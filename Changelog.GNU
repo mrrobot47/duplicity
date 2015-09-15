@@ -1,3 +1,32 @@
+2015-09-15  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~duplicity-team/duplicity/po-updates
+    * Prep for 0.7.05
+
+2015-09-14  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~bmerry/duplicity/pydrive-id-cache
+      - This fixes the issue a number of users (including myself) have been
+        having with duplicity creating files with duplicate filenames on
+        Google Drive. It keeps a runtime cache of filename to object ID
+        mappings, so that once it has uploaded an object it won't be fooled
+        by weakly consistent directory listings.
+
+2015-09-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1493573.  Correct option name in man page.
+    * Fix bug #1494228 CygWin: TypeError: basis_file must be a (true) file
+      - The problem that caused the change to tempfile.TemporaryFile was due
+        to the fact that os.tmpfile always creates its file in the system
+        temp directory, not in the directory specified.  The fix applied was
+        to use os.tmpfile in cygwin/windows and tempfile.TemporaryFile in all
+        the rest.  This means that cygwin is now broken with respect to temp
+        file placement of this one file (deleted automatically on close).
+
+2015-09-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Updated man pages to reflect more contributors.
+
 2015-08-25  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~germar/duplicity/par2removefix
