@@ -523,6 +523,9 @@ def parse_cmdline_options(arglist):
     # Whether to use S3 Reduced Redudancy Storage
     parser.add_option("--s3-use-rrs", action="store_true")
 
+    # Whether to use S3 Infrequent Access Storage
+    parser.add_option("--s3-use-ia", action="store_true")
+
     # Whether to use "new-style" subdomain addressing for S3 buckets. Such
     # use is not backwards-compatible with upper-case buckets, or buckets
     # that are otherwise not expressable in a valid hostname.
@@ -864,7 +867,14 @@ def usage():
         # TRANSL: Used in usage help to represent a user name (i.e. login).
         # Example:
         # ftp://user[:password]@other.host[:port]/some_dir
-        'user': _("user")
+        'user': _("user"),
+
+        # TRANSL: account id for b2. Example: b2://account_id@bucket/
+        'account_id': _("account_id"),
+
+        # TRANSL: application_key for b2.
+        # Example: b2://account_id:application_key@bucket/
+        'application_key': _("application_key"),
     }
 
     # TRANSL: Header in usage help
@@ -892,7 +902,7 @@ def usage():
   rsync://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]::/%(module)s/%(some_dir)s
   rsync://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(relative_path)s
   rsync://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]//%(absolute_path)s
-  s3://%(other_host)s/%(bucket_name)s[/%(prefix)s]
+  s3://%(other_host)s[:%(port)s]/%(bucket_name)s[/%(prefix)s]
   s3+http://%(bucket_name)s[/%(prefix)s]
   scp://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   ssh://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
@@ -907,6 +917,7 @@ def usage():
   dpbx:///%(some_dir)s
   onedrive://%(some_dir)s
   azure://%(container_name)s
+  b2://%(account_id)s[:%(application_key)s]@%(bucket_name)s/[%(some_dir)s/]
 
 """ % dict
 
@@ -1057,6 +1068,8 @@ def check_consistency(action):
         if globals.restore_dir:
             command_line_error("restore option incompatible with %s backup"
                                % (action,))
+        if globals.s3_use_rrs and globals.s3_use_ia:
+            command_line_error("--s3-use-rrs and --s3-use-ia cannot be used together")
 
 
 def ProcessCommandLine(cmdline_list):

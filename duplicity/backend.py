@@ -452,8 +452,11 @@ class Backend(object):
         Execute the given command line, interpreted as a shell command.
         Returns int Exitcode, string StdOut, string StdErr
         """
+        import shlex
         from subprocess import Popen, PIPE
-        p = Popen(commandline, shell=True, stdout=PIPE, stderr=PIPE)
+        args = shlex.split(commandline)
+        args[0] = util.which(args[0])
+        p = Popen(args, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate()
 
         return p.returncode, stdout, stderr

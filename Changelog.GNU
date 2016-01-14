@@ -1,3 +1,154 @@
+2016-01-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied changes from ralle-ubuntu to fix bug 1072130.
+      - duplicity does not support ftpes://
+
+2016-01-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied patch from abeverly to fix bug #1475890
+      - allow port to be specified along with hostname on S3
+      - adjusted help text and man page to reflect the change
+    * Undo changes to test_restart.py.  GNU tar is needed.
+    * Fix minor pep8 nit in collections.py
+
+2016-01-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied patch from shaochun to fix bug #1531154,
+      - --file-changed failed when file contains spaces
+
+2016-01-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Partial fix for bug #1529606 - shell code injection in lftpbackend
+      - still need to fix the other backends that spawn shell commands
+    * Make test_restart compatible with both GNUtar and BSDtar
+    * Fix stupid issue with functional test path for duplicity
+
+2016-01-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    Random stuff:
+      - supply correct path for pydevd under Mac
+      - fix some tests to run under Mac as well
+
+2015-12-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    Random stuff:
+      - remove RPM stuff from makedist
+      - have makedist pull directly from VCS, not local dir
+      - update po translation directory and build process
+      - clean up some odd error messages
+      - move Pep8 ignores to tox.ini
+
+2015-12-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~matthew-t-bentley/duplicity/b2
+      - A couple fixes allowing multiple backups to be hosted in different
+        folders in the same bucket as well as some logging for -v9.
+
+2015-12-09  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~matthew-t-bentley/duplicity/b2
+      - Fix import and error typos.
+      - Allow multiple backups in the same bucket.
+      - Fixes #1523498.
+
+2015-12-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Prep for 0.7.06
+
+2015-12-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~matthew-t-bentley/duplicity/b2
+      - Adds a backed for BackBlaze's (currently beta) B2 backup service.
+      - This adds backends/b2backend.py, modifies log.py to add an
+        error code and modifies commandline.py to add the b2://
+        example to the help text.
+
+2015-12-03  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~noizyland/duplicity/azurebackend-fixes
+      - Support new version of Azure Storage SDK
+      - Refactor _list method to support containers with >5000 blobs
+
+2015-11-30  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1520691 - Shell Code Injection in hsi backend (2)
+      - Added code to expand relative program path to full path.
+      - Fix hisbackend where it expected a list not a string.
+
+2015-11-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1520691 - Shell Code Injection in hsi backend
+      - Replace use of os.popen3() with subprocess equivalent.
+
+2015-11-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~feraudet/duplicity/fix
+      - Fix missing SWIFT_ENDPOINT_TYPE env var, bug 1519694.
+
+2015-11-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~michal-s/duplicity/duplicity
+      - Fix azurebackend storage class import
+
+2015-11-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1511308 - Cannot restore no-encryption, no-compression backup
+      - Corrected code to include plain file in write_multivolume()
+      - Added PlainWriteFile() to gpg.py
+
+2015-11-01  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~ed.so/duplicity/tempfile.tempdir
+      - make sure packages using python's tempfile create temp files in
+          duplicity's temp dir
+
+2015-10-31  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Reversed previous changes to lockfile.  Now it will take any version
+      extant in the LP build repository.  (PyPi is not avail in LP build).
+
+2015-10-27  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Cleanup issues around Launchpad build, mainly lockfile >= 0.9.
+    * Merged in lp:~michal-s/duplicity/duplicity
+      - WindowsAzureMissingResourceError and WindowsAzureConflictError
+        changed due to SDK changes.
+
+2015-10-26  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied patch from Alexander Zangerl to update to changes in lockfile
+      API 0.9 and later.  Updated README to notify users.
+    * Modded tox.ini to use the latest lockfile.
+    * Merged in lp:~ed.so/duplicity/setup.shebang
+      - Having the python interpreter searched in the PATH is much more
+        flexible than the /usr/bin/python inserted into our scripts shebang
+        by setuptools.  This patch prevents that. don't touch my shebang! :)
+
+2015-10-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Upgrade to newest version of pep8 and pylint.   Add three ignores
+      to test_pep8 and one to test_pylint to get the rest to pass.  They
+      are all valid in our case.
+
+2015-10-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mnjul/duplicity/s3-infreq-access
+      - This adds support for AWS S3's newly announced Infrequent Access
+        storage class and is intended to implement Blueprint:
+        https://blueprints.launchpad.net/duplicity/+spec/aws-s3-std-ia-class .
+      - A new command line option, --s3-use-ia, is added, and boto backend
+        will automatically use the correct storage class value depending on
+        whether --s3-use-rrs and --s3-use-ia is set. Command line parser will
+        prompt error if both --s3-use-ia and --s3-use-rrs are used together,
+        as they conflict with each other.
+      - The manpage has been updated giving a short explanation on the new
+        option. Its wording derives from Amazon's official announcement:
+        https://aws.amazon.com/about-aws/whats-new/2015/09/announcing-new-\
+        amazon-s3-storage-class-and-lower-glacier-prices/
+    * The ptyprocess module no longer supports Python 2.6, so fix tox.ini to
+      use an older version.  Make explicit environs for all tests.
+
+
 2015-09-15  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~duplicity-team/duplicity/po-updates

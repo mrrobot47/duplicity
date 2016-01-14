@@ -23,11 +23,11 @@ import sys
 import subprocess
 
 if sys.version_info < (2, 7):
-    import unittest2 as unittest
+    import unittest2 as unittest  # @UnresolvedImport @UnusedImport
 else:
-    import unittest
+    import unittest  # @Reimport
 
-from . import _top_dir, DuplicityTestCase
+from . import _top_dir, DuplicityTestCase  # @IgnorePep8
 
 
 class CodeTest(DuplicityTestCase):
@@ -75,7 +75,9 @@ class CodeTest(DuplicityTestCase):
             "--disable=E0611",  # No name in module
             "--disable=E1101",  # Has no member
             "--disable=E1103",  # Maybe has no member
+            "--disable=E0712",  # Catching an exception which doesn't inherit from BaseException
             "--ignore=_librsync.so",
+            "--msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'",
             os.path.join(_top_dir, 'duplicity'),
             os.path.join(_top_dir, 'bin/duplicity'),
             os.path.join(_top_dir, 'bin/rdiffdir')],
@@ -87,7 +89,10 @@ class CodeTest(DuplicityTestCase):
                          'Must set environment var RUN_CODE_TESTS=1')
     def test_pep8(self):
         ignores = [
-            "E501",
+            "E402",  # module level import not at top of file
+            "E501",  # line too long
+            "E731",  # do not assign a lambda expression, use a def
+            "W503",  # line break before binary operator
         ]
         self.run_checker(["pep8",
                           "--ignore=" + ','.join(ignores),

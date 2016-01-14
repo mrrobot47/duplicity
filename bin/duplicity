@@ -39,12 +39,20 @@ import resource
 import re
 import threading
 from datetime import datetime
-from lockfile import FileLock
+try:
+    from lockfile import FileLock
+except:
+    from lockfile import LockFile as FileLock
 
-if '--pydevd' in sys.argv:
+if '--pydevd' in sys.argv or os.getenv('PYDEVD', None):
     # The following is for starting remote debugging in Eclipse with Pydev.
     # Adjust the path to your location and version of Eclipse and Pydev.
-    pysrc = "/opt/eclipse/plugins/org.python.pydev_3.9.2.201502050007/pysrc"
+    if platform.platform().startswith('Linux'):
+        pysrc = "/opt/liclipse/plugins/org.python.pydev_4.4.0.201510052047/pysrc"
+    elif platform.platform().startswith('Darwin'):
+        pysrc = "/Applications/LiClipse.app/Contents/liclipse/plugins/org.python.pydev_4.4.0.201510052047/pysrc"
+    else:
+        raise Exception("Platform %s not supported by pydevd." % platform.platform())
     sys.path.append(pysrc)
     import pydevd  # @UnresolvedImport
     pydevd.settrace()
@@ -124,15 +132,15 @@ def get_passphrase(n, action, for_signing=False):
         and (globals.gpg_profile.sign_key in globals.gpg_profile.recipients
              or globals.gpg_profile.sign_key in globals.gpg_profile.hidden_recipients)
         and 'PASSPHRASE' in os.environ):  # noqa
-            log.Notice(_("Reuse configured PASSPHRASE as SIGN_PASSPHRASE"))
-            return os.environ['PASSPHRASE']
+        log.Notice(_("Reuse configured PASSPHRASE as SIGN_PASSPHRASE"))
+        return os.environ['PASSPHRASE']
     # if one encryption key is also the signing key assume that the passphrase is identical
     if (not for_signing
         and (globals.gpg_profile.sign_key in globals.gpg_profile.recipients
              or globals.gpg_profile.sign_key in globals.gpg_profile.hidden_recipients)
         and 'SIGN_PASSPHRASE' in os.environ):  # noqa
-            log.Notice(_("Reuse configured SIGN_PASSPHRASE as PASSPHRASE"))
-            return os.environ['SIGN_PASSPHRASE']
+        log.Notice(_("Reuse configured SIGN_PASSPHRASE as PASSPHRASE"))
+        return os.environ['SIGN_PASSPHRASE']
 
     # Next, verify we need to ask the user
 
@@ -419,10 +427,11 @@ def write_multivol(backup_type, tarblock_iter, man_outfp, sig_outfp, backend):
 
         # write volume
         if globals.encryption:
-            at_end = gpg.GPGWriteFile(tarblock_iter, tdp.name,
-                                      globals.gpg_profile, globals.volsize)
-        else:
+            at_end = gpg.GPGWriteFile(tarblock_iter, tdp.name, globals.gpg_profile, globals.volsize)
+        elif globals.compression:
             at_end = gpg.GzipWriteFile(tarblock_iter, tdp.name, globals.volsize)
+        else:
+            at_end = gpg.PlainWriteFile(tarblock_iter, tdp.name, globals.volsize)
         tdp.setdata()
 
         # Add volume information to manifest
@@ -717,7 +726,7 @@ def restore(col_stats):
     if not patchdir.Write_ROPaths(globals.local_path,
                                   restore_get_patched_rop_iter(col_stats)):
         if globals.restore_dir:
-            log.FatalError(_("%s not found in archive, no files restored.")
+            log.FatalError(_("%s not found in archive - no files restored.")
                            % (util.ufn(globals.restore_dir)),
                            log.ErrorCode.restore_dir_not_found)
         else:
@@ -1082,6 +1091,7 @@ def sync_archive(decrypt):
             """
             Data block to return from SrcIter
             """
+
             def __init__(self, data):
                 self.data = data
 
@@ -1089,6 +1099,7 @@ def sync_archive(decrypt):
             """
             Iterate over source and return Block of data.
             """
+
             def __init__(self, fileobj):
                 self.fileobj = fileobj
 
@@ -1273,6 +1284,7 @@ class Restart:
     Class to aid in restart of inc or full backup.
     Instance in globals.restart if restart in progress.
     """
+
     def __init__(self, last_backup):
         self.type = None
         self.start_time = None
