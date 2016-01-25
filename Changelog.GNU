@@ -1,3 +1,22 @@
+2016-01-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Pep8 corrections for recently released code.
+    * Fixed bug #1260666 universally by splitting the filelist for
+      delete before passing to backend.
+    * Fixed bug #1369243 by adjusting messages to be more readable.
+    * Fixed bug #1375019 with patch from Eric Bavier (home to tmp).
+    * Fixed bug #1379575 with patch from Tim Ruffing (shorten webdav response).
+    * Fixed bug #1492301 with patch from askretov (manually refresh oauth).
+
+2016-01-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1296793 - Failed to create bucket
+      - use S3Connection.lookup() to check bucket exists
+      - skips Boto's Exception processing for this check
+      - dupe of bug #1507109 and bug #1537185
+    * Merged in lp:~mifchip/duplicity/duplicity
+      - fix bug #1313964, absolute path doesn't work for FTP
+
 2016-01-11  Kenneth Loafman  <kenneth@loafman.com>
 
     * Applied changes from ralle-ubuntu to fix bug 1072130.
@@ -49,7 +68,7 @@
     * Merged in lp:~matthew-t-bentley/duplicity/b2
       - Fix import and error typos.
       - Allow multiple backups in the same bucket.
-      - Fixes #1523498.
+      - Fixes bug #1523498.
 
 2015-12-07  Kenneth Loafman  <kenneth@loafman.com>
 

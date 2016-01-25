@@ -113,13 +113,9 @@ class WebDAVBackend(duplicity.backend.Backend):
     """
 
     """
-    for better compatibility we send an empty listbody as described in
-    http://www.ietf.org/rfc/rfc4918.txt
-    "  A client may choose not to submit a request body.  An empty PROPFIND
-       request body MUST be treated as if it were an 'allprop' request.  "
-    it was retired because e.g. box.net didn't support <D:allprop/>
+    Request just the names.
     """
-    listbody = ""
+    listbody = '<?xml version="1.0"?><D:propfind xmlns:D="DAV:"><D:prop><D:resourcetype/></D:prop></D:propfind>'
 
     """Connect to remote store using WebDAV Protocol"""
     def __init__(self, parsed_url):
