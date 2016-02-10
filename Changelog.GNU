@@ -1,3 +1,31 @@
+2016-02-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed a patching error in ssh_pexpect_backend.py
+    * Merged in lp:~fpytloun/duplicity/webdav-gssapi-fix
+      - Make kerberos optional for webdav backend
+
+2016-02-03  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied patch from kay-diam to fix error handling in ssh pexpect,
+      fixes bug #1541314
+
+2016-02-02  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1540279 - mistake in --help
+
+2016-01-29  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Add more pylint ignore warnings tags
+    * Adjust so test_restart.py can run on Mac as well
+    * Fix for bug #1538333 - assert filecount == len(self.files_changed)
+      - added flush after every write for all FileobjHooked files which
+        should prevent some errors when duplicity is forcibly closed.
+
+2016-01-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~fpytloun/duplicity/webdav-gssapi
+      - support GSSAPI authentication in webdav backend
+
 2016-01-24  Kenneth Loafman  <kenneth@loafman.com>
 
     * Pep8 corrections for recently released code.
