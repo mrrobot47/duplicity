@@ -95,7 +95,7 @@ def get_connection(scheme, parsed_url, storage_uri):
         conn = storage_uri.connect(is_secure=(not globals.s3_unencrypted_connection))
     else:
         assert scheme == 's3'
-        conn = storage_uri.connect(host=parsed_url.hostname,
+        conn = storage_uri.connect(host=parsed_url.hostname, port=parsed_url.port,
                                    is_secure=(not globals.s3_unencrypted_connection))
 
     if hasattr(conn, 'calling_format'):
@@ -128,6 +128,7 @@ class BotoBackend(duplicity.backend.Backend):
 
     def __init__(self, parsed_url):
         import boto
+        from boto.s3.connection import Location
         duplicity.backend.Backend.__init__(self, parsed_url)
 
         assert boto.Version >= BOTO_MIN_VERSION
@@ -158,6 +159,10 @@ class BotoBackend(duplicity.backend.Backend):
         # boto uses scheme://bucket[/name] and specifies hostname on connect()
         self.boto_uri_str = '://'.join((parsed_url.scheme[:2],
                                         parsed_url.path.lstrip('/')))
+        if globals.s3_european_buckets:
+            self.my_location = Location.EU
+        else:
+            self.my_location = ''
         self.resetConnection()
         self._listed_keys = {}
 
@@ -181,23 +186,16 @@ class BotoBackend(duplicity.backend.Backend):
         del self.storage_uri
         self.storage_uri = boto.storage_uri(self.boto_uri_str)
         self.conn = get_connection(self.scheme, self.parsed_url, self.storage_uri)
-        try:
-            self.bucket = self.conn.get_bucket(self.bucket_name, validate=True)
-        except Exception as e:
-            if "NoSuchBucket" in e.error_code:
-                if globals.s3_european_buckets:
-                    self.bucket = self.conn.create_bucket(self.bucket_name,
-                                                          location=Location.EU)
-                else:
-                    self.bucket = self.conn.create_bucket(self.bucket_name)
-            else:
-                raise e
+        if not self.conn.lookup(self.bucket_name):
+            self.bucket = self.conn.create_bucket(self.bucket_name,
+                                                  location=self.my_location)
+        else:
+            self.bucket = self.conn.get_bucket(self.bucket_name)
 
     def _retry_cleanup(self):
         self.resetConnection()
 
     def _put(self, source_path, remote_filename):
-        from boto.s3.connection import Location
         if globals.s3_european_buckets:
             if not globals.s3_use_new_style:
                 raise FatalBackendException("European bucket creation was requested, but not new-style "
@@ -206,14 +204,11 @@ class BotoBackend(duplicity.backend.Backend):
 
         if self.bucket is None:
             try:
-                self.bucket = self.conn.get_bucket(self.bucket_name, validate=True)
+                self.bucket = self.conn.get_bucket(self.bucket_name)
             except Exception as e:
                 if "NoSuchBucket" in str(e):
-                    if globals.s3_european_buckets:
-                        self.bucket = self.conn.create_bucket(self.bucket_name,
-                                                              location=Location.EU)
-                    else:
-                        self.bucket = self.conn.create_bucket(self.bucket_name)
+                    self.bucket = self.conn.create_bucket(self.bucket_name,
+                                                          location=self.my_location)
                 else:
                     raise
 
@@ -221,6 +216,8 @@ class BotoBackend(duplicity.backend.Backend):
 
         if globals.s3_use_rrs:
             storage_class = 'REDUCED_REDUNDANCY'
+        elif globals.s3_use_ia:
+            storage_class = 'STANDARD_IA'
         else:
             storage_class = 'STANDARD'
         log.Info("Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))
@@ -241,7 +238,9 @@ class BotoBackend(duplicity.backend.Backend):
         upload_end = time.time()
         total_s = abs(upload_end - upload_start) or 1  # prevent a zero value!
         rough_upload_speed = os.path.getsize(source_path.name) / total_s
-        log.Debug("Uploaded %s/%s to %s Storage at roughly %f bytes/second" % (self.straight_url, remote_filename, storage_class, rough_upload_speed))
+        log.Debug("Uploaded %s/%s to %s Storage at roughly %f bytes/second" %
+                  (self.straight_url, remote_filename, storage_class,
+                   rough_upload_speed))
 
     def _get(self, remote_filename, local_path):
         key_name = self.key_prefix + remote_filename

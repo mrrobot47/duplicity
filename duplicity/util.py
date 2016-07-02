@@ -23,18 +23,15 @@
 Miscellaneous utilities.
 """
 
-from future_builtins import map
-
 import errno
 import os
-import sys
 import string
+import sys
 import traceback
 
-from lockfile import FileLock, UnlockError
+from lockfile import UnlockError
 
 from duplicity import tarfile
-
 import duplicity.globals as globals
 import duplicity.log as log
 
@@ -70,7 +67,7 @@ def ufn(filename):
 def uindex(index):
     "Convert an index (a tuple of path parts) to unicode for printing"
     if index:
-        return os.path.join(*map(ufn, index))
+        return os.path.join(*list(map(ufn, index)))
     else:
         return u'.'
 
@@ -97,13 +94,14 @@ def maybe_ignore_errors(fn):
     except Exception as e:
         if globals.ignore_errors:
             log.Warn(_("IGNORED_ERROR: Warning: ignoring error as requested: %s: %s")
-                     % (e.__class__.__name__, uexc(e)))
+                     % (e.__class__.__name__, util.uexc(e)))
             return None
         else:
             raise
 
 
 class BlackHoleList(list):
+
     def append(self, x):
         pass
 
@@ -161,7 +159,7 @@ def ignore_missing(fn, filename):
 
 def release_lockfile():
     if globals.lockfile and globals.lockfile.is_locked():
-        log.Debug(_("Releasing lockfile %s") % globals.lockfile)
+        log.Debug(_("Releasing lockfile %s") % globals.lockfile.lock_file)
         try:
             globals.lockfile.release()
         except UnlockError:
@@ -195,3 +193,26 @@ def copyfileobj(infp, outfp, byte_count=-1):
         bytes_written += len(buf)
         outfp.write(buf)
     return bytes_written
+
+
+def which(program):
+    """
+    Return absolute path for program name.
+    Returns None if program not found.
+    """
+
+    def is_exe(fpath):
+        return os.path.isfile(fpath) and os.path.isabs(fpath) and os.access(fpath, os.X_OK)
+
+    fpath, fname = os.path.split(program)  # @UnusedVariable
+    if fpath:
+        if is_exe(program):
+            return program
+    else:
+        for path in os.getenv("PATH").split(os.pathsep):
+            path = path.strip('"')
+            exe_file = os.path.abspath(os.path.join(path, program))
+            if is_exe(exe_file):
+                return exe_file
+
+    return None

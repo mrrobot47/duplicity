@@ -122,6 +122,10 @@ class OneDriveBackend(duplicity.backend.Backend):
             auto_refresh_url=self.OAUTH_TOKEN_URI,
             token_updater=token_updater)
 
+        # We have to refresh token manually because it's not working "under the covers"
+        if token is not None:
+            self.http_client.refresh_token(self.OAUTH_TOKEN_URI)
+
         # Send a request to make sure the token is valid (or could at least be
         # refreshed successfully, which will happen under the covers). In case
         # this request fails, the provided token was too old (i.e. expired),
@@ -139,11 +143,11 @@ class OneDriveBackend(duplicity.backend.Backend):
             authorization_url, state = self.http_client.authorization_url(
                 self.OAUTH_AUTHORIZE_URI, display='touch')
 
-            print ''
-            print ('In order to authorize duplicity to access your OneDrive, '
-                   'please open %s in a browser and copy the URL of the blank '
-                   'page the dialog leads to.' % authorization_url)
-            print ''
+            print()
+            print('In order to authorize duplicity to access your OneDrive, '
+                  'please open %s in a browser and copy the URL of the blank '
+                  'page the dialog leads to.' % authorization_url)
+            print()
 
             redirected_to = raw_input('URL of the blank page: ')
 

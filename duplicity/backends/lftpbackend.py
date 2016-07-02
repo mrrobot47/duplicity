@@ -28,6 +28,10 @@ import os
 import os.path
 import re
 import urllib
+try:
+    from shlex import quote as cmd_quote
+except ImportError:
+    from pipes import quote as cmd_quote
 
 import duplicity.backend
 from duplicity import globals
@@ -57,10 +61,6 @@ class LFTPBackend(duplicity.backend.Backend):
         log.Notice("LFTP version is %s" % version)
 
         self.parsed_url = parsed_url
-
-#        self.url_string = duplicity.backend.strip_auth_from_url(self.parsed_url)
-#        # strip lftp+ prefix
-#        self.url_string = duplicity.backend.strip_prefix(self.url_string, 'lftp')
 
         self.scheme = duplicity.backend.strip_prefix(parsed_url.scheme, 'lftp').lower()
         self.scheme = re.sub('^webdav', 'http', self.scheme)
@@ -95,28 +95,30 @@ class LFTPBackend(duplicity.backend.Backend):
             cacert_candidates = ["~/.duplicity/cacert.pem",
                                  "~/duplicity_cacert.pem",
                                  "/etc/duplicity/cacert.pem"]
-            #
+            # look for a default cacert file
             if not self.cacert_file:
                 for path in cacert_candidates:
                     path = os.path.expanduser(path)
                     if (os.path.isfile(path)):
                         self.cacert_file = path
                         break
-            # still no cacert file, inform user
-            if not self.cacert_file:
-                raise duplicity.errors.FatalBackendException("""For certificate verification a cacert database file is needed in one of these locations: %s
-Hints:
-  Consult the man page, chapter 'SSL Certificate Verification'.
-  Consider using the options --ssl-cacert-file, --ssl-no-check-certificate .""" % ", ".join(cacert_candidates))
 
+        # save config into a reusable temp file
         self.tempfile, self.tempname = tempdir.default().mkstemp()
-        os.write(self.tempfile, "set ssl:verify-certificate " + ("false" if globals.ssl_no_check_certificate else "true") + "\n")
-        if globals.ssl_cacert_file:
-            os.write(self.tempfile, "set ssl:ca-file '" + globals.ssl_cacert_file + "'\n")
+        os.write(self.tempfile, "set ssl:verify-certificate " +
+                 ("false" if globals.ssl_no_check_certificate else "true") + "\n")
+        if self.cacert_file:
+            os.write(self.tempfile, "set ssl:ca-file " + cmd_quote(self.cacert_file) + "\n")
+        if globals.ssl_cacert_path:
+            os.write(self.tempfile, "set ssl:ca-path " + cmd_quote(globals.ssl_cacert_path) + "\n")
         if self.parsed_url.scheme == 'ftps':
             os.write(self.tempfile, "set ftp:ssl-allow true\n")
             os.write(self.tempfile, "set ftp:ssl-protect-data true\n")
             os.write(self.tempfile, "set ftp:ssl-protect-list true\n")
+        elif self.parsed_url.scheme == 'ftpes':
+            os.write(self.tempfile, "set ftp:ssl-force on\n")
+            os.write(self.tempfile, "set ftp:ssl-protect-data on\n")
+            os.write(self.tempfile, "set ftp:ssl-protect-list on\n")
         else:
             os.write(self.tempfile, "set ftp:ssl-allow false\n")
         os.write(self.tempfile, "set http:use-propfind true\n")
@@ -125,21 +127,24 @@ Hints:
         os.write(self.tempfile, "set ftp:passive-mode %s\n" % self.conn_opt)
         if log.getverbosity() >= log.DEBUG:
             os.write(self.tempfile, "debug\n")
-        os.write(self.tempfile, "open %s %s\n" % (self.authflag, self.url_string))
-#        os.write(self.tempfile, "open %s %s\n" % (self.portflag, self.parsed_url.hostname))
-        # allow .netrc auth by only setting user/pass when user was actually given
-#        if self.parsed_url.username:
-#            os.write(self.tempfile, "user %s %s\n" % (self.parsed_url.username, self.password))
+        if self.parsed_url.scheme == 'ftpes':
+            os.write(self.tempfile, "open %s %s\n" % (self.authflag, self.url_string.replace('ftpes', 'ftp')))
+        else:
+            os.write(self.tempfile, "open %s %s\n" % (self.authflag, self.url_string))
         os.close(self.tempfile)
+        # print settings in debug mode
         if log.getverbosity() >= log.DEBUG:
             f = open(self.tempname, 'r')
             log.Debug("SETTINGS: \n"
-                      "%s" % f.readlines())
+                      "%s" % f.read())
 
     def _put(self, source_path, remote_filename):
-        # remote_path = os.path.join(urllib.unquote(self.parsed_url.path.lstrip('/')), remote_filename).rstrip()
-        commandline = "lftp -c 'source \'%s\'; mkdir -p %s; put \'%s\' -o \'%s\''" % \
-            (self.tempname, self.remote_path, source_path.name, self.remote_path + remote_filename)
+        commandline = "lftp -c \"source %s; mkdir -p %s; put %s -o %s\"" % (
+            self.tempname,
+            cmd_quote(self.remote_path),
+            cmd_quote(source_path.name),
+            cmd_quote(self.remote_path) + remote_filename
+        )
         log.Debug("CMD: %s" % commandline)
         s, l, e = self.subprocess_popen(commandline)
         log.Debug("STATUS: %s" % s)
@@ -149,9 +154,11 @@ Hints:
                   "%s" % (l))
 
     def _get(self, remote_filename, local_path):
-        # remote_path = os.path.join(urllib.unquote(self.parsed_url.path), remote_filename).rstrip()
-        commandline = "lftp -c 'source \'%s\'; get \'%s\' -o \'%s\''" % \
-            (self.tempname, self.remote_path + remote_filename, local_path.name)
+        commandline = "lftp -c \"source %s; get %s -o %s\"" % (
+            cmd_quote(self.tempname),
+            cmd_quote(self.remote_path) + remote_filename,
+            cmd_quote(local_path.name)
+        )
         log.Debug("CMD: %s" % commandline)
         _, l, e = self.subprocess_popen(commandline)
         log.Debug("STDERR:\n"
@@ -164,7 +171,12 @@ Hints:
         # remote_dir = urllib.unquote(self.parsed_url.path.lstrip('/')).rstrip()
         remote_dir = urllib.unquote(self.parsed_url.path)
         # print remote_dir
-        commandline = "lftp -c 'source \'%s\'; cd \'%s\' || exit 0; ls'" % (self.tempname, self.remote_path)
+        quoted_path = cmd_quote(self.remote_path)
+        # failing to cd into the folder might be because it was not created already
+        commandline = "lftp -c \"source %s; ( cd %s && ls ) || ( mkdir -p %s && cd %s && ls )\"" % (
+            cmd_quote(self.tempname),
+            quoted_path, quoted_path, quoted_path
+        )
         log.Debug("CMD: %s" % commandline)
         _, l, e = self.subprocess_popen(commandline)
         log.Debug("STDERR:\n"
@@ -176,8 +188,11 @@ Hints:
         return [x.split()[-1] for x in l.split('\n') if x]
 
     def _delete(self, filename):
-        # remote_dir = urllib.unquote(self.parsed_url.path.lstrip('/')).rstrip()
-        commandline = "lftp -c 'source \'%s\'; cd \'%s\'; rm \'%s\''" % (self.tempname, self.remote_path, filename)
+        commandline = "lftp -c \"source %s; cd %s; rm %s\"" % (
+            cmd_quote(self.tempname),
+            cmd_quote(self.remote_path),
+            cmd_quote(filename)
+        )
         log.Debug("CMD: %s" % commandline)
         _, l, e = self.subprocess_popen(commandline)
         log.Debug("STDERR:\n"
@@ -188,19 +203,22 @@ Hints:
 duplicity.backend.register_backend("ftp", LFTPBackend)
 duplicity.backend.register_backend("ftps", LFTPBackend)
 duplicity.backend.register_backend("fish", LFTPBackend)
+duplicity.backend.register_backend("ftpes", LFTPBackend)
 
 duplicity.backend.register_backend("lftp+ftp", LFTPBackend)
 duplicity.backend.register_backend("lftp+ftps", LFTPBackend)
 duplicity.backend.register_backend("lftp+fish", LFTPBackend)
+duplicity.backend.register_backend("lftp+ftpes", LFTPBackend)
 duplicity.backend.register_backend("lftp+sftp", LFTPBackend)
 duplicity.backend.register_backend("lftp+webdav", LFTPBackend)
 duplicity.backend.register_backend("lftp+webdavs", LFTPBackend)
 duplicity.backend.register_backend("lftp+http", LFTPBackend)
 duplicity.backend.register_backend("lftp+https", LFTPBackend)
 
-duplicity.backend.uses_netloc.extend(['ftp', 'ftps', 'fish',
+duplicity.backend.uses_netloc.extend(['ftp', 'ftps', 'fish', 'ftpes',
                                       'lftp+ftp', 'lftp+ftps',
-                                      'lftp+fish', 'lftp+sftp',
+                                      'lftp+fish', 'lftp+ftpes',
+                                      'lftp+sftp',
                                       'lftp+webdav', 'lftp+webdavs',
                                       'lftp+http', 'lftp+https']
                                      )

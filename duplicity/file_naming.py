@@ -220,18 +220,23 @@ def get(type, volume_number=None, manifest=False,
         assert not (volume_number and part_string)
         if type == "full-sig":
             if globals.short_filenames:
-                return (globals.file_prefix + globals.file_prefix_signature + "dfs.%s.st%s%s" %
+                return (globals.file_prefix + globals.file_prefix_signature +
+                        "dfs.%s.st%s%s" %
                         (to_base36(dup_time.curtime), part_string, suffix))
             else:
-                return (globals.file_prefix + globals.file_prefix_signature + "duplicity-full-signatures.%s.sigtar%s%s" %
+                return (globals.file_prefix + globals.file_prefix_signature +
+                        "duplicity-full-signatures.%s.sigtar%s%s" %
                         (dup_time.curtimestr, part_string, suffix))
         elif type == "new-sig":
             if globals.short_filenames:
-                return (globals.file_prefix + globals.file_prefix_signature + "dns.%s.%s.st%s%s" %
-                        (to_base36(dup_time.prevtime), to_base36(dup_time.curtime),
+                return (globals.file_prefix + globals.file_prefix_signature +
+                        "dns.%s.%s.st%s%s" %
+                        (to_base36(dup_time.prevtime),
+                         to_base36(dup_time.curtime),
                          part_string, suffix))
             else:
-                return (globals.file_prefix + globals.file_prefix_signature + "duplicity-new-signatures.%s.to.%s.sigtar%s%s" %
+                return (globals.file_prefix + globals.file_prefix_signature +
+                        "duplicity-new-signatures.%s.to.%s.sigtar%s%s" %
                         (dup_time.prevtimestr, dup_time.curtimestr,
                          part_string, suffix))
     else:
@@ -277,8 +282,6 @@ def parse(filename):
     """
     Parse duplicity filename, return None or ParseResults object
     """
-    filename = filename.lower()
-
     def str2time(timestr, short):
         """
         Return time in seconds if string can be converted, None otherwise

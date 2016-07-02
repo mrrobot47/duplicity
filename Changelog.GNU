@@ -1,3 +1,366 @@
+2016-07-02  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~aaron-whitehouse/duplicity/PEP8_W503_fixes
+      - Fix PEP8 W503 errors (line break before binary operator) and enable the
+        PEP8 test for this in test_code.CodeTest.
+    * Merged in lp:~aaron-whitehouse/duplicity/PEP8_line_length
+      - Set line length error length to 120 (matching tox.ini) for PEP8 and
+        fixed E501(line too long) errors.
+    * Merged in lp:~duplicity-team/duplicity/po-updates
+    * Prep for 0.7.08
+
+2016-06-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1594780 with patches from B. Reitsma
+      - Use re.finditer() to speed processing
+
+2016-06-13  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed README-REPO to no longer mention 0.6-series
+    * Merged in lp:~aaron-whitehouse/duplicity/fix_stat_errors
+      - Only give an error about not being able to access possibly locked file if
+        that file is supposed to be included or scanned (i.e. not excluded).
+        Fixes Bug #1089131
+
+2016-06-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #822697 ssh-options not passed in rsync over ssh
+      - Added globals.ssh_options to rsync command line
+    * Increased default volume size to 200M, was 25M
+
+2016-06-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~aaron-whitehouse/duplicity/fix_pep8
+      - Fix PEP8 error in onedrivebackend.py (space before bracket)
+
+2016-06-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1589038 with patches from Malte Schröder
+      - Added ignore_case option to selection functions
+    * Merged in lp:~mstoll-de/duplicity/b2-reauth
+      - Fixes bug #1588503 b2: large uploads fail due to expired auth token
+
+2016-06-01  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1586992 with patches from Dmitry Nezhevenko
+      - Patch adds _delete_list to Par2Backend. And _delete_list fallbacks to
+        _delete calls if wrapped backend has no _delete_list.
+
+2016-05-30  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~ghoz/duplicity/swift-prefix
+      - adds the abiliy to use path in the swift backend, in order to have multiple
+        backups to the same container neatly organized.
+    * Fixed bug #1573957 with patches from Dmitry Nezhevenko
+      - upload last chunk with files_upload_session_finish to avoid extra request
+      - upload small files using non-chunked api
+    * Fixed bug #1586934 with patches from Dmitry Nezhevenko
+      - fixes error handling in wrapper
+
+2016-05-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~noizyland/duplicity/fix_azurebackend_typo
+      - Fix typo in error handling code
+
+2016-04-19  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Prep for 0.7.07.1 critical bug fixes
+
+2016-04-18  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1571134 incompatible with python-oauth2client version 2.x
+      and #1558155 PyDrive backend broken, needs update to oauth2client library
+      - used patch from https://bugs.debian.org/820725 but made changes
+        to allow the user to continue using the old version
+    * Fixed bug #1570293 duplicity is very slow due to excessive fsync
+      - removed flush() after write.
+      - revert to previous version
+
+2016-04-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1568677 duplicity fails to use existing S3 bucket in boto backend
+      - bug introduced by incomplete fix of bug #1296793
+      - simplified setting of bucket locations
+    * Fixed bug #1569523 get_bucket unknown keyword location and my_location name error
+      - bug introduced in improper fix of bug #1568677
+      - gotta love those inconsistent APIs
+
+2016-04-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug 1568677 with suggestions from Florian Kruse
+      - bug introduced by incomplete fix of bug 1296793
+
+2016-04-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~duplicity-team/duplicity/po-updates
+    * Prep for 0.7.07
+
+2016-03-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug reported on the mailing list from Mark Grandi (assertion error
+      while backing up).  In file_naming.parse() the filename was being lower
+      cased prior to parsing.  If you had used a prefix with mixed case, we
+      were writing the file properly, but could not find it in the backend.
+
+2016-03-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~aaron-whitehouse/duplicity/split_glob_matching_from_select
+      - Move glob matching code out of selection.py's Select function and
+        into globmatch.py.
+
+2016-03-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~aaron-whitehouse/duplicity/improve_present_get_sf_man_page
+      - Improve man page entry for --exclude-if-present
+
+2016-03-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * More fixes to dist/makedist to make it more OS agnostic.
+    * Merged in lp:~ed.so/duplicity/webdav.lftp.ssl-overhaul
+        duplicity.1, commandline.py, globals.py
+        - added --ssl-cacert-path parameter
+        backend.py
+        - make sure url path component is properly url decoded,
+          in case it contains special chars (eg. @ or space)
+        lftpbackend.py
+        - quote _all_ cmd line params
+        - added missing lftp+ftpes protocol
+        - fix empty list result when chdir failed silently
+        - added ssl_cacert_path support
+        webdavbackend.py
+        - add ssl default context support for python 2.7.9+
+          (using system certs eg. in /etc/ssl/certs)
+        - added ssl_cacert_path support for python 2.7.9+
+        - gettext wrapped all log messages
+        - minor refinements
+    * Applied patch from Dmitry Nezhevenko to upgrade dropbox backend:
+      - update to SDK v2
+      - use chunked upload
+
+2016-02-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Reverted changes made in rev 1164 w.r.t. getting the source from
+      VCS rather than local directory.  Fixes bug #1548080.
+
+2016-02-15  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Added acdclibackend.py from Stefan Breunig and Malay Shah
+      - renamed from amazoncloudbackend to stress use of acd_cli
+    * Fixed some 2to3 and Pep8 issues that had crept in
+    * Backed out changes made by patching for bug #1541314.  These
+      patches should not have been applied to the 0.7 series.
+    * Merged in lp:~rye/duplicity/mediafire
+      - Backend for https://www.mediafire.com
+      - Requires https://pypi.python.org/pypi/mediafire/ installed.
+
+2016-02-15  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~harningt/duplicity/multibackend-mirror
+      - This changeset addresses multibackend handling to permit a
+        mirroring option in addition to its "stripe" mode to make it
+        a redundancy tool vs space-expansion tool. To do this without
+        changing the configuration too much, I used the query string
+        that would generally go unused for files to specify behavior
+        that applies to all items inside the configuration file.
+
+2016-02-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed a patching error in ssh_pexpect_backend.py
+    * Merged in lp:~fpytloun/duplicity/webdav-gssapi-fix
+      - Make kerberos optional for webdav backend
+
+2016-02-03  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied patch from kay-diam to fix error handling in ssh pexpect,
+      fixes bug #1541314
+
+2016-02-02  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1540279 - mistake in --help
+
+2016-01-29  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Add more pylint ignore warnings tags
+    * Adjust so test_restart.py can run on Mac as well
+    * Fix for bug #1538333 - assert filecount == len(self.files_changed)
+      - added flush after every write for all FileobjHooked files which
+        should prevent some errors when duplicity is forcibly closed.
+
+2016-01-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~fpytloun/duplicity/webdav-gssapi
+      - support GSSAPI authentication in webdav backend
+
+2016-01-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Pep8 corrections for recently released code.
+    * Fixed bug #1260666 universally by splitting the filelist for
+      delete before passing to backend.
+    * Fixed bug #1369243 by adjusting messages to be more readable.
+    * Fixed bug #1375019 with patch from Eric Bavier (home to tmp).
+    * Fixed bug #1379575 with patch from Tim Ruffing (shorten webdav response).
+    * Fixed bug #1492301 with patch from askretov (manually refresh oauth).
+
+2016-01-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1296793 - Failed to create bucket
+      - use S3Connection.lookup() to check bucket exists
+      - skips Boto's Exception processing for this check
+      - dupe of bug #1507109 and bug #1537185
+    * Merged in lp:~mifchip/duplicity/duplicity
+      - fix bug #1313964, absolute path doesn't work for FTP
+
+2016-01-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied changes from ralle-ubuntu to fix bug 1072130.
+      - duplicity does not support ftpes://
+
+2016-01-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied patch from abeverly to fix bug #1475890
+      - allow port to be specified along with hostname on S3
+      - adjusted help text and man page to reflect the change
+    * Undo changes to test_restart.py.  GNU tar is needed.
+    * Fix minor pep8 nit in collections.py
+
+2016-01-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied patch from shaochun to fix bug #1531154,
+      - --file-changed failed when file contains spaces
+
+2016-01-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Partial fix for bug #1529606 - shell code injection in lftpbackend
+      - still need to fix the other backends that spawn shell commands
+    * Make test_restart compatible with both GNUtar and BSDtar
+    * Fix stupid issue with functional test path for duplicity
+
+2016-01-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    Random stuff:
+      - supply correct path for pydevd under Mac
+      - fix some tests to run under Mac as well
+
+2015-12-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    Random stuff:
+      - remove RPM stuff from makedist
+      - have makedist pull directly from VCS, not local dir
+      - update po translation directory and build process
+      - clean up some odd error messages
+      - move Pep8 ignores to tox.ini
+
+2015-12-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~matthew-t-bentley/duplicity/b2
+      - A couple fixes allowing multiple backups to be hosted in different
+        folders in the same bucket as well as some logging for -v9.
+
+2015-12-09  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~matthew-t-bentley/duplicity/b2
+      - Fix import and error typos.
+      - Allow multiple backups in the same bucket.
+      - Fixes bug #1523498.
+
+2015-12-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Prep for 0.7.06
+
+2015-12-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~matthew-t-bentley/duplicity/b2
+      - Adds a backed for BackBlaze's (currently beta) B2 backup service.
+      - This adds backends/b2backend.py, modifies log.py to add an
+        error code and modifies commandline.py to add the b2://
+        example to the help text.
+
+2015-12-03  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~noizyland/duplicity/azurebackend-fixes
+      - Support new version of Azure Storage SDK
+      - Refactor _list method to support containers with >5000 blobs
+
+2015-11-30  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1520691 - Shell Code Injection in hsi backend (2)
+      - Added code to expand relative program path to full path.
+      - Fix hisbackend where it expected a list not a string.
+
+2015-11-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1520691 - Shell Code Injection in hsi backend
+      - Replace use of os.popen3() with subprocess equivalent.
+
+2015-11-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~feraudet/duplicity/fix
+      - Fix missing SWIFT_ENDPOINT_TYPE env var, bug 1519694.
+
+2015-11-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~michal-s/duplicity/duplicity
+      - Fix azurebackend storage class import
+
+2015-11-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1511308 - Cannot restore no-encryption, no-compression backup
+      - Corrected code to include plain file in write_multivolume()
+      - Added PlainWriteFile() to gpg.py
+
+2015-11-01  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~ed.so/duplicity/tempfile.tempdir
+      - make sure packages using python's tempfile create temp files in
+          duplicity's temp dir
+
+2015-10-31  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Reversed previous changes to lockfile.  Now it will take any version
+      extant in the LP build repository.  (PyPi is not avail in LP build).
+
+2015-10-27  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Cleanup issues around Launchpad build, mainly lockfile >= 0.9.
+    * Merged in lp:~michal-s/duplicity/duplicity
+      - WindowsAzureMissingResourceError and WindowsAzureConflictError
+        changed due to SDK changes.
+
+2015-10-26  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Applied patch from Alexander Zangerl to update to changes in lockfile
+      API 0.9 and later.  Updated README to notify users.
+    * Modded tox.ini to use the latest lockfile.
+    * Merged in lp:~ed.so/duplicity/setup.shebang
+      - Having the python interpreter searched in the PATH is much more
+        flexible than the /usr/bin/python inserted into our scripts shebang
+        by setuptools.  This patch prevents that. don't touch my shebang! :)
+
+2015-10-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Upgrade to newest version of pep8 and pylint.   Add three ignores
+      to test_pep8 and one to test_pylint to get the rest to pass.  They
+      are all valid in our case.
+
+2015-10-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mnjul/duplicity/s3-infreq-access
+      - This adds support for AWS S3's newly announced Infrequent Access
+        storage class and is intended to implement Blueprint:
+        https://blueprints.launchpad.net/duplicity/+spec/aws-s3-std-ia-class .
+      - A new command line option, --s3-use-ia, is added, and boto backend
+        will automatically use the correct storage class value depending on
+        whether --s3-use-rrs and --s3-use-ia is set. Command line parser will
+        prompt error if both --s3-use-ia and --s3-use-rrs are used together,
+        as they conflict with each other.
+      - The manpage has been updated giving a short explanation on the new
+        option. Its wording derives from Amazon's official announcement:
+        https://aws.amazon.com/about-aws/whats-new/2015/09/announcing-new-\
+        amazon-s3-storage-class-and-lower-glacier-prices/
+    * The ptyprocess module no longer supports Python 2.6, so fix tox.ini to
+      use an older version.  Make explicit environs for all tests.
+
+
 2015-09-15  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~duplicity-team/duplicity/po-updates

@@ -266,6 +266,8 @@ class ParsedUrl:
 
         try:
             self.path = pu.path
+            if self.path:
+                self.path = urllib.unquote(self.path)
         except Exception:
             raise InvalidBackendURL("Syntax error (path) in: %s" % url_string)
 
@@ -299,7 +301,9 @@ class ParsedUrl:
         except Exception:  # not raised in python2.7+, just returns None
             # old style rsync://host::[/]dest, are still valid, though they contain no port
             if not (self.scheme in ['rsync'] and re.search('::[^:]*$', self.url_string)):
-                raise InvalidBackendURL("Syntax error (port) in: %s A%s B%s C%s" % (url_string, (self.scheme in ['rsync']), re.search('::[^:]+$', self.netloc), self.netloc))
+                raise InvalidBackendURL("Syntax error (port) in: %s A%s B%s C%s" %
+                                        (url_string, (self.scheme in ['rsync']),
+                                         re.search('::[^:]+$', self.netloc), self.netloc))
 
         # Our URL system uses two slashes more than urlparse's does when using
         # non-netloc URLs.  And we want to make sure that if urlparse assuming
@@ -452,8 +456,11 @@ class Backend(object):
         Execute the given command line, interpreted as a shell command.
         Returns int Exitcode, string StdOut, string StdErr
         """
+        import shlex
         from subprocess import Popen, PIPE
-        p = Popen(commandline, shell=True, stdout=PIPE, stderr=PIPE)
+        args = shlex.split(commandline)
+        args[0] = util.which(args[0])
+        p = Popen(args, stdout=PIPE, stderr=PIPE)
         stdout, stderr = p.communicate()
 
         return p.returncode, stdout, stderr
@@ -580,7 +587,10 @@ class BackendWrapper(object):
 
     @retry('delete', fatal=False)
     def _do_delete_list(self, filename_list):
-        self.backend._delete_list(filename_list)
+        while filename_list:
+            sublist = filename_list[:100]
+            self.backend._delete_list(sublist)
+            filename_list = filename_list[100:]
 
     @retry('delete', fatal=False)
     def _do_delete(self, filename):
