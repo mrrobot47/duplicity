@@ -53,6 +53,10 @@ class Par2Backend(backend.Backend):
             if hasattr(self.wrapped_backend, attr):
                 setattr(self, attr, getattr(self, attr[1:]))
 
+        # always declare _delete_list support because _delete queries file
+        # list for every call
+        self._delete_list = self.delete_list
+
     def transfer(self, method, source_path, remote_filename):
         """create Par2 files and transfer the given file and the Par2 files
         with the wrapped backend.
@@ -113,7 +117,9 @@ class Par2Backend(backend.Backend):
             par2file = par2temp.append(remote_filename + '.par2')
             self.wrapped_backend._get(par2file.get_filename(), par2file)
 
-            par2verify = 'par2 v %s %s %s' % (self.common_options, par2file.get_canonical(), local_path_temp.get_canonical())
+            par2verify = 'par2 v %s %s %s' % (self.common_options,
+                                              par2file.get_canonical(),
+                                              local_path_temp.get_canonical())
             out, returncode = pexpect.run(par2verify, None, True)
 
             if returncode:
@@ -125,7 +131,9 @@ class Par2Backend(backend.Backend):
                     file = par2temp.append(filename)
                     self.wrapped_backend._get(filename, file)
 
-                par2repair = 'par2 r %s %s %s' % (self.common_options, par2file.get_canonical(), local_path_temp.get_canonical())
+                par2repair = 'par2 r %s %s %s' % (self.common_options,
+                                                  par2file.get_canonical(),
+                                                  local_path_temp.get_canonical())
                 out, returncode = pexpect.run(par2repair, None, True)
 
                 if returncode:
@@ -160,9 +168,14 @@ class Par2Backend(backend.Backend):
             c = re.compile(r'%s(?:\.vol[\d+]*)?\.par2' % filename)
             for remote_filename in remote_list:
                 if c.match(remote_filename):
-                    filename_list.append(remote_filename)
+                    # insert here to make sure par2 files will be removed first
+                    filename_list.insert(0, remote_filename)
 
-        return self.wrapped_backend._delete_list(filename_list)
+        if hasattr(self.wrapped_backend, '_delete_list'):
+            return self.wrapped_backend._delete_list(filename_list)
+        else:
+            for filename in filename_list:
+                self.wrapped_backend._delete(filename)
 
     def list(self):
         """

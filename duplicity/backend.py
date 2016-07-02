@@ -266,6 +266,8 @@ class ParsedUrl:
 
         try:
             self.path = pu.path
+            if self.path:
+                self.path = urllib.unquote(self.path)
         except Exception:
             raise InvalidBackendURL("Syntax error (path) in: %s" % url_string)
 
@@ -299,7 +301,9 @@ class ParsedUrl:
         except Exception:  # not raised in python2.7+, just returns None
             # old style rsync://host::[/]dest, are still valid, though they contain no port
             if not (self.scheme in ['rsync'] and re.search('::[^:]*$', self.url_string)):
-                raise InvalidBackendURL("Syntax error (port) in: %s A%s B%s C%s" % (url_string, (self.scheme in ['rsync']), re.search('::[^:]+$', self.netloc), self.netloc))
+                raise InvalidBackendURL("Syntax error (port) in: %s A%s B%s C%s" %
+                                        (url_string, (self.scheme in ['rsync']),
+                                         re.search('::[^:]+$', self.netloc), self.netloc))
 
         # Our URL system uses two slashes more than urlparse's does when using
         # non-netloc URLs.  And we want to make sure that if urlparse assuming
