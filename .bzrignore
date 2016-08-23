@@ -16,3 +16,4 @@ duplicity.spec
 po/duplicity.pot-e
 random_seed
 testfiles
+docs/_build
