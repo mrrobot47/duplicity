@@ -18,7 +18,6 @@
 # You should have received a copy of the GNU General Public License
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-from __builtin__ import isinstance
 
 """Provides a high-level interface to some librsync functions
 
@@ -26,7 +25,11 @@ This is a python wrapper around the lower-level _librsync module,
 which is written in C.  The goal was to use C as little as possible...
 
 """
-
+import os
+if os.environ.get('READTHEDOCS') == 'True':
+    import mock
+    import duplicity
+    duplicity._librsync = mock.MagicMock()
 from . import _librsync
 import types
 import array
