@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
@@ -100,8 +101,8 @@ class CollectionTest(UnitTestCase):
         cs = collections.CollectionsStatus(None, globals.archive_dir)
         chains, orphaned, incomplete = cs.get_backup_chains(filename_list1)  # @UnusedVariable
         if len(chains) != 1 or len(orphaned) != 0:
-            print chains
-            print orphaned
+            print(chains)
+            print(orphaned)
             assert 0
 
         chain = chains[0]
@@ -145,7 +146,7 @@ class CollectionTest(UnitTestCase):
         """Test chains and orphaned_paths values for two above tests"""
         if orphaned_paths:
             for op in orphaned_paths:
-                print op
+                print(op)
             assert 0
         assert len(chains) == 1, chains
         assert chains[0].end_time == 1029826800

@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
@@ -235,16 +236,16 @@ class DDTest(UnitTestCase):
         result = diffdir.combine_path_iters([get_iter1(),
                                              get_iter2(),
                                              get_iter3()])
-        elem1 = result.next()
+        elem1 = next(result)
         assert elem1.index == () and elem1.other == 3, elem1
-        elem2 = result.next()
+        elem2 = next(result)
         assert elem2.index == (1,) and elem2.other is None, elem2
-        elem3 = result.next()
+        elem3 = next(result)
         assert elem3.index == (1, 5) and elem3.other is None
-        elem4 = result.next()
+        elem4 = next(result)
         assert elem4.index == (2,) and elem4.other == 1
         try:
-            elem5 = result.next()
+            elem5 = next(result)
         except StopIteration:
             pass
         else:
@@ -259,7 +260,7 @@ def compare_tar(tarfile1, tarfile2):
 
     for ti1 in tf1:
         try:
-            ti2 = tf2_iter.next()
+            ti2 = next(tf2_iter)
         except StopIteration:
             assert 0, ("Premature end to second tarfile, "
                        "ti1.name = %s" % ti1.name)
@@ -274,7 +275,7 @@ def compare_tar(tarfile1, tarfile2):
             fp2.close()
             assert buf1 == buf2
     try:
-        ti2 = tf2_iter.next()
+        ti2 = next(tf2_iter)
     except StopIteration:
         pass
     else:
@@ -287,29 +288,29 @@ def compare_tar(tarfile1, tarfile2):
 
 def tarinfo_eq(ti1, ti2):
     if ti1.name != ti2.name:
-        print "Name:", ti1.name, ti2.name
+        print("Name:", ti1.name, ti2.name)
         return 0
     if ti1.size != ti2.size:
-        print "Size:", ti1.size, ti2.size
+        print("Size:", ti1.size, ti2.size)
         return 0
     if ti1.mtime != ti2.mtime:
-        print "Mtime:", ti1.mtime, ti2.mtime
+        print("Mtime:", ti1.mtime, ti2.mtime)
         return 0
     if ti1.mode != ti2.mode:
-        print "Mode:", ti1.mode, ti2.mode
+        print("Mode:", ti1.mode, ti2.mode)
         return 0
     if ti1.type != ti2.type:
-        print "Type:", ti1.type, ti2.type
+        print("Type:", ti1.type, ti2.type)
         return 0
     if ti1.issym() or ti1.islnk():
         if ti1.linkname != ti2.linkname:
-            print "Linkname:", ti1.linkname, ti2.linkname
+            print("Linkname:", ti1.linkname, ti2.linkname)
             return 0
     if ti1.uid != ti2.uid or ti1.gid != ti2.gid:
-        print "IDs:", ti1.uid, ti2.uid, ti1.gid, ti2.gid
+        print("IDs:", ti1.uid, ti2.uid, ti1.gid, ti2.gid)
         return 0
     if ti1.uname != ti2.uname or ti1.gname != ti2.gname:
-        print "Owner names:", ti1.uname, ti2.uname, ti1.gname, ti2.gname
+        print("Owner names:", ti1.uname, ti2.uname, ti1.gname, ti2.gname)
         return 0
     return 1
 

@@ -143,7 +143,7 @@ class MapTestCase(Iterators):
             if x == "hello":
                 raise NameError
         i = Iter.map(f, self.trueerror_maker())
-        i.next()
+        next(i)
         self.assertRaises(NameError, i.next)
 
     def testEmpty(self):
@@ -165,8 +165,8 @@ class CatTestCase(Iterators):
     def testShortcut(self):
         """Process iterators in order"""
         i = Iter.cat(self.typeerror_maker(), self.nameerror_maker())
-        i.next()
-        i.next()
+        next(i)
+        next(i)
         self.assertRaises(TypeError, i.next)
 
 

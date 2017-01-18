@@ -31,8 +31,8 @@ class TimeTest:
     def testConversion(self):
         """test timetostring and stringtotime"""
         dup_time.setcurtime()
-        assert type(dup_time.curtime) in (types.IntType, types.LongType)
-        assert isinstance(dup_time.curtimestr, types.StringType)
+        assert type(dup_time.curtime) in (int, int)
+        assert isinstance(dup_time.curtimestr, bytes)
         assert (dup_time.cmp(int(dup_time.curtime), dup_time.curtimestr) == 0 or
                 dup_time.cmp(int(dup_time.curtime) + 1, dup_time.curtimestr) == 0)
         time.sleep(1.05)
