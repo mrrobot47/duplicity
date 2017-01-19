@@ -27,7 +27,14 @@ import time
 import types
 import re
 import calendar
+import sys
 from duplicity import globals
+
+# For type testing against both int and long types that works in python 2/3
+if sys.version_info < (3,):
+    integer_types = (int, types.LongType)
+else:
+    integer_types = (int,)
 
 
 class TimeException(Exception):
@@ -69,14 +76,14 @@ def setcurtime(time_in_secs=None):
     """Sets the current time in curtime and curtimestr"""
     global curtime, curtimestr
     t = time_in_secs or int(time.time())
-    assert type(t) in (types.LongType, types.IntType)
+    assert type(t) in integer_types
     curtime, curtimestr = t, timetostring(t)
 
 
 def setprevtime(time_in_secs):
     """Sets the previous time in prevtime and prevtimestr"""
     global prevtime, prevtimestr
-    assert type(time_in_secs) in (types.LongType, types.IntType), prevtime
+    assert type(time_in_secs) in integer_types, prevtime
     prevtime, prevtimestr = time_in_secs, timetostring(time_in_secs)
 
 
@@ -181,7 +188,7 @@ def inttopretty(seconds):
     if seconds == 1:
         partlist.append("1 second")
     elif not partlist or seconds > 1:
-        if isinstance(seconds, (types.LongType, types.IntType)):
+        if isinstance(seconds, integer_types):
             partlist.append("%s seconds" % seconds)
         else:
             partlist.append("%.2f seconds" % seconds)

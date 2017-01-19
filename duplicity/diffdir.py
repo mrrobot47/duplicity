@@ -83,7 +83,7 @@ def DirDelta(path_iter, dirsig_fileobj_list):
     """
     global stats
     stats = statistics.StatsDeltaProcess()
-    if isinstance(dirsig_fileobj_list, types.ListType):
+    if isinstance(dirsig_fileobj_list, list):
         sig_iter = combine_path_iters([sigtar2path_iter(x) for x
                                        in dirsig_fileobj_list])
     else:
@@ -273,7 +273,7 @@ def collate2iters(riter1, riter2):
     while 1:
         if not relem1:
             try:
-                relem1 = riter1.next()
+                relem1 = next(riter1)
             except StopIteration:
                 if relem2:
                     yield (None, relem2)
@@ -283,7 +283,7 @@ def collate2iters(riter1, riter2):
             index1 = relem1.index
         if not relem2:
             try:
-                relem2 = riter2.next()
+                relem2 = next(riter2)
             except StopIteration:
                 if relem1:
                     yield (relem1, None)
@@ -324,7 +324,7 @@ def combine_path_iters(path_iter_list):
         Represent the next element as a triple, to help sorting
         """
         try:
-            path = path_iter_list[iter_index].next()
+            path = next(path_iter_list[iter_index])
         except StopIteration:
             return None
         return (path.index, iter_index, path)
@@ -364,7 +364,7 @@ def DirDelta_WriteSig(path_iter, sig_infp_list, newsig_outfp):
     """
     global stats
     stats = statistics.StatsDeltaProcess()
-    if isinstance(sig_infp_list, types.ListType):
+    if isinstance(sig_infp_list, list):
         sig_path_iter = get_combined_path_iter(sig_infp_list)
     else:
         sig_path_iter = sigtar2path_iter(sig_infp_list)
@@ -520,7 +520,7 @@ class TarBlockIter:
             result = self.process_continued()
         else:
             # Below a StopIteration exception will just be passed upwards
-            result = self.process(self.input_iter.next())
+            result = self.process(next(self.input_iter))
         block_number = self.process_next_vol_number
         self.offset += len(result.data)
         self.previous_index = result.index
