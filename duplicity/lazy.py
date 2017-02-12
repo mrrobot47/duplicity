@@ -20,6 +20,7 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 """Define some lazy data structures and functions acting on them"""
+from __future__ import print_function
 
 import os
 
@@ -76,21 +77,21 @@ class Iter:
         """
         for i1 in iter1:
             try:
-                i2 = iter2.next()
+                i2 = next(iter2)
             except StopIteration:
                 if verbose:
-                    print "End when i1 = %s" % (i1,)
+                    print("End when i1 = %s" % (i1,))
                 return None
             if not operator(i1, i2):
                 if verbose:
-                    print "%s not equal to %s" % (i1, i2)
+                    print("%s not equal to %s" % (i1, i2))
                 return None
         try:
-            i2 = iter2.next()
+            i2 = next(iter2)
         except StopIteration:
             return 1
         if verbose:
-            print "End when i2 = %s" % (i2,)
+            print("End when i2 = %s" % (i2,))
         return None
 
     @staticmethod
@@ -117,7 +118,7 @@ class Iter:
         i = 0
         while 1:
             try:
-                iter.next()
+                next(iter)
             except StopIteration:
                 return i
             i = i + 1
@@ -126,20 +127,20 @@ class Iter:
     def foldr(f, default, iter):  # @NoSelf
         """foldr the "fundamental list recursion operator"?"""
         try:
-            next = iter.next()
+            next_item = next(iter)
         except StopIteration:
             return default
-        return f(next, Iter.foldr(f, default, iter))
+        return f(next_item, Iter.foldr(f, default, iter))
 
     @staticmethod
     def foldl(f, default, iter):  # @NoSelf
         """the fundamental list iteration operator.."""
         while 1:
             try:
-                next = iter.next()
+                next_item = next(iter)
             except StopIteration:
                 return default
-            default = f(default, next)
+            default = f(default, next_item)
 
     @staticmethod
     def multiplex(iter, num_of_forks, final_func=None, closing_func=None):  # @NoSelf
@@ -174,7 +175,7 @@ class Iter:
             """Return the next element requested by fork_num"""
             if forkposition[fork_num] == -1:
                 try:
-                    buffer.insert(0, iter.next())
+                    buffer.insert(0, next(iter))
                 except StopIteration:
                     # call closing_func if necessary
                     if (forkposition == starting_forkposition and
@@ -222,7 +223,7 @@ class IterMultiplex2:
         while(1):
             if self.a_leading_by >= 0:
                 # a is in front, add new element
-                elem = iter.next()  # exception will be passed
+                elem = next(iter)  # exception will be passed
                 buf.append(elem)
             else:
                 # b is in front, subtract an element
@@ -236,7 +237,7 @@ class IterMultiplex2:
         while(1):
             if self.a_leading_by <= 0:
                 # b is in front, add new element
-                elem = iter.next()  # exception will be passed
+                elem = next(iter)  # exception will be passed
                 buf.append(elem)
             else:
                 # a is in front, subtract an element

@@ -118,7 +118,7 @@ def difftar2path_iter(diff_tarfile):
     # The next tar_info is stored in this one element list so
     # Multivol_Filelike below can update it.  Any StopIterations will
     # be passed upwards.
-    tarinfo_list = [tar_iter.next()]
+    tarinfo_list = [next(tar_iter)]
 
     while 1:
         # This section relevant when a multivol diff is last in tar
@@ -144,7 +144,7 @@ def difftar2path_iter(diff_tarfile):
             else:
                 ropath.setfileobj(diff_tarfile.extractfile(tarinfo_list[0]))
         yield ropath
-        tarinfo_list[0] = tar_iter.next()
+        tarinfo_list[0] = next(tar_iter)
 
 
 def get_index_from_tarinfo(tarinfo):
@@ -234,7 +234,7 @@ class Multivol_Filelike:
         fp.close()
 
         try:
-            self.tarinfo_list[0] = self.tar_iter.next()
+            self.tarinfo_list[0] = next(self.tar_iter)
         except StopIteration:
             self.tarinfo_list[0] = None
             self.at_end = 1
@@ -330,7 +330,7 @@ class TarFile_FromFileobjs:
         """Set tarfile from next file object, or raise StopIteration"""
         if self.current_fp:
             assert not self.current_fp.close()
-        self.current_fp = self.fileobj_iter.next()
+        self.current_fp = next(self.fileobj_iter)
         self.tarfile = util.make_tarfile("r", self.current_fp)
         self.tar_iter = iter(self.tarfile)
 
@@ -338,11 +338,11 @@ class TarFile_FromFileobjs:
         if not self.tarfile:
             self.set_tarfile()
         try:
-            return self.tar_iter.next()
+            return next(self.tar_iter)
         except StopIteration:
             assert not self.tarfile.close()
             self.set_tarfile()
-            return self.tar_iter.next()
+            return next(self.tar_iter)
 
     def extractfile(self, tarinfo):
         """Return data associated with given tarinfo"""
@@ -375,7 +375,7 @@ def collate_iters(iter_list):
         for i in range(iter_num):
             if not overflow[i] and elems[i] is None:
                 try:
-                    elems[i] = iter_list[i].next()
+                    elems[i] = next(iter_list[i])
                 except StopIteration:
                     overflow[i] = 1
                     elems[i] = None
@@ -442,7 +442,7 @@ class IndexedTuple:
     def __eq__(self, other):
         if isinstance(other, IndexedTuple):
             return self.index == other.index and self.data == other.data
-        elif isinstance(other, types.TupleType):
+        elif isinstance(other, tuple):
             return self.data == other
         else:
             return None
