@@ -57,5 +57,6 @@ class HSIBackend(duplicity.backend.Backend):
         commandline = '%s "rm %s%s"' % (hsi_command, self.remote_prefix, filename)
         self.subprocess_popen(commandline)
 
+
 duplicity.backend.register_backend("hsi", HSIBackend)
 duplicity.backend.uses_netloc.extend(['hsi'])

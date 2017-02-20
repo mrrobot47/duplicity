@@ -61,4 +61,5 @@ class HubicBackend(PyraxBackend):
         self.nso_exc = pyrax.exceptions.NoSuchObject
         self.container = pyrax.cloudfiles.create_container(container)
 
+
 duplicity.backend.register_backend("cf+hubic", HubicBackend)

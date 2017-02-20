@@ -73,4 +73,5 @@ class LocalBackend(duplicity.backend.Backend):
         size = target_file.getsize() if target_file.exists() else -1
         return {'size': size}
 
+
 duplicity.backend.register_backend("file", LocalBackend)

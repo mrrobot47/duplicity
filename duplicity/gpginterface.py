@@ -707,6 +707,7 @@ def _run_doctests():
     from . import gpginterface
     return doctest.testmod(GnuPGInterface)
 
+
 # deprecated
 GnuPGInterface = GnuPG
 

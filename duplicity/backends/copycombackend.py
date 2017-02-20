@@ -304,6 +304,7 @@ class CopyComBackend(duplicity.backend.Backend):
         except CoPyCloud.Error as e:
             raise BackendException(e)
 
+
 ''' This must be disabled here, because if a file in list does not exist, the
     Copy server will stop deleting the subsequent stuff, raising an error,
     making test_delete_list to fail.
