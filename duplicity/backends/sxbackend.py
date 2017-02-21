@@ -49,4 +49,5 @@ class SXBackend(duplicity.backend.Backend):
         commandline = "sxrm {0}/{1}".format(self.url_string, filename)
         self.subprocess_popen(commandline)
 
+
 duplicity.backend.register_backend("sx", SXBackend)

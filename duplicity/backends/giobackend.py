@@ -170,4 +170,5 @@ class GIOBackend(duplicity.backend.Backend):
                                       Gio.FileQueryInfoFlags.NONE, None)
         return {'size': info.get_size()}
 
+
 duplicity.backend.register_backend_prefix('gio', GIOBackend)

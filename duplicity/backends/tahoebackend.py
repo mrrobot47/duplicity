@@ -72,4 +72,5 @@ class TAHOEBackend(duplicity.backend.Backend):
     def _delete(self, filename):
         self.run("tahoe", "rm", self.get_remote_path(filename))
 
+
 duplicity.backend.register_backend("tahoe", TAHOEBackend)

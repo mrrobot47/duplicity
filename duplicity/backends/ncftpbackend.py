@@ -116,5 +116,6 @@ class NCFTPBackend(duplicity.backend.Backend):
             (self.flags, filename, self.url_string)
         self.subprocess_popen(commandline)
 
+
 duplicity.backend.register_backend("ncftp+ftp", NCFTPBackend)
 duplicity.backend.uses_netloc.extend(['ncftp+ftp'])
