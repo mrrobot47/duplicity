@@ -28,6 +28,10 @@ the standard threading module, and absolute imports require
 at least python 2.5.)
 """
 
+import sys
+from duplicity import errors
+
+
 _threading_supported = True
 
 try:
@@ -41,10 +45,6 @@ try:
 except ImportError:
     import dummy_threading as threading
     _threading_supported = False
-
-import sys
-
-from duplicity import errors
 
 
 def threading_supported():
