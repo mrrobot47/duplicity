@@ -23,6 +23,7 @@
 from __future__ import absolute_import
 
 import tarfile
+from duplicity import cached_ops
 
 # Grab all symbols in tarfile, to try to reproduce its API exactly.
 # from <> import * wouldn't get everything we want, since tarfile defines
@@ -31,5 +32,4 @@ for sym in dir(tarfile):
     globals()[sym] = getattr(tarfile, sym)
 
 # Now make sure that we cache the grp/pwd ops
-from duplicity import cached_ops
 grp = pwd = cached_ops
