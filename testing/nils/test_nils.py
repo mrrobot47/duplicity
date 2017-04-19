@@ -165,6 +165,7 @@ class FinalTest(FunctionalTestCase):
 
 
 class OldFilenamesFinalTest(FinalTest):
+
     def setUp(self):
         super(OldFilenamesFinalTest, self).setUp()
         self.class_args.extend(["--old-filenames"])
