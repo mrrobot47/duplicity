@@ -34,7 +34,7 @@ class BadUploadTest(FunctionalTestCase):
         Test basic lost file
         """
         try:
-            self.backup("full", "testfiles/dir1", options=["--skip-volume=1"])
+            self.backup(u"full", u"testfiles/dir1", options=[u"--skip-volume=1"])
             self.fail()
         except CmdError as e:
             self.assertEqual(e.exit_status, 44, str(e))
