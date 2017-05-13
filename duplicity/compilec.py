@@ -22,7 +22,9 @@
 
 import sys
 import os
-from distutils.core import setup, Extension
+
+#  https://github.com/PyCQA/pylint/issues/73
+from distutils.core import setup, Extension  # pylint: disable=import-error,no-name-in-module
 
 assert len(sys.argv) == 1
 sys.argv.append("build")
