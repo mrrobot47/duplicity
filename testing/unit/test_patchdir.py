@@ -21,7 +21,6 @@
 
 from future_builtins import map
 
-import sys
 import cStringIO
 import unittest
 
