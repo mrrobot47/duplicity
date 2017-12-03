@@ -71,23 +71,23 @@ class GPGTest(UnitTestCase):
 
     def test_gpg_asym(self):
         """Test GPG asymmetric encryption"""
-        profile = gpg.GPGProfile(passphrase=self.sign_passphrase,
+        profile = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
                                  recipients=[self.encrypt_key1,
                                              self.encrypt_key2])
         self.gpg_cycle("aoensutha aonetuh saoe", profile)
 
-        profile2 = gpg.GPGProfile(passphrase=self.sign_passphrase,
+        profile2 = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
                                   recipients=[self.encrypt_key1])
         self.gpg_cycle("aoeu" * 10000, profile2)
 
     def test_gpg_hidden_asym(self):
         """Test GPG asymmetric encryption with hidden key id"""
-        profile = gpg.GPGProfile(passphrase=self.sign_passphrase,
+        profile = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
                                  hidden_recipients=[self.encrypt_key1,
                                                     self.encrypt_key2])
         self.gpg_cycle("aoensutha aonetuh saoe", profile)
 
-        profile2 = gpg.GPGProfile(passphrase=self.sign_passphrase,
+        profile2 = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
                                   hidden_recipients=[self.encrypt_key1])
         self.gpg_cycle("aoeu" * 10000, profile2)
 
@@ -95,7 +95,7 @@ class GPGTest(UnitTestCase):
         """Test to make sure GPG reports the proper signature key"""
         plaintext = "hello" * 50000
 
-        signing_profile = gpg.GPGProfile(passphrase=self.sign_passphrase,
+        signing_profile = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
                                          sign_key=self.sign_key,
                                          recipients=[self.encrypt_key1])
 
@@ -114,7 +114,7 @@ class GPGTest(UnitTestCase):
         """Test to make sure GPG reports the proper signature key even with hidden encryption key id"""
         plaintext = "hello" * 50000
 
-        signing_profile = gpg.GPGProfile(passphrase=self.sign_passphrase,
+        signing_profile = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
                                          sign_key=self.sign_key,
                                          hidden_recipients=[self.encrypt_key1])
 
