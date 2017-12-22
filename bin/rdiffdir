@@ -58,7 +58,7 @@ def parse_cmdline_options(arglist):
         try:
             return open(filename, "r")
         except IOError:
-            log.FatalError(_("Error opening file %s") % util.ufn(filename))
+            log.FatalError(_("Error opening file %s") % util.fsdecode(filename))
 
     try:
         optlist, args = getopt.getopt(arglist, "v:Vz",
@@ -126,7 +126,7 @@ def check_does_not_exist(filename):
         pass
     else:
         log.FatalError(_("File %s already exists, will not "
-                         "overwrite.") % util.ufn(filename))
+                         "overwrite.") % util.fsdecode(filename))
 
 
 def get_action(args):
