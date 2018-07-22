@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2018-07-08 07:14-0500\n"
-"PO-Revision-Date: 2018-07-12 13:09+0000\n"
-"Last-Translator: Arve Eriksson <Unknown>\n"
+"PO-Revision-Date: 2018-07-21 12:51+0000\n"
+"Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-07-13 06:02+0000\n"
-"X-Generator: Launchpad (build 18719)\n"
+"X-Launchpad-Export-Date: 2018-07-22 05:55+0000\n"
+"X-Generator: Launchpad (build 18730)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -262,7 +262,7 @@ msgstr "Replikerar %s."
 #: ../bin/duplicity:1077
 #, python-format
 msgid "Backupset %s already replicated"
-msgstr ""
+msgstr "Säkerhetskopierngsuppsättning %s redan replikerad"
 
 #: ../bin/duplicity:1198
 #, python-format
@@ -383,7 +383,7 @@ msgstr ""
 #: ../bin/duplicity:1491
 #, python-format
 msgid "Acquiring lockfile %s"
-msgstr ""
+msgstr "Hämtar låsfil %s"
 
 #: ../bin/duplicity:1549
 #, python-format
@@ -642,11 +642,12 @@ msgid ""
 "Running in 'ignore errors' mode due to %s; please re-consider if this was "
 "not intended"
 msgstr ""
+"Körs i 'ignore errors'-läge på grund av %s; överväg om detta inte var avsett"
 
 #. Used in usage help to represent an imap mailbox
 #: ../duplicity/commandline.py:436
 msgid "imap_mailbox"
-msgstr ""
+msgstr "imap_mailbox"
 
 #: ../duplicity/commandline.py:454
 msgid "file_descriptor"
@@ -667,11 +668,11 @@ msgstr "antal"
 #. Used in usage help (noun)
 #: ../duplicity/commandline.py:468
 msgid "backup name"
-msgstr ""
+msgstr "säkerhetskopia namn"
 
 #: ../duplicity/commandline.py:570
 msgid "policy"
-msgstr ""
+msgstr "riktlinjer"
 
 #. noun
 #: ../duplicity/commandline.py:588 ../duplicity/commandline.py:591
