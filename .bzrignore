@@ -20,4 +20,5 @@ po/duplicity.pot-e
 random_seed
 testfiles
 testing/gnupg/.gpg-v21-migrated
+testing/gnupg/S.*
 testing/gnupg/private-keys-v1.d
