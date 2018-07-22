@@ -177,6 +177,7 @@ class CodeTest(DuplicityTestCase):
                          os.path.join(_top_dir, u'duplicity', u'util.py'),
                          os.path.join(_top_dir, u'testing', u'__init__.py'),
                          os.path.join(_top_dir, u'testing', u'find_unadorned_strings.py'),
+                         os.path.join(_top_dir, u'testing', u'fix_unadorned_strings.py'),
                          os.path.join(_top_dir, u'testing', u'functional', u'__init__.py'),
                          os.path.join(_top_dir, u'testing', u'functional', u'test_badupload.py'),
                          os.path.join(_top_dir, u'testing', u'functional', u'test_cleanup.py'),
