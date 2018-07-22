@@ -1,3 +1,11 @@
+2018-07-22  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Added function to fix unadorned strings (testing/fix_unadorned_strings.py)
+      - Fixes by inserting 'u' before token string
+      - Solves 99.9% of the use cases we have
+      - Fix unadorned strings to unicode in bin/duplicity and bin/rdiffdir
+      - Add import for __future__.print_function to find_unadorned_strings.py
+
 2018-07-20  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~aaron-whitehouse/duplicity/08-adorn-strings

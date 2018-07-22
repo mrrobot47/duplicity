@@ -365,6 +365,11 @@ New in v0.8.00 (2016/07/??)
   - Adorn strings in selection.py
   - Adorn strings in functional/test_selection.py and unit/test_selection.py
   - Remove ignores for these files in test_code.py
+* Added function to fix unadorned strings (testing/fix_unadorned_strings.py)
+  - Fixes by inserting 'u' before token string
+  - Solves 99.9% of the use cases we have
+  - Fix unadorned strings to unicode in bin/duplicity and bin/rdiffdir
+  - Add import for __future__.print_function to find_unadorned_strings.py
 
 
 New in v0.7.08 (2016/07/02)
