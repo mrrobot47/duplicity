@@ -22,6 +22,8 @@
 # For predictable results in python2/3 all string literals need to be marked as unicode, bytes or raw
 # This code finds all unadorned string literals (strings that are not marked with a u, b or r)
 
+from __future__ import print_function
+
 import sys
 import tokenize
 import token
