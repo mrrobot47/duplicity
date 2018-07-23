@@ -22,7 +22,7 @@
 import os
 import duplicity.backend
 
-hsi_command = "hsi"
+hsi_command = u"hsi"
 
 
 class HSIBackend(duplicity.backend.Backend):
@@ -31,21 +31,21 @@ class HSIBackend(duplicity.backend.Backend):
         self.host_string = parsed_url.hostname
         self.remote_dir = parsed_url.path
         if self.remote_dir:
-            self.remote_prefix = self.remote_dir + "/"
+            self.remote_prefix = self.remote_dir + u"/"
         else:
-            self.remote_prefix = ""
+            self.remote_prefix = u""
 
     def _put(self, source_path, remote_filename):
-        commandline = '%s "put %s : %s%s"' % (hsi_command, source_path.name, self.remote_prefix, remote_filename)
+        commandline = u'%s "put %s : %s%s"' % (hsi_command, source_path.name, self.remote_prefix, remote_filename)
         self.subprocess_popen(commandline)
 
     def _get(self, remote_filename, local_path):
-        commandline = '%s "get %s : %s%s"' % (hsi_command, local_path.name, self.remote_prefix, remote_filename)
+        commandline = u'%s "get %s : %s%s"' % (hsi_command, local_path.name, self.remote_prefix, remote_filename)
         self.subprocess_popen(commandline)
 
     def _list(self):
         import sys
-        commandline = '%s "ls -l %s"' % (hsi_command, self.remote_dir)
+        commandline = u'%s "ls -l %s"' % (hsi_command, self.remote_dir)
         l = self.subprocess_popen(commandline)[2]
         l = l.split(os.linesep)[3:]
         for i in range(0, len(l)):
@@ -54,9 +54,9 @@ class HSIBackend(duplicity.backend.Backend):
         return [x for x in l if x]
 
     def _delete(self, filename):
-        commandline = '%s "rm %s%s"' % (hsi_command, self.remote_prefix, filename)
+        commandline = u'%s "rm %s%s"' % (hsi_command, self.remote_prefix, filename)
         self.subprocess_popen(commandline)
 
 
-duplicity.backend.register_backend("hsi", HSIBackend)
-duplicity.backend.uses_netloc.extend(['hsi'])
+duplicity.backend.register_backend(u"hsi", HSIBackend)
+duplicity.backend.uses_netloc.extend([u'hsi'])

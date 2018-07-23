@@ -23,31 +23,31 @@ import duplicity.backend
 
 
 class SXBackend(duplicity.backend.Backend):
-    """Connect to remote store using Skylable Protocol"""
+    u"""Connect to remote store using Skylable Protocol"""
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
         self.url_string = parsed_url.url_string
 
     def _put(self, source_path, remote_filename):
         remote_path = os.path.join(self.url_string, remote_filename)
-        commandline = "sxcp {0} {1}".format(source_path.name, remote_path)
+        commandline = u"sxcp {0} {1}".format(source_path.name, remote_path)
         self.subprocess_popen(commandline)
 
     def _get(self, remote_filename, local_path):
         remote_path = os.path.join(self.url_string, remote_filename)
-        commandline = "sxcp {0} {1}".format(remote_path, local_path.name)
+        commandline = u"sxcp {0} {1}".format(remote_path, local_path.name)
         self.subprocess_popen(commandline)
 
     def _list(self):
         # Do a long listing to avoid connection reset
-        commandline = "sxls {0}".format(self.url_string)
+        commandline = u"sxls {0}".format(self.url_string)
         _, l, _ = self.subprocess_popen(commandline)
         # Look for our files as the last element of a long list line
-        return [x[x.rindex('/') + 1:].split()[-1] for x in l.split('\n') if x and not x.startswith("total ")]
+        return [x[x.rindex(u'/') + 1:].split()[-1] for x in l.split(u'\n') if x and not x.startswith(u"total ")]
 
     def _delete(self, filename):
-        commandline = "sxrm {0}/{1}".format(self.url_string, filename)
+        commandline = u"sxrm {0}/{1}".format(self.url_string, filename)
         self.subprocess_popen(commandline)
 
 
-duplicity.backend.register_backend("sx", SXBackend)
+duplicity.backend.register_backend(u"sx", SXBackend)

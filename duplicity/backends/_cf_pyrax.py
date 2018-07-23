@@ -27,7 +27,7 @@ from duplicity.errors import BackendException
 
 
 class PyraxBackend(duplicity.backend.Backend):
-    """
+    u"""
     Backend for Rackspace's CloudFiles using Pyrax
     """
     def __init__(self, parsed_url):
@@ -36,35 +36,35 @@ class PyraxBackend(duplicity.backend.Backend):
         try:
             import pyrax
         except ImportError as e:
-            raise BackendException("""\
+            raise BackendException(u"""\
 Pyrax backend requires the pyrax library available from Rackspace.
 Exception: %s""" % str(e))
 
         # Inform Pyrax that we're talking to Rackspace
         # per Jesus Monzon (gsusmonzon)
-        pyrax.set_setting("identity_type", "rackspace")
+        pyrax.set_setting(u"identity_type", u"rackspace")
 
         conn_kwargs = {}
 
-        if 'CLOUDFILES_USERNAME' not in os.environ:
-            raise BackendException('CLOUDFILES_USERNAME environment variable'
-                                   'not set.')
+        if u'CLOUDFILES_USERNAME' not in os.environ:
+            raise BackendException(u'CLOUDFILES_USERNAME environment variable'
+                                   u'not set.')
 
-        if 'CLOUDFILES_APIKEY' not in os.environ:
-            raise BackendException('CLOUDFILES_APIKEY environment variable not set.')
+        if u'CLOUDFILES_APIKEY' not in os.environ:
+            raise BackendException(u'CLOUDFILES_APIKEY environment variable not set.')
 
-        conn_kwargs['username'] = os.environ['CLOUDFILES_USERNAME']
-        conn_kwargs['api_key'] = os.environ['CLOUDFILES_APIKEY']
+        conn_kwargs[u'username'] = os.environ[u'CLOUDFILES_USERNAME']
+        conn_kwargs[u'api_key'] = os.environ[u'CLOUDFILES_APIKEY']
 
-        if 'CLOUDFILES_REGION' in os.environ:
-            conn_kwargs['region'] = os.environ['CLOUDFILES_REGION']
+        if u'CLOUDFILES_REGION' in os.environ:
+            conn_kwargs[u'region'] = os.environ[u'CLOUDFILES_REGION']
 
-        container = parsed_url.path.lstrip('/')
+        container = parsed_url.path.lstrip(u'/')
 
         try:
             pyrax.set_credentials(**conn_kwargs)
         except Exception as e:
-            log.FatalError("Connection failed, please check your credentials: %s %s"
+            log.FatalError(u"Connection failed, please check your credentials: %s %s"
                            % (e.__class__.__name__, util.uexc(e)),
                            log.ErrorCode.connection_failed)
 
@@ -75,19 +75,19 @@ Exception: %s""" % str(e))
         try:
             self.container = pyrax.cloudfiles.get_container(container)
         except pyrax.exceptions.Forbidden as e:
-            log.FatalError("%s : %s \n" % (e.__class__.__name__, util.uexc(e)) +
-                           "Container may exist, but access was denied.\n" +
-                           "If this container exists, please check its X-Container-Read/Write headers.\n" +
-                           "Otherwise, please check your credentials and permissions.",
+            log.FatalError(u"%s : %s \n" % (e.__class__.__name__, util.uexc(e)) +
+                           u"Container may exist, but access was denied.\n" +
+                           u"If this container exists, please check its X-Container-Read/Write headers.\n" +
+                           u"Otherwise, please check your credentials and permissions.",
                            log.ErrorCode.backend_permission_denied)
         except pyrax.exceptions.NoSuchContainer as e:
             try:
                 self.container = pyrax.cloudfiles.create_container(container)
             except pyrax.exceptions.Forbidden as e:
-                log.FatalError("%s : %s \n" % (e.__class__.__name__, util.uexc(e)) +
-                               "Container does not exist, but creation was denied.\n" +
-                               "You may be using a read-only user that can view but not create containers.\n" +
-                               "Please check your credentials and permissions.",
+                log.FatalError(u"%s : %s \n" % (e.__class__.__name__, util.uexc(e)) +
+                               u"Container does not exist, but creation was denied.\n" +
+                               u"You may be using a read-only user that can view but not create containers.\n" +
+                               u"Please check your credentials and permissions.",
                                log.ErrorCode.backend_permission_denied)
 
     def _error_code(self, operation, e):
@@ -96,7 +96,7 @@ Exception: %s""" % str(e))
         elif isinstance(e, self.client_exc):
             if e.code == 404:
                 return log.ErrorCode.backend_not_found
-        elif hasattr(e, 'http_status'):
+        elif hasattr(e, u'http_status'):
             if e.http_status == 404:
                 return log.ErrorCode.backend_not_found
 
@@ -105,7 +105,7 @@ Exception: %s""" % str(e))
 
     def _get(self, remote_filename, local_path):
         sobject = self.container.get_object(remote_filename)
-        with open(local_path.name, 'wb') as f:
+        with open(local_path.name, u'wb') as f:
             f.write(sobject.get())
 
     def _list(self):
@@ -123,4 +123,4 @@ Exception: %s""" % str(e))
 
     def _query(self, filename):
         sobject = self.container.get_object(filename)
-        return {'size': sobject.total_bytes}
+        return {u'size': sobject.total_bytes}

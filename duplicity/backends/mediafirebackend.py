@@ -18,7 +18,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-"""MediaFire Duplicity Backend"""
+u"""MediaFire Duplicity Backend"""
 
 import os
 
@@ -26,11 +26,11 @@ import duplicity.backend
 
 from duplicity.errors import BackendException
 
-DUPLICITY_APP_ID = '45593'
+DUPLICITY_APP_ID = u'45593'
 
 
 class MediafireBackend(duplicity.backend.Backend):
-    """Use this backend when saving to MediaFire
+    u"""Use this backend when saving to MediaFire
 
     URLs look like mf:/root/folder.
     """
@@ -38,7 +38,7 @@ class MediafireBackend(duplicity.backend.Backend):
         try:
             import mediafire.client
         except ImportError as e:
-            raise BackendException("""\
+            raise BackendException(u"""\
 Mediafire backend requires the mediafire library.
 Exception: %s""" % str(e))
 
@@ -58,7 +58,7 @@ Exception: %s""" % str(e))
                           password=mediafire_password)
 
         # //username:password@host/path/to/folder -> path/to/folder
-        uri = 'mf:///' + parsed_url.path.split('/', 3)[3]
+        uri = u'mf:///' + parsed_url.path.split(u'/', 3)[3]
 
         # Create folder if it does not exist and make sure it is private
         # See MediaFire Account Settings /Security and Privacy / Share Link
@@ -66,17 +66,17 @@ Exception: %s""" % str(e))
         try:
             folder = self.client.get_resource_by_uri(uri)
             if not isinstance(folder, self._folder_res):
-                raise BackendException("target_url already exists "
-                                       "and is not a folder")
+                raise BackendException(u"target_url already exists "
+                                       u"and is not a folder")
         except mediafire.client.ResourceNotFoundError:
             # force folder to be private
             folder = self.client.create_folder(uri, recursive=True)
-            self.client.update_folder_metadata(uri, privacy='private')
+            self.client.update_folder_metadata(uri, privacy=u'private')
 
         self.folder = folder
 
     def _put(self, source_path, remote_filename=None):
-        """Upload file"""
+        u"""Upload file"""
         # Use source file name if remote one is not defined
         if remote_filename is None:
             remote_filename = os.path.basename(source_path.name)
@@ -84,56 +84,56 @@ Exception: %s""" % str(e))
         uri = self._build_uri(remote_filename)
 
         with self.client.upload_session():
-            self.client.upload_file(source_path.open('rb'), uri)
+            self.client.upload_file(source_path.open(u'rb'), uri)
 
     def _get(self, filename, local_path):
-        """Download file"""
+        u"""Download file"""
         uri = self._build_uri(filename)
         try:
-            self.client.download_file(uri, local_path.open('wb'))
+            self.client.download_file(uri, local_path.open(u'wb'))
         except self._downloaderror_exc as ex:
             raise BackendException(ex)
 
     def _list(self):
-        """List files in backup directory"""
+        u"""List files in backup directory"""
         uri = self._build_uri()
         filenames = []
         for item in self.client.get_folder_contents_iter(uri):
             if not isinstance(item, self._file_res):
                 continue
 
-            filenames.append(item['filename'].encode('utf-8'))
+            filenames.append(item[u'filename'].encode(u'utf-8'))
 
         return filenames
 
     def _delete(self, filename):
-        """Delete single file"""
+        u"""Delete single file"""
         uri = self._build_uri(filename)
         self.client.delete_file(uri)
 
     def _delete_list(self, filename_list):
-        """Delete list of files"""
+        u"""Delete list of files"""
         for filename in filename_list:
             self._delete(filename)
 
     def _query(self, filename):
-        """Stat the remote file"""
+        u"""Stat the remote file"""
         uri = self._build_uri(filename)
 
         try:
             resource = self.client.get_resource_by_uri(uri)
-            size = int(resource['size'])
+            size = int(resource[u'size'])
         except self._notfound_exc:
             size = -1
 
-        return {'size': size}
+        return {u'size': size}
 
     def _build_uri(self, filename=None):
-        """Build relative URI"""
+        u"""Build relative URI"""
         return (
-            'mf:' + self.folder["folderkey"] +
-            ('/' + filename if filename else '')
+            u'mf:' + self.folder[u"folderkey"] +
+            (u'/' + filename if filename else u'')
         )
 
 
-duplicity.backend.register_backend("mf", MediafireBackend)
+duplicity.backend.register_backend(u"mf", MediafireBackend)

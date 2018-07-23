@@ -27,7 +27,7 @@ from duplicity import globals
 
 
 class Par2Backend(backend.Backend):
-    """This backend wrap around other backends and create Par2 recovery files
+    u"""This backend wrap around other backends and create Par2 recovery files
     before the file and the Par2 files are transfered with the wrapped backend.
 
     If a received file is corrupt it will try to repair it on the fly.
@@ -48,15 +48,15 @@ class Par2Backend(backend.Backend):
             self.redundancy = 10
 
         try:
-            self.common_options = globals.par2_options + " -q -q"
+            self.common_options = globals.par2_options + u" -q -q"
         except AttributeError:
-            self.common_options = "-q -q"
+            self.common_options = u"-q -q"
 
         self.wrapped_backend = backend.get_backend_object(parsed_url.url_string)
 
-        for attr in ['_get', '_put', '_list', '_delete', '_delete_list',
-                     '_query', '_query_list', '_retry_cleanup', '_error_code',
-                     '_move', '_close']:
+        for attr in [u'_get', u'_put', u'_list', u'_delete', u'_delete_list',
+                     u'_query', u'_query_list', u'_retry_cleanup', u'_error_code',
+                     u'_move', u'_close']:
             if hasattr(self.wrapped_backend, attr):
                 setattr(self, attr, getattr(self, attr[1:]))
 
@@ -65,7 +65,7 @@ class Par2Backend(backend.Backend):
         self._delete_list = self.delete_list
 
     def transfer(self, method, source_path, remote_filename):
-        """create Par2 files and transfer the given file and the Par2 files
+        u"""create Par2 files and transfer the given file and the Par2 files
         with the wrapped backend.
 
         Par2 must run on the real filename or it would restore the
@@ -81,8 +81,8 @@ class Par2Backend(backend.Backend):
         os.symlink(source_target, source_symlink.get_canonical())
         source_symlink.setdata()
 
-        log.Info("Create Par2 recovery files")
-        par2create = 'par2 c -r%d -n1 %s %s' % (self.redundancy, self.common_options, source_symlink.get_canonical())
+        log.Info(u"Create Par2 recovery files")
+        par2create = u'par2 c -r%d -n1 %s %s' % (self.redundancy, self.common_options, source_symlink.get_canonical())
         out, returncode = pexpect.run(par2create, None, True)
 
         source_symlink.delete()
@@ -104,7 +104,7 @@ class Par2Backend(backend.Backend):
         self.transfer(self.wrapped_backend._move, local, remote)
 
     def get(self, remote_filename, local_path):
-        """transfer remote_filename and the related .par2 file into
+        u"""transfer remote_filename and the related .par2 file into
         a temp-dir. remote_filename will be renamed into local_path before
         finishing.
 
@@ -118,16 +118,16 @@ class Par2Backend(backend.Backend):
         self.wrapped_backend._get(remote_filename, local_path_temp)
 
         try:
-            par2file = par2temp.append(remote_filename + '.par2')
+            par2file = par2temp.append(remote_filename + u'.par2')
             self.wrapped_backend._get(par2file.get_filename(), par2file)
 
-            par2verify = 'par2 v %s %s %s' % (self.common_options,
-                                              par2file.get_canonical(),
-                                              local_path_temp.get_canonical())
+            par2verify = u'par2 v %s %s %s' % (self.common_options,
+                                               par2file.get_canonical(),
+                                               local_path_temp.get_canonical())
             out, returncode = pexpect.run(par2verify, None, True)
 
             if returncode:
-                log.Warn("File is corrupt. Try to repair %s" % remote_filename)
+                log.Warn(u"File is corrupt. Try to repair %s" % remote_filename)
                 par2volumes = filter(re.compile(r'%s\.vol[\d+]*\.par2' % remote_filename).match,
                                      self.wrapped_backend._list())
 
@@ -135,15 +135,15 @@ class Par2Backend(backend.Backend):
                     file = par2temp.append(filename)
                     self.wrapped_backend._get(filename, file)
 
-                par2repair = 'par2 r %s %s %s' % (self.common_options,
-                                                  par2file.get_canonical(),
-                                                  local_path_temp.get_canonical())
+                par2repair = u'par2 r %s %s %s' % (self.common_options,
+                                                   par2file.get_canonical(),
+                                                   local_path_temp.get_canonical())
                 out, returncode = pexpect.run(par2repair, None, True)
 
                 if returncode:
-                    log.Error("Failed to repair %s" % remote_filename)
+                    log.Error(u"Failed to repair %s" % remote_filename)
                 else:
-                    log.Warn("Repair successful %s" % remote_filename)
+                    log.Warn(u"Repair successful %s" % remote_filename)
         except BackendException:
             # par2 file not available
             pass
@@ -152,7 +152,7 @@ class Par2Backend(backend.Backend):
             par2temp.deltree()
 
     def delete(self, filename):
-        """delete given filename and its .par2 files
+        u"""delete given filename and its .par2 files
         """
         self.wrapped_backend._delete(filename)
 
@@ -164,7 +164,7 @@ class Par2Backend(backend.Backend):
                 self.wrapped_backend._delete(remote_filename)
 
     def delete_list(self, filename_list):
-        """delete given filename_list and all .par2 files that belong to them
+        u"""delete given filename_list and all .par2 files that belong to them
         """
         remote_list = self.unfiltered_list()
 
@@ -175,14 +175,14 @@ class Par2Backend(backend.Backend):
                     # insert here to make sure par2 files will be removed first
                     filename_list.insert(0, remote_filename)
 
-        if hasattr(self.wrapped_backend, '_delete_list'):
+        if hasattr(self.wrapped_backend, u'_delete_list'):
             return self.wrapped_backend._delete_list(filename_list)
         else:
             for filename in filename_list:
                 self.wrapped_backend._delete(filename)
 
     def list(self):
-        """
+        u"""
         Return list of filenames (byte strings) present in backend
 
         Files ending with ".par2" will be excluded from the list.
@@ -215,4 +215,4 @@ class Par2Backend(backend.Backend):
         self.wrapped_backend._close()
 
 
-backend.register_backend_prefix('par2', Par2Backend)
+backend.register_backend_prefix(u'par2', Par2Backend)

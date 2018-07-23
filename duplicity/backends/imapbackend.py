@@ -40,7 +40,7 @@ class ImapBackend(duplicity.backend.Backend):
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
-        log.Debug("I'm %s (scheme %s) connecting to %s as %s" %
+        log.Debug(u"I'm %s (scheme %s) connecting to %s as %s" %
                   (self.__class__.__name__, parsed_url.scheme, parsed_url.hostname, parsed_url.username))
 
         #  Store url for reconnection on error
@@ -48,16 +48,16 @@ class ImapBackend(duplicity.backend.Backend):
 
         #  Set the username
         if (parsed_url.username is None):
-            username = raw_input('Enter account userid: ')
+            username = raw_input(u'Enter account userid: ')
         else:
             username = parsed_url.username
 
         #  Set the password
         if (not parsed_url.password):
-            if 'IMAP_PASSWORD' in os.environ:
-                password = os.environ.get('IMAP_PASSWORD')
+            if u'IMAP_PASSWORD' in os.environ:
+                password = os.environ.get(u'IMAP_PASSWORD')
             else:
-                password = getpass.getpass("Enter account password: ")
+                password = getpass.getpass(u"Enter account password: ")
         else:
             password = parsed_url.password
 
@@ -68,7 +68,7 @@ class ImapBackend(duplicity.backend.Backend):
     def resetConnection(self):
         parsed_url = self.url
         try:
-            imap_server = os.environ['IMAP_SERVER']
+            imap_server = os.environ[u'IMAP_SERVER']
         except KeyError:
             imap_server = parsed_url.hostname
 
@@ -78,25 +78,25 @@ class ImapBackend(duplicity.backend.Backend):
         except Exception:
             pass
 
-        if (parsed_url.scheme == "imap"):
+        if (parsed_url.scheme == u"imap"):
             cl = imaplib.IMAP4
             self.conn = cl(imap_server, 143)
-        elif (parsed_url.scheme == "imaps"):
+        elif (parsed_url.scheme == u"imaps"):
             cl = imaplib.IMAP4_SSL
             self.conn = cl(imap_server, 993)
 
-        log.Debug("Type of imap class: %s" % (cl.__name__))
+        log.Debug(u"Type of imap class: %s" % (cl.__name__))
         self.remote_dir = re.sub(r'^/', r'', parsed_url.path, 1)
 
         #  Login
         if (not(globals.imap_full_address)):
             self.conn.login(self.username, self.password)
             self.conn.select(globals.imap_mailbox)
-            log.Info("IMAP connected")
+            log.Info(u"IMAP connected")
         else:
-            self.conn.login(self.username + "@" + parsed_url.hostname, self.password)
+            self.conn.login(self.username + u"@" + parsed_url.hostname, self.password)
             self.conn.select(globals.imap_mailbox)
-            log.Info("IMAP connected")
+            log.Info(u"IMAP connected")
 
     def prepareBody(self, f, rname):
         mp = email.MIMEMultipart.MIMEMultipart()
@@ -104,10 +104,10 @@ class ImapBackend(duplicity.backend.Backend):
         # I am going to use the remote_dir as the From address so that
         # multiple archives can be stored in an IMAP account and can be
         # accessed separately
-        mp["From"] = self.remote_dir
-        mp["Subject"] = rname
+        mp[u"From"] = self.remote_dir
+        mp[u"Subject"] = rname
 
-        a = email.MIMEBase.MIMEBase("application", "binary")
+        a = email.MIMEBase.MIMEBase(u"application", u"binary")
         a.set_payload(f.read())
 
         email.Encoders.encode_base64(a)
@@ -117,7 +117,7 @@ class ImapBackend(duplicity.backend.Backend):
         return mp.as_string()
 
     def _put(self, source_path, remote_filename):
-        f = source_path.open("rb")
+        f = source_path.open(u"rb")
         allowedTimeout = globals.timeout
         if (allowedTimeout == 0):
             # Allow a total timeout of 1 day
@@ -133,7 +133,7 @@ class ImapBackend(duplicity.backend.Backend):
                 break
             except (imaplib.IMAP4.abort, socket.error, socket.sslerror):
                 allowedTimeout -= 1
-                log.Info("Error saving '%s', retrying in 30s " % remote_filename)
+                log.Info(u"Error saving '%s', retrying in 30s " % remote_filename)
                 time.sleep(30)
                 while allowedTimeout > 0:
                     try:
@@ -141,10 +141,10 @@ class ImapBackend(duplicity.backend.Backend):
                         break
                     except (imaplib.IMAP4.abort, socket.error, socket.sslerror):
                         allowedTimeout -= 1
-                        log.Info("Error reconnecting, retrying in 30s ")
+                        log.Info(u"Error reconnecting, retrying in 30s ")
                         time.sleep(30)
 
-        log.Info("IMAP mail with '%s' subject stored" % remote_filename)
+        log.Info(u"IMAP mail with '%s' subject stored" % remote_filename)
 
     def _get(self, remote_filename, local_path):
         allowedTimeout = globals.timeout
@@ -154,17 +154,17 @@ class ImapBackend(duplicity.backend.Backend):
         while allowedTimeout > 0:
             try:
                 self.conn.select(globals.imap_mailbox)
-                (result, list) = self.conn.search(None, 'Subject', remote_filename)
-                if result != "OK":
+                (result, list) = self.conn.search(None, u'Subject', remote_filename)
+                if result != u"OK":
                     raise Exception(list[0])
 
                 # check if there is any result
-                if list[0] == '':
-                    raise Exception("no mail with subject %s")
+                if list[0] == u'':
+                    raise Exception(u"no mail with subject %s")
 
-                (result, list) = self.conn.fetch(list[0], "(RFC822)")
+                (result, list) = self.conn.fetch(list[0], u"(RFC822)")
 
-                if result != "OK":
+                if result != u"OK":
                     raise Exception(list[0])
                 rawbody = list[0][1]
 
@@ -178,7 +178,7 @@ class ImapBackend(duplicity.backend.Backend):
                 break
             except (imaplib.IMAP4.abort, socket.error, socket.sslerror):
                 allowedTimeout -= 1
-                log.Info("Error loading '%s', retrying in 30s " % remote_filename)
+                log.Info(u"Error loading '%s', retrying in 30s " % remote_filename)
                 time.sleep(30)
                 while allowedTimeout > 0:
                     try:
@@ -186,33 +186,33 @@ class ImapBackend(duplicity.backend.Backend):
                         break
                     except (imaplib.IMAP4.abort, socket.error, socket.sslerror):
                         allowedTimeout -= 1
-                        log.Info("Error reconnecting, retrying in 30s ")
+                        log.Info(u"Error reconnecting, retrying in 30s ")
                         time.sleep(30)
 
-        tfile = local_path.open("wb")
+        tfile = local_path.open(u"wb")
         tfile.write(body)
         local_path.setdata()
-        log.Info("IMAP mail with '%s' subject fetched" % remote_filename)
+        log.Info(u"IMAP mail with '%s' subject fetched" % remote_filename)
 
     def _list(self):
         ret = []
         (result, list) = self.conn.select(globals.imap_mailbox)
-        if result != "OK":
+        if result != u"OK":
             raise BackendException(list[0])
 
         # Going to find all the archives which have remote_dir in the From
         # address
 
         # Search returns an error if you haven't selected an IMAP folder.
-        (result, list) = self.conn.search(None, 'FROM', self.remote_dir)
-        if result != "OK":
+        (result, list) = self.conn.search(None, u'FROM', self.remote_dir)
+        if result != u"OK":
             raise Exception(list[0])
-        if list[0] == '':
+        if list[0] == u'':
             return ret
-        nums = list[0].strip().split(" ")
-        set = "%s:%s" % (nums[0], nums[-1])
-        (result, list) = self.conn.fetch(set, "(BODY[HEADER])")
-        if result != "OK":
+        nums = list[0].strip().split(u" ")
+        set = u"%s:%s" % (nums[0], nums[-1])
+        (result, list) = self.conn.fetch(set, u"(BODY[HEADER])")
+        if result != u"OK":
             raise Exception(list[0])
 
         for msg in list:
@@ -220,37 +220,37 @@ class ImapBackend(duplicity.backend.Backend):
                 continue
             io = StringIO.StringIO(msg[1])  # pylint: disable=unsubscriptable-object
             m = rfc822.Message(io)
-            subj = m.getheader("subject")
-            header_from = m.getheader("from")
+            subj = m.getheader(u"subject")
+            header_from = m.getheader(u"from")
 
             # Catch messages with empty headers which cause an exception.
             if (not (header_from is None)):
-                if (re.compile("^" + self.remote_dir + "$").match(header_from)):
+                if (re.compile(u"^" + self.remote_dir + u"$").match(header_from)):
                     ret.append(subj)
-                    log.Info("IMAP LIST: %s %s" % (subj, header_from))
+                    log.Info(u"IMAP LIST: %s %s" % (subj, header_from))
         return ret
 
     def imapf(self, fun, *args):
         (ret, list) = fun(*args)
-        if ret != "OK":
+        if ret != u"OK":
             raise Exception(list[0])
         return list
 
     def delete_single_mail(self, i):
-        self.imapf(self.conn.store, i, "+FLAGS", '\\DELETED')
+        self.imapf(self.conn.store, i, u"+FLAGS", u'\\DELETED')
 
     def expunge(self):
         list = self.imapf(self.conn.expunge)
 
     def _delete_list(self, filename_list):
         for filename in filename_list:
-            list = self.imapf(self.conn.search, None, "(SUBJECT %s)" % filename)
+            list = self.imapf(self.conn.search, None, u"(SUBJECT %s)" % filename)
             list = list[0].split()
-            if len(list) > 0 and list[0] != "":
+            if len(list) > 0 and list[0] != u"":
                 self.delete_single_mail(list[0])
-                log.Notice("marked %s to be deleted" % filename)
+                log.Notice(u"marked %s to be deleted" % filename)
         self.expunge()
-        log.Notice("IMAP expunged %s files" % len(filename_list))
+        log.Notice(u"IMAP expunged %s files" % len(filename_list))
 
     def _close(self):
         self.conn.select(globals.imap_mailbox)
@@ -258,6 +258,6 @@ class ImapBackend(duplicity.backend.Backend):
         self.conn.logout()
 
 
-duplicity.backend.register_backend("imap", ImapBackend)
-duplicity.backend.register_backend("imaps", ImapBackend)
-duplicity.backend.uses_netloc.extend(['imap', 'imaps'])
+duplicity.backend.register_backend(u"imap", ImapBackend)
+duplicity.backend.register_backend(u"imaps", ImapBackend)
+duplicity.backend.uses_netloc.extend([u'imap', u'imaps'])

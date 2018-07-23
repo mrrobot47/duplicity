@@ -24,53 +24,53 @@ from duplicity.errors import BackendException
 
 
 class TAHOEBackend(duplicity.backend.Backend):
-    """
+    u"""
     Backend for the Tahoe file system
     """
 
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
-        url = parsed_url.path.strip('/').split('/')
+        url = parsed_url.path.strip(u'/').split(u'/')
 
         self.alias = url[0]
 
         if len(url) > 1:
-            self.directory = "/".join(url[1:])
+            self.directory = u"/".join(url[1:])
         else:
-            self.directory = ""
+            self.directory = u""
 
-        log.Debug("tahoe: %s -> %s:%s" % (url, self.alias, self.directory))
+        log.Debug(u"tahoe: %s -> %s:%s" % (url, self.alias, self.directory))
 
     def get_remote_path(self, filename=None):
         if filename is None:
-            if self.directory != "":
-                return "%s:%s" % (self.alias, self.directory)
+            if self.directory != u"":
+                return u"%s:%s" % (self.alias, self.directory)
             else:
-                return "%s:" % self.alias
+                return u"%s:" % self.alias
 
-        if self.directory != "":
-            return "%s:%s/%s" % (self.alias, self.directory, filename)
+        if self.directory != u"":
+            return u"%s:%s/%s" % (self.alias, self.directory, filename)
         else:
-            return "%s:%s" % (self.alias, filename)
+            return u"%s:%s" % (self.alias, filename)
 
     def run(self, *args):
-        cmd = " ".join(args)
+        cmd = u" ".join(args)
         _, output, _ = self.subprocess_popen(cmd)
         return output
 
     def _put(self, source_path, remote_filename):
-        self.run("tahoe", "cp", source_path.name, self.get_remote_path(remote_filename))
+        self.run(u"tahoe", u"cp", source_path.name, self.get_remote_path(remote_filename))
 
     def _get(self, remote_filename, local_path):
-        self.run("tahoe", "cp", self.get_remote_path(remote_filename), local_path.name)
+        self.run(u"tahoe", u"cp", self.get_remote_path(remote_filename), local_path.name)
 
     def _list(self):
-        output = self.run("tahoe", "ls", self.get_remote_path())
-        return output.split('\n') if output else []
+        output = self.run(u"tahoe", u"ls", self.get_remote_path())
+        return output.split(u'\n') if output else []
 
     def _delete(self, filename):
-        self.run("tahoe", "rm", self.get_remote_path(filename))
+        self.run(u"tahoe", u"rm", self.get_remote_path(filename))
 
 
-duplicity.backend.register_backend("tahoe", TAHOEBackend)
+duplicity.backend.register_backend(u"tahoe", TAHOEBackend)

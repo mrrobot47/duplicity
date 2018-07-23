@@ -29,7 +29,7 @@ from duplicity import globals, tempdir, util
 
 
 class RsyncBackend(duplicity.backend.Backend):
-    """Connect to remote store using rsync
+    u"""Connect to remote store using rsync
 
     rsync backend contributed by Sebastian Wilhelmi <seppi@seppi.de>
     rsyncd auth, alternate port support
@@ -37,9 +37,9 @@ class RsyncBackend(duplicity.backend.Backend):
 
     """
     def __init__(self, parsed_url):
-        """rsyncBackend initializer"""
+        u"""rsyncBackend initializer"""
         duplicity.backend.Backend.__init__(self, parsed_url)
-        """
+        u"""
         rsyncd module url: rsync://[user:password@]host[:port]::[/]modname/path
                       Note: 3.0.7 is picky about syntax use either 'rsync://' or '::'
                       cmd: rsync [--port=port] host::modname/path
@@ -49,51 +49,51 @@ class RsyncBackend(duplicity.backend.Backend):
                           cmd: rsync -e 'ssh [-p=port]' [user@]host:[/]path
         """
         host = parsed_url.hostname
-        port = ""
+        port = u""
         # RSYNC_RSH from calling shell might conflict with our settings
-        if 'RSYNC_RSH' in os.environ:
-            del os.environ['RSYNC_RSH']
+        if u'RSYNC_RSH' in os.environ:
+            del os.environ[u'RSYNC_RSH']
         if self.over_rsyncd():
             # its a module path
             (path, port) = self.get_rsync_path()
-            self.url_string = "%s::%s" % (host, path.lstrip('/:'))
+            self.url_string = u"%s::%s" % (host, path.lstrip(u'/:'))
             if port:
-                port = " --port=%s" % port
+                port = u" --port=%s" % port
         else:
-            host_string = host + ":" if host else ""
-            if parsed_url.path.startswith("//"):
+            host_string = host + u":" if host else u""
+            if parsed_url.path.startswith(u"//"):
                 # its an absolute path
-                self.url_string = "%s/%s" % (host_string, parsed_url.path.lstrip('/'))
+                self.url_string = u"%s/%s" % (host_string, parsed_url.path.lstrip(u'/'))
             else:
                 # its a relative path
-                self.url_string = "%s%s" % (host_string, parsed_url.path.lstrip('/'))
+                self.url_string = u"%s%s" % (host_string, parsed_url.path.lstrip(u'/'))
             if parsed_url.port:
-                port = "-p %s" % parsed_url.port
+                port = u"-p %s" % parsed_url.port
         # add trailing slash if missing
-        if self.url_string[-1] != '/':
-            self.url_string += '/'
+        if self.url_string[-1] != u'/':
+            self.url_string += u'/'
         # user?
         if parsed_url.username:
             if self.over_rsyncd():
-                os.environ['USER'] = parsed_url.username
+                os.environ[u'USER'] = parsed_url.username
             else:
-                self.url_string = parsed_url.username + "@" + self.url_string
+                self.url_string = parsed_url.username + u"@" + self.url_string
         # password?, don't ask if none was given
         self.use_getpass = False
         password = self.get_password()
         if password:
-            os.environ['RSYNC_PASSWORD'] = password
+            os.environ[u'RSYNC_PASSWORD'] = password
         if self.over_rsyncd():
             portOption = port
         else:
-            portOption = "-e 'ssh %s -oBatchMode=yes %s'" % (port, globals.ssh_options)
+            portOption = u"-e 'ssh %s -oBatchMode=yes %s'" % (port, globals.ssh_options)
         rsyncOptions = globals.rsync_options
         # build cmd
-        self.cmd = "rsync %s %s" % (portOption, rsyncOptions)
+        self.cmd = u"rsync %s %s" % (portOption, rsyncOptions)
 
     def over_rsyncd(self):
         url = self.parsed_url.url_string
-        if re.search('::[^:]*$', url):
+        if re.search(u'::[^:]*$', url):
             return True
         else:
             return False
@@ -102,30 +102,30 @@ class RsyncBackend(duplicity.backend.Backend):
         url = self.parsed_url.url_string
         m = re.search(r"(:\d+|)?::([^:]*)$", url)
         if m:
-            return m.group(2), m.group(1).lstrip(':')
-        raise InvalidBackendURL("Could not determine rsync path: %s"
-                                "" % self.munge_password(url))
+            return m.group(2), m.group(1).lstrip(u':')
+        raise InvalidBackendURL(u"Could not determine rsync path: %s"
+                                u"" % self.munge_password(url))
 
     def _put(self, source_path, remote_filename):
         remote_path = os.path.join(self.url_string, remote_filename)
-        commandline = "%s %s %s" % (self.cmd, source_path.name, remote_path)
+        commandline = u"%s %s %s" % (self.cmd, source_path.name, remote_path)
         self.subprocess_popen(commandline)
 
     def _get(self, remote_filename, local_path):
         remote_path = os.path.join(self.url_string, remote_filename)
-        commandline = "%s %s %s" % (self.cmd, remote_path, local_path.name)
+        commandline = u"%s %s %s" % (self.cmd, remote_path, local_path.name)
         self.subprocess_popen(commandline)
 
     def _list(self):
         def split(str):
             line = str.split()
-            if len(line) > 4 and line[4] != '.':
+            if len(line) > 4 and line[4] != u'.':
                 return line[4]
             else:
                 return None
-        commandline = "%s %s" % (self.cmd, self.url_string)
+        commandline = u"%s %s" % (self.cmd, self.url_string)
         result, stdout, stderr = self.subprocess_popen(commandline)
-        return [x for x in map(split, stdout.split('\n')) if x]
+        return [x for x in map(split, stdout.split(u'\n')) if x]
 
     def _delete_list(self, filename_list):
         delete_list = filename_list
@@ -142,11 +142,11 @@ class RsyncBackend(duplicity.backend.Backend):
         for file in dont_delete_list:
             path = os.path.join(dir, file)
             to_delete.append(path)
-            f = open(path, 'w')
+            f = open(path, u'w')
             print >> exclude, file
             f.close()
         exclude.close()
-        commandline = ("%s --recursive --delete --exclude-from=%s %s/ %s" %
+        commandline = (u"%s --recursive --delete --exclude-from=%s %s/ %s" %
                        (self.cmd, exclude_name, dir, self.url_string))
         self.subprocess_popen(commandline)
         for file in to_delete:
@@ -154,5 +154,5 @@ class RsyncBackend(duplicity.backend.Backend):
         os.rmdir(dir)
 
 
-duplicity.backend.register_backend("rsync", RsyncBackend)
-duplicity.backend.uses_netloc.extend(['rsync'])
+duplicity.backend.register_backend(u"rsync", RsyncBackend)
+duplicity.backend.uses_netloc.extend([u'rsync'])

@@ -28,7 +28,7 @@ from duplicity.errors import BackendException
 
 
 class AzureBackend(duplicity.backend.Backend):
-    """
+    u"""
     Backend for Azure Blob Storage Service
     """
     def __init__(self, parsed_url):
@@ -38,7 +38,7 @@ class AzureBackend(duplicity.backend.Backend):
         try:
             import azure
             import azure.storage
-            if hasattr(azure.storage, 'BlobService'):
+            if hasattr(azure.storage, u'BlobService'):
                 # v0.11.1 and below
                 from azure.storage import BlobService
                 self.AzureMissingResourceError = azure.WindowsAzureMissingResourceError
@@ -46,43 +46,43 @@ class AzureBackend(duplicity.backend.Backend):
             else:
                 # v1.0.0 and above
                 import azure.storage.blob
-                if hasattr(azure.storage.blob, 'BlobService'):
+                if hasattr(azure.storage.blob, u'BlobService'):
                     from azure.storage.blob import BlobService
                 else:
                     from azure.storage.blob.blockblobservice import BlockBlobService as BlobService
                 self.AzureMissingResourceError = azure.common.AzureMissingResourceHttpError
                 self.AzureConflictError = azure.common.AzureConflictHttpError
         except ImportError as e:
-            raise BackendException("""\
+            raise BackendException(u"""\
 Azure backend requires Microsoft Azure Storage SDK for Python (https://pypi.python.org/pypi/azure-storage/).
 Exception: %s""" % str(e))
 
         # TODO: validate container name
-        self.container = parsed_url.path.lstrip('/')
+        self.container = parsed_url.path.lstrip(u'/')
 
-        if 'AZURE_ACCOUNT_NAME' not in os.environ:
-            raise BackendException('AZURE_ACCOUNT_NAME environment variable not set.')
+        if u'AZURE_ACCOUNT_NAME' not in os.environ:
+            raise BackendException(u'AZURE_ACCOUNT_NAME environment variable not set.')
 
-        if 'AZURE_ACCOUNT_KEY' in os.environ:
-            if 'AZURE_ENDPOINT_SUFFIX' in os.environ:
-                self.blob_service = BlobService(account_name=os.environ['AZURE_ACCOUNT_NAME'],
-                                                account_key=os.environ['AZURE_ACCOUNT_KEY'],
-                                                endpoint_suffix=os.environ['AZURE_ENDPOINT_SUFFIX'])
+        if u'AZURE_ACCOUNT_KEY' in os.environ:
+            if u'AZURE_ENDPOINT_SUFFIX' in os.environ:
+                self.blob_service = BlobService(account_name=os.environ[u'AZURE_ACCOUNT_NAME'],
+                                                account_key=os.environ[u'AZURE_ACCOUNT_KEY'],
+                                                endpoint_suffix=os.environ[u'AZURE_ENDPOINT_SUFFIX'])
             else:
-                self.blob_service = BlobService(account_name=os.environ['AZURE_ACCOUNT_NAME'],
-                                                account_key=os.environ['AZURE_ACCOUNT_KEY'])
+                self.blob_service = BlobService(account_name=os.environ[u'AZURE_ACCOUNT_NAME'],
+                                                account_key=os.environ[u'AZURE_ACCOUNT_KEY'])
             self._create_container()
-        elif 'AZURE_SHARED_ACCESS_SIGNATURE' in os.environ:
-            if 'AZURE_ENDPOINT_SUFFIX' in os.environ:
-                self.blob_service = BlobService(account_name=os.environ['AZURE_ACCOUNT_NAME'],
-                                                sas_token=os.environ['AZURE_SHARED_ACCESS_SIGNATURE'],
-                                                endpoint_suffix=os.environ['AZURE_ENDPOINT_SUFFIX'])
+        elif u'AZURE_SHARED_ACCESS_SIGNATURE' in os.environ:
+            if u'AZURE_ENDPOINT_SUFFIX' in os.environ:
+                self.blob_service = BlobService(account_name=os.environ[u'AZURE_ACCOUNT_NAME'],
+                                                sas_token=os.environ[u'AZURE_SHARED_ACCESS_SIGNATURE'],
+                                                endpoint_suffix=os.environ[u'AZURE_ENDPOINT_SUFFIX'])
             else:
-                self.blob_service = BlobService(account_name=os.environ['AZURE_ACCOUNT_NAME'],
-                                                sas_token=os.environ['AZURE_SHARED_ACCESS_SIGNATURE'])
+                self.blob_service = BlobService(account_name=os.environ[u'AZURE_ACCOUNT_NAME'],
+                                                sas_token=os.environ[u'AZURE_SHARED_ACCESS_SIGNATURE'])
         else:
             raise BackendException(
-                'Neither AZURE_ACCOUNT_KEY nor AZURE_SHARED_ACCESS_SIGNATURE environment variable not set.')
+                u'Neither AZURE_ACCOUNT_KEY nor AZURE_SHARED_ACCESS_SIGNATURE environment variable not set.')
 
         if globals.azure_max_single_put_size:
             # check if we use azure-storage>=0.30.0
@@ -109,14 +109,14 @@ Exception: %s""" % str(e))
             # Indicates that the resource could not be created because it already exists.
             pass
         except Exception as e:
-            log.FatalError("Could not create Azure container: %s"
-                           % unicode(e.message).split('\n', 1)[0],
+            log.FatalError(u"Could not create Azure container: %s"
+                           % unicode(e.message).split(u'\n', 1)[0],
                            log.ErrorCode.connection_failed)
 
     def _put(self, source_path, remote_filename):
         kwargs = {}
         if globals.azure_max_connections:
-            kwargs['max_connections'] = globals.azure_max_connections
+            kwargs[u'max_connections'] = globals.azure_max_connections
 
         # https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#upload-a-blob-into-a-container
         try:
@@ -147,10 +147,10 @@ Exception: %s""" % str(e))
     def _query(self, filename):
         prop = self.blob_service.get_blob_properties(self.container, filename)
         try:
-            info = {'size': int(prop.properties.content_length)}
+            info = {u'size': int(prop.properties.content_length)}
         except AttributeError:
             # old versions directly returned the properties
-            info = {'size': int(prop['content-length'])}
+            info = {u'size': int(prop[u'content-length'])}
         return info
 
     def _error_code(self, operation, e):
@@ -158,4 +158,4 @@ Exception: %s""" % str(e))
             return log.ErrorCode.backend_not_found
 
 
-duplicity.backend.register_backend('azure', AzureBackend)
+duplicity.backend.register_backend(u'azure', AzureBackend)

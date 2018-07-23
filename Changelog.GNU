@@ -1,3 +1,8 @@
+2018-07-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed unadorned strings to unicode in duplicity/backends/*
+      - Some fixup due to shifting indenataion not matching PEP8.
+
 2018-07-22  Kenneth Loafman  <kenneth@loafman.com>
 
     * Added function to fix unadorned strings (testing/fix_unadorned_strings.py)

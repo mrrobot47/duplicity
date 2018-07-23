@@ -27,7 +27,7 @@ from duplicity.errors import BackendException
 
 
 class CloudFilesBackend(duplicity.backend.Backend):
-    """
+    u"""
     Backend for Rackspace's CloudFiles
     """
     def __init__(self, parsed_url):
@@ -37,34 +37,34 @@ class CloudFilesBackend(duplicity.backend.Backend):
             from cloudfiles import consts
             from cloudfiles.errors import NoSuchObject
         except ImportError as e:
-            raise BackendException("""\
+            raise BackendException(u"""\
 Cloudfiles backend requires the cloudfiles library available from Rackspace.
 Exception: %s""" % str(e))
 
         self.resp_exc = ResponseError
         conn_kwargs = {}
 
-        if 'CLOUDFILES_USERNAME' not in os.environ:
-            raise BackendException('CLOUDFILES_USERNAME environment variable'
-                                   'not set.')
+        if u'CLOUDFILES_USERNAME' not in os.environ:
+            raise BackendException(u'CLOUDFILES_USERNAME environment variable'
+                                   u'not set.')
 
-        if 'CLOUDFILES_APIKEY' not in os.environ:
-            raise BackendException('CLOUDFILES_APIKEY environment variable not set.')
+        if u'CLOUDFILES_APIKEY' not in os.environ:
+            raise BackendException(u'CLOUDFILES_APIKEY environment variable not set.')
 
-        conn_kwargs['username'] = os.environ['CLOUDFILES_USERNAME']
-        conn_kwargs['api_key'] = os.environ['CLOUDFILES_APIKEY']
+        conn_kwargs[u'username'] = os.environ[u'CLOUDFILES_USERNAME']
+        conn_kwargs[u'api_key'] = os.environ[u'CLOUDFILES_APIKEY']
 
-        if 'CLOUDFILES_AUTHURL' in os.environ:
-            conn_kwargs['authurl'] = os.environ['CLOUDFILES_AUTHURL']
+        if u'CLOUDFILES_AUTHURL' in os.environ:
+            conn_kwargs[u'authurl'] = os.environ[u'CLOUDFILES_AUTHURL']
         else:
-            conn_kwargs['authurl'] = consts.default_authurl
+            conn_kwargs[u'authurl'] = consts.default_authurl
 
-        container = parsed_url.path.lstrip('/')
+        container = parsed_url.path.lstrip(u'/')
 
         try:
             conn = Connection(**conn_kwargs)
         except Exception as e:
-            log.FatalError("Connection failed, please check your credentials: %s %s"
+            log.FatalError(u"Connection failed, please check your credentials: %s %s"
                            % (e.__class__.__name__, util.uexc(e)),
                            log.ErrorCode.connection_failed)
         self.container = conn.create_container(container)
@@ -82,7 +82,7 @@ Exception: %s""" % str(e))
 
     def _get(self, remote_filename, local_path):
         sobject = self.container.create_object(remote_filename)
-        with open(local_path.name, 'wb') as f:
+        with open(local_path.name, u'wb') as f:
             for chunk in sobject.stream():
                 f.write(chunk)
 
@@ -101,4 +101,4 @@ Exception: %s""" % str(e))
 
     def _query(self, filename):
         sobject = self.container.get_object(filename)
-        return {'size': sobject.size}
+        return {u'size': sobject.size}

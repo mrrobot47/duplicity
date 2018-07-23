@@ -13,9 +13,9 @@ from requests.compat import quote, quote_plus
 import requests
 
 
-OAUTH_ENDPOINT = "https://api.hubic.com/oauth/"
-API_ENDPOINT = "https://api.hubic.com/1.0/"
-TOKENS_FILE = os.path.expanduser("~/.hubic_tokens")
+OAUTH_ENDPOINT = u"https://api.hubic.com/oauth/"
+API_ENDPOINT = u"https://api.hubic.com/1.0/"
+TOKENS_FILE = os.path.expanduser(u"~/.hubic_tokens")
 
 
 class BearerTokenAuth(requests.auth.AuthBase):
@@ -23,7 +23,7 @@ class BearerTokenAuth(requests.auth.AuthBase):
         self.token = token
 
     def __call__(self, req):
-        req.headers['Authorization'] = 'Bearer ' + self.token
+        req.headers[u'Authorization'] = u'Bearer ' + self.token
         return req
 
 
@@ -34,17 +34,17 @@ class HubicIdentity(BaseIdentity):
             import pyrax
             import pyrax.exceptions as exc
         except ImportError as e:
-            raise BackendException("""\
+            raise BackendException(u"""\
 Hubic backend requires the pyrax library available from Rackspace.
 Exception: %s""" % str(e))
 
     def _get_auth_endpoint(self):
-        return ""
+        return u""
 
     def set_credentials(self, email, password, client_id,
                         client_secret, redirect_uri,
                         authenticate=False):
-        """Sets the username and password directly."""
+        u"""Sets the username and password directly."""
         self._email = email
         self._password = password
         self._client_id = client_id
@@ -55,42 +55,42 @@ Exception: %s""" % str(e))
             self.authenticate()
 
     def _read_credential_file(self, cfg):
-        """
+        u"""
         Parses the credential file with Rackspace-specific labels.
         """
-        self._email = cfg.get("hubic", "email")
-        self._password = cfg.get("hubic", "password")
-        self._client_id = cfg.get("hubic", "client_id")
+        self._email = cfg.get(u"hubic", u"email")
+        self._password = cfg.get(u"hubic", u"password")
+        self._client_id = cfg.get(u"hubic", u"client_id")
         self.tenant_id = self._client_id
-        self._client_secret = cfg.get("hubic", "client_secret")
-        self._redirect_uri = cfg.get("hubic", "redirect_uri")
+        self._client_secret = cfg.get(u"hubic", u"client_secret")
+        self._redirect_uri = cfg.get(u"hubic", u"redirect_uri")
 
     def _parse_error(self, resp):
-        if 'location' not in resp.headers:
+        if u'location' not in resp.headers:
             return None
-        query = urlparse.urlsplit(resp.headers['location']).query
+        query = urlparse.urlsplit(resp.headers[u'location']).query
         qs = dict(urlparse.parse_qsl(query))
-        return {'error': qs['error'], 'error_description': qs['error_description']}
+        return {u'error': qs[u'error'], u'error_description': qs[u'error_description']}
 
     def _get_access_token(self, code):
         r = requests.post(
-            OAUTH_ENDPOINT + 'token/',
+            OAUTH_ENDPOINT + u'token/',
             data={
-                'code': code,
-                'redirect_uri': self._redirect_uri,
-                'grant_type': 'authorization_code',
+                u'code': code,
+                u'redirect_uri': self._redirect_uri,
+                u'grant_type': u'authorization_code',
             },
             auth=(self._client_id, self._client_secret)
         )
         if r.status_code != 200:
             try:
                 err = r.json()
-                err['code'] = r.status_code
+                err[u'code'] = r.status_code
             except:
                 err = {}
 
-            raise exc.AuthenticationFailed("Unable to get oauth access token, "
-                                           "wrong client_id or client_secret ? (%s)" %
+            raise exc.AuthenticationFailed(u"Unable to get oauth access token, "
+                                           u"wrong client_id or client_secret ? (%s)" %
                                            str(err))
 
         oauth_token = r.json()
@@ -98,36 +98,36 @@ Exception: %s""" % str(e))
         config = ConfigParser.ConfigParser()
         config.read(TOKENS_FILE)
 
-        if not config.has_section("hubic"):
-            config.add_section("hubic")
+        if not config.has_section(u"hubic"):
+            config.add_section(u"hubic")
 
-        if oauth_token['access_token'] is not None:
-            config.set("hubic", "access_token", oauth_token['access_token'])
-            with open(TOKENS_FILE, 'wb') as configfile:
+        if oauth_token[u'access_token'] is not None:
+            config.set(u"hubic", u"access_token", oauth_token[u'access_token'])
+            with open(TOKENS_FILE, u'wb') as configfile:
                 config.write(configfile)
         else:
             raise exc.AuthenticationFailed(
-                "Unable to get oauth access token, wrong client_id or client_secret ? (%s)" %
+                u"Unable to get oauth access token, wrong client_id or client_secret ? (%s)" %
                 str(err))
 
-        if oauth_token['refresh_token'] is not None:
-            config.set("hubic", "refresh_token", oauth_token['refresh_token'])
-            with open(TOKENS_FILE, 'wb') as configfile:
+        if oauth_token[u'refresh_token'] is not None:
+            config.set(u"hubic", u"refresh_token", oauth_token[u'refresh_token'])
+            with open(TOKENS_FILE, u'wb') as configfile:
                 config.write(configfile)
         else:
-            raise exc.AuthenticationFailed("Unable to get the refresh token.")
+            raise exc.AuthenticationFailed(u"Unable to get the refresh token.")
 
         # removing username and password from .hubic_tokens
-        if config.has_option("hubic", "email"):
-            config.remove_option("hubic", "email")
-            with open(TOKENS_FILE, 'wb') as configfile:
+        if config.has_option(u"hubic", u"email"):
+            config.remove_option(u"hubic", u"email")
+            with open(TOKENS_FILE, u'wb') as configfile:
                 config.write(configfile)
-            print "username has been removed from the .hubic_tokens file sent to the CE."
-        if config.has_option("hubic", "password"):
-            config.remove_option("hubic", "password")
-            with open(TOKENS_FILE, 'wb') as configfile:
+            print u"username has been removed from the .hubic_tokens file sent to the CE."
+        if config.has_option(u"hubic", u"password"):
+            config.remove_option(u"hubic", u"password")
+            with open(TOKENS_FILE, u'wb') as configfile:
                 config.write(configfile)
-            print "password has been removed from the .hubic_tokens file sent to the CE."
+            print u"password has been removed from the .hubic_tokens file sent to the CE."
 
         return oauth_token
 
@@ -135,10 +135,10 @@ Exception: %s""" % str(e))
 
         config = ConfigParser.ConfigParser()
         config.read(TOKENS_FILE)
-        refresh_token = config.get("hubic", "refresh_token")
+        refresh_token = config.get(u"hubic", u"refresh_token")
 
         if refresh_token is None:
-            raise exc.AuthenticationFailed("refresh_token is null. Not acquiered before ?")
+            raise exc.AuthenticationFailed(u"refresh_token is null. Not acquiered before ?")
 
         success = False
         max_retries = 20
@@ -148,16 +148,16 @@ Exception: %s""" % str(e))
 
         while retries < max_retries and not success:
             r = requests.post(
-                OAUTH_ENDPOINT + 'token/',
+                OAUTH_ENDPOINT + u'token/',
                 data={
-                    'refresh_token': refresh_token,
-                    'grant_type': 'refresh_token',
+                    u'refresh_token': refresh_token,
+                    u'grant_type': u'refresh_token',
                 },
                 auth=(self._client_id, self._client_secret)
             )
             if r.status_code != 200:
                 if r.status_code == 509:
-                    print "status_code 509: attempt #", retries, " failed"
+                    print u"status_code 509: attempt #", retries, u" failed"
                     retries += 1
                     time.sleep(sleep_time)
                     sleep_time = sleep_time * 2
@@ -166,38 +166,38 @@ Exception: %s""" % str(e))
                 else:
                     try:
                         err = r.json()
-                        err['code'] = r.status_code
+                        err[u'code'] = r.status_code
                     except:
                         err = {}
 
                     raise exc.AuthenticationFailed(
-                        "Unable to get oauth access token, wrong client_id or client_secret ? (%s)" %
+                        u"Unable to get oauth access token, wrong client_id or client_secret ? (%s)" %
                         str(err))
             else:
                 success = True
 
         if not success:
             raise exc.AuthenticationFailed(
-                "All the attempts failed to get the refresh token: "
-                "status_code = 509: Bandwidth Limit Exceeded")
+                u"All the attempts failed to get the refresh token: "
+                u"status_code = 509: Bandwidth Limit Exceeded")
 
         oauth_token = r.json()
 
-        if oauth_token['access_token'] is not None:
+        if oauth_token[u'access_token'] is not None:
             return oauth_token
         else:
-            raise exc.AuthenticationFailed("Unable to get oauth access token from json")
+            raise exc.AuthenticationFailed(u"Unable to get oauth access token from json")
 
     def authenticate(self):
         config = ConfigParser.ConfigParser()
         config.read(TOKENS_FILE)
 
-        if config.has_option("hubic", "refresh_token"):
+        if config.has_option(u"hubic", u"refresh_token"):
             oauth_token = self._refresh_access_token()
         else:
             r = requests.get(
-                OAUTH_ENDPOINT + 'auth/?client_id={0}&redirect_uri={1}'
-                '&scope=credentials.r,account.r&response_type=code&state={2}'.format(
+                OAUTH_ENDPOINT + u'auth/?client_id={0}&redirect_uri={1}'
+                u'&scope=credentials.r,account.r&response_type=code&state={2}'.format(
                     quote(self._client_id),
                     quote_plus(self._redirect_uri),
                     pyrax.utils.random_ascii()  # csrf ? wut ?..
@@ -205,8 +205,8 @@ Exception: %s""" % str(e))
                 allow_redirects=False
             )
             if r.status_code != 200:
-                raise exc.AuthenticationFailed("Incorrect/unauthorized "
-                                               "client_id (%s)" % str(self._parse_error(r)))
+                raise exc.AuthenticationFailed(u"Incorrect/unauthorized "
+                                               u"client_id (%s)" % str(self._parse_error(r)))
 
             try:
                 from lxml import html as lxml_html
@@ -214,7 +214,7 @@ Exception: %s""" % str(e))
                 lxml_html = None
 
             if lxml_html:
-                oauth = lxml_html.document_fromstring(r.content).xpath('//input[@name="oauth"]')
+                oauth = lxml_html.document_fromstring(r.content).xpath(u'//input[@name="oauth"]')
                 oauth = oauth[0].value if oauth else None
             else:
                 oauth = re.search(
@@ -223,52 +223,52 @@ Exception: %s""" % str(e))
                 oauth = oauth.group(1) if oauth else None
 
             if not oauth:
-                raise exc.AuthenticationFailed("Unable to get oauth_id from authorization page")
+                raise exc.AuthenticationFailed(u"Unable to get oauth_id from authorization page")
 
             if self._email is None or self._password is None:
-                raise exc.AuthenticationFailed("Cannot retrieve email and/or password. "
-                                               "Please run expresslane-hubic-setup.sh")
+                raise exc.AuthenticationFailed(u"Cannot retrieve email and/or password. "
+                                               u"Please run expresslane-hubic-setup.sh")
 
             r = requests.post(
-                OAUTH_ENDPOINT + 'auth/',
+                OAUTH_ENDPOINT + u'auth/',
                 data={
-                    'action': 'accepted',
-                    'oauth': oauth,
-                    'login': self._email,
-                    'user_pwd': self._password,
-                    'account': 'r',
-                    'credentials': 'r',
+                    u'action': u'accepted',
+                    u'oauth': oauth,
+                    u'login': self._email,
+                    u'user_pwd': self._password,
+                    u'account': u'r',
+                    u'credentials': u'r',
 
                 },
                 allow_redirects=False
             )
 
             try:
-                query = urlparse.urlsplit(r.headers['location']).query
-                code = dict(urlparse.parse_qsl(query))['code']
+                query = urlparse.urlsplit(r.headers[u'location']).query
+                code = dict(urlparse.parse_qsl(query))[u'code']
             except:
-                raise exc.AuthenticationFailed("Unable to authorize client_id, "
-                                               "invalid login/password ?")
+                raise exc.AuthenticationFailed(u"Unable to authorize client_id, "
+                                               u"invalid login/password ?")
 
             oauth_token = self._get_access_token(code)
 
-        if oauth_token['token_type'].lower() != 'bearer':
-            raise exc.AuthenticationFailed("Unsupported access token type")
+        if oauth_token[u'token_type'].lower() != u'bearer':
+            raise exc.AuthenticationFailed(u"Unsupported access token type")
 
         r = requests.get(
-            API_ENDPOINT + 'account/credentials',
-            auth=BearerTokenAuth(oauth_token['access_token']),
+            API_ENDPOINT + u'account/credentials',
+            auth=BearerTokenAuth(oauth_token[u'access_token']),
         )
 
         swift_token = r.json()
         self.authenticated = True
-        self.token = swift_token['token']
-        self.expires = swift_token['expires']
-        self.services['object_store'] = Service(self, {
-            'name': 'HubiC',
-            'type': 'cloudfiles',
-            'endpoints': [
-                {'public_url': swift_token['endpoint']}
+        self.token = swift_token[u'token']
+        self.expires = swift_token[u'expires']
+        self.services[u'object_store'] = Service(self, {
+            u'name': u'HubiC',
+            u'type': u'cloudfiles',
+            u'endpoints': [
+                {u'public_url': swift_token[u'endpoint']}
             ]
         })
         self.username = self.password = None
