@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-"""Provide time related exceptions and functions"""
+u"""Provide time related exceptions and functions"""
 
 from future_builtins import map
 
@@ -42,29 +42,29 @@ class TimeException(Exception):
     pass
 
 
-_interval_conv_dict = {"s": 1, "m": 60, "h": 3600, "D": 86400,
-                       "W": 7 * 86400, "M": 30 * 86400, "Y": 365 * 86400}
-_integer_regexp = re.compile("^[0-9]+$")
-_interval_regexp = re.compile("^([0-9]+)([smhDWMY])")
-_genstr_date_regexp1 = re.compile("^(?P<year>[0-9]{4})[-/]"
-                                  "(?P<month>[0-9]{1,2})[-/]"
-                                  "(?P<day>[0-9]{1,2})$")
-_genstr_date_regexp2 = re.compile("^(?P<month>[0-9]{1,2})[-/]"
-                                  "(?P<day>[0-9]{1,2})[-/]"
-                                  "(?P<year>[0-9]{4})$")
-_genstr_date_regexp3 = re.compile("^(?P<year>[0-9]{4})"
-                                  "(?P<month>[0-9]{2})"
-                                  "(?P<day>[0-9]{2})Z$")
+_interval_conv_dict = {u"s": 1, u"m": 60, u"h": 3600, u"D": 86400,
+                       u"W": 7 * 86400, u"M": 30 * 86400, u"Y": 365 * 86400}
+_integer_regexp = re.compile(u"^[0-9]+$")
+_interval_regexp = re.compile(u"^([0-9]+)([smhDWMY])")
+_genstr_date_regexp1 = re.compile(u"^(?P<year>[0-9]{4})[-/]"
+                                  u"(?P<month>[0-9]{1,2})[-/]"
+                                  u"(?P<day>[0-9]{1,2})$")
+_genstr_date_regexp2 = re.compile(u"^(?P<month>[0-9]{1,2})[-/]"
+                                  u"(?P<day>[0-9]{1,2})[-/]"
+                                  u"(?P<year>[0-9]{4})$")
+_genstr_date_regexp3 = re.compile(u"^(?P<year>[0-9]{4})"
+                                  u"(?P<month>[0-9]{2})"
+                                  u"(?P<day>[0-9]{2})Z$")
 curtime = curtimestr = None
 prevtime = prevtimestr = None
 
-bad_interval_string = _("""Bad interval string "%s"
+bad_interval_string = _(u"""Bad interval string "%s"
 
 Intervals are specified like 2Y (2 years) or 2h30m (2.5 hours).  The
 allowed special characters are s, m, h, D, W, M, and Y.  See the man
 page for more information.""")
 
-bad_time_string = _("""Bad time string "%s"
+bad_time_string = _(u"""Bad time string "%s"
 
 The acceptible time strings are intervals (like "3D64s"), w3-datetime
 strings, like "2002-04-26T04:22:01-07:00" (strings like
@@ -75,7 +75,7 @@ the day).""")
 
 
 def setcurtime(time_in_secs=None):
-    """Sets the current time in curtime and curtimestr"""
+    u"""Sets the current time in curtime and curtimestr"""
     global curtime, curtimestr
     t = time_in_secs or int(time.time())
     assert type(t) in integer_types
@@ -83,37 +83,37 @@ def setcurtime(time_in_secs=None):
 
 
 def setprevtime(time_in_secs):
-    """Sets the previous time in prevtime and prevtimestr"""
+    u"""Sets the previous time in prevtime and prevtimestr"""
     global prevtime, prevtimestr
     assert type(time_in_secs) in integer_types, prevtime
     prevtime, prevtimestr = time_in_secs, timetostring(time_in_secs)
 
 
 def timetostring(timeinseconds):
-    """Return w3 or duplicity datetime compliant listing of timeinseconds"""
+    u"""Return w3 or duplicity datetime compliant listing of timeinseconds"""
 
     if globals.old_filenames:
         # We need to know if DST applies to append the correct offset. So
         #    1. Save the tuple returned by localtime.
         #    2. Pass the DST flag into gettzd
         lcltime = time.localtime(timeinseconds)
-        return time.strftime("%Y-%m-%dT%H" + globals.time_separator +
-                             "%M" + globals.time_separator + "%S",
+        return time.strftime(u"%Y-%m-%dT%H" + globals.time_separator +
+                             u"%M" + globals.time_separator + u"%S",
                              lcltime) + gettzd(lcltime[-1])
     else:
         # DST never applies to UTC
         lcltime = time.gmtime(timeinseconds)
-        return time.strftime("%Y%m%dT%H%M%SZ", lcltime)
+        return time.strftime(u"%Y%m%dT%H%M%SZ", lcltime)
 
 
 def stringtotime(timestring):
-    """Return time in seconds from w3 or duplicity timestring
+    u"""Return time in seconds from w3 or duplicity timestring
 
     If there is an error parsing the string, or it doesn't look
     like a valid datetime string, return None.
     """
     try:
-        date, daytime = timestring[:19].split("T")
+        date, daytime = timestring[:19].split(u"T")
         if len(timestring) == 16:
             # new format for filename time
             year, month, day = map(int,
@@ -122,7 +122,7 @@ def stringtotime(timestring):
                                        [daytime[0:2], daytime[2:4], daytime[4:6]])
         else:
             # old format for filename time
-            year, month, day = map(int, date.split("-"))
+            year, month, day = map(int, date.split(u"-"))
             hour, minute, second = map(int,
                                        daytime.split(globals.time_separator))
         assert 1900 < year < 2100, year
@@ -163,42 +163,42 @@ def stringtotime(timestring):
 
 
 def timetopretty(timeinseconds):
-    """Return pretty version of time"""
+    u"""Return pretty version of time"""
     return time.asctime(time.localtime(timeinseconds))
 
 
 def stringtopretty(timestring):
-    """Return pretty version of time given w3 time string"""
+    u"""Return pretty version of time given w3 time string"""
     return timetopretty(stringtotime(timestring))
 
 
 def inttopretty(seconds):
-    """Convert num of seconds to readable string like "2 hours"."""
+    u"""Convert num of seconds to readable string like "2 hours"."""
     partlist = []
     hours, seconds = divmod(seconds, 3600)
     if hours > 1:
-        partlist.append("%d hours" % hours)
+        partlist.append(u"%d hours" % hours)
     elif hours == 1:
-        partlist.append("1 hour")
+        partlist.append(u"1 hour")
 
     minutes, seconds = divmod(seconds, 60)
     if minutes > 1:
-        partlist.append("%d minutes" % minutes)
+        partlist.append(u"%d minutes" % minutes)
     elif minutes == 1:
-        partlist.append("1 minute")
+        partlist.append(u"1 minute")
 
     if seconds == 1:
-        partlist.append("1 second")
+        partlist.append(u"1 second")
     elif not partlist or seconds > 1:
         if isinstance(seconds, integer_types):
-            partlist.append("%s seconds" % seconds)
+            partlist.append(u"%s seconds" % seconds)
         else:
-            partlist.append("%.2f seconds" % seconds)
-    return " ".join(partlist)
+            partlist.append(u"%.2f seconds" % seconds)
+    return u" ".join(partlist)
 
 
 def intstringtoseconds(interval_string):
-    """Convert a string expressing an interval (e.g. "4D2s") to seconds"""
+    u"""Convert a string expressing an interval (e.g. "4D2s") to seconds"""
     def error():
         raise TimeException(bad_interval_string % util.escape(interval_string))
 
@@ -219,7 +219,7 @@ def intstringtoseconds(interval_string):
 
 
 def gettzd(dstflag):
-    """Return w3's timezone identification string.
+    u"""Return w3's timezone identification string.
 
     Expresed as [+/-]hh:mm.  For instance, PST is -08:00.  Zone is
     coincides with what localtime(), etc., use.
@@ -236,30 +236,30 @@ def gettzd(dstflag):
     else:
         offset = -1 * time.timezone / 60
     if offset > 0:
-        prefix = "+"
+        prefix = u"+"
     elif offset < 0:
-        prefix = "-"
+        prefix = u"-"
     else:
-        return "Z"  # time is already in UTC
+        return u"Z"  # time is already in UTC
 
     hours, minutes = map(abs, divmod(offset, 60))
     assert 0 <= hours <= 23
     assert 0 <= minutes <= 59
-    return "%s%02d%s%02d" % (prefix, hours, globals.time_separator, minutes)
+    return u"%s%02d%s%02d" % (prefix, hours, globals.time_separator, minutes)
 
 
 def tzdtoseconds(tzd):
-    """Given w3 compliant TZD, return how far ahead UTC is"""
-    if tzd == "Z":
+    u"""Given w3 compliant TZD, return how far ahead UTC is"""
+    if tzd == u"Z":
         return 0
     assert len(tzd) == 6  # only accept forms like +08:00 for now
-    assert (tzd[0] == "-" or tzd[0] == "+") and \
+    assert (tzd[0] == u"-" or tzd[0] == u"+") and \
         tzd[3] == globals.time_separator
     return -60 * (60 * int(tzd[:3]) + int(tzd[4:]))
 
 
 def cmp(time1, time2):
-    """Compare time1 and time2 and return -1, 0, or 1"""
+    u"""Compare time1 and time2 and return -1, 0, or 1"""
     if isinstance(time1, types.StringType):
         time1 = stringtotime(time1)
         assert time1 is not None
@@ -276,10 +276,10 @@ def cmp(time1, time2):
 
 
 def genstrtotime(timestr, override_curtime=None):
-    """Convert a generic time string to a time in seconds"""
+    u"""Convert a generic time string to a time in seconds"""
     if override_curtime is None:
         override_curtime = curtime
-    if timestr == "now":
+    if timestr == u"now":
         return override_curtime
 
     def error():
@@ -311,10 +311,10 @@ def genstrtotime(timestr, override_curtime=None):
              _genstr_date_regexp3.search(timestr))
     if not match:
         error()
-    timestr = "%s-%02d-%02dT00:00:00%s" % (match.group('year'),
-                                           int(match.group('month')),
-                                           int(match.group('day')),
-                                           gettzd(0))
+    timestr = u"%s-%02d-%02dT00:00:00%s" % (match.group(u'year'),
+                                            int(match.group(u'month')),
+                                            int(match.group(u'day')),
+                                            gettzd(0))
     t = stringtotime(timestr)
     if t:
         return t

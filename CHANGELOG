@@ -370,8 +370,9 @@ New in v0.8.00 (2016/07/??)
   - Solves 99.9% of the use cases we have
   - Fix unadorned strings to unicode in bin/duplicity and bin/rdiffdir
   - Add import for __future__.print_function to find_unadorned_strings.py
-* Fixed unadorned strings to unicode in duplicity/backends/*
+* Fixed unadorned strings to unicode in duplicity/*/*
   - Some fixup due to shifting indenataion not matching PEP8.
+  - Substituted for non-ascii char in jottlibbackend.py comment.
 
 
 New in v0.7.08 (2016/07/02)
