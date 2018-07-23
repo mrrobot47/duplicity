@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-07-08 07:14-0500\n"
+"POT-Creation-Date: 2018-07-22 09:39-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-07-09 05:57+0000\n"
-"X-Generator: Launchpad (build 18704)\n"
+"X-Launchpad-Export-Date: 2018-07-23 05:58+0000\n"
+"X-Generator: Launchpad (build 18730)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -1315,6 +1315,8 @@ msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
 "starting at time %s."
 msgstr ""
+"Keine Signaturkette für die angeforderte Zeit. Nutze die älteste verfügbare "
+"Kette, starte bei der Zeit %s."
 
 #: ../duplicity/collections.py:1235
 #, python-format
@@ -1587,7 +1589,7 @@ msgstr "WebDAV weitersenden an: %s "
 
 #: ../duplicity/backends/webdavbackend.py:226
 msgid "WebDAV redirected 10 times. Giving up."
-msgstr ""
+msgstr "WebDAV leitete 10 mal um. Gebe auf."
 
 #: ../duplicity/backends/webdavbackend.py:231
 msgid "WebDAV missing location header in redirect response."
@@ -1697,12 +1699,12 @@ msgstr ""
 #: ../duplicity/manifest.py:206
 #, python-format
 msgid "Found manifest volume %s"
-msgstr ""
+msgstr "Manifest-Volumen %s gefunden"
 
 #: ../duplicity/manifest.py:213
 #, python-format
 msgid "Found %s volumes in manifest"
-msgstr ""
+msgstr "%s Volumen in Manifest gefunden"
 
 #: ../duplicity/manifest.py:230
 #, python-format
