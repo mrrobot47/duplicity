@@ -3,6 +3,7 @@
     * Fixed unadorned strings to unicode in duplicity/*/*
       - Some fixup due to shifting indenataion not matching PEP8.
       - Substituted for non-ascii char in jottlibbackend.py comment.
+    * Nuke remnants of copycom and acdcli backends
 
 2018-07-22  Kenneth Loafman  <kenneth@loafman.com>
 

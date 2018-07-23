@@ -373,6 +373,7 @@ New in v0.8.00 (2016/07/??)
 * Fixed unadorned strings to unicode in duplicity/*/*
   - Some fixup due to shifting indenataion not matching PEP8.
   - Substituted for non-ascii char in jottlibbackend.py comment.
+* Nuke remnants of copycom and acdcli backends
 
 
 New in v0.7.08 (2016/07/02)
