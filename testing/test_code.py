@@ -104,11 +104,13 @@ class CodeTest(DuplicityTestCase):
     def test_unadorned_string_literals(self):
         u"""For predictable results in python2/3 all string literals need to be marked as unicode, bytes or raw"""
 
-        ignored_files = [os.path.join(_top_dir, u'.tox', u'*'), # These are not source files we want to check
+        ignored_files = [
+                         # These are NOT source files we want to check
+                         os.path.join(_top_dir, u'.tox', u'*'),
                          os.path.join(_top_dir, u'.eggs', u'*'),
+                         os.path.join(_top_dir, u'docs', u'conf.py'),
                          # TODO Every file from here down needs to be fixed and the exclusion removed
                          os.path.join(_top_dir, u'setup.py'),
-                         os.path.join(_top_dir, u'docs', u'conf.py'),
                          os.path.join(_top_dir, u'testing', u'__init__.py'),
                          os.path.join(_top_dir, u'testing', u'find_unadorned_strings.py'),
                          os.path.join(_top_dir, u'testing', u'fix_unadorned_strings.py'),
@@ -141,7 +143,8 @@ class CodeTest(DuplicityTestCase):
                          os.path.join(_top_dir, u'testing', u'unit', u'test_path.py'),
                          os.path.join(_top_dir, u'testing', u'unit', u'test_statistics.py'),
                          os.path.join(_top_dir, u'testing', u'unit', u'test_tarfile.py'),
-                         os.path.join(_top_dir, u'testing', u'unit', u'test_tempdir.py')]
+                         os.path.join(_top_dir, u'testing', u'unit', u'test_tempdir.py'),
+                         ]
 
 
         # Find all the .py files in the duplicity tree
