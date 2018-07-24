@@ -33,7 +33,7 @@ from pkg_resources import parse_version
 
 
 class CmdError(Exception):
-    """Indicates an error running an external command"""
+    u"""Indicates an error running an external command"""
     def __init__(self, code):
         Exception.__init__(self, code)
         self.exit_status = code
@@ -47,13 +47,13 @@ class FunctionalTestCase(DuplicityTestCase):
     def _check_setsid(cls):
         if cls._setsid_w is not None:
             return
-        if platform.platform().startswith('Linux'):
+        if platform.platform().startswith(u'Linux'):
             # setsid behavior differs between distributions.
             # If setsid supports -w ("wait"), use it.
             import subprocess
             try:
-                with open("/dev/null", "w") as sink:
-                    subprocess.check_call(["setsid", "-w", "ls"], stdout=sink, stderr=sink)
+                with open(u"/dev/null", u"w") as sink:
+                    subprocess.check_call([u"setsid", u"-w", u"ls"], stdout=sink, stderr=sink)
             except subprocess.CalledProcessError:
                 cls._setsid_w = False
             else:
@@ -67,8 +67,8 @@ class FunctionalTestCase(DuplicityTestCase):
         self.class_args = []
         self.backend_url = u"file://testfiles/output"
         self.last_backup = None
-        self.set_environ('PASSPHRASE', self.sign_passphrase)
-        self.set_environ("SIGN_PASSPHRASE", self.sign_passphrase)
+        self.set_environ(u'PASSPHRASE', self.sign_passphrase)
+        self.set_environ(u"SIGN_PASSPHRASE", self.sign_passphrase)
 
         backend_inst = backend.get_backend(self.backend_url)
         bl = backend_inst.list()
@@ -79,7 +79,7 @@ class FunctionalTestCase(DuplicityTestCase):
 
     def run_duplicity(self, options=[], current_time=None, fail=None,
                       passphrase_input=[]):
-        """
+        u"""
         Run duplicity binary with given arguments and options
         """
         # We run under setsid and take input from /dev/null (below) because
@@ -88,10 +88,10 @@ class FunctionalTestCase(DuplicityTestCase):
 
         # Check all string inputs are unicode -- we will convert to system encoding before running the command
         for item in options:
-            assert not isinstance(item, str), "item " + unicode(item) + " in options is not unicode"
+            assert not isinstance(item, str), u"item " + unicode(item) + u" in options is not unicode"
 
         for item in passphrase_input:
-            assert isinstance(item, unicode), "item " + unicode(item) + " in passphrase_input is not unicode"
+            assert isinstance(item, unicode), u"item " + unicode(item) + u" in passphrase_input is not unicode"
 
         if platform.platform().startswith(u'Linux'):
             cmd_list = [u'setsid']
@@ -132,7 +132,7 @@ class FunctionalTestCase(DuplicityTestCase):
         # Manually encode to filesystem encoding and send to spawn as bytes
         # ToDo: Remove this once we no longer have to support systems with pexpect < 4.0
         child = pexpect.spawn(b'/bin/sh', [b'-c', cmdline.encode(sys.getfilesystemencoding(),
-                                                                 'replace')], timeout=None)
+                                                                 u'replace')], timeout=None)
 
         for passphrase in passphrase_input:
             child.expect(b'passphrase.*:')
@@ -148,18 +148,18 @@ class FunctionalTestCase(DuplicityTestCase):
         if fail:
             self.assertEqual(30, return_val)
         elif return_val:
-            print >>sys.stderr, "\n...command:", cmdline
-            print >>sys.stderr, "...cwd:", os.getcwd()
-            print >>sys.stderr, "...output:"
+            print >>sys.stderr, u"\n...command:", cmdline
+            print >>sys.stderr, u"...cwd:", os.getcwd()
+            print >>sys.stderr, u"...output:"
             for line in lines:
                 line = line.rstrip()
                 if line:
                     print >>sys.stderr, line
-            print >>sys.stderr, "...return_val:", return_val
+            print >>sys.stderr, u"...return_val:", return_val
             raise CmdError(return_val)
 
     def backup(self, type, input_dir, options=[], **kwargs):
-        """Run duplicity backup to default directory"""
+        u"""Run duplicity backup to default directory"""
         options = [type, input_dir, self.backend_url, u"--volsize", u"1"] + options
         before_files = self.get_backend_files()
 
@@ -176,7 +176,7 @@ class FunctionalTestCase(DuplicityTestCase):
         return after_files - before_files
 
     def restore(self, file_to_restore=None, time=None, options=[], **kwargs):
-        assert not os.system("rm -rf testfiles/restore_out")
+        assert not os.system(u"rm -rf testfiles/restore_out")
         options = [self.backend_url, u"testfiles/restore_out"] + options
         if file_to_restore:
             options.extend([u'--file-to-restore', file_to_restore])
@@ -194,7 +194,7 @@ class FunctionalTestCase(DuplicityTestCase):
         self.run_duplicity(options=options, **kwargs)
 
     def cleanup(self, options=[]):
-        """
+        u"""
         Run duplicity cleanup to default directory
         """
         options = [u"cleanup", self.backend_url, u"--force"] + options
@@ -207,7 +207,7 @@ class FunctionalTestCase(DuplicityTestCase):
         return set(bl)
 
     def make_largefiles(self, count=3, size=2):
-        """
+        u"""
         Makes a number of large files in testfiles/largefiles that each are
         the specified number of megabytes.
         """

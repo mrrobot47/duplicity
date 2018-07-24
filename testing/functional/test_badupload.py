@@ -26,11 +26,11 @@ from . import CmdError, FunctionalTestCase
 
 
 class BadUploadTest(FunctionalTestCase):
-    """
+    u"""
     Test missing volume upload using duplicity binary
     """
     def test_missing_file(self):
-        """
+        u"""
         Test basic lost file
         """
         try:
@@ -39,7 +39,7 @@ class BadUploadTest(FunctionalTestCase):
         except CmdError as e:
             self.assertEqual(e.exit_status, 44, str(e))
         else:
-            self.fail('Expected CmdError not thrown')
+            self.fail(u'Expected CmdError not thrown')
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()

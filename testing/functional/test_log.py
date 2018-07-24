@@ -25,21 +25,21 @@ from . import FunctionalTestCase
 
 
 class LogTest(FunctionalTestCase):
-    """Test machine-readable functions/classes in log.py"""
+    u"""Test machine-readable functions/classes in log.py"""
 
     def setUp(self):
         super(LogTest, self).setUp()
-        assert not os.system("rm -f /tmp/duplicity.log")
+        assert not os.system(u"rm -f /tmp/duplicity.log")
 
     def tearDown(self):
-        assert not os.system("rm -f /tmp/duplicity.log")
+        assert not os.system(u"rm -f /tmp/duplicity.log")
         super(LogTest, self).tearDown()
 
     def test_command_line_error(self):
-        """Check notification of a simple error code"""
+        u"""Check notification of a simple error code"""
 
         # Run actual duplicity command (will fail, because no arguments passed)
-        os.system("duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
+        os.system(u"duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
 
         # The format of the file should be:
         # """ERROR 2
@@ -47,20 +47,20 @@ class LogTest(FunctionalTestCase):
         # . Blah blah blah.
         #
         # """
-        f = open('/tmp/duplicity.log', 'r')
+        f = open(u'/tmp/duplicity.log', u'r')
         linecount = 0
         lastline = False
         for line in f:
             assert(not lastline)
             linecount += 1
             if linecount == 1:
-                assert(line == "ERROR 2\n")
-            elif line != "\n":
-                assert(line.startswith(". "))
+                assert(line == u"ERROR 2\n")
+            elif line != u"\n":
+                assert(line.startswith(r". "))
             else:
                 lastline = True
         assert(lastline)
 
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()

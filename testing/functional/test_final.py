@@ -27,11 +27,11 @@ from . import CmdError, FunctionalTestCase
 
 
 class FinalTest(FunctionalTestCase):
-    """
+    u"""
     Test backup/restore using duplicity binary
     """
     def runtest(self, dirlist, backup_options=[], restore_options=[]):
-        """Run backup/restore test on directories in dirlist"""
+        u"""Run backup/restore test on directories in dirlist"""
         assert len(dirlist) >= 1
 
         # Back up directories to local backend
@@ -53,12 +53,12 @@ class FinalTest(FunctionalTestCase):
                         time=current_time, options=restore_options)
 
     def check_same(self, filename1, filename2):
-        """Verify two filenames are the same"""
+        u"""Verify two filenames are the same"""
         path1, path2 = path.Path(filename1), path.Path(filename2)
         assert path1.compare_recursive(path2, verbose=1)
 
     def test_basic_cycle(self, backup_options=[], restore_options=[]):
-        """Run backup/restore test on basic directories"""
+        u"""Run backup/restore test on basic directories"""
         self.runtest([u"testfiles/dir1",
                       u"testfiles/dir2",
                       u"testfiles/dir3"],
@@ -78,7 +78,7 @@ class FinalTest(FunctionalTestCase):
                         options=restore_options)
 
     def test_asym_cycle(self):
-        """Like test_basic_cycle but use asymmetric encryption and signing"""
+        u"""Like test_basic_cycle but use asymmetric encryption and signing"""
         backup_options = [u"--encrypt-key", self.encrypt_key1,
                           u"--sign-key", self.sign_key]
         restore_options = [u"--encrypt-key", self.encrypt_key1,
@@ -87,7 +87,7 @@ class FinalTest(FunctionalTestCase):
                               restore_options=restore_options)
 
     def test_asym_with_hidden_recipient_cycle(self):
-        """Like test_basic_cycle but use asymmetric encryption (hiding key id) and signing"""
+        u"""Like test_basic_cycle but use asymmetric encryption (hiding key id) and signing"""
         backup_options = [u"--hidden-encrypt-key", self.encrypt_key1,
                           u"--sign-key", self.sign_key]
         restore_options = [u"--hidden-encrypt-key", self.encrypt_key1,
@@ -96,16 +96,16 @@ class FinalTest(FunctionalTestCase):
                               restore_options=restore_options)
 
     def test_single_regfile(self):
-        """Test backing and restoring up a single regular file"""
+        u"""Test backing and restoring up a single regular file"""
         self.runtest([u"testfiles/various_file_types/regular_file"])
 
     def test_empty_backup(self):
-        """Make sure backup works when no files change"""
+        u"""Make sure backup works when no files change"""
         self.backup(u"full", u"testfiles/empty_dir")
         self.backup(u"inc", u"testfiles/empty_dir")
 
     def test_long_filenames(self):
-        """Test backing up a directory with long filenames in it"""
+        u"""Test backing up a directory with long filenames in it"""
         # Note that some versions of ecryptfs (at least through Ubuntu 11.10)
         # have a bug where they treat the max path segment length as 143
         # instead of 255.  So make sure that these segments don't break that.
@@ -113,35 +113,35 @@ class FinalTest(FunctionalTestCase):
         if lf_dir.exists():
             lf_dir.deltree()
         lf_dir.mkdir()
-        lf1 = lf_dir.append("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        lf1 = lf_dir.append(u"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
         lf1.mkdir()
-        lf2 = lf1.append("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+        lf2 = lf1.append(u"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
         lf2.mkdir()
-        lf3 = lf2.append("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC")
+        lf3 = lf2.append(u"CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC")
         lf3.mkdir()
-        lf4 = lf3.append("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+        lf4 = lf3.append(u"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
         lf4.touch()
-        lf4_1 = lf3.append("SYMLINK--------------------------------------------------------------------------------------------")
-        os.symlink("SYMLINK-DESTINATION-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------", lf4_1.name)
+        lf4_1 = lf3.append(u"SYMLINK--------------------------------------------------------------------------------------------")
+        os.symlink(u"SYMLINK-DESTINATION-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------", lf4_1.name)
         lf4_1.setdata()
         assert lf4_1.issym()
-        lf4_2 = lf3.append("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-        fp = lf4_2.open("wb")
-        fp.write("hello" * 1000)
+        lf4_2 = lf3.append(u"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+        fp = lf4_2.open(u"wb")
+        fp.write(u"hello" * 1000)
         assert not fp.close()
 
         self.runtest([u"testfiles/empty_dir", lf_dir.uc_name,
                       u"testfiles/empty_dir", lf_dir.uc_name])
 
     def test_empty_restore(self):
-        """Make sure error raised when restore doesn't match anything"""
+        u"""Make sure error raised when restore doesn't match anything"""
         self.backup(u"full", u"testfiles/dir1")
         self.assertRaises(CmdError, self.restore, u"this_file_does_not_exist")
         self.backup(u"inc", u"testfiles/empty_dir")
         self.assertRaises(CmdError, self.restore, u"this_file_does_not_exist")
 
     def test_remove_older_than(self):
-        """Test removing old backup chains"""
+        u"""Test removing old backup chains"""
         first_chain = self.backup(u"full", u"testfiles/dir1", current_time=10000)
         first_chain |= self.backup(u"inc", u"testfiles/dir2", current_time=20000)
         second_chain = self.backup(u"full", u"testfiles/dir1", current_time=30000)
@@ -157,7 +157,7 @@ class FinalTest(FunctionalTestCase):
         self.assertEqual(self.get_backend_files(), second_chain)
 
     def test_piped_password(self):
-        """Make sure that prompting for a password works"""
+        u"""Make sure that prompting for a password works"""
         self.set_environ(u"PASSPHRASE", None)
         self.backup(u"full", u"testfiles/empty_dir",
                     passphrase_input=[self.sign_passphrase, self.sign_passphrase])
@@ -177,5 +177,5 @@ class ShortFilenamesFinalTest(FinalTest):
         super(ShortFilenamesFinalTest, self).setUp()
         self.class_args.extend([u"--short-filenames"])
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()

@@ -25,11 +25,11 @@ from . import FunctionalTestCase
 
 
 class CleanupTest(FunctionalTestCase):
-    """
+    u"""
     Test cleanup using duplicity binary
     """
     def test_cleanup_after_partial(self):
-        """
+        u"""
         Regression test for https://bugs.launchpad.net/bugs/409593
         where duplicity deletes all the signatures during a cleanup
         after a failed backup.
@@ -50,7 +50,7 @@ class CleanupTest(FunctionalTestCase):
         self.verify(u"testfiles/largefiles")
 
     def test_remove_all_but_n(self):
-        """
+        u"""
         Test that remove-all-but-n works in the simple case.
         """
         full1_files = self.backup(u"full", u"testfiles/empty_dir")
@@ -60,7 +60,7 @@ class CleanupTest(FunctionalTestCase):
         self.assertEqual(full2_files, leftovers)
 
     def test_remove_all_inc_of_but_n(self):
-        """
+        u"""
         Test that remove-all-inc-of-but-n-full works in the simple case.
         """
         full1_files = self.backup(u"full", u"testfiles/empty_dir")
@@ -70,5 +70,5 @@ class CleanupTest(FunctionalTestCase):
         leftovers = self.get_backend_files()
         self.assertEqual(full1_files | full2_files, leftovers)
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()
