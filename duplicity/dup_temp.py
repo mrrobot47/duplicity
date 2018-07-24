@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-u"""Manage temporary files"""
+"""Manage temporary files"""
 
 import os
 import sys
@@ -35,7 +35,7 @@ from duplicity import gpg
 
 
 def new_temppath():
-    u"""
+    """
     Return a new TempPath
     """
     filename = tempdir.default().mktemp()
@@ -43,18 +43,18 @@ def new_temppath():
 
 
 class TempPath(path.Path):
-    u"""
+    """
     Path object used as a temporary file
     """
     def delete(self):
-        u"""
+        """
         Forget and delete
         """
         path.Path.delete(self)
         tempdir.default().forget(self.name)
 
     def open_with_delete(self, mode):
-        u"""
+        """
         Returns a fileobj.  When that is closed, delete file
         """
         fh = FileobjHooked(path.Path.open(self, mode))
@@ -63,7 +63,7 @@ class TempPath(path.Path):
 
 
 def get_fileobj_duppath(dirpath, partname, permname, remname, overwrite=False):
-    u"""
+    """
     Return a file object open for writing, will write to filename
 
     Data will be processed and written to a temporary file.  When the
@@ -74,13 +74,13 @@ def get_fileobj_duppath(dirpath, partname, permname, remname, overwrite=False):
         td = tempdir.TemporaryDirectory(dirpath.name)
         tdpname = td.mktemp()
         tdp = TempDupPath(tdpname, parseresults=file_naming.parse(partname))
-        fh = FileobjHooked(tdp.filtered_open(u"wb"), tdp=tdp, dirpath=dirpath,
+        fh = FileobjHooked(tdp.filtered_open("wb"), tdp=tdp, dirpath=dirpath,
                            partname=partname, permname=permname, remname=remname)
     else:
         dp = path.DupPath(dirpath.name, index=(partname,))
-        mode = u"ab"
+        mode = "ab"
         if overwrite:
-            mode = u"wb"
+            mode = "wb"
         fh = FileobjHooked(dp.filtered_open(mode), tdp=None, dirpath=dirpath,
                            partname=partname, permname=permname, remname=remname)
 
@@ -95,7 +95,7 @@ def get_fileobj_duppath(dirpath, partname, permname, remname, overwrite=False):
 
 
 def new_tempduppath(parseresults):
-    u"""
+    """
     Return a new TempDupPath, using settings from parseresults
     """
     filename = tempdir.default().mktemp()
@@ -103,41 +103,41 @@ def new_tempduppath(parseresults):
 
 
 class TempDupPath(path.DupPath):
-    u"""
+    """
     Like TempPath, but build around DupPath
     """
     def delete(self):
-        u"""
+        """
         Forget and delete
         """
         path.DupPath.delete(self)
         tempdir.default().forget(self.name)
 
     def filtered_open_with_delete(self, mode):
-        u"""
+        """
         Returns a filtered fileobj.  When that is closed, delete file
         """
         fh = FileobjHooked(path.DupPath.filtered_open(self, mode))
         fh.addhook(self.delete)
         return fh
 
-    def open_with_delete(self, mode=u"rb"):
-        u"""
+    def open_with_delete(self, mode="rb"):
+        """
         Returns a fileobj.  When that is closed, delete file
         """
-        assert mode == u"rb"  # Why write a file and then close it immediately?
+        assert mode == "rb"  # Why write a file and then close it immediately?
         fh = FileobjHooked(path.DupPath.open(self, mode))
         fh.addhook(self.delete)
         return fh
 
 
 class FileobjHooked:
-    u"""
+    """
     Simulate a file, but add hook on close
     """
     def __init__(self, fileobj, tdp=None, dirpath=None,
                  partname=None, permname=None, remname=None):
-        u"""
+        """
         Initializer.  fileobj is the file object to simulate
         """
         self.fileobj = fileobj  # the actual file object
@@ -150,20 +150,20 @@ class FileobjHooked:
         self.remname = remname  # remote filename
 
     def write(self, buf):
-        u"""
+        """
         Write fileobj, return result of write()
         """
         return self.fileobj.write(buf)
 
     def flush(self):
-        u"""
+        """
         Flush fileobj and force sync.
         """
         self.fileobj.flush()
         os.fsync(self.fileobj.fileno())
 
     def to_partial(self):
-        u"""
+        """
         We have achieved the first checkpoint, make file visible and permanent.
         """
         assert not globals.restart
@@ -172,7 +172,7 @@ class FileobjHooked:
         del self.hooklist[0]
 
     def to_remote(self):
-        u"""
+        """
         We have written the last checkpoint, now encrypt or compress
         and send a copy of it to the remote for final storage.
         """
@@ -189,7 +189,7 @@ class FileobjHooked:
         globals.backend.move(tgt)  # @UndefinedVariable
 
     def to_final(self):
-        u"""
+        """
         We are finished, rename to final, gzip if needed.
         """
         src = self.dirpath.append(self.partname)
@@ -203,25 +203,25 @@ class FileobjHooked:
             os.rename(src.name, tgt.name)
 
     def read(self, length=-1):
-        u"""
+        """
         Read fileobj, return result of read()
         """
         return self.fileobj.read(length)
 
     def tell(self):
-        u"""
+        """
         Returns current location of fileobj
         """
         return self.fileobj.tell()
 
     def seek(self, offset):
-        u"""
+        """
         Seeks to a location of fileobj
         """
         return self.fileobj.seek(offset)
 
     def close(self):
-        u"""
+        """
         Close fileobj, running hooks right afterwards
         """
         assert not self.fileobj.close()
@@ -229,13 +229,13 @@ class FileobjHooked:
             hook()
 
     def addhook(self, hook):
-        u"""
+        """
         Add hook (function taking no arguments) to run upon closing
         """
         self.hooklist.append(hook)
 
     def get_name(self):
-        u"""
+        """
         Return the name of the file
         """
         return self.fileobj.name
@@ -244,7 +244,7 @@ class FileobjHooked:
 
 
 class Block:
-    u"""
+    """
     Data block to return from SrcIter
     """
     def __init__(self, data):
@@ -252,18 +252,18 @@ class Block:
 
 
 class SrcIter:
-    u"""
+    """
     Iterate over source and return Block of data.
     """
     def __init__(self, src):
         self.src = src
-        self.fp = src.open(u"rb")
+        self.fp = src.open("rb")
 
     def next(self):
         try:
             res = Block(self.fp.read(self.get_read_size()))
         except Exception:
-            log.FatalError(_(u"Failed to read %s: %s") %
+            log.FatalError(_("Failed to read %s: %s") %
                            (self.src.uc_name, sys.exc_info()),
                            log.ErrorCode.generic)
         if not res.data:
@@ -275,4 +275,4 @@ class SrcIter:
         return 128 * 1024
 
     def get_footer(self):
-        return u""
+        return ""

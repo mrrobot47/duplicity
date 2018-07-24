@@ -18,14 +18,14 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-u"""Cache-wrapped functions for grp and pwd lookups."""
+"""Cache-wrapped functions for grp and pwd lookups."""
 
 import grp
 import pwd
 
 
 class CachedCall(object):
-    u"""Decorator for caching the results of function calls."""
+    """Decorator for caching the results of function calls."""
 
     def __init__(self, f):
         self.cache = {}

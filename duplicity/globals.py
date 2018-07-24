@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-u"""Store global configuration information"""
+"""Store global configuration information"""
 
 import os
 import sys
@@ -27,19 +27,19 @@ import socket
 
 
 # The current version of duplicity
-version = u"$version"
+version = "$version"
 
 # Prefix for all files (appended before type-specific prefixes)
-file_prefix = u""
+file_prefix = ""
 
 # Prefix for manifest files only
-file_prefix_manifest = u""
+file_prefix_manifest = ""
 
 # Prefix for archive files only
-file_prefix_archive = u""
+file_prefix_archive = ""
 
 # Prefix for sig files only
-file_prefix_signature = u""
+file_prefix_signature = ""
 
 # The name of the current host, or None if it cannot be set
 hostname = socket.getfqdn()
@@ -58,13 +58,13 @@ current_time = None
 # contains the signatures and manifests of the relevent backup
 # collection), and for checkpoint state between volumes.
 # NOTE: this gets expanded in duplicity.commandline
-os.environ[u"XDG_CACHE_HOME"] = os.getenv(u"XDG_CACHE_HOME", os.path.expanduser(u"~/.cache"))
-archive_dir = os.path.expandvars(u"$XDG_CACHE_HOME/duplicity")
+os.environ["XDG_CACHE_HOME"] = os.getenv("XDG_CACHE_HOME", os.path.expanduser("~/.cache"))
+archive_dir = os.path.expandvars("$XDG_CACHE_HOME/duplicity")
 archive_dir_path = None
 
 # config dir for future use
-os.environ[u"XDG_CONFIG_HOME"] = os.getenv(u"XDG_CONFIG_HOME", os.path.expanduser(u"~/.config"))
-config_dir = os.path.expandvars(u"$XDG_CONFIG_HOME/duplicity")
+os.environ["XDG_CONFIG_HOME"] = os.getenv("XDG_CONFIG_HOME", os.path.expanduser("~/.config"))
+config_dir = os.path.expandvars("$XDG_CONFIG_HOME/duplicity")
 
 # Restores will try to bring back the state as of the following time.
 # If it is None, default to current time.
@@ -88,7 +88,7 @@ gpg_binary = None
 gpg_profile = None
 
 # Options to pass to gpg
-gpg_options = u''
+gpg_options = ''
 
 # Maximum file blocksize
 max_blocksize = 2048
@@ -106,10 +106,10 @@ pydevd = False
 # Character used like the ":" in time strings like
 # 2002-08-06T04:22:00-07:00.  The colon isn't good for filenames on
 # windows machines.
-time_separator = u":"
+time_separator = ":"
 
 # Global lockfile used to manage concurrency
-lockpath = u""
+lockpath = ""
 lockfile = None
 
 # If this is true, only warn and don't raise fatal error when backup
@@ -166,10 +166,10 @@ temproot = None
 timeout = 30
 
 # FTP data connection type
-ftp_connection = u'passive'
+ftp_connection = 'passive'
 
 # Protocol for webdav
-webdav_proto = u'http'
+webdav_proto = 'http'
 
 # Asynchronous put/get concurrency limit
 # (default of 0 disables asynchronicity).
@@ -221,7 +221,7 @@ s3_multipart_max_timeout = None
 s3_use_sse = False
 
 # Which storage policy to use for Swift containers
-swift_storage_policy = u""
+swift_storage_policy = ""
 
 # The largest size upload supported in a single put call for azure
 azure_max_single_put_size = None
@@ -239,7 +239,7 @@ imap_full_address = False
 
 # Name of the imap folder where we want to store backups.
 # Can be changed with a command line argument.
-imap_mailbox = u"INBOX"
+imap_mailbox = "INBOX"
 
 # Whether the old filename format is in effect.
 old_filenames = False
@@ -255,10 +255,10 @@ sftp_command = None
 ssh_askpass = False
 
 # user added ssh options
-ssh_options = u""
+ssh_options = ""
 
 # default cf backend is pyrax
-cf_backend = u"pyrax"
+cf_backend = "pyrax"
 
 # HTTPS ssl options (currently only webdav, lftp)
 ssl_cacert_file = None
@@ -266,7 +266,7 @@ ssl_cacert_path = None
 ssl_no_check_certificate = False
 
 # user added rsync options
-rsync_options = u""
+rsync_options = ""
 
 # will be a Restart object if restarting
 restart = None
@@ -308,7 +308,7 @@ progress_rate = 3
 par2_redundancy = 10
 
 # Verbatim par2 other options
-par2_options = u""
+par2_options = ""
 
 # Whether to enable gio backend
 use_gio = False
@@ -324,4 +324,4 @@ backend_retry_delay = 30
 # 'utf-8' or some other sane encoding, but will sometimes fail and return
 # either 'ascii' or None.  Both are bogus, so default to 'utf-8' if it does.
 fsencoding = sys.getfilesystemencoding()
-fsencoding = fsencoding if fsencoding not in [u'ascii', u'ANSI_X3.4-1968', None] else u'utf-8'
+fsencoding = fsencoding if fsencoding not in ['ascii', 'ANSI_X3.4-1968', None] else 'utf-8'

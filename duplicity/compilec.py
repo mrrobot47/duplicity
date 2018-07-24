@@ -27,14 +27,14 @@ import os
 from distutils.core import setup, Extension  # pylint: disable=import-error,no-name-in-module
 
 assert len(sys.argv) == 1
-sys.argv.append(u"build")
+sys.argv.append("build")
 
-setup(name=u"CModule",
-      version=u"cvs",
-      description=u"duplicity's C component",
-      ext_modules=[Extension(u"_librsync",
-                             [u"_librsyncmodule.c"],
-                             libraries=[u"rsync"])])
+setup(name="CModule",
+      version="cvs",
+      description="duplicity's C component",
+      ext_modules=[Extension("_librsync",
+                             ["_librsyncmodule.c"],
+                             libraries=["rsync"])])
 
-assert not os.system(u"mv `find build -name '_librsync*.so'` .")
-assert not os.system(u"rm -rf build")
+assert not os.system("mv `find build -name '_librsync*.so'` .")
+assert not os.system("rm -rf build")

@@ -104,13 +104,40 @@ class CodeTest(DuplicityTestCase):
     def test_unadorned_string_literals(self):
         u"""For predictable results in python2/3 all string literals need to be marked as unicode, bytes or raw"""
 
-        ignored_files = [
-                         # These are NOT source files we want to check
-                         os.path.join(_top_dir, u'.tox', u'*'),
+        ignored_files = [os.path.join(_top_dir, u'.tox', u'*'), # These are not source files we want to check
                          os.path.join(_top_dir, u'.eggs', u'*'),
-                         os.path.join(_top_dir, u'docs', u'conf.py'),
                          # TODO Every file from here down needs to be fixed and the exclusion removed
                          os.path.join(_top_dir, u'setup.py'),
+                         os.path.join(_top_dir, u'docs', u'conf.py'),
+                         os.path.join(_top_dir, u'duplicity', u'__init__.py'),
+                         os.path.join(_top_dir, u'duplicity', u'asyncscheduler.py'),
+                         os.path.join(_top_dir, u'duplicity', u'backend.py'),
+                         os.path.join(_top_dir, u'duplicity', u'cached_ops.py'),
+                         os.path.join(_top_dir, u'duplicity', u'collections.py'),
+                         os.path.join(_top_dir, u'duplicity', u'commandline.py'),
+                         os.path.join(_top_dir, u'duplicity', u'compilec.py'),
+                         os.path.join(_top_dir, u'duplicity', u'diffdir.py'),
+                         os.path.join(_top_dir, u'duplicity', u'dup_temp.py'),
+                         os.path.join(_top_dir, u'duplicity', u'dup_threading.py'),
+                         os.path.join(_top_dir, u'duplicity', u'dup_time.py'),
+                         os.path.join(_top_dir, u'duplicity', u'errors.py'),
+                         os.path.join(_top_dir, u'duplicity', u'file_naming.py'),
+                         os.path.join(_top_dir, u'duplicity', u'filechunkio.py'),
+                         os.path.join(_top_dir, u'duplicity', u'globals.py'),
+                         os.path.join(_top_dir, u'duplicity', u'gpg.py'),
+                         os.path.join(_top_dir, u'duplicity', u'gpginterface.py'),
+                         os.path.join(_top_dir, u'duplicity', u'lazy.py'),
+                         os.path.join(_top_dir, u'duplicity', u'librsync.py'),
+                         os.path.join(_top_dir, u'duplicity', u'log.py'),
+                         os.path.join(_top_dir, u'duplicity', u'manifest.py'),
+                         os.path.join(_top_dir, u'duplicity', u'patchdir.py'),
+                         os.path.join(_top_dir, u'duplicity', u'path.py'),
+                         os.path.join(_top_dir, u'duplicity', u'progress.py'),
+                         os.path.join(_top_dir, u'duplicity', u'robust.py'),
+                         os.path.join(_top_dir, u'duplicity', u'statistics.py'),
+                         os.path.join(_top_dir, u'duplicity', u'tarfile.py'),
+                         os.path.join(_top_dir, u'duplicity', u'tempdir.py'),
+                         os.path.join(_top_dir, u'duplicity', u'util.py'),
                          os.path.join(_top_dir, u'testing', u'__init__.py'),
                          os.path.join(_top_dir, u'testing', u'find_unadorned_strings.py'),
                          os.path.join(_top_dir, u'testing', u'fix_unadorned_strings.py'),
@@ -143,8 +170,7 @@ class CodeTest(DuplicityTestCase):
                          os.path.join(_top_dir, u'testing', u'unit', u'test_path.py'),
                          os.path.join(_top_dir, u'testing', u'unit', u'test_statistics.py'),
                          os.path.join(_top_dir, u'testing', u'unit', u'test_tarfile.py'),
-                         os.path.join(_top_dir, u'testing', u'unit', u'test_tempdir.py'),
-                         ]
+                         os.path.join(_top_dir, u'testing', u'unit', u'test_tempdir.py')]
 
 
         # Find all the .py files in the duplicity tree

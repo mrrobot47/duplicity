@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-u"""
+"""
 Error/exception classes that do not fit naturally anywhere else.
 """
 
@@ -31,7 +31,7 @@ class DuplicityError(Exception):
 
 
 class UserError(DuplicityError):
-    u"""
+    """
     Subclasses use this in their inheritance hierarchy to signal that
     the error is a user generated one, and that it is therefore
     typically unsuitable to display a full stack trace.
@@ -40,7 +40,7 @@ class UserError(DuplicityError):
 
 
 class NotSupported(DuplicityError):
-    u"""
+    """
     Exception raised when an action cannot be completed because some
     particular feature is not supported by the environment.
     """
@@ -48,7 +48,7 @@ class NotSupported(DuplicityError):
 
 
 class ConflictingScheme(DuplicityError):
-    u"""
+    """
     Raised to indicate an attempt was made to register a backend for a
     scheme for which there is already a backend registered.
     """
@@ -56,25 +56,25 @@ class ConflictingScheme(DuplicityError):
 
 
 class InvalidBackendURL(UserError):
-    u"""
+    """
     Raised to indicate a URL was not a valid backend URL.
     """
     pass
 
 
 class UnsupportedBackendScheme(InvalidBackendURL, UserError):
-    u"""
+    """
     Raised to indicate that a backend URL was parsed successfully as a
     URL, but was not supported.
     """
     def __init__(self, url):
         InvalidBackendURL.__init__(self,
-                                   (u"scheme not supported in url: %s" % (url,)))
+                                   ("scheme not supported in url: %s" % (url,)))
         self.url = url
 
 
 class BackendException(DuplicityError):
-    u"""
+    """
     Raised to indicate a backend specific problem.
     """
     def __init__(self, msg, code=log.ErrorCode.backend_error):
@@ -83,14 +83,14 @@ class BackendException(DuplicityError):
 
 
 class FatalBackendException(BackendException):
-    u"""
+    """
     Raised to indicate a backend failed fatally.
     """
     pass
 
 
 class TemporaryLoadException(BackendException):
-    u"""
+    """
     Raised to indicate a temporary issue on the backend.
     Duplicity should back off for a bit and try again.
     """

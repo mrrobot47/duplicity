@@ -20,4 +20,4 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import gettext
-gettext.install(u'duplicity', unicode=True, names=[u'ngettext'])
+gettext.install('duplicity', unicode=True, names=['ngettext'])

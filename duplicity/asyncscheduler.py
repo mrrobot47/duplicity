@@ -20,7 +20,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-u"""
+"""
 Asynchronous job scheduler, for concurrent execution with minimalistic
 dependency guarantees.
 """
@@ -37,7 +37,7 @@ threading = duplicity.dup_threading.threading_module()
 
 
 class AsyncScheduler:
-    u"""
+    """
     Easy-to-use scheduler of function calls to be executed
     concurrently. A very simple dependency mechanism exists in the
     form of barriers (see insert_barrier()).
@@ -59,14 +59,14 @@ class AsyncScheduler:
     """
 
     def __init__(self, concurrency):
-        u"""
+        """
         Create an asynchronous scheduler that executes jobs with the
         given level of concurrency.
         """
-        log.Info(u"%s: %s" % (self.__class__.__name__,
-                              _(u"instantiating at concurrency %d") %
-                              (concurrency)))
-        assert concurrency >= 0, u"%s concurrency level must be >= 0" % (self.__class__.__name__,)
+        log.Info("%s: %s" % (self.__class__.__name__,
+                             _("instantiating at concurrency %d") %
+                             (concurrency)))
+        assert concurrency >= 0, "%s concurrency level must be >= 0" % (self.__class__.__name__,)
 
         self.__failed = False  # has at least one task failed so far?
         self.__failed_waiter = None  # when __failed, the waiter of the first task that failed
@@ -79,10 +79,10 @@ class AsyncScheduler:
 #                                                    # are not technically efficient.
 
         if concurrency > 0:
-            require_threading(u"concurrency > 0 (%d)" % (concurrency,))
+            require_threading("concurrency > 0 (%d)" % (concurrency,))
 
     def insert_barrier(self):
-        u"""
+        """
         Proclaim that any tasks scheduled prior to the call to this
         method MUST be executed prior to any tasks scheduled after the
         call to this method.
@@ -91,7 +91,7 @@ class AsyncScheduler:
         barrier must be inserted in between to guarantee that A
         happens before B.
         """
-        log.Debug(u"%s: %s" % (self.__class__.__name__, _(u"inserting barrier")))
+        log.Debug("%s: %s" % (self.__class__.__name__, _("inserting barrier")))
         # With concurrency 0 it's a NOOP, and due to the special case in
         # task scheduling we do not want to append to the queue (will never
         # be popped).
@@ -102,7 +102,7 @@ class AsyncScheduler:
             with_lock(self.__cv, _insert_barrier)
 
     def schedule_task(self, fn, params):
-        u"""
+        """
         Schedule the given task (callable, typically function) for
         execution. Pass the given parameters to the function when
         calling it. Returns a callable which can optionally be used
@@ -139,20 +139,20 @@ class AsyncScheduler:
         if self.__concurrency == 0:
             # special case this to not require any platform support for
             # threading at all
-            log.Info(u"%s: %s" % (self.__class__.__name__,
-                     _(u"running task synchronously (asynchronicity disabled)")),
+            log.Info("%s: %s" % (self.__class__.__name__,
+                     _("running task synchronously (asynchronicity disabled)")),
                      log.InfoCode.synchronous_upload_begin)
 
             return self.__run_synchronously(fn, params)
         else:
-            log.Info(u"%s: %s" % (self.__class__.__name__,
-                     _(u"scheduling task for asynchronous execution")),
+            log.Info("%s: %s" % (self.__class__.__name__,
+                     _("scheduling task for asynchronous execution")),
                      log.InfoCode.asynchronous_upload_begin)
 
             return self.__run_asynchronously(fn, params)
 
     def wait(self):
-        u"""
+        """
         Wait for the scheduler to become entirely empty (i.e., all
         tasks having run to completion).
 
@@ -174,8 +174,8 @@ class AsyncScheduler:
         def _waiter():
             return ret
 
-        log.Info(u"%s: %s" % (self.__class__.__name__,
-                 _(u"task completed successfully")),
+        log.Info("%s: %s" % (self.__class__.__name__,
+                 _("task completed successfully")),
                  log.InfoCode.synchronous_upload_done)
 
         return _waiter
@@ -185,19 +185,19 @@ class AsyncScheduler:
 
         def check_pending_failure():
             if self.__failed:
-                log.Info(u"%s: %s" % (self.__class__.__name__,
-                         _(u"a previously scheduled task has failed; "
-                           u"propagating the result immediately")),
+                log.Info("%s: %s" % (self.__class__.__name__,
+                         _("a previously scheduled task has failed; "
+                           "propagating the result immediately")),
                          log.InfoCode.asynchronous_upload_done)
                 self.__failed_waiter()
-                raise AssertionError(u"%s: waiter should have raised an exception; "
-                                     u"this is a bug" % (self.__class__.__name__,))
+                raise AssertionError("%s: waiter should have raised an exception; "
+                                     "this is a bug" % (self.__class__.__name__,))
 
         def wait_for_and_register_launch():
             check_pending_failure()  # raise on fail
             while self.__worker_count >= self.__concurrency or self.__barrier:
                 if self.__worker_count == 0:
-                    assert self.__barrier, u"barrier should be in effect"
+                    assert self.__barrier, "barrier should be in effect"
                     self.__barrier = False
                     self.__cv.notifyAll()
                 else:
@@ -208,8 +208,8 @@ class AsyncScheduler:
                 check_pending_failure()  # raise on fail
 
             self.__worker_count += 1
-            log.Debug(u"%s: %s" % (self.__class__.__name__,
-                                   _(u"active workers = %d") % (self.__worker_count,)))
+            log.Debug("%s: %s" % (self.__class__.__name__,
+                                  _("active workers = %d") % (self.__worker_count,)))
 
         # simply wait for an OK condition to start, then launch our worker. the worker
         # never waits on us, we just wait for them.
@@ -220,7 +220,7 @@ class AsyncScheduler:
         return waiter
 
     def __start_worker(self, caller):
-        u"""
+        """
         Start a new worker.
         """
         def trampoline():
@@ -229,8 +229,8 @@ class AsyncScheduler:
             finally:
                 def complete_worker():
                     self.__worker_count -= 1
-                    log.Debug(u"%s: %s" % (self.__class__.__name__,
-                                           _(u"active workers = %d") % (self.__worker_count,)))
+                    log.Debug("%s: %s" % (self.__class__.__name__,
+                                          _("active workers = %d") % (self.__worker_count,)))
                     self.__cv.notifyAll()
                 with_lock(self.__cv, complete_worker)
 
@@ -249,6 +249,6 @@ class AsyncScheduler:
                         self.__cv.notifyAll()
                 with_lock(self.__cv, _signal_failed)
 
-            log.Info(u"%s: %s" % (self.__class__.__name__,
-                     _(u"task execution done (success: %s)") % succeeded),
+            log.Info("%s: %s" % (self.__class__.__name__,
+                     _("task execution done (success: %s)") % succeeded),
                      log.InfoCode.asynchronous_upload_done)

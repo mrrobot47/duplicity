@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-u"""Create and edit manifest for session contents"""
+"""Create and edit manifest for session contents"""
 
 from future_builtins import filter
 
@@ -32,18 +32,18 @@ from duplicity import util
 
 
 class ManifestError(Exception):
-    u"""
+    """
     Exception raised when problem with manifest
     """
     pass
 
 
 class Manifest:
-    u"""
+    """
     List of volumes and information about each one
     """
     def __init__(self, fh=None):
-        u"""
+        """
         Create blank Manifest
 
         @param fh: fileobj for manifest
@@ -59,7 +59,7 @@ class Manifest:
         self.files_changed = []
 
     def set_dirinfo(self):
-        u"""
+        """
         Set information about directory from globals,
         and write to manifest file.
 
@@ -70,13 +70,13 @@ class Manifest:
         self.local_dirname = globals.local_path.name  # @UndefinedVariable
         if self.fh:
             if self.hostname:
-                self.fh.write(u"Hostname %s\n" % self.hostname)
+                self.fh.write("Hostname %s\n" % self.hostname)
             if self.local_dirname:
-                self.fh.write(u"Localdir %s\n" % Quote(self.local_dirname))
+                self.fh.write("Localdir %s\n" % Quote(self.local_dirname))
         return self
 
     def check_dirinfo(self):
-        u"""
+        """
         Return None if dirinfo is the same, otherwise error message
 
         Does not raise an error message if hostname or local_dirname
@@ -89,41 +89,41 @@ class Manifest:
             return
 
         if self.hostname and self.hostname != globals.hostname:
-            errmsg = _(u"Fatal Error: Backup source host has changed.\n"
-                       u"Current hostname: %s\n"
-                       u"Previous hostname: %s") % (globals.hostname, self.hostname)
+            errmsg = _("Fatal Error: Backup source host has changed.\n"
+                       "Current hostname: %s\n"
+                       "Previous hostname: %s") % (globals.hostname, self.hostname)
             code = log.ErrorCode.hostname_mismatch
-            code_extra = u"%s %s" % (util.escape(globals.hostname), util.escape(self.hostname))
+            code_extra = "%s %s" % (util.escape(globals.hostname), util.escape(self.hostname))
 
         elif (self.local_dirname and self.local_dirname != globals.local_path.name):  # @UndefinedVariable
-            errmsg = _(u"Fatal Error: Backup source directory has changed.\n"
-                       u"Current directory: %s\n"
-                       u"Previous directory: %s") % (globals.local_path.name, self.local_dirname)  # @UndefinedVariable
+            errmsg = _("Fatal Error: Backup source directory has changed.\n"
+                       "Current directory: %s\n"
+                       "Previous directory: %s") % (globals.local_path.name, self.local_dirname)  # @UndefinedVariable
             code = log.ErrorCode.source_dir_mismatch
-            code_extra = u"%s %s" % (util.escape(globals.local_path.name),
-                                     util.escape(self.local_dirname))  # @UndefinedVariable
+            code_extra = "%s %s" % (util.escape(globals.local_path.name),
+                                    util.escape(self.local_dirname))  # @UndefinedVariable
         else:
             return
 
-        log.FatalError(errmsg + u"\n\n" +
-                       _(u"Aborting because you may have accidentally tried to "
-                         u"backup two different data sets to the same remote "
-                         u"location, or using the same archive directory.  If "
-                         u"this is not a mistake, use the "
-                         u"--allow-source-mismatch switch to avoid seeing this "
-                         u"message"), code, code_extra)
+        log.FatalError(errmsg + "\n\n" +
+                       _("Aborting because you may have accidentally tried to "
+                         "backup two different data sets to the same remote "
+                         "location, or using the same archive directory.  If "
+                         "this is not a mistake, use the "
+                         "--allow-source-mismatch switch to avoid seeing this "
+                         "message"), code, code_extra)
 
     def set_files_changed_info(self, files_changed):
         if files_changed:
             self.files_changed = files_changed
 
         if self.fh:
-            self.fh.write(u"Filelist %d\n" % len(self.files_changed))
+            self.fh.write("Filelist %d\n" % len(self.files_changed))
             for fileinfo in self.files_changed:
-                self.fh.write(u"    %-7s  %s\n" % (fileinfo[1], Quote(fileinfo[0])))
+                self.fh.write("    %-7s  %s\n" % (fileinfo[1], Quote(fileinfo[0])))
 
     def add_volume_info(self, vi):
-        u"""
+        """
         Add volume info vi to manifest and write to manifest
 
         @param vi: volume info to add
@@ -134,10 +134,10 @@ class Manifest:
         vol_num = vi.volume_number
         self.volume_info_dict[vol_num] = vi
         if self.fh:
-            self.fh.write(vi.to_string() + u"\n")
+            self.fh.write(vi.to_string() + "\n")
 
     def del_volume_info(self, vol_num):
-        u"""
+        """
         Remove volume vol_num from the manifest
 
         @param vol_num: volume number to delete
@@ -148,87 +148,87 @@ class Manifest:
         try:
             del self.volume_info_dict[vol_num]
         except Exception:
-            raise ManifestError(u"Volume %d not present in manifest" % (vol_num,))
+            raise ManifestError("Volume %d not present in manifest" % (vol_num,))
 
     def to_string(self):
-        u"""
+        """
         Return string version of self (just concatenate vi strings)
 
         @rtype: string
         @return: self in string form
         """
-        result = u""
+        result = ""
         if self.hostname:
-            result += u"Hostname %s\n" % self.hostname
+            result += "Hostname %s\n" % self.hostname
         if self.local_dirname:
-            result += u"Localdir %s\n" % Quote(self.local_dirname)
+            result += "Localdir %s\n" % Quote(self.local_dirname)
 
-        result += u"Filelist %d\n" % len(self.files_changed)
+        result += "Filelist %d\n" % len(self.files_changed)
         for fileinfo in self.files_changed:
-            result += u"    %-7s  %s\n" % (fileinfo[1], Quote(fileinfo[0]))
+            result += "    %-7s  %s\n" % (fileinfo[1], Quote(fileinfo[0]))
 
         vol_num_list = self.volume_info_dict.keys()
         vol_num_list.sort()
 
         def vol_num_to_string(vol_num):
             return self.volume_info_dict[vol_num].to_string()
-        result = u"%s%s\n" % (result,
-                              u"\n".join(map(vol_num_to_string, vol_num_list)))
+        result = "%s%s\n" % (result,
+                             "\n".join(map(vol_num_to_string, vol_num_list)))
         return result
 
     __str__ = to_string
 
     def from_string(self, s):
-        u"""
+        """
         Initialize self from string s, return self
         """
         def get_field(fieldname):
-            u"""
+            """
             Return the value of a field by parsing s, or None if no field
             """
-            m = re.search(u"(^|\\n)%s\\s(.*?)\n" % fieldname, s, re.I)
+            m = re.search("(^|\\n)%s\\s(.*?)\n" % fieldname, s, re.I)
             if not m:
                 return None
             else:
                 return Unquote(m.group(2))
-        self.hostname = get_field(u"hostname")
-        self.local_dirname = get_field(u"localdir")
+        self.hostname = get_field("hostname")
+        self.local_dirname = get_field("localdir")
 
         highest_vol = 0
         latest_vol = 0
-        vi_regexp = re.compile(u"(?:^|\\n)(volume\\s.*(?:\\n.*)*?)(?=\\nvolume\\s|$)", re.I)
+        vi_regexp = re.compile("(?:^|\\n)(volume\\s.*(?:\\n.*)*?)(?=\\nvolume\\s|$)", re.I)
         vi_iterator = vi_regexp.finditer(s)
         for match in vi_iterator:
             vi = VolumeInfo().from_string(match.group(1))
             self.add_volume_info(vi)
             latest_vol = vi.volume_number
             highest_vol = max(highest_vol, latest_vol)
-            log.Debug(_(u"Found manifest volume %s") % latest_vol)
+            log.Debug(_("Found manifest volume %s") % latest_vol)
         # If we restarted after losing some remote volumes, the highest volume
         # seen may be higher than the last volume recorded.  That is, the
         # manifest could contain "vol1, vol2, vol3, vol2."  If so, we don't
         # want to keep vol3's info.
         for i in range(latest_vol + 1, highest_vol + 1):
             self.del_volume_info(i)
-        log.Info(_(u"Found %s volumes in manifest") % latest_vol)
+        log.Info(_("Found %s volumes in manifest") % latest_vol)
 
         # Get file changed list - not needed if --file-changed not present
         filecount = 0
         if globals.file_changed is not None:
-            filelist_regexp = re.compile(u"(^|\\n)filelist\\s([0-9]+)\\n(.*?)(\\nvolume\\s|$)", re.I | re.S)
+            filelist_regexp = re.compile("(^|\\n)filelist\\s([0-9]+)\\n(.*?)(\\nvolume\\s|$)", re.I | re.S)
             match = filelist_regexp.search(s)
             if match:
                 filecount = int(match.group(2))
             if filecount > 0:
                 def parse_fileinfo(line):
                     fileinfo = line.strip().split()
-                    return (fileinfo[0], u''.join(fileinfo[1:]))
+                    return (fileinfo[0], ''.join(fileinfo[1:]))
 
-                self.files_changed = list(map(parse_fileinfo, match.group(3).split(u'\n')))
+                self.files_changed = list(map(parse_fileinfo, match.group(3).split('\n')))
 
             if filecount != len(self.files_changed):
-                log.Error(_(u"Manifest file '%s' is corrupt: File count says %d, File list contains %d" %
-                            (self.fh.base if self.fh else u"", filecount, len(self.files_changed))))
+                log.Error(_("Manifest file '%s' is corrupt: File count says %d, File list contains %d" %
+                            (self.fh.base if self.fh else "", filecount, len(self.files_changed))))
                 self.corrupt_filelist = True
 
         return self
@@ -237,7 +237,7 @@ class Manifest:
         return self.files_changed
 
     def __eq__(self, other):
-        u"""
+        """
         Two manifests are equal if they contain the same volume infos
         """
         vi_list1 = self.volume_info_dict.keys()
@@ -246,39 +246,39 @@ class Manifest:
         vi_list2.sort()
 
         if vi_list1 != vi_list2:
-            log.Notice(_(u"Manifests not equal because different volume numbers"))
+            log.Notice(_("Manifests not equal because different volume numbers"))
             return False
 
         for i in range(len(vi_list1)):
             if not vi_list1[i] == vi_list2[i]:
-                log.Notice(_(u"Manifests not equal because volume lists differ"))
+                log.Notice(_("Manifests not equal because volume lists differ"))
                 return False
 
         if (self.hostname != other.hostname or
                 self.local_dirname != other.local_dirname):
-            log.Notice(_(u"Manifests not equal because hosts or directories differ"))
+            log.Notice(_("Manifests not equal because hosts or directories differ"))
             return False
 
         return True
 
     def __ne__(self, other):
-        u"""
+        """
         Defines !=.  Not doing this always leads to annoying bugs...
         """
         return not self.__eq__(other)
 
     def write_to_path(self, path):
-        u"""
+        """
         Write string version of manifest to given path
         """
         assert not path.exists()
-        fout = path.open(u"wb")
+        fout = path.open("wb")
         fout.write(self.to_string())
         assert not fout.close()
         path.setdata()
 
     def get_containing_volumes(self, index_prefix):
-        u"""
+        """
         Return list of volume numbers that may contain index_prefix
         """
         return filter(lambda vol_num:
@@ -287,18 +287,18 @@ class Manifest:
 
 
 class VolumeInfoError(Exception):
-    u"""
+    """
     Raised when there is a problem initializing a VolumeInfo from string
     """
     pass
 
 
 class VolumeInfo:
-    u"""
+    """
     Information about a single volume
     """
     def __init__(self):
-        u"""VolumeInfo initializer"""
+        """VolumeInfo initializer"""
         self.volume_number = None
         self.start_index = None
         self.start_block = None
@@ -309,7 +309,7 @@ class VolumeInfo:
     def set_info(self, vol_number,
                  start_index, start_block,
                  end_index, end_block):
-        u"""
+        """
         Set essential VolumeInfo information, return self
 
         Call with starting and ending paths stored in the volume.  If
@@ -325,13 +325,13 @@ class VolumeInfo:
         return self
 
     def set_hash(self, hash_name, data):
-        u"""
+        """
         Set the value of hash hash_name (e.g. "MD5") to data
         """
         self.hashes[hash_name] = data
 
     def get_best_hash(self):
-        u"""
+        """
         Return pair (hash_type, hash_data)
 
         SHA1 is the best hash, and MD5 is the second best hash.  None
@@ -340,59 +340,59 @@ class VolumeInfo:
         if not self.hashes:
             return None
         try:
-            return (u"SHA1", self.hashes[u'SHA1'])
+            return ("SHA1", self.hashes['SHA1'])
         except KeyError:
             pass
         try:
-            return (u"MD5", self.hashes[u'MD5'])
+            return ("MD5", self.hashes['MD5'])
         except KeyError:
             pass
         return self.hashes.items()[0]
 
     def to_string(self):
-        u"""
+        """
         Return nicely formatted string reporting all information
         """
         def index_to_string(index):
-            u"""Return printable version of index without any whitespace"""
+            """Return printable version of index without any whitespace"""
             if index:
-                s = u"/".join(index)
+                s = "/".join(index)
                 return Quote(s)
             else:
-                return u"."
+                return "."
 
-        slist = [u"Volume %d:" % self.volume_number]
-        whitespace = u"    "
-        slist.append(u"%sStartingPath   %s %s" %
-                     (whitespace, index_to_string(self.start_index), (self.start_block or u" ")))
-        slist.append(u"%sEndingPath     %s %s" %
-                     (whitespace, index_to_string(self.end_index), (self.end_block or u" ")))
+        slist = ["Volume %d:" % self.volume_number]
+        whitespace = "    "
+        slist.append("%sStartingPath   %s %s" %
+                     (whitespace, index_to_string(self.start_index), (self.start_block or " ")))
+        slist.append("%sEndingPath     %s %s" %
+                     (whitespace, index_to_string(self.end_index), (self.end_block or " ")))
         for key in self.hashes:
-            slist.append(u"%sHash %s %s" %
+            slist.append("%sHash %s %s" %
                          (whitespace, key, self.hashes[key]))
-        return u"\n".join(slist)
+        return "\n".join(slist)
 
     __str__ = to_string
 
     def from_string(self, s):
-        u"""
+        """
         Initialize self from string s as created by to_string
         """
         def string_to_index(s):
-            u"""
+            """
             Return tuple index from string
             """
             s = Unquote(s)
-            if s == u".":
+            if s == ".":
                 return ()
-            return tuple(s.split(u"/"))
+            return tuple(s.split("/"))
 
-        linelist = s.strip().split(u"\n")
+        linelist = s.strip().split("\n")
 
         # Set volume number
-        m = re.search(u"^Volume ([0-9]+):", linelist[0], re.I)
+        m = re.search("^Volume ([0-9]+):", linelist[0], re.I)
         if not m:
-            raise VolumeInfoError(u"Bad first line '%s'" % (linelist[0],))
+            raise VolumeInfoError("Bad first line '%s'" % (linelist[0],))
         self.volume_number = int(m.group(1))
 
         # Set other fields
@@ -402,61 +402,61 @@ class VolumeInfo:
             line_split = line.strip().split()
             field_name = line_split[0].lower()
             other_fields = line_split[1:]
-            if field_name == u"Volume":
-                log.Warn(_(u"Warning, found extra Volume identifier"))
+            if field_name == "Volume":
+                log.Warn(_("Warning, found extra Volume identifier"))
                 break
-            elif field_name == u"startingpath":
+            elif field_name == "startingpath":
                 self.start_index = string_to_index(other_fields[0])
                 if len(other_fields) > 1:
                     self.start_block = int(other_fields[1])
                 else:
                     self.start_block = None
-            elif field_name == u"endingpath":
+            elif field_name == "endingpath":
                 self.end_index = string_to_index(other_fields[0])
                 if len(other_fields) > 1:
                     self.end_block = int(other_fields[1])
                 else:
                     self.end_block = None
-            elif field_name == u"hash":
+            elif field_name == "hash":
                 self.set_hash(other_fields[0], other_fields[1])
 
         if self.start_index is None or self.end_index is None:
-            raise VolumeInfoError(u"Start or end index not set")
+            raise VolumeInfoError("Start or end index not set")
         return self
 
     def __eq__(self, other):
-        u"""
+        """
         Used in test suite
         """
         if not isinstance(other, VolumeInfo):
-            log.Notice(_(u"Other is not VolumeInfo"))
+            log.Notice(_("Other is not VolumeInfo"))
             return None
         if self.volume_number != other.volume_number:
-            log.Notice(_(u"Volume numbers don't match"))
+            log.Notice(_("Volume numbers don't match"))
             return None
         if self.start_index != other.start_index:
-            log.Notice(_(u"start_indicies don't match"))
+            log.Notice(_("start_indicies don't match"))
             return None
         if self.end_index != other.end_index:
-            log.Notice(_(u"end_index don't match"))
+            log.Notice(_("end_index don't match"))
             return None
         hash_list1 = self.hashes.items()
         hash_list1.sort()
         hash_list2 = other.hashes.items()
         hash_list2.sort()
         if hash_list1 != hash_list2:
-            log.Notice(_(u"Hashes don't match"))
+            log.Notice(_("Hashes don't match"))
             return None
         return 1
 
     def __ne__(self, other):
-        u"""
+        """
         Defines !=
         """
         return not self.__eq__(other)
 
     def contains(self, index_prefix, recursive=1):
-        u"""
+        """
         Return true if volume might contain index
 
         If recursive is true, then return true if any index starting
@@ -471,11 +471,11 @@ class VolumeInfo:
             return self.start_index <= index_prefix <= self.end_index
 
 
-nonnormal_char_re = re.compile(u"(\\s|[\\\\\"'])")
+nonnormal_char_re = re.compile("(\\s|[\\\\\"'])")
 
 
 def Quote(s):
-    u"""
+    """
     Return quoted version of s safe to put in a manifest or volume info
     """
     if not nonnormal_char_re.search(s):
@@ -483,29 +483,29 @@ def Quote(s):
     slist = []
     for char in s:
         if nonnormal_char_re.search(char):
-            slist.append(u"\\x%02x" % ord(char))
+            slist.append("\\x%02x" % ord(char))
         else:
             slist.append(char)
-    return u'"%s"' % u"".join(slist)
+    return '"%s"' % "".join(slist)
 
 
 def Unquote(quoted_string):
-    u"""
+    """
     Return original string from quoted_string produced by above
     """
-    if not quoted_string[0] == u'"' or quoted_string[0] == u"'":
+    if not quoted_string[0] == '"' or quoted_string[0] == "'":
         return quoted_string
     assert quoted_string[0] == quoted_string[-1]
     return_list = []
     i = 1  # skip initial char
     while i < len(quoted_string) - 1:
         char = quoted_string[i]
-        if char == u"\\":
+        if char == "\\":
             # quoted section
-            assert quoted_string[i + 1] == u"x"
+            assert quoted_string[i + 1] == "x"
             return_list.append(chr(int(quoted_string[i + 2:i + 4], 16)))
             i += 4
         else:
             return_list.append(char)
             i += 1
-    return u"".join(return_list)
+    return "".join(return_list)

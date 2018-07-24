@@ -28,7 +28,7 @@ tmp_file_index = 1
 
 
 def check_common_error(error_handler, function, args=()):
-    u"""Apply function to args, if error, run error_handler on exception
+    """Apply function to args, if error, run error_handler on exception
 
     This only catches certain exceptions which seem innocent
     enough.
@@ -47,9 +47,9 @@ def check_common_error(error_handler, function, args=()):
         if (not isinstance(exc, EnvironmentError) or
             ((exc[0] in errno.errorcode) and
              errno.errorcode[exc[0]] in
-             [u'EPERM', u'ENOENT', u'EACCES', u'EBUSY', u'EEXIST',
-              u'ENOTDIR', u'ENAMETOOLONG', u'EINTR', u'ENOTEMPTY',
-              u'EIO', u'ETXTBSY', u'ESRCH', u'EINVAL'])):
+             ['EPERM', 'ENOENT', 'EACCES', 'EBUSY', 'EEXIST',
+              'ENOTDIR', 'ENAMETOOLONG', 'EINTR', 'ENOTEMPTY',
+              'EIO', 'ETXTBSY', 'ESRCH', 'EINVAL'])):
             # Log.exception()
             if error_handler:
                 return error_handler(exc, *args)
@@ -59,9 +59,9 @@ def check_common_error(error_handler, function, args=()):
 
 
 def listpath(path):
-    u"""Like path.listdir() but return [] if error, and sort results"""
+    """Like path.listdir() but return [] if error, and sort results"""
     def error_handler(exc):
-        log.Warn(_(u"Error listing directory %s") % path.uc_name)
+        log.Warn(_("Error listing directory %s") % path.uc_name)
         return []
     dir_listing = check_common_error(error_handler, path.listdir)
     dir_listing.sort()

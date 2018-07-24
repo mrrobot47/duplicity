@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2018-07-23 11:22-0500\n"
+"POT-Creation-Date: 2018-07-24 06:40-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -931,12 +931,12 @@ msgstr ""
 msgid "Patching %s"
 msgstr ""
 
-#: ../duplicity/patchdir.py:529
+#: ../duplicity/patchdir.py:530
 #, python-format
 msgid "Error '%s' patching %s"
 msgstr ""
 
-#: ../duplicity/patchdir.py:604
+#: ../duplicity/patchdir.py:605
 #, python-format
 msgid "Writing %s of type %s"
 msgstr ""
