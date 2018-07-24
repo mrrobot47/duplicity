@@ -29,27 +29,27 @@ from duplicity import log
 
 _testing_dir = os.path.dirname(os.path.abspath(__file__))
 _top_dir = os.path.dirname(_testing_dir)
-_overrides_dir = os.path.join(_testing_dir, 'overrides')
-_bin_dir = os.path.join(_testing_dir, 'overrides', 'bin')
+_overrides_dir = os.path.join(_testing_dir, u'overrides')
+_bin_dir = os.path.join(_testing_dir, u'overrides', u'bin')
 
 # Adjust python path for duplicity and override modules
 sys.path = [_overrides_dir, _top_dir, _bin_dir] + sys.path
 
 # Also set PYTHONPATH for any subprocesses
-os.environ['PYTHONPATH'] = _overrides_dir + ":" + _top_dir + ":" + os.environ.get('PYTHONPATH', '')
+os.environ[u'PYTHONPATH'] = _overrides_dir + u":" + _top_dir + u":" + os.environ.get(u'PYTHONPATH', u'')
 
 # And PATH for any subprocesses
-os.environ['PATH'] = _bin_dir + ":" + os.environ.get('PATH', '')
+os.environ[u'PATH'] = _bin_dir + u":" + os.environ.get(u'PATH', u'')
 
 # Now set some variables that help standardize test behavior
-os.environ['LANG'] = ''
-os.environ['GNUPGHOME'] = os.path.join(_testing_dir, 'gnupg')
+os.environ[u'LANG'] = u''
+os.environ[u'GNUPGHOME'] = os.path.join(_testing_dir, u'gnupg')
 
 # bzr does not honor perms so fix the perms and avoid annoying error
-os.system("chmod 700 %s" % os.path.join(_testing_dir, 'gnupg'))
+os.system(u"chmod 700 %s" % os.path.join(_testing_dir, u'gnupg'))
 
 # Standardize time
-os.environ['TZ'] = 'US/Central'
+os.environ[u'TZ'] = u'US/Central'
 time.tzset()
 
 
@@ -70,7 +70,7 @@ class DuplicityTestCase(unittest.TestCase):
         # TODO: remove these lines
         log.setup()
         log.setverbosity(log.WARNING)
-        self.set_global('print_statistics', 0)
+        self.set_global(u'print_statistics', 0)
         backend.import_backends()
 
         # Have all file references in tests relative to our testing dir
@@ -81,13 +81,13 @@ class DuplicityTestCase(unittest.TestCase):
             self._update_env(key, self.savedEnviron[key])
         for key in self.savedGlobals:
             setattr(globals, key, self.savedGlobals[key])
-        assert not os.system("rm -rf testfiles")
+        assert not os.system(u"rm -rf testfiles")
         super(DuplicityTestCase, self).tearDown()
 
     def unpack_testfiles(self):
-        assert not os.system("rm -rf testfiles")
-        assert not os.system("tar xzf testfiles.tar.gz > /dev/null 2>&1")
-        assert not os.system("mkdir testfiles/output testfiles/cache")
+        assert not os.system(u"rm -rf testfiles")
+        assert not os.system(u"tar xzf testfiles.tar.gz > /dev/null 2>&1")
+        assert not os.system(u"mkdir testfiles/output testfiles/cache")
 
     def _update_env(self, key, value):
         if value is not None:
