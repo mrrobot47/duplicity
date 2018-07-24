@@ -1,5 +1,5 @@
-testing\.unit\.test\_gpginterface module
-========================================
+testing.unit.test\_gpginterface module
+======================================
 
 .. automodule:: testing.unit.test_gpginterface
     :members:

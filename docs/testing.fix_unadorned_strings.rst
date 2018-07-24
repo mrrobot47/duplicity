@@ -1,7 +1,7 @@
-duplicity.backends.swiftbackend module
+testing.fix\_unadorned\_strings module
 ======================================
 
-.. automodule:: duplicity.backends.swiftbackend
+.. automodule:: testing.fix_unadorned_strings
     :members:
     :undoc-members:
     :show-inheritance:

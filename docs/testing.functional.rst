@@ -1,5 +1,5 @@
-testing\.functional package
-===========================
+testing.functional package
+==========================
 
 Submodules
 ----------

@@ -1,5 +1,5 @@
-duplicity\.dup\_time module
-===========================
+duplicity.dup\_time module
+==========================
 
 .. automodule:: duplicity.dup_time
     :members:

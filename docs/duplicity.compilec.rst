@@ -1,5 +1,5 @@
-duplicity\.compilec module
-==========================
+duplicity.compilec module
+=========================
 
 .. automodule:: duplicity.compilec
     :members:

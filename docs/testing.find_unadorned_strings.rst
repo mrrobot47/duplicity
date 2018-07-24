@@ -1,7 +1,7 @@
-testing.functional.test\_cleanup module
+testing.find\_unadorned\_strings module
 =======================================
 
-.. automodule:: testing.functional.test_cleanup
+.. automodule:: testing.find_unadorned_strings
     :members:
     :undoc-members:
     :show-inheritance:

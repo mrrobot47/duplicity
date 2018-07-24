@@ -1,5 +1,5 @@
-duplicity\.cached\_ops module
-=============================
+duplicity.cached\_ops module
+============================
 
 .. automodule:: duplicity.cached_ops
     :members:

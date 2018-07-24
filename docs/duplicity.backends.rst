@@ -1,5 +1,5 @@
-duplicity\.backends package
-===========================
+duplicity.backends package
+==========================
 
 Subpackages
 -----------
@@ -13,7 +13,6 @@ Submodules
 
 .. toctree::
 
-   duplicity.backends.acdclibackend
    duplicity.backends.adbackend
    duplicity.backends.azurebackend
    duplicity.backends.b2backend

@@ -1,5 +1,5 @@
-testing\.unit\.test\_backend\_instance module
-=============================================
+testing.unit.test\_backend\_instance module
+===========================================
 
 .. automodule:: testing.unit.test_backend_instance
     :members:

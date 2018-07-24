@@ -1,5 +1,5 @@
-duplicity\.manifest module
-==========================
+duplicity.manifest module
+=========================
 
 .. automodule:: duplicity.manifest
     :members:

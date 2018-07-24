@@ -1,5 +1,5 @@
-duplicity\.backends\.onedrivebackend module
-===========================================
+duplicity.backends.onedrivebackend module
+=========================================
 
 .. automodule:: duplicity.backends.onedrivebackend
     :members:

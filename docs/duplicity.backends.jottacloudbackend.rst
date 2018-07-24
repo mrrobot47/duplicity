@@ -1,5 +1,5 @@
-duplicity\.backends\.jottacloudbackend module
-=============================================
+duplicity.backends.jottacloudbackend module
+===========================================
 
 .. automodule:: duplicity.backends.jottacloudbackend
     :members:

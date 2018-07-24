@@ -1,5 +1,5 @@
-duplicity\.backends\.pcabackend module
-======================================
+duplicity.backends.pcabackend module
+====================================
 
 .. automodule:: duplicity.backends.pcabackend
     :members:

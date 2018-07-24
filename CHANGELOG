@@ -371,7 +371,8 @@ New in v0.8.00 (2016/07/??)
   - Fix unadorned strings to unicode in bin/duplicity and bin/rdiffdir
   - Add import for __future__.print_function to find_unadorned_strings.py
 * Fixed unadorned strings to unicode in duplicity/backends/*
-  - Some fixup due to shifting indenataion not matching PEP8.
+  - Some fixup due to shifting indentataion not matching PEP8.
+* Reverted back to rev 1317 and reimplemented revs 1319 to 1322
 
 
 New in v0.7.08 (2016/07/02)

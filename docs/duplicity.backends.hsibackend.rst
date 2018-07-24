@@ -1,5 +1,5 @@
-duplicity\.backends\.hsibackend module
-======================================
+duplicity.backends.hsibackend module
+====================================
 
 .. automodule:: duplicity.backends.hsibackend
     :members:

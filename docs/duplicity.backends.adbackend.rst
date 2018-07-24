@@ -1,5 +1,5 @@
-duplicity\.backends\.adbackend module
-=====================================
+duplicity.backends.adbackend module
+===================================
 
 .. automodule:: duplicity.backends.adbackend
     :members:

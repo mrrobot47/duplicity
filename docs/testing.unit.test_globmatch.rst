@@ -1,5 +1,5 @@
-testing\.unit\.test\_globmatch module
-=====================================
+testing.unit.test\_globmatch module
+===================================
 
 .. automodule:: testing.unit.test_globmatch
     :members:

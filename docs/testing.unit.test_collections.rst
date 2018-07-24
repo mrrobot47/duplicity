@@ -1,5 +1,5 @@
-testing\.unit\.test\_collections module
-=======================================
+testing.unit.test\_collections module
+=====================================
 
 .. automodule:: testing.unit.test_collections
     :members:

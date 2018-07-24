@@ -1,5 +1,5 @@
-testing\.unit\.test\_tempdir module
-===================================
+testing.unit.test\_tempdir module
+=================================
 
 .. automodule:: testing.unit.test_tempdir
     :members:
