@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2018-07-23 11:22-0500\n"
+"POT-Creation-Date: 2018-07-24 15:52-0500\n"
 "PO-Revision-Date: 2018-03-08 01:07+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-07-24 06:02+0000\n"
+"X-Launchpad-Export-Date: 2018-07-25 05:56+0000\n"
 "X-Generator: Launchpad (build 18730)\n"
 
 #: ../bin/duplicity:122
@@ -1001,12 +1001,12 @@ msgstr "task execution done (success: %s)"
 msgid "Patching %s"
 msgstr "Patching %s"
 
-#: ../duplicity/patchdir.py:529
+#: ../duplicity/patchdir.py:530
 #, python-format
 msgid "Error '%s' patching %s"
 msgstr "Error '%s' patching %s"
 
-#: ../duplicity/patchdir.py:604
+#: ../duplicity/patchdir.py:605
 #, python-format
 msgid "Writing %s of type %s"
 msgstr "Writing %s of type %s"
