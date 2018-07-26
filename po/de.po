@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-07-25 05:56+0000\n"
+"X-Launchpad-Export-Date: 2018-07-26 05:56+0000\n"
 "X-Generator: Launchpad (build 18730)\n"
 
 #: ../bin/duplicity:122
@@ -1634,7 +1634,7 @@ msgstr "Fehlendes Verzeichnis »%s« wird erstellt"
 #: ../duplicity/backends/webdavbackend.py:364
 #, python-format
 msgid "WebDAV MKCOL %s failed: %s %s"
-msgstr ""
+msgstr "WebDAV MKCOL %s fehlgeschlagen: %s %s"
 
 #: ../duplicity/backends/webdavbackend.py:377
 #, python-format
@@ -1644,17 +1644,17 @@ msgstr ""
 #: ../duplicity/backends/webdavbackend.py:422
 #, python-format
 msgid "WebDAV GET Bad status code %s reason %s."
-msgstr ""
+msgstr "WebDAV GET Falscher Statuscode %s Grund %s."
 
 #: ../duplicity/backends/webdavbackend.py:444
 #, python-format
 msgid "WebDAV PUT Bad status code %s reason %s."
-msgstr ""
+msgstr "WebDAV PUT Falscher Statuscode %s Grund %s."
 
 #: ../duplicity/backends/webdavbackend.py:464
 #, python-format
 msgid "WebDAV DEL Bad status code %s reason %s."
-msgstr ""
+msgstr "WebDAV DEL Falscher Statuscode %s Grund %s."
 
 #: ../duplicity/librsync.py:184
 msgid ""
