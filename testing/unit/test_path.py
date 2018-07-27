@@ -28,15 +28,15 @@ from . import UnitTestCase
 
 
 class PathTest(UnitTestCase):
-    """Test basic path functions"""
+    u"""Test basic path functions"""
     def setUp(self):
         super(PathTest, self).setUp()
         self.unpack_testfiles()
 
     def test_deltree(self):
-        """Test deleting a tree"""
-        assert not os.system("cp -pR testfiles/deltree testfiles/output")
-        p = Path("testfiles/output")
+        u"""Test deleting a tree"""
+        assert not os.system(u"cp -pR testfiles/deltree testfiles/output")
+        p = Path(u"testfiles/output")
         assert p.isdir()
         p.deltree()
         assert not p.type, p.type
@@ -50,45 +50,45 @@ class PathTest(UnitTestCase):
     #    assert not Path("testfiles/dir1").compare_recursive(Path("testfiles/dir2"), 1)
 
     def test_quote(self):
-        """Test path quoting"""
-        p = Path("hello")
-        assert p.quote() == '"hello"'
-        assert p.quote("\\") == '"\\\\"', p.quote("\\")
-        assert p.quote("$HELLO") == '"\\$HELLO"'
+        u"""Test path quoting"""
+        p = Path(u"hello")
+        assert p.quote() == u'"hello"'
+        assert p.quote(u"\\") == u'"\\\\"', p.quote(u"\\")
+        assert p.quote(u"$HELLO") == u'"\\$HELLO"'
 
     def test_unquote(self):
-        """Test path unquoting"""
-        p = Path("foo")  # just to provide unquote function
+        u"""Test path unquoting"""
+        p = Path(u"foo")  # just to provide unquote function
 
         def t(s):
-            """Run test on string s"""
+            u"""Run test on string s"""
             quoted_version = p.quote(s)
             unquoted = p.unquote(quoted_version)
             assert unquoted == s, (unquoted, s)
 
-        t("\\")
-        t("$HELLO")
-        t(" aoe aoe \\ \n`")
+        t(u"\\")
+        t(u"$HELLO")
+        t(u" aoe aoe \\ \n`")
 
     def test_canonical(self):
-        """Test getting canonical version of path"""
-        c = Path(".").get_canonical()
-        assert c == ".", c
+        u"""Test getting canonical version of path"""
+        c = Path(u".").get_canonical()
+        assert c == u".", c
 
-        c = Path("//foo/bar/./").get_canonical()
-        assert c == "/foo/bar", c
+        c = Path(u"//foo/bar/./").get_canonical()
+        assert c == u"/foo/bar", c
 
     def test_compare_verbose(self):
-        """Run compare_verbose on a few files"""
-        vft = Path("testfiles/various_file_types")
+        u"""Run compare_verbose on a few files"""
+        vft = Path(u"testfiles/various_file_types")
         assert vft.compare_verbose(vft)
-        reg_file = vft.append("regular_file")
+        reg_file = vft.append(u"regular_file")
         assert not vft.compare_verbose(reg_file)
         assert reg_file.compare_verbose(reg_file)
-        file2 = vft.append("executable")
+        file2 = vft.append(u"executable")
         assert not file2.compare_verbose(reg_file)
         assert file2.compare_verbose(file2)
 
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()

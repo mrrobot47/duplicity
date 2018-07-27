@@ -29,5 +29,5 @@ class TarfileTest(UnitTestCase):
         self.assertTrue(tarfile.grp is cached_ops)
         self.assertTrue(tarfile.pwd is cached_ops)
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()

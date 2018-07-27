@@ -260,10 +260,10 @@ def tzdtoseconds(tzd):
 
 def cmp(time1, time2):
     """Compare time1 and time2 and return -1, 0, or 1"""
-    if isinstance(time1, types.StringType):
+    if isinstance(time1, types.StringTypes):
         time1 = stringtotime(time1)
         assert time1 is not None
-    if isinstance(time2, types.StringType):
+    if isinstance(time2, types.StringTypes):
         time2 = stringtotime(time2)
         assert time2 is not None
 

@@ -31,108 +31,108 @@ from . import UnitTestCase
 
 
 class ParsedUrlTest(UnitTestCase):
-    """Test the ParsedUrl class"""
+    u"""Test the ParsedUrl class"""
     def test_basic(self):
-        """Test various url strings"""
-        pu = duplicity.backend.ParsedUrl("scp://ben@foo.bar:1234/a/b")
-        assert pu.scheme == "scp", pu.scheme
-        assert pu.netloc == "ben@foo.bar:1234", pu.netloc
-        assert pu.path == "/a/b", pu.path
-        assert pu.username == "ben", pu.username
+        u"""Test various url strings"""
+        pu = duplicity.backend.ParsedUrl(u"scp://ben@foo.bar:1234/a/b")
+        assert pu.scheme == u"scp", pu.scheme
+        assert pu.netloc == u"ben@foo.bar:1234", pu.netloc
+        assert pu.path == u"/a/b", pu.path
+        assert pu.username == u"ben", pu.username
         assert pu.port == 1234, pu.port
-        assert pu.hostname == "foo.bar", pu.hostname
+        assert pu.hostname == u"foo.bar", pu.hostname
 
-        pu = duplicity.backend.ParsedUrl("ftp://foo.bar:1234/")
-        assert pu.scheme == "ftp", pu.scheme
-        assert pu.netloc == "foo.bar:1234", pu.netloc
-        assert pu.path == "/", pu.path
+        pu = duplicity.backend.ParsedUrl(u"ftp://foo.bar:1234/")
+        assert pu.scheme == u"ftp", pu.scheme
+        assert pu.netloc == u"foo.bar:1234", pu.netloc
+        assert pu.path == u"/", pu.path
         assert pu.username is None, pu.username
         assert pu.port == 1234, pu.port
-        assert pu.hostname == "foo.bar", pu.hostname
+        assert pu.hostname == u"foo.bar", pu.hostname
 
-        pu = duplicity.backend.ParsedUrl("file:///home")
-        assert pu.scheme == "file", pu.scheme
-        assert pu.netloc == "", pu.netloc
-        assert pu.path == "///home", pu.path
+        pu = duplicity.backend.ParsedUrl(u"file:///home")
+        assert pu.scheme == u"file", pu.scheme
+        assert pu.netloc == u"", pu.netloc
+        assert pu.path == u"///home", pu.path
         assert pu.username is None, pu.username
         assert pu.port is None, pu.port
 
-        pu = duplicity.backend.ParsedUrl("file://home")
-        assert pu.scheme == "file", pu.scheme
-        assert pu.netloc == "", pu.netloc
-        assert pu.path == "//home", pu.path
+        pu = duplicity.backend.ParsedUrl(u"file://home")
+        assert pu.scheme == u"file", pu.scheme
+        assert pu.netloc == u"", pu.netloc
+        assert pu.path == u"//home", pu.path
         assert pu.username is None, pu.username
         assert pu.port is None, pu.port
 
-        pu = duplicity.backend.ParsedUrl("ftp://foo@bar:pass@example.com:123/home")
-        assert pu.scheme == "ftp", pu.scheme
-        assert pu.netloc == "foo@bar:pass@example.com:123", pu.netloc
-        assert pu.hostname == "example.com", pu.hostname
-        assert pu.path == "/home", pu.path
-        assert pu.username == "foo@bar", pu.username
-        assert pu.password == "pass", pu.password
+        pu = duplicity.backend.ParsedUrl(u"ftp://foo@bar:pass@example.com:123/home")
+        assert pu.scheme == u"ftp", pu.scheme
+        assert pu.netloc == u"foo@bar:pass@example.com:123", pu.netloc
+        assert pu.hostname == u"example.com", pu.hostname
+        assert pu.path == u"/home", pu.path
+        assert pu.username == u"foo@bar", pu.username
+        assert pu.password == u"pass", pu.password
         assert pu.port == 123, pu.port
 
-        pu = duplicity.backend.ParsedUrl("ftp://foo%40bar:pass@example.com:123/home")
-        assert pu.scheme == "ftp", pu.scheme
-        assert pu.netloc == "foo%40bar:pass@example.com:123", pu.netloc
-        assert pu.hostname == "example.com", pu.hostname
-        assert pu.path == "/home", pu.path
-        assert pu.username == "foo@bar", pu.username
-        assert pu.password == "pass", pu.password
+        pu = duplicity.backend.ParsedUrl(u"ftp://foo%40bar:pass@example.com:123/home")
+        assert pu.scheme == u"ftp", pu.scheme
+        assert pu.netloc == u"foo%40bar:pass@example.com:123", pu.netloc
+        assert pu.hostname == u"example.com", pu.hostname
+        assert pu.path == u"/home", pu.path
+        assert pu.username == u"foo@bar", pu.username
+        assert pu.password == u"pass", pu.password
         assert pu.port == 123, pu.port
 
-        pu = duplicity.backend.ParsedUrl("imap://foo@bar:pass@example.com:123/home")
-        assert pu.scheme == "imap", pu.scheme
-        assert pu.netloc == "foo@bar:pass@example.com:123", pu.netloc
-        assert pu.hostname == "example.com", pu.hostname
-        assert pu.path == "/home", pu.path
-        assert pu.username == "foo@bar", pu.username
-        assert pu.password == "pass", pu.password
+        pu = duplicity.backend.ParsedUrl(u"imap://foo@bar:pass@example.com:123/home")
+        assert pu.scheme == u"imap", pu.scheme
+        assert pu.netloc == u"foo@bar:pass@example.com:123", pu.netloc
+        assert pu.hostname == u"example.com", pu.hostname
+        assert pu.path == u"/home", pu.path
+        assert pu.username == u"foo@bar", pu.username
+        assert pu.password == u"pass", pu.password
         assert pu.port == 123, pu.port
 
-        pu = duplicity.backend.ParsedUrl("imap://foo@bar@example.com:123/home")
-        assert pu.scheme == "imap", pu.scheme
-        assert pu.netloc == "foo@bar@example.com:123", pu.netloc
-        assert pu.hostname == "example.com", pu.hostname
-        assert pu.path == "/home", pu.path
-        assert pu.username == "foo@bar", pu.username
+        pu = duplicity.backend.ParsedUrl(u"imap://foo@bar@example.com:123/home")
+        assert pu.scheme == u"imap", pu.scheme
+        assert pu.netloc == u"foo@bar@example.com:123", pu.netloc
+        assert pu.hostname == u"example.com", pu.hostname
+        assert pu.path == u"/home", pu.path
+        assert pu.username == u"foo@bar", pu.username
         assert pu.password is None, pu.password
         assert pu.port == 123, pu.port
 
-        pu = duplicity.backend.ParsedUrl("imap://foo@bar@example.com/home")
-        assert pu.scheme == "imap", pu.scheme
-        assert pu.netloc == "foo@bar@example.com", pu.netloc
-        assert pu.hostname == "example.com", pu.hostname
-        assert pu.path == "/home", pu.path
-        assert pu.username == "foo@bar", pu.username
-        assert pu.password is None, pu.password
-        assert pu.port is None, pu.port
-
-        pu = duplicity.backend.ParsedUrl("imap://foo@bar.com@example.com/home")
-        assert pu.scheme == "imap", pu.scheme
-        assert pu.netloc == "foo@bar.com@example.com", pu.netloc
-        assert pu.hostname == "example.com", pu.hostname
-        assert pu.path == "/home", pu.path
-        assert pu.username == "foo@bar.com", pu.username
+        pu = duplicity.backend.ParsedUrl(u"imap://foo@bar@example.com/home")
+        assert pu.scheme == u"imap", pu.scheme
+        assert pu.netloc == u"foo@bar@example.com", pu.netloc
+        assert pu.hostname == u"example.com", pu.hostname
+        assert pu.path == u"/home", pu.path
+        assert pu.username == u"foo@bar", pu.username
         assert pu.password is None, pu.password
         assert pu.port is None, pu.port
 
-        pu = duplicity.backend.ParsedUrl("imap://foo%40bar.com@example.com/home")
-        assert pu.scheme == "imap", pu.scheme
-        assert pu.netloc == "foo%40bar.com@example.com", pu.netloc
-        assert pu.hostname == "example.com", pu.hostname
-        assert pu.path == "/home", pu.path
-        assert pu.username == "foo@bar.com", pu.username
+        pu = duplicity.backend.ParsedUrl(u"imap://foo@bar.com@example.com/home")
+        assert pu.scheme == u"imap", pu.scheme
+        assert pu.netloc == u"foo@bar.com@example.com", pu.netloc
+        assert pu.hostname == u"example.com", pu.hostname
+        assert pu.path == u"/home", pu.path
+        assert pu.username == u"foo@bar.com", pu.username
+        assert pu.password is None, pu.password
+        assert pu.port is None, pu.port
+
+        pu = duplicity.backend.ParsedUrl(u"imap://foo%40bar.com@example.com/home")
+        assert pu.scheme == u"imap", pu.scheme
+        assert pu.netloc == u"foo%40bar.com@example.com", pu.netloc
+        assert pu.hostname == u"example.com", pu.hostname
+        assert pu.path == u"/home", pu.path
+        assert pu.username == u"foo@bar.com", pu.username
         assert pu.password is None, pu.password
         assert pu.port is None, pu.port
 
     def test_errors(self):
-        """Test various url errors"""
+        u"""Test various url errors"""
         self.assertRaises(InvalidBackendURL, duplicity.backend.ParsedUrl,
-                          "file:path")  # no relative paths for non-netloc schemes
+                          u"file:path")  # no relative paths for non-netloc schemes
         self.assertRaises(UnsupportedBackendScheme, duplicity.backend.get_backend,
-                          "ssh://foo@bar:pass@example.com/home")
+                          u"ssh://foo@bar:pass@example.com/home")
 
 
 class BackendWrapperTest(UnitTestCase):
@@ -142,11 +142,11 @@ class BackendWrapperTest(UnitTestCase):
         self.mock = mock.MagicMock()
         self.backend = duplicity.backend.BackendWrapper(self.mock)
         self.local = mock.MagicMock()
-        self.remote = 'remote'
+        self.remote = u'remote'
 
-    @mock.patch('sys.exit')
+    @mock.patch(u'sys.exit')
     def test_default_error_exit(self, exit_mock):
-        self.set_global('num_retries', 1)
+        self.set_global(u'num_retries', 1)
         try:
             del self.mock._error_code
         except:
@@ -157,26 +157,26 @@ class BackendWrapperTest(UnitTestCase):
         self.backend.put(self.local, self.remote)
         exit_mock.assert_called_once_with(50)
 
-    @mock.patch('sys.exit')
+    @mock.patch(u'sys.exit')
     def test_translates_code(self, exit_mock):
-        self.set_global('num_retries', 1)
+        self.set_global(u'num_retries', 1)
         self.mock._error_code.return_value = 12345
         self.mock._put.side_effect = Exception
         self.backend.put(self.local, self.remote)
         exit_mock.assert_called_once_with(12345)
 
-    @mock.patch('sys.exit')
+    @mock.patch(u'sys.exit')
     def test_uses_exception_code(self, exit_mock):
-        self.set_global('num_retries', 1)
+        self.set_global(u'num_retries', 1)
         self.mock._error_code.return_value = 12345
-        self.mock._put.side_effect = BackendException('error', code=54321)
+        self.mock._put.side_effect = BackendException(u'error', code=54321)
         self.backend.put(self.local, self.remote)
         exit_mock.assert_called_once_with(54321)
 
-    @mock.patch('sys.exit')
-    @mock.patch('time.sleep')  # so no waiting
+    @mock.patch(u'sys.exit')
+    @mock.patch(u'time.sleep')  # so no waiting
     def test_cleans_up(self, exit_mock, time_mock):
-        self.set_global('num_retries', 2)
+        self.set_global(u'num_retries', 2)
         self.mock._retry_cleanup.return_value = None
         self.mock._put.side_effect = Exception
         self.backend.put(self.local, self.remote)
@@ -207,10 +207,10 @@ class BackendWrapperTest(UnitTestCase):
         self.backend.query_info([self.remote])
         self.assertEqual(self.mock._query.call_count, 1)
 
-    @mock.patch('sys.exit')
-    @mock.patch('time.sleep')  # so no waiting
+    @mock.patch(u'sys.exit')
+    @mock.patch(u'time.sleep')  # so no waiting
     def test_retries(self, exit_mock, time_mock):
-        self.set_global('num_retries', 2)
+        self.set_global(u'num_retries', 2)
 
         self.mock._get.side_effect = Exception
         self.backend.get(self.remote, self.local)
@@ -280,5 +280,5 @@ class BackendWrapperTest(UnitTestCase):
         self.mock._close.assert_called_once_with()
 
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()

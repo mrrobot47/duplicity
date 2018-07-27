@@ -71,7 +71,7 @@ class GPGProfile:
         indicated, and recipients should be a list of keys.  For all
         keys, the format should be an hex key like 'AA0E73D2'.
         """
-        assert passphrase is None or isinstance(passphrase, types.StringType)
+        assert passphrase is None or isinstance(passphrase, types.StringTypes)
 
         self.passphrase = passphrase
         self.signing_passphrase = passphrase

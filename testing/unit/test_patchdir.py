@@ -35,13 +35,13 @@ from . import UnitTestCase
 
 
 class PatchingTest(UnitTestCase):
-    """Test patching"""
+    u"""Test patching"""
     def setUp(self):
         super(PatchingTest, self).setUp()
         self.unpack_testfiles()
 
     def copyfileobj(self, infp, outfp):
-        """Copy in fileobj to out, closing afterwards"""
+        u"""Copy in fileobj to out, closing afterwards"""
         blocksize = 32 * 1024
         while 1:
             buf = infp.read(blocksize)
@@ -52,21 +52,21 @@ class PatchingTest(UnitTestCase):
         assert not outfp.close()
 
     def test_total(self):
-        """Test cycle on dirx"""
-        self.total_sequence(['testfiles/dir1',
-                             'testfiles/dir2',
-                             'testfiles/dir3'])
+        u"""Test cycle on dirx"""
+        self.total_sequence([u'testfiles/dir1',
+                             u'testfiles/dir2',
+                             u'testfiles/dir3'])
 
     def get_sel(self, path):
-        """Get selection iter over the given directory"""
+        u"""Get selection iter over the given directory"""
         return selection.Select(path).set_iter()
 
     def total_sequence(self, filelist):
-        """Test signatures, diffing, and patching on directory list"""
+        u"""Test signatures, diffing, and patching on directory list"""
         assert len(filelist) >= 2
-        sig = Path("testfiles/output/sig.tar")
-        diff = Path("testfiles/output/diff.tar")
-        seq_path = Path("testfiles/output/sequence")
+        sig = Path(u"testfiles/output/sig.tar")
+        diff = Path(u"testfiles/output/diff.tar")
+        seq_path = Path(u"testfiles/output/sequence")
         new_path, old_path = None, None  # set below in for loop
 
         # Write initial full backup to diff.tar
@@ -76,22 +76,22 @@ class PatchingTest(UnitTestCase):
                 sigblock = diffdir.DirSig(self.get_sel(seq_path))
                 diffdir.write_block_iter(sigblock, sig)
                 deltablock = diffdir.DirDelta(self.get_sel(new_path),
-                                              sig.open("rb"))
+                                              sig.open(u"rb"))
             else:
                 deltablock = diffdir.DirFull(self.get_sel(new_path))
             diffdir.write_block_iter(deltablock, diff)
 
-            patchdir.Patch(seq_path, diff.open("rb"))
+            patchdir.Patch(seq_path, diff.open(u"rb"))
             # print "#########", seq_path, new_path
             assert seq_path.compare_recursive(new_path, 1)
 
     def test_block_tar(self):
-        """Test building block tar from a number of files"""
+        u"""Test building block tar from a number of files"""
         def get_fileobjs():
-            """Return iterator yielding open fileobjs of tar files"""
+            u"""Return iterator yielding open fileobjs of tar files"""
             for i in range(1, 4):
-                p = Path("testfiles/blocktartest/test%d.tar" % i)
-                fp = p.open("rb")
+                p = Path(u"testfiles/blocktartest/test%d.tar" % i)
+                fp = p.open(u"rb")
                 yield fp
                 fp.close()
 
@@ -100,37 +100,37 @@ class PatchingTest(UnitTestCase):
         for tarinfo in tf:
             namelist.append(tarinfo.name)
         for i in range(1, 6):
-            assert ("tmp/%d" % i) in namelist, namelist
+            assert (u"tmp/%d" % i) in namelist, namelist
 
     def test_doubledot_hole(self):
-        """Test for the .. bug that lets tar overwrite parent dir"""
+        u"""Test for the .. bug that lets tar overwrite parent dir"""
 
         def make_bad_tar(filename):
-            """Write attack tarfile to filename"""
-            tf = tarfile.TarFile(name=filename, mode="w")
+            u"""Write attack tarfile to filename"""
+            tf = tarfile.TarFile(name=filename, mode=u"w")
 
             # file object will be empty, and tarinfo will have path
             # "snapshot/../warning-security-error"
-            assert not os.system("cat /dev/null >testfiles/output/file")
-            path = Path("testfiles/output/file")
-            path.index = ("diff", "..", "warning-security-error")
+            assert not os.system(u"cat /dev/null >testfiles/output/file")
+            path = Path(u"testfiles/output/file")
+            path.index = (u"diff", u"..", u"warning-security-error")
             ti = path.get_tarinfo()
-            fp = cStringIO.StringIO("")
+            fp = cStringIO.StringIO(u"")
             tf.addfile(ti, fp)
 
             tf.close()
 
-        make_bad_tar("testfiles/output/bad.tar")
-        os.mkdir("testfiles/output/temp")
+        make_bad_tar(u"testfiles/output/bad.tar")
+        os.mkdir(u"testfiles/output/temp")
 
         self.assertRaises(patchdir.PatchDirException, patchdir.Patch,
-                          Path("testfiles/output/temp"),
-                          open("testfiles/output/bad.tar"))
-        assert not Path("testfiles/output/warning-security-error").exists()
+                          Path(u"testfiles/output/temp"),
+                          open(u"testfiles/output/bad.tar"))
+        assert not Path(u"testfiles/output/warning-security-error").exists()
 
 
 class index:
-    """Used below to test the iter collation"""
+    u"""Used below to test the iter collation"""
     def __init__(self, index):
         self.index = index
 
@@ -141,7 +141,7 @@ class CollateItersTest(UnitTestCase):
         self.unpack_testfiles()
 
     def test_collate(self):
-        """Test collate_iters function"""
+        u"""Test collate_iters function"""
         indicies = [index(i) for i in [0, 1, 2, 3]]
         helper = lambda i: indicies[i]
 
@@ -170,13 +170,13 @@ class CollateItersTest(UnitTestCase):
                           patchdir.collate_iters([makeiter1(), iter([])]))
 
     def test_tuple(self):
-        """Test indexed tuple"""
-        i = patchdir.IndexedTuple((1, 2, 3), ("a", "b"))
-        i2 = patchdir.IndexedTuple((), ("hello", "there", "how are you"))
+        u"""Test indexed tuple"""
+        i = patchdir.IndexedTuple((1, 2, 3), (u"a", u"b"))
+        i2 = patchdir.IndexedTuple((), (u"hello", u"there", u"how are you"))
 
-        assert i[0] == "a"
-        assert i[1] == "b"
-        assert i2[1] == "there"
+        assert i[0] == u"a"
+        assert i[1] == u"b"
+        assert i2[1] == u"there"
         assert len(i) == 2 and len(i2) == 3
         assert i2 < i, i2 < i
 
@@ -188,31 +188,31 @@ class CollateItersTest(UnitTestCase):
 
 
 class TestInnerFuncs(UnitTestCase):
-    """Test some other functions involved in patching"""
+    u"""Test some other functions involved in patching"""
     def setUp(self):
         super(TestInnerFuncs, self).setUp()
         self.unpack_testfiles()
         self.check_output()
 
     def check_output(self):
-        """Make sure testfiles/output exists"""
-        out = Path("testfiles/output")
+        u"""Make sure testfiles/output exists"""
+        out = Path(u"testfiles/output")
         if not (out.exists() and out.isdir()):
             out.mkdir()
         self.out = out
 
     def snapshot(self):
-        """Make a snapshot ROPath, permissions 0o600"""
-        ss = self.out.append("snapshot")
-        fout = ss.open("wb")
-        fout.write("hello, world!")
+        u"""Make a snapshot ROPath, permissions 0o600"""
+        ss = self.out.append(u"snapshot")
+        fout = ss.open(u"wb")
+        fout.write(u"hello, world!")
         assert not fout.close()
         ss.chmod(0o600)
-        ss.difftype = "snapshot"
+        ss.difftype = u"snapshot"
         return ss
 
     def get_delta(self, old_buf, new_buf):
-        """Return delta buffer from old to new"""
+        u"""Return delta buffer from old to new"""
         sigfile = librsync.SigFile(cStringIO.StringIO(old_buf))
         sig = sigfile.read()
         assert not sigfile.close()
@@ -223,36 +223,36 @@ class TestInnerFuncs(UnitTestCase):
         return deltabuf
 
     def delta1(self):
-        """Make a delta ROPath, permissions 0o640"""
-        delta1 = self.out.append("delta1")
-        fout = delta1.open("wb")
-        fout.write(self.get_delta("hello, world!",
-                                  "aonseuth aosetnuhaonsuhtansoetuhaoe"))
+        u"""Make a delta ROPath, permissions 0o640"""
+        delta1 = self.out.append(u"delta1")
+        fout = delta1.open(u"wb")
+        fout.write(self.get_delta(u"hello, world!",
+                                  u"aonseuth aosetnuhaonsuhtansoetuhaoe"))
         assert not fout.close()
         delta1.chmod(0o640)
-        delta1.difftype = "diff"
+        delta1.difftype = u"diff"
         return delta1
 
     def delta2(self):
-        """Make another delta ROPath, permissions 0o644"""
-        delta2 = self.out.append("delta1")
-        fout = delta2.open("wb")
-        fout.write(self.get_delta("aonseuth aosetnuhaonsuhtansoetuhaoe",
-                                  "3499 34957839485792357 458348573"))
+        u"""Make another delta ROPath, permissions 0o644"""
+        delta2 = self.out.append(u"delta1")
+        fout = delta2.open(u"wb")
+        fout.write(self.get_delta(u"aonseuth aosetnuhaonsuhtansoetuhaoe",
+                                  u"3499 34957839485792357 458348573"))
         assert not fout.close()
         delta2.chmod(0o644)
-        delta2.difftype = "diff"
+        delta2.difftype = u"diff"
         return delta2
 
     def deleted(self):
-        """Make a deleted ROPath"""
-        deleted = self.out.append("deleted")
+        u"""Make a deleted ROPath"""
+        deleted = self.out.append(u"deleted")
         assert not deleted.exists()
-        deleted.difftype = "deleted"
+        deleted.difftype = u"deleted"
         return deleted
 
     def test_normalize(self):
-        """Test normalizing a sequence of diffs"""
+        u"""Test normalizing a sequence of diffs"""
         ss = self.snapshot()
         d1 = self.delta1()
         d2 = self.delta2()
@@ -275,23 +275,23 @@ class TestInnerFuncs(UnitTestCase):
         try_seq(seq5, seq1)
 
     def test_patch_seq2ropath(self):
-        """Test patching sequence"""
+        u"""Test patching sequence"""
         def testseq(seq, perms, buf):
             result = patchdir.patch_seq2ropath(seq)
             assert result.getperms() == perms, (result.getperms(), perms)
-            fout = result.open("rb")
+            fout = result.open(u"rb")
             contents = fout.read()
             assert not fout.close()
             assert contents == buf, (contents, buf)
 
-        ids = "%d:%d" % (os.getuid(), os.getgid())
+        ids = u"%d:%d" % (os.getuid(), os.getgid())
 
-        testseq([self.snapshot()], ("%s 600" % ids), "hello, world!")
-        testseq([self.snapshot(), self.delta1()], ("%s 640" % ids),
-                "aonseuth aosetnuhaonsuhtansoetuhaoe")
-        testseq([self.snapshot(), self.delta1(), self.delta2()], ("%s 644" % ids),
-                "3499 34957839485792357 458348573")
+        testseq([self.snapshot()], (u"%s 600" % ids), u"hello, world!")
+        testseq([self.snapshot(), self.delta1()], (u"%s 640" % ids),
+                u"aonseuth aosetnuhaonsuhtansoetuhaoe")
+        testseq([self.snapshot(), self.delta1(), self.delta2()], (u"%s 644" % ids),
+                u"3499 34957839485792357 458348573")
 
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()

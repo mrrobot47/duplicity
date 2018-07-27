@@ -33,111 +33,111 @@ from . import UnitTestCase
 
 
 class VolumeInfoTest(UnitTestCase):
-    """Test VolumeInfo"""
+    u"""Test VolumeInfo"""
     def test_basic(self):
-        """Basic VolumeInfoTest"""
+        u"""Basic VolumeInfoTest"""
         vi = manifest.VolumeInfo()
-        vi.set_info(3, ("hello", "there"), None, (), None)
-        vi.set_hash("MD5", "aoseutaohe")
+        vi.set_info(3, (u"hello", u"there"), None, (), None)
+        vi.set_hash(u"MD5", u"aoseutaohe")
         s = vi.to_string()
-        assert isinstance(s, types.StringType)
+        assert isinstance(s, types.StringTypes)
         # print "---------\n%s\n---------" % s
         vi2 = manifest.VolumeInfo()
         vi2.from_string(s)
         assert vi == vi2
 
     def test_special(self):
-        """Test VolumeInfo with special characters"""
+        u"""Test VolumeInfo with special characters"""
         vi = manifest.VolumeInfo()
         vi.set_info(3234,
-                    ("\n eu \x233", "heuo", '\xd8\xab\xb1Wb\xae\xc5]\x8a\xbb\x15v*\xf4\x0f!\xf9>\xe2Y\x86\xbb\xab\xdbp\xb0\x84\x13k\x1d\xc2\xf1\xf5e\xa5U\x82\x9aUV\xa0\xf4\xdf4\xba\xfdX\x03\x82\x07s\xce\x9e\x8b\xb34\x04\x9f\x17 \xf4\x8f\xa6\xfa\x97\xab\xd8\xac\xda\x85\xdcKvC\xfa#\x94\x92\x9e\xc9\xb7\xc3_\x0f\x84g\x9aB\x11<=^\xdbM\x13\x96c\x8b\xa7|*"\\\'^$@#!(){}?+ ~` '),
+                    (r"\n eu \x233", r"heuo", r'\xd8\xab\xb1Wb\xae\xc5]\x8a\xbb\x15v*\xf4\x0f!\xf9>\xe2Y\x86\xbb\xab\xdbp\xb0\x84\x13k\x1d\xc2\xf1\xf5e\xa5U\x82\x9aUV\xa0\xf4\xdf4\xba\xfdX\x03\x82\x07s\xce\x9e\x8b\xb34\x04\x9f\x17 \xf4\x8f\xa6\xfa\x97\xab\xd8\xac\xda\x85\xdcKvC\xfa#\x94\x92\x9e\xc9\xb7\xc3_\x0f\x84g\x9aB\x11<=^\xdbM\x13\x96c\x8b\xa7|*"\\\'^$@#!(){}?+ ~` '),
                     None,
-                    ("\n",),
+                    (r"\n",),
                     None)
         s = vi.to_string()
-        assert isinstance(s, types.StringType)
+        assert isinstance(s, types.StringTypes)
         # print "---------\n%s\n---------" % s
         vi2 = manifest.VolumeInfo()
         vi2.from_string(s)
         assert vi == vi2
 
     def test_contains(self):
-        """Test to see if contains() works"""
+        u"""Test to see if contains() works"""
         vi = manifest.VolumeInfo()
-        vi.set_info(1, ("1", "2"), None, ("1", "3"), None)
-        assert vi.contains(("1",), recursive=1)
-        assert not vi.contains(("1",), recursive=0)
+        vi.set_info(1, (u"1", u"2"), None, (u"1", u"3"), None)
+        assert vi.contains((u"1",), recursive=1)
+        assert not vi.contains((u"1",), recursive=0)
 
         vi2 = manifest.VolumeInfo()
-        vi2.set_info(1, ("A",), None, ("Z",), None)
-        assert vi2.contains(("M",), recursive=1)
-        assert vi2.contains(("M",), recursive=0)
+        vi2.set_info(1, (u"A",), None, (u"Z",), None)
+        assert vi2.contains((u"M",), recursive=1)
+        assert vi2.contains((u"M",), recursive=0)
 
         vi3 = manifest.VolumeInfo()
-        vi3.set_info(1, ("A",), None, ("Z",), None)
-        assert not vi3.contains(("3",), recursive=1)
-        assert not vi3.contains(("3",), recursive=0)
+        vi3.set_info(1, (u"A",), None, (u"Z",), None)
+        assert not vi3.contains((u"3",), recursive=1)
+        assert not vi3.contains((u"3",), recursive=0)
 
 
 class ManifestTest(UnitTestCase):
-    """Test Manifest class"""
+    u"""Test Manifest class"""
 
     def setUp(self):
         UnitTestCase.setUp(self)
         self.old_files_changed = globals.file_changed
-        globals.file_changed = 'testing'
+        globals.file_changed = u'testing'
 
     def tearDown(self):
         globals.file_changed = self.old_files_changed
 
     def test_basic(self):
         vi1 = manifest.VolumeInfo()
-        vi1.set_info(3, ("hello",), None, (), None)
+        vi1.set_info(3, (u"hello",), None, (), None)
         vi2 = manifest.VolumeInfo()
-        vi2.set_info(4, ("goodbye", "there"), None, ("aoeusht",), None)
+        vi2.set_info(4, (u"goodbye", u"there"), None, (u"aoeusht",), None)
         vi3 = manifest.VolumeInfo()
         vi3.set_info(34, (), None, (), None)
         m = manifest.Manifest()
         for vi in [vi1, vi2, vi3]:
             m.add_volume_info(vi)
 
-        self.set_global('local_path', path.Path("Foobar"))
+        self.set_global(u'local_path', path.Path(u"Foobar"))
         m.set_dirinfo()
         m.set_files_changed_info([])
 
         s = m.to_string()
-        assert s.lower().startswith("hostname")
-        assert s.endswith("\n")
+        assert s.lower().startswith(u"hostname")
+        assert s.endswith(u"\n")
 
         m2 = manifest.Manifest().from_string(s)
         assert m == m2
 
     def test_corrupt_filelist(self):
         vi1 = manifest.VolumeInfo()
-        vi1.set_info(3, ("hello",), None, (), None)
+        vi1.set_info(3, (u"hello",), None, (), None)
         vi2 = manifest.VolumeInfo()
-        vi2.set_info(4, ("goodbye", "there"), None, ("aoeusht",), None)
+        vi2.set_info(4, (u"goodbye", u"there"), None, (u"aoeusht",), None)
         vi3 = manifest.VolumeInfo()
         vi3.set_info(34, (), None, (), None)
         m = manifest.Manifest()
         for vi in [vi1, vi2, vi3]:
             m.add_volume_info(vi)
 
-        self.set_global('local_path', path.Path("Foobar"))
+        self.set_global(u'local_path', path.Path(u"Foobar"))
         m.set_dirinfo()
         m.set_files_changed_info([
-            ('one', 'new'),
-            ('two', 'changed'),
-            ('three', 'new'),
+            (u'one', u'new'),
+            (u'two', u'changed'),
+            (u'three', u'new'),
             ])
 
         # build manifest string
         s = m.to_string()
 
         # make filecount higher than files in list
-        s2 = re.sub('Filelist 3', 'Filelist 5', s)
+        s2 = re.sub(u'Filelist 3', u'Filelist 5', s)
         m2 = manifest.Manifest().from_string(s2)
-        assert hasattr(m2, 'corrupt_filelist')
+        assert hasattr(m2, u'corrupt_filelist')
 
-if __name__ == "__main__":
+if __name__ == u"__main__":
     unittest.main()
