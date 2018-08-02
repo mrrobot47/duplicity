@@ -1,3 +1,11 @@
+2018-08-01  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Added AUTHORS file listing all copyright claimants in headers
+
+2018-07-26  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Adorned strings in testing/, testing/functional/, and testing/unit
+
 2018-07-24  Kenneth Loafman  <kenneth@loafman.com>
 
     * Reverted back to rev 1317 and reimplemented revs 1319 to 1322

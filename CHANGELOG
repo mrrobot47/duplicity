@@ -373,6 +373,8 @@ New in v0.8.00 (2016/07/??)
 * Fixed unadorned strings to unicode in duplicity/backends/*
   - Some fixup due to shifting indentataion not matching PEP8.
 * Reverted back to rev 1317 and reimplemented revs 1319 to 1322
+* Adorned strings in testing/, testing/functional/, and testing/unit
+* Added AUTHORS file listing all copyright claimants in headers
 
 
 New in v0.7.08 (2016/07/02)
