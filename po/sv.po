@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2018-08-01 10:53-0500\n"
-"PO-Revision-Date: 2018-07-21 12:51+0000\n"
+"PO-Revision-Date: 2018-08-09 15:44+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-08-03 05:57+0000\n"
-"X-Generator: Launchpad (build 18739)\n"
+"X-Launchpad-Export-Date: 2018-08-10 05:14+0000\n"
+"X-Generator: Launchpad (build 18747)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -686,11 +686,11 @@ msgstr ""
 
 #: ../duplicity/commandline.py:615
 msgid "pem formatted bundle of certificate authorities"
-msgstr ""
+msgstr "pem formaterad bunt av certifikatauktoriteter"
 
 #: ../duplicity/commandline.py:616
 msgid "path to a folder with certificate authority files"
-msgstr ""
+msgstr "sökväg till en mapp med certifikatauktoritetsfiler"
 
 #. Used in usage help. Example:
 #. --timeout <seconds>
@@ -716,7 +716,7 @@ msgstr ""
 #: ../duplicity/commandline.py:770
 #, python-format
 msgid "Using backup name: %s"
-msgstr ""
+msgstr "Använd säkerhetskopierings namn: %s"
 
 #: ../duplicity/commandline.py:777
 #, python-format
@@ -878,6 +878,9 @@ msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
 "Received '%s' instead."
 msgstr ""
+"Singeringsnyckeln bör vara en 8, 16 alt. 40 tecken hex-sträng, som "
+"\"AA0E73D2\".\n"
+"Mottog \"%s\" istället."
 
 #: ../duplicity/commandline.py:1064
 #, python-format
@@ -885,6 +888,8 @@ msgid ""
 "Restore destination directory %s already exists.\n"
 "Will not overwrite."
 msgstr ""
+"Återställnings destinationskatalog %s finns redan.\n"
+"Skriver inte över."
 
 #: ../duplicity/commandline.py:1069
 #, python-format
@@ -894,12 +899,12 @@ msgstr ""
 #: ../duplicity/commandline.py:1075
 #, python-format
 msgid "Backup source directory %s does not exist."
-msgstr ""
+msgstr "Säkerhetskopiakatalogen %s finns inte."
 
 #: ../duplicity/commandline.py:1106
 #, python-format
 msgid "Command line warning: %s"
-msgstr ""
+msgstr "Kommandoradvarning: %s"
 
 #: ../duplicity/commandline.py:1106
 msgid ""
@@ -910,7 +915,7 @@ msgstr ""
 #: ../duplicity/commandline.py:1142
 #, python-format
 msgid "GPG binary is %s, version %s"
-msgstr ""
+msgstr "GPG-binär är %s, version %s"
 
 #: ../duplicity/commandline.py:1169
 #, python-format
@@ -919,6 +924,9 @@ msgid ""
 "Examples of URL strings are \"scp://user@host.net:1234/path\" and\n"
 "\"file:///usr/local\".  See the man page for more information."
 msgstr ""
+"Dålig URL '%s'.\n"
+"Exempel på URL-strängar är \"scp://user@host.net:1234/path\" och\n"
+"\"file:///usr/local\".  Se man-sida för mer information."
 
 #: ../duplicity/commandline.py:1199
 msgid "Main action: "
