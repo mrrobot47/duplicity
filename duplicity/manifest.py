@@ -369,7 +369,7 @@ class VolumeInfo:
                      (whitespace, index_to_string(self.end_index), (self.end_block or " ")))
         for key in self.hashes:
             slist.append("%sHash %s %s" %
-                         (whitespace, key, self.hashes[key]))
+                         (whitespace, key.encode(), self.hashes[key]))
         return "\n".join(slist)
 
     __str__ = to_string

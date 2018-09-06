@@ -1391,7 +1391,8 @@ def log_startup_parms(verbosity=log.INFO):
     """
     log.Log(u'=' * 80, verbosity)
     log.Log(u"duplicity $version ($reldate)", verbosity)
-    log.Log(u"Args: %s" % util.fsdecode(u' '.join(sys.argv)), verbosity)
+    u_args = (util.fsdecode(arg) for arg in sys.argv)
+    log.Log(u"Args: %s" % u' '.join(u_args), verbosity)
     log.Log(u' '.join(platform.uname()), verbosity)
     log.Log(u"%s %s" % (sys.executable or sys.platform, sys.version), verbosity)
     log.Log(u'=' * 80, verbosity)
