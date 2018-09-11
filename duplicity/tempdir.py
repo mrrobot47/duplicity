@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-"""
+u"""
 Provides temporary file handling cenetered around a single top-level
 securely created temporary directory.
 
@@ -44,7 +44,7 @@ _initialSystemTempRoot = tempfile.gettempdir()
 
 
 def default():
-    """
+    u"""
     Obtain the global default instance of TemporaryDirectory, creating
     it first if necessary. Failures are propagated to caller. Most
     callers are expected to use this function rather than
@@ -68,7 +68,7 @@ def default():
 
 
 class TemporaryDirectory:
-    """
+    u"""
     A temporary directory.
 
     An instance of this class is backed by a directory in the file
@@ -114,7 +114,7 @@ class TemporaryDirectory:
     'attackers' file.
     """
     def __init__(self, temproot=None):
-        """
+        u"""
         Create a new TemporaryDirectory backed by a unique and
         securely created file system directory.
 
@@ -127,9 +127,9 @@ class TemporaryDirectory:
             else:
                 global _initialSystemTempRoot
                 temproot = _initialSystemTempRoot
-        self.__dir = tempfile.mkdtemp("-tempdir", "duplicity-", temproot)
+        self.__dir = tempfile.mkdtemp(u"-tempdir", u"duplicity-", temproot)
 
-        log.Info(_("Using temporary directory %s") % util.fsdecode(self.__dir))
+        log.Info(_(u"Using temporary directory %s") % util.fsdecode(self.__dir))
 
         # number of mktemp()/mkstemp() calls served so far
         self.__tempcount = 0
@@ -141,13 +141,13 @@ class TemporaryDirectory:
         self.__lock = threading.Lock()  # protect private resources *AND* mktemp/mkstemp calls
 
     def dir(self):
-        """
+        u"""
         Returns the absolute pathname of the temp folder.
         """
         return self.__dir
 
     def __del__(self):
-        """
+        u"""
         Perform cleanup.
         """
         global _defaultInstance
@@ -155,7 +155,7 @@ class TemporaryDirectory:
             self.cleanup()
 
     def mktemp(self):
-        """
+        u"""
         Return a unique filename suitable for use for a temporary
         file. The file is not created.
 
@@ -170,10 +170,10 @@ class TemporaryDirectory:
         self.__lock.acquire()
         try:
             self.__tempcount = self.__tempcount + 1
-            suffix = "-%d" % (self.__tempcount,)
-            filename = tempfile.mktemp(suffix, "mktemp-", self.__dir)
+            suffix = u"-%d" % (self.__tempcount,)
+            filename = tempfile.mktemp(suffix, u"mktemp-", self.__dir)
 
-            log.Debug(_("Registering (mktemp) temporary file %s") % util.fsdecode(filename))
+            log.Debug(_(u"Registering (mktemp) temporary file %s") % util.fsdecode(filename))
             self.__pending[filename] = None
         finally:
             self.__lock.release()
@@ -181,7 +181,7 @@ class TemporaryDirectory:
         return filename
 
     def mkstemp(self):
-        """
+        u"""
         Returns a filedescriptor and a filename, as per os.mkstemp(),
         but located in the temporary directory and subject to tracking
         and automatic cleanup.
@@ -192,10 +192,10 @@ class TemporaryDirectory:
         self.__lock.acquire()
         try:
             self.__tempcount = self.__tempcount + 1
-            suffix = "-%d" % (self.__tempcount,)
-            fd, filename = tempfile.mkstemp(suffix, "mkstemp-", self.__dir)
+            suffix = u"-%d" % (self.__tempcount,)
+            fd, filename = tempfile.mkstemp(suffix, u"mkstemp-", self.__dir)
 
-            log.Debug(_("Registering (mkstemp) temporary file %s") % util.fsdecode(filename))
+            log.Debug(_(u"Registering (mkstemp) temporary file %s") % util.fsdecode(filename))
             self.__pending[filename] = None
         finally:
             self.__lock.release()
@@ -203,16 +203,16 @@ class TemporaryDirectory:
         return fd, filename
 
     def mkstemp_file(self):
-        """
+        u"""
         Convenience wrapper around mkstemp(), with the file descriptor
         converted into a file object.
         """
         fd, filename = self.mkstemp()
 
-        return os.fdopen(fd, "r+"), filename
+        return os.fdopen(fd, u"r+"), filename
 
     def forget(self, fname):
-        """
+        u"""
         Forget about the given filename previously obtained through
         mktemp() or mkstemp(). This should be called *after* the file
         has been deleted, to stop a future cleanup() from trying to
@@ -227,16 +227,16 @@ class TemporaryDirectory:
         self.__lock.acquire()
         try:
             if fname in self.__pending:
-                log.Debug(_("Forgetting temporary file %s") % util.fsdecode(fname))
+                log.Debug(_(u"Forgetting temporary file %s") % util.fsdecode(fname))
                 del(self.__pending[fname])
             else:
-                log.Warn(_("Attempt to forget unknown tempfile %s - this is probably a bug.") % util.fsdecode(fname))
+                log.Warn(_(u"Attempt to forget unknown tempfile %s - this is probably a bug.") % util.fsdecode(fname))
                 pass
         finally:
             self.__lock.release()
 
     def cleanup(self):
-        """
+        u"""
         Cleanup any files created in the temporary directory (that
         have not been forgotten), and clean up the temporary directory
         itself.
@@ -249,16 +249,16 @@ class TemporaryDirectory:
             if self.__dir is not None:
                 for file in self.__pending.keys():
                     try:
-                        log.Debug(_("Removing still remembered temporary file %s") % util.fsdecode(file))
+                        log.Debug(_(u"Removing still remembered temporary file %s") % util.fsdecode(file))
                         util.ignore_missing(os.unlink, file)
                     except Exception:
-                        log.Info(_("Cleanup of temporary file %s failed") % util.fsdecode(file))
+                        log.Info(_(u"Cleanup of temporary file %s failed") % util.fsdecode(file))
                         pass
                 try:
                     os.rmdir(self.__dir)
                 except Exception:
-                    log.Warn(_("Cleanup of temporary directory %s failed - "
-                               "this is probably a bug.") % util.fsdecode(self.__dir))
+                    log.Warn(_(u"Cleanup of temporary directory %s failed - "
+                               u"this is probably a bug.") % util.fsdecode(self.__dir))
                     pass
                 self.__pending = None
                 self.__dir = None

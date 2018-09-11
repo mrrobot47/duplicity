@@ -1,4 +1,4 @@
-"""Interface to GNU Privacy Guard (GnuPG)
+u"""Interface to GNU Privacy Guard (GnuPG)
 
 !!! This was renamed to gpginterface.py.
     Please refer to duplicity's README for the reason. !!!
@@ -234,35 +234,35 @@ try:
     import threading
 except ImportError:
     import dummy_threading  # @UnusedImport
-    log.Warn(_("Threading not available -- zombie processes may appear"))
+    log.Warn(_(u"Threading not available -- zombie processes may appear"))
 
-__author__ = "Frank J. Tobin, ftobin@neverending.org"
-__version__ = "0.3.2"
-__revision__ = "$Id: GnuPGInterface.py,v 1.6 2009/06/06 17:35:19 loafman Exp $"
+__author__ = u"Frank J. Tobin, ftobin@neverending.org"
+__version__ = u"0.3.2"
+__revision__ = u"$Id: GnuPGInterface.py,v 1.6 2009/06/06 17:35:19 loafman Exp $"
 
 # "standard" filehandles attached to processes
-_stds = ['stdin', 'stdout', 'stderr']
+_stds = [u'stdin', u'stdout', u'stderr']
 
 # the permissions each type of fh needs to be opened with
-_fd_modes = {'stdin': 'w',
-             'stdout': 'r',
-             'stderr': 'r',
-             'passphrase': 'w',
-             'command': 'w',
-             'logger': 'r',
-             'status': 'r'
+_fd_modes = {u'stdin': u'w',
+             u'stdout': u'r',
+             u'stderr': u'r',
+             u'passphrase': u'w',
+             u'command': u'w',
+             u'logger': u'r',
+             u'status': u'r'
              }
 
 # correlation between handle names and the arguments we'll pass
-_fd_options = {'passphrase': '--passphrase-fd',
-               'logger': '--logger-fd',
-               'status': '--status-fd',
-               'command': '--command-fd'
+_fd_options = {u'passphrase': u'--passphrase-fd',
+               u'logger': u'--logger-fd',
+               u'status': u'--status-fd',
+               u'command': u'--command-fd'
                }
 
 
 class GnuPG:
-    """Class instances represent GnuPG.
+    u"""Class instances represent GnuPG.
 
     Instance attributes of a GnuPG object are:
 
@@ -283,12 +283,12 @@ class GnuPG:
     """
 
     def __init__(self):
-        self.call = 'gpg'
+        self.call = u'gpg'
         self.passphrase = None
         self.options = Options()
 
     def run(self, gnupg_commands, args=None, create_fhs=None, attach_fhs=None):
-        """Calls GnuPG with the list of string commands gnupg_commands,
+        u"""Calls GnuPG with the list of string commands gnupg_commands,
         complete with prefixing dashes.
         For example, gnupg_commands could be
         '["--sign", "--encrypt"]'
@@ -365,38 +365,38 @@ class GnuPG:
         handle_passphrase = 0
 
         if self.passphrase is not None \
-           and 'passphrase' not in attach_fhs \
-           and 'passphrase' not in create_fhs:
+           and u'passphrase' not in attach_fhs \
+           and u'passphrase' not in create_fhs:
             handle_passphrase = 1
-            create_fhs.append('passphrase')
+            create_fhs.append(u'passphrase')
 
         process = self._attach_fork_exec(gnupg_commands, args,
                                          create_fhs, attach_fhs)
 
         if handle_passphrase:
-            passphrase_fh = process.handles['passphrase']
+            passphrase_fh = process.handles[u'passphrase']
             passphrase_fh.write(self.passphrase)
             passphrase_fh.close()
-            del process.handles['passphrase']
+            del process.handles[u'passphrase']
 
         return process
 
     def _attach_fork_exec(self, gnupg_commands, args, create_fhs, attach_fhs):
-        """This is like run(), but without the passphrase-helping
+        u"""This is like run(), but without the passphrase-helping
         (note that run() calls this)."""
 
         process = Process()
 
         for fh_name in create_fhs + attach_fhs.keys():
             if fh_name not in _fd_modes:
-                raise KeyError("unrecognized filehandle name '%s'; must be one of %s"
+                raise KeyError(u"unrecognized filehandle name '%s'; must be one of %s"
                                % (fh_name, _fd_modes.keys()))
 
         for fh_name in create_fhs:
             # make sure the user doesn't specify a filehandle
             # to be created *and* attached
             if fh_name in attach_fhs:
-                raise ValueError("cannot have filehandle '%s' in both create_fhs and attach_fhs"
+                raise ValueError(u"cannot have filehandle '%s' in both create_fhs and attach_fhs"
                                  % fh_name)
 
             pipe = os.pipe()
@@ -404,7 +404,7 @@ class GnuPG:
             # that since pipes are unidirectional on some systems,
             # so we have to 'turn the pipe around'
             # if we are writing
-            if _fd_modes[fh_name] == 'w':
+            if _fd_modes[fh_name] == u'w':
                 pipe = (pipe[1], pipe[0])
             process._pipes[fh_name] = Pipe(pipe[0], pipe[1], 0)
 
@@ -415,7 +415,7 @@ class GnuPG:
         if process.pid != 0:
             # start a threaded_waitpid on the child
             process.thread = threading.Thread(target=threaded_waitpid,
-                                              name="wait%d" % process.pid,
+                                              name=u"wait%d" % process.pid,
                                               args=(process,))
             process.thread.start()
 
@@ -424,7 +424,7 @@ class GnuPG:
         return self._as_parent(process)
 
     def _as_parent(self, process):
-        """Stuff run after forking in parent"""
+        u"""Stuff run after forking in parent"""
         for k, p in process._pipes.items():
             if not p.direct:
                 os.close(p.child)
@@ -436,11 +436,11 @@ class GnuPG:
         return process
 
     def _as_child(self, process, gnupg_commands, args):
-        """Stuff run after forking in child"""
+        u"""Stuff run after forking in child"""
         # child
         for std in _stds:
             p = process._pipes[std]
-            os.dup2(p.child, getattr(sys, "__%s__" % std).fileno())
+            os.dup2(p.child, getattr(sys, u"__%s__" % std).fileno())
 
         for k, p in process._pipes.items():
             if p.direct and k not in _stds:
@@ -452,7 +452,7 @@ class GnuPG:
         for k, p in process._pipes.items():
             # set command-line options for non-standard fds
             if k not in _stds:
-                fd_args.extend([_fd_options[k], "%d" % p.child])
+                fd_args.extend([_fd_options[k], u"%d" % p.child])
 
             if not p.direct:
                 os.close(p.parent)
@@ -463,7 +463,7 @@ class GnuPG:
 
 
 class Pipe:
-    """simple struct holding stuff about pipes we use"""
+    u"""simple struct holding stuff about pipes we use"""
     def __init__(self, parent, child, direct):
         self.parent = parent
         self.child = child
@@ -471,7 +471,7 @@ class Pipe:
 
 
 class Options:
-    """Objects of this class encompass options passed to GnuPG.
+    u"""Objects of this class encompass options passed to GnuPG.
     This class is responsible for determining command-line arguments
     which are based on options.  It can be said that a GnuPG
     object has-a Options object in its options attribute.
@@ -578,75 +578,75 @@ class Options:
         self.extra_args = []
 
     def get_args(self):
-        """Generate a list of GnuPG arguments based upon attributes."""
+        u"""Generate a list of GnuPG arguments based upon attributes."""
 
         return self.get_meta_args() + self.get_standard_args() + self.extra_args
 
     def get_standard_args(self):
-        """Generate a list of standard, non-meta or extra arguments"""
+        u"""Generate a list of standard, non-meta or extra arguments"""
         args = []
         if self.homedir is not None:
-            args.extend(['--homedir', self.homedir])
+            args.extend([u'--homedir', self.homedir])
         if self.options is not None:
-            args.extend(['--options', self.options])
+            args.extend([u'--options', self.options])
         if self.comment is not None:
-            args.extend(['--comment', self.comment])
+            args.extend([u'--comment', self.comment])
         if self.compress_algo is not None:
-            args.extend(['--compress-algo', self.compress_algo])
+            args.extend([u'--compress-algo', self.compress_algo])
         if self.default_key is not None:
-            args.extend(['--default-key', self.default_key])
+            args.extend([u'--default-key', self.default_key])
 
         if self.no_options:
-            args.append('--no-options')
+            args.append(u'--no-options')
         if self.armor:
-            args.append('--armor')
+            args.append(u'--armor')
         if self.textmode:
-            args.append('--textmode')
+            args.append(u'--textmode')
         if self.no_greeting:
-            args.append('--no-greeting')
+            args.append(u'--no-greeting')
         if self.verbose:
-            args.append('--verbose')
+            args.append(u'--verbose')
         if self.no_verbose:
-            args.append('--no-verbose')
+            args.append(u'--no-verbose')
         if self.quiet:
-            args.append('--quiet')
+            args.append(u'--quiet')
         if self.batch:
-            args.append('--batch')
+            args.append(u'--batch')
         if self.always_trust:
-            args.append('--always-trust')
+            args.append(u'--always-trust')
         if self.force_v3_sigs:
-            args.append('--force-v3-sigs')
+            args.append(u'--force-v3-sigs')
         if self.rfc1991:
-            args.append('--rfc1991')
+            args.append(u'--rfc1991')
         if self.openpgp:
-            args.append('--openpgp')
+            args.append(u'--openpgp')
 
         for r in self.recipients:
-            args.extend(['--recipient', r])
+            args.extend([u'--recipient', r])
         for r in self.hidden_recipients:
-            args.extend(['--hidden-recipient', r])
+            args.extend([u'--hidden-recipient', r])
         for r in self.encrypt_to:
-            args.extend(['--encrypt-to', r])
+            args.extend([u'--encrypt-to', r])
 
         return args
 
     def get_meta_args(self):
-        """Get a list of generated meta-arguments"""
+        u"""Get a list of generated meta-arguments"""
         args = []
 
         if self.meta_pgp_5_compatible:
-            args.extend(['--compress-algo', '1',
-                         '--force-v3-sigs'])
+            args.extend([u'--compress-algo', u'1',
+                         u'--force-v3-sigs'])
         if self.meta_pgp_2_compatible:
-            args.append('--rfc1991')
+            args.append(u'--rfc1991')
         if not self.meta_interactive:
-            args.extend(['--batch', '--no-tty'])
+            args.extend([u'--batch', u'--no-tty'])
 
         return args
 
 
 class Process:
-    """Objects of this class encompass properties of a GnuPG
+    u"""Objects of this class encompass properties of a GnuPG
     process spawned by GnuPG.run().
 
     # gnupg is a GnuPG object
@@ -677,18 +677,18 @@ class Process:
         self.returned = None
 
     def wait(self):
-        """
+        u"""
         Wait on threaded_waitpid to exit and examine results.
         Will raise an IOError if the process exits non-zero.
         """
         if self.returned is None:
             self.thread.join()
         if self.returned != 0:
-            raise IOError("GnuPG exited non-zero, with code %d" % (self.returned >> 8))
+            raise IOError(u"GnuPG exited non-zero, with code %d" % (self.returned >> 8))
 
 
 def threaded_waitpid(process):
-    """
+    u"""
     When started as a thread with the Process object, thread
     will execute an immediate waitpid() against the process
     pid and will collect the process termination info.  This
@@ -698,7 +698,7 @@ def threaded_waitpid(process):
     try:
         process.returned = os.waitpid(process.pid, 0)[1]
     except:
-        log.Debug(_("GPG process %d terminated before wait()") % process.pid)
+        log.Debug(_(u"GPG process %d terminated before wait()") % process.pid)
         process.returned = 0
 
 
@@ -711,5 +711,5 @@ def _run_doctests():
 # deprecated
 GnuPGInterface = GnuPG
 
-if __name__ == '__main__':
+if __name__ == u'__main__':
     _run_doctests()

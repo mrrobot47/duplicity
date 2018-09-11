@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-"""Provides a high-level interface to some librsync functions
+u"""Provides a high-level interface to some librsync functions
 
 This is a python wrapper around the lower-level _librsync module,
 which is written in C.  The goal was to use C as little as possible...
@@ -31,7 +31,7 @@ from . import _librsync
 import types
 import array
 
-if os.environ.get('READTHEDOCS') == 'True':
+if os.environ.get(u'READTHEDOCS') == u'True':
     import mock
     import duplicity
     duplicity._librsync = mock.MagicMock()
@@ -40,7 +40,7 @@ blocksize = _librsync.RS_JOB_BLOCKSIZE
 
 
 class librsyncError(Exception):
-    """Signifies error in internal librsync processing (bad signature, etc.)
+    u"""Signifies error in internal librsync processing (bad signature, etc.)
 
     underlying _librsync.librsyncError's are regenerated using this
     class because the C-created exceptions are by default
@@ -52,33 +52,33 @@ class librsyncError(Exception):
 
 
 class LikeFile:
-    """File-like object used by SigFile, DeltaFile, and PatchFile"""
-    mode = "rb"
+    u"""File-like object used by SigFile, DeltaFile, and PatchFile"""
+    mode = u"rb"
 
     # This will be replaced in subclasses by an object with
     # appropriate cycle() method
     maker = None
 
     def __init__(self, infile, need_seek=None):
-        """LikeFile initializer - zero buffers, set eofs off"""
+        u"""LikeFile initializer - zero buffers, set eofs off"""
         self.check_file(infile, need_seek)
         self.infile = infile
         self.closed = self.infile_closed = None
-        self.inbuf = ""
-        self.outbuf = array.array('c')
+        self.inbuf = b""
+        self.outbuf = array.array(b'c')
         self.eof = self.infile_eof = None
 
     def check_file(self, file, need_seek=None):
-        """Raise type error if file doesn't have necessary attributes"""
-        if not hasattr(file, "read"):
-            raise TypeError("Basis file must have a read() method")
-        if not hasattr(file, "close"):
-            raise TypeError("Basis file must have a close() method")
-        if need_seek and not hasattr(file, "seek"):
-            raise TypeError("Basis file must have a seek() method")
+        u"""Raise type error if file doesn't have necessary attributes"""
+        if not hasattr(file, u"read"):
+            raise TypeError(u"Basis file must have a read() method")
+        if not hasattr(file, u"close"):
+            raise TypeError(u"Basis file must have a close() method")
+        if need_seek and not hasattr(file, u"seek"):
+            raise TypeError(u"Basis file must have a seek() method")
 
     def read(self, length=-1):
-        """Build up self.outbuf, return first length bytes"""
+        u"""Build up self.outbuf, return first length bytes"""
         if length == -1:
             while not self.eof:
                 self._add_to_outbuf_once()
@@ -93,7 +93,7 @@ class LikeFile:
         return return_val
 
     def _add_to_outbuf_once(self):
-        """Add one cycle's worth of output to self.outbuf"""
+        u"""Add one cycle's worth of output to self.outbuf"""
         if not self.infile_eof:
             self._add_to_inbuf()
         try:
@@ -104,7 +104,7 @@ class LikeFile:
         self.outbuf.fromstring(cycle_out)
 
     def _add_to_inbuf(self):
-        """Make sure len(self.inbuf) >= blocksize"""
+        u"""Make sure len(self.inbuf) >= blocksize"""
         assert not self.infile_eof
         while len(self.inbuf) < blocksize:
             new_in = self.infile.read(blocksize)
@@ -116,16 +116,16 @@ class LikeFile:
             self.inbuf += new_in
 
     def close(self):
-        """Close infile"""
+        u"""Close infile"""
         if not self.infile_closed:
             assert not self.infile.close()
         self.closed = 1
 
 
 class SigFile(LikeFile):
-    """File-like object which incrementally generates a librsync signature"""
+    u"""File-like object which incrementally generates a librsync signature"""
     def __init__(self, infile, blocksize=_librsync.RS_DEFAULT_BLOCK_LEN):
-        """SigFile initializer - takes basis file
+        u"""SigFile initializer - takes basis file
 
         basis file only needs to have read() and close() methods.  It
         will be closed when we come to the end of the signature.
@@ -139,9 +139,9 @@ class SigFile(LikeFile):
 
 
 class DeltaFile(LikeFile):
-    """File-like object which incrementally generates a librsync delta"""
+    u"""File-like object which incrementally generates a librsync delta"""
     def __init__(self, signature, new_file):
-        """DeltaFile initializer - call with signature and new file
+        u"""DeltaFile initializer - call with signature and new file
 
         Signature can either be a string or a file with read() and
         close() methods.  New_file also only needs to have read() and
@@ -162,9 +162,9 @@ class DeltaFile(LikeFile):
 
 
 class PatchedFile(LikeFile):
-    """File-like object which applies a librsync delta incrementally"""
+    u"""File-like object which applies a librsync delta incrementally"""
     def __init__(self, basis_file, delta_file):
-        """PatchedFile initializer - call with basis delta
+        u"""PatchedFile initializer - call with basis delta
 
         Here basis_file must be a true Python file, because we may
         need to seek() around in it a lot, and this is done in C.
@@ -173,16 +173,16 @@ class PatchedFile(LikeFile):
         """
         LikeFile.__init__(self, delta_file)
         if not isinstance(basis_file, types.FileType):
-            """ tempfile.TemporaryFile() only guarantees a true file
+            u""" tempfile.TemporaryFile() only guarantees a true file
             object on posix platforms. on cygwin/windows a file-like
             object whose file attribute is the underlying true file
             object is returned.
             """
-            if hasattr(basis_file, 'file') and isinstance(basis_file.file, types.FileType):
+            if hasattr(basis_file, u'file') and isinstance(basis_file.file, types.FileType):
                 basis_file = basis_file.file
             else:
-                raise TypeError(_("basis_file must be a (true) file or an object whose "
-                                  "file attribute is the underlying true file object"))
+                raise TypeError(_(u"basis_file must be a (true) file or an object whose "
+                                  u"file attribute is the underlying true file object"))
         try:
             self.maker = _librsync.new_patchmaker(basis_file)
         except _librsync.librsyncError as e:
@@ -190,33 +190,33 @@ class PatchedFile(LikeFile):
 
 
 class SigGenerator:
-    """Calculate signature.
+    u"""Calculate signature.
 
     Input and output is same as SigFile, but the interface is like md5
     module, not filelike object
 
     """
     def __init__(self, blocksize=_librsync.RS_DEFAULT_BLOCK_LEN):
-        """Return new signature instance"""
+        u"""Return new signature instance"""
         try:
             self.sig_maker = _librsync.new_sigmaker(blocksize)
         except _librsync.librsyncError as e:
             raise librsyncError(str(e))
         self.gotsig = None
-        self.buffer = ""
+        self.buffer = b""
         self.sigstring_list = []
 
     def update(self, buf):
-        """Add buf to data that signature will be calculated over"""
+        u"""Add buf to data that signature will be calculated over"""
         if self.gotsig:
-            raise librsyncError("SigGenerator already provided signature")
+            raise librsyncError(u"SigGenerator already provided signature")
         self.buffer += buf
         while len(self.buffer) >= blocksize:
             if self.process_buffer():
-                raise librsyncError("Premature EOF received from sig_maker")
+                raise librsyncError(u"Premature EOF received from sig_maker")
 
     def process_buffer(self):
-        """Run self.buffer through sig_maker, add to self.sig_string"""
+        u"""Run self.buffer through sig_maker, add to self.sig_string"""
         try:
             eof, len_buf_read, cycle_out = self.sig_maker.cycle(self.buffer)
         except _librsync.librsyncError as e:
@@ -226,7 +226,7 @@ class SigGenerator:
         return eof
 
     def getsig(self):
-        """Return signature over given data"""
+        u"""Return signature over given data"""
         while not self.process_buffer():
             pass  # keep running until eof
-        return ''.join(self.sigstring_list)
+        return b''.join(self.sigstring_list)
