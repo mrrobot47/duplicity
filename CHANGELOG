@@ -375,6 +375,10 @@ New in v0.8.00 (2016/07/??)
 * Reverted back to rev 1317 and reimplemented revs 1319 to 1322
 * Adorned strings in testing/, testing/functional/, and testing/unit
 * Added AUTHORS file listing all copyright claimants in headers
+* Merged in lp:~mgorse/duplicity/0.8-series
+  - Adorn some duplicity/*.py strings. I've avoided submitting anything that I think might require
+    significant discussion; I think that reviewing will be easier this way. Mostly annotated strings
+    as unicode, except for librsync.py.
 
 
 New in v0.7.08 (2016/07/02)

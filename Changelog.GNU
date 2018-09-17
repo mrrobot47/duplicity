@@ -1,3 +1,10 @@
+2018-08-17  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mgorse/duplicity/0.8-series
+      - Adorn some duplicity/*.py strings. I've avoided submitting anything that I think might require
+        significant discussion; I think that reviewing will be easier this way. Mostly annotated strings
+        as unicode, except for librsync.py.
+
 2018-08-01  Kenneth Loafman  <kenneth@loafman.com>
 
     * Added AUTHORS file listing all copyright claimants in headers
