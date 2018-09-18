@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-08-01 10:53-0500\n"
+"POT-Creation-Date: 2018-09-17 15:38-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-08-03 05:57+0000\n"
-"X-Generator: Launchpad (build 18739)\n"
+"X-Launchpad-Export-Date: 2018-09-18 04:54+0000\n"
+"X-Generator: Launchpad (build 18780)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -347,7 +347,7 @@ msgstr ""
 "sein.\n"
 "Bitte »ulimit -n 1024« ausführen, um dieses zu berichtigen.\n"
 
-#: ../bin/duplicity:1434
+#: ../bin/duplicity:1435
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
@@ -355,7 +355,7 @@ msgstr ""
 "NEUSTART: Das Hochladen des ersten Datenträgers ist fehlgeschlagen.\n"
 "         Neustart nicht möglich, Sicherung wird vom Anfang wiederaufgenommen."
 
-#: ../bin/duplicity:1440
+#: ../bin/duplicity:1441
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
@@ -364,7 +364,7 @@ msgstr ""
 "NEUSTART: Das Hochladen der Datenträger %d bis %d ist fehlgeschlagen.\n"
 "        Sicherung wird mit Datenträger %d wiederaufgenommen."
 
-#: ../bin/duplicity:1447
+#: ../bin/duplicity:1448
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -377,7 +377,7 @@ msgstr ""
 "        Neustart nicht möglich … duplicity wird die letzte unvollständige\n"
 "        Sicherung entfernen und von vorn anfangen."
 
-#: ../bin/duplicity:1468
+#: ../bin/duplicity:1469
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -394,40 +394,40 @@ msgstr ""
 "\n"
 "Siehe https://bugs.launchpad.net/duplicity/+bug/931175\n"
 
-#: ../bin/duplicity:1491
+#: ../bin/duplicity:1492
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr "Die Sperrdatei %s wird erfasst"
 
-#: ../bin/duplicity:1549
+#: ../bin/duplicity:1550
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr ""
 "Das letzte %s-Sicherung hinterließ einen Teil eines Sicherungssatzes, "
 "Neustart wird durchgeführt."
 
-#: ../bin/duplicity:1553
+#: ../bin/duplicity:1554
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr ""
 "Der letzte unvollständige %s-Sicherungssatz wird entfernt, Neustart wird "
 "durchgeführt."
 
-#: ../bin/duplicity:1565
+#: ../bin/duplicity:1566
 msgid "Last full backup date:"
 msgstr "Letzte vollständige Sicherung:"
 
-#: ../bin/duplicity:1567
+#: ../bin/duplicity:1568
 msgid "Last full backup date: none"
 msgstr "Letzte vollständige Sicherung: Keine"
 
-#: ../bin/duplicity:1569
+#: ../bin/duplicity:1570
 msgid "Last full backup is too old, forcing full backup"
 msgstr ""
 "Letzte vollständige Sicherung ist zu alt, vollständige Sicherung wird "
 "erzwungen"
 
-#: ../bin/duplicity:1618
+#: ../bin/duplicity:1619
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."
@@ -435,21 +435,21 @@ msgstr ""
 "Bei symmetrischer Verschlüsselung müssen die Passphrasen für Signatur und "
 "Verschlüsselung übereinstimmen."
 
-#: ../bin/duplicity:1687
+#: ../bin/duplicity:1688
 msgid "INT intercepted...exiting."
 msgstr "INT abgefangen … wird beendet."
 
-#: ../bin/duplicity:1695
+#: ../bin/duplicity:1696
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "GPG-Fehlerdetail: %s"
 
-#: ../bin/duplicity:1705
+#: ../bin/duplicity:1706
 #, python-format
 msgid "User error detail: %s"
 msgstr "Benutzerfehlerdetail: %s"
 
-#: ../bin/duplicity:1715
+#: ../bin/duplicity:1716
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Fehlerdetail des Hintergrundprogramms: %s"

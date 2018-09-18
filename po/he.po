@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-08-01 10:53-0500\n"
+"POT-Creation-Date: 2018-09-17 15:38-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Hebrew <he@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-08-03 05:57+0000\n"
-"X-Generator: Launchpad (build 18739)\n"
+"X-Launchpad-Export-Date: 2018-09-18 04:54+0000\n"
+"X-Generator: Launchpad (build 18780)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -311,20 +311,20 @@ msgid ""
 "Use 'ulimit -n 1024' or higher to correct.\n"
 msgstr ""
 
-#: ../bin/duplicity:1434
+#: ../bin/duplicity:1435
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
 msgstr ""
 
-#: ../bin/duplicity:1440
+#: ../bin/duplicity:1441
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
 "         Restarting backup at volume %d."
 msgstr ""
 
-#: ../bin/duplicity:1447
+#: ../bin/duplicity:1448
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -333,7 +333,7 @@ msgid ""
 "         backup then restart the backup from the beginning."
 msgstr ""
 
-#: ../bin/duplicity:1468
+#: ../bin/duplicity:1469
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -343,54 +343,54 @@ msgid ""
 "See https://bugs.launchpad.net/duplicity/+bug/931175\n"
 msgstr ""
 
-#: ../bin/duplicity:1491
+#: ../bin/duplicity:1492
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr ""
 
-#: ../bin/duplicity:1549
+#: ../bin/duplicity:1550
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr ""
 
-#: ../bin/duplicity:1553
+#: ../bin/duplicity:1554
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr ""
 
-#: ../bin/duplicity:1565
+#: ../bin/duplicity:1566
 msgid "Last full backup date:"
 msgstr ""
 
-#: ../bin/duplicity:1567
+#: ../bin/duplicity:1568
 msgid "Last full backup date: none"
 msgstr ""
 
-#: ../bin/duplicity:1569
+#: ../bin/duplicity:1570
 msgid "Last full backup is too old, forcing full backup"
 msgstr ""
 
-#: ../bin/duplicity:1618
+#: ../bin/duplicity:1619
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."
 msgstr ""
 
-#: ../bin/duplicity:1687
+#: ../bin/duplicity:1688
 msgid "INT intercepted...exiting."
 msgstr ""
 
-#: ../bin/duplicity:1695
+#: ../bin/duplicity:1696
 #, python-format
 msgid "GPG error detail: %s"
 msgstr ""
 
-#: ../bin/duplicity:1705
+#: ../bin/duplicity:1706
 #, python-format
 msgid "User error detail: %s"
 msgstr ""
 
-#: ../bin/duplicity:1715
+#: ../bin/duplicity:1716
 #, python-format
 msgid "Backend error detail: %s"
 msgstr ""

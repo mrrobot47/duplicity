@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-08-01 10:53-0500\n"
+"POT-Creation-Date: 2018-09-17 15:38-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Kenneth Loafman <kenneth@loafman.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2018-08-03 05:57+0000\n"
-"X-Generator: Launchpad (build 18739)\n"
+"X-Launchpad-Export-Date: 2018-09-18 04:54+0000\n"
+"X-Generator: Launchpad (build 18780)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -345,7 +345,7 @@ msgstr ""
 "1024.\n"
 "Используйте 'ulimit -n 1024' или выше, чтобы исправить.\n"
 
-#: ../bin/duplicity:1434
+#: ../bin/duplicity:1435
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
@@ -353,7 +353,7 @@ msgstr ""
 "ПЕРЕЗАПУСК: Ошибка выгрузки первого тома перед завершением работы.\n"
 "         Перезапуск невозможен...выполнение резервного копирования с начала."
 
-#: ../bin/duplicity:1440
+#: ../bin/duplicity:1441
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
@@ -362,7 +362,7 @@ msgstr ""
 "ПЕРЕЗАПУСК: Ошибка выгрузки томов %d дo %d перед завершением работы.\n"
 "         Перезапуск резервного копирования в томе %d."
 
-#: ../bin/duplicity:1447
+#: ../bin/duplicity:1448
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -376,7 +376,7 @@ msgstr ""
 "части\n"
 "         резервной копии, затем запустит резервное копирования сначала."
 
-#: ../bin/duplicity:1468
+#: ../bin/duplicity:1469
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -386,40 +386,40 @@ msgid ""
 "See https://bugs.launchpad.net/duplicity/+bug/931175\n"
 msgstr ""
 
-#: ../bin/duplicity:1491
+#: ../bin/duplicity:1492
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr ""
 
-#: ../bin/duplicity:1549
+#: ../bin/duplicity:1550
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr ""
 "Последняя %s резервная копия оставила частичный набор, выполняется "
 "перезапуск."
 
-#: ../bin/duplicity:1553
+#: ../bin/duplicity:1554
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr ""
 "Очистка предыдущего частичного %s набора резервного копирования, выполняется "
 "перезапуск."
 
-#: ../bin/duplicity:1565
+#: ../bin/duplicity:1566
 msgid "Last full backup date:"
 msgstr "Время последней полной резервной копии:"
 
-#: ../bin/duplicity:1567
+#: ../bin/duplicity:1568
 msgid "Last full backup date: none"
 msgstr "Время последней полной резервной копии: нету"
 
-#: ../bin/duplicity:1569
+#: ../bin/duplicity:1570
 msgid "Last full backup is too old, forcing full backup"
 msgstr ""
 "Последняя полная резервная копия слишком старая, будет сделана полная "
 "резервная копия"
 
-#: ../bin/duplicity:1618
+#: ../bin/duplicity:1619
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."
@@ -427,21 +427,21 @@ msgstr ""
 "При использовании симметричного шифрования кодовая фраза для подписи должна "
 "совпадать с кодовой фразой для шифрования."
 
-#: ../bin/duplicity:1687
+#: ../bin/duplicity:1688
 msgid "INT intercepted...exiting."
 msgstr "Перехват INT...выполняется выход."
 
-#: ../bin/duplicity:1695
+#: ../bin/duplicity:1696
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "Подробности ошибки GPG: %s"
 
-#: ../bin/duplicity:1705
+#: ../bin/duplicity:1706
 #, python-format
 msgid "User error detail: %s"
 msgstr "Сведения ошибки пользователя: %s"
 
-#: ../bin/duplicity:1715
+#: ../bin/duplicity:1716
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Подробности об ошибке в заглушке: %s"

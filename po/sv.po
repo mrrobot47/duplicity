@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-08-01 10:53-0500\n"
+"POT-Creation-Date: 2018-09-17 15:38-0500\n"
 "PO-Revision-Date: 2018-08-09 15:44+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-08-10 05:14+0000\n"
-"X-Generator: Launchpad (build 18747)\n"
+"X-Launchpad-Export-Date: 2018-09-18 04:54+0000\n"
+"X-Generator: Launchpad (build 18780)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -333,7 +333,7 @@ msgstr ""
 "Högsta antal öppna filer för %s är för lågt, bör vara >= 1024.\n"
 "Använd 'ulimit -n 1024' eller högre för att rätta till detta.\n"
 
-#: ../bin/duplicity:1434
+#: ../bin/duplicity:1435
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
@@ -341,7 +341,7 @@ msgstr ""
 "OMSTART: Den första volymen kunde inte laddas upp före avslutning.\n"
 "          Omstart kan inte utföras... Kör säkerhetskopieringen från början."
 
-#: ../bin/duplicity:1440
+#: ../bin/duplicity:1441
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
@@ -350,7 +350,7 @@ msgstr ""
 "OMSTART: Volymerna %d till %d kunde inte laddas upp före avslutning.\n"
 "          Startar om säkerhetskopieringen vid volym %d."
 
-#: ../bin/duplicity:1447
+#: ../bin/duplicity:1448
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -364,7 +364,7 @@ msgstr ""
 "delvisa\n"
 "          säkerhetskopieringen, och sedan börja om från början."
 
-#: ../bin/duplicity:1468
+#: ../bin/duplicity:1469
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -380,38 +380,38 @@ msgstr ""
 "\n"
 "Se https://bugs.launchpad.net/duplicity/+bug/931175\n"
 
-#: ../bin/duplicity:1491
+#: ../bin/duplicity:1492
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr "Hämtar låsfil %s"
 
-#: ../bin/duplicity:1549
+#: ../bin/duplicity:1550
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr ""
 "Senaste %s säkerhetskopiering lämnade ett ofullständigt arkiv, startar om."
 
-#: ../bin/duplicity:1553
+#: ../bin/duplicity:1554
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr ""
 "Städar upp föregående delvisa säkerhetskopieringsarkiv %s, startar om."
 
-#: ../bin/duplicity:1565
+#: ../bin/duplicity:1566
 msgid "Last full backup date:"
 msgstr "Datum för senaste fullständiga säkerhetskopiering:"
 
-#: ../bin/duplicity:1567
+#: ../bin/duplicity:1568
 msgid "Last full backup date: none"
 msgstr "Datum för senaste fullständiga säkerhetskopiering: inget"
 
-#: ../bin/duplicity:1569
+#: ../bin/duplicity:1570
 msgid "Last full backup is too old, forcing full backup"
 msgstr ""
 "Senaste fullständiga säkerhetskopiering är för gammal, framtvingar "
 "fullständig säkerhetskopiering"
 
-#: ../bin/duplicity:1618
+#: ../bin/duplicity:1619
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."
@@ -419,21 +419,21 @@ msgstr ""
 "När du använder symmetrisk kryptering måste det signerande lösenordet vara "
 "samma som krypteringens lösenord."
 
-#: ../bin/duplicity:1687
+#: ../bin/duplicity:1688
 msgid "INT intercepted...exiting."
 msgstr "INT mottogs... avslutar."
 
-#: ../bin/duplicity:1695
+#: ../bin/duplicity:1696
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "GPG-feldetaljer: %s"
 
-#: ../bin/duplicity:1705
+#: ../bin/duplicity:1706
 #, python-format
 msgid "User error detail: %s"
 msgstr "Detaljer om användarfel: %s"
 
-#: ../bin/duplicity:1715
+#: ../bin/duplicity:1716
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Detaljer om bakändesfel: %s"
@@ -871,6 +871,7 @@ msgstr "Kommandon:"
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr ""
+"Den angivna arkivkatalogen \"%s\" finns inte, eller är inte en katalog"
 
 #: ../duplicity/commandline.py:1004
 #, python-format
