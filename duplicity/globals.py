@@ -220,6 +220,11 @@ s3_multipart_max_timeout = None
 # Use server side encryption in s3
 s3_use_sse = False
 
+# Use server side kms encryption in s3
+s3_use_sse_kms = False
+s3_kms_key_id = None
+s3_kms_grant = None
+
 # Which storage policy to use for Swift containers
 swift_storage_policy = u""
 
