@@ -30,7 +30,7 @@ from duplicity import path
 from . import UnitTestCase
 
 
-@pytest.mark.nocapture
+@pytest.mark.usefixtures(u"redirect_stdin")
 class GPGTest(UnitTestCase):
     u"""Test GPGFile"""
     def setUp(self):

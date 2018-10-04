@@ -183,7 +183,7 @@ class CollectionTest(UnitTestCase):
         test_fileobj(1, u"hello 1")
         test_fileobj(2, u"Hello 2")
 
-    @pytest.mark.nocapture
+    @pytest.mark.usefixtures(u"redirect_stdin")
     def test_sigchain_fileobj(self):
         u"""Test getting signature chain fileobjs from archive_dir_path"""
         self.set_gpg_profile()

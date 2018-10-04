@@ -2,6 +2,9 @@
 
     * Merged in lp:~mgorse/duplicity/0.8-series
       - Adorn more strings in duplicity/*.py
+    * Applied patch from Radim Tobolka to allow all tests to run at once.
+    * Fixed bug #1795227 global name Dropbox is not defined
+      - Applied patch from Pedro Gimeno to restore globals
 
 2018-08-17  Kenneth Loafman  <kenneth@loafman.com>
 

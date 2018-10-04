@@ -89,6 +89,13 @@ class DPBXBackend(duplicity.backend.Backend):
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
+        global Dropbox
+        global AuthError, BadInputError, ApiError
+        global UploadSessionCursor, CommitInfo
+        global WriteMode, GetMetadataError
+        global DeleteError, UploadSessionLookupError
+        global ListFolderError
+        global DropboxOAuth2FlowNoRedirect
         try:
             from dropbox import Dropbox
             from dropbox.exceptions import AuthError, BadInputError, ApiError

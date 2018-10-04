@@ -381,6 +381,9 @@ New in v0.8.00 (2016/07/??)
     as unicode, except for librsync.py.
 * Merged in lp:~mgorse/duplicity/0.8-series
   - Adorn more strings in duplicity/*.py
+* Applied patch from Radim Tobolka to allow all tests to run at once.
+* Fixed bug #1795227 global name Dropbox is not defined
+  - Applied patch from Pedro Gimeno to restore globals
 
 
 New in v0.7.08 (2016/07/02)
