@@ -1,3 +1,8 @@
+2018-10-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mgorse/duplicity/0.8-series
+      - Adorn more strings in duplicity/*.py
+
 2018-08-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~mgorse/duplicity/0.8-series
