@@ -43,11 +43,6 @@ documentation on what this code does can be found on the man page.
 """
 
 
-class SelectError(Exception):
-    u"""Some error dealing with the Select class"""
-    pass
-
-
 class Select:
     u"""Iterate appropriate Paths in given directory
 
@@ -281,7 +276,7 @@ class Select:
                     self.add_selection_func(self.regexp_get_sf(arg, 1))
                 else:
                     assert 0, u"Bad selection option %s" % opt
-        except SelectError as e:
+        except GlobbingError as e:
             self.parse_catch_error(e)
         assert filelists_index == len(filelists)
         self.parse_last_excludes()
@@ -508,8 +503,7 @@ probably isn't what you meant.""") %
         file_prefix_selection = select_fn_from_glob(glob_str, include=1)(self.rootpath)
         if not file_prefix_selection:
             # file_prefix_selection == 1 (include) or 2 (scan)
-            raise FilePrefixError(glob_str + u" glob with " + self.rootpath.uc_name
-                                  + u" path gives " + unicode(file_prefix_selection))
+            raise FilePrefixError(glob_str)
 
         return select_fn_from_glob(glob_str, include, ignore_case)
 
