@@ -19,7 +19,7 @@ The default prefix is /usr, so files are put in /usr/bin,
 
 REQUIREMENTS:
 
- * Python v2.7 or later
+ * Python v2.7
  * librsync v0.9.6 or later
  * GnuPG for encryption
  * fasteners 0.14.1 or later for concurrency locking
