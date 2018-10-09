@@ -1,10 +1,9 @@
-2018-10-04  Kenneth Loafman  <kenneth@loafman.com>
+2018-08-17  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Merged in lp:~mgorse/duplicity/0.8-series
-      - Adorn more strings in duplicity/*.py
-    * Applied patch from Radim Tobolka to allow all tests to run at once.
-    * Fixed bug #1795227 global name Dropbox is not defined
-      - Applied patch from Pedro Gimeno to restore globals
+    * Merged in lp:~qsantos/duplicity/fix-unmatched-rule-error
+      - There are actually two commits: the first fixes a very minor detail in the README regarding the
+        Python version that should be used; the second fixes the way exceptions are handled when an
+        incorrect rule is specified, and display the nice error message rather than an obscure stack trace.
 
 2018-08-17  Kenneth Loafman  <kenneth@loafman.com>
 
