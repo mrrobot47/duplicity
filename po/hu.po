@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-04 09:30-0500\n"
+"POT-Creation-Date: 2018-10-08 15:02-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Úr Balázs <urbalazs@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-10-05 06:08+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-10 05:49+0000\n"
+"X-Generator: Launchpad (build 18790)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -445,34 +445,34 @@ msgstr "Hiba a %s állomány megnyitása közben"
 msgid "File %s already exists, will not overwrite."
 msgstr "A(z) %s fájl már létezik, nem lesz felülírva."
 
-#: ../duplicity/selection.py:119
+#: ../duplicity/selection.py:114
 #, python-format
 msgid "Skipping socket %s"
 msgstr "Konnektor (socket) átugrása: %s"
 
-#: ../duplicity/selection.py:123
+#: ../duplicity/selection.py:118
 #, python-format
 msgid "Error initializing file %s"
 msgstr "Hiba történt a %s állomány inicializálása során"
 
-#: ../duplicity/selection.py:127 ../duplicity/selection.py:152
-#: ../duplicity/selection.py:461
+#: ../duplicity/selection.py:122 ../duplicity/selection.py:147
+#: ../duplicity/selection.py:456
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Valószínűleg zárolt a %s állomány, nem érem el"
 
-#: ../duplicity/selection.py:167
+#: ../duplicity/selection.py:162
 #, python-format
 msgid "Warning: base %s doesn't exist, continuing"
 msgstr "Figyelem: %s alap nem létezik, folytatom"
 
-#: ../duplicity/selection.py:170 ../duplicity/selection.py:188
-#: ../duplicity/selection.py:191
+#: ../duplicity/selection.py:165 ../duplicity/selection.py:183
+#: ../duplicity/selection.py:186
 #, python-format
 msgid "Selecting %s"
 msgstr "%s kiválasztása"
 
-#: ../duplicity/selection.py:293
+#: ../duplicity/selection.py:288
 #, python-format
 msgid ""
 "Fatal Error: The file specification\n"
@@ -489,7 +489,7 @@ msgstr ""
 "Egy állományspecifikáció az alapkönyvtárral kezdődjön, vagy\n"
 "valamilyen minta (mint pl. a '**') illeszkedjen az alapkönyvtárra."
 
-#: ../duplicity/selection.py:302
+#: ../duplicity/selection.py:297
 #, python-format
 msgid ""
 "Fatal Error while processing expression\n"
@@ -498,7 +498,7 @@ msgstr ""
 "Súlyos hiba: A kifejezés feldolgozása során hiba történt:\n"
 "%s"
 
-#: ../duplicity/selection.py:311
+#: ../duplicity/selection.py:306
 #, python-format
 msgid ""
 "Last selection expression:\n"
@@ -513,17 +513,17 @@ msgstr ""
 "Mivel az alapértelmezés szerint minden állományt befoglalunk,\n"
 "a kifejezés felesleges. Kilépek, mert valószínűleg nem ezt akartad."
 
-#: ../duplicity/selection.py:367
+#: ../duplicity/selection.py:362
 #, python-format
 msgid "Reading globbing filelist %s"
 msgstr "Globbing állománylista %s beolvasása"
 
-#: ../duplicity/selection.py:400
+#: ../duplicity/selection.py:395
 #, python-format
 msgid "Error compiling regular expression %s"
 msgstr "Hiba történt a %s reguláris kifejezés lefordítása során"
 
-#: ../duplicity/selection.py:417
+#: ../duplicity/selection.py:412
 msgid ""
 "Warning: exclude-device-files is not the first selector.\n"
 "This may not be what you intended"

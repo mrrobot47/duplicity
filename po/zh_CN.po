@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2018-10-04 09:30-0500\n"
+"POT-Creation-Date: 2018-10-08 15:02-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Careone <zzbusagain@yahoo.com.cn>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2018-10-05 06:08+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-10 05:49+0000\n"
+"X-Generator: Launchpad (build 18790)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -418,34 +418,34 @@ msgstr "打开文件 %s 时出错"
 msgid "File %s already exists, will not overwrite."
 msgstr "文件 %s 已存在，不进行覆盖。"
 
-#: ../duplicity/selection.py:119
+#: ../duplicity/selection.py:114
 #, python-format
 msgid "Skipping socket %s"
 msgstr "跳过套接字 %s"
 
-#: ../duplicity/selection.py:123
+#: ../duplicity/selection.py:118
 #, python-format
 msgid "Error initializing file %s"
 msgstr "初始化文件 %s 时出错"
 
-#: ../duplicity/selection.py:127 ../duplicity/selection.py:152
-#: ../duplicity/selection.py:461
+#: ../duplicity/selection.py:122 ../duplicity/selection.py:147
+#: ../duplicity/selection.py:456
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "访问可能被锁定的文件 %s 时出错"
 
-#: ../duplicity/selection.py:167
+#: ../duplicity/selection.py:162
 #, python-format
 msgid "Warning: base %s doesn't exist, continuing"
 msgstr "警告：基本路径 %s 不存在，正在继续"
 
-#: ../duplicity/selection.py:170 ../duplicity/selection.py:188
-#: ../duplicity/selection.py:191
+#: ../duplicity/selection.py:165 ../duplicity/selection.py:183
+#: ../duplicity/selection.py:186
 #, python-format
 msgid "Selecting %s"
 msgstr "选择 %s"
 
-#: ../duplicity/selection.py:293
+#: ../duplicity/selection.py:288
 #, python-format
 msgid ""
 "Fatal Error: The file specification\n"
@@ -462,7 +462,7 @@ msgstr ""
 "下的任何文件。正确的指定应当以基本路径或者\n"
 "匹配基本路径的模式 (如 '**') 开始。"
 
-#: ../duplicity/selection.py:302
+#: ../duplicity/selection.py:297
 #, python-format
 msgid ""
 "Fatal Error while processing expression\n"
@@ -471,7 +471,7 @@ msgstr ""
 "处理正则表达式时发生致命错误\n"
 "%s"
 
-#: ../duplicity/selection.py:311
+#: ../duplicity/selection.py:306
 #, python-format
 msgid ""
 "Last selection expression:\n"
@@ -486,17 +486,17 @@ msgstr ""
 "所有文件，所以表达式无效。鉴于表达式与\n"
 "您的真实意图可能不符，程序将会退出。"
 
-#: ../duplicity/selection.py:367
+#: ../duplicity/selection.py:362
 #, python-format
 msgid "Reading globbing filelist %s"
 msgstr "读取通配符文件列表 %s"
 
-#: ../duplicity/selection.py:400
+#: ../duplicity/selection.py:395
 #, python-format
 msgid "Error compiling regular expression %s"
 msgstr "解析正则表达式 %s 时出错"
 
-#: ../duplicity/selection.py:417
+#: ../duplicity/selection.py:412
 msgid ""
 "Warning: exclude-device-files is not the first selector.\n"
 "This may not be what you intended"

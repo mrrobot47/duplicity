@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-04 09:30-0500\n"
+"POT-Creation-Date: 2018-10-08 15:02-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Łukasz Cieliński <lukasc@mp.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2018-10-05 06:08+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-10 05:49+0000\n"
+"X-Generator: Launchpad (build 18790)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -451,34 +451,34 @@ msgstr "Błąd podczas próby otwarcia pliku %s"
 msgid "File %s already exists, will not overwrite."
 msgstr "Plik %s już istnieje i nie zostanie nadpisany."
 
-#: ../duplicity/selection.py:119
+#: ../duplicity/selection.py:114
 #, python-format
 msgid "Skipping socket %s"
 msgstr "Pomijanie pliku gniazda %s"
 
-#: ../duplicity/selection.py:123
+#: ../duplicity/selection.py:118
 #, python-format
 msgid "Error initializing file %s"
 msgstr "Błąd inicjalizacji pliku %s"
 
-#: ../duplicity/selection.py:127 ../duplicity/selection.py:152
-#: ../duplicity/selection.py:461
+#: ../duplicity/selection.py:122 ../duplicity/selection.py:147
+#: ../duplicity/selection.py:456
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Błąd dostępu do (prawdopodobnie) zastrzeżonego pliku %s"
 
-#: ../duplicity/selection.py:167
+#: ../duplicity/selection.py:162
 #, python-format
 msgid "Warning: base %s doesn't exist, continuing"
 msgstr "Ostrzeżenie: ścieżka bazowa %s nie istnieje, kontynuowanie"
 
-#: ../duplicity/selection.py:170 ../duplicity/selection.py:188
-#: ../duplicity/selection.py:191
+#: ../duplicity/selection.py:165 ../duplicity/selection.py:183
+#: ../duplicity/selection.py:186
 #, python-format
 msgid "Selecting %s"
 msgstr "Wybrano %s"
 
-#: ../duplicity/selection.py:293
+#: ../duplicity/selection.py:288
 #, python-format
 msgid ""
 "Fatal Error: The file specification\n"
@@ -495,7 +495,7 @@ msgstr ""
 "Użyteczne specyfikacje zaczynają się od ścieżki bazowej lub zawierają\n"
 "wzorzec (np. \"**\"), który odpowiada ścieżce bazowej."
 
-#: ../duplicity/selection.py:302
+#: ../duplicity/selection.py:297
 #, python-format
 msgid ""
 "Fatal Error while processing expression\n"
@@ -504,7 +504,7 @@ msgstr ""
 "Krytyczny błąd podczas przetwarzania wyrażenia\n"
 "%s"
 
-#: ../duplicity/selection.py:311
+#: ../duplicity/selection.py:306
 #, python-format
 msgid ""
 "Last selection expression:\n"
@@ -520,17 +520,17 @@ msgstr ""
 "wykonywanie,\n"
 "ponieważ prawdopodobnie nie jest to to co chciałeś uzyskać."
 
-#: ../duplicity/selection.py:367
+#: ../duplicity/selection.py:362
 #, python-format
 msgid "Reading globbing filelist %s"
 msgstr "Wczytywanie pliku z listą wyrażeń regularnych %s"
 
-#: ../duplicity/selection.py:400
+#: ../duplicity/selection.py:395
 #, python-format
 msgid "Error compiling regular expression %s"
 msgstr "Błąd kompilacji wyrażenia regularnego %s"
 
-#: ../duplicity/selection.py:417
+#: ../duplicity/selection.py:412
 msgid ""
 "Warning: exclude-device-files is not the first selector.\n"
 "This may not be what you intended"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-04 09:30-0500\n"
+"POT-Creation-Date: 2018-10-08 15:02-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2018-10-05 06:08+0000\n"
-"X-Generator: Launchpad (build 18785)\n"
+"X-Launchpad-Export-Date: 2018-10-10 05:49+0000\n"
+"X-Generator: Launchpad (build 18790)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -457,34 +457,34 @@ msgstr "Napaka med odpiranjem datoteke %s"
 msgid "File %s already exists, will not overwrite."
 msgstr "Datoteka %s že obstaja, zato ne bo prepisana."
 
-#: ../duplicity/selection.py:119
+#: ../duplicity/selection.py:114
 #, python-format
 msgid "Skipping socket %s"
 msgstr "Preskakovanje vtiča %s"
 
-#: ../duplicity/selection.py:123
+#: ../duplicity/selection.py:118
 #, python-format
 msgid "Error initializing file %s"
 msgstr "Napaka med začenjanjem datoteke %s"
 
-#: ../duplicity/selection.py:127 ../duplicity/selection.py:152
-#: ../duplicity/selection.py:461
+#: ../duplicity/selection.py:122 ../duplicity/selection.py:147
+#: ../duplicity/selection.py:456
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Napaka med dostopanjem do morda zaklenjene datoteke %s"
 
-#: ../duplicity/selection.py:167
+#: ../duplicity/selection.py:162
 #, python-format
 msgid "Warning: base %s doesn't exist, continuing"
 msgstr "Opozorilo: osnova %s ne obstaja, nadaljevanje"
 
-#: ../duplicity/selection.py:170 ../duplicity/selection.py:188
-#: ../duplicity/selection.py:191
+#: ../duplicity/selection.py:165 ../duplicity/selection.py:183
+#: ../duplicity/selection.py:186
 #, python-format
 msgid "Selecting %s"
 msgstr "Izbiranje %s"
 
-#: ../duplicity/selection.py:293
+#: ../duplicity/selection.py:288
 #, python-format
 msgid ""
 "Fatal Error: The file specification\n"
@@ -501,7 +501,7 @@ msgstr ""
 "Uporabna določila datoteke se začnejo z osnovno mapo ali\n"
 "z vzorcem, ki se ujema z osnovno mapo."
 
-#: ../duplicity/selection.py:302
+#: ../duplicity/selection.py:297
 #, python-format
 msgid ""
 "Fatal Error while processing expression\n"
@@ -510,7 +510,7 @@ msgstr ""
 "Usodna napaka med obdelovanjem izraza\n"
 "%s"
 
-#: ../duplicity/selection.py:311
+#: ../duplicity/selection.py:306
 #, python-format
 msgid ""
 "Last selection expression:\n"
@@ -525,17 +525,17 @@ msgstr ""
 "je ta izraz odvečen. Program se bo končal, ker verjetno niste želeli vnesti\n"
 "takšnega izraza."
 
-#: ../duplicity/selection.py:367
+#: ../duplicity/selection.py:362
 #, python-format
 msgid "Reading globbing filelist %s"
 msgstr "Branje seznama datotek globbing %s"
 
-#: ../duplicity/selection.py:400
+#: ../duplicity/selection.py:395
 #, python-format
 msgid "Error compiling regular expression %s"
 msgstr "Napaka med kodnim prevajanjem logičnega izraza %s"
 
-#: ../duplicity/selection.py:417
+#: ../duplicity/selection.py:412
 msgid ""
 "Warning: exclude-device-files is not the first selector.\n"
 "This may not be what you intended"
