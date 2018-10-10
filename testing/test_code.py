@@ -111,11 +111,7 @@ class CodeTest(DuplicityTestCase):
                          os.path.join(_top_dir, u'docs', u'conf.py'),
                          # TODO Every file from here down needs to be fixed and the exclusion removed
                          os.path.join(_top_dir, u'setup.py'),
-                         os.path.join(_top_dir, u'duplicity', u'__init__.py'),
                          os.path.join(_top_dir, u'duplicity', u'compilec.py'),
-                         os.path.join(_top_dir, u'testing', u'overrides', u'gettext.py'),
-                         os.path.join(_top_dir, u'testing', u'test_unadorned.py'),
-                         os.path.join(_top_dir, u'testing', u'unit', u'test_statistics.py'),
                          ]
 
 
