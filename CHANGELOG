@@ -383,6 +383,8 @@ New in v0.8.00 (2016/07/??)
   - There are actually two commits: the first fixes a very minor detail in the README regarding the
     Python version that should be used; the second fixes the way exceptions are handled when an
     incorrect rule is specified, and display the nice error message rather than an obscure stack trace.
+* Merged in lp:~mgorse/duplicity/0.8-series
+  - Adorn some remaining strings
 
 
 New in v0.7.08 (2016/07/02)

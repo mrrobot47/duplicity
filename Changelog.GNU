@@ -1,3 +1,8 @@
+2018-10-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mgorse/duplicity/0.8-series
+      - Adorn some remaining strings
+
 2018-08-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~qsantos/duplicity/fix-unmatched-rule-error
