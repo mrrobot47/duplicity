@@ -39,7 +39,7 @@ from duplicity.gpg import GPGError
 
 # For type testing against both int and long types that works in python 2/3
 if sys.version_info < (3,):
-    integer_types = (int, types.LongType)
+    integer_types = (int, int)
 else:
     integer_types = (int,)
 
