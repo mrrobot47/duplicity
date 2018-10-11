@@ -222,7 +222,7 @@ def dummy_backup(tarblock_iter):
     """
     try:
         # Just spin our wheels
-        while tarblock_iter.next():
+        while next(tarblock_iter):
             pass
     except StopIteration:
         pass
@@ -247,7 +247,7 @@ def restart_position_iterator(tarblock_iter):
     last_block = globals.restart.last_block
     try:
         # Just spin our wheels
-        iter_result = tarblock_iter.next()
+        iter_result = next(tarblock_iter)
         while iter_result:
             if (tarblock_iter.previous_index == last_index):
                 # If both the previous index and this index are done, exit now
@@ -266,7 +266,7 @@ def restart_position_iterator(tarblock_iter):
                 # We went too far! Stuff the data back into place before restarting
                 tarblock_iter.queue_index_data(iter_result)
                 break
-            iter_result = tarblock_iter.next()
+            iter_result = next(tarblock_iter)
     except StopIteration:
         log.Warn(_(u"File %s missing in backup set.\n"
                    u"Continuing restart on file %s.") %
