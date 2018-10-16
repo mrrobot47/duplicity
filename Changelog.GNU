@@ -2,6 +2,8 @@
 
     * Merged in lp:~mgorse/duplicity/0.8-series
       - Run futurize --stage1, and adjust so that tests still pass.
+    * Fixed but #1797797 with patch from Bas Hulsken
+      - use bytes instead of unicode for '/' in filenames
 
 2018-10-11  Kenneth Loafman  <kenneth@loafman.com>
 

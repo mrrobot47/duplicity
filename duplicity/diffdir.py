@@ -246,7 +246,7 @@ def sigtar2path_iter(sigtarobj):
         else:
             raise DiffDirException(u"Bad tarinfo name %s" % (tiname,))
 
-        index = tuple(name.split(u"/"))
+        index = tuple(name.split(b"/"))
         if not index[-1]:
             index = index[:-1]  # deal with trailing /, ""
 
