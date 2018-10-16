@@ -1,3 +1,8 @@
+2018-10-16  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mgorse/duplicity/0.8-series
+      - Run futurize --stage1, and adjust so that tests still pass.
+
 2018-10-11  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~mgorse/duplicity/0.8-series

@@ -28,7 +28,7 @@ from . import UnitTestCase
 
 # For type testing against both int and long types that works in python 2/3
 if sys.version_info < (3,):
-    integer_types = (int, types.LongType)
+    integer_types = (int, int)
 else:
     integer_types = (int,)
 
@@ -38,7 +38,7 @@ class TimeTest:
         u"""test timetostring and stringtotime"""
         dup_time.setcurtime()
         assert type(dup_time.curtime) in integer_types
-        assert isinstance(dup_time.curtimestr, types.StringTypes)
+        assert isinstance(dup_time.curtimestr, (str, u"".__class__))
         assert (dup_time.cmp(int(dup_time.curtime), dup_time.curtimestr) == 0 or
                 dup_time.cmp(int(dup_time.curtime) + 1, dup_time.curtimestr) == 0)
         time.sleep(1.05)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2012 Canonical Ltd
@@ -148,14 +149,14 @@ class FunctionalTestCase(DuplicityTestCase):
         if fail:
             self.assertEqual(30, return_val)
         elif return_val:
-            print >>sys.stderr, u"\n...command:", cmdline
-            print >>sys.stderr, u"...cwd:", os.getcwd()
-            print >>sys.stderr, u"...output:"
+            print(u"\n...command:", cmdline, file=sys.stderr)
+            print(u"...cwd:", os.getcwd(), file=sys.stderr)
+            print(u"...output:", file=sys.stderr)
             for line in lines:
                 line = line.rstrip()
                 if line:
-                    print >>sys.stderr, line
-            print >>sys.stderr, u"...return_val:", return_val
+                    print(line, file=sys.stderr)
+            print(u"...return_val:", return_val, file=sys.stderr)
             raise CmdError(return_val)
 
     def backup(self, type, input_dir, options=[], **kwargs):

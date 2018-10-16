@@ -385,7 +385,9 @@ New in v0.8.00 (2016/07/??)
     incorrect rule is specified, and display the nice error message rather than an obscure stack trace.
 * Merged in lp:~mgorse/duplicity/0.8-series
   - Adorn some remaining strings
-
+* Merged in lp:~mgorse/duplicity/0.8-series
+  - Run futurize --stage1, and adjust so that tests still pass.
+	
 
 New in v0.7.08 (2016/07/02)
 ---------------------------

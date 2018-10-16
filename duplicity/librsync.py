@@ -149,7 +149,7 @@ class DeltaFile(LikeFile):
 
         """
         LikeFile.__init__(self, new_file)
-        if isinstance(signature, types.StringType):
+        if isinstance(signature, bytes):
             sig_string = signature
         else:
             self.check_file(signature)

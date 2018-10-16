@@ -3,6 +3,7 @@
 # Copyright (c) 2014 Gu1
 # Licensed under the MIT license
 
+from __future__ import print_function
 import ConfigParser
 import os
 import re
@@ -122,12 +123,12 @@ Exception: %s""" % str(e))
             config.remove_option(u"hubic", u"email")
             with open(TOKENS_FILE, u'wb') as configfile:
                 config.write(configfile)
-            print u"username has been removed from the .hubic_tokens file sent to the CE."
+            print(u"username has been removed from the .hubic_tokens file sent to the CE.")
         if config.has_option(u"hubic", u"password"):
             config.remove_option(u"hubic", u"password")
             with open(TOKENS_FILE, u'wb') as configfile:
                 config.write(configfile)
-            print u"password has been removed from the .hubic_tokens file sent to the CE."
+            print(u"password has been removed from the .hubic_tokens file sent to the CE.")
 
         return oauth_token
 
@@ -157,7 +158,7 @@ Exception: %s""" % str(e))
             )
             if r.status_code != 200:
                 if r.status_code == 509:
-                    print u"status_code 509: attempt #", retries, u" failed"
+                    print(u"status_code 509: attempt #", retries, u" failed")
                     retries += 1
                     time.sleep(sleep_time)
                     sleep_time = sleep_time * 2

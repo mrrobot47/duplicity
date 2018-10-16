@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2011 Carlos Abalde <carlos.abalde@gmail.com>

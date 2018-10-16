@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2013 jno <jno@pisem.net>
@@ -148,12 +149,12 @@ Exception: %s""" % str(e))
         auth_flow = DropboxOAuth2FlowNoRedirect(app_key, app_secret)
         log.Debug(u'dpbx,auth_flow.start()')
         authorize_url = auth_flow.start()
-        print
-        print u'-' * 72
-        print u"1. Go to: " + authorize_url
-        print u"2. Click \"Allow\" (you might have to log in first)."
-        print u"3. Copy the authorization code."
-        print u'-' * 72
+        print()
+        print(u'-' * 72)
+        print(u"1. Go to: " + authorize_url)
+        print(u"2. Click \"Allow\" (you might have to log in first).")
+        print(u"3. Copy the authorization code.")
+        print(u'-' * 72)
         auth_code = raw_input(u"Enter the authorization code here: ").strip()
         try:
             log.Debug(u'dpbx,auth_flow.finish(%s)' % auth_code)

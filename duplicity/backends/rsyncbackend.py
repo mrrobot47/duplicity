@@ -1,3 +1,4 @@
+from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
@@ -143,7 +144,7 @@ class RsyncBackend(duplicity.backend.Backend):
             path = os.path.join(dir, file)
             to_delete.append(path)
             f = open(path, u'w')
-            print >> exclude, file
+            print(file, file=exclude)
             f.close()
         exclude.close()
         commandline = (u"%s --recursive --delete --exclude-from=%s %s/ %s" %

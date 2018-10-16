@@ -477,7 +477,7 @@ class Backend(object):
         """
         import shlex
 
-        if isinstance(commandline, (types.ListType, types.TupleType)):
+        if isinstance(commandline, (list, tuple)):
             logstr = u' '.join(commandline)
             args = commandline
         else:
@@ -583,7 +583,7 @@ class BackendWrapper(object):
         u"""
         Delete each filename in filename_list, in order if possible.
         """
-        assert not isinstance(filename_list, types.StringType)
+        assert not isinstance(filename_list, bytes)
         if hasattr(self.backend, u'_delete_list'):
             self._do_delete_list(filename_list)
         elif hasattr(self.backend, u'_delete'):
