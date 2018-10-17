@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-11 14:51-0500\n"
+"POT-Creation-Date: 2018-10-16 15:41-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Kenneth Loafman <kenneth@loafman.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2018-10-12 05:47+0000\n"
+"X-Launchpad-Export-Date: 2018-10-17 05:46+0000\n"
 "X-Generator: Launchpad (build 18790)\n"
 
 #: ../bin/duplicity:122
@@ -415,12 +415,12 @@ msgstr "Detalhe do erro de utilizador: %s"
 msgid "Backend error detail: %s"
 msgstr "Detalhe do erro no motor de processamento: %s"
 
-#: ../bin/rdiffdir:61 ../duplicity/commandline.py:263
+#: ../bin/rdiffdir:62 ../duplicity/commandline.py:263
 #, python-format
 msgid "Error opening file %s"
 msgstr ""
 
-#: ../bin/rdiffdir:128
+#: ../bin/rdiffdir:129
 #, python-format
 msgid "File %s already exists, will not overwrite."
 msgstr ""
