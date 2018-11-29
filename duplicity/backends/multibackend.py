@@ -23,11 +23,14 @@
 
 #
 
+from future import standard_library
+standard_library.install_aliases()
 import os
 import os.path
 import string
-import urllib
-import urlparse
+import urllib.request  # pylint: disable=import-error
+import urllib.parse  # pylint: disable=import-error
+import urllib.error  # pylint: disable=import-error
 import json
 
 import duplicity.backend
@@ -77,11 +80,11 @@ class MultiBackend(duplicity.backend.Backend):
     @staticmethod
     def get_query_params(parsed_url):
         # Reparse so the query string is available
-        reparsed_url = urlparse.urlparse(parsed_url.geturl())
+        reparsed_url = urllib.parse.urlparse(parsed_url.geturl())
         if len(reparsed_url.query) == 0:
             return dict()
         try:
-            queryMultiDict = urlparse.parse_qs(reparsed_url.query, strict_parsing=True)
+            queryMultiDict = urllib.parse.parse_qs(reparsed_url.query, strict_parsing=True)
         except ValueError as e:
             log.Log(_(u"MultiBackend: Could not parse query string %s: %s ")
                     % (reparsed_url.query, e),
@@ -90,7 +93,7 @@ class MultiBackend(duplicity.backend.Backend):
         queryDict = dict()
         # Convert the multi-dict to a single dictionary
         # while checking to make sure that no unrecognized values are found
-        for name, valueList in queryMultiDict.items():
+        for name, valueList in list(queryMultiDict.items()):
             if len(valueList) != 1:
                 log.Log(_(u"MultiBackend: Invalid query string %s: more than one value for %s")
                         % (reparsed_url.query, name),
@@ -205,7 +208,7 @@ class MultiBackend(duplicity.backend.Backend):
 
     def _eligible_stores(self, filename):
         if self.__affinities:
-            matching_prefixes = [k for k in self.__affinities.keys() if filename.startswith(k)]
+            matching_prefixes = [k for k in list(self.__affinities.keys()) if filename.startswith(k)]
             matching_stores = {store for prefix in matching_prefixes for store in self.__affinities[prefix]}
             if matching_stores:
                 # Distinct stores with matching prefix

@@ -1,4 +1,3 @@
-from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2013 jno <jno@pisem.net>
@@ -26,13 +25,22 @@ from __future__ import print_function
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-import StringIO
+from __future__ import print_function
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import input
+from builtins import str
+from past.utils import old_div
+import io
 import os
 import re
 import sys
 import time
 import traceback
-import urllib
+import urllib.request  # pylint: disable=import-error
+import urllib.parse  # pylint: disable=import-error
+import urllib.error  # pylint: disable=import-error
 
 from duplicity import log, globals
 from duplicity import progress
@@ -40,7 +48,6 @@ from duplicity.errors import BackendException
 from duplicity.globals import num_retries
 from requests.exceptions import ConnectionError
 import duplicity.backend
-
 
 # This is chunk size for upload using Dpbx chumked API v2. It doesn't
 # make sense to make it much large since Dpbx SDK uses connection pool
@@ -57,7 +64,7 @@ DPBX_AUTORENAMED_FILE_RE = re.compile(r' \([0-9]+\)\.[^\.]+$')
 
 def log_exception(e):
     log.Error(u'Exception [%s]:' % (e,))
-    f = StringIO.StringIO()
+    f = io.StringIO()
     traceback.print_exc(file=f)
     f.seek(0)
     for s in f.readlines():
@@ -155,7 +162,7 @@ Exception: %s""" % str(e))
         print(u"2. Click \"Allow\" (you might have to log in first).")
         print(u"3. Copy the authorization code.")
         print(u'-' * 72)
-        auth_code = raw_input(u"Enter the authorization code here: ").strip()
+        auth_code = input(u"Enter the authorization code here: ").strip()
         try:
             log.Debug(u'dpbx,auth_flow.finish(%s)' % auth_code)
             authresult = auth_flow.finish(auth_code)
@@ -202,7 +209,7 @@ Exception: %s""" % str(e))
 
     @command()
     def _put(self, source_path, remote_filename):
-        remote_dir = urllib.unquote(self.parsed_url.path.lstrip(u'/'))
+        remote_dir = urllib.parse.unquote(self.parsed_url.path.lstrip(u'/'))
         remote_path = u'/' + os.path.join(remote_dir, remote_filename).rstrip()
 
         file_size = os.path.getsize(source_path.name)
@@ -341,7 +348,7 @@ Exception: %s""" % str(e))
                     # reupload
                     log.Info(u'dpbx: sleeping a bit before chunk retry')
                     time.sleep(30)
-                    current_chunk_size = DPBX_UPLOAD_CHUNK_SIZE / 5
+                    current_chunk_size = old_div(DPBX_UPLOAD_CHUNK_SIZE, 5)
                     requested_offset = None
                     continue
 
@@ -361,7 +368,7 @@ Exception: %s""" % str(e))
         if not self.user_authenticated():
             self.login()
 
-        remote_dir = urllib.unquote(self.parsed_url.path.lstrip(u'/'))
+        remote_dir = urllib.parse.unquote(self.parsed_url.path.lstrip(u'/'))
         remote_path = u'/' + os.path.join(remote_dir, remote_filename).rstrip()
 
         log.Debug(u'dpbx,files_download(%s)' % remote_path)
@@ -396,7 +403,7 @@ Exception: %s""" % str(e))
         # Do a long listing to avoid connection reset
         if not self.user_authenticated():
             self.login()
-        remote_dir = u'/' + urllib.unquote(self.parsed_url.path.lstrip(u'/')).rstrip()
+        remote_dir = u'/' + urllib.parse.unquote(self.parsed_url.path.lstrip(u'/')).rstrip()
 
         log.Debug(u'dpbx.files_list_folder(%s)' % remote_dir)
         res = []
@@ -426,7 +433,7 @@ Exception: %s""" % str(e))
         if not self.user_authenticated():
             self.login()
 
-        remote_dir = urllib.unquote(self.parsed_url.path.lstrip(u'/'))
+        remote_dir = urllib.parse.unquote(self.parsed_url.path.lstrip(u'/'))
         remote_path = u'/' + os.path.join(remote_dir, filename).rstrip()
 
         log.Debug(u'dpbx.files_delete(%s)' % remote_path)
@@ -445,7 +452,7 @@ Exception: %s""" % str(e))
     def _query(self, filename):
         if not self.user_authenticated():
             self.login()
-        remote_dir = urllib.unquote(self.parsed_url.path.lstrip(u'/'))
+        remote_dir = urllib.parse.unquote(self.parsed_url.path.lstrip(u'/'))
         remote_path = u'/' + os.path.join(remote_dir, filename).rstrip()
 
         log.Debug(u'dpbx.files_get_metadata(%s)' % remote_path)

@@ -19,6 +19,8 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from builtins import next
+from builtins import range
 import unittest
 import pickle
 import sys
@@ -29,9 +31,9 @@ from . import UnitTestCase
 
 
 class Iterators(UnitTestCase):
-    one_to_100 = lambda s: iter(range(1, 101))
-    evens = lambda s: iter(range(2, 101, 2))
-    odds = lambda s: iter(range(1, 100, 2))
+    one_to_100 = lambda s: iter(list(range(1, 101)))
+    evens = lambda s: iter(list(range(2, 101, 2)))
+    odds = lambda s: iter(list(range(1, 100, 2)))
     empty = lambda s: iter([])
 
     def __init__(self, *args):
@@ -81,8 +83,8 @@ class IterEqualTestCase(Iterators):
     def testNormal(self):
         u"""See if normal iterators are equal"""
         assert Iter.equal(iter((1, 2, 3)), iter((1, 2, 3)))
-        assert Iter.equal(self.odds(), iter(range(1, 100, 2)))
-        assert Iter.equal(iter((1, 2, 3)), iter(range(1, 4)))
+        assert Iter.equal(self.odds(), iter(list(range(1, 100, 2))))
+        assert Iter.equal(iter((1, 2, 3)), iter(list(range(1, 4))))
 
     def testNormalInequality(self):
         u"""See if normal unequals work"""
@@ -127,7 +129,10 @@ class FilterTestCase(Iterators):
     def testError(self):
         u"""Should raise appropriate error"""
         i = Iter.filter(lambda x: x, self.falseerror_maker())
-        self.assertRaises(Exception, i.next)
+        if sys.version_info.major >= 3:
+            self.assertRaises(Exception, i.__next__)
+        else:
+            self.assertRaises(Exception, i.next)
 
 
 class MapTestCase(Iterators):
@@ -135,7 +140,7 @@ class MapTestCase(Iterators):
     def testNumbers(self):
         u"""1 to 100 * 2 = 2 to 200"""
         assert Iter.equal(Iter.map(lambda x: 2 * x, self.one_to_100()),
-                          iter(range(2, 201, 2)))
+                          iter(list(range(2, 201, 2))))
 
     def testShortcut(self):
         u"""Map should go in order"""
@@ -144,7 +149,10 @@ class MapTestCase(Iterators):
                 raise NameError
         i = Iter.map(f, self.trueerror_maker())
         next(i)
-        self.assertRaises(NameError, i.next)
+        if sys.version_info.major >= 3:
+            self.assertRaises(NameError, i.__next__)
+        else:
+            self.assertRaises(NameError, i.next)
 
     def testEmpty(self):
         u"""Map of an empty iterator is empty"""
@@ -159,7 +167,7 @@ class CatTestCase(Iterators):
 
     def testNumbers(self):
         u"""1 to 50 + 51 to 100 = 1 to 100"""
-        assert Iter.equal(Iter.cat(iter(range(1, 51)), iter(range(51, 101))),
+        assert Iter.equal(Iter.cat(iter(list(range(1, 51))), iter(list(range(51, 101)))),
                           self.one_to_100())
 
     def testShortcut(self):
@@ -167,7 +175,10 @@ class CatTestCase(Iterators):
         i = Iter.cat(self.typeerror_maker(), self.nameerror_maker())
         next(i)
         next(i)
-        self.assertRaises(TypeError, i.next)
+        if sys.version_info.major >= 3:
+            self.assertRaises(TypeError, i.__next__)
+        else:
+            self.assertRaises(TypeError, i.next)
 
 
 class AndOrTestCase(Iterators):
@@ -213,9 +224,9 @@ class FoldingTest(Iterators):
 
     def testLargeAddition(self):
         u"""Folds on 10000 element iterators"""
-        assert Iter.foldl(self.f, 0, iter(range(1, 10001))) == 50005000
+        assert Iter.foldl(self.f, 0, iter(list(range(1, 10001)))) == 50005000
         self.assertRaises(RuntimeError,
-                          Iter.foldr, self.f, 0, iter(range(1, 10001)))
+                          Iter.foldr, self.f, 0, iter(list(range(1, 10001))))
 
     def testLen(self):
         u"""Use folds to calculate length of lists"""

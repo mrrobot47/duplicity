@@ -20,6 +20,7 @@
 
 import duplicity.backend
 from duplicity import log
+from duplicity import util
 from duplicity.errors import BackendException
 
 
@@ -49,6 +50,8 @@ class TAHOEBackend(duplicity.backend.Backend):
             else:
                 return u"%s:" % self.alias
 
+        if isinstance(filename, b"".__class__):
+            filename = util.fsdecode(filename)
         if self.directory != u"":
             return u"%s:%s/%s" % (self.alias, self.directory, filename)
         else:
@@ -60,14 +63,14 @@ class TAHOEBackend(duplicity.backend.Backend):
         return output
 
     def _put(self, source_path, remote_filename):
-        self.run(u"tahoe", u"cp", source_path.name, self.get_remote_path(remote_filename))
+        self.run(u"tahoe", u"cp", source_path.uc_name, self.get_remote_path(remote_filename))
 
     def _get(self, remote_filename, local_path):
-        self.run(u"tahoe", u"cp", self.get_remote_path(remote_filename), local_path.name)
+        self.run(u"tahoe", u"cp", self.get_remote_path(remote_filename), local_path.uc_name)
 
     def _list(self):
         output = self.run(u"tahoe", u"ls", self.get_remote_path())
-        return output.split(u'\n') if output else []
+        return output.split(b'\n') if output else []
 
     def _delete(self, filename):
         self.run(u"tahoe", u"rm", self.get_remote_path(filename))

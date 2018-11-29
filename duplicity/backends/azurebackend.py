@@ -19,6 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from builtins import str
 import os
 
 import duplicity.backend
@@ -110,7 +111,7 @@ Exception: %s""" % str(e))
             pass
         except Exception as e:
             log.FatalError(u"Could not create Azure container: %s"
-                           % unicode(e.message).split(u'\n', 1)[0],
+                           % str(e.message).split(u'\n', 1)[0],
                            log.ErrorCode.connection_failed)
 
     def _put(self, source_path, remote_filename):

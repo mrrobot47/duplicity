@@ -1122,7 +1122,7 @@ class TestAbsolutePaths(IncludeExcludeFunctionalTest):
         self.assertEqual(restored, self.expected_restored_tree)
 
 
-@unittest.skipUnless(sys.getfilesystemencoding() == u"UTF-8",
+@unittest.skipUnless(sys.getfilesystemencoding().upper() == u"UTF-8",
                      u"Skipping TestUnicode -- Only tested to work on UTF-8 systems")
 class TestUnicode(IncludeExcludeFunctionalTest):
     u""" Tests include/exclude options with unicode paths"""

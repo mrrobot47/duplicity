@@ -110,7 +110,7 @@ class GnuPGTests(BasicTest):
 
     def test_create_fhs_solely(self):
         u"""Do GnuPG operations using solely the create_fhs feature"""
-        plaintext = u"Three blind mice"
+        plaintext = b"Three blind mice"
 
         ciphertext = self.do_create_fh_operation([u'--symmetric'],
                                                  plaintext)
@@ -125,7 +125,7 @@ class GnuPGTests(BasicTest):
         u"""Do GnuPG operations using the attach_fhs feature"""
         plaintext_source = __file__
 
-        plainfile = open(plaintext_source)
+        plainfile = open(plaintext_source, u"rb")
         temp1 = tempfile.TemporaryFile()
         temp2 = tempfile.TemporaryFile()
 

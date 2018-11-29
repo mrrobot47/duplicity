@@ -4,11 +4,14 @@
 # Licensed under the MIT license
 
 from __future__ import print_function
-import ConfigParser
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+import configparser
 import os
 import re
 import time
-import urlparse
+import urllib.parse  # pylint: disable=import-error
 
 from requests.compat import quote, quote_plus
 import requests
@@ -69,8 +72,8 @@ Exception: %s""" % str(e))
     def _parse_error(self, resp):
         if u'location' not in resp.headers:
             return None
-        query = urlparse.urlsplit(resp.headers[u'location']).query
-        qs = dict(urlparse.parse_qsl(query))
+        query = urllib.parse.urlsplit(resp.headers[u'location']).query
+        qs = dict(urllib.parse.parse_qsl(query))
         return {u'error': qs[u'error'], u'error_description': qs[u'error_description']}
 
     def _get_access_token(self, code):
@@ -96,7 +99,7 @@ Exception: %s""" % str(e))
 
         oauth_token = r.json()
 
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
         config.read(TOKENS_FILE)
 
         if not config.has_section(u"hubic"):
@@ -134,7 +137,7 @@ Exception: %s""" % str(e))
 
     def _refresh_access_token(self):
 
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
         config.read(TOKENS_FILE)
         refresh_token = config.get(u"hubic", u"refresh_token")
 
@@ -190,7 +193,7 @@ Exception: %s""" % str(e))
             raise exc.AuthenticationFailed(u"Unable to get oauth access token from json")
 
     def authenticate(self):
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
         config.read(TOKENS_FILE)
 
         if config.has_option(u"hubic", u"refresh_token"):
@@ -245,8 +248,8 @@ Exception: %s""" % str(e))
             )
 
             try:
-                query = urlparse.urlsplit(r.headers[u'location']).query
-                code = dict(urlparse.parse_qsl(query))[u'code']
+                query = urllib.parse.urlsplit(r.headers[u'location']).query
+                code = dict(urllib.parse.parse_qsl(query))[u'code']
             except:
                 raise exc.AuthenticationFailed(u"Unable to authorize client_id, "
                                                u"invalid login/password ?")

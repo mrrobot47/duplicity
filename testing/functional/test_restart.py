@@ -312,7 +312,7 @@ class RestartTestWithoutEncryption(RestartTest):
         self.assertEqual(1, len(sigtars))
         sigtar = sigtars[0]
         output = subprocess.Popen([u"tar", u"t", u"--file=%s" % sigtar], stdout=subprocess.PIPE).communicate()[0]
-        self.assertEqual(1, output.split(u"\n").count(u"snapshot/"))
+        self.assertEqual(1, output.split(b"\n").count(b"snapshot/"))
 
     def test_ignore_double_snapshot(self):
         u"""

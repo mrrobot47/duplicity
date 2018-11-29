@@ -24,10 +24,14 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from future import standard_library
+standard_library.install_aliases()
 import os
 import os.path
 import re
-import urllib
+import urllib.request  # pylint: disable=import-error
+import urllib.parse  # pylint: disable=import-error
+import urllib.error  # pylint: disable=import-error
 try:
     from shlex import quote as cmd_quote
 except ImportError:
@@ -37,6 +41,7 @@ import duplicity.backend
 from duplicity import globals
 from duplicity import log
 from duplicity import tempdir
+from duplicity import util
 
 
 class LFTPBackend(duplicity.backend.Backend):
@@ -104,34 +109,35 @@ class LFTPBackend(duplicity.backend.Backend):
                         break
 
         # save config into a reusable temp file
-        self.tempfile, self.tempname = tempdir.default().mkstemp()
-        os.write(self.tempfile, u"set ssl:verify-certificate " +
-                 (u"false" if globals.ssl_no_check_certificate else u"true") + u"\n")
+        self.tempfd, self.tempname = tempdir.default().mkstemp()
+        self.tempfile = os.fdopen(self.tempfd, u"w")
+        self.tempfile.write(u"set ssl:verify-certificate " +
+                            (u"false" if globals.ssl_no_check_certificate else u"true") + u"\n")
         if self.cacert_file:
-            os.write(self.tempfile, u"set ssl:ca-file " + cmd_quote(self.cacert_file) + u"\n")
+            self.tempfile.write(u"set ssl:ca-file " + cmd_quote(self.cacert_file) + u"\n")
         if globals.ssl_cacert_path:
-            os.write(self.tempfile, u"set ssl:ca-path " + cmd_quote(globals.ssl_cacert_path) + u"\n")
+            self.tempfile.write(u"set ssl:ca-path " + cmd_quote(globals.ssl_cacert_path) + u"\n")
         if self.parsed_url.scheme == u'ftps':
-            os.write(self.tempfile, u"set ftp:ssl-allow true\n")
-            os.write(self.tempfile, u"set ftp:ssl-protect-data true\n")
-            os.write(self.tempfile, u"set ftp:ssl-protect-list true\n")
+            self.tempfile.write(u"set ftp:ssl-allow true\n")
+            self.tempfile.write(u"set ftp:ssl-protect-data true\n")
+            self.tempfile.write(u"set ftp:ssl-protect-list true\n")
         elif self.parsed_url.scheme == u'ftpes':
-            os.write(self.tempfile, u"set ftp:ssl-force on\n")
-            os.write(self.tempfile, u"set ftp:ssl-protect-data on\n")
-            os.write(self.tempfile, u"set ftp:ssl-protect-list on\n")
+            self.tempfile.write(u"set ftp:ssl-force on\n")
+            self.tempfile.write(u"set ftp:ssl-protect-data on\n")
+            self.tempfile.write(u"set ftp:ssl-protect-list on\n")
         else:
-            os.write(self.tempfile, u"set ftp:ssl-allow false\n")
-        os.write(self.tempfile, u"set http:use-propfind true\n")
-        os.write(self.tempfile, u"set net:timeout %s\n" % globals.timeout)
-        os.write(self.tempfile, u"set net:max-retries %s\n" % globals.num_retries)
-        os.write(self.tempfile, u"set ftp:passive-mode %s\n" % self.conn_opt)
+            self.tempfile.write(u"set ftp:ssl-allow false\n")
+        self.tempfile.write(u"set http:use-propfind true\n")
+        self.tempfile.write(u"set net:timeout %s\n" % globals.timeout)
+        self.tempfile.write(u"set net:max-retries %s\n" % globals.num_retries)
+        self.tempfile.write(u"set ftp:passive-mode %s\n" % self.conn_opt)
         if log.getverbosity() >= log.DEBUG:
-            os.write(self.tempfile, u"debug\n")
+            self.tempfd.write(u"debug\n")
         if self.parsed_url.scheme == u'ftpes':
-            os.write(self.tempfile, u"open %s %s\n" % (self.authflag, self.url_string.replace(u'ftpes', u'ftp')))
+            self.tempfile.write(u"open %s %s\n" % (self.authflag, self.url_string.replace(u'ftpes', u'ftp')))
         else:
-            os.write(self.tempfile, u"open %s %s\n" % (self.authflag, self.url_string))
-        os.close(self.tempfile)
+            self.tempfile.write(u"open %s %s\n" % (self.authflag, self.url_string))
+        os.close(self.tempfd)
         # print settings in debug mode
         if log.getverbosity() >= log.DEBUG:
             f = open(self.tempname, u'r')
@@ -139,11 +145,13 @@ class LFTPBackend(duplicity.backend.Backend):
                       u"%s" % f.read())
 
     def _put(self, source_path, remote_filename):
+        if isinstance(remote_filename, b"".__class__):
+            remote_filename = util.fsdecode(remote_filename)
         commandline = u"lftp -c \"source %s; mkdir -p %s; put %s -o %s\"" % (
             self.tempname,
             cmd_quote(self.remote_path),
-            cmd_quote(source_path.name),
-            cmd_quote(self.remote_path) + remote_filename
+            cmd_quote(source_path.uc_name),
+            cmd_quote(self.remote_path) + util.fsdecode(remote_filename)
         )
         log.Debug(u"CMD: %s" % commandline)
         s, l, e = self.subprocess_popen(commandline)
@@ -154,10 +162,12 @@ class LFTPBackend(duplicity.backend.Backend):
                   u"%s" % (l))
 
     def _get(self, remote_filename, local_path):
+        if isinstance(remote_filename, b"".__class__):
+            remote_filename = util.fsdecode(remote_filename)
         commandline = u"lftp -c \"source %s; get %s -o %s\"" % (
             cmd_quote(self.tempname),
             cmd_quote(self.remote_path) + remote_filename,
-            cmd_quote(local_path.name)
+            cmd_quote(local_path.uc_name)
         )
         log.Debug(u"CMD: %s" % commandline)
         _, l, e = self.subprocess_popen(commandline)
@@ -169,7 +179,7 @@ class LFTPBackend(duplicity.backend.Backend):
     def _list(self):
         # Do a long listing to avoid connection reset
         # remote_dir = urllib.unquote(self.parsed_url.path.lstrip('/')).rstrip()
-        remote_dir = urllib.unquote(self.parsed_url.path)
+        remote_dir = urllib.parse.unquote(self.parsed_url.path)
         # print remote_dir
         quoted_path = cmd_quote(self.remote_path)
         # failing to cd into the folder might be because it was not created already
@@ -185,13 +195,13 @@ class LFTPBackend(duplicity.backend.Backend):
                   u"%s" % (l))
 
         # Look for our files as the last element of a long list line
-        return [x.split()[-1] for x in l.split(u'\n') if x]
+        return [x.split()[-1] for x in l.split(b'\n') if x]
 
     def _delete(self, filename):
         commandline = u"lftp -c \"source %s; cd %s; rm %s\"" % (
             cmd_quote(self.tempname),
             cmd_quote(self.remote_path),
-            cmd_quote(filename)
+            cmd_quote(util.fsdecode(filename))
         )
         log.Debug(u"CMD: %s" % commandline)
         _, l, e = self.subprocess_popen(commandline)

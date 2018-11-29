@@ -56,13 +56,13 @@ class GPGTest(UnitTestCase):
 
     def test_gpg1(self):
         u"""Test gpg short strings"""
-        self.gpg_cycle(u"hello, world")
-        self.gpg_cycle(u"ansoetuh aoetnuh aoenstuh aoetnuh asoetuh saoteuh ")
+        self.gpg_cycle(b"hello, world")
+        self.gpg_cycle(b"ansoetuh aoetnuh aoenstuh aoetnuh asoetuh saoteuh ")
 
     def test_gpg2(self):
         u"""Test gpg long strings easily compressed"""
-        self.gpg_cycle(u" " * 50000)
-        self.gpg_cycle(u"aoeu" * 1000000)
+        self.gpg_cycle(b" " * 50000)
+        self.gpg_cycle(b"aoeu" * 1000000)
 
     def test_gpg3(self):
         u"""Test on random data - must have /dev/urandom device"""
@@ -73,31 +73,31 @@ class GPGTest(UnitTestCase):
 
     def test_gpg_asym(self):
         u"""Test GPG asymmetric encryption"""
-        profile = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
+        profile = gpg.GPGProfile(passphrase=self.sign_passphrase,
                                  recipients=[self.encrypt_key1,
                                              self.encrypt_key2])
-        self.gpg_cycle(u"aoensutha aonetuh saoe", profile)
+        self.gpg_cycle(b"aoensutha aonetuh saoe", profile)
 
-        profile2 = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
+        profile2 = gpg.GPGProfile(passphrase=self.sign_passphrase,
                                   recipients=[self.encrypt_key1])
-        self.gpg_cycle(u"aoeu" * 10000, profile2)
+        self.gpg_cycle(b"aoeu" * 10000, profile2)
 
     def test_gpg_hidden_asym(self):
         u"""Test GPG asymmetric encryption with hidden key id"""
-        profile = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
+        profile = gpg.GPGProfile(passphrase=self.sign_passphrase,
                                  hidden_recipients=[self.encrypt_key1,
                                                     self.encrypt_key2])
-        self.gpg_cycle(u"aoensutha aonetuh saoe", profile)
+        self.gpg_cycle(b"aoensutha aonetuh saoe", profile)
 
-        profile2 = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
+        profile2 = gpg.GPGProfile(passphrase=self.sign_passphrase,
                                   hidden_recipients=[self.encrypt_key1])
-        self.gpg_cycle(u"aoeu" * 10000, profile2)
+        self.gpg_cycle(b"aoeu" * 10000, profile2)
 
     def test_gpg_signing(self):
         u"""Test to make sure GPG reports the proper signature key"""
-        plaintext = u"hello" * 50000
+        plaintext = b"hello" * 50000
 
-        signing_profile = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
+        signing_profile = gpg.GPGProfile(passphrase=self.sign_passphrase,
                                          sign_key=self.sign_key,
                                          recipients=[self.encrypt_key1])
 
@@ -114,9 +114,9 @@ class GPGTest(UnitTestCase):
 
     def test_gpg_signing_and_hidden_encryption(self):
         u"""Test to make sure GPG reports the proper signature key even with hidden encryption key id"""
-        plaintext = u"hello" * 50000
+        plaintext = b"hello" * 50000
 
-        signing_profile = gpg.GPGProfile(passphrase=self.sign_passphrase_bytes,
+        signing_profile = gpg.GPGProfile(passphrase=self.sign_passphrase,
                                          sign_key=self.sign_key,
                                          hidden_recipients=[self.encrypt_key1])
 
@@ -177,11 +177,11 @@ class GPGWriteFile_Helper:
 
     def get_buffer(self, size):
         u"""Return buffer of size size, consisting of half random data"""
-        s1 = size / 2
+        s1 = int(size / 2)
         s2 = size - s1
-        return r"a" * s1 + self.from_random_fp.read(s2)
+        return b"a" * s1 + self.from_random_fp.read(s2)
 
-    def next(self):
+    def __next__(self):
         if self.at_end:
             raise StopIteration
         block_data = self.get_buffer(self.get_read_size())
@@ -195,7 +195,7 @@ class GPGWriteFile_Helper:
             return random.randrange(0, size)
 
     def get_footer(self):
-        return u"e" * random.randrange(0, 15000)
+        return b"e" * random.randrange(0, 15000)
 
 
 class SHATest(UnitTestCase):

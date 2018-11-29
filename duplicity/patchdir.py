@@ -19,7 +19,12 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from future_builtins import filter, map
+from builtins import map
+from builtins import filter
+from builtins import next
+from builtins import range
+from builtins import object
+from future.builtins import filter, map
 
 import re  # @UnusedImport
 import types
@@ -149,9 +154,11 @@ def difftar2path_iter(diff_tarfile):
 
 def get_index_from_tarinfo(tarinfo):
     u"""Return (index, difftype, multivol) pair from tarinfo object"""
-    for prefix in [b"snapshot/", b"diff/", b"deleted/",
-                   b"multivol_diff/", b"multivol_snapshot/"]:
+    for prefix in [u"snapshot/", u"diff/", u"deleted/",
+                   u"multivol_diff/", u"multivol_snapshot/"]:
         tiname = util.get_tarinfo_name(tarinfo)
+        if sys.version_info.major == 2 and isinstance(prefix, unicode):
+            prefix = prefix.encode()
         if tiname.startswith(prefix):
             name = tiname[len(prefix):]  # strip prefix
             if prefix.startswith(u"multivol"):
@@ -161,32 +168,35 @@ def get_index_from_tarinfo(tarinfo):
                     difftype = u"snapshot"
                 multivol = 1
                 name, num_subs = \
-                    re.subn(b"(?s)^multivol_(diff|snapshot)/?(.*)/[0-9]+$",
-                            b"\\2", tiname)
+                    re.subn(u"(?s)^multivol_(diff|snapshot)/?(.*)/[0-9]+$",
+                            u"\\2", tiname)
                 if num_subs != 1:
                     raise PatchDirException(u"Unrecognized diff entry %s" %
-                                            util.fsdecode(tiname))
+                                            tiname)
             else:
                 difftype = prefix[:-1]  # strip trailing /
                 name = tiname[len(prefix):]
-                if name.endswith(b"/"):
+                if name.endswith(r"/"):
                     name = name[:-1]  # strip trailing /'s
                 multivol = 0
             break
     else:
         raise PatchDirException(u"Unrecognized diff entry %s" %
-                                util.fsdecode(tiname))
-    if name == b"." or name == b"":
+                                tiname)
+    if name == r"." or name == r"":
         index = ()
     else:
-        index = tuple(name.split(b"/"))
+        if sys.version_info.major >= 3:
+            index = tuple(util.fsencode(name).split(b"/"))
+        else:
+            index = tuple(name.split(b"/"))
         if b'..' in index:
             raise PatchDirException(u"Tar entry %s contains '..'.  Security "
                                     u"violation" % util.fsdecode(tiname))
     return (index, difftype, multivol)
 
 
-class Multivol_Filelike:
+class Multivol_Filelike(object):
     u"""Emulate a file like object from multivols
 
     Maintains a buffer about the size of a volume.  When it is read()
@@ -310,7 +320,7 @@ class PathPatcher(ITRBranch):
             basis_path.patch_with_attribs(diff_ropath)
 
 
-class TarFile_FromFileobjs:
+class TarFile_FromFileobjs(object):
     u"""Like a tarfile.TarFile iterator, but read from multiple fileobjs"""
     def __init__(self, fileobj_iter):
         u"""Make new tarinfo iterator
@@ -323,7 +333,7 @@ class TarFile_FromFileobjs:
         self.tarfile, self.tar_iter = None, None
         self.current_fp = None
 
-    def __iter__(self):
+    def __iter__(self):  # pylint: disable=non-iterator-returned
         return self
 
     def set_tarfile(self):
@@ -334,7 +344,7 @@ class TarFile_FromFileobjs:
         self.tarfile = util.make_tarfile(u"r", self.current_fp)
         self.tar_iter = iter(self.tarfile)
 
-    def next(self):
+    def __next__(self):
         if not self.tarfile:
             self.set_tarfile()
         try:
@@ -382,7 +392,7 @@ def collate_iters(iter_list):
 
     def getleastindex(elems):
         u"""Return the first index in elems, assuming elems isn't empty"""
-        return min(map(lambda elem: elem.index, filter(lambda x: x, elems)))
+        return min([elem.index for elem in [x for x in elems if x]])
 
     def yield_tuples(iter_num, overflow, elems):
         while 1:
@@ -402,7 +412,7 @@ def collate_iters(iter_list):
     return yield_tuples(iter_num, overflow, elems)
 
 
-class IndexedTuple:
+class IndexedTuple(object):
     u"""Like a tuple, but has .index (used previously by collate_iters)"""
     def __init__(self, index, sequence):
         self.index = index
@@ -488,7 +498,9 @@ def patch_seq2ropath(patch_seq):
 
     for delta_ropath in patch_seq[1:]:
         assert delta_ropath.difftype == u"diff", delta_ropath.difftype
-        if not isinstance(current_file, file):
+        try:
+            cur_file.fileno()
+        except:
             u"""
             librsync insists on a real file object, which we create manually
             by using the duplicity.tempdir to tell us where.

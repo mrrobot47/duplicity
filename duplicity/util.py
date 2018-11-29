@@ -23,6 +23,9 @@ u"""
 Miscellaneous utilities.
 """
 
+from builtins import str
+from builtins import map
+from builtins import object
 import errno
 import os
 import string
@@ -77,9 +80,14 @@ def exception_traceback(limit=50):
     lines.extend(traceback.format_exception_only(type, value))
 
     msg = u"Traceback (innermost last):\n"
-    msg = msg + u"%-20s %s" % (string.join(lines[:-1], u""), lines[-1])
+    if sys.version_info.major >= 3:
+        msg = msg + u"%-20s %s" % (str.join(u"", lines[:-1]), lines[-1])
+    else:
+        msg = msg + u"%-20s %s" % (string.join(lines[:-1], u""), lines[-1])
 
-    return msg.decode(u'unicode-escape', u'replace')
+    if sys.version_info.major < 3:
+        return msg.decode(u'unicode-escape', u'replace')
+    return msg
 
 
 def escape(string):
@@ -101,7 +109,7 @@ def uexc(e):
     # non-ascii will cause a UnicodeDecodeError when implicitly decoding to
     # unicode.  So we decode manually, using the filesystem encoding.
     # 99.99% of the time, this will be a fine encoding to use.
-    return fsdecode(unicode(e).encode(u'utf-8'))
+    return fsdecode(str(e).encode(u'utf-8'))
 
 
 def maybe_ignore_errors(fn):
@@ -130,7 +138,7 @@ class BlackHoleList(list):
         pass
 
 
-class FakeTarFile:
+class FakeTarFile(object):
     debug = 0
 
     def __iter__(self):
@@ -159,8 +167,8 @@ def get_tarinfo_name(ti):
     # Python versions before 2.6 ensure that directories end with /, but 2.6
     # and later ensure they they *don't* have /.  ::shrug::  Internally, we
     # continue to use pre-2.6 method.
-    if ti.isdir() and not ti.name.endswith(b"/"):
-        return ti.name + b"/"
+    if ti.isdir() and not ti.name.endswith(r"/"):
+        return ti.name + r"/"
     else:
         return ti.name
 

@@ -26,13 +26,16 @@ which is written in C.  The goal was to use C as little as possible...
 
 """
 
+from builtins import str
+from builtins import object
 import os
+import sys
 from . import _librsync
 import types
 import array
 
 if os.environ.get(u'READTHEDOCS') == u'True':
-    import mock
+    import mock  # pylint: disable=import-error
     import duplicity
     duplicity._librsync = mock.MagicMock()
 
@@ -51,7 +54,7 @@ class librsyncError(Exception):
     pass
 
 
-class LikeFile:
+class LikeFile(object):
     u"""File-like object used by SigFile, DeltaFile, and PatchFile"""
     mode = u"rb"
 
@@ -65,7 +68,7 @@ class LikeFile:
         self.infile = infile
         self.closed = self.infile_closed = None
         self.inbuf = b""
-        self.outbuf = array.array(b'c')
+        self.outbuf = array.array(u'b')
         self.eof = self.infile_eof = None
 
     def check_file(self, file, need_seek=None):
@@ -88,7 +91,10 @@ class LikeFile:
                 self._add_to_outbuf_once()
             real_len = min(length, len(self.outbuf))
 
-        return_val = self.outbuf[:real_len].tostring()
+        if sys.version_info.major >= 3:
+            return_val = self.outbuf[:real_len].tobytes()
+        else:
+            return_val = self.outbuf[:real_len].tostring()
         del self.outbuf[:real_len]
         return return_val
 
@@ -101,7 +107,10 @@ class LikeFile:
         except _librsync.librsyncError as e:
             raise librsyncError(str(e))
         self.inbuf = self.inbuf[len_inbuf_read:]
-        self.outbuf.fromstring(cycle_out)
+        if sys.version_info.major >= 3:
+            self.outbuf.frombytes(cycle_out)
+        else:
+            self.outbuf.fromstring(cycle_out)
 
     def _add_to_inbuf(self):
         u"""Make sure len(self.inbuf) >= blocksize"""
@@ -172,13 +181,15 @@ class PatchedFile(LikeFile):
 
         """
         LikeFile.__init__(self, delta_file)
-        if not isinstance(basis_file, types.FileType):
+        try:
+            basis_file.fileno()
+        except:
             u""" tempfile.TemporaryFile() only guarantees a true file
             object on posix platforms. on cygwin/windows a file-like
             object whose file attribute is the underlying true file
             object is returned.
             """
-            if hasattr(basis_file, u'file') and isinstance(basis_file.file, types.FileType):
+            if hasattr(basis_file, u'file') and hasattr(basis_file.file, u'fileno'):
                 basis_file = basis_file.file
             else:
                 raise TypeError(_(u"basis_file must be a (true) file or an object whose "
@@ -189,7 +200,7 @@ class PatchedFile(LikeFile):
             raise librsyncError(str(e))
 
 
-class SigGenerator:
+class SigGenerator(object):
     u"""Calculate signature.
 
     Input and output is same as SigFile, but the interface is like md5

@@ -19,7 +19,7 @@ from __future__ import print_function
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from future_builtins import map
+from future.builtins import map
 
 import os
 import pexpect
@@ -89,10 +89,11 @@ class FunctionalTestCase(DuplicityTestCase):
 
         # Check all string inputs are unicode -- we will convert to system encoding before running the command
         for item in options:
-            assert not isinstance(item, str), u"item " + unicode(item) + u" in options is not unicode"
+            if sys.version_info.major == 2:
+                assert not isinstance(item, str), u"item " + unicode(item) + u" in options is not unicode"
 
         for item in passphrase_input:
-            assert isinstance(item, unicode), u"item " + unicode(item) + u" in passphrase_input is not unicode"
+            assert isinstance(item, u"".__class__), u"item " + unicode(item) + u" in passphrase_input is not unicode"
 
         if platform.platform().startswith(u'Linux'):
             cmd_list = [u'setsid']
@@ -110,8 +111,8 @@ class FunctionalTestCase(DuplicityTestCase):
             cmd_list.extend([u"--current-time", current_time])
         cmd_list.extend(self.class_args)
         if fail:
-            cmd_list.extend([u"--fail", unicode(fail)])
-        cmdline = u" ".join(map(lambda x: u'"%s"' % x, cmd_list))
+            cmd_list.extend([u"--fail", u"".__class__(fail)])
+        cmdline = u" ".join([u'"%s"' % x for x in cmd_list])
 
         if not passphrase_input:
             cmdline += u" < /dev/null"
@@ -132,7 +133,10 @@ class FunctionalTestCase(DuplicityTestCase):
 
         # Manually encode to filesystem encoding and send to spawn as bytes
         # ToDo: Remove this once we no longer have to support systems with pexpect < 4.0
-        child = pexpect.spawn(b'/bin/sh', [b'-c', cmdline.encode(sys.getfilesystemencoding(),
+        if sys.version_info.major > 2:
+            child = pexpect.spawn(u'/bin/sh', [u'-c', cmdline], timeout=None)
+        else:
+            child = pexpect.spawn(b'/bin/sh', [b'-c', cmdline.encode(sys.getfilesystemencoding(),
                                                                  u'replace')], timeout=None)
 
         for passphrase in passphrase_input:
@@ -182,7 +186,7 @@ class FunctionalTestCase(DuplicityTestCase):
         if file_to_restore:
             options.extend([u'--file-to-restore', file_to_restore])
         if time:
-            options.extend([u'--restore-time', unicode(time)])
+            options.extend([u'--restore-time', u"".__class__(time)])
         self.run_duplicity(options=options, **kwargs)
 
     def verify(self, dirname, file_to_verify=None, time=None, options=[],
@@ -191,7 +195,7 @@ class FunctionalTestCase(DuplicityTestCase):
         if file_to_verify:
             options.extend([u'--file-to-restore', file_to_verify])
         if time:
-            options.extend([u'--restore-time', unicode(time)])
+            options.extend([u'--restore-time', u"".__class__(time)])
         self.run_duplicity(options=options, **kwargs)
 
     def cleanup(self, options=[]):

@@ -34,44 +34,44 @@ from duplicity import gpg
 from duplicity import dup_time
 from . import UnitTestCase
 
-filename_list1 = [u"duplicity-full.2002-08-17T16:17:01-07:00.manifest.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol1.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol2.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol3.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol4.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol5.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol6.difftar.gpg",
-                  u"duplicity-inc.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.manifest.gpg",
-                  u"duplicity-inc.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.vol1.difftar.gpg",
-                  u"Extra stuff to be ignored"]
+filename_list1 = [b"duplicity-full.2002-08-17T16:17:01-07:00.manifest.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol1.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol2.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol3.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol4.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol5.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol6.difftar.gpg",
+                  b"duplicity-inc.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.manifest.gpg",
+                  b"duplicity-inc.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.vol1.difftar.gpg",
+                  b"Extra stuff to be ignored"]
 
-remote_sigchain_filename_list = [u"duplicity-full-signatures.2002-08-17T16:17:01-07:00.sigtar.gpg",
-                                 u"duplicity-new-signatures.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.sigtar.gpg",
-                                 u"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg"]
+remote_sigchain_filename_list = [b"duplicity-full-signatures.2002-08-17T16:17:01-07:00.sigtar.gpg",
+                                 b"duplicity-new-signatures.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.sigtar.gpg",
+                                 b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg"]
 
-local_sigchain_filename_list = [u"duplicity-full-signatures.2002-08-17T16:17:01-07:00.sigtar.gz",
-                                u"duplicity-new-signatures.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.sigtar.gz",
-                                u"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gz"]
+local_sigchain_filename_list = [b"duplicity-full-signatures.2002-08-17T16:17:01-07:00.sigtar.gz",
+                                b"duplicity-new-signatures.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.sigtar.gz",
+                                b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gz"]
 
 # A filename list with some incomplete volumes, an older full volume,
 # and a complete chain.
-filename_list2 = [u"duplicity-full.2001-01-01T16:17:01-07:00.manifest.gpg",
-                  u"duplicity-full.2001-01-01T16:17:01-07:00.vol1.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.manifest.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol1.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol2.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol3.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol4.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol5.difftar.gpg",
-                  u"duplicity-full.2002-08-17T16:17:01-07:00.vol6.difftar.gpg",
-                  u"duplicity-inc.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.manifest.gpg",
-                  u"duplicity-inc.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.vol1.difftar.gpg",
-                  u"The following are extraneous duplicity files",
-                  u"duplicity-new-signatures.2001-08-17T02:05:13-05:00.to.2002-08-17T05:05:14-05:00.sigtar.gpg",
-                  u"duplicity-full.2002-08-15T01:01:01-07:00.vol1.difftar.gpg",
-                  u"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.manifest.gpg",
-                  u"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.vol1.difftar.gpg",
-                  u"Extra stuff to be ignored"]
+filename_list2 = [b"duplicity-full.2001-01-01T16:17:01-07:00.manifest.gpg",
+                  b"duplicity-full.2001-01-01T16:17:01-07:00.vol1.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.manifest.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol1.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol2.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol3.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol4.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol5.difftar.gpg",
+                  b"duplicity-full.2002-08-17T16:17:01-07:00.vol6.difftar.gpg",
+                  b"duplicity-inc.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.manifest.gpg",
+                  b"duplicity-inc.2002-08-17T16:17:01-07:00.to.2002-08-18T00:04:30-07:00.vol1.difftar.gpg",
+                  b"The following are extraneous duplicity files",
+                  b"duplicity-new-signatures.2001-08-17T02:05:13-05:00.to.2002-08-17T05:05:14-05:00.sigtar.gpg",
+                  b"duplicity-full.2002-08-15T01:01:01-07:00.vol1.difftar.gpg",
+                  b"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.manifest.gpg",
+                  b"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.vol1.difftar.gpg",
+                  b"Extra stuff to be ignored"]
 
 
 class CollectionTest(UnitTestCase):
@@ -88,7 +88,7 @@ class CollectionTest(UnitTestCase):
                                                        u"/archive_dir")
 
         self.real_backend = backend.get_backend(u"file://%s/%s" %
-                                                (col_test_dir.name, u"remote_dir"))
+                                                (col_test_dir.uc_name, u"remote_dir"))
         self.output_dir = path.Path(u"testfiles/output")  # used as a temp directory
         self.output_dir_backend = backend.get_backend(u"file://testfiles/output")
 
@@ -129,7 +129,7 @@ class CollectionTest(UnitTestCase):
         chain = collections.SignatureChain(1, globals.archive_dir_path)
         for filename in local_sigchain_filename_list:
             assert chain.add_filename(filename)
-        assert not chain.add_filename(u"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg")
+        assert not chain.add_filename(b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg")
 
     def test_sig_chains(self):
         u"""Test making signature chains from filename list"""
@@ -179,9 +179,9 @@ class CollectionTest(UnitTestCase):
             fileobjlist[i].close()
             assert buf == s, (buf, s)
 
-        test_fileobj(0, u"Hello, world!")
-        test_fileobj(1, u"hello 1")
-        test_fileobj(2, u"Hello 2")
+        test_fileobj(0, b"Hello, world!")
+        test_fileobj(1, b"hello 1")
+        test_fileobj(2, b"Hello 2")
 
     @pytest.mark.usefixtures(u"redirect_stdin")
     def test_sigchain_fileobj(self):
@@ -209,15 +209,15 @@ class CollectionTest(UnitTestCase):
         assert len(cs.remote_orphaned_sig_names) == 1, cs.remote_orphaned_sig_names
         assert len(cs.incomplete_backup_sets) == 1, cs.incomplete_backup_sets
 
-        right_list = [u"duplicity-new-signatures.2001-08-17T02:05:13-05:00.to.2002-08-17T05:05:14-05:00.sigtar.gpg",
-                      u"duplicity-full.2002-08-15T01:01:01-07:00.vol1.difftar.gpg",
-                      u"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.manifest.gpg",
-                      u"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.vol1.difftar.gpg"]
+        right_list = [b"duplicity-new-signatures.2001-08-17T02:05:13-05:00.to.2002-08-17T05:05:14-05:00.sigtar.gpg",
+                      b"duplicity-full.2002-08-15T01:01:01-07:00.vol1.difftar.gpg",
+                      b"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.manifest.gpg",
+                      b"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.vol1.difftar.gpg"]
         local_received_list, remote_received_list = cs.get_extraneous(False)  # @UnusedVariable
         errors = []
         for filename in remote_received_list:
             if filename not in right_list:
-                errors.append(u"### Got bad extraneous filename " + filename)
+                errors.append(u"### Got bad extraneous filename " + filename.decode())
             else:
                 right_list.remove(filename)
         for filename in right_list:

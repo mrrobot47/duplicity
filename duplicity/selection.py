@@ -20,7 +20,10 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from future_builtins import filter, map
+from builtins import next
+from builtins import str
+from builtins import object
+from builtins import filter, map
 
 import os  # @UnusedImport
 import stat  # @UnusedImport
@@ -43,7 +46,7 @@ documentation on what this code does can be found on the man page.
 """
 
 
-class Select:
+class Select(object):
     u"""Iterate appropriate Paths in given directory
 
     This class acts as an iterator on account of its next() method.
@@ -87,13 +90,17 @@ class Select:
         self.rootpath = path
         self.prefix = self.rootpath.uc_name
 
+    def __iter__(self):  # pylint: disable=non-iterator-returned
+        return self
+
+    def __next__(self):
+        return next(self.iter)
+
     def set_iter(self):
         u"""Initialize generator, prepare to iterate."""
         # Externally-accessed method
         self.rootpath.setdata()  # this may have changed since Select init
         self.iter = self.Iterate(self.rootpath)
-        self.next = self.iter.next
-        self.__iter__ = lambda: self
         return self
 
     def Iterate(self, path):
@@ -241,10 +248,10 @@ class Select:
         filelists_index = 0
         try:
             for opt, arg in argtuples:
-                assert isinstance(opt, unicode), u"option " + opt.decode(sys.getfilesystemencoding(), u"ignore") + \
-                                                 u" is not unicode"
-                assert isinstance(arg, unicode), u"option " + arg.decode(sys.getfilesystemencoding(), u"ignore") + \
-                                                 u" is not unicode"
+                assert isinstance(opt, str), u"option " + opt.decode(sys.getfilesystemencoding(), u"ignore") + \
+                                             u" is not unicode"
+                assert isinstance(arg, str), u"option " + arg.decode(sys.getfilesystemencoding(), u"ignore") + \
+                                             u" is not unicode"
 
                 if opt == u"--exclude":
                     self.add_selection_func(self.glob_get_sf(arg, 0))
@@ -426,7 +433,7 @@ probably isn't what you meant.""") %
         u"""Return selection function given by glob string"""
         # Internal. Used by ParseArgs, filelist_globbing_get_sfs and unit tests.
         assert include == 0 or include == 1
-        assert isinstance(glob_str, unicode)
+        assert isinstance(glob_str, str)
         if glob_str == u"**":
             sel_func = lambda path: include
         else:
@@ -488,7 +495,7 @@ probably isn't what you meant.""") %
         things similar to this.
 
         """
-        assert isinstance(glob_str, unicode), \
+        assert isinstance(glob_str, str), \
             u"The glob string " + glob_str.decode(sys.getfilesystemencoding(), u"ignore") + u" is not unicode"
         ignore_case = False
 

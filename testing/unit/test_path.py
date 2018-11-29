@@ -73,10 +73,10 @@ class PathTest(UnitTestCase):
     def test_canonical(self):
         u"""Test getting canonical version of path"""
         c = Path(u".").get_canonical()
-        assert c == u".", c
+        assert c == b".", c
 
         c = Path(u"//foo/bar/./").get_canonical()
-        assert c == u"/foo/bar", c
+        assert c == b"/foo/bar", c
 
     def test_compare_verbose(self):
         u"""Run compare_verbose on a few files"""

@@ -45,9 +45,9 @@ class RdiffdirTest(FunctionalTestCase):
         delta_path = path.Path(u"testfiles/output/delta.tar")
         sig_path = path.Path(u"testfiles/output/sig.tar")
 
-        self.run_cmd(u"cp -pR %s %s" % (new_path.name, seq_path.name))
+        self.run_cmd(u"cp -pR %s %s" % (new_path.uc_name, seq_path.uc_name))
         seq_path.setdata()
-        self.run_rdiffdir(u"sig %s %s" % (seq_path.name, sig_path.name))
+        self.run_rdiffdir(u"sig %s %s" % (seq_path.uc_name, sig_path.uc_name))
         sig_path.setdata()
         assert sig_path.exists()
 
@@ -62,12 +62,12 @@ class RdiffdirTest(FunctionalTestCase):
                 delta_path.delete()
             assert not delta_path.exists()
             self.run_rdiffdir(u"delta %s %s %s" %
-                              (sig_path.name, new_path.name, delta_path.name))
+                              (sig_path.uc_name, new_path.uc_name, delta_path.uc_name))
             delta_path.setdata()
             assert delta_path.exists()
 
             # patch and compare
-            self.run_rdiffdir(u"patch %s %s" % (seq_path.name, delta_path.name))
+            self.run_rdiffdir(u"patch %s %s" % (seq_path.uc_name, delta_path.uc_name))
             seq_path.setdata()
             new_path.setdata()
             assert new_path.compare_recursive(seq_path, verbose=1)
@@ -75,7 +75,7 @@ class RdiffdirTest(FunctionalTestCase):
             # Make new signature
             sig_path.delete()
             assert not sig_path.exists()
-            self.run_rdiffdir(u"sig %s %s" % (seq_path.name, sig_path.name))
+            self.run_rdiffdir(u"sig %s %s" % (seq_path.uc_name, sig_path.uc_name))
             sig_path.setdata()
             assert sig_path.isreg()
 

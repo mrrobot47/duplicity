@@ -16,7 +16,8 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from future_builtins import filter
+from builtins import filter
+from future.builtins import filter
 
 import os
 import re
@@ -24,6 +25,7 @@ from duplicity import backend
 from duplicity.errors import BackendException
 from duplicity import log
 from duplicity import globals
+from duplicity import util
 
 
 class Par2Backend(backend.Backend):
@@ -77,12 +79,13 @@ class Par2Backend(backend.Backend):
         source_symlink = par2temp.append(remote_filename)
         source_target = source_path.get_canonical()
         if not os.path.isabs(source_target):
-            source_target = os.path.join(os.getcwd(), source_target)
+            source_target = os.path.join(util.fsencode(os.getcwd()), source_target)
         os.symlink(source_target, source_symlink.get_canonical())
         source_symlink.setdata()
 
         log.Info(u"Create Par2 recovery files")
-        par2create = u'par2 c -r%d -n1 %s %s' % (self.redundancy, self.common_options, source_symlink.get_canonical())
+        par2create = u'par2 c -r%d -n1 %s %s' % (self.redundancy, self.common_options,
+                                                 util.fsdecode(source_symlink.get_canonical()))
         out, returncode = pexpect.run(par2create, None, True)
 
         source_symlink.delete()
@@ -111,6 +114,7 @@ class Par2Backend(backend.Backend):
         If "par2 verify" detect an error transfer the Par2-volumes into the
         temp-dir and try to repair.
         """
+
         par2temp = local_path.get_temp_in_same_dir()
         par2temp.mkdir()
         local_path_temp = par2temp.append(remote_filename)
@@ -118,7 +122,7 @@ class Par2Backend(backend.Backend):
         self.wrapped_backend._get(remote_filename, local_path_temp)
 
         try:
-            par2file = par2temp.append(remote_filename + u'.par2')
+            par2file = par2temp.append(remote_filename + b'.par2')
             self.wrapped_backend._get(par2file.get_filename(), par2file)
 
             par2verify = u'par2 v %s %s %s' % (self.common_options,
@@ -128,8 +132,8 @@ class Par2Backend(backend.Backend):
 
             if returncode:
                 log.Warn(u"File is corrupt. Try to repair %s" % remote_filename)
-                par2volumes = filter(re.compile(r'%s\.vol[\d+]*\.par2' % remote_filename).match,
-                                     self.wrapped_backend._list())
+                par2volumes = list(filter(re.compile(b'%s\\.vol[\\d+]*\\.par2' % remote_filename).match,
+                                          self.wrapped_backend._list()))
 
                 for filename in par2volumes:
                     file = par2temp.append(filename)
@@ -158,7 +162,7 @@ class Par2Backend(backend.Backend):
 
         remote_list = self.unfiltered_list()
 
-        c = re.compile(r'%s(?:\.vol[\d+]*)?\.par2' % filename)
+        c = re.compile(b'%s(?:\\.vol[\\d+]*)?\\.par2' % filename)
         for remote_filename in remote_list:
             if c.match(remote_filename):
                 self.wrapped_backend._delete(remote_filename)
@@ -169,7 +173,7 @@ class Par2Backend(backend.Backend):
         remote_list = self.unfiltered_list()
 
         for filename in filename_list[:]:
-            c = re.compile(r'%s(?:\.vol[\d+]*)?\.par2' % filename)
+            c = re.compile(b'%s(?:\\.vol[\\d+]*)?\\.par2' % filename)
             for remote_filename in remote_list:
                 if c.match(remote_filename):
                     # insert here to make sure par2 files will be removed first
@@ -189,7 +193,7 @@ class Par2Backend(backend.Backend):
         """
         remote_list = self.wrapped_backend._list()
 
-        c = re.compile(r'(?!.*\.par2$)')
+        c = re.compile(b'(?!.*\\.par2$)')
         filtered_list = []
         for filename in remote_list:
             if c.match(filename):

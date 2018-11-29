@@ -27,6 +27,7 @@ import re
 
 from builtins import map
 from builtins import range
+from builtins import str
 
 
 class GlobbingError(Exception):
@@ -68,7 +69,7 @@ def select_fn_from_glob(glob_str, include, ignore_case=False):
 
     Note: including a folder implicitly includes everything within it.
     """
-    assert isinstance(glob_str, unicode)
+    assert isinstance(glob_str, str)
     glob_ends_w_slash = False
 
     if glob_str == u"/":
@@ -159,7 +160,7 @@ def glob_to_regex(pat):
     """
     # Internal. Used by glob_get_normal_sf, glob_get_prefix_res and unit tests.
 
-    assert isinstance(pat, unicode)
+    assert isinstance(pat, str)
 
     i, n, res = 0, len(pat), u''
     while i < n:

@@ -26,10 +26,19 @@ Note that the main processes of this module have two parts.  In the
 first, the signature or delta is constructed of a ROPath iterator.  In
 the second, the ROPath iterator is put into tar block form.
 """
+from __future__ import division
 
-from future_builtins import map
+from future import standard_library
+standard_library.install_aliases()
+from builtins import map
+from builtins import next
+from builtins import str
+from builtins import range
+from past.utils import old_div
+from builtins import object
+from future.builtins import map
 
-import cStringIO
+import io
 import types
 import math
 from duplicity import statistics
@@ -64,14 +73,14 @@ def DirFull(path_iter):
     will be easy to split up the tar and make the volumes the same
     sizes).
     """
-    return DirDelta(path_iter, cStringIO.StringIO(u""))
+    return DirDelta(path_iter, io.StringIO(u""))
 
 
 def DirFull_WriteSig(path_iter, sig_outfp):
     u"""
     Return full backup like above, but also write signature to sig_outfp
     """
-    return DirDelta_WriteSig(path_iter, cStringIO.StringIO(u""), sig_outfp)
+    return DirDelta_WriteSig(path_iter, io.StringIO(u""), sig_outfp)
 
 
 def DirDelta(path_iter, dirsig_fileobj_list):
@@ -126,8 +135,11 @@ def get_delta_path(new_path, sig_path, sigTarFile=None):
         Callback activated when FileWithSignature read to end
         """
         ti.size = len(sig_string)
-        ti.name = b"signature/" + b"/".join(index)
-        sigTarFile.addfile(ti, cStringIO.StringIO(sig_string))
+        if sys.version_info.major >= 3:
+            ti.name = u"signature/" + util.fsdecode(b"/".join(index))
+        else:
+            ti.name = b"signature/" + b"/".join(index)
+        sigTarFile.addfile(ti, io.BytesIO(sig_string))
 
     if new_path.isreg() and sig_path and sig_path.isreg() and sig_path.difftype == u"signature":
         delta_path.difftype = u"diff"
@@ -140,7 +152,10 @@ def get_delta_path(new_path, sig_path, sigTarFile=None):
     else:
         delta_path.difftype = u"snapshot"
         if sigTarFile:
-            ti.name = b"snapshot/" + b"/".join(index)
+            if sys.version_info.major >= 3:
+                ti.name = u"snapshot/" + util.fsdecode(b"/".join(index))
+            else:
+                ti.name = b"snapshot/" + b"/".join(index)
         if not new_path.isreg():
             if sigTarFile:
                 sigTarFile.addfile(ti)
@@ -207,7 +222,10 @@ def get_delta_iter(new_iter, sig_iter, sig_fileobj=None):
                          util.escape(sig_path.get_relative_path()))
                 if sigTarFile:
                     ti = ROPath(sig_path.index).get_tarinfo()
-                    ti.name = u"deleted/" + u"/".join(sig_path.index)
+                    if sys.version_info.major >= 3:
+                        ti.name = u"deleted/" + util.uindex(sig_path.index)
+                    else:
+                        ti.name = b"deleted/" + b"/".join(sig_path.index)
                     sigTarFile.addfile(ti)
                 stats.add_deleted_file(sig_path)
                 yield ROPath(sig_path.index)
@@ -238,7 +256,7 @@ def sigtar2path_iter(sigtarobj):
     tf.debug = 1
     for tarinfo in tf:
         tiname = util.get_tarinfo_name(tarinfo)
-        for prefix in [b"signature/", b"snapshot/", b"deleted/"]:
+        for prefix in [r"signature/", r"snapshot/", r"deleted/"]:
             if tiname.startswith(prefix):
                 # strip prefix and '/' from name and set it to difftype
                 name, difftype = tiname[len(prefix):], prefix[:-1]
@@ -246,7 +264,10 @@ def sigtar2path_iter(sigtarobj):
         else:
             raise DiffDirException(u"Bad tarinfo name %s" % (tiname,))
 
-        index = tuple(name.split(b"/"))
+        if sys.version_info.major >= 3:
+            index = tuple(util.fsencode(name).split(b"/"))
+        else:
+            index = tuple(name.split(b"/"))
         if not index[-1]:
             index = index[:-1]  # deal with trailing /, ""
 
@@ -347,7 +368,7 @@ def combine_path_iters(path_iter_list):
             else:
                 break  # assumed triple_list sorted, so can exit now
 
-    triple_list = [x for x in map(get_triple, range(len(path_iter_list))) if x]
+    triple_list = [x for x in map(get_triple, list(range(len(path_iter_list)))) if x]
     while triple_list:
         triple_list.sort()
         yield triple_list[0][2]
@@ -382,7 +403,7 @@ def get_combined_path_iter(sig_infp_list):
     return combine_path_iters([sigtar2path_iter(x) for x in sig_infp_list])
 
 
-class FileWithReadCounter:
+class FileWithReadCounter(object):
     u"""
     File-like object which also computes amount read as it is read
     """
@@ -404,7 +425,7 @@ class FileWithReadCounter:
         return self.infile.close()
 
 
-class FileWithSignature:
+class FileWithSignature(object):
     u"""
     File-like object which also computes signature as it is read
     """
@@ -441,7 +462,7 @@ class FileWithSignature:
         return self.infile.close()
 
 
-class TarBlock:
+class TarBlock(object):
     u"""
     Contain information to add next file to tar
     """
@@ -453,7 +474,7 @@ class TarBlock:
         self.data = data
 
 
-class TarBlockIter:
+class TarBlockIter(object):
     u"""
     A bit like an iterator, yield tar blocks given input iterator
 
@@ -481,7 +502,7 @@ class TarBlockIter:
         Make tarblock out of tarinfo and file data
         """
         tarinfo.size = len(file_data)
-        headers = tarinfo.tobuf(errors=u'replace')
+        headers = tarinfo.tobuf(errors=u'replace', encoding=globals.fsencoding)
         blocks, remainder = divmod(tarinfo.size, tarfile.BLOCKSIZE)  # @UnusedVariable
         if remainder > 0:
             filler_data = b"\0" * (tarfile.BLOCKSIZE - remainder)
@@ -506,7 +527,7 @@ class TarBlockIter:
         assert self.process_waiting
         XXX  # Override in subclass @UndefinedVariable
 
-    def next(self):
+    def __next__(self):
         u"""
         Return next block and update offset
         """
@@ -517,10 +538,10 @@ class TarBlockIter:
             return result
 
         if self.process_waiting:
-            result = self.process_continued()
+            result = self.process_continued()  # pylint: disable=assignment-from-no-return
         else:
             # Below a StopIteration exception will just be passed upwards
-            result = self.process(next(self.input_iter))
+            result = self.process(next(self.input_iter))  # pylint: disable=assignment-from-no-return
         block_number = self.process_next_vol_number
         self.offset += len(result.data)
         self.previous_index = result.index
@@ -570,9 +591,9 @@ class TarBlockIter:
         """
         blocks, remainder = divmod(self.offset, tarfile.RECORDSIZE)  # @UnusedVariable
         self.offset = 0
-        return u'\0' * (tarfile.RECORDSIZE - remainder)  # remainder can be 0
+        return b'\0' * (tarfile.RECORDSIZE - remainder)  # remainder can be 0
 
-    def __iter__(self):
+    def __iter__(self):  # pylint: disable=non-iterator-returned
         return self
 
 
@@ -614,10 +635,14 @@ class SigTarBlockIter(TarBlockIter):
                                    get_block_size(path.getsize()))
             sigbuf = sfp.read()
             sfp.close()
-            ti.name = u"signature/" + u"/".join(path.index)
+            ti.name = b"signature/" + b"/".join(path.index)
+            if sys.version_info.major >= 3:
+                ti.name = util.fsdecode(ti.name)
             return self.tarinfo2tarblock(path.index, ti, sigbuf)
         else:
-            ti.name = u"snapshot/" + u"/".join(path.index)
+            ti.name = b"snapshot/" + b"/".join(path.index)
+            if sys.version_info.major >= 3:
+                ti.name = util.fsdecode(ti.name)
             return self.tarinfo2tarblock(path.index, ti)
 
 
@@ -635,10 +660,10 @@ class DeltaTarBlockIter(TarBlockIter):
         """
         def add_prefix(tarinfo, prefix):
             u"""Add prefix to the name of a tarinfo file"""
-            if tarinfo.name == b".":
-                tarinfo.name = prefix + b"/"
+            if tarinfo.name == r".":
+                tarinfo.name = prefix + r"/"
             else:
-                tarinfo.name = b"%s/%s" % (prefix, tarinfo.name)
+                tarinfo.name = r"%s/%s" % (prefix, tarinfo.name)
 
         ti = delta_ropath.get_tarinfo()
         index = delta_ropath.index
@@ -646,10 +671,10 @@ class DeltaTarBlockIter(TarBlockIter):
         # Return blocks of deleted files or fileless snapshots
         if not delta_ropath.type or not delta_ropath.fileobj:
             if not delta_ropath.type:
-                add_prefix(ti, u"deleted")
+                add_prefix(ti, r"deleted")
             else:
                 assert delta_ropath.difftype == u"snapshot"
-                add_prefix(ti, b"snapshot")
+                add_prefix(ti, r"snapshot")
             return self.tarinfo2tarblock(index, ti)
 
         # Now handle single volume block case
@@ -659,16 +684,16 @@ class DeltaTarBlockIter(TarBlockIter):
             stats.RawDeltaSize += len(data)
         if last_block:
             if delta_ropath.difftype == u"snapshot":
-                add_prefix(ti, b"snapshot")
+                add_prefix(ti, r"snapshot")
             elif delta_ropath.difftype == u"diff":
-                add_prefix(ti, b"diff")
+                add_prefix(ti, r"diff")
             else:
                 assert 0, u"Unknown difftype"
             return self.tarinfo2tarblock(index, ti, data)
 
         # Finally, do multivol snapshot or diff case
-        full_name = u"multivol_%s/%s" % (delta_ropath.difftype, ti.name)
-        ti.name = full_name + u"/1"
+        full_name = r"multivol_%s/%s" % (delta_ropath.difftype, ti.name)
+        ti.name = full_name + r"/1"
         self.process_prefix = full_name
         self.process_fp = fp
         self.process_ropath = delta_ropath
@@ -741,5 +766,5 @@ def get_block_size(file_len):
         return 512  # set minimum of 512 bytes
     else:
         # Split file into about 2000 pieces, rounding to 512
-        file_blocksize = int((file_len / (2000 * 512)) * 512)
+        file_blocksize = int((old_div(file_len, (2000 * 512))) * 512)
         return min(file_blocksize, globals.max_blocksize)

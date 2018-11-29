@@ -66,7 +66,7 @@ class DDTest(UnitTestCase):
         sigtar = diffdir.SigTarBlockIter(select)
         diffdir.write_block_iter(sigtar, u"testfiles/output/sigtar")
 
-        sigtar_fp = open(u"testfiles/output/sigtar")
+        sigtar_fp = open(u"testfiles/output/sigtar", u"rb")
         select2 = selection.Select(Path(dirname))
         select2.set_iter()
         diffdir.write_block_iter(diffdir.DirDelta(select2, sigtar_fp),
@@ -78,7 +78,7 @@ class DDTest(UnitTestCase):
             fin = open(u"testfiles/output/difftar", u"rb")
             diff_buf = fin.read()
             assert not fin.close()
-            assert diff_buf == u'\0' * 10240
+            assert diff_buf == b'\0' * 10240
 
     def test_empty_diff(self):
         u"""Test producing a diff against same sig; should be len 0"""
@@ -89,7 +89,7 @@ class DDTest(UnitTestCase):
         sigtar = diffdir.SigTarBlockIter(select)
         diffdir.write_block_iter(sigtar, u"testfiles/output/sigtar")
 
-        sigtar_fp = open(u"testfiles/output/sigtar")
+        sigtar_fp = open(u"testfiles/output/sigtar", u"rb")
         select2 = selection.Select(Path(u"testfiles/various_file_types"))
         select2.set_iter()
         diffdir.write_block_iter(diffdir.DirDelta(select2, sigtar_fp),
@@ -141,7 +141,7 @@ class DDTest(UnitTestCase):
         diffdir.write_block_iter(delta_tar,
                                  u"testfiles/output/dir2dir3.difftar")
 
-        buffer = r""
+        buffer = b""
         tf = tarfile.TarFile(u"testfiles/output/dir2dir3.difftar", u"r")
         for tarinfo in tf:
             if tarinfo.name.startswith(r"multivol_diff/"):
@@ -201,7 +201,7 @@ class DDTest(UnitTestCase):
 
             # print delta1.name, delta2.name
             compare_tar(delta1.open(u"rb"), delta2.open(u"rb"))
-            assert not os.system(u"cmp %s %s" % (delta1.name, delta2.name))
+            assert not os.system(u"cmp %s %s" % (delta1.uc_name, delta2.uc_name))
 
             # Write old-style signature to cur_full_sigs
             diffdir.write_block_iter(diffdir.SigTarBlockIter(get_sel(cur_dir)),

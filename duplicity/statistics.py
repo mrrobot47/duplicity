@@ -20,8 +20,14 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 u"""Generate and process backup statistics"""
+from __future__ import division
 
-from future_builtins import map
+from builtins import zip
+from builtins import map
+from builtins import str
+from builtins import object
+from past.utils import old_div
+from future.builtins import map
 
 import re
 import time
@@ -34,7 +40,7 @@ class StatsException(Exception):
     pass
 
 
-class StatsObj:
+class StatsObj(object):
     u"""Contains various statistics, provide string conversion functions"""
     # used when quoting files in get_stats_line
     space_regex = re.compile(u" ")
@@ -150,10 +156,10 @@ class StatsObj:
         u"""Return portion of statistics string dealing with time"""
         timelist = []
         if self.StartTime is not None:
-            timelist.append(u"StartTime %.2f (%s)\n" %
+            timelist.append(u"StartTime %.2f (%s)\n" %  # pylint: disable=bad-string-format-type
                             (self.StartTime, dup_time.timetopretty(self.StartTime)))
         if self.EndTime is not None:
-            timelist.append(u"EndTime %.2f (%s)\n" %
+            timelist.append(u"EndTime %.2f (%s)\n" %  # pylint: disable=bad-string-format-type
                             (self.EndTime, dup_time.timetopretty(self.EndTime)))
         if self.ElapsedTime or (self.StartTime is not None and
                                 self.EndTime is not None):
@@ -201,7 +207,7 @@ class StatsObj:
         for abbrev_bytes, abbrev_string in self.byte_abbrev_list:
             if byte_count >= abbrev_bytes:
                 # Now get 3 significant figures
-                abbrev_count = float(byte_count) / abbrev_bytes
+                abbrev_count = old_div(float(byte_count), abbrev_bytes)
                 if abbrev_count >= 100:
                     precision = 0
                 elif abbrev_count >= 10:
@@ -290,7 +296,7 @@ class StatsObj:
         for attr in self.stat_attrs:
             if self.get_stat(attr) is not None:
                 self.set_stat(attr,
-                              self.get_stat(attr) / float(len(statobj_list)))
+                              old_div(self.get_stat(attr), float(len(statobj_list))))
         return self
 
     def get_statsobj_copy(self):

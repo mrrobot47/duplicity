@@ -19,5 +19,9 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+import sys
 import gettext
-gettext.install(u'duplicity', unicode=True, names=[u'ngettext'])
+if sys.version_info.major >= 3:
+    gettext.install(u'duplicity', names=[u'ngettext'])
+else:
+    gettext.install(u'duplicity', names=[u'ngettext'])

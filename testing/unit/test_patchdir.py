@@ -19,9 +19,9 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from future_builtins import map
+from future.builtins import map
 
-import cStringIO
+import io
 import unittest
 
 from duplicity import diffdir
@@ -112,20 +112,20 @@ class PatchingTest(UnitTestCase):
             # file object will be empty, and tarinfo will have path
             # "snapshot/../warning-security-error"
             assert not os.system(u"cat /dev/null >testfiles/output/file")
-            path = Path(u"testfiles/output/file")
-            path.index = (u"diff", u"..", u"warning-security-error")
+            path = Path(b"testfiles/output/file")
+            path.index = (b"diff", b"..", b"warning-security-error")
             ti = path.get_tarinfo()
-            fp = cStringIO.StringIO(u"")
+            fp = io.StringIO(u"")
             tf.addfile(ti, fp)
 
             tf.close()
 
-        make_bad_tar(u"testfiles/output/bad.tar")
+        make_bad_tar(b"testfiles/output/bad.tar")
         os.mkdir(u"testfiles/output/temp")
 
         self.assertRaises(patchdir.PatchDirException, patchdir.Patch,
                           Path(u"testfiles/output/temp"),
-                          open(u"testfiles/output/bad.tar"))
+                          open(u"testfiles/output/bad.tar", u"rb"))
         assert not Path(u"testfiles/output/warning-security-error").exists()
 
 
@@ -205,7 +205,7 @@ class TestInnerFuncs(UnitTestCase):
         u"""Make a snapshot ROPath, permissions 0o600"""
         ss = self.out.append(u"snapshot")
         fout = ss.open(u"wb")
-        fout.write(u"hello, world!")
+        fout.write(b"hello, world!")
         assert not fout.close()
         ss.chmod(0o600)
         ss.difftype = u"snapshot"
@@ -213,11 +213,11 @@ class TestInnerFuncs(UnitTestCase):
 
     def get_delta(self, old_buf, new_buf):
         u"""Return delta buffer from old to new"""
-        sigfile = librsync.SigFile(cStringIO.StringIO(old_buf))
+        sigfile = librsync.SigFile(io.BytesIO(old_buf))
         sig = sigfile.read()
         assert not sigfile.close()
 
-        deltafile = librsync.DeltaFile(sig, cStringIO.StringIO(new_buf))
+        deltafile = librsync.DeltaFile(sig, io.BytesIO(new_buf))
         deltabuf = deltafile.read()
         assert not deltafile.close()
         return deltabuf
@@ -226,8 +226,8 @@ class TestInnerFuncs(UnitTestCase):
         u"""Make a delta ROPath, permissions 0o640"""
         delta1 = self.out.append(u"delta1")
         fout = delta1.open(u"wb")
-        fout.write(self.get_delta(u"hello, world!",
-                                  u"aonseuth aosetnuhaonsuhtansoetuhaoe"))
+        fout.write(self.get_delta(b"hello, world!",
+                                  b"aonseuth aosetnuhaonsuhtansoetuhaoe"))
         assert not fout.close()
         delta1.chmod(0o640)
         delta1.difftype = u"diff"
@@ -237,8 +237,8 @@ class TestInnerFuncs(UnitTestCase):
         u"""Make another delta ROPath, permissions 0o644"""
         delta2 = self.out.append(u"delta1")
         fout = delta2.open(u"wb")
-        fout.write(self.get_delta(u"aonseuth aosetnuhaonsuhtansoetuhaoe",
-                                  u"3499 34957839485792357 458348573"))
+        fout.write(self.get_delta(b"aonseuth aosetnuhaonsuhtansoetuhaoe",
+                                  b"3499 34957839485792357 458348573"))
         assert not fout.close()
         delta2.chmod(0o644)
         delta2.difftype = u"diff"
@@ -286,11 +286,11 @@ class TestInnerFuncs(UnitTestCase):
 
         ids = u"%d:%d" % (os.getuid(), os.getgid())
 
-        testseq([self.snapshot()], (u"%s 600" % ids), u"hello, world!")
+        testseq([self.snapshot()], (u"%s 600" % ids), b"hello, world!")
         testseq([self.snapshot(), self.delta1()], (u"%s 640" % ids),
-                u"aonseuth aosetnuhaonsuhtansoetuhaoe")
+                b"aonseuth aosetnuhaonsuhtansoetuhaoe")
         testseq([self.snapshot(), self.delta1(), self.delta2()], (u"%s 644" % ids),
-                u"3499 34957839485792357 458348573")
+                b"3499 34957839485792357 458348573")
 
 
 if __name__ == u"__main__":

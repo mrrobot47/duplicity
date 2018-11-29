@@ -25,6 +25,9 @@ which is now patched with some code for iterative threaded execution
 see duplicity's README for details
 """
 
+from builtins import next
+from builtins import str
+from builtins import object
 import os
 import sys
 import types
@@ -57,7 +60,7 @@ class GPGError(Exception):
     pass
 
 
-class GPGProfile:
+class GPGProfile(object):
     u"""
     Just hold some GPG settings, avoid passing tons of arguments
     """
@@ -91,7 +94,8 @@ class GPGProfile:
 
         self.gpg_version = self.get_gpg_version(globals.gpg_binary)
 
-    _version_re = re.compile(r'^gpg.*\(GnuPG(?:/MacGPG2)?\) (?P<maj>[0-9]+)\.(?P<min>[0-9]+)\.(?P<bug>[0-9]+)(-.+)?$')
+    rc = re.compile
+    _version_re = rc(b'^gpg.*\\(GnuPG(?:/MacGPG2)?\\) (?P<maj>[0-9]+)\\.(?P<min>[0-9]+)\\.(?P<bug>[0-9]+)(-.+)?$')
 
     def get_gpg_version(self, binary):
         gnupg = gpginterface.GnuPG()
@@ -112,7 +116,7 @@ class GPGProfile:
         raise GPGError(u"failed to determine gnupg version of %s from %s" % (binary, line))
 
 
-class GPGFile:
+class GPGFile(object):
     u"""
     File-like object that encrypts decrypts another file on the fly
     """
@@ -243,7 +247,10 @@ class GPGFile:
         try:
             res = self.gpg_input.write(buf)
             if res is not None:
-                self.byte_count += len(res)
+                if sys.version_info.major >= 3:
+                    self.byte_count += res
+                else:
+                    self.byte_count += len(res)
         except Exception:
             self.gpg_failed()
         return res
@@ -264,7 +271,7 @@ class GPGFile:
             fp.seek(0)
             for line in fp:
                 try:
-                    msg += unicode(line.strip(), locale.getpreferredencoding(), u'replace') + u"\n"
+                    msg += str(line.strip(), locale.getpreferredencoding(), u'replace') + u"\n"
                 except Exception as e:
                     msg += line.strip() + u"\n"
         msg += u"===== End GnuPG log =====\n"
@@ -316,13 +323,13 @@ class GPGFile:
         """
         self.status_fp.seek(0)
         status_buf = self.status_fp.read()
-        match = re.search(u"^\\[GNUPG:\\] GOODSIG ([0-9A-F]*)",
+        match = re.search(b"^\\[GNUPG:\\] GOODSIG ([0-9A-F]*)",
                           status_buf, re.M)
         if not match:
             self.signature = None
         else:
             assert len(match.group(1)) >= 8
-            self.signature = match.group(1)
+            self.signature = match.group(1).decode()
 
     def get_signature(self):
         u"""
@@ -383,7 +390,7 @@ def GPGWriteFile(block_iter, filename, profile,
             if bytes_to_go < block_iter.get_read_size():
                 break
             try:
-                data = block_iter.next().data
+                data = block_iter.__next__().data
             except StopIteration:
                 at_end_of_blockiter = 1
                 break
@@ -415,7 +422,7 @@ def GzipWriteFile(block_iter, filename, size=200 * 1024 * 1024, gzipped=True):
     The input requirements on block_iter and the output is the same as
     GPGWriteFile (returns true if wrote until end of block_iter).
     """
-    class FileCounted:
+    class FileCounted(object):
         u"""
         Wrapper around file object that counts number of bytes written
         """

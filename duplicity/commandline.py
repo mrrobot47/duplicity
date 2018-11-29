@@ -22,7 +22,10 @@
 u"""Parse command line, check for consistency, and set globals"""
 from __future__ import print_function
 
-from future_builtins import filter
+from builtins import filter
+from builtins import str
+from builtins import range
+from future.builtins import filter
 
 from copy import copy
 import optparse
@@ -127,7 +130,7 @@ def generate_default_backup_name(backend_url):
     # (but duplicity is run from a different directory or similar),
     # then it is simply up to the user to set --archive-dir properly.
     burlhash = md5()
-    burlhash.update(backend_url)
+    burlhash.update(backend_url.encode())
     return burlhash.hexdigest()
 
 
@@ -231,9 +234,12 @@ class OPHelpFix(optparse.OptionParser):
         encoding = self._get_encoding(file)
         help = self.format_help()
         # The help is in unicode or bytes depending on the user's locale
-        if not isinstance(help, unicode):
-            help = self.format_help().decode(u'utf-8')
-        file.write(help.encode(encoding, u"replace"))
+        if sys.version_info.major == 2:
+            if isinstance(help, unicode):
+                help = self.format_help().decode(u'utf-8')
+                file.write(help.encode(encoding, u"replace"))
+        else:
+            file.write(help)
 
 
 def parse_cmdline_options(arglist):
@@ -387,7 +393,7 @@ def parse_cmdline_options(arglist):
     # --archive-dir <path>
     parser.add_option(u"--file-to-restore", u"-r", action=u"callback", type=u"file",
                       metavar=_(u"path"), dest=u"restore_dir",
-                      callback=lambda o, s, v, p: setattr(p.values, u"restore_dir", v.strip(u'/')))
+                      callback=lambda o, s, v, p: setattr(p.values, u"restore_dir", util.fsencode(v.strip(u'/'))))
 
     # Used to confirm certain destructive operations like deleting old files.
     parser.add_option(u"--force", action=u"store_true")
@@ -665,7 +671,7 @@ def parse_cmdline_options(arglist):
     # attributes that are 'hidden' (start with an underscore) or whose name is
     # the empty string (used for arguments that don't directly store a value
     # by using dest="")
-    for f in filter(lambda x: x and not x.startswith(u"_"), dir(options)):
+    for f in [x for x in dir(options) if x and not x.startswith(u"_")]:
         v = getattr(options, f)
         # Only set if v is not None because None is the default for all the
         # variables.  If user didn't set it, we'll use defaults in globals.py

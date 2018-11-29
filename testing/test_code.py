@@ -44,7 +44,7 @@ class CodeTest(DuplicityTestCase):
                                    stderr=subprocess.PIPE)
         output = process.communicate()[0]
         self.assertTrue(process.returncode in returncodes, output)
-        self.assertEqual(u"", output, output)
+        self.assertEqual(b"", output, output)
 
     @skipCodeTest
     def test_2to3(self):
@@ -65,6 +65,7 @@ class CodeTest(DuplicityTestCase):
             u"--nofix=raw_input",
             u"--nofix=urllib",
             u"--nofix=xrange",
+            u"--nofix=map",
             _top_dir])
 
     @skipCodeTest
@@ -78,6 +79,7 @@ class CodeTest(DuplicityTestCase):
             u"--disable=E0602",  # Undefined variable
             u"--disable=E0611",  # No name in module
             u"--disable=E1101",  # Has no member
+            u"--disable=E1102",  # is not callable (_)
             u"--disable=E1103",  # Maybe has no member
             u"--disable=E0712",  # Catching an exception which doesn't inherit from BaseException
             u"--ignore=_librsync.so",

@@ -1,4 +1,3 @@
-from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2017 Tomas Vondra (Launchpad id: tomas-v)
@@ -20,6 +19,7 @@ from __future__ import print_function
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
 import duplicity.backend
 from duplicity import log
 from duplicity.errors import BackendException
@@ -80,7 +80,7 @@ class MegaBackend(duplicity.backend.Backend):
     def _makedir_recursive(self, path):
         u'creates a remote directory (recursively the whole path), ingores errors'
 
-        print (u"mkdir: %s" % (u'/'.join(path),))
+        print(u"mkdir: %s" % (u'/'.join(path),))
 
         p = self._root
 
@@ -119,7 +119,7 @@ class MegaBackend(duplicity.backend.Backend):
     def folder_contents(self, files_only=False):
         u'lists contents of a folder, optionally ignoring subdirectories'
 
-        print (u"megals: %s" % (self._folder,))
+        print(u"megals: %s" % (self._folder,))
 
         if self._megarc:
             cmd = [u'megals', u'--config', self._megarc, self._folder]
@@ -140,7 +140,7 @@ class MegaBackend(duplicity.backend.Backend):
 
     def download(self, remote_file, local_file):
 
-        print (u"megaget: %s" % (remote_file,))
+        print(u"megaget: %s" % (remote_file,))
 
         if self._megarc:
             cmd = [u'megaget', u'--config', self._megarc, u'--no-progress',
@@ -153,7 +153,7 @@ class MegaBackend(duplicity.backend.Backend):
 
     def upload(self, local_file, remote_file):
 
-        print (u"megaput: %s" % (remote_file,))
+        print(u"megaput: %s" % (remote_file,))
 
         if self._megarc:
             cmd = [u'megaput', u'--config', self._megarc, u'--no-progress',
@@ -166,7 +166,7 @@ class MegaBackend(duplicity.backend.Backend):
 
     def delete(self, remote_file):
 
-        print (u"megarm: %s" % (remote_file,))
+        print(u"megarm: %s" % (remote_file,))
 
         if self._megarc:
             cmd = [u'megarm', u'--config', self._megarc, self._folder + u'/' + remote_file]

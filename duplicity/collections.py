@@ -21,7 +21,14 @@
 
 u"""Classes and functions on collections of backup volumes"""
 
-from future_builtins import filter, map
+from past.builtins import cmp
+from builtins import filter
+from builtins import str
+from builtins import zip
+from builtins import map
+from builtins import range
+from builtins import object
+from future.builtins import filter, map
 
 import types
 import gettext
@@ -48,7 +55,7 @@ class CollectionsError(Exception):
     pass
 
 
-class BackupSet:
+class BackupSet(object):
     u"""
     Backup set - the backup information produced by one session
     """
@@ -193,7 +200,7 @@ class BackupSet:
         filelist = []
         if self.remote_manifest_name:
             filelist.append(self.remote_manifest_name)
-        filelist.extend(self.volume_name_dict.values())
+        filelist.extend(list(self.volume_name_dict.values()))
         return u"[%s]" % u", ".join(map(util.fsdecode, filelist))
 
     def get_timestr(self):
@@ -268,7 +275,7 @@ class BackupSet:
         Return sorted list of (remote) filenames of files in set
         """
         assert self.info_set
-        volume_num_list = self.volume_name_dict.keys()
+        volume_num_list = list(self.volume_name_dict.keys())
         volume_num_list.sort()
         volume_filenames = [self.volume_name_dict[x] for x in volume_num_list]
         if self.remote_manifest_name:
@@ -298,7 +305,7 @@ class BackupSet:
         u"""
         Return the number of volumes in the set
         """
-        return len(self.volume_name_dict.keys())
+        return len(list(self.volume_name_dict.keys()))
 
     def __eq__(self, other):
         u"""
@@ -311,7 +318,7 @@ class BackupSet:
             len(self) == len(other)
 
 
-class BackupChain:
+class BackupChain(object):
     u"""
     BackupChain - a number of linked BackupSets
 
@@ -463,7 +470,7 @@ class BackupChain:
             return self.incset_list
 
 
-class SignatureChain:
+class SignatureChain(object):
     u"""
     A number of linked SignatureSets
 
@@ -593,14 +600,13 @@ class SignatureChain:
 
         inclist = self.inclist
         if time:
-            inclist = filter(lambda n: file_naming.parse(n).end_time <= time,
-                             inclist)
+            inclist = [n for n in inclist if file_naming.parse(n).end_time <= time]
 
         l.extend(inclist)
         return l
 
 
-class CollectionsStatus:
+class CollectionsStatus(object):
     u"""
     Hold information about available chains and sets
     """
@@ -669,13 +675,13 @@ class CollectionsStatus:
         for i in range(len(self.other_backup_chains)):
             l.append(_(u"Secondary chain %d of %d:") %
                      (i + 1, len(self.other_backup_chains)))
-            l.append(unicode(self.other_backup_chains[i]))
+            l.append(str(self.other_backup_chains[i]))
             l.append(u"")
 
         if self.matched_chain_pair:
             l.append(u"\n" + _(u"Found primary backup chain with matching "
                      u"signature chain:"))
-            l.append(unicode(self.matched_chain_pair[1]))
+            l.append(str(self.matched_chain_pair[1]))
         else:
             l.append(_(u"No backup chains with active signatures found"))
 
@@ -825,7 +831,7 @@ class CollectionsStatus:
                               u"Warning, found the following orphaned "
                               u"backup files:",
                               len(self.orphaned_backup_sets)) + u"\n" +
-                     u"\n".join(map(unicode, self.orphaned_backup_sets)),
+                     u"\n".join(map(str, self.orphaned_backup_sets)),
                      log.WarningCode.orphaned_backup)
 
     def get_backup_chains(self, filename_list):
@@ -942,13 +948,9 @@ class CollectionsStatus:
                 elif pr.type == u"new-sig":
                     new_sig_filenames.append(filename)
 
-        # compare by file time
-        def by_start_time(a, b):
-            return int(file_naming.parse(a).start_time) - int(file_naming.parse(b).start_time)
-
         # Try adding new signatures to existing chains
         orphaned_filenames = []
-        new_sig_filenames.sort(by_start_time)
+        new_sig_filenames.sort(key=lambda x: int(file_naming.parse(x).start_time))
         for sig_filename in new_sig_filenames:
             for chain in chains:
                 if chain.add_filename(sig_filename):
@@ -970,7 +972,7 @@ class CollectionsStatus:
                 endtime_chain_dict[chain.end_time] = [chain]
 
         # Use dictionary to build final sorted list
-        sorted_end_times = endtime_chain_dict.keys()
+        sorted_end_times = list(endtime_chain_dict.keys())
         sorted_end_times.sort()
         sorted_chain_list = []
         for end_time in sorted_end_times:
@@ -1152,9 +1154,6 @@ class CollectionsStatus:
         a valid input). Thus the second-to-last is obtained with n=2
         rather than n=1.
         """
-        def mycmp(x, y):
-            return cmp(x.get_first().time, y.get_first().time)
-
         assert self.values_set
         assert n > 0
 
@@ -1162,7 +1161,7 @@ class CollectionsStatus:
             return None
 
         sorted = self.all_backup_chains[:]
-        sorted.sort(mycmp)
+        sorted.sort(key=lambda x: x.get_first().time)
 
         sorted.reverse()
         return sorted[n - 1]
@@ -1191,10 +1190,10 @@ class CollectionsStatus:
         where the newer end of the chain is newer than t.
         """
         assert self.values_set
-        new_chains = filter(lambda c: c.end_time >= t, self.all_backup_chains)
+        new_chains = [c for c in self.all_backup_chains if c.end_time >= t]
         result_sets = []
         for chain in new_chains:
-            old_sets = filter(lambda s: s.get_time() < t, chain.get_all_sets())
+            old_sets = [s for s in chain.get_all_sets() if s.get_time() < t]
             result_sets.extend(old_sets)
         return self.sort_sets(result_sets)
 
@@ -1224,7 +1223,7 @@ class CollectionsStatus:
         return FileChangedStatus(filepath, list(zip(specified_file_backup_type, specified_file_backup_set)))
 
 
-class FileChangedStatus:
+class FileChangedStatus(object):
     def __init__(self, filepath, fileinfo_list):
         self.filepath = filepath
         self.fileinfo_list = fileinfo_list

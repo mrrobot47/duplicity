@@ -25,6 +25,10 @@ Asynchronous job scheduler, for concurrent execution with minimalistic
 dependency guarantees.
 """
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
+import gettext
 import duplicity
 from duplicity import log
 from duplicity.dup_threading import require_threading
@@ -36,7 +40,7 @@ thread = duplicity.dup_threading.thread_module()
 threading = duplicity.dup_threading.threading_module()
 
 
-class AsyncScheduler:
+class AsyncScheduler(object):
     u"""
     Easy-to-use scheduler of function calls to be executed
     concurrently. A very simple dependency mechanism exists in the

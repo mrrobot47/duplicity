@@ -26,6 +26,7 @@ securely created temporary directory.
 The public interface of this module is thread-safe.
 """
 
+from builtins import object
 import os
 import threading
 import tempfile
@@ -67,7 +68,7 @@ def default():
         _defaultLock.release()
 
 
-class TemporaryDirectory:
+class TemporaryDirectory(object):
     u"""
     A temporary directory.
 
@@ -127,9 +128,11 @@ class TemporaryDirectory:
             else:
                 global _initialSystemTempRoot
                 temproot = _initialSystemTempRoot
+        if isinstance(temproot, b"".__class__):
+            temproot = util.fsdecode(temproot)
         self.__dir = tempfile.mkdtemp(u"-tempdir", u"duplicity-", temproot)
 
-        log.Info(_(u"Using temporary directory %s") % util.fsdecode(self.__dir))
+        log.Info(_(u"Using temporary directory %s") % self.__dir)
 
         # number of mktemp()/mkstemp() calls served so far
         self.__tempcount = 0
@@ -171,7 +174,7 @@ class TemporaryDirectory:
         try:
             self.__tempcount = self.__tempcount + 1
             suffix = u"-%d" % (self.__tempcount,)
-            filename = tempfile.mktemp(suffix, u"mktemp-", self.__dir)
+            filename = tempfile.mktemp(suffix, u"mktemp-", util.fsdecode(self.__dir))
 
             log.Debug(_(u"Registering (mktemp) temporary file %s") % util.fsdecode(filename))
             self.__pending[filename] = None
@@ -193,9 +196,9 @@ class TemporaryDirectory:
         try:
             self.__tempcount = self.__tempcount + 1
             suffix = u"-%d" % (self.__tempcount,)
-            fd, filename = tempfile.mkstemp(suffix, u"mkstemp-", self.__dir)
+            fd, filename = tempfile.mkstemp(suffix, u"mkstemp-", self.__dir,)
 
-            log.Debug(_(u"Registering (mkstemp) temporary file %s") % util.fsdecode(filename))
+            log.Debug(_(u"Registering (mkstemp) temporary file %s") % filename)
             self.__pending[filename] = None
         finally:
             self.__lock.release()
@@ -247,7 +250,7 @@ class TemporaryDirectory:
         self.__lock.acquire()
         try:
             if self.__dir is not None:
-                for file in self.__pending.keys():
+                for file in list(self.__pending.keys()):
                     try:
                         log.Debug(_(u"Removing still remembered temporary file %s") % util.fsdecode(file))
                         util.ignore_missing(os.unlink, file)

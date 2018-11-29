@@ -127,7 +127,7 @@ class FinalTest(FunctionalTestCase):
         assert lf4_1.issym()
         lf4_2 = lf3.append(u"DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
         fp = lf4_2.open(u"wb")
-        fp.write(u"hello" * 1000)
+        fp.write(b"hello" * 1000)
         assert not fp.close()
 
         self.runtest([u"testfiles/empty_dir", lf_dir.uc_name,

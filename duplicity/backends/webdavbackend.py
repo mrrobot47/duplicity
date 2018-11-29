@@ -21,13 +21,17 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
 import base64
-import httplib
+import http.client
 import os
 import re
-import urllib
-import urllib2
-import urlparse
+import urllib.request  # pylint: disable=import-error
+import urllib.parse  # pylint: disable=import-error
+import urllib.error  # pylint: disable=import-error
 import xml.dom.minidom
 
 import duplicity.backend
@@ -37,7 +41,7 @@ from duplicity import util
 from duplicity.errors import BackendException, FatalBackendException
 
 
-class CustomMethodRequest(urllib2.Request):
+class CustomMethodRequest(urllib.request.Request):
     u"""
     This request subclass allows explicit specification of
     the HTTP request method. Basic urllib2.Request class
@@ -45,13 +49,13 @@ class CustomMethodRequest(urllib2.Request):
     """
     def __init__(self, method, *args, **kwargs):
         self.method = method
-        urllib2.Request.__init__(self, *args, **kwargs)
+        urllib.request.Request.__init__(self, *args, **kwargs)
 
     def get_method(self):
         return self.method
 
 
-class VerifiedHTTPSConnection(httplib.HTTPSConnection):
+class VerifiedHTTPSConnection(http.client.HTTPSConnection):
         def __init__(self, *args, **kwargs):
             try:
                 global socket, ssl
@@ -60,7 +64,7 @@ class VerifiedHTTPSConnection(httplib.HTTPSConnection):
             except ImportError:
                 raise FatalBackendException(_(u"Missing socket or ssl python modules."))
 
-            httplib.HTTPSConnection.__init__(self, *args, **kwargs)
+            http.client.HTTPSConnection.__init__(self, *args, **kwargs)
 
             self.cacert_file = globals.ssl_cacert_file
             self.cacert_candidates = [u"~/.duplicity/cacert.pem",
@@ -117,7 +121,7 @@ Hints:
 
         def request(self, *args, **kwargs):  # pylint: disable=method-hidden
             try:
-                return httplib.HTTPSConnection.request(self, *args, **kwargs)
+                return http.client.HTTPSConnection.request(self, *args, **kwargs)
             except ssl.SSLError as e:
                 # encapsulate ssl errors
                 raise BackendException(u"SSL failed: %s" % util.uexc(e),
@@ -185,10 +189,10 @@ class WebDAVBackend(duplicity.backend.Backend):
         self._close()
         # http schemes needed for redirect urls from servers
         if self.parsed_url.scheme in [u'webdav', u'http']:
-            self.conn = httplib.HTTPConnection(self.parsed_url.hostname, self.parsed_url.port)
+            self.conn = http.client.HTTPConnection(self.parsed_url.hostname, self.parsed_url.port)
         elif self.parsed_url.scheme in [u'webdavs', u'https']:
             if globals.ssl_no_check_certificate:
-                self.conn = httplib.HTTPSConnection(self.parsed_url.hostname, self.parsed_url.port)
+                self.conn = http.client.HTTPSConnection(self.parsed_url.hostname, self.parsed_url.port)
             else:
                 self.conn = VerifiedHTTPSConnection(self.parsed_url.hostname, self.parsed_url.port)
         else:
@@ -206,7 +210,7 @@ class WebDAVBackend(duplicity.backend.Backend):
         self._close()  # or we get previous request's data or exception
         self.connect()
 
-        quoted_path = urllib.quote(path, u"/:~")
+        quoted_path = urllib.parse.quote(path, u"/:~")
 
         if self.digest_challenge is not None:
             self.headers[u'Authorization'] = self.get_digest_authorization(path)
@@ -221,7 +225,7 @@ class WebDAVBackend(duplicity.backend.Backend):
             redirect_url = response.getheader(u'location', None)
             response.close()
             if redirect_url:
-                log.Notice(_(u"WebDAV redirect to: %s ") % urllib.unquote(redirect_url))
+                log.Notice(_(u"WebDAV redirect to: %s ") % urllib.parse.unquote(redirect_url))
                 if redirected > 10:
                     raise FatalBackendException(_(u"WebDAV redirected 10 times. Giving up."))
                 self.parsed_url = duplicity.backend.ParsedUrl(redirect_url)
@@ -291,9 +295,9 @@ class WebDAVBackend(duplicity.backend.Backend):
         """
         u = self.parsed_url
         if self.digest_auth_handler is None:
-            pw_manager = urllib2.HTTPPasswordMgrWithDefaultRealm()
+            pw_manager = urllib.request.HTTPPasswordMgrWithDefaultRealm()
             pw_manager.add_password(None, self.conn.host, self.username, self.password)
-            self.digest_auth_handler = urllib2.HTTPDigestAuthHandler(pw_manager)
+            self.digest_auth_handler = urllib.request.HTTPDigestAuthHandler(pw_manager)
 
         # building a dummy request that gets never sent,
         # needed for call to auth_handler.get_authorization
@@ -372,7 +376,7 @@ class WebDAVBackend(duplicity.backend.Backend):
         @return: A matching filename, or None if the href did not match.
         """
         raw_filename = self.getText(href.childNodes).strip()
-        parsed_url = urlparse.urlparse(urllib.unquote(raw_filename))
+        parsed_url = urllib.parse.urlparse(urllib.parse.unquote(raw_filename))
         filename = parsed_url.path
         log.Debug(_(u"WebDAV path decoding and translation: "
                   u"%s -> %s") % (raw_filename, filename))

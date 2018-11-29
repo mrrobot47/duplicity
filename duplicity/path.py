@@ -26,7 +26,10 @@ associates stat information with filenames
 
 """
 
-from future_builtins import filter
+from builtins import filter
+from builtins import str
+from builtins import object
+from future.builtins import filter
 
 import stat
 import errno
@@ -52,7 +55,7 @@ _copy_blocksize = 64 * 1024
 _tmp_path_counter = 1
 
 
-class StatResult:
+class StatResult(object):
     u"""Used to emulate the output of os.stat() and related"""
     # st_mode is required by the TarInfo class, but it's unclear how
     # to generate it from file permissions.
@@ -63,7 +66,7 @@ class PathException(Exception):
     pass
 
 
-class ROPath:
+class ROPath(object):
     u"""Read only Path
 
     Objects of this class doesn't represent real files, so they don't
@@ -199,6 +202,8 @@ class ROPath:
         elif type == tarfile.SYMTYPE:
             self.type = u"sym"
             self.symtext = tarinfo.linkname
+            if isinstance(self.symtext, u"".__class__):
+                self.symtext = util.fsencode(self.symtext)
         elif type == tarfile.CHRTYPE:
             self.type = u"chr"
             self.devnums = (tarinfo.devmajor, tarinfo.devminor)
@@ -262,11 +267,11 @@ class ROPath:
         """
         ti = tarfile.TarInfo()
         if self.index:
-            ti.name = b"/".join(self.index)
+            ti.name = util.fsdecode(b"/".join(self.index))
         else:
-            ti.name = b"."
+            ti.name = u"."
         if self.isdir():
-            ti.name += b"/"  # tar dir naming convention
+            ti.name += u"/"  # tar dir naming convention
 
         ti.size = 0
         if self.type:
@@ -282,6 +287,8 @@ class ROPath:
             elif self.issym():
                 ti.type = tarfile.SYMTYPE
                 ti.linkname = self.symtext
+                if isinstance(ti.linkname, bytes):
+                    ti.linkname = util.fsdecode(ti.linkname)
             elif self.isdev():
                 if self.type == u"chr":
                     ti.type = tarfile.CHRTYPE
@@ -512,7 +519,7 @@ class Path(ROPath):
         # self.opened should be true if the file has been opened, and
         # self.fileobj can override returned fileobj
         self.opened, self.fileobj = None, None
-        if isinstance(base, unicode):
+        if isinstance(base, str):
             # For now (Python 2), it is helpful to know that all paths
             # are starting with bytes -- see note above util.fsencode definition
             base = util.fsencode(base)
@@ -539,7 +546,7 @@ class Path(ROPath):
             else:
                 self.stat = os.lstat(self.name)
         except OSError as e:
-            err_string = errno.errorcode[e[0]]
+            err_string = errno.errorcode[e.errno]
             if err_string in [u"ENOENT", u"ENOTDIR", u"ELOOP", u"ENOTCONN"]:
                 self.stat, self.type = None, None  # file doesn't exist
                 self.mode = None
@@ -552,6 +559,8 @@ class Path(ROPath):
 
     def append(self, ext):
         u"""Return new Path with ext added to index"""
+        if isinstance(ext, u"".__class__):
+            ext = util.fsencode(ext)
         return self.__class__(self.base, self.index + (ext,))
 
     def new_index(self, index):
@@ -627,11 +636,11 @@ class Path(ROPath):
         if self.index:
             return Path(self.base, self.index[:-1])
         else:
-            components = self.base.split(u"/")
+            components = self.base.split(b"/")
             if len(components) == 2 and not components[0]:
-                return Path(u"/")  # already in root directory
+                return Path(b"/")  # already in root directory
             else:
-                return Path(u"/".join(components[:-1]))
+                return Path(b"/".join(components[:-1]))
 
     def writefileobj(self, fin):
         u"""Copy file object fin to self.  Close both when done."""
@@ -706,7 +715,7 @@ class Path(ROPath):
         used with os.system.
         """
         if not s:
-            s = self.name
+            s = self.uc_name
         return u'"%s"' % self.regex_chars_to_quote.sub(lambda m: u"\\" + m.group(0), s)
 
     def unquote(self, s):
@@ -725,7 +734,7 @@ class Path(ROPath):
 
     def get_filename(self):
         u"""Return filename of last component"""
-        components = self.name.split(u"/")
+        components = self.name.split(b"/")
         assert components and components[-1]
         return components[-1]
 
@@ -737,14 +746,13 @@ class Path(ROPath):
         it's harder to remove "..", as "foo/bar/.." is not necessarily
         "foo", so we can't use path.normpath()
         """
-        newpath = u"/".join(filter(lambda x: x and x != u".",
-                                   self.name.split(u"/")))
-        if self.name[0] == u"/":
-            return u"/" + newpath
+        newpath = b"/".join([x for x in self.name.split(b"/") if x and x != b"."])
+        if self.uc_name[0] == u"/":
+            return b"/" + newpath
         elif newpath:
             return newpath
         else:
-            return u"."
+            return b"."
 
 
 class DupPath(Path):
