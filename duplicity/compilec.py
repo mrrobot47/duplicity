@@ -24,7 +24,11 @@ import sys
 import os
 
 #  https://github.com/PyCQA/pylint/issues/73
+# Avoid conflict on python 2 with collections.py vs. built-in collections module
+sp = sys.path
+sys.path = sys.path[1:]
 from distutils.core import setup, Extension  # pylint: disable=import-error,no-name-in-module
+sys.path = sp
 
 assert len(sys.argv) == 1
 sys.argv.append("build")
