@@ -37,6 +37,9 @@ from duplicity import globals
 from duplicity import log
 from duplicity.errors import BackendException
 
+global paramiko
+
+
 read_blocksize = 65635  # for doing scp retrievals, where we need to read ourselves
 
 
@@ -61,6 +64,8 @@ class SSHParamikoBackend(duplicity.backend.Backend):
     This problem does not exist with sftp.
     """
     def __init__(self, parsed_url):
+        global paramiko
+
         duplicity.backend.Backend.__init__(self, parsed_url)
 
         self.retry_delay = 10
