@@ -387,8 +387,11 @@ New in v0.8.00 (2016/07/??)
   - Adorn some remaining strings
 * Merged in lp:~mgorse/duplicity/0.8-series
   - Run futurize --stage1, and adjust so that tests still pass.
-# Fixed but #1797797 with patch from Bas Hulsken
+* Fixed but #1797797 with patch from Bas Hulsken
   - use bytes instead of unicode for '/' in filenames
+* Merged in lp:~mcuelenaere/duplicity/duplicity
+  - Make sure we don't load files completely into memory when transferring them from/to
+    the remote WebDAV endpoint.
 
 
 New in v0.7.08 (2016/07/02)

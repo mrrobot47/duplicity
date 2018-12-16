@@ -1,3 +1,9 @@
+2018-12-15  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mcuelenaere/duplicity/duplicity
+      - Make sure we don't load files completely into memory when transferring them from/to
+        the remote WebDAV endpoint.
+
 2018-10-16  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~mgorse/duplicity/0.8-series
