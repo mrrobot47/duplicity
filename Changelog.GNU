@@ -1,7 +1,7 @@
 2018-10-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1798206 and bug #1798504
-      * Made paramiko a global with import during __init__ so it would
+      - Made paramiko a global with import during __init__ so it would
         not be loaded unless needed.
 
 2018-12-15  Kenneth Loafman  <kenneth@loafman.com>
