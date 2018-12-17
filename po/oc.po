@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2018-10-16 15:41-0500\n"
+"POT-Creation-Date: 2018-12-16 10:57-0600\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Occitan (post 1500) <oc@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2018-10-17 05:45+0000\n"
-"X-Generator: Launchpad (build 18790)\n"
+"X-Launchpad-Export-Date: 2018-12-17 05:49+0000\n"
+"X-Generator: Launchpad (build 18837)\n"
 
 #: ../bin/duplicity:122
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -1365,21 +1365,21 @@ msgstr ""
 msgid "PyDrive backend: multiple files called '%s'."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:61
+#: ../duplicity/backends/webdavbackend.py:62
 msgid "Missing socket or ssl python modules."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:79
+#: ../duplicity/backends/webdavbackend.py:80
 #, python-format
 msgid "Cacert database file '%s' is not readable."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:100
+#: ../duplicity/backends/webdavbackend.py:101
 msgid ""
 "Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:104
+#: ../duplicity/backends/webdavbackend.py:105
 #, python-format
 msgid ""
 "For certificate verification with python 2.7.8 or earlier a cacert database\n"
@@ -1389,113 +1389,113 @@ msgid ""
 "  Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:150
+#: ../duplicity/backends/webdavbackend.py:151
 #, python-format
 msgid "Using WebDAV protocol %s"
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:151
+#: ../duplicity/backends/webdavbackend.py:152
 #, python-format
 msgid "Using WebDAV host %s port %s"
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:153
+#: ../duplicity/backends/webdavbackend.py:154
 #, python-format
 msgid "Using WebDAV directory %s"
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:184
+#: ../duplicity/backends/webdavbackend.py:185
 #, python-format
 msgid "WebDAV create connection on '%s'"
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:195
+#: ../duplicity/backends/webdavbackend.py:196
 #, python-format
 msgid "WebDAV Unknown URI scheme: %s"
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:214
+#: ../duplicity/backends/webdavbackend.py:215
 #, python-format
 msgid "WebDAV %s %s request with headers: %s "
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:215
-#: ../duplicity/backends/webdavbackend.py:238
+#: ../duplicity/backends/webdavbackend.py:216
+#: ../duplicity/backends/webdavbackend.py:239
 #, python-format
 msgid "WebDAV data length: %s "
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:218
+#: ../duplicity/backends/webdavbackend.py:219
 #, python-format
 msgid "WebDAV response status %s with reason '%s'."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:224
+#: ../duplicity/backends/webdavbackend.py:225
 #, python-format
 msgid "WebDAV redirect to: %s "
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:226
+#: ../duplicity/backends/webdavbackend.py:227
 msgid "WebDAV redirected 10 times. Giving up."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:231
+#: ../duplicity/backends/webdavbackend.py:232
 msgid "WebDAV missing location header in redirect response."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:236
+#: ../duplicity/backends/webdavbackend.py:237
 msgid "WebDAV retry request with authentification headers."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:237
+#: ../duplicity/backends/webdavbackend.py:238
 #, python-format
 msgid "WebDAV %s %s request2 with headers: %s "
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:241
+#: ../duplicity/backends/webdavbackend.py:242
 #, python-format
 msgid "WebDAV response2 status %s with reason '%s'."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:258
+#: ../duplicity/backends/webdavbackend.py:259
 msgid ""
 "python-kerberos needed to use kerberos                           "
 "authorization, falling back to basic auth."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:262
+#: ../duplicity/backends/webdavbackend.py:263
 #, python-format
 msgid ""
 "Kerberos authorization failed: %s.                          Falling back to "
 "basic auth."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:360
+#: ../duplicity/backends/webdavbackend.py:361
 #, python-format
 msgid "Creating missing directory %s"
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:364
+#: ../duplicity/backends/webdavbackend.py:365
 #, python-format
 msgid "WebDAV MKCOL %s failed: %s %s"
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:377
+#: ../duplicity/backends/webdavbackend.py:378
 #, python-format
 msgid "WebDAV path decoding and translation: %s -> %s"
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:422
+#: ../duplicity/backends/webdavbackend.py:423
 #, python-format
 msgid "WebDAV GET Bad status code %s reason %s."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:444
+#: ../duplicity/backends/webdavbackend.py:445
 #, python-format
 msgid "WebDAV PUT Bad status code %s reason %s."
 msgstr ""
 
-#: ../duplicity/backends/webdavbackend.py:464
+#: ../duplicity/backends/webdavbackend.py:465
 #, python-format
 msgid "WebDAV DEL Bad status code %s reason %s."
 msgstr ""
