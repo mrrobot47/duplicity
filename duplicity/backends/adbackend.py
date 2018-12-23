@@ -1,4 +1,3 @@
-from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2016 Stefan Breunig <stefan-duplicity@breunig.xyz>
@@ -20,6 +19,10 @@ from __future__ import print_function
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
+from __future__ import division
+from builtins import input
+from past.utils import old_div
 import os.path
 import json
 import sys
@@ -147,7 +150,7 @@ class ADBackend(duplicity.backend.Backend):
             print(authorization_url)
             print(u'')
 
-            redirected_to = (raw_input(u'URL of the resulting page: ')
+            redirected_to = (input(u'URL of the resulting page: ')
                              .replace(u'http://', u'https://', 1)).strip()
 
             token = self.http_client.fetch_token(
@@ -319,7 +322,7 @@ class ADBackend(duplicity.backend.Backend):
                      u'waiting for %d seconds to see if Amazon Drive finished the '
                      u'upload anyway' % (remote_filename, response.status_code,
                                          globals.timeout))
-            tries = globals.timeout / 15
+            tries = old_div(globals.timeout, 15)
             while tries >= 0:
                 tries -= 1
                 time.sleep(15)
@@ -390,7 +393,7 @@ class ADBackend(duplicity.backend.Backend):
 
         self.names_to_ids = {f[u'name']: f[u'id'] for f in files}
 
-        return self.names_to_ids.keys()
+        return list(self.names_to_ids.keys())
 
     def _delete(self, remote_filename):
         u"""Delete file from Amazon Drive"""

@@ -20,10 +20,15 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import range
+from past.utils import old_div
 import os
 import sys
 import threading
-import Queue
+import queue
 import time
 import traceback
 
@@ -63,7 +68,7 @@ class ConsumerThread(threading.Thread):
             try:
                 args = self.queue.get(True, 1)
                 progress.report_transfer(args[0], args[1])
-            except Queue.Empty as e:
+            except queue.Empty as e:
                 pass
 
 
@@ -122,7 +127,7 @@ class BotoBackend(BotoSingleBackend):
         if bytes < chunk_size:
             chunks = 1
         else:
-            chunks = bytes / chunk_size
+            chunks = old_div(bytes, chunk_size)
             if (bytes % chunk_size):
                 chunks += 1
 
@@ -211,7 +216,8 @@ def multipart_upload_worker(scheme, parsed_url, storage_uri, bucket_name, multip
                         log.Debug((u"{name}: Uploaded chunk {chunk}"
                                    u"at roughly {speed} bytes/second").format(name=worker_name,
                                                                               chunk=offset + 1,
-                                                                              speed=(bytes / max(1, abs(end - start)))))
+                                                                              speed=(old_div(bytes, max(1,
+                                                                                             abs(end - start))))))
                     break
             conn.close()
             conn = None

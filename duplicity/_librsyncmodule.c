@@ -89,7 +89,11 @@ _librsync_sigmaker_cycle(_librsync_SigMakerObject *self, PyObject *args)
   rs_buffers_t buf;
   rs_result result;
 
+#if PY_MAJOR_VERSION >= 3
+  if (!PyArg_ParseTuple(args, "y#:cycle", &inbuf, &inbuf_length))
+#else
   if (!PyArg_ParseTuple(args, "s#:cycle", &inbuf, &inbuf_length))
+#endif
     return NULL;
 
   buf.next_in = inbuf;
@@ -105,7 +109,11 @@ _librsync_sigmaker_cycle(_librsync_SigMakerObject *self, PyObject *args)
     return NULL;
   }
 
+#if PY_MAJOR_VERSION >= 3
+  return Py_BuildValue("(ily#)", (result == RS_DONE),
+#else
   return Py_BuildValue("(ils#)", (result == RS_DONE),
+#endif
                        (long)inbuf_length - (long)buf.avail_in,
                        outbuf, RS_JOB_BLOCKSIZE - (long)buf.avail_out);
 }
@@ -169,7 +177,11 @@ _librsync_new_deltamaker(PyObject* self, PyObject* args)
   rs_buffers_t buf;
   rs_result result;
 
+#if PY_MAJOR_VERSION >= 3
+  if (!PyArg_ParseTuple(args,"y#:new_deltamaker", &sig_string, &sig_length))
+#else
   if (!PyArg_ParseTuple(args,"s#:new_deltamaker", &sig_string, &sig_length))
+#endif
     return NULL;
 
   dm = PyObject_New(_librsync_DeltaMakerObject, &_librsync_DeltaMakerType);
@@ -222,7 +234,11 @@ _librsync_deltamaker_cycle(_librsync_DeltaMakerObject *self, PyObject *args)
   rs_buffers_t buf;
   rs_result result;
 
+#if PY_MAJOR_VERSION >= 3
+  if (!PyArg_ParseTuple(args, "y#:cycle", &inbuf, &inbuf_length))
+#else
   if (!PyArg_ParseTuple(args, "s#:cycle", &inbuf, &inbuf_length))
+#endif
     return NULL;
 
   buf.next_in = inbuf;
@@ -237,7 +253,11 @@ _librsync_deltamaker_cycle(_librsync_DeltaMakerObject *self, PyObject *args)
     return NULL;
   }
 
+#if PY_MAJOR_VERSION >= 3
+  return Py_BuildValue("(ily#)", (result == RS_DONE),
+#else
   return Py_BuildValue("(ils#)", (result == RS_DONE),
+#endif
                        (long)inbuf_length - (long)buf.avail_in,
                        outbuf, RS_JOB_BLOCKSIZE - (long)buf.avail_out);
 }
@@ -351,7 +371,11 @@ _librsync_patchmaker_cycle(_librsync_PatchMakerObject *self, PyObject *args)
   rs_buffers_t buf;
   rs_result result;
 
+#if PY_MAJOR_VERSION >= 3
+  if (!PyArg_ParseTuple(args, "y#:cycle", &inbuf, &inbuf_length))
+#else
   if (!PyArg_ParseTuple(args, "s#:cycle", &inbuf, &inbuf_length))
+#endif
     return NULL;
 
   buf.next_in = inbuf;
@@ -366,7 +390,11 @@ _librsync_patchmaker_cycle(_librsync_PatchMakerObject *self, PyObject *args)
     return NULL;
   }
 
+#if PY_MAJOR_VERSION >= 3
+  return Py_BuildValue("(ily#)", (result == RS_DONE),
+#else
   return Py_BuildValue("(ils#)", (result == RS_DONE),
+#endif
                        (long)inbuf_length - (long)buf.avail_in,
                        outbuf, RS_JOB_BLOCKSIZE - (long)buf.avail_out);
 }

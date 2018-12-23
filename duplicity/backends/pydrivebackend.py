@@ -16,6 +16,8 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from builtins import next
+from builtins import str
 import string
 import os
 
@@ -185,7 +187,7 @@ Exception: %s""" % str(e))
         # not yet appear in the listing.
         # Note: do not use iterkeys() here, because file_by_name will modify
         # the cache if it finds invalid entries.
-        for filename in self.id_cache.keys():
+        for filename in list(self.id_cache.keys()):
             if (filename not in filenames) and (self.file_by_name(filename) is not None):
                 filenames.add(filename)
         return list(filenames)

@@ -20,15 +20,23 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+import sys
+from future import standard_library
+standard_library.install_aliases()
+from builtins import input
 import imaplib
 import re
 import os
 import time
 import socket
-import StringIO
-import rfc822
+import io
 import getpass
 import email
+from email.parser import Parser
+try:
+    from email.policy import default  # pylint: disable=import-error
+except:
+    pass
 
 import duplicity.backend
 from duplicity import globals
@@ -48,7 +56,7 @@ class ImapBackend(duplicity.backend.Backend):
 
         #  Set the username
         if (parsed_url.username is None):
-            username = raw_input(u'Enter account userid: ')
+            username = eval(input(u'Enter account userid: '))
         else:
             username = parsed_url.username
 
@@ -218,10 +226,12 @@ class ImapBackend(duplicity.backend.Backend):
         for msg in list:
             if (len(msg) == 1):
                 continue
-            io = StringIO.StringIO(msg[1])  # pylint: disable=unsubscriptable-object
-            m = rfc822.Message(io)
-            subj = m.getheader(u"subject")
-            header_from = m.getheader(u"from")
+            if sys.version_info.major >= 3:
+                headers = Parser(policy=default).parsestr(msg[1])  # pylint: disable=unsubscriptable-object
+            else:
+                headers = Parser().parsestr(msg[1])  # pylint: disable=unsubscriptable-object
+            subj = headers[u"subject"]
+            header_from = headers[u"from"]
 
             # Catch messages with empty headers which cause an exception.
             if (not (header_from is None)):

@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from StringIO import StringIO
+from io import StringIO
 import re
 import sys
 import types
@@ -37,10 +37,10 @@ class VolumeInfoTest(UnitTestCase):
     def test_basic(self):
         u"""Basic VolumeInfoTest"""
         vi = manifest.VolumeInfo()
-        vi.set_info(3, (u"hello", u"there"), None, (), None)
+        vi.set_info(3, (b"hello", b"there"), None, (), None)
         vi.set_hash(u"MD5", u"aoseutaohe")
         s = vi.to_string()
-        assert isinstance(s, (str, u"".__class__))
+        assert isinstance(s, (b"".__class__, u"".__class__))
         # print "---------\n%s\n---------" % s
         vi2 = manifest.VolumeInfo()
         vi2.from_string(s)
@@ -50,12 +50,12 @@ class VolumeInfoTest(UnitTestCase):
         u"""Test VolumeInfo with special characters"""
         vi = manifest.VolumeInfo()
         vi.set_info(3234,
-                    (r"\n eu \x233", r"heuo", r'\xd8\xab\xb1Wb\xae\xc5]\x8a\xbb\x15v*\xf4\x0f!\xf9>\xe2Y\x86\xbb\xab\xdbp\xb0\x84\x13k\x1d\xc2\xf1\xf5e\xa5U\x82\x9aUV\xa0\xf4\xdf4\xba\xfdX\x03\x82\x07s\xce\x9e\x8b\xb34\x04\x9f\x17 \xf4\x8f\xa6\xfa\x97\xab\xd8\xac\xda\x85\xdcKvC\xfa#\x94\x92\x9e\xc9\xb7\xc3_\x0f\x84g\x9aB\x11<=^\xdbM\x13\x96c\x8b\xa7|*"\\\'^$@#!(){}?+ ~` '),
+                    (b"\n eu \x233", b"heuo", b'\xd8\xab\xb1Wb\xae\xc5]\x8a\xbb\x15v*\xf4\x0f!\xf9>\xe2Y\x86\xbb\xab\xdbp\xb0\x84\x13k\x1d\xc2\xf1\xf5e\xa5U\x82\x9aUV\xa0\xf4\xdf4\xba\xfdX\x03\x82\x07s\xce\x9e\x8b\xb34\x04\x9f\x17 \xf4\x8f\xa6\xfa\x97\xab\xd8\xac\xda\x85\xdcKvC\xfa#\x94\x92\x9e\xc9\xb7\xc3_\x0f\x84g\x9aB\x11<=^\xdbM\x13\x96c\x8b\xa7|*"\\\'^$@#!(){}?+ ~` '),
                     None,
-                    (r"\n",),
+                    (b"\n",),
                     None)
         s = vi.to_string()
-        assert isinstance(s, (str, u"".__class__))
+        assert isinstance(s, (str, bytes))
         # print "---------\n%s\n---------" % s
         vi2 = manifest.VolumeInfo()
         vi2.from_string(s)
@@ -92,9 +92,9 @@ class ManifestTest(UnitTestCase):
 
     def test_basic(self):
         vi1 = manifest.VolumeInfo()
-        vi1.set_info(3, (u"hello",), None, (), None)
+        vi1.set_info(3, (b"hello",), None, (), None)
         vi2 = manifest.VolumeInfo()
-        vi2.set_info(4, (u"goodbye", u"there"), None, (u"aoeusht",), None)
+        vi2.set_info(4, (b"goodbye", b"there"), None, (b"aoeusht",), None)
         vi3 = manifest.VolumeInfo()
         vi3.set_info(34, (), None, (), None)
         m = manifest.Manifest()
@@ -106,17 +106,17 @@ class ManifestTest(UnitTestCase):
         m.set_files_changed_info([])
 
         s = m.to_string()
-        assert s.lower().startswith(u"hostname")
-        assert s.endswith(u"\n")
+        assert s.lower().startswith(b"hostname")
+        assert s.endswith(b"\n")
 
         m2 = manifest.Manifest().from_string(s)
         assert m == m2
 
     def test_corrupt_filelist(self):
         vi1 = manifest.VolumeInfo()
-        vi1.set_info(3, (u"hello",), None, (), None)
+        vi1.set_info(3, (b"hello",), None, (), None)
         vi2 = manifest.VolumeInfo()
-        vi2.set_info(4, (u"goodbye", u"there"), None, (u"aoeusht",), None)
+        vi2.set_info(4, (b"goodbye", b"there"), None, (b"aoeusht",), None)
         vi3 = manifest.VolumeInfo()
         vi3.set_info(34, (), None, (), None)
         m = manifest.Manifest()
@@ -126,16 +126,16 @@ class ManifestTest(UnitTestCase):
         self.set_global(u'local_path', path.Path(u"Foobar"))
         m.set_dirinfo()
         m.set_files_changed_info([
-            (u'one', u'new'),
-            (u'two', u'changed'),
-            (u'three', u'new'),
+            (b'one', b'new'),
+            (b'two', b'changed'),
+            (b'three', b'new'),
             ])
 
         # build manifest string
         s = m.to_string()
 
         # make filecount higher than files in list
-        s2 = re.sub(u'Filelist 3', u'Filelist 5', s)
+        s2 = re.sub(b'Filelist 3', b'Filelist 5', s)
         m2 = manifest.Manifest().from_string(s2)
         assert hasattr(m2, u'corrupt_filelist')
 

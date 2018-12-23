@@ -27,6 +27,11 @@
 # Please send mail to me or the mailing list if you find bugs or have
 # any suggestions.
 
+from builtins import filter
+from builtins import next
+from builtins import map
+from builtins import range
+from builtins import object
 import duplicity.errors
 import copy
 import gzip
@@ -34,7 +39,7 @@ import os
 import platform
 import re
 import resource
-import statvfs
+from os import statvfs
 import sys
 import threading
 import time
@@ -62,7 +67,7 @@ from duplicity import tempdir
 from duplicity import util
 
 if u'--pydevd' in sys.argv or os.getenv(u'PYDEVD', None):
-    import pydevd  # @UnresolvedImport  # pylint: disable=import-error
+    import pydevd  # pylint: disable=import-error
     pydevd.settrace()
     # In a dev environment the path is screwed so fix it.
     base = sys.path.pop(0)
@@ -81,7 +86,8 @@ def getpass_safe(message):
     # in non-ascii characters.
     import getpass
     import locale
-    message = message.encode(locale.getpreferredencoding(), u'replace')
+    if sys.version_info.major == 2:
+        message = message.encode(locale.getpreferredencoding(), u'replace')
     return getpass.getpass(message)
 
 
@@ -733,7 +739,7 @@ def restore_get_patched_rop_iter(col_stats):
     @param col_stats: collection status
     """
     if globals.restore_dir:
-        index = tuple(globals.restore_dir.split(u"/"))
+        index = tuple(globals.restore_dir.split(b"/"))
     else:
         index = ()
     time = globals.restore_time or dup_time.curtime
@@ -1029,7 +1035,7 @@ def replicate():
         return
     for src_chain in src_chainlist:
         try:
-            tgt_chain = filter(lambda chain: chain.start_time == src_chain.start_time, tgt_chainlist)[0]
+            tgt_chain = list(filter(lambda chain: chain.start_time == src_chain.start_time, tgt_chainlist))[0]
         except IndexError:
             tgt_chain = None
 
@@ -1064,7 +1070,7 @@ def replicate():
     sorted(tgt_chainlist, key=lambda chain: chain.start_time)
     for src_chain in src_chainlist:
         try:
-            tgt_chain = filter(lambda chain: chain.start_time == src_chain.start_time, tgt_chainlist)[0]
+            tgt_chain = list(filter(lambda chain: chain.start_time == src_chain.start_time, tgt_chainlist))[0]
         except IndexError:
             tgt_chain = None
 
@@ -1085,7 +1091,7 @@ def replicate():
             mf_filename = file_naming.get(src_set.type, manifest=True)
             mf_tdp = dup_temp.new_tempduppath(file_naming.parse(mf_filename))
             mf = manifest.Manifest(fh=mf_tdp.filtered_open(mode=u'wb'))
-            for i, filename in src_set.volume_name_dict.iteritems():
+            for i, filename in src_set.volume_name_dict.items():
                 log.Notice(_(u"Replicating %s.") % (filename,))
                 fileobj = restore_get_enc_fileobj(globals.src_backend, filename, rmf.volume_info_dict[i])
                 filename = file_naming.get(src_set.type, i, encrypted=globals.encryption, gzipped=globals.compression)
@@ -1171,7 +1177,7 @@ def sync_archive():
         file = open(filename, u"wb")
         while True:
             try:
-                data = src_iter.next().data
+                data = src_iter.__next__().data
             except StopIteration:
                 break
             file.write(data)
@@ -1207,7 +1213,7 @@ def sync_archive():
         u"""
         Copy remote file fn to local cache.
         """
-        class Block:
+        class Block(object):
             u"""
             Data block to return from SrcIter
             """
@@ -1215,7 +1221,7 @@ def sync_archive():
             def __init__(self, data):
                 self.data = data
 
-        class SrcIter:
+        class SrcIter(object):
             u"""
             Iterate over source and return Block of data.
             """
@@ -1223,12 +1229,15 @@ def sync_archive():
             def __init__(self, fileobj):
                 self.fileobj = fileobj
 
-            def next(self):
+            def __next__(self):
                 try:
                     res = Block(self.fileobj.read(self.get_read_size()))
                 except Exception:
                     if hasattr(self.fileobj, u'name'):
                         name = self.fileobj.name
+                        # name may be a path
+                        if hasattr(name, u'name'):
+                            name = name.name
                     else:
                         name = None
                     log.FatalError(_(u"Failed to read %s: %s") %
@@ -1243,7 +1252,7 @@ def sync_archive():
                 return 128 * 1024
 
             def get_footer(self):
-                return u""
+                return b""
 
         log.Notice(_(u"Copying %s to local cache.") % util.fsdecode(fn))
 
@@ -1270,8 +1279,8 @@ def sync_archive():
     # we have the list of metafiles on both sides. remote is always
     # authoritative. figure out which are local spurious (should not
     # be there) and missing (should be there but are not).
-    local_keys = local_metafiles.keys()
-    remote_keys = remote_metafiles.keys()
+    local_keys = list(local_metafiles.keys())
+    remote_keys = list(remote_metafiles.keys())
 
     local_missing = []
     local_spurious = []
@@ -1361,7 +1370,7 @@ def check_resources(action):
                            log.ErrorCode.get_freespace_failed)
         # Calculate space we need for at least 2 volumes of full or inc
         # plus about 30% of one volume for the signature files.
-        freespace = stats[statvfs.F_FRSIZE] * stats[statvfs.F_BAVAIL]
+        freespace = stats.f_frsize * stats.f_bavail
         needspace = (((globals.async_concurrency + 1) * globals.volsize) +
                      int(0.30 * globals.volsize))
         if freespace < needspace:
@@ -1398,7 +1407,7 @@ def log_startup_parms(verbosity=log.INFO):
     log.Log(u'=' * 80, verbosity)
 
 
-class Restart:
+class Restart(object):
     u"""
     Class to aid in restart of inc or full backup.
     Instance in globals.restart if restart in progress.
@@ -1487,7 +1496,7 @@ See https://bugs.launchpad.net/duplicity/+bug/931175
     # determine what action we're performing and process command line
     action = commandline.ProcessCommandLine(sys.argv[1:])
 
-    globals.lockpath = os.path.join(globals.archive_dir_path.name, u"lockfile")
+    globals.lockpath = os.path.join(globals.archive_dir_path.name, b"lockfile")
     globals.lockfile = fasteners.process_lock.InterProcessLock(globals.lockpath)
     log.Debug(_(u"Acquiring lockfile %s") % globals.lockpath)
     if not globals.lockfile.acquire(blocking=False):
@@ -1566,7 +1575,8 @@ def do_backup(action):
         log.Notice(_(u"Last full backup date:") + u" " + dup_time.timetopretty(last_full_time))
     else:
         log.Notice(_(u"Last full backup date: none"))
-    if not globals.restart and action == u"inc" and last_full_time < globals.full_force_time:
+    if not globals.restart and action == u"inc" and globals.full_force_time is not None and \
+       last_full_time < globals.full_force_time:
         log.Notice(_(u"Last full backup is too old, forcing full backup"))
         action = u"full"
     log.PrintCollectionStatus(col_stats)

@@ -224,6 +224,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 or see http://www.gnu.org/copyleft/lesser.html
 """
 
+from builtins import object
 import os
 import sys
 import fcntl
@@ -244,8 +245,8 @@ __revision__ = u"$Id: GnuPGInterface.py,v 1.6 2009/06/06 17:35:19 loafman Exp $"
 _stds = [u'stdin', u'stdout', u'stderr']
 
 # the permissions each type of fh needs to be opened with
-_fd_modes = {u'stdin': u'w',
-             u'stdout': u'r',
+_fd_modes = {u'stdin': u'wb',
+             u'stdout': u'rb',
              u'stderr': u'r',
              u'passphrase': u'w',
              u'command': u'w',
@@ -261,7 +262,7 @@ _fd_options = {u'passphrase': u'--passphrase-fd',
                }
 
 
-class GnuPG:
+class GnuPG(object):
     u"""Class instances represent GnuPG.
 
     Instance attributes of a GnuPG object are:
@@ -387,10 +388,10 @@ class GnuPG:
 
         process = Process()
 
-        for fh_name in create_fhs + attach_fhs.keys():
+        for fh_name in create_fhs + list(attach_fhs.keys()):
             if fh_name not in _fd_modes:
                 raise KeyError(u"unrecognized filehandle name '%s'; must be one of %s"
-                               % (fh_name, _fd_modes.keys()))
+                               % (fh_name, list(_fd_modes.keys())))
 
         for fh_name in create_fhs:
             # make sure the user doesn't specify a filehandle
@@ -404,11 +405,14 @@ class GnuPG:
             # that since pipes are unidirectional on some systems,
             # so we have to 'turn the pipe around'
             # if we are writing
-            if _fd_modes[fh_name] == u'w':
+            if _fd_modes[fh_name] == u'w' or _fd_modes[fh_name] == u'wb':
                 pipe = (pipe[1], pipe[0])
+            if sys.version_info.major >= 3:
+                os.set_inheritable(pipe[0], True)
+                os.set_inheritable(pipe[1], True)
             process._pipes[fh_name] = Pipe(pipe[0], pipe[1], 0)
 
-        for fh_name, fh in attach_fhs.items():
+        for fh_name, fh in list(attach_fhs.items()):
             process._pipes[fh_name] = Pipe(fh.fileno(), fh.fileno(), 1)
 
         process.pid = os.fork()
@@ -425,7 +429,7 @@ class GnuPG:
 
     def _as_parent(self, process):
         u"""Stuff run after forking in parent"""
-        for k, p in process._pipes.items():
+        for k, p in list(process._pipes.items()):
             if not p.direct:
                 os.close(p.child)
                 process.handles[k] = os.fdopen(p.parent, _fd_modes[k])
@@ -442,14 +446,14 @@ class GnuPG:
             p = process._pipes[std]
             os.dup2(p.child, getattr(sys, u"__%s__" % std).fileno())
 
-        for k, p in process._pipes.items():
+        for k, p in list(process._pipes.items()):
             if p.direct and k not in _stds:
                 # we want the fh to stay open after execing
                 fcntl.fcntl(p.child, fcntl.F_SETFD, 0)
 
         fd_args = []
 
-        for k, p in process._pipes.items():
+        for k, p in list(process._pipes.items()):
             # set command-line options for non-standard fds
             if k not in _stds:
                 fd_args.extend([_fd_options[k], u"%d" % p.child])
@@ -462,7 +466,7 @@ class GnuPG:
         os.execvp(command[0], command)
 
 
-class Pipe:
+class Pipe(object):
     u"""simple struct holding stuff about pipes we use"""
     def __init__(self, parent, child, direct):
         self.parent = parent
@@ -470,7 +474,7 @@ class Pipe:
         self.direct = direct
 
 
-class Options:
+class Options(object):
     u"""Objects of this class encompass options passed to GnuPG.
     This class is responsible for determining command-line arguments
     which are based on options.  It can be said that a GnuPG
@@ -645,7 +649,7 @@ class Options:
         return args
 
 
-class Process:
+class Process(object):
     u"""Objects of this class encompass properties of a GnuPG
     process spawned by GnuPG.run().
 

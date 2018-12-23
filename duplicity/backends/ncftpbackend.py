@@ -19,8 +19,12 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from future import standard_library
+standard_library.install_aliases()
 import os.path
-import urllib
+import urllib.request  # pylint: disable=import-error
+import urllib.parse  # pylint: disable=import-error
+import urllib.error  # pylint: disable=import-error
 import re
 
 import duplicity.backend
@@ -93,13 +97,15 @@ class NCFTPBackend(duplicity.backend.Backend):
             self.flags += u" -P '%s'" % (parsed_url.port)
 
     def _put(self, source_path, remote_filename):
-        remote_path = os.path.join(urllib.unquote(re.sub(u'^/', u'', self.parsed_url.path)), remote_filename).rstrip()
+        remote_path = os.path.join(urllib.parse.unquote(re.sub(u'^/', u'', self.parsed_url.path)),
+                                   remote_filename).rstrip()
         commandline = u"ncftpput %s -m -V -C '%s' '%s'" % \
             (self.flags, source_path.name, remote_path)
         self.subprocess_popen(commandline)
 
     def _get(self, remote_filename, local_path):
-        remote_path = os.path.join(urllib.unquote(re.sub(u'^/', u'', self.parsed_url.path)), remote_filename).rstrip()
+        remote_path = os.path.join(urllib.parse.unquote(re.sub(u'^/', u'', self.parsed_url.path)),
+                                   remote_filename).rstrip()
         commandline = u"ncftpget %s -V -C '%s' '%s' '%s'" % \
             (self.flags, self.parsed_url.hostname, remote_path.lstrip(u'/'), local_path.name)
         self.subprocess_popen(commandline)

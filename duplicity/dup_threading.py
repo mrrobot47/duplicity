@@ -28,16 +28,18 @@ the standard threading module, and absolute imports require
 at least python 2.5.)
 """
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
 import sys
 from duplicity import errors
-
 
 _threading_supported = True
 
 try:
-    import thread
+    import _thread
 except ImportError:
-    import dummy_thread as thread
+    import _dummy_thread as _thread
     _threading_supported = False
 
 try:
@@ -77,7 +79,7 @@ def thread_module():
     Returns the thread module, or dummy_thread if threading is not
     supported.
     """
-    return thread
+    return _thread
 
 
 def threading_module():
@@ -226,7 +228,7 @@ def async_split(fn):
     return (waiter, caller)
 
 
-class Value:
+class Value(object):
     u"""
     A thread-safe container of a reference to an object (but not the
     object itself).

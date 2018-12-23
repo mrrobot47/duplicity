@@ -21,6 +21,7 @@
 
 u"""Manage temporary files"""
 
+from builtins import object
 import os
 import sys
 import shutil
@@ -131,7 +132,7 @@ class TempDupPath(path.DupPath):
         return fh
 
 
-class FileobjHooked:
+class FileobjHooked(object):
     u"""
     Simulate a file, but add hook on close
     """
@@ -243,7 +244,7 @@ class FileobjHooked:
     name = property(get_name)
 
 
-class Block:
+class Block(object):
     u"""
     Data block to return from SrcIter
     """
@@ -251,7 +252,7 @@ class Block:
         self.data = data
 
 
-class SrcIter:
+class SrcIter(object):
     u"""
     Iterate over source and return Block of data.
     """
@@ -259,7 +260,7 @@ class SrcIter:
         self.src = src
         self.fp = src.open(u"rb")
 
-    def next(self):
+    def __next__(self):
         try:
             res = Block(self.fp.read(self.get_read_size()))
         except Exception:
@@ -275,4 +276,4 @@ class SrcIter:
         return 128 * 1024
 
     def get_footer(self):
-        return u""
+        return b""

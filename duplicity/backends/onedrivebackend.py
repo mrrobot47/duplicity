@@ -1,4 +1,3 @@
-from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 # vim:tabstop=4:shiftwidth=4:expandtab
 #
@@ -22,6 +21,9 @@ from __future__ import print_function
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
+from builtins import input
+from builtins import str
 import time
 import json
 import os
@@ -150,7 +152,7 @@ class OneDriveBackend(duplicity.backend.Backend):
                   u'page the dialog leads to.' % authorization_url)
             print()
 
-            redirected_to = raw_input(u'URL of the blank page: ').strip()
+            redirected_to = input(u'URL of the blank page: ').strip()
 
             token = self.http_client.fetch_token(
                 self.OAUTH_TOKEN_URI,
@@ -198,7 +200,7 @@ class OneDriveBackend(duplicity.backend.Backend):
                         u'Could not resolve/create directory "%s" on '
                         u'OneDrive: %s not in %s (files of folder %s)' % (
                             self.directory, component,
-                            names_to_ids.keys(), object_id)))
+                            list(names_to_ids.keys()), object_id)))
                 break
             object_id = names_to_ids[component]
         self.directory_id = object_id

@@ -23,6 +23,11 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import division
+from builtins import oct
+from builtins import input
+from builtins import zip
+from past.utils import old_div
 import re
 import string
 import os
@@ -106,7 +111,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                                                               fingerprint)
                 while True:
                     sys.stdout.write(question)
-                    choice = raw_input().lower()
+                    choice = input().lower()
                     if choice in [u'yes', u'y']:
                         paramiko.AutoAddPolicy.missing_host_key(self, client,
                                                                 hostname, key)
@@ -241,7 +246,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                 self.config[u'user'],
                 self.config[u'hostname'],
                 self.config[u'port'], e))
-        self.client.get_transport().set_keepalive((int)(globals.timeout / 2))
+        self.client.get_transport().set_keepalive((int)(old_div(globals.timeout, 2)))
 
         self.scheme = duplicity.backend.strip_prefix(parsed_url.scheme,
                                                      u'paramiko')

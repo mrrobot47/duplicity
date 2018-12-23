@@ -19,7 +19,7 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import os
-import StringIO
+import io
 import unittest
 
 import duplicity.backend
@@ -37,7 +37,7 @@ class BackendInstanceBase(UnitTestCase):
         os.makedirs(u'testfiles')
         self.backend = None
         self.local = path.Path(u'testfiles/local')
-        self.local.writefileobj(StringIO.StringIO(u"hello"))
+        self.local.writefileobj(io.BytesIO(b"hello"))
 
     def tearDown(self):
         if self.backend is None:
@@ -50,18 +50,18 @@ class BackendInstanceBase(UnitTestCase):
             return
         self.backend._put(self.local, u'a')
         getfile = path.Path(u'testfiles/getfile')
-        self.backend._get(u'a', getfile)
+        self.backend._get(b'a', getfile)
         self.assertTrue(self.local.compare_data(getfile))
 
     def test_list(self):
         if self.backend is None:
             return
-        self.backend._put(self.local, u'a')
-        self.backend._put(self.local, u'b')
+        self.backend._put(self.local, b'a')
+        self.backend._put(self.local, b'b')
         # It's OK for backends to create files as a side effect of put (e.g.
         # the par2 backend does), so only check that at least a and b exist.
-        self.assertTrue(u'a' in self.backend._list())
-        self.assertTrue(u'b' in self.backend._list())
+        self.assertTrue(b'a' in self.backend._list())
+        self.assertTrue(b'b' in self.backend._list())
 
     def test_delete(self):
         if self.backend is None:
@@ -69,11 +69,11 @@ class BackendInstanceBase(UnitTestCase):
         if not hasattr(self.backend, u'_delete'):
             self.assertTrue(hasattr(self.backend, u'_delete_list'))
             return
-        self.backend._put(self.local, u'a')
-        self.backend._put(self.local, u'b')
-        self.backend._delete(u'a')
-        self.assertFalse(u'a' in self.backend._list())
-        self.assertTrue(u'b' in self.backend._list())
+        self.backend._put(self.local, b'a')
+        self.backend._put(self.local, b'b')
+        self.backend._delete(b'a')
+        self.assertFalse(b'a' in self.backend._list())
+        self.assertTrue(b'b' in self.backend._list())
 
     def test_delete_clean(self):
         if self.backend is None:
@@ -81,8 +81,8 @@ class BackendInstanceBase(UnitTestCase):
         if not hasattr(self.backend, u'_delete'):
             self.assertTrue(hasattr(self.backend, u'_delete_list'))
             return
-        self.backend._put(self.local, u'a')
-        self.backend._delete(u'a')
+        self.backend._put(self.local, b'a')
+        self.backend._delete(b'a')
         self.assertEqual(self.backend._list(), [])
 
     def test_delete_missing(self):
@@ -94,7 +94,7 @@ class BackendInstanceBase(UnitTestCase):
         # Backends can either silently ignore this, or throw an error
         # that gives log.ErrorCode.backend_not_found.
         try:
-            self.backend._delete(u'a')
+            self.backend._delete(b'a')
         except BackendException as e:
             pass  # Something went wrong, but it was an 'expected' something
         except Exception as e:
@@ -107,14 +107,14 @@ class BackendInstanceBase(UnitTestCase):
         if not hasattr(self.backend, u'_delete_list'):
             self.assertTrue(hasattr(self.backend, u'_delete'))
             return
-        self.backend._put(self.local, u'a')
-        self.backend._put(self.local, u'b')
-        self.backend._put(self.local, u'c')
-        self.backend._delete_list([u'a', u'd', u'c'])
+        self.backend._put(self.local, b'a')
+        self.backend._put(self.local, b'b')
+        self.backend._put(self.local, b'c')
+        self.backend._delete_list([b'a', b'd', b'c'])
         files = self.backend._list()
-        self.assertFalse(u'a' in files, files)
-        self.assertTrue(u'b' in files, files)
-        self.assertFalse(u'c' in files, files)
+        self.assertFalse(b'a' in files, files)
+        self.assertTrue(b'b' in files, files)
+        self.assertFalse(b'c' in files, files)
 
     def test_move(self):
         if self.backend is None:
@@ -126,11 +126,11 @@ class BackendInstanceBase(UnitTestCase):
         self.local.copy(copy)
 
         self.backend._move(self.local, u'a')
-        self.assertTrue(u'a' in self.backend._list())
+        self.assertTrue(b'a' in self.backend._list())
         self.assertFalse(self.local.exists())
 
         getfile = path.Path(u'testfiles/getfile')
-        self.backend._get(u'a', getfile)
+        self.backend._get(b'a', getfile)
         self.assertTrue(copy.compare_data(getfile))
 
     def test_query_exists(self):

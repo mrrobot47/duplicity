@@ -22,13 +22,17 @@
 u"""Define some lazy data structures and functions acting on them"""
 from __future__ import print_function
 
+from builtins import map
+from builtins import next
+from builtins import range
+from builtins import object
 import os
 from duplicity import log
 from duplicity import robust
 from duplicity import util
 
 
-class Iter:
+class Iter(object):
     u"""Hold static methods for the manipulation of lazy iterators"""
 
     @staticmethod
@@ -204,10 +208,10 @@ class Iter:
             while(1):
                 yield get_next(fork_num)
 
-        return tuple(map(make_iterator, range(num_of_forks)))
+        return tuple(map(make_iterator, list(range(num_of_forks))))
 
 
-class IterMultiplex2:
+class IterMultiplex2(object):
     u"""Multiplex an iterator into 2 parts
 
     This is a special optimized case of the Iter.multiplex function,
@@ -249,7 +253,7 @@ class IterMultiplex2:
             yield elem
 
 
-class IterTreeReducer:
+class IterTreeReducer(object):
     u"""Tree style reducer object for iterator - stolen from rdiff-backup
 
     The indicies of a RORPIter form a tree type structure.  This class
@@ -356,7 +360,7 @@ class IterTreeReducer:
         return 1
 
 
-class ITRBranch:
+class ITRBranch(object):
     u"""Helper class for IterTreeReducer above
 
     There are five stub functions below: start_process, end_process,

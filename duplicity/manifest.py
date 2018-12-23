@@ -21,9 +21,14 @@
 
 u"""Create and edit manifest for session contents"""
 
-from future_builtins import filter
+from builtins import filter
+from builtins import map
+from builtins import range
+from builtins import object
+from future.builtins import filter
 
 import re
+import sys
 
 from duplicity import globals
 from duplicity import log
@@ -38,7 +43,7 @@ class ManifestError(Exception):
     pass
 
 
-class Manifest:
+class Manifest(object):
     u"""
     List of volumes and information about each one
     """
@@ -70,9 +75,9 @@ class Manifest:
         self.local_dirname = globals.local_path.name  # @UndefinedVariable
         if self.fh:
             if self.hostname:
-                self.fh.write(u"Hostname %s\n" % self.hostname)
+                self.fh.write(b"Hostname %s\n" % self.hostname.encode())
             if self.local_dirname:
-                self.fh.write(u"Localdir %s\n" % Quote(self.local_dirname))
+                self.fh.write(b"Localdir %s\n" % Quote(self.local_dirname))
         return self
 
     def check_dirinfo(self):
@@ -118,7 +123,7 @@ class Manifest:
             self.files_changed = files_changed
 
         if self.fh:
-            self.fh.write(u"Filelist %d\n" % len(self.files_changed))
+            self.fh.write(b"Filelist %d\n" % len(self.files_changed))
             for fileinfo in self.files_changed:
                 self.fh.write(b"    %-7s  %s\n" % (fileinfo[1], Quote(fileinfo[0])))
 
@@ -157,9 +162,9 @@ class Manifest:
         @rtype: string
         @return: self in string form
         """
-        result = u""
+        result = b""
         if self.hostname:
-            result += b"Hostname %s\n" % self.hostname
+            result += b"Hostname %s\n" % self.hostname.encode()
         if self.local_dirname:
             result += b"Localdir %s\n" % Quote(self.local_dirname)
 
@@ -167,7 +172,7 @@ class Manifest:
         for fileinfo in self.files_changed:
             result += b"    %-7s  %s\n" % (fileinfo[1], Quote(fileinfo[0]))
 
-        vol_num_list = self.volume_info_dict.keys()
+        vol_num_list = list(self.volume_info_dict.keys())
         vol_num_list.sort()
 
         def vol_num_to_string(vol_num):
@@ -182,21 +187,26 @@ class Manifest:
         u"""
         Initialize self from string s, return self
         """
+
         def get_field(fieldname):
             u"""
             Return the value of a field by parsing s, or None if no field
             """
-            m = re.search(u"(^|\\n)%s\\s(.*?)\n" % fieldname, s, re.I)
+            if not isinstance(fieldname, bytes):
+                fieldname = fieldname.encode()
+            m = re.search(b"(^|\\n)%s\\s(.*?)\n" % fieldname, s, re.I)
             if not m:
                 return None
             else:
                 return Unquote(m.group(2))
         self.hostname = get_field(u"hostname")
+        if self.hostname is not None:
+            self.hostname = self.hostname.decode()
         self.local_dirname = get_field(u"localdir")
 
         highest_vol = 0
         latest_vol = 0
-        vi_regexp = re.compile(u"(?:^|\\n)(volume\\s.*(?:\\n.*)*?)(?=\\nvolume\\s|$)", re.I)
+        vi_regexp = re.compile(b"(?:^|\\n)(volume\\s.*(?:\\n.*)*?)(?=\\nvolume\\s|$)", re.I)
         vi_iterator = vi_regexp.finditer(s)
         for match in vi_iterator:
             vi = VolumeInfo().from_string(match.group(1))
@@ -215,16 +225,16 @@ class Manifest:
         # Get file changed list - not needed if --file-changed not present
         filecount = 0
         if globals.file_changed is not None:
-            filelist_regexp = re.compile(u"(^|\\n)filelist\\s([0-9]+)\\n(.*?)(\\nvolume\\s|$)", re.I | re.S)
+            filelist_regexp = re.compile(b"(^|\\n)filelist\\s([0-9]+)\\n(.*?)(\\nvolume\\s|$)", re.I | re.S)
             match = filelist_regexp.search(s)
             if match:
                 filecount = int(match.group(2))
             if filecount > 0:
                 def parse_fileinfo(line):
                     fileinfo = line.strip().split()
-                    return (fileinfo[0], u''.join(fileinfo[1:]))
+                    return (fileinfo[0], b''.join(fileinfo[1:]))
 
-                self.files_changed = list(map(parse_fileinfo, match.group(3).split(u'\n')))
+                self.files_changed = list(map(parse_fileinfo, match.group(3).split(b'\n')))
 
             if filecount != len(self.files_changed):
                 log.Error(_(u"Manifest file '%s' is corrupt: File count says %d, File list contains %d" %
@@ -240,9 +250,9 @@ class Manifest:
         u"""
         Two manifests are equal if they contain the same volume infos
         """
-        vi_list1 = self.volume_info_dict.keys()
+        vi_list1 = list(self.volume_info_dict.keys())
         vi_list1.sort()
-        vi_list2 = other.volume_info_dict.keys()
+        vi_list2 = list(other.volume_info_dict.keys())
         vi_list2.sort()
 
         if vi_list1 != vi_list2:
@@ -281,9 +291,10 @@ class Manifest:
         u"""
         Return list of volume numbers that may contain index_prefix
         """
-        return filter(lambda vol_num:
-                      self.volume_info_dict[vol_num].contains(index_prefix),
-                      self.volume_info_dict.keys())
+        if len(index_prefix) == 1 and isinstance(index_prefix[0], u"".__class__):
+            index_prefix = (index_prefix[0].encode(),)
+        return [vol_num for vol_num in list(self.volume_info_dict.keys()) if
+                self.volume_info_dict[vol_num].contains(index_prefix)]
 
 
 class VolumeInfoError(Exception):
@@ -293,7 +304,7 @@ class VolumeInfoError(Exception):
     pass
 
 
-class VolumeInfo:
+class VolumeInfo(object):
     u"""
     Information about a single volume
     """
@@ -328,6 +339,10 @@ class VolumeInfo:
         u"""
         Set the value of hash hash_name (e.g. "MD5") to data
         """
+        if isinstance(hash_name, bytes):
+            hash_name = hash_name.decode()
+        if isinstance(data, bytes):
+            data = data.decode()
         self.hashes[hash_name] = data
 
     def get_best_hash(self):
@@ -347,7 +362,7 @@ class VolumeInfo:
             return (u"MD5", self.hashes[u'MD5'])
         except KeyError:
             pass
-        return self.hashes.items()[0]
+        return list(self.hashes.items())[0]
 
     def to_string(self):
         u"""
@@ -361,15 +376,20 @@ class VolumeInfo:
             else:
                 return b"."
 
+        def bfmt(x):
+            if x is None:
+                return b" "
+            return str(x).encode()
+
         slist = [b"Volume %d:" % self.volume_number]
         whitespace = b"    "
         slist.append(b"%sStartingPath   %s %s" %
-                     (whitespace, index_to_string(self.start_index), (self.start_block or b" ")))
+                     (whitespace, index_to_string(self.start_index), bfmt(self.start_block)))
         slist.append(b"%sEndingPath     %s %s" %
-                     (whitespace, index_to_string(self.end_index), (self.end_block or b" ")))
+                     (whitespace, index_to_string(self.end_index), bfmt(self.end_block)))
         for key in self.hashes:
             slist.append(b"%sHash %s %s" %
-                         (whitespace, key.encode(), self.hashes[key]))
+                         (whitespace, key.encode(), self.hashes[key].encode()))
         return b"\n".join(slist)
 
     __str__ = to_string
@@ -390,7 +410,7 @@ class VolumeInfo:
         linelist = s.strip().split(b"\n")
 
         # Set volume number
-        m = re.search(u"^Volume ([0-9]+):", linelist[0], re.I)
+        m = re.search(b"^Volume ([0-9]+):", linelist[0], re.I)
         if not m:
             raise VolumeInfoError(u"Bad first line '%s'" % (linelist[0],))
         self.volume_number = int(m.group(1))
@@ -402,22 +422,22 @@ class VolumeInfo:
             line_split = line.strip().split()
             field_name = line_split[0].lower()
             other_fields = line_split[1:]
-            if field_name == u"Volume":
+            if field_name == b"Volume":
                 log.Warn(_(u"Warning, found extra Volume identifier"))
                 break
-            elif field_name == u"startingpath":
+            elif field_name == b"startingpath":
                 self.start_index = string_to_index(other_fields[0])
                 if len(other_fields) > 1:
                     self.start_block = int(other_fields[1])
                 else:
                     self.start_block = None
-            elif field_name == u"endingpath":
+            elif field_name == b"endingpath":
                 self.end_index = string_to_index(other_fields[0])
                 if len(other_fields) > 1:
                     self.end_block = int(other_fields[1])
                 else:
                     self.end_block = None
-            elif field_name == u"hash":
+            elif field_name == b"hash":
                 self.set_hash(other_fields[0], other_fields[1])
 
         if self.start_index is None or self.end_index is None:
@@ -440,9 +460,9 @@ class VolumeInfo:
         if self.end_index != other.end_index:
             log.Notice(_(u"end_index don't match"))
             return None
-        hash_list1 = self.hashes.items()
+        hash_list1 = list(self.hashes.items())
         hash_list1.sort()
-        hash_list2 = other.hashes.items()
+        hash_list2 = list(other.hashes.items())
         hash_list2.sort()
         if hash_list1 != hash_list2:
             log.Notice(_(u"Hashes don't match"))
@@ -471,7 +491,7 @@ class VolumeInfo:
             return self.start_index <= index_prefix <= self.end_index
 
 
-nonnormal_char_re = re.compile(u"(\\s|[\\\\\"'])")
+nonnormal_char_re = re.compile(b"(\\s|[\\\\\"'])")
 
 
 def Quote(s):
@@ -481,29 +501,40 @@ def Quote(s):
     if not nonnormal_char_re.search(s):
         return s  # no quoting necessary
     slist = []
-    for char in s:
+    for i in range(0, len(s)):
+        char = s[i:i + 1]
         if nonnormal_char_re.search(char):
             slist.append(b"\\x%02x" % ord(char))
         else:
             slist.append(char)
-    return b'"%s"' % u"".join(slist)
+    return b'"%s"' % b"".join(slist)
+
+
+def maybe_chr(ch):
+    if sys.version_info.major >= 3:
+        return chr(ch)
+    else:
+        return ch
 
 
 def Unquote(quoted_string):
     u"""
     Return original string from quoted_string produced by above
     """
-    if not quoted_string[0] == b'"' or quoted_string[0] == b"'":
+    if not maybe_chr(quoted_string[0]) == u'"' or maybe_chr(quoted_string[0]) == u"'":
         return quoted_string
     assert quoted_string[0] == quoted_string[-1]
     return_list = []
     i = 1  # skip initial char
     while i < len(quoted_string) - 1:
-        char = quoted_string[i]
+        char = quoted_string[i:i + 1]
         if char == b"\\":
             # quoted section
-            assert quoted_string[i + 1] == b"x"
-            return_list.append(chr(int(quoted_string[i + 2:i + 4], 16)))
+            assert maybe_chr(quoted_string[i + 1]) == u"x"
+            if sys.version_info.major >= 3:
+                return_list.append(int(quoted_string[i + 2:i + 4].decode(), 16).to_bytes(1, byteorder=u'big'))
+            else:
+                return_list.append(chr(int(quoted_string[i + 2:i + 4], 16)))
             i += 4
         else:
             return_list.append(char)

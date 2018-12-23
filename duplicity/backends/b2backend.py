@@ -22,9 +22,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
 import os
 import hashlib
-from urllib import quote_plus
+from urllib.parse import quote_plus  # pylint: disable=import-error
 
 import duplicity.backend
 from duplicity.errors import BackendException, FatalBackendException
@@ -32,7 +35,7 @@ from duplicity import log
 from duplicity import progress
 
 
-class B2ProgressListener:
+class B2ProgressListener(object):
     def set_total_bytes(self, total_byte_count):
         self.total_byte_count = total_byte_count
 

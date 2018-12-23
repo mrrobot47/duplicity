@@ -20,6 +20,7 @@
 
 u"""Cache-wrapped functions for grp and pwd lookups."""
 
+from builtins import object
 import grp
 import pwd
 

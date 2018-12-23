@@ -24,6 +24,11 @@ Provides a common interface to all backends and certain sevices
 intended to be used by the backends themselves.
 """
 
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from builtins import object
 import errno
 import os
 import sys
@@ -34,8 +39,9 @@ import getpass
 import gettext
 import re
 import types
-import urllib
-import urlparse
+import urllib.request  # pylint: disable=import-error
+import urllib.parse  # pylint: disable=import-error
+import urllib.error  # pylint: disable=import-error
 
 from duplicity import dup_temp
 from duplicity import file_naming
@@ -55,7 +61,6 @@ from duplicity.errors import InvalidBackendURL
 from duplicity.errors import UnsupportedBackendScheme
 
 import duplicity.backends
-
 
 # todo: this should really NOT be done here
 socket.setdefaulttimeout(globals.timeout)
@@ -226,7 +231,7 @@ def get_backend(url_string):
     return obj
 
 
-class ParsedUrl:
+class ParsedUrl(object):
     u"""
     Parse the given URL as a duplicity backend URL.
 
@@ -242,7 +247,7 @@ class ParsedUrl:
 
         # Python < 2.6.5 still examine urlparse.uses_netlock when parsing urls,
         # so stuff our custom list in there before we parse.
-        urlparse.uses_netloc = uses_netloc
+        urllib.parse.uses_netloc = uses_netloc
 
         # While useful in some cases, the fact is that the urlparser makes
         # all the properties in the URL deferred or lazy.  This means that
@@ -250,7 +255,7 @@ class ParsedUrl:
         # problems here, so they will be caught early.
 
         try:
-            pu = urlparse.urlparse(url_string)
+            pu = urllib.parse.urlparse(url_string)
         except Exception:
             raise InvalidBackendURL(u"Syntax error in: %s" % url_string)
 
@@ -267,7 +272,7 @@ class ParsedUrl:
         try:
             self.path = pu.path
             if self.path:
-                self.path = urllib.unquote(self.path)
+                self.path = urllib.parse.unquote(self.path)
         except Exception:
             raise InvalidBackendURL(u"Syntax error (path) in: %s" % url_string)
 
@@ -276,7 +281,7 @@ class ParsedUrl:
         except Exception:
             raise InvalidBackendURL(u"Syntax error (username) in: %s" % url_string)
         if self.username:
-            self.username = urllib.unquote(pu.username)
+            self.username = urllib.parse.unquote(pu.username)
         else:
             self.username = None
 
@@ -285,7 +290,7 @@ class ParsedUrl:
         except Exception:
             raise InvalidBackendURL(u"Syntax error (password) in: %s" % url_string)
         if self.password:
-            self.password = urllib.unquote(self.password)
+            self.password = urllib.parse.unquote(self.password)
         else:
             self.password = None
 
@@ -386,7 +391,7 @@ def retry(operation, fatal=True):
                                 return util.escape(f.uc_name)
                             else:
                                 return util.escape(f)
-                        extra = u' '.join([operation] + [make_filename(x) for x in args if x])
+                        extra = u' '.join([operation] + [make_filename(x) for x in args if (x and isinstance(x, str))])
                         log.FatalError(_(u"Giving up after %s attempts. %s: %s")
                                        % (n, e.__class__.__name__,
                                           util.uexc(e)), code=code, extra=extra)
@@ -496,7 +501,7 @@ class Backend(object):
                 return 0, u'', u''
             except (KeyError, ValueError):
                 raise BackendException(u"Error running '%s': returned %d, with output:\n%s" %
-                                       (logstr, result, stdout + u'\n' + stderr))
+                                       (logstr, result, stdout.decode() + u'\n' + stderr.decode()))
         return result, stdout, stderr
 
 
@@ -564,7 +569,7 @@ class BackendWrapper(object):
         """
         def tobytes(filename):
             u"Convert a (maybe unicode) filename to bytes"
-            if isinstance(filename, unicode):
+            if isinstance(filename, str):
                 # There shouldn't be any encoding errors for files we care
                 # about, since duplicity filenames are ascii.  But user files
                 # may be in the same directory.  So just replace characters.

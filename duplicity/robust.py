@@ -45,11 +45,11 @@ def check_common_error(error_handler, function, args=()):
     #    TracebackArchive.add()
     except (IOError, EnvironmentError, librsync.librsyncError, path.PathException) as exc:
         if (not isinstance(exc, EnvironmentError) or
-            ((exc[0] in errno.errorcode) and
-             errno.errorcode[exc[0]] in
-             [u'EPERM', u'ENOENT', u'EACCES', u'EBUSY', u'EEXIST',
-              u'ENOTDIR', u'ENAMETOOLONG', u'EINTR', u'ENOTEMPTY',
-              u'EIO', u'ETXTBSY', u'ESRCH', u'EINVAL'])):
+            hasattr(exc, u"errno") and
+            errno.errorcode[exc.errno] in
+            [u'EPERM', u'ENOENT', u'EACCES', u'EBUSY', u'EEXIST',
+             u'ENOTDIR', u'ENAMETOOLONG', u'EINTR', u'ENOTEMPTY',
+             u'EIO', u'ETXTBSY', u'ESRCH', u'EINVAL']):
             # Log.exception()
             if error_handler:
                 return error_handler(exc, *args)

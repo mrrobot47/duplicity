@@ -25,6 +25,12 @@
 
 def install(*args, **kwargs):
     ZWSP = u"​"  # ZERO WIDTH SPACE, basically an invisible space separator
-    import __builtin__
-    __builtin__.__dict__[u'_'] = lambda x: x + ZWSP
-    __builtin__.__dict__[u'ngettext'] = lambda one, more, n: one + ZWSP if n == 1 else more + ZWSP
+    import sys
+    if sys.version_info.major >= 3:
+        import builtins
+        b = builtins
+    else:
+        import __builtin__
+        b = __builtin__
+    b.__dict__[u'_'] = lambda x: x + ZWSP
+    b.__dict__[u'ngettext'] = lambda one, more, n: one + ZWSP if n == 1 else more + ZWSP

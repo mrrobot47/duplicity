@@ -1,3 +1,8 @@
+2018-12-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mgorse/duplicity/0.8-series
+      - First pass at a python 3 port.
+
 2018-10-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1798206 and bug #1798504

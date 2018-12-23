@@ -25,6 +25,7 @@ from duplicity import dup_time
 from duplicity import file_naming
 from duplicity import log
 from duplicity import globals
+from duplicity import util
 from . import UnitTestCase
 
 
@@ -47,7 +48,7 @@ class FileNamingBase:
 
         file_naming.prepare_regex(force=True)
         filename = file_naming.get(u"inc", volume_number=23)
-        log.Info(u"Inc filename: " + filename)
+        log.Info(u"Inc filename: " + util.fsdecode(filename))
         pr = file_naming.parse(filename)
         assert pr and pr.type == u"inc", pr
         assert pr.start_time == 10
@@ -56,7 +57,7 @@ class FileNamingBase:
         assert not pr.partial
 
         filename = file_naming.get(u"full-sig")
-        log.Info(u"Full sig filename: " + filename)
+        log.Info(u"Full sig filename: " + util.fsdecode(filename))
         pr = file_naming.parse(filename)
         assert pr.type == u"full-sig"
         assert pr.time == 20
@@ -85,18 +86,18 @@ class FileNamingBase:
     def test_more(self):
         u"""More file_parsing tests"""
         file_naming.prepare_regex(force=True)
-        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + u"dns.h112bi.h14rg0.st.g")
+        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"dns.h112bi.h14rg0.st.g")
         assert pr, pr
         assert pr.type == u"new-sig"
         assert pr.end_time == 1029826800
 
         if not globals.short_filenames:
-            pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + u"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg")
+            pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg")
             assert pr, pr
             assert pr.type == u"new-sig"
             assert pr.end_time == 1029826800
 
-        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + u"dfs.h5dixs.st.g")
+        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"dfs.h5dixs.st.g")
         assert pr, pr
         assert pr.type == u"full-sig"
         assert pr.time == 1036954144, repr(pr.time)
@@ -104,20 +105,20 @@ class FileNamingBase:
     def test_partial(self):
         u"""Test addition of partial flag"""
         file_naming.prepare_regex(force=True)
-        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + u"dns.h112bi.h14rg0.st.p.g")
+        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"dns.h112bi.h14rg0.st.p.g")
         assert pr, pr
         assert pr.partial
         assert pr.type == u"new-sig"
         assert pr.end_time == 1029826800
 
         if not globals.short_filenames:
-            pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + u"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.part.gpg")
+            pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.part.gpg")
             assert pr, pr
             assert pr.partial
             assert pr.type == u"new-sig"
             assert pr.end_time == 1029826800
 
-        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + u"dfs.h5dixs.st.p.g")
+        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"dfs.h5dixs.st.p.g")
         assert pr, pr
         assert pr.partial
         assert pr.type == u"full-sig"
@@ -142,10 +143,10 @@ class FileNamingPrefixes(UnitTestCase, FileNamingBase):
     u"""Test filename parsing and generation with prefixes"""
     def setUp(self):
         super(FileNamingPrefixes, self).setUp()
-        self.set_global(u'file_prefix', u"global-")
-        self.set_global(u'file_prefix_manifest', u"mani-")
-        self.set_global(u'file_prefix_signature', u"sign-")
-        self.set_global(u'file_prefix_archive', u"arch-")
+        self.set_global(u'file_prefix', b"global-")
+        self.set_global(u'file_prefix_manifest', b"mani-")
+        self.set_global(u'file_prefix_signature', b"sign-")
+        self.set_global(u'file_prefix_archive', b"arch-")
 
 
 if __name__ == u"__main__":

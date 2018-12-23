@@ -21,7 +21,8 @@
 
 u"""Provide time related exceptions and functions"""
 
-from future_builtins import map
+from builtins import map
+from future.builtins import map
 
 import time
 import types
@@ -116,15 +117,15 @@ def stringtotime(timestring):
         date, daytime = timestring[:19].split(u"T")
         if len(timestring) == 16:
             # new format for filename time
-            year, month, day = map(int,
-                                   [date[0:4], date[4:6], date[6:8]])
-            hour, minute, second = map(int,
-                                       [daytime[0:2], daytime[2:4], daytime[4:6]])
+            year, month, day = list(map(int,
+                                    [date[0:4], date[4:6], date[6:8]]))
+            hour, minute, second = list(map(int,
+                                        [daytime[0:2], daytime[2:4], daytime[4:6]]))
         else:
             # old format for filename time
-            year, month, day = map(int, date.split(u"-"))
-            hour, minute, second = map(int,
-                                       daytime.split(globals.time_separator))
+            year, month, day = list(map(int, date.split(u"-")))
+            hour, minute, second = list(map(int,
+                                        daytime.split(globals.time_separator)))
         assert 1900 < year < 2100, year
         assert 1 <= month <= 12
         assert 1 <= day <= 31
@@ -242,7 +243,7 @@ def gettzd(dstflag):
     else:
         return u"Z"  # time is already in UTC
 
-    hours, minutes = map(abs, divmod(offset, 60))
+    hours, minutes = list(map(abs, divmod(offset, 60)))
     assert 0 <= hours <= 23
     assert 0 <= minutes <= 59
     return u"%s%02d%s%02d" % (prefix, hours, globals.time_separator, minutes)

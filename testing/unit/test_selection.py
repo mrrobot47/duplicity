@@ -22,7 +22,7 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import types
-import StringIO
+import io
 import unittest
 import duplicity.path
 
@@ -41,7 +41,7 @@ class MatchingTest(UnitTestCase):
         self.Select = Select(self.root)
 
     def makeext(self, path):
-        return self.root.new_index(tuple(path.split(u"/")))
+        return self.root.new_index(tuple(path.encode().split(b"/")))
 
     def testRegexp(self):
         u"""Test regular expression selection func"""
@@ -239,8 +239,8 @@ class ParseArgsTest(UnitTestCase):
         u"""Turn strings in filelist into fileobjs"""
         new_filelists = []
         for f in filelist:
-            if isinstance(f, unicode):
-                new_filelists.append(StringIO.StringIO(f))
+            if isinstance(f, u"".__class__):
+                new_filelists.append(io.StringIO(f))
             else:
                 new_filelists.append(f)
         return new_filelists

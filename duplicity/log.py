@@ -22,7 +22,11 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 u"""Log various messages depending on verbosity level"""
+from __future__ import division
 
+from builtins import str
+from past.utils import old_div
+from builtins import object
 import os
 import sys
 import logging
@@ -82,7 +86,7 @@ def Log(s, verb_level, code=1, extra=None, force_print=False):
     # assert line.  As it is, we'll attempt to convert s to unicode if we
     # are handed bytes.  One day we should update the backends.
     # assert isinstance(s, unicode)
-    if not isinstance(s, unicode):
+    if not isinstance(s, str):
         s = s.decode(u"utf8", u"replace")
 
     _logger.log(DupToLoggerLevel(verb_level), s,
@@ -98,7 +102,7 @@ def Debug(s):
     Log(s, DEBUG)
 
 
-class InfoCode:
+class InfoCode(object):
     u"""Enumeration class to hold info code values.
        These values should never change, as frontends rely upon them.
        Don't use 0 or negative numbers."""
@@ -180,7 +184,7 @@ def _RemainingSecs2Str(secs):
 def TransferProgress(progress, eta, changed_bytes, elapsed, speed, stalled):
     u"""Shortcut used for upload progress messages (verbosity 5)."""
     dots = int(0.4 * progress)  # int(40.0 * progress / 100.0) -- for 40 chars
-    data_amount = float(changed_bytes) / 1024.0
+    data_amount = old_div(float(changed_bytes), 1024.0)
     data_scale = u"KB"
     if data_amount > 1000.0:
         data_amount /= 1024.0
@@ -194,7 +198,7 @@ def TransferProgress(progress, eta, changed_bytes, elapsed, speed, stalled):
         speed_scale = u"B"
     else:
         eta_str = _RemainingSecs2Str(eta)
-        speed_amount = float(speed) / 1024.0
+        speed_amount = old_div(float(speed), 1024.0)
         speed_scale = u"KB"
         if speed_amount > 1000.0:
             speed_amount /= 1024.0
@@ -216,13 +220,13 @@ def TransferProgress(progress, eta, changed_bytes, elapsed, speed, stalled):
 
 def PrintCollectionStatus(col_stats, force_print=False):
     u"""Prints a collection status to the log"""
-    Log(unicode(col_stats), 8, InfoCode.collection_status,
+    Log(str(col_stats), 8, InfoCode.collection_status,
         u'\n' + u'\n'.join(col_stats.to_log_info()), force_print)
 
 
 def PrintCollectionFileChangedStatus(col_stats, filepath, force_print=False):
     u"""Prints a collection status to the log"""
-    Log(unicode(col_stats.get_file_changed_record(filepath)), 8, InfoCode.collection_status, None, force_print)
+    Log(str(col_stats.get_file_changed_record(filepath)), 8, InfoCode.collection_status, None, force_print)
 
 
 def Notice(s):
@@ -230,7 +234,7 @@ def Notice(s):
     Log(s, NOTICE)
 
 
-class WarningCode:
+class WarningCode(object):
     u"""Enumeration class to hold warning code values.
        These values should never change, as frontends rely upon them.
        Don't use 0 or negative numbers."""
@@ -254,7 +258,7 @@ def Warn(s, code=WarningCode.generic, extra=None):
     Log(s, WARNING, code, extra)
 
 
-class ErrorCode:
+class ErrorCode(object):
     u"""Enumeration class to hold error code values.
        These values should never change, as frontends rely upon them.
        Don't use 0 or negative numbers.  This code is returned by duplicity

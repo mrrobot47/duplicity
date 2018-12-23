@@ -1,4 +1,3 @@
-from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2011 Carlos Abalde <carlos.abalde@gmail.com>
@@ -19,9 +18,16 @@ from __future__ import print_function
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import input
+from builtins import str
 import os.path
 import string
-import urllib
+import urllib.request  # pylint: disable=import-error
+import urllib.parse  # pylint: disable=import-error
+import urllib.error  # pylint: disable=import-error
 
 import duplicity.backend
 from duplicity.errors import BackendException
@@ -138,7 +144,7 @@ Exception: %s""" % str(e))
             print(u'A captcha challenge in required. Please visit ' + challenge.captcha_url)
             answer = None
             while not answer:
-                answer = raw_input(u'Answer to the challenge? ')
+                answer = eval(input(u'Answer to the challenge? '))
             self._authorize(email, password, challenge.captcha_token, answer)
         except gdata.client.BadAuthentication:
             raise BackendException(
@@ -158,7 +164,7 @@ Exception: %s""" % str(e))
         else:
             uri += u'?showfolders=true'
         if title:
-            uri += u'&title=' + urllib.quote(title) + u'&title-exact=true'
+            uri += u'&title=' + urllib.parse.quote(title) + u'&title-exact=true'
 
         # Fetch entries.
         entries = self.client.get_all_resources(uri=uri)

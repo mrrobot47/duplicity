@@ -19,6 +19,9 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import division
+from builtins import str
+from past.utils import old_div
 import os
 import time
 
@@ -242,7 +245,7 @@ class BotoBackend(duplicity.backend.Backend):
         self.upload(source_path.name, key, headers)
         upload_end = time.time()
         total_s = abs(upload_end - upload_start) or 1  # prevent a zero value!
-        rough_upload_speed = os.path.getsize(source_path.name) / total_s
+        rough_upload_speed = old_div(os.path.getsize(source_path.name), total_s)
         log.Debug(u"Uploaded %s/%s to %s Storage at roughly %f bytes/second" %
                   (self.straight_url, remote_filename, storage_class,
                    rough_upload_speed))
