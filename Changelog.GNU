@@ -1,3 +1,8 @@
+2018-12-27  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1803896 with patch from slawekbunka
+      - Add __enter__ and __exit__ to B2ProgressListener
+
 2018-12-23  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~mgorse/duplicity/0.8-series

@@ -397,6 +397,8 @@ New in v0.8.00 (2016/07/??)
     not be loaded unless needed.
 * Merged in lp:~mgorse/duplicity/0.8-series
   - First pass at a python 3 port.
+* Fixed bug #1803896 with patch from slawekbunka
+  - Add __enter__ and __exit__ to B2ProgressListener
 
 
 New in v0.7.08 (2016/07/02)
