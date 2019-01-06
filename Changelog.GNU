@@ -1,3 +1,9 @@
+2019-01-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~okrasz/duplicity/duplicity
+      - Add --azure-blob-tier that specifies storage tier
+        (Hot,Cool,Archive) used for uploaded files.
+
 2018-12-27  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1803896 with patch from slawekbunka

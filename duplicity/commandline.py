@@ -590,6 +590,9 @@ def parse_cmdline_options(arglist):
     # max_connections (int) - Maximum number of parallel connections to use when the blob size exceeds 64MB.
     parser.add_option(u"--azure-max-connections", type=u"int", metavar=_(u"number"))
 
+    # Standard storage tier used for storring backup files (Hot|Cool|Archive).
+    parser.add_option(u"--azure-blob-tier", type=u"string", metavar=_(u"Hot|Cool|Archive"))
+
     # scp command to use (ssh pexpect backend)
     parser.add_option(u"--scp-command", metavar=_(u"command"))
 

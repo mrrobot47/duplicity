@@ -232,6 +232,9 @@ azure_max_block_size = None
 # Maximum number of parallel connections to use when the blob size for azure exceeds 64MB
 azure_max_connections = None
 
+# Standard storage tier used for storring backup blobs (Hot|Cool|Archive).
+azure_blob_tier = None
+
 # Whether to use the full email address as the user name when
 # logging into an imap server. If false just the user name
 # part of the email address is used.

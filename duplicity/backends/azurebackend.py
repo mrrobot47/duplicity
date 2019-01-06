@@ -102,7 +102,7 @@ Exception: %s""" % str(e))
             # fallback for azure-storage<0.30.0
             except AttributeError:
                 self.blob_service._BLOB_MAX_CHUNK_DATA_SIZE = globals.azure_max_block_size
-
+                
     def _create_container(self):
         try:
             self.blob_service.create_container(self.container, fail_on_exist=True)
@@ -124,7 +124,16 @@ Exception: %s""" % str(e))
             self.blob_service.create_blob_from_path(self.container, remote_filename, source_path.name, **kwargs)
         except AttributeError:  # Old versions use a different method name
             self.blob_service.put_block_blob_from_path(self.container, remote_filename, source_path.name, **kwargs)
-
+        
+        self._set_tier(remote_filename)
+            
+    def _set_tier(self, remote_filename):
+        if globals.azure_blob_tier is not None:
+            try:
+                self.blob_service.set_standard_blob_tier(self.container, remote_filename, globals.azure_blob_tier)
+            except AttributeError:  # might not be available in old API
+                pass
+            
     def _get(self, remote_filename, local_path):
         # https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#download-blobs
         self.blob_service.get_blob_to_path(self.container, remote_filename, local_path.name)
