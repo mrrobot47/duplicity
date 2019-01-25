@@ -1,3 +1,8 @@
+2019-01-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~vam9/duplicity/0.8-series-s3-kms-support
+      - Added s3 kms server side encryption support with kms-grants support.
+
 2019-01-06  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~okrasz/duplicity/duplicity

@@ -165,7 +165,7 @@ class BotoBackend(duplicity.backend.Backend):
         # duplicity and boto.storage_uri() have different URI formats.
         # boto uses scheme://bucket[/name] and specifies hostname on connect()
         self.boto_uri_str = u'://'.join((parsed_url.scheme[:2],
-                                        parsed_url.path.lstrip(u'/')))
+                                         parsed_url.path.lstrip(u'/')))
         if globals.s3_european_buckets:
             self.my_location = Location.EU
         else:
@@ -235,6 +235,19 @@ class BotoBackend(duplicity.backend.Backend):
                 u'x-amz-storage-class': storage_class,
                 u'x-amz-server-side-encryption': u'AES256'
             }
+        elif globals.s3_use_sse_kms:
+            if globals.s3_kms_key_id is None:
+                raise FatalBackendException("S3 USE SSE KMS was requested, but key id not provided "
+                                            "require (--s3-kms-key-id)",
+                                            code=log.ErrorCode.s3_kms_no_id)
+            headers = {
+                'Content-Type': 'application/octet-stream',
+                'x-amz-storage-class': storage_class,
+                'x-amz-server-side-encryption': 'aws:kms',
+                'x-amz-server-side-encryption-aws-kms-key-id': globals.s3_kms_key_id
+            }
+            if globals.s3_kms_grant is not None:
+                headers['x-amz-grant-full-control'] = globals.s3_kms_grant
         else:
             headers = {
                 u'Content-Type': u'application/octet-stream',
