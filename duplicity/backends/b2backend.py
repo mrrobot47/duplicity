@@ -35,7 +35,10 @@ from duplicity import log
 from duplicity import progress
 
 
-class B2ProgressListener(object):
+class B2ProgressListener:
+    def __enter__(self):
+        pass
+    
     def set_total_bytes(self, total_byte_count):
         self.total_byte_count = total_byte_count
 
@@ -45,6 +48,8 @@ class B2ProgressListener(object):
     def close(self):
         pass
 
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        pass
 
 class B2Backend(duplicity.backend.Backend):
     u"""

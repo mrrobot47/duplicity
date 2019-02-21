@@ -572,6 +572,11 @@ def parse_cmdline_options(arglist):
     # Option to allow use of server side encryption in s3
     parser.add_option(u"--s3-use-server-side-encryption", action=u"store_true", dest=u"s3_use_sse")
 
+    # Options to allow use of server side KMS encryption
+    parser.add_option("--s3-use-server-side-kms-encryption", action=u"store_true", dest="s3_use_sse_kms")
+    parser.add_option("--s3-kms-key-id", action=u"store", dest="s3_kms_key_id")
+    parser.add_option("--s3-kms-grant", action=u"store", dest="s3_kms_grant")
+
     # Option to specify a Swift container storage policy.
     parser.add_option(u"--swift-storage-policy", type=u"string", metavar=_(u"policy"))
 
@@ -589,6 +594,9 @@ def parse_cmdline_options(arglist):
     # The number for the maximum parallel connections to use when the blob size exceeds 64MB.
     # max_connections (int) - Maximum number of parallel connections to use when the blob size exceeds 64MB.
     parser.add_option(u"--azure-max-connections", type=u"int", metavar=_(u"number"))
+
+    # Standard storage tier used for storring backup files (Hot|Cool|Archive).
+    parser.add_option(u"--azure-blob-tier", type=u"string", metavar=_(u"Hot|Cool|Archive"))
 
     # scp command to use (ssh pexpect backend)
     parser.add_option(u"--scp-command", metavar=_(u"command"))

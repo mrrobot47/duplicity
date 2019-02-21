@@ -29,6 +29,7 @@ import base64
 import http.client
 import os
 import re
+import shutil
 import urllib.request  # pylint: disable=import-error
 import urllib.parse  # pylint: disable=import-error
 import urllib.error  # pylint: disable=import-error
@@ -413,7 +414,7 @@ class WebDAVBackend(duplicity.backend.Backend):
             response = self.request(u"GET", url)
             if response.status == 200:
                 # data=response.read()
-                target_file.write(response.read())
+                shutil.copyfileobj(response, target_file)
                 # import hashlib
                 # log.Info("WebDAV GOT %s bytes with md5=%s" %
                 # (len(data),hashlib.md5(data).hexdigest()) )
@@ -436,7 +437,7 @@ class WebDAVBackend(duplicity.backend.Backend):
         response = None
         try:
             source_file = source_path.open(u"rb")
-            response = self.request(u"PUT", url, source_file.read())
+            response = self.request(u"PUT", url, source_file)
             # 200 is returned if a file is overwritten during restarting
             if response.status in [200, 201, 204]:
                 response.read()

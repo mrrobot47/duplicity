@@ -816,6 +816,10 @@ hanging on multipart uploads or if you'd like to control the time variance
 when uploading to S3 to ensure you kill connections to slow S3 endpoints.
 
 .TP
+.BI "--azure-blob-tier"
+Standard storage tier used for backup files (Hot|Cool|Archive).
+
+.TP
 .BI "--azure-max-single-put-size"
 Specify the number of the largest supported upload size where the Azure
 library makes only one put call. If the content size is known and below this
@@ -830,7 +834,7 @@ The maximum block size the service supports is 104857600 (100MiB) and the
 default is 4194304 (4MiB)
 
 .TP
-.BI ""--azure-max-connections"
+.BI "--azure-max-connections"
 Specify the number of maximum connections to transfer one blob to Azure
 blob size exceeds 64MB. The default values is 2.
 
@@ -1120,12 +1124,6 @@ cf+http://container_name
 .PP
 See also
 .B "A NOTE ON CLOUD FILES ACCESS"
-.RE
-.PP
-.B "Copy cloud storage"
-.PP
-.RS
-copy://user[:password]@copy.com/some_dir
 .RE
 .PP
 .B Dropbox

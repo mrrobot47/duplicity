@@ -1,3 +1,36 @@
+2019-01-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~vam9/duplicity/0.8-series-s3-kms-support
+      - Added s3 kms server side encryption support with kms-grants support.
+
+2019-01-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~okrasz/duplicity/duplicity
+      - Add --azure-blob-tier that specifies storage tier
+        (Hot,Cool,Archive) used for uploaded files.
+
+2018-12-27  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1803896 with patch from slawekbunka
+      - Add __enter__ and __exit__ to B2ProgressListener
+
+2018-12-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mgorse/duplicity/0.8-series
+      - First pass at a python 3 port.
+
+2018-10-17  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1798206 and bug #1798504
+      - Made paramiko a global with import during __init__ so it would
+        not be loaded unless needed.
+
+2018-12-15  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mcuelenaere/duplicity/duplicity
+      - Make sure we don't load files completely into memory when transferring them from/to
+        the remote WebDAV endpoint.
+
 2018-10-16  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~mgorse/duplicity/0.8-series

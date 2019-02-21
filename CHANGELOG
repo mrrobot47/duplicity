@@ -387,8 +387,23 @@ New in v0.8.00 (2016/07/??)
   - Adorn some remaining strings
 * Merged in lp:~mgorse/duplicity/0.8-series
   - Run futurize --stage1, and adjust so that tests still pass.
-# Fixed but #1797797 with patch from Bas Hulsken
+* Fixed but #1797797 with patch from Bas Hulsken
   - use bytes instead of unicode for '/' in filenames
+* Merged in lp:~mcuelenaere/duplicity/duplicity
+  - Make sure we don't load files completely into memory when transferring them from/to
+    the remote WebDAV endpoint.
+* Fixed bug #1798206 and bug #1798504
+  - Made paramiko a global with import during __init__ so it would
+    not be loaded unless needed.
+* Merged in lp:~mgorse/duplicity/0.8-series
+  - First pass at a python 3 port.
+* Fixed bug #1803896 with patch from slawekbunka
+  - Add __enter__ and __exit__ to B2ProgressListener
+* Merged in lp:~okrasz/duplicity/duplicity
+  - Add --azure-blob-tier that specifies storage tier
+    (Hot,Cool,Archive) used for uploaded files.
+* Merged in lp:~vam9/duplicity/0.8-series-s3-kms-support
+  - Added s3 kms server side encryption support with kms-grants support.
 
 
 New in v0.7.08 (2016/07/02)

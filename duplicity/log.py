@@ -312,6 +312,7 @@ class ErrorCode(object):
     dpbx_nologin = 47
 
     bad_request = 48
+    s3_kms_no_id = 49
 
     # 50->69 reserved for backend errors
     backend_error = 50
