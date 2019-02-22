@@ -193,7 +193,7 @@ class BackupSet(object):
                     pass
         util.release_lockfile()
 
-    def __unicode__(self):
+    def __str__(self):
         u"""
         For now just list files in set
         """
@@ -657,7 +657,7 @@ class CollectionsStatus(object):
 
         return l
 
-    def __unicode__(self):
+    def __str__(self):
         u"""
         Return string summary of the collection
         """
@@ -1228,7 +1228,7 @@ class FileChangedStatus(object):
         self.filepath = filepath
         self.fileinfo_list = fileinfo_list
 
-    def __unicode__(self):
+    def __str__(self):
         set_schema = u"%20s   %30s  %20s"
         l = [u"-------------------------",
              _(u"File: %s") % (self.filepath),
