@@ -118,7 +118,7 @@ class StatsObj(object):
             if use_repr:
                 # use repr to quote newlines in relative filename, then
                 # take of leading and trailing quote and quote spaces.
-                filename = self.space_regex.sub(u"\\x20", repr(filename))
+                filename = self.space_regex.sub(u"\\\\x20", repr(filename))
                 n = 1
                 if filename[0] == u'u':
                     n = 2
