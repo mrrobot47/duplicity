@@ -128,7 +128,7 @@ def difftar2path_iter(diff_tarfile):
     while 1:
         # This section relevant when a multivol diff is last in tar
         if not tarinfo_list[0]:
-            raise StopIteration
+            return
         if multivol_fileobj and not multivol_fileobj.at_end:
             multivol_fileobj.close()  # aborting in middle of multivol
             continue
@@ -149,7 +149,10 @@ def difftar2path_iter(diff_tarfile):
             else:
                 ropath.setfileobj(diff_tarfile.extractfile(tarinfo_list[0]))
         yield ropath
-        tarinfo_list[0] = next(tar_iter)
+        try:
+            tarinfo_list[0] = next(tar_iter)
+        except StopIteration:
+            return
 
 
 def get_index_from_tarinfo(tarinfo):

@@ -174,7 +174,7 @@ class TemporaryDirectory(object):
         try:
             self.__tempcount = self.__tempcount + 1
             suffix = u"-%d" % (self.__tempcount,)
-            filename = tempfile.mktemp(suffix, u"mktemp-", util.fsdecode(self.__dir))
+            filename = util.fsencode(tempfile.mktemp(suffix, u"mktemp-", self.__dir))
 
             log.Debug(_(u"Registering (mktemp) temporary file %s") % util.fsdecode(filename))
             self.__pending[filename] = None

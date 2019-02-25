@@ -487,7 +487,7 @@ class ROPath(object):
             other.stat = stat
             other.mode = self.mode
 
-    def __unicode__(self):
+    def __str__(self):
         u"""Return string representation"""
         return u"(%s %s)" % (util.uindex(self.index), self.type)
 

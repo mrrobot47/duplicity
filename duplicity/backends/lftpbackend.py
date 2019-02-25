@@ -132,12 +132,12 @@ class LFTPBackend(duplicity.backend.Backend):
         self.tempfile.write(u"set net:max-retries %s\n" % globals.num_retries)
         self.tempfile.write(u"set ftp:passive-mode %s\n" % self.conn_opt)
         if log.getverbosity() >= log.DEBUG:
-            self.tempfd.write(u"debug\n")
+            self.tempfile.write(u"debug\n")
         if self.parsed_url.scheme == u'ftpes':
             self.tempfile.write(u"open %s %s\n" % (self.authflag, self.url_string.replace(u'ftpes', u'ftp')))
         else:
             self.tempfile.write(u"open %s %s\n" % (self.authflag, self.url_string))
-        os.close(self.tempfd)
+        self.tempfile.close()
         # print settings in debug mode
         if log.getverbosity() >= log.DEBUG:
             f = open(self.tempname, u'r')

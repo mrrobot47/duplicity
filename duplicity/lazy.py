@@ -206,7 +206,11 @@ class Iter(object):
 
         def make_iterator(fork_num):
             while(1):
-                yield get_next(fork_num)
+                try:
+                    ret = get_next(fork_num)
+                except StopIteration:
+                    return
+                yield ret
 
         return tuple(map(make_iterator, list(range(num_of_forks))))
 
@@ -230,7 +234,10 @@ class IterMultiplex2(object):
         while(1):
             if self.a_leading_by >= 0:
                 # a is in front, add new element
-                elem = next(iter)  # exception will be passed
+                try:
+                    elem = next(iter)
+                except StopIteration:
+                    return
                 buf.append(elem)
             else:
                 # b is in front, subtract an element
@@ -244,7 +251,10 @@ class IterMultiplex2(object):
         while(1):
             if self.a_leading_by <= 0:
                 # b is in front, add new element
-                elem = next(iter)  # exception will be passed
+                try:
+                    elem = next(iter)
+                except StopIteration:
+                    return
                 buf.append(elem)
             else:
                 # a is in front, subtract an element
