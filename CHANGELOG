@@ -1,4 +1,4 @@
-New in v0.8.00 (2016/07/??)
+New in v0.8.00 (2019/??/??)
 ---------------------------
 * Merged in lp:~aaron-whitehouse/duplicity/remove-python26
   - Remove Python 2.6 support references and tests.
@@ -454,6 +454,15 @@ New in v0.7.08 (2016/07/02)
   - Added pylint: disable=import-error to a couple of conditional imports
 * Merged in lp:~excitablesnowball/duplicity/s3-onezone-ia
   - Add option --s3-use-onezone-ia S3 One Zone Infrequent Access Storage
+* Merged in lp:~mgorse/duplicity/0.8-series
+  - More changes for unicode and py3 support
+* Merged in lp:~mterry/duplicity/pydrive-root
+  - Just a tiny fix to clean up the temporary file we create to find the root ID.
+    It's a little surprising for the user if they wind up with this file called
+    "i_am_in_root" that they don't know where it came from. Almost sounds like
+    they were hacked.
+* Fixed bug #1817375 with hint from mgorse
+  - Added 'global pexpect' at end of imports
 
 
 New in v0.7.07.1 (2016/04/19)

@@ -1,3 +1,16 @@
+2019-02-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in  lp:~mgorse/duplicity/0.8-series
+      - More changes for unicode and py3 support
+    * Merged in lp:~mterry/duplicity/pydrive-root
+      - Just a tiny fix to clean up the temporary file we create to find the root ID.
+        It's a little surprising for the user if they wind up with this file called
+        "i_am_in_root" that they don't know where it came from. Almost sounds like
+        they were hacked.
+    * Fixed bug #1817375 with hint from mgorse
+      - Added 'global pexpect' at end of imports
+
+
 2019-01-25  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~vam9/duplicity/0.8-series-s3-kms-support

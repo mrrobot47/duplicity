@@ -40,6 +40,8 @@ from duplicity import globals
 from duplicity import log
 from duplicity.errors import BackendException
 
+global pexpect
+
 
 class SSHPExpectBackend(duplicity.backend.Backend):
     u"""This backend copies files using scp.  List not supported.  Filenames
