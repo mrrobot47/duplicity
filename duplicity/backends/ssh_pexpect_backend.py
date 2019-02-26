@@ -38,9 +38,8 @@ import os
 import duplicity.backend
 from duplicity import globals
 from duplicity import log
+from duplicity import util
 from duplicity.errors import BackendException
-
-global pexpect
 
 
 class SSHPExpectBackend(duplicity.backend.Backend):
@@ -52,6 +51,8 @@ class SSHPExpectBackend(duplicity.backend.Backend):
 
         try:
             import pexpect
+            global pexpect
+
         except ImportError:
             raise
 
@@ -172,7 +173,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
                      u"open(.*): Failure"]
         max_response_len = max([len(p) for p in responses[1:]])
         log.Info(u"Running '%s'" % (commandline))
-        child = pexpect.spawn(commandline, timeout=None, maxread=maxread)
+        child = pexpect.spawn(commandline, timeout=None, maxread=maxread, encoding=globals.fsencoding)
         cmdloc = 0
         passprompt = 0
         while 1:
@@ -228,6 +229,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
             raise BackendException(u"Error running '%s': %s" % (commandline, msg))
 
     def _put(self, source_path, remote_filename):
+        remote_filename = util.fsdecode(remote_filename)
         if self.use_scp:
             self.put_scp(source_path, remote_filename)
         else:
@@ -235,7 +237,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
 
     def put_sftp(self, source_path, remote_filename):
         commands = [u"put \"%s\" \"%s.%s.part\"" %
-                    (source_path.name, self.remote_prefix, remote_filename),
+                    (source_path.uc_name, self.remote_prefix, remote_filename),
                     u"rename \"%s.%s.part\" \"%s%s\"" %
                     (self.remote_prefix, remote_filename, self.remote_prefix, remote_filename)]
         commandline = (u"%s %s %s" % (self.sftp_command,
@@ -245,11 +247,12 @@ class SSHPExpectBackend(duplicity.backend.Backend):
 
     def put_scp(self, source_path, remote_filename):
         commandline = u"%s %s %s %s:%s%s" % \
-            (self.scp_command, globals.ssh_options, source_path.name, self.host_string,
+            (self.scp_command, globals.ssh_options, source_path.uc_name, self.host_string,
              self.remote_prefix, remote_filename)
         self.run_scp_command(commandline)
 
     def _get(self, remote_filename, local_path):
+        remote_filename = util.fsdecode(remote_filename)
         if self.use_scp:
             self.get_scp(remote_filename, local_path)
         else:
@@ -257,7 +260,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
 
     def get_sftp(self, remote_filename, local_path):
         commands = [u"get \"%s%s\" \"%s\"" %
-                    (self.remote_prefix, remote_filename, local_path.name)]
+                    (self.remote_prefix, remote_filename, local_path.uc_name)]
         commandline = (u"%s %s %s" % (self.sftp_command,
                                       globals.ssh_options,
                                       self.host_string))
@@ -266,7 +269,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
     def get_scp(self, remote_filename, local_path):
         commandline = u"%s %s %s:%s%s %s" % \
             (self.scp_command, globals.ssh_options, self.host_string, self.remote_prefix,
-             remote_filename, local_path.name)
+             remote_filename, local_path.uc_name)
         self.run_scp_command(commandline)
 
     def _list(self):
@@ -289,7 +292,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
 
         l = self.run_sftp_command(commandline, commands).split(u'\n')[1:]
 
-        return [x for x in map(string.strip, l) if x]
+        return [x for x in map(u"".__class__.strip, l) if x]
 
     def _delete(self, filename):
         commands = [u"cd \"%s\"" % (self.remote_dir,)]
