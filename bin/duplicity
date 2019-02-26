@@ -1136,7 +1136,7 @@ def sync_archive():
     @rtype: void
     @return: void
     """
-    suffixes = [u".g", u".gpg", u".z", u".gz", u".part"]
+    suffixes = [b".g", b".gpg", b".z", b".gz", b".part"]
 
     def get_metafiles(filelist):
         u"""
