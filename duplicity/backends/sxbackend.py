@@ -20,6 +20,7 @@
 
 import os.path
 import duplicity.backend
+import duplicity.util
 
 
 class SXBackend(duplicity.backend.Backend):
@@ -29,13 +30,15 @@ class SXBackend(duplicity.backend.Backend):
         self.url_string = parsed_url.url_string
 
     def _put(self, source_path, remote_filename):
+        remote_filename = util.fsdecode(remote_filename)
         remote_path = os.path.join(self.url_string, remote_filename)
-        commandline = u"sxcp {0} {1}".format(source_path.name, remote_path)
+        commandline = u"sxcp {0} {1}".format(source_path.uc_name, remote_path)
         self.subprocess_popen(commandline)
 
     def _get(self, remote_filename, local_path):
+        remote_filename = util.fsdecode(remote_filename)
         remote_path = os.path.join(self.url_string, remote_filename)
-        commandline = u"sxcp {0} {1}".format(remote_path, local_path.name)
+        commandline = u"sxcp {0} {1}".format(remote_path, local_path.uc_name)
         self.subprocess_popen(commandline)
 
     def _list(self):
@@ -43,7 +46,7 @@ class SXBackend(duplicity.backend.Backend):
         commandline = u"sxls {0}".format(self.url_string)
         _, l, _ = self.subprocess_popen(commandline)
         # Look for our files as the last element of a long list line
-        return [x[x.rindex(u'/') + 1:].split()[-1] for x in l.split(u'\n') if x and not x.startswith(u"total ")]
+        return [x[x.rindex(u'/') + 1:].split()[-1] for x in l.split(b'\n') if x and not x.startswith(b"total ")]
 
     def _delete(self, filename):
         commandline = u"sxrm {0}/{1}".format(self.url_string, filename)
