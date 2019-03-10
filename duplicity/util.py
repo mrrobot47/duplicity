@@ -109,7 +109,10 @@ def uexc(e):
     # non-ascii will cause a UnicodeDecodeError when implicitly decoding to
     # unicode.  So we decode manually, using the filesystem encoding.
     # 99.99% of the time, this will be a fine encoding to use.
-    return fsdecode(str(e).encode(u'utf-8'))
+    m = e.message
+    if isinstance(m, unicode):
+        m = m.encode('utf-8')
+    return fsdecode(m)
 
 
 def maybe_ignore_errors(fn):
