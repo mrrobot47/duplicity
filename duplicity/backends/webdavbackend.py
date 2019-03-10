@@ -57,76 +57,76 @@ class CustomMethodRequest(urllib.request.Request):
 
 
 class VerifiedHTTPSConnection(http.client.HTTPSConnection):
-        def __init__(self, *args, **kwargs):
-            try:
-                global socket, ssl
-                import socket
-                import ssl
-            except ImportError:
-                raise FatalBackendException(_(u"Missing socket or ssl python modules."))
+    def __init__(self, *args, **kwargs):
+        try:
+            global socket, ssl
+            import socket
+            import ssl
+        except ImportError:
+            raise FatalBackendException(_(u"Missing socket or ssl python modules."))
 
-            http.client.HTTPSConnection.__init__(self, *args, **kwargs)
+        http.client.HTTPSConnection.__init__(self, *args, **kwargs)
 
-            self.cacert_file = globals.ssl_cacert_file
-            self.cacert_candidates = [u"~/.duplicity/cacert.pem",
-                                      u"~/duplicity_cacert.pem",
-                                      u"/etc/duplicity/cacert.pem"]
-            # if no cacert file was given search default locations
+        self.cacert_file = globals.ssl_cacert_file
+        self.cacert_candidates = [u"~/.duplicity/cacert.pem",
+                                  u"~/duplicity_cacert.pem",
+                                  u"/etc/duplicity/cacert.pem"]
+        # if no cacert file was given search default locations
+        if not self.cacert_file:
+            for path in self.cacert_candidates:
+                path = os.path.expanduser(path)
+                if (os.path.isfile(path)):
+                    self.cacert_file = path
+                    break
+
+        # check if file is accessible (libssl errors are not very detailed)
+        if self.cacert_file and not os.access(self.cacert_file, os.R_OK):
+            raise FatalBackendException(_(u"Cacert database file '%s' is not readable.") %
+                                        self.cacert_file)
+
+    def connect(self):
+        # create new socket
+        sock = socket.create_connection((self.host, self.port),
+                                        self.timeout)
+        if self._tunnel_host:
+            self.sock = sock
+            self.tunnel()
+
+        # python 2.7.9+ supports default system certs now
+        if u"create_default_context" in dir(ssl):
+            context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH,
+                                                 cafile=self.cacert_file,
+                                                 capath=globals.ssl_cacert_path)
+            self.sock = context.wrap_socket(sock, server_hostname=self.host)
+        # the legacy way needing a cert file
+        else:
+            if globals.ssl_cacert_path:
+                raise FatalBackendException(
+                    _(u"Option '--ssl-cacert-path' is not supported "
+                      u"with python 2.7.8 and below."))
+
             if not self.cacert_file:
-                for path in self.cacert_candidates:
-                    path = os.path.expanduser(path)
-                    if (os.path.isfile(path)):
-                        self.cacert_file = path
-                        break
-
-            # check if file is accessible (libssl errors are not very detailed)
-            if self.cacert_file and not os.access(self.cacert_file, os.R_OK):
-                raise FatalBackendException(_(u"Cacert database file '%s' is not readable.") %
-                                            self.cacert_file)
-
-        def connect(self):
-            # create new socket
-            sock = socket.create_connection((self.host, self.port),
-                                            self.timeout)
-            if self._tunnel_host:
-                self.sock = sock
-                self.tunnel()
-
-            # python 2.7.9+ supports default system certs now
-            if u"create_default_context" in dir(ssl):
-                context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH,
-                                                     cafile=self.cacert_file,
-                                                     capath=globals.ssl_cacert_path)
-                self.sock = context.wrap_socket(sock, server_hostname=self.host)
-            # the legacy way needing a cert file
-            else:
-                if globals.ssl_cacert_path:
-                    raise FatalBackendException(
-                        _(u"Option '--ssl-cacert-path' is not supported "
-                          u"with python 2.7.8 and below."))
-
-                if not self.cacert_file:
-                    raise FatalBackendException(_(u"""\
+                raise FatalBackendException(_(u"""\
 For certificate verification with python 2.7.8 or earlier a cacert database
 file is needed in one of these locations: %s
 Hints:
-  Consult the man page, chapter 'SSL Certificate Verification'.
-  Consider using the options --ssl-cacert-file, --ssl-no-check-certificate .""") %
-                                                u", ".join(self.cacert_candidates))
+Consult the man page, chapter 'SSL Certificate Verification'.
+Consider using the options --ssl-cacert-file, --ssl-no-check-certificate .""") %
+                                            u", ".join(self.cacert_candidates))
 
-                # wrap the socket in ssl using verification
-                self.sock = ssl.wrap_socket(sock,
-                                            cert_reqs=ssl.CERT_REQUIRED,
-                                            ca_certs=self.cacert_file,
-                                            )
+            # wrap the socket in ssl using verification
+            self.sock = ssl.wrap_socket(sock,
+                                        cert_reqs=ssl.CERT_REQUIRED,
+                                        ca_certs=self.cacert_file,
+                                        )
 
-        def request(self, *args, **kwargs):  # pylint: disable=method-hidden
-            try:
-                return http.client.HTTPSConnection.request(self, *args, **kwargs)
-            except ssl.SSLError as e:
-                # encapsulate ssl errors
-                raise BackendException(u"SSL failed: %s" % util.uexc(e),
-                                       log.ErrorCode.backend_error)
+    def request(self, *args, **kwargs):  # pylint: disable=method-hidden
+        try:
+            return http.client.HTTPSConnection.request(self, *args, **kwargs)
+        except ssl.SSLError as e:
+            # encapsulate ssl errors
+            raise BackendException(u"SSL failed: %s" % util.uexc(e),
+                                   log.ErrorCode.backend_error)
 
 
 class WebDAVBackend(duplicity.backend.Backend):

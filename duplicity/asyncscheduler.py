@@ -241,18 +241,18 @@ class AsyncScheduler(object):
         thread.start_new_thread(trampoline, ())
 
     def __execute_caller(self, caller):
-            # The caller half that we get here will not propagate
-            # errors back to us, but rather propagate it back to the
-            # "other half" of the async split.
-            succeeded, waiter = caller()
-            if not succeeded:
-                def _signal_failed():
-                    if not self.__failed:
-                        self.__failed = True
-                        self.__failed_waiter = waiter
-                        self.__cv.notifyAll()
-                with_lock(self.__cv, _signal_failed)
+        # The caller half that we get here will not propagate
+        # errors back to us, but rather propagate it back to the
+        # "other half" of the async split.
+        succeeded, waiter = caller()
+        if not succeeded:
+            def _signal_failed():
+                if not self.__failed:
+                    self.__failed = True
+                    self.__failed_waiter = waiter
+                    self.__cv.notifyAll()
+            with_lock(self.__cv, _signal_failed)
 
-            log.Info(u"%s: %s" % (self.__class__.__name__,
-                     _(u"task execution done (success: %s)") % succeeded),
-                     log.InfoCode.asynchronous_upload_done)
+        log.Info(u"%s: %s" % (self.__class__.__name__,
+                 _(u"task execution done (success: %s)") % succeeded),
+                 log.InfoCode.asynchronous_upload_done)
