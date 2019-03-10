@@ -26,7 +26,13 @@ class TestExc(unittest.TestCase):
         msg = duplicity.util.uexc(e)
         self.assertEqual(msg, 'test')
 
+        # Test for Bug #1770929
+        # https://bugs.launchpad.net/duplicity/+bug/1770929
         e = Exception(b'\xe3\x83\x86\xe3\x82\xb9\xe3\x83\x88')
+        msg = duplicity.util.uexc(e)
+        self.assertEqual(msg, u'\u30c6\u30b9\u30c8')
+
+        e = Exception(u'\u30c6\u30b9\u30c8')
         msg = duplicity.util.uexc(e)
         self.assertEqual(msg, u'\u30c6\u30b9\u30c8')
 

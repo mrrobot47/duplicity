@@ -112,9 +112,15 @@ def uexc(e):
     # 99.99% of the time, this will be a fine encoding to use.
     if e.args:
         m = e.args[0]  # exception.message is deprecated, but this is equivalent
-        return fsdecode(m)
+        if isinstance(m, str):
+            # Already unicode
+            return m
+        else:
+            # Encoded, likely in filesystem encoding
+            return fsdecode(m)
     else:
         return None
+
 
 def maybe_ignore_errors(fn):
     u"""
