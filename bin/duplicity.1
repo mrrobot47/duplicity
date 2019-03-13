@@ -782,6 +782,20 @@ This storage is similar to Standard - Infrequent Access, but only stores object
 data in one Availability Zone.
 
 .TP
+.BI "--s3-use-glacier"
+Store volumes using Glacier S3 when uploading to Amazon S3. This storage class
+has a lower cost of storage but a higher per-request cost along with delays
+of up to 12 hours from the time of retrieval request. This storage cost is
+calculated against a 90-day storage minimum. According to Amazon this storage is
+ideal for data archiving and long-term backup offering 99.999999999% durability.
+To restore a backup you will have to manually migrate all data stored on AWS
+Glacier back to Standard S3 and wait for AWS to complete the migration. 
+.B Notice:
+Duplicity will store the manifest.gpg files from full and incremental backups on
+AWS S3 standard storage to allow quick retrieval for later incremental backups,
+all other data is stored in S3 Glacier.
+
+.TP
 .BI "--s3-use-multiprocessing"
 Allow multipart volumne uploads to S3 through multiprocessing. This option
 requires Python 2.6 and can be used to make uploads to S3 more efficient.
