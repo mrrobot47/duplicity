@@ -10,6 +10,8 @@
       - Removed "pylint: disable=bad-string-format-type" comment, which was throwing
         an error and does not seem to be needed.
     * Removed last mention of copy.com from man page with help from edso.
+    * Fix bug #1811114 with revised onedrivebackend.py from David Martin
+      - Adapt to new Microsoft Graph API
 
 2019-02-25  Kenneth Loafman  <kenneth@loafman.com>
 
