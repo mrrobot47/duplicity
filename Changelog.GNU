@@ -5,6 +5,10 @@
     * Merged in lp:~aaron-whitehouse/duplicity/08-uexc-fix
       - Fix for Bug #1770929 with associated test cases (thanks to Pete Zaitcev (zaitcev)
         in Bug #1797928 for the head start).
+    * Merged in lp:~aaron-whitehouse/duplicity/08-style-fixes
+      - Fix pylint style issues (over-indented text, whitespace on blank lines etc)
+      - Removed "pylint: disable=bad-string-format-type" comment, which was throwing
+        an error and does not seem to be needed.
 
 2019-02-25  Kenneth Loafman  <kenneth@loafman.com>
 

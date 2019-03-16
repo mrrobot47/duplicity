@@ -1096,8 +1096,8 @@ class CollectionsStatus(object):
             if (chain.end_time < t and
                 (not self.matched_chain_pair or
                  chain is not self.matched_chain_pair[1])):
-                    # don't delete the active (matched) chain
-                    old_chains.append(chain)
+                # don't delete the active (matched) chain
+                old_chains.append(chain)
         return old_chains
 
     def get_signature_chains_older_than(self, t):
@@ -1116,8 +1116,8 @@ class CollectionsStatus(object):
             if (chain.end_time < t and
                 (not self.matched_chain_pair or
                  chain is not self.matched_chain_pair[0])):
-                    # don't delete the active (matched) chain
-                    old_chains.append(chain)
+                # don't delete the active (matched) chain
+                old_chains.append(chain)
         return old_chains
 
     def get_last_full_backup_time(self):
