@@ -472,6 +472,7 @@ New in v0.7.08 (2016/07/02)
   - Fix pylint style issues (over-indented text, whitespace on blank lines etc)
   - Removed "pylint: disable=bad-string-format-type" comment, which was throwing
     an error and does not seem to be needed.
+* Removed last mention of copy.com from man page with help from edso.
 
 
 New in v0.7.07.1 (2016/04/19)
