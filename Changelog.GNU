@@ -2,6 +2,9 @@
 
     * Merged in  lp:~mgorse/duplicity/0.8-series
       - More python 3 fixes
+    * Merged in lp:~aaron-whitehouse/duplicity/08-uexc-fix
+      - Fix for Bug #1770929 with associated test cases (thanks to Pete Zaitcev (zaitcev)
+        in Bug #1797928 for the head start).
 
 2019-02-25  Kenneth Loafman  <kenneth@loafman.com>
 

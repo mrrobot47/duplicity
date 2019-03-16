@@ -105,11 +105,21 @@ def uindex(index):
 
 
 def uexc(e):
+    u"""Returns the exception message in Unicode"""
     # Exceptions in duplicity often have path names in them, which if they are
     # non-ascii will cause a UnicodeDecodeError when implicitly decoding to
     # unicode.  So we decode manually, using the filesystem encoding.
     # 99.99% of the time, this will be a fine encoding to use.
-    return fsdecode(str(e).encode(u'utf-8'))
+    if e.args:
+        m = e.args[0]  # exception.message is deprecated, but this is equivalent
+        if isinstance(m, str):
+            # Already unicode
+            return m
+        else:
+            # Encoded, likely in filesystem encoding
+            return fsdecode(m)
+    else:
+        return None
 
 
 def maybe_ignore_errors(fn):

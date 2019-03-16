@@ -465,6 +465,9 @@ New in v0.7.08 (2016/07/02)
   - Added 'global pexpect' at end of imports
 * Merged in lp:~mgorse/duplicity/0.8-series
   - More python 3 fixes
+* Merged in lp:~aaron-whitehouse/duplicity/08-uexc-fix
+  - Fix for Bug #1770929 with associated test cases (thanks to Pete Zaitcev (zaitcev)
+    in Bug #1797928 for the head start).
 
 
 New in v0.7.07.1 (2016/04/19)
