@@ -31,6 +31,7 @@ import duplicity.backend
 from duplicity import globals
 from duplicity import log
 from duplicity import tempdir
+from duplicity import util
 
 
 class NCFTPBackend(duplicity.backend.Backend):
@@ -86,28 +87,31 @@ class NCFTPBackend(duplicity.backend.Backend):
         else:
             self.conn_opt = u'-F'
 
-        self.tempfile, self.tempname = tempdir.default().mkstemp()
-        os.write(self.tempfile, u"host %s\n" % self.parsed_url.hostname)
-        os.write(self.tempfile, u"user %s\n" % self.parsed_url.username)
-        os.write(self.tempfile, u"pass %s\n" % self.password)
-        os.close(self.tempfile)
+        self.tempfd, self.tempname = tempdir.default().mkstemp()
+        self.tempfile = os.fdopen(self.tempfd, u"w")
+        self.tempfile.write(u"host %s\n" % self.parsed_url.hostname)
+        self.tempfile.write(u"user %s\n" % self.parsed_url.username)
+        self.tempfile.write(u"pass %s\n" % self.password)
+        self.tempfile.close()
         self.flags = u"-f %s %s -t %s -o useCLNT=0,useHELP_SITE=0 " % \
             (self.tempname, self.conn_opt, globals.timeout)
         if parsed_url.port is not None and parsed_url.port != 21:
             self.flags += u" -P '%s'" % (parsed_url.port)
 
     def _put(self, source_path, remote_filename):
+        remote_filename = util.fsdecode(remote_filename)
         remote_path = os.path.join(urllib.parse.unquote(re.sub(u'^/', u'', self.parsed_url.path)),
                                    remote_filename).rstrip()
         commandline = u"ncftpput %s -m -V -C '%s' '%s'" % \
-            (self.flags, source_path.name, remote_path)
+            (self.flags, source_path.uc_name, remote_path)
         self.subprocess_popen(commandline)
 
     def _get(self, remote_filename, local_path):
+        remote_filename = util.fsdecode(remote_filename)
         remote_path = os.path.join(urllib.parse.unquote(re.sub(u'^/', u'', self.parsed_url.path)),
                                    remote_filename).rstrip()
         commandline = u"ncftpget %s -V -C '%s' '%s' '%s'" % \
-            (self.flags, self.parsed_url.hostname, remote_path.lstrip(u'/'), local_path.name)
+            (self.flags, self.parsed_url.hostname, remote_path.lstrip(u'/'), local_path.uc_name)
         self.subprocess_popen(commandline)
 
     def _list(self):
@@ -115,7 +119,7 @@ class NCFTPBackend(duplicity.backend.Backend):
         commandline = u"ncftpls %s -l '%s'" % (self.flags, self.url_string)
         _, l, _ = self.subprocess_popen(commandline)
         # Look for our files as the last element of a long list line
-        return [x.split()[-1] for x in l.split(u'\n') if x and not x.startswith(u"total ")]
+        return [x.split()[-1] for x in l.split(b'\n') if x and not x.startswith(b"total ")]
 
     def _delete(self, filename):
         commandline = u"ncftpls %s -l -X 'DELE %s' '%s'" % \

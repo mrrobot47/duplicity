@@ -1,3 +1,8 @@
+2019-03-16  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in  lp:~mgorse/duplicity/0.8-series
+      - More python 3 fixes
+
 2019-02-25  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in  lp:~mgorse/duplicity/0.8-series
@@ -9,7 +14,6 @@
         they were hacked.
     * Fixed bug #1817375 with hint from mgorse
       - Added 'global pexpect' at end of imports
-
 
 2019-01-25  Kenneth Loafman  <kenneth@loafman.com>
 
