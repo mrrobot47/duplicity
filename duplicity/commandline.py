@@ -540,6 +540,9 @@ def parse_cmdline_options(arglist):
     # Whether to use S3 Infrequent Access Storage
     parser.add_option(u"--s3-use-ia", action=u"store_true")
 
+    # Whether to use S3 Glacier Storage
+    parser.add_option(u"--s3-use-glacier", action=u"store_true")
+
     # Whether to use S3 One Zone Infrequent Access Storage
     parser.add_option(u"--s3-use-onezone-ia", action=u"store_true")
 

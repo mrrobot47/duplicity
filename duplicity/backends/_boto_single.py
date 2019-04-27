@@ -226,6 +226,8 @@ class BotoBackend(duplicity.backend.Backend):
             storage_class = u'STANDARD_IA'
         elif globals.s3_use_onezone_ia:
             storage_class = u'ONEZONE_IA'
+        elif globals.s3_use_glacier and "manifest.gpg" not in remote_filename:
+            storage_class = u'GLACIER'
         else:
             storage_class = u'STANDARD'
         log.Info(u"Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))

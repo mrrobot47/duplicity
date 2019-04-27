@@ -1,5 +1,10 @@
 2019-03-16  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Merged in lp:~brandon753-ba/duplicity/aws-glacier
+      - Adds support for for a command line option to store data on AWS S3 Glacier.
+
+2019-03-16  Kenneth Loafman  <kenneth@loafman.com>
+
     * Merged in  lp:~mgorse/duplicity/0.8-series
       - More python 3 fixes
     * Merged in lp:~aaron-whitehouse/duplicity/08-uexc-fix
