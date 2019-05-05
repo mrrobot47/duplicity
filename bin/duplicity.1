@@ -789,7 +789,7 @@ of up to 12 hours from the time of retrieval request. This storage cost is
 calculated against a 90-day storage minimum. According to Amazon this storage is
 ideal for data archiving and long-term backup offering 99.999999999% durability.
 To restore a backup you will have to manually migrate all data stored on AWS
-Glacier back to Standard S3 and wait for AWS to complete the migration. 
+Glacier back to Standard S3 and wait for AWS to complete the migration.
 .B Notice:
 Duplicity will store the manifest.gpg files from full and incremental backups on
 AWS S3 standard storage to allow quick retrieval for later incremental backups,
@@ -967,6 +967,17 @@ Use this storage policy when operating on Swift containers.
 .br
 See also
 .BR "A NOTE ON SWIFT (OPENSTACK OBJECT STORAGE) ACCESS" .
+
+.TP
+.BI "--metadata-sync-mode " mode
+This option defaults to 'partial', but you can set it to 'full'
+.br
+Use 'partial' to avoid syncing metadata for backup chains that you are not going to use.
+This saves time when restoring for the first time, and lets you restore an
+old backup that was encrypted with a different passphrase by supplying only
+the target passphrase.
+.br
+Use 'full' to sync metadata for all backup chains on the remote.
 
 .TP
 .BI "--tempdir " directory

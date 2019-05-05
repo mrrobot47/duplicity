@@ -501,6 +501,11 @@ def parse_cmdline_options(arglist):
                       callback=lambda o, s, v, p: (setattr(p.values, o.dest, True),
                                                    old_fn_deprecation(s)))
 
+    # Sync only required metadata
+    parser.add_option("--metadata-sync-mode",
+                      default="partial",
+                      choices=("full", "partial"))
+
     # Level of Redundancy in % for Par2 files
     parser.add_option(u"--par2-redundancy", type=u"int", metavar=_(u"number"))
 

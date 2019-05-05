@@ -418,6 +418,14 @@ New in v0.8.00 (2019/??/??)
   - Adapt to new Microsoft Graph API
 * Merged in lp:~brandon753-ba/duplicity/aws-glacier
   - Adds support for for a command line option to store data on AWS S3 Glacier.
+* Manual merge of lp:~yajo/duplicity/duplicity
+  - Support partial metadata sync.
+  - Fixes bug #1823858 by letting the user to choose partial syncing. Only the metadata for the target chain
+    will be downloaded. If older (or newer) chains are encrypted with a different passphrase, the user will
+    be able to restore to a given time by supplying only the passphrase for the chain selected by
+    the `--restore-time` option when using this new option.
+  - A side effect is that using this flag reduces dramatically the sync time when moving files from one to
+    another location, in cases where big amounts of chains are found.
 
 
 New in v0.7.08 (2016/07/02)
