@@ -123,7 +123,10 @@ def difftar2path_iter(diff_tarfile):
     # The next tar_info is stored in this one element list so
     # Multivol_Filelike below can update it.  Any StopIterations will
     # be passed upwards.
-    tarinfo_list = [next(tar_iter)]
+    try:
+        tarinfo_list = [next(tar_iter)]
+    except StopIteration:
+        return
 
     while 1:
         # This section relevant when a multivol diff is last in tar
@@ -349,7 +352,10 @@ class TarFile_FromFileobjs(object):
 
     def __next__(self):
         if not self.tarfile:
-            self.set_tarfile()
+            try:
+                self.set_tarfile()
+            except StopIteration:
+                return
         try:
             return next(self.tar_iter)
         except StopIteration:
