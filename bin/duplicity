@@ -1344,6 +1344,7 @@ def sync_archive(col_stats):
                 globals.backend.pre_process_download(local_missing)
             for fn in local_missing:
                 copy_to_local(fn)
+            col_stats.set_values()
         else:
             if local_missing:
                 log.Notice(_(u"Sync would copy the following from remote to local:") +
