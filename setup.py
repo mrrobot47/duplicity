@@ -30,7 +30,11 @@ from distutils.command.build_scripts import build_scripts
 
 version_string = "$version"
 
-if sys.version_info[:2] < (3, 5):
+major, minor = sys.version_info[:2]
+if major == 2 and minor < 7:
+    print("Sorry, duplicity requires version 2.7 or later of Python.")
+    sys.exit(1)
+elif major == 3 and minor < 5:
     print("Sorry, duplicity requires version 3.5 or later of Python.")
     sys.exit(1)
 
@@ -177,33 +181,35 @@ class BSCommand (build_scripts):
 
 
 setup(name="duplicity",
-      version=version_string,
-      description="Encrypted backup using rsync algorithm",
-      author="Ben Escoto <ben@emerose.org>",
-      author_email="bescoto@stanford.edu",
-      maintainer="Kenneth Loafman <kenneth@loafman.com>",
-      maintainer_email="kenneth@loafman.com",
-      url="http://duplicity.nongnu.org/index.html",
-      packages=['duplicity',
-                'duplicity.backends',
-                'duplicity.backends.pyrax_identity',
-                'testing',
-                'testing.functional',
-                'testing.overrides',
-                'testing.unit'],
-      package_dir={"duplicity": "duplicity",
-                   "duplicity.backends": "duplicity/backends", },
-      ext_modules=ext_modules,
-      scripts=['bin/rdiffdir', 'bin/duplicity'],
-      data_files=data_files,
-      setup_requires=['pytest-runner'],
-      install_requires=['fasteners', 'future'],
-      tests_require=['pytest','fasteners', 'mock', 'pexpect'],
-      test_suite='testing',
-      cmdclass={'test': TestCommand,
-                'install': InstallCommand,
-                'sdist': SDistCommand,
-                'build_scripts': BSCommand},
-      classifiers=["Programming Language :: Python :: 3 :: Only",
-                   "Programming Language :: Python :: 3.5"]
-      )
+    version=version_string,
+    description="Encrypted backup using rsync algorithm",
+    author="Ben Escoto <requested no contact>",
+    author_email="<requested no contact>",
+    maintainer="Kenneth Loafman <kenneth@loafman.com>",
+    maintainer_email="kenneth@loafman.com",
+    url="http://duplicity.nongnu.org/index.html",
+    packages=['duplicity',
+              'duplicity.backends',
+              'duplicity.backends.pyrax_identity',
+              'testing',
+              'testing.functional',
+              'testing.overrides',
+              'testing.unit'],
+    package_dir={"duplicity": "duplicity",
+                 "duplicity.backends": "duplicity/backends", },
+    ext_modules=ext_modules,
+    scripts=['bin/rdiffdir', 'bin/duplicity'],
+    data_files=data_files,
+    setup_requires=['pytest-runner'],
+    install_requires=['fasteners', 'future'],
+    tests_require=['pytest','fasteners', 'future', 'mock', 'pexpect'],
+    test_suite='testing',
+    cmdclass={'test': TestCommand,
+              'install': InstallCommand,
+              'sdist': SDistCommand,
+              'build_scripts': BSCommand},
+    classifiers=["Programming Language :: Python :: 2",
+                 "Programming Language :: Python :: 2.7",
+                 "Programming Language :: Python :: 3",
+                 "Programming Language :: Python :: 3.5"]
+    )
