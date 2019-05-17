@@ -253,7 +253,7 @@ imap_full_address = False
 imap_mailbox = u"INBOX"
 
 # Sync partial metadata by default
-metadata_sync_mode = "partial"
+metadata_sync_mode = u"partial"
 
 # Whether the old filename format is in effect.
 old_filenames = False
