@@ -1146,9 +1146,9 @@ def sync_archive(col_stats):
 
         Otherwise, only the metadata for the target chain needs sync.
         """
-        if globals.metadata_sync_mode == "full":
+        if globals.metadata_sync_mode == u"full":
             return True
-        assert globals.metadata_sync_mode == "partial"
+        assert globals.metadata_sync_mode == u"partial"
         parsed = file_naming.parse(filename)
         try:
             target_chain = col_stats.get_backup_chain_at_time(
