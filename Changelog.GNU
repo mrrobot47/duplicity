@@ -1,3 +1,9 @@
+2019-05-19  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mgorse/duplicity/0.8-series
+      - Python 3 fixes to imapbackend.py
+      - Fix bug 1828869: refresh CollectionsStatus after sync
+
 2019-05-05  Kenneth Loafman  <kenneth@loafman.com>
 
     * Manual merge of lp:~yajo/duplicity/duplicity

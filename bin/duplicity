@@ -1156,8 +1156,14 @@ def sync_archive(col_stats):
         except collections.CollectionsError:
             # With zero or multiple chains at this time, do a full sync
             return True
-        return parsed.end_time >= target_chain.start_time and \
-            parsed.start_time <= target_chain.end_time
+        if parsed.start_time is None and parsed.end_time is None:
+            start_time = end_time = parsed.time
+        else:
+            start_time = parsed.start_time
+            end_time = parsed.end_time
+
+        return end_time >= target_chain.start_time and \
+            start_time <= target_chain.end_time
 
     def get_metafiles(filelist):
         u"""
@@ -1338,6 +1344,7 @@ def sync_archive(col_stats):
                 globals.backend.pre_process_download(local_missing)
             for fn in local_missing:
                 copy_to_local(fn)
+            col_stats.set_values()
         else:
             if local_missing:
                 log.Notice(_(u"Sync would copy the following from remote to local:") +

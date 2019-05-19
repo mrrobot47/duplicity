@@ -32,11 +32,18 @@ import socket
 import io
 import getpass
 import email
+import email.encoders
+import email.mime.multipart
 from email.parser import Parser
 try:
     from email.policy import default  # pylint: disable=import-error
 except:
     pass
+
+# TODO: should probably change use of socket.sslerror instead of doing this
+if sys.version_info.major >= 3:
+    import ssl
+    socket.sslerror = ssl.SSLError
 
 import duplicity.backend
 from duplicity import globals
@@ -107,18 +114,18 @@ class ImapBackend(duplicity.backend.Backend):
             log.Info(u"IMAP connected")
 
     def prepareBody(self, f, rname):
-        mp = email.MIMEMultipart.MIMEMultipart()
+        mp = email.mime.multipart.MIMEMultipart()
 
         # I am going to use the remote_dir as the From address so that
         # multiple archives can be stored in an IMAP account and can be
         # accessed separately
         mp[u"From"] = self.remote_dir
-        mp[u"Subject"] = rname
+        mp[u"Subject"] = rname.decode()
 
-        a = email.MIMEBase.MIMEBase(u"application", u"binary")
+        a = email.mime.multipart.MIMEBase(u"application", u"binary")
         a.set_payload(f.read())
 
-        email.Encoders.encode_base64(a)
+        email.encoders.encode_base64(a)
 
         mp.attach(a)
 
@@ -137,7 +144,7 @@ class ImapBackend(duplicity.backend.Backend):
                 # If we don't select the IMAP folder before
                 # append, the message goes into the INBOX.
                 self.conn.select(globals.imap_mailbox)
-                self.conn.append(globals.imap_mailbox, None, None, body)
+                self.conn.append(globals.imap_mailbox, None, None, body.encode())
                 break
             except (imaplib.IMAP4.abort, socket.error, socket.sslerror):
                 allowedTimeout -= 1
@@ -176,9 +183,9 @@ class ImapBackend(duplicity.backend.Backend):
                     raise Exception(list[0])
                 rawbody = list[0][1]
 
-                p = email.Parser.Parser()
+                p = Parser()
 
-                m = p.parsestr(rawbody)
+                m = p.parsestr(rawbody.decode())
 
                 mp = m.get_payload(0)
 
@@ -199,6 +206,7 @@ class ImapBackend(duplicity.backend.Backend):
 
         tfile = local_path.open(u"wb")
         tfile.write(body)
+        tfile.close()
         local_path.setdata()
         log.Info(u"IMAP mail with '%s' subject fetched" % remote_filename)
 
@@ -215,10 +223,10 @@ class ImapBackend(duplicity.backend.Backend):
         (result, list) = self.conn.search(None, u'FROM', self.remote_dir)
         if result != u"OK":
             raise Exception(list[0])
-        if list[0] == u'':
+        if list[0] == b'':
             return ret
-        nums = list[0].strip().split(u" ")
-        set = u"%s:%s" % (nums[0], nums[-1])
+        nums = list[0].strip().split(b" ")
+        set = b"%s:%s" % (nums[0], nums[-1])
         (result, list) = self.conn.fetch(set, u"(BODY[HEADER])")
         if result != u"OK":
             raise Exception(list[0])
@@ -227,9 +235,9 @@ class ImapBackend(duplicity.backend.Backend):
             if (len(msg) == 1):
                 continue
             if sys.version_info.major >= 3:
-                headers = Parser(policy=default).parsestr(msg[1])  # pylint: disable=unsubscriptable-object
+                headers = Parser(policy=default).parsestr(msg[1].decode(u"unicode-escape"))  # pylint: disable=unsubscriptable-object
             else:
-                headers = Parser().parsestr(msg[1])  # pylint: disable=unsubscriptable-object
+                headers = Parser().parsestr(msg[1].decode(u"unicode-escape"))  # pylint: disable=unsubscriptable-object
             subj = headers[u"subject"]
             header_from = headers[u"from"]
 
