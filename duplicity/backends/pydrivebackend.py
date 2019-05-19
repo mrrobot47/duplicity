@@ -97,7 +97,7 @@ Exception: %s""" % str(e))
             file_in_root.Delete()
 
         # Fetch destination folder entry and create hierarchy if required.
-        folder_names = string.split(parsed_url.path, u'/')
+        folder_names = parsed_url.path.split(u'/')
         for folder_name in folder_names:
             if not folder_name:
                 continue

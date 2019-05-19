@@ -3,6 +3,8 @@
     * Merged in lp:~mgorse/duplicity/0.8-series
       - Python 3 fixes to imapbackend.py
       - Fix bug 1828869: refresh CollectionsStatus after sync
+    * Fixed bug #1828662 with patch from Bas Hulsken
+      - string.split() had been deprecated in 2, removed in 3.7
 
 2019-05-05  Kenneth Loafman  <kenneth@loafman.com>
 
