@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-02-22 13:13-0600\n"
+"POT-Creation-Date: 2019-05-19 10:40-0500\n"
 "PO-Revision-Date: 2018-02-23 14:32+0000\n"
 "Last-Translator: Pavel Borecki <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2019-02-26 05:50+0000\n"
-"X-Generator: Launchpad (build 18886)\n"
+"X-Launchpad-Export-Date: 2019-05-20 05:51+0000\n"
+"X-Generator: Launchpad (build 18962)\n"
 
 #: ../bin/duplicity:128
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -269,63 +269,63 @@ msgstr "Replikuje se %s."
 msgid "Backupset %s already replicated"
 msgstr "Sada záloh %s je už replikovaná"
 
-#: ../bin/duplicity:1204
+#: ../bin/duplicity:1231
 #, python-format
 msgid "Deleting local %s (not authoritative at backend)."
 msgstr "Mazání místní %s (neautoritativní z pohledu podpůrné vrstvy)."
 
-#: ../bin/duplicity:1209
+#: ../bin/duplicity:1236
 #, python-format
 msgid "Unable to delete %s: %s"
 msgstr "%s se nedaří smazat: %s"
 
-#: ../bin/duplicity:1243 ../duplicity/dup_temp.py:267
+#: ../bin/duplicity:1270 ../duplicity/dup_temp.py:267
 #, python-format
 msgid "Failed to read %s: %s"
 msgstr "Nepodařilo se načíst %s: %s"
 
-#: ../bin/duplicity:1257
+#: ../bin/duplicity:1284
 #, python-format
 msgid "Copying %s to local cache."
 msgstr "Kopíruje se %s do mezipaměti na tomto stroji."
 
-#: ../bin/duplicity:1305
+#: ../bin/duplicity:1332
 msgid "Local and Remote metadata are synchronized, no sync needed."
 msgstr ""
 "Místní a vzdálená metadata jsou synchronní, není třeba synchronizace."
 
-#: ../bin/duplicity:1310
+#: ../bin/duplicity:1337
 msgid "Synchronizing remote metadata to local cache..."
 msgstr "Synchronizace vzdálených metadat do místní mezipaměti…"
 
-#: ../bin/duplicity:1322
+#: ../bin/duplicity:1350
 msgid "Sync would copy the following from remote to local:"
 msgstr "Sync by zkopíroval následující ze vzdáleného na místní:"
 
-#: ../bin/duplicity:1325
+#: ../bin/duplicity:1353
 msgid "Sync would remove the following spurious local files:"
 msgstr "Sync by odebralo následující zbytečné místní soubory:"
 
-#: ../bin/duplicity:1369
+#: ../bin/duplicity:1397
 msgid "Unable to get free space on temp."
 msgstr "Nedaří se zjistit volné místo na dočasném."
 
-#: ../bin/duplicity:1377
+#: ../bin/duplicity:1405
 #, python-format
 msgid "Temp space has %d available, backup needs approx %d."
 msgstr ""
 "Na dočasném prostoru je k dispozici %d, záloha potřebuje přibližně %d."
 
-#: ../bin/duplicity:1380
+#: ../bin/duplicity:1408
 #, python-format
 msgid "Temp has %d available, backup will use approx %d."
 msgstr "Na dočasném prostoru je k dispozici %d, záloha využije přibližně %d."
 
-#: ../bin/duplicity:1388
+#: ../bin/duplicity:1416
 msgid "Unable to get max open files."
 msgstr "Nedaří se zjistit limit počtu otevřených souborů."
 
-#: ../bin/duplicity:1392
+#: ../bin/duplicity:1420
 #, python-format
 msgid ""
 "Max open files of %s is too low, should be >= 1024.\n"
@@ -334,7 +334,7 @@ msgstr ""
 "Limit naráz otevřených souborů %s je příliš nízký, měl by být >= 1024.\n"
 "Napravte to spuštěním příkazu „ulimit -n 1024“ (nebo s vyšší hodnotou).\n"
 
-#: ../bin/duplicity:1444
+#: ../bin/duplicity:1472
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
@@ -342,7 +342,7 @@ msgstr ""
 "RESTART: První svazek se nepodařilo nahrát před ukončením.\n"
 "         Restart není možný, záloha se spouští znovu od začátku."
 
-#: ../bin/duplicity:1450
+#: ../bin/duplicity:1478
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
@@ -351,7 +351,7 @@ msgstr ""
 "RESTART: Svazky %d až %d se nepodařilo nahrát před ukončením.\n"
 "         Restartuje se záloha u svazku %d."
 
-#: ../bin/duplicity:1457
+#: ../bin/duplicity:1485
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -364,7 +364,7 @@ msgstr ""
 "pak\n"
 "         restartuje zálohu od začátku."
 
-#: ../bin/duplicity:1478
+#: ../bin/duplicity:1506
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -380,35 +380,35 @@ msgstr ""
 "\n"
 "Viz https://bugs.launchpad.net/duplicity/+bug/931175\n"
 
-#: ../bin/duplicity:1501
+#: ../bin/duplicity:1529
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr "Získává se zamykací soubor %s"
 
-#: ../bin/duplicity:1559
+#: ../bin/duplicity:1587
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr "Poslední %s záloha zanechala částečnou sadu, restartuje se."
 
-#: ../bin/duplicity:1563
+#: ../bin/duplicity:1591
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr "Čištění předchozí částečné %s sady záloh, restartuje se."
 
-#: ../bin/duplicity:1575
+#: ../bin/duplicity:1603
 msgid "Last full backup date:"
 msgstr "Datum poslední úplné zálohy:"
 
-#: ../bin/duplicity:1577
+#: ../bin/duplicity:1605
 msgid "Last full backup date: none"
 msgstr "Datum poslední plné zálohy: žádná"
 
-#: ../bin/duplicity:1580
+#: ../bin/duplicity:1608
 msgid "Last full backup is too old, forcing full backup"
 msgstr ""
 "Poslední plná záloha je příliš stará, vynucuje se pořízení plné zálohy"
 
-#: ../bin/duplicity:1629
+#: ../bin/duplicity:1657
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."
@@ -416,21 +416,21 @@ msgstr ""
 "Při použití symetrického šifrování je třeba, aby podpisovací heslová fráze "
 "byla stejná, jako ta šifrovací."
 
-#: ../bin/duplicity:1698
+#: ../bin/duplicity:1726
 msgid "INT intercepted...exiting."
 msgstr "Zachyceno přerušení, ukončuje se."
 
-#: ../bin/duplicity:1706
+#: ../bin/duplicity:1734
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "Podrobnosti chyby GPG: %s"
 
-#: ../bin/duplicity:1716
+#: ../bin/duplicity:1744
 #, python-format
 msgid "User error detail: %s"
 msgstr "Podrobnosti uživateské chyby: %s"
 
-#: ../bin/duplicity:1726
+#: ../bin/duplicity:1754
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Podrobnosti chyby na podpůrné vrstvě (backend): %s"
@@ -572,8 +572,8 @@ msgstr ""
 #. --archive-dir <path>
 #: ../duplicity/commandline.py:290 ../duplicity/commandline.py:300
 #: ../duplicity/commandline.py:321 ../duplicity/commandline.py:395
-#: ../duplicity/commandline.py:413 ../duplicity/commandline.py:634
-#: ../duplicity/commandline.py:667 ../duplicity/commandline.py:866
+#: ../duplicity/commandline.py:413 ../duplicity/commandline.py:642
+#: ../duplicity/commandline.py:675 ../duplicity/commandline.py:874
 msgid "path"
 msgstr "popis umístění"
 
@@ -584,8 +584,8 @@ msgstr "popis umístění"
 #. Used in usage help to represent an ID for a GnuPG key. Example:
 #. --encrypt-key <gpg_key_id>
 #: ../duplicity/commandline.py:316 ../duplicity/commandline.py:323
-#: ../duplicity/commandline.py:419 ../duplicity/commandline.py:618
-#: ../duplicity/commandline.py:839
+#: ../duplicity/commandline.py:419 ../duplicity/commandline.py:626
+#: ../duplicity/commandline.py:847
 msgid "gpg-key-id"
 msgstr "identifikator_gpg_klice"
 
@@ -594,7 +594,7 @@ msgstr "identifikator_gpg_klice"
 #. Example:
 #. --exclude <shell_pattern>
 #: ../duplicity/commandline.py:331 ../duplicity/commandline.py:444
-#: ../duplicity/commandline.py:889
+#: ../duplicity/commandline.py:897
 msgid "shell_pattern"
 msgstr "shellovy_vzor"
 
@@ -603,7 +603,7 @@ msgstr "shellovy_vzor"
 #: ../duplicity/commandline.py:337 ../duplicity/commandline.py:346
 #: ../duplicity/commandline.py:353 ../duplicity/commandline.py:446
 #: ../duplicity/commandline.py:453 ../duplicity/commandline.py:466
-#: ../duplicity/commandline.py:835
+#: ../duplicity/commandline.py:843
 msgid "filename"
 msgstr "soubor"
 
@@ -616,16 +616,16 @@ msgstr "r_egulární výraz"
 #. point in time, as described in the documentation. Example:
 #. duplicity remove-older-than time [options] target_url
 #: ../duplicity/commandline.py:364 ../duplicity/commandline.py:407
-#: ../duplicity/commandline.py:528 ../duplicity/commandline.py:921
+#: ../duplicity/commandline.py:533 ../duplicity/commandline.py:929
 msgid "time"
 msgstr "čas"
 
 #. Used in usage help. (Should be consistent with the "Options:"
 #. header.) Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:415 ../duplicity/commandline.py:508
-#: ../duplicity/commandline.py:531 ../duplicity/commandline.py:626
-#: ../duplicity/commandline.py:854
+#: ../duplicity/commandline.py:415 ../duplicity/commandline.py:513
+#: ../duplicity/commandline.py:536 ../duplicity/commandline.py:634
+#: ../duplicity/commandline.py:862
 msgid "options"
 msgstr "volby"
 
@@ -651,11 +651,11 @@ msgstr "popisovač souboru"
 #. something. Example:
 #. --num-retries <number>
 #: ../duplicity/commandline.py:471 ../duplicity/commandline.py:493
-#: ../duplicity/commandline.py:505 ../duplicity/commandline.py:514
-#: ../duplicity/commandline.py:558 ../duplicity/commandline.py:563
-#: ../duplicity/commandline.py:567 ../duplicity/commandline.py:586
-#: ../duplicity/commandline.py:592 ../duplicity/commandline.py:596
-#: ../duplicity/commandline.py:662 ../duplicity/commandline.py:849
+#: ../duplicity/commandline.py:510 ../duplicity/commandline.py:519
+#: ../duplicity/commandline.py:566 ../duplicity/commandline.py:571
+#: ../duplicity/commandline.py:575 ../duplicity/commandline.py:594
+#: ../duplicity/commandline.py:600 ../duplicity/commandline.py:604
+#: ../duplicity/commandline.py:670 ../duplicity/commandline.py:857
 msgid "number"
 msgstr "číslo"
 
@@ -664,29 +664,29 @@ msgstr "číslo"
 msgid "backup name"
 msgstr "název zálohy"
 
-#: ../duplicity/commandline.py:581
+#: ../duplicity/commandline.py:589
 msgid "policy"
 msgstr "zásada"
 
-#: ../duplicity/commandline.py:599
+#: ../duplicity/commandline.py:607
 msgid "Hot|Cool|Archive"
 msgstr ""
 
 #. noun
-#: ../duplicity/commandline.py:602 ../duplicity/commandline.py:605
-#: ../duplicity/commandline.py:820
+#: ../duplicity/commandline.py:610 ../duplicity/commandline.py:613
+#: ../duplicity/commandline.py:828
 msgid "command"
 msgstr "příkaz"
 
-#: ../duplicity/commandline.py:608
+#: ../duplicity/commandline.py:616
 msgid "pyrax|cloudfiles"
 msgstr "pyrax|cloudfiles"
 
-#: ../duplicity/commandline.py:629
+#: ../duplicity/commandline.py:637
 msgid "pem formatted bundle of certificate authorities"
 msgstr "balíček certifikátů cert. autorit ve formátu pem"
 
-#: ../duplicity/commandline.py:630
+#: ../duplicity/commandline.py:638
 msgid "path to a folder with certificate authority files"
 msgstr "popis umístění složky se soubory certifikačních autorit"
 
@@ -696,113 +696,113 @@ msgstr "popis umístění složky se soubory certifikačních autorit"
 #. --backend-retry-delay <seconds>
 #. Used in usage help. Example:
 #. --timeout <seconds>
-#: ../duplicity/commandline.py:639 ../duplicity/commandline.py:673
-#: ../duplicity/commandline.py:883
+#: ../duplicity/commandline.py:647 ../duplicity/commandline.py:681
+#: ../duplicity/commandline.py:891
 msgid "seconds"
 msgstr "sekund"
 
 #. abbreviation for "character" (noun)
-#: ../duplicity/commandline.py:645 ../duplicity/commandline.py:817
+#: ../duplicity/commandline.py:653 ../duplicity/commandline.py:825
 msgid "char"
 msgstr "znak"
 
-#: ../duplicity/commandline.py:783
+#: ../duplicity/commandline.py:791
 #, python-format
 msgid "Using archive dir: %s"
 msgstr "S použitím archivní složky: %s"
 
-#: ../duplicity/commandline.py:784
+#: ../duplicity/commandline.py:792
 #, python-format
 msgid "Using backup name: %s"
 msgstr "S použitím názvu zálohy: %s"
 
-#: ../duplicity/commandline.py:791
+#: ../duplicity/commandline.py:799
 #, python-format
 msgid "Command line error: %s"
 msgstr "Chyba na příkazovém řádku: %s"
 
-#: ../duplicity/commandline.py:792
+#: ../duplicity/commandline.py:800
 msgid "Enter 'duplicity --help' for help screen."
 msgstr "Pro nápovědu zadejte „duplicty --help“."
 
 #. Used in usage help to represent a Unix-style path name. Example:
 #. rsync://user[:password]@other_host[:port]//absolute_path
-#: ../duplicity/commandline.py:805
+#: ../duplicity/commandline.py:813
 msgid "absolute_path"
 msgstr "absolutni_popis_umisteni"
 
 #. Used in usage help. Example:
 #. tahoe://alias/some_dir
-#: ../duplicity/commandline.py:809
+#: ../duplicity/commandline.py:817
 msgid "alias"
 msgstr "alternativni_nazev"
 
 #. Used in help to represent a "bucket name" for Amazon Web
 #. Services' Simple Storage Service (S3). Example:
 #. s3://other.host/bucket_name[/prefix]
-#: ../duplicity/commandline.py:814
+#: ../duplicity/commandline.py:822
 msgid "bucket_name"
 msgstr "nazev_kontejneru"
 
 #. Used in usage help to represent the name of a container in
 #. Amazon Web Services' Cloudfront. Example:
 #. cf+http://container_name
-#: ../duplicity/commandline.py:825
+#: ../duplicity/commandline.py:833
 msgid "container_name"
 msgstr "název_kontejneru"
 
 #. noun
-#: ../duplicity/commandline.py:828
+#: ../duplicity/commandline.py:836
 msgid "count"
 msgstr "počet"
 
 #. Used in usage help to represent the name of a file directory
-#: ../duplicity/commandline.py:831
+#: ../duplicity/commandline.py:839
 msgid "directory"
 msgstr "složka"
 
 #. Used in usage help, e.g. to represent the name of a code
 #. module. Example:
 #. rsync://user[:password]@other.host[:port]::/module/some_dir
-#: ../duplicity/commandline.py:844
+#: ../duplicity/commandline.py:852
 msgid "module"
 msgstr "modul"
 
 #. Used in usage help to represent an internet hostname. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:858
+#: ../duplicity/commandline.py:866
 msgid "other.host"
 msgstr "druhy.stroj"
 
 #. Used in usage help. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:862
+#: ../duplicity/commandline.py:870
 msgid "password"
 msgstr "heslo"
 
 #. Used in usage help to represent a TCP port number. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:870
+#: ../duplicity/commandline.py:878
 msgid "port"
 msgstr "port"
 
 #. Used in usage help. This represents a string to be used as a
 #. prefix to names for backup files created by Duplicity. Example:
 #. s3://other.host/bucket_name[/prefix]
-#: ../duplicity/commandline.py:875
+#: ../duplicity/commandline.py:883
 msgid "prefix"
 msgstr "předpona"
 
 #. Used in usage help to represent a Unix-style path name. Example:
 #. rsync://user[:password]@other.host[:port]/relative_path
-#: ../duplicity/commandline.py:879
+#: ../duplicity/commandline.py:887
 msgid "relative_path"
 msgstr "relativni_popis_umisteni"
 
 #. Used in usage help to represent the name of a single file
 #. directory or a Unix-style path to a directory. Example:
 #. file:///some_dir
-#: ../duplicity/commandline.py:894
+#: ../duplicity/commandline.py:902
 msgid "some_dir"
 msgstr "nejaka_slozka"
 
@@ -810,14 +810,14 @@ msgstr "nejaka_slozka"
 #. directory or a Unix-style path to a directory where files will be
 #. coming FROM. Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:900
+#: ../duplicity/commandline.py:908
 msgid "source_dir"
 msgstr "zdrojová_složka"
 
 #. Used in usage help to represent a URL files will be coming
 #. FROM. Example:
 #. duplicity [restore] [options] source_url target_dir
-#: ../duplicity/commandline.py:905
+#: ../duplicity/commandline.py:913
 msgid "source_url"
 msgstr "zdrojova_url"
 
@@ -825,52 +825,52 @@ msgstr "zdrojova_url"
 #. directory or a Unix-style path to a directory. where files will be
 #. going TO. Example:
 #. duplicity [restore] [options] source_url target_dir
-#: ../duplicity/commandline.py:911
+#: ../duplicity/commandline.py:919
 msgid "target_dir"
 msgstr "cílová_složka"
 
 #. Used in usage help to represent a URL files will be going TO.
 #. Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:916
+#: ../duplicity/commandline.py:924
 msgid "target_url"
 msgstr "cilova_url"
 
 #. Used in usage help to represent a user name (i.e. login).
 #. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:926
+#: ../duplicity/commandline.py:934
 msgid "user"
 msgstr "uživatel"
 
 #. account id for b2. Example: b2://account_id@bucket/
-#: ../duplicity/commandline.py:929
+#: ../duplicity/commandline.py:937
 msgid "account_id"
 msgstr "identifikator_uctu"
 
 #. application_key for b2.
 #. Example: b2://account_id:application_key@bucket/
-#: ../duplicity/commandline.py:933
+#: ../duplicity/commandline.py:941
 msgid "application_key"
 msgstr "aplikacni_klic"
 
 #. Header in usage help
-#: ../duplicity/commandline.py:952
+#: ../duplicity/commandline.py:960
 msgid "Backends and their URL formats:"
 msgstr "Podpůrné vrstvy (backend) a formáty jejich URL adres:"
 
 #. Header in usage help
-#: ../duplicity/commandline.py:984
+#: ../duplicity/commandline.py:992
 msgid "Commands:"
 msgstr "Příkazy:"
 
-#: ../duplicity/commandline.py:1009
+#: ../duplicity/commandline.py:1017
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr "Zadaná složka archivu „%s“ neexistuje, nebo se nejedná o složku"
 
-#: ../duplicity/commandline.py:1018
+#: ../duplicity/commandline.py:1026
 #, python-format
 msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
@@ -880,7 +880,7 @@ msgstr ""
 "např. „AA0E73D2“.\n"
 "Namísto toho obdrženo „%s“."
 
-#: ../duplicity/commandline.py:1078
+#: ../duplicity/commandline.py:1086
 #, python-format
 msgid ""
 "Restore destination directory %s already exists.\n"
@@ -889,22 +889,22 @@ msgstr ""
 "Složka %s do které se má obnovit už existuje.\n"
 "Nebude přepsána."
 
-#: ../duplicity/commandline.py:1083
+#: ../duplicity/commandline.py:1091
 #, python-format
 msgid "Verify directory %s does not exist"
 msgstr "Ověřovací složka %s neexistuje"
 
-#: ../duplicity/commandline.py:1089
+#: ../duplicity/commandline.py:1097
 #, python-format
 msgid "Backup source directory %s does not exist."
 msgstr "Zdrojová složka zálohy %s neexistuje."
 
-#: ../duplicity/commandline.py:1120
+#: ../duplicity/commandline.py:1128
 #, python-format
 msgid "Command line warning: %s"
 msgstr "Varování příkazového řádku: %s"
 
-#: ../duplicity/commandline.py:1120
+#: ../duplicity/commandline.py:1128
 msgid ""
 "Selection options --exclude/--include\n"
 "currently work only when backing up,not restoring."
@@ -912,12 +912,12 @@ msgstr ""
 "Volby výběru --exclude/--include\n"
 "v tuto chvíli fungují pouze pro zálohování, ne při obnovování."
 
-#: ../duplicity/commandline.py:1156
+#: ../duplicity/commandline.py:1164
 #, python-format
 msgid "GPG binary is %s, version %s"
 msgstr "Spustitelný soubor GPG je %s, verze %s"
 
-#: ../duplicity/commandline.py:1183
+#: ../duplicity/commandline.py:1191
 #, python-format
 msgid ""
 "Bad URL '%s'.\n"
@@ -928,7 +928,7 @@ msgstr ""
 "Příklady URL řetězců jsou „scp://uzivatel@stroj.net:1234/popis_umisteni“ a\n"
 "\"file:///usr/local“. Další informace viz manuálová stránka."
 
-#: ../duplicity/commandline.py:1213
+#: ../duplicity/commandline.py:1221
 msgid "Main action: "
 msgstr "Hlavní akce: "
 
@@ -1015,12 +1015,12 @@ msgstr "vykonání úlohy dokončeno (úspěch: %s)"
 msgid "Patching %s"
 msgstr "Opravuje se %s"
 
-#: ../duplicity/patchdir.py:545
+#: ../duplicity/patchdir.py:551
 #, python-format
 msgid "Error '%s' patching %s"
 msgstr "Chyba „%s“ při opravování %s"
 
-#: ../duplicity/patchdir.py:620
+#: ../duplicity/patchdir.py:626
 #, python-format
 msgid "Writing %s of type %s"
 msgstr "Zápisování %s typu %s"
@@ -1475,7 +1475,7 @@ msgstr ""
 "MultiBackend: nepodařilo se smazat %s. Vyzkoušena všechna úložiště a na "
 "žádném se neuspělo"
 
-#: ../duplicity/backends/pydrivebackend.py:144
+#: ../duplicity/backends/pydrivebackend.py:145
 #, python-format
 msgid "PyDrive backend: multiple files called '%s'."
 msgstr "Podpůrná vrstva PyDrive: vícero souborů nazvaných „%s“."
@@ -1501,14 +1501,9 @@ msgid ""
 "For certificate verification with python 2.7.8 or earlier a cacert database\n"
 "file is needed in one of these locations: %s\n"
 "Hints:\n"
-"  Consult the man page, chapter 'SSL Certificate Verification'.\n"
-"  Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
+"Consult the man page, chapter 'SSL Certificate Verification'.\n"
+"Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
 msgstr ""
-"Pro ověřování certifikátů s python 2.7.8 a staršími je třeba souboru\n"
-"s databází certifikátů cert. autorit v jednom z těchto umístění: %s\n"
-"Rady:\n"
-"  Konzultujte manuálovou stránku, kapitolu „Ověřování SSL certifikátů“.\n"
-"  Zvažte použití voleb --ssl-cacert-file, --ssl-no-check-certificate ."
 
 #: ../duplicity/backends/webdavbackend.py:155
 #, python-format
@@ -1874,12 +1869,26 @@ msgid "Cleanup of temporary directory %s failed - this is probably a bug."
 msgstr ""
 "Čištění dočasné složky %s se nezdařilo – toto je nejspíš chyba v programu."
 
-#: ../duplicity/util.py:128
+#: ../duplicity/util.py:138
 #, python-format
 msgid "IGNORED_ERROR: Warning: ignoring error as requested: %s: %s"
 msgstr "IGNORED_ERROR: Varování: ignoruje se chyba, jak požadováno: %s: %s"
 
-#: ../duplicity/util.py:195
+#: ../duplicity/util.py:205
 #, python-format
 msgid "Releasing lockfile %s"
 msgstr "Uvolňování souboru zámku %s"
+
+#, python-format
+#~ msgid ""
+#~ "For certificate verification with python 2.7.8 or earlier a cacert database\n"
+#~ "file is needed in one of these locations: %s\n"
+#~ "Hints:\n"
+#~ "  Consult the man page, chapter 'SSL Certificate Verification'.\n"
+#~ "  Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
+#~ msgstr ""
+#~ "Pro ověřování certifikátů s python 2.7.8 a staršími je třeba souboru\n"
+#~ "s databází certifikátů cert. autorit v jednom z těchto umístění: %s\n"
+#~ "Rady:\n"
+#~ "  Konzultujte manuálovou stránku, kapitolu „Ověřování SSL certifikátů“.\n"
+#~ "  Zvažte použití voleb --ssl-cacert-file, --ssl-no-check-certificate ."
