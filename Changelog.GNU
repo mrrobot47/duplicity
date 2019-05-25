@@ -1,5 +1,12 @@
 2019-05-19  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Some more work on unadorned strings
+      - Fixed test_unadorned_string_literals to list all strings found
+      - Added bin/duplicity and bin/rdiffdir to list of files tested
+      - All unadorned strings have now been adorned
+
+2019-05-19  Kenneth Loafman  <kenneth@loafman.com>
+
     * Merged in lp:~mgorse/duplicity/0.8-series
       - Python 3 fixes to imapbackend.py
       - Fix bug 1828869: refresh CollectionsStatus after sync

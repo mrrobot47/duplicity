@@ -22,9 +22,9 @@ class TestExc(unittest.TestCase):
 
     def test_uexc(self):
 
-        e = Exception('test')
+        e = Exception(u'test')
         msg = duplicity.util.uexc(e)
-        self.assertEqual(msg, 'test')
+        self.assertEqual(msg, u'test')
 
         # Test for Bug #1770929
         # https://bugs.launchpad.net/duplicity/+bug/1770929
@@ -37,5 +37,5 @@ class TestExc(unittest.TestCase):
         self.assertEqual(msg, u'\u30c6\u30b9\u30c8')
 
 
-if __name__ == '__main__':
+if __name__ == u'__main__':
     unittest.main()

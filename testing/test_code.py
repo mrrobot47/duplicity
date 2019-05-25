@@ -18,7 +18,9 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
 import os
+import sys
 import subprocess
 import pytest
 import fnmatch
@@ -112,8 +114,6 @@ class CodeTest(DuplicityTestCase):
                          os.path.join(_top_dir, u'.eggs', u'*'),
                          os.path.join(_top_dir, u'docs', u'conf.py'),
                          # TODO Every file from here down needs to be fixed and the exclusion removed
-                         os.path.join(_top_dir, u'setup.py'),
-                         os.path.join(_top_dir, u'duplicity', u'compilec.py'),
                          ]
 
 
@@ -133,12 +133,24 @@ class CodeTest(DuplicityTestCase):
 
         excluded = multi_filter(matches, ignored_files) if ignored_files else []
         matches = list(set(matches) - set(excluded))
+        matches.extend([
+            os.path.join(_top_dir, u"bin", u"duplicity"),
+            os.path.join(_top_dir, u"bin", u"rdiffdir")
+            ])
 
+        do_assert = False
         for python_source_file in matches:
             # Check each of the relevant python sources for unadorned string literals
             unadorned_string_list = find_unadorned_strings.check_file_for_unadorned(python_source_file)
-            self.assertEqual([], unadorned_string_list,
-                             u"Found %s unadorned strings: \n %s" % (len(unadorned_string_list), unadorned_string_list))
+            if unadorned_string_list:
+                do_assert = True
+                print(u"Found {0:d} unadorned strings in {1:s}:".format(
+                    len(unadorned_string_list), python_source_file),
+                    file=sys.stderr)
+                for unadorned_string in unadorned_string_list:
+                    print(unadorned_string[1:], file=sys.stderr)
+
+        self.assertEqual(do_assert, False, u"Found unadorned strings.")
 
 
 if __name__ == u"__main__":

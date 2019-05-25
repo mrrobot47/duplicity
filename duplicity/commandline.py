@@ -502,9 +502,9 @@ def parse_cmdline_options(arglist):
                                                    old_fn_deprecation(s)))
 
     # Sync only required metadata
-    parser.add_option("--metadata-sync-mode",
-                      default="partial",
-                      choices=("full", "partial"))
+    parser.add_option(u"--metadata-sync-mode",
+                      default=u"partial",
+                      choices=(u"full", u"partial"))
 
     # Level of Redundancy in % for Par2 files
     parser.add_option(u"--par2-redundancy", type=u"int", metavar=_(u"number"))
@@ -581,9 +581,9 @@ def parse_cmdline_options(arglist):
     parser.add_option(u"--s3-use-server-side-encryption", action=u"store_true", dest=u"s3_use_sse")
 
     # Options to allow use of server side KMS encryption
-    parser.add_option("--s3-use-server-side-kms-encryption", action=u"store_true", dest="s3_use_sse_kms")
-    parser.add_option("--s3-kms-key-id", action=u"store", dest="s3_kms_key_id")
-    parser.add_option("--s3-kms-grant", action=u"store", dest="s3_kms_grant")
+    parser.add_option(u"--s3-use-server-side-kms-encryption", action=u"store_true", dest=u"s3_use_sse_kms")
+    parser.add_option(u"--s3-kms-key-id", action=u"store", dest=u"s3_kms_key_id")
+    parser.add_option(u"--s3-kms-grant", action=u"store", dest=u"s3_kms_grant")
 
     # Option to specify a Swift container storage policy.
     parser.add_option(u"--swift-storage-policy", type=u"string", metavar=_(u"policy"))

@@ -235,7 +235,7 @@ class ImapBackend(duplicity.backend.Backend):
             if (len(msg) == 1):
                 continue
             if sys.version_info.major >= 3:
-                headers = Parser(policy=default).parsestr(msg[1].decode(u"unicode-escape"))  # pylint: disable=unsubscriptable-object
+                headers = Parser(policy=default).parsestr(msg[1].decode(u"unicode-escape"))  # noqa  # pylint: disable=unsubscriptable-object
             else:
                 headers = Parser().parsestr(msg[1].decode(u"unicode-escape"))  # pylint: disable=unsubscriptable-object
             subj = headers[u"subject"]

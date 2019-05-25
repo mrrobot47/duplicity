@@ -226,7 +226,7 @@ class BotoBackend(duplicity.backend.Backend):
             storage_class = u'STANDARD_IA'
         elif globals.s3_use_onezone_ia:
             storage_class = u'ONEZONE_IA'
-        elif globals.s3_use_glacier and "manifest.gpg" not in remote_filename:
+        elif globals.s3_use_glacier and u"manifest.gpg" not in remote_filename:
             storage_class = u'GLACIER'
         else:
             storage_class = u'STANDARD'
@@ -239,17 +239,17 @@ class BotoBackend(duplicity.backend.Backend):
             }
         elif globals.s3_use_sse_kms:
             if globals.s3_kms_key_id is None:
-                raise FatalBackendException("S3 USE SSE KMS was requested, but key id not provided "
-                                            "require (--s3-kms-key-id)",
+                raise FatalBackendException(u"S3 USE SSE KMS was requested, but key id not provided "
+                                            u"require (--s3-kms-key-id)",
                                             code=log.ErrorCode.s3_kms_no_id)
             headers = {
-                'Content-Type': 'application/octet-stream',
-                'x-amz-storage-class': storage_class,
-                'x-amz-server-side-encryption': 'aws:kms',
-                'x-amz-server-side-encryption-aws-kms-key-id': globals.s3_kms_key_id
+                u'Content-Type': u'application/octet-stream',
+                u'x-amz-storage-class': storage_class,
+                u'x-amz-server-side-encryption': u'aws:kms',
+                u'x-amz-server-side-encryption-aws-kms-key-id': globals.s3_kms_key_id
             }
             if globals.s3_kms_grant is not None:
-                headers['x-amz-grant-full-control'] = globals.s3_kms_grant
+                headers[u'x-amz-grant-full-control'] = globals.s3_kms_grant
         else:
             headers = {
                 u'Content-Type': u'application/octet-stream',

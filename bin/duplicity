@@ -1139,7 +1139,7 @@ def sync_archive(col_stats):
     suffixes = [b".g", b".gpg", b".z", b".gz", b".part"]
 
     def is_needed(filename):
-        """Indicates if the metadata file should be synced.
+        u"""Indicates if the metadata file should be synced.
 
         In full sync mode, or if there's a collection misbehavior, all files
         are needed.

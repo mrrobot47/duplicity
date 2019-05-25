@@ -38,9 +38,9 @@ from duplicity import log
 # For documentation on the API, see
 # The previous Live SDK API required the use of opaque folder IDs to navigate paths, but the Microsoft Graph
 # API allows the use of parent/child/grandchild pathnames.
-# Old Live SDK API: https://docs.microsoft.com/en-us/previous-versions/office/developer/onedrive-live-sdk/dn659731(v%3doffice.15)
+# Old Live SDK API: https://docs.microsoft.com/en-us/previous-versions/office/developer/onedrive-live-sdk/dn659731(v%3doffice.15)  # noqa
 # Files API: https://docs.microsoft.com/en-us/graph/api/resources/onedrive?view=graph-rest-1.0
-# Large file upload API: https://docs.microsoft.com/en-us/onedrive/developer/rest-api/api/driveitem_createuploadsession?view=odsp-graph-online
+# Large file upload API: https://docs.microsoft.com/en-us/onedrive/developer/rest-api/api/driveitem_createuploadsession?view=odsp-graph-online  # noqa
 
 
 class OneDriveBackend(duplicity.backend.Backend):
@@ -61,14 +61,14 @@ class OneDriveBackend(duplicity.backend.Backend):
     # User.Read is needed for the /me request to see if the token works.
     # offline_access is necessary for duplicity to access onedrive without
     # the user being logged in right now.
-    OAUTH_SCOPE = [u'Files.Read', u'Files.ReadWrite', u'User.Read', u'offline_access' ]
+    OAUTH_SCOPE = [u'Files.Read', u'Files.ReadWrite', u'User.Read', u'offline_access']
 
     # OAUTHLIB_RELAX_TOKEN_SCOPE prevents the oauthlib from complaining about a mismatch between
     # the requested scope and the delivered scope. We need this because we don't get a refresh
     # token without asking for offline_access, but Microsoft Graph doesn't include offline_access
     # in its response (even though it does send a refresh_token).
 
-    os.environ['OAUTHLIB_RELAX_TOKEN_SCOPE'] = 'TRUE'
+    os.environ[u'OAUTHLIB_RELAX_TOKEN_SCOPE'] = u'TRUE'
 
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
@@ -90,7 +90,7 @@ class OneDriveBackend(duplicity.backend.Backend):
                 u'them and try again.\n' + str(e)))
 
         self.directory = parsed_url.path.lstrip(u'/')
-        self.directory_onedrive_path = 'me/drive/root:/%s/' % self.directory
+        self.directory_onedrive_path = u'me/drive/root:/%s/' % self.directory
         if self.directory == u"":
             raise BackendException((
                 u'You did not specify a path. '
@@ -195,7 +195,7 @@ class OneDriveBackend(duplicity.backend.Backend):
                     u'Malformed JSON: expected "value" member in %s' % (
                         responseJson)))
             accum += responseJson[u'value']
-            if '@odata.nextLink' in responseJson:
+            if u'@odata.nextLink' in responseJson:
                 next_url = responseJson[u'@odata.nextLink']
             else:
                 break
@@ -227,23 +227,23 @@ class OneDriveBackend(duplicity.backend.Backend):
                 log.Debug(u'Bytes available: %d' % available)
                 if source_size > available:
                     raise BackendException((
-                            u'Out of space: trying to store "%s" (%d bytes), but only '
-                            u'%d bytes available on OneDrive.' % (
-                                source_path.name, source_size,
-                                available)))
+                        u'Out of space: trying to store "%s" (%d bytes), but only '
+                        u'%d bytes available on OneDrive.' % (
+                            source_path.name, source_size,
+                            available)))
         log.Debug(u"Checked quota in %fs" % (time.time() - start))
 
         with source_path.open() as source_file:
             start = time.time()
-            url = self.API_URI + self.directory_onedrive_path + remote_filename + ':/createUploadSession'
+            url = self.API_URI + self.directory_onedrive_path + remote_filename + u':/createUploadSession'
 
             response = self.http_client.post(url)
             response.raise_for_status()
             response_json = json.loads(response.content)
             if u'uploadUrl' not in response_json:
                 raise BackendException((
-                        u'File "%s" cannot be uploaded: could not create upload session: %s' % (
-                    remote_filename, response.content)))
+                    u'File "%s" cannot be uploaded: could not create upload session: %s' % (
+                        remote_filename, response.content)))
             uploadUrl = response_json[u'uploadUrl']
 
             # https://docs.microsoft.com/en-us/onedrive/developer/rest-api/api/driveitem_createuploadsession?
