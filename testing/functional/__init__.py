@@ -145,9 +145,9 @@ class FunctionalTestCase(DuplicityTestCase):
 
         # if the command fails, we need to clear its output
         # so it will terminate cleanly.
-        lines = []
-        while child.isalive():
-            lines.append(child.readline())
+        child.expect_exact(pexpect.EOF)
+        lines = child.before.splitlines()
+        child.wait()
         return_val = child.exitstatus
 
         if fail:
