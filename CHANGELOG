@@ -435,6 +435,8 @@ New in v0.8.00 (2019/??/??)
   - Fixed test_unadorned_string_literals to list all strings found
   - Added bin/duplicity and bin/rdiffdir to list of files tested
   - All unadorned strings have now been adorned
+* Fix TestGlobToRegex.test_glob_to_regex for py3.6 and above
+  - see https://bugs.python.org/issue29995 for details
 
 
 New in v0.7.08 (2016/07/02)

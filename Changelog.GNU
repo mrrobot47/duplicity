@@ -1,4 +1,9 @@
-2019-05-19  Kenneth Loafman  <kenneth@loafman.com>
+2019-05-26  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix TestGlobToRegex.test_glob_to_regex for py3.6 and above
+      - see https://bugs.python.org/issue29995 for details
+
+2019-05-25  Kenneth Loafman  <kenneth@loafman.com>
 
     * Some more work on unadorned strings
       - Fixed test_unadorned_string_literals to list all strings found

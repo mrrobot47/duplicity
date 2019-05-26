@@ -21,6 +21,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+import sys
 import unittest
 
 from duplicity.globmatch import *
@@ -82,8 +83,15 @@ class TestGlobToRegex(UnitTestCase):
         self.assertEqual(glob_to_regex(u".e?ll**o"), u"\\.e[^/]ll.*o")
         self.assertEqual(glob_to_regex(u"[abc]el[^de][!fg]h"),
                          u"[abc]el[^de][^fg]h")
-        self.assertEqual(glob_to_regex(u"/usr/*/bin/"),
-                         u"\\/usr\\/[^/]*\\/bin\\/")
+
+        # see https://bugs.python.org/issue29995 for details
+        if sys.version_info[:2] >= (3, 6):
+            self.assertEqual(glob_to_regex(u"/usr/*/bin/"),
+                             u"/usr/[^/]*/bin/")
+        else:
+            self.assertEqual(glob_to_regex(u"/usr/*/bin/"),
+                             u"\/usr\/[^/]*\/bin\/")
+
         self.assertEqual(glob_to_regex(u"[a.b/c]"), u"[a.b/c]")
         self.assertEqual(glob_to_regex(u"[a*b-c]e[!]]"), u"[a*b-c]e[^]]")
 
