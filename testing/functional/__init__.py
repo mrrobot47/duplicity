@@ -171,8 +171,12 @@ class FunctionalTestCase(DuplicityTestCase):
         # If a chain ends with time X and the next full chain begins at time X,
         # we may trigger an assert in collections.py.  If needed, sleep to
         # avoid such problems
-        if self.last_backup == int(time.time()):
-            time.sleep(1)
+        now = time.time()
+        if self.last_backup == int(now):
+            seconds_to_sleep = (self.last_backup + 1) - now
+            assert 0 <= seconds_to_sleep <= 1
+            time.sleep(seconds_to_sleep)
+            assert int(time.time()) != self.last_backup
 
         result = self.run_duplicity(options=options, **kwargs)
         self.last_backup = int(time.time())
