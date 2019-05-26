@@ -148,6 +148,7 @@ class FunctionalTestCase(DuplicityTestCase):
         child.expect_exact(pexpect.EOF)
         lines = child.before.splitlines()
         child.wait()
+        child.ptyproc.delayafterclose = 0.0
         return_val = child.exitstatus
 
         if fail:
