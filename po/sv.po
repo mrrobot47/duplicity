@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-05-25 14:21-0500\n"
-"PO-Revision-Date: 2019-02-23 12:58+0000\n"
+"POT-Creation-Date: 2019-05-26 10:24-0500\n"
+"PO-Revision-Date: 2019-05-26 09:31+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-05-26 05:52+0000\n"
+"X-Launchpad-Export-Date: 2019-05-27 05:55+0000\n"
 "X-Generator: Launchpad (build 18968)\n"
 
 #: ../bin/duplicity:128
@@ -1080,25 +1080,25 @@ msgstr ""
 
 #: ../duplicity/collections.py:434
 msgid "Chain start time: "
-msgstr ""
+msgstr "Kedjans starttid: "
 
 #: ../duplicity/collections.py:435
 msgid "Chain end time: "
-msgstr ""
+msgstr "Chain end time: "
 
 #: ../duplicity/collections.py:436
 #, python-format
 msgid "Number of contained backup sets: %d"
-msgstr ""
+msgstr "Antal inneslutna säkerhetskopieringsuppsättningar: %d"
 
 #: ../duplicity/collections.py:438
 #, python-format
 msgid "Total number of contained volumes: %d"
-msgstr ""
+msgstr "Totalt antal inneslutna volymer: %d"
 
 #: ../duplicity/collections.py:440 ../duplicity/collections.py:1236
 msgid "Type of backup set:"
-msgstr ""
+msgstr "Typ av säkerhetskopieringsuppsättning:"
 
 #: ../duplicity/collections.py:440 ../duplicity/collections.py:1236
 msgid "Time:"
@@ -1106,7 +1106,7 @@ msgstr "Tid:"
 
 #: ../duplicity/collections.py:440
 msgid "Num volumes:"
-msgstr ""
+msgstr "Num volymer:"
 
 #: ../duplicity/collections.py:444 ../duplicity/collections.py:1242
 msgid "Full"
@@ -1163,14 +1163,18 @@ msgstr "Inga säkerhetskopieringskedjor med aktiva signaturer hittades"
 msgid "Also found %d backup set not part of any chain,"
 msgid_plural "Also found %d backup sets not part of any chain,"
 msgstr[0] ""
+"Hittade också %d säkerhetskopieringsuppsättning som inte en del av någon "
+"kedja,"
 msgstr[1] ""
+"Hittade också %d säkerhetskopieringsuppsättningar som inte en del av någon "
+"kedja,"
 
 #: ../duplicity/collections.py:693
 #, python-format
 msgid "and %d incomplete backup set."
 msgid_plural "and %d incomplete backup sets."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "och %d ofullständig säkerhetskopieringsuppsättning."
+msgstr[1] "och %d ofullständiga säkerhetskopieringsuppsättningar."
 
 #. "cleanup" is a hard-coded command, so do not translate it
 #: ../duplicity/collections.py:698
@@ -1182,6 +1186,8 @@ msgstr ""
 #: ../duplicity/collections.py:701
 msgid "No orphaned or incomplete backup sets found."
 msgstr ""
+"Inga föräldralösa eller ofullständiga säkerhetskopieringsuppsättningar "
+"hittades."
 
 #: ../duplicity/collections.py:717
 #, python-format
@@ -1207,34 +1213,37 @@ msgstr ""
 #: ../duplicity/collections.py:803
 msgid "Warning, found the following local orphaned signature file:"
 msgid_plural "Warning, found the following local orphaned signature files:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Varning, hittade följande lokal föräldralös signaturfil:"
+msgstr[1] "Varning, hittade följande lokala föräldralösa signaturfiler:"
 
 #: ../duplicity/collections.py:812
 msgid "Warning, found the following remote orphaned signature file:"
 msgid_plural "Warning, found the following remote orphaned signature files:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Varning, hittade följande fjärrföräldralös signaturfil:"
+msgstr[1] "Varning, hittade följande fjärrföräldralösa signaturfiler:"
 
 #: ../duplicity/collections.py:821
 msgid "Warning, found signatures but no corresponding backup files"
 msgstr ""
+"Varning, hittade signaturer men inga motsvarande säkerhetskopieringsfiler"
 
 #: ../duplicity/collections.py:825
 msgid ""
 "Warning, found incomplete backup sets, probably left from aborted session"
 msgstr ""
+"Varning, hittade ofullständiga säkerhetskopieringsuppsättningar, förmodligen "
+"kvar från avbruten session"
 
 #: ../duplicity/collections.py:829
 msgid "Warning, found the following orphaned backup file:"
 msgid_plural "Warning, found the following orphaned backup files:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Varning, hittade följande föräldralös säkerhetskopieringsfil:"
+msgstr[1] "Varning, hittade följande föräldralösa säkerhetskopieringsfiler:"
 
 #: ../duplicity/collections.py:846
 #, python-format
 msgid "Extracting backup chains from list of files: %s"
-msgstr ""
+msgstr "Packa upp säkerhetskopieringskedjor från listan över filer: %s"
 
 #: ../duplicity/collections.py:857
 #, python-format
@@ -1249,7 +1258,7 @@ msgstr "Filen %s är inte del av en känd uppsättning; skapar ny uppsättning"
 #: ../duplicity/collections.py:865
 #, python-format
 msgid "Ignoring file (rejected by backup set) '%s'"
-msgstr ""
+msgstr "Ignorerar fil (avvisas av säkerhetskopieringsuppsättningar) \"%s\""
 
 #: ../duplicity/collections.py:881
 #, python-format
@@ -1259,7 +1268,7 @@ msgstr "Hittade säkerhetskopieringskedjan %s"
 #: ../duplicity/collections.py:886
 #, python-format
 msgid "Added set %s to pre-existing chain %s"
-msgstr ""
+msgstr "Lade till uppsättningen %s till den befintliga kedjan %s"
 
 #: ../duplicity/collections.py:890
 #, python-format
@@ -1272,20 +1281,22 @@ msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
 "starting at time %s."
 msgstr ""
+"Ingen signaturkedja för den begärda tiden. Använda äldsta tillgängliga "
+"kedjan, börjar vid tiden %s."
 
 #: ../duplicity/collections.py:1234
 #, python-format
 msgid "File: %s"
-msgstr ""
+msgstr "Fil: %s"
 
 #: ../duplicity/collections.py:1235
 #, python-format
 msgid "Total number of backup: %d"
-msgstr ""
+msgstr "Totalt antal säkerhetskopior: %d"
 
 #: ../duplicity/collections.py:1236
 msgid "Type of file change:"
-msgstr ""
+msgstr "Typ av filändring:"
 
 #: ../duplicity/robust.py:64
 #, python-format
@@ -1295,17 +1306,17 @@ msgstr "Fel vid listning av katalogen %s"
 #: ../duplicity/diffdir.py:117 ../duplicity/diffdir.py:419
 #, python-format
 msgid "Error %s getting delta for %s"
-msgstr ""
+msgstr "Fel %s får delta för %s"
 
 #: ../duplicity/diffdir.py:131
 #, python-format
 msgid "Getting delta of %s and %s"
-msgstr ""
+msgstr "Får delta av %s och %s"
 
 #: ../duplicity/diffdir.py:182
 #, python-format
 msgid "A %s"
-msgstr ""
+msgstr "A %s"
 
 #: ../duplicity/diffdir.py:189
 #, python-format
@@ -1455,12 +1466,12 @@ msgstr ""
 #: ../duplicity/backends/webdavbackend.py:84
 #, python-format
 msgid "Cacert database file '%s' is not readable."
-msgstr ""
+msgstr "Cacert-databasfilen %s är inte läsbar."
 
 #: ../duplicity/backends/webdavbackend.py:105
 msgid ""
 "Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
-msgstr ""
+msgstr "Flaggan \"--SSL-cacert-path\" stöds inte med python 2.7.8 och lägre."
 
 #: ../duplicity/backends/webdavbackend.py:109
 #, python-format
@@ -1475,22 +1486,22 @@ msgstr ""
 #: ../duplicity/backends/webdavbackend.py:155
 #, python-format
 msgid "Using WebDAV protocol %s"
-msgstr ""
+msgstr "Använda WebDAV-protokollet %s"
 
 #: ../duplicity/backends/webdavbackend.py:156
 #, python-format
 msgid "Using WebDAV host %s port %s"
-msgstr ""
+msgstr "Använda WebDAV-värden %s porten %s"
 
 #: ../duplicity/backends/webdavbackend.py:158
 #, python-format
 msgid "Using WebDAV directory %s"
-msgstr ""
+msgstr "Använd WebDAV-mappen %s"
 
 #: ../duplicity/backends/webdavbackend.py:189
 #, python-format
 msgid "WebDAV create connection on '%s'"
-msgstr ""
+msgstr "WebDAV skapa anslutning på \"%s\""
 
 #: ../duplicity/backends/webdavbackend.py:200
 #, python-format
@@ -1506,21 +1517,21 @@ msgstr ""
 #: ../duplicity/backends/webdavbackend.py:243
 #, python-format
 msgid "WebDAV data length: %s "
-msgstr ""
+msgstr "WebDAV-data längd: %s "
 
 #: ../duplicity/backends/webdavbackend.py:223
 #, python-format
 msgid "WebDAV response status %s with reason '%s'."
-msgstr ""
+msgstr "WebDAV-responsstatus %s med anledning \"%s\"."
 
 #: ../duplicity/backends/webdavbackend.py:229
 #, python-format
 msgid "WebDAV redirect to: %s "
-msgstr ""
+msgstr "WebDAV omdirigera till: %s "
 
 #: ../duplicity/backends/webdavbackend.py:231
 msgid "WebDAV redirected 10 times. Giving up."
-msgstr ""
+msgstr "WebDAV omdirigerades 10 gånger. Ger upp."
 
 #: ../duplicity/backends/webdavbackend.py:236
 msgid "WebDAV missing location header in redirect response."
@@ -1556,7 +1567,7 @@ msgstr ""
 #: ../duplicity/backends/webdavbackend.py:365
 #, python-format
 msgid "Creating missing directory %s"
-msgstr ""
+msgstr "Skapar mappen %s som saknas"
 
 #: ../duplicity/backends/webdavbackend.py:369
 #, python-format
@@ -1596,6 +1607,9 @@ msgid ""
 "Current hostname: %s\n"
 "Previous hostname: %s"
 msgstr ""
+"Fatalt fel: Värden för säkerhetskopieringskällan har ändrats.\n"
+"Aktuellt värdnamn: %s\n"
+"Tidigare värdnamn: %s"
 
 #: ../duplicity/manifest.py:104
 #, python-format
@@ -1604,6 +1618,9 @@ msgid ""
 "Current directory: %s\n"
 "Previous directory: %s"
 msgstr ""
+"Fatalt fel: Mappen för säkerhetskopieringskällan har ändrats.\n"
+"Aktuellt mapp: %s\n"
+"Tidigare mapp: %s"
 
 #: ../duplicity/manifest.py:114
 msgid ""
@@ -1612,6 +1629,10 @@ msgid ""
 "If this is not a mistake, use the --allow-source-mismatch switch to avoid "
 "seeing this message"
 msgstr ""
+"Avbryter eftersom du kan ha av misstag försökt att säkerhetskopiera två "
+"olika datauppsättningar till samma fjärrplats, eller använda samma "
+"arkivmapp. Om detta inte är ett misstag, använd växeln --allow-source-"
+"mismatch för att undvika att se det här meddelandet"
 
 #: ../duplicity/manifest.py:216
 #, python-format
@@ -1621,7 +1642,7 @@ msgstr ""
 #: ../duplicity/manifest.py:223
 #, python-format
 msgid "Found %s volumes in manifest"
-msgstr ""
+msgstr "Hittade % s volymer i manifest"
 
 #: ../duplicity/manifest.py:240
 #, python-format
@@ -1643,7 +1664,7 @@ msgstr ""
 
 #: ../duplicity/manifest.py:426
 msgid "Warning, found extra Volume identifier"
-msgstr ""
+msgstr "Varning, hittade extra volymidentifierare"
 
 #: ../duplicity/manifest.py:452
 msgid "Other is not VolumeInfo"
@@ -1651,7 +1672,7 @@ msgstr ""
 
 #: ../duplicity/manifest.py:455
 msgid "Volume numbers don't match"
-msgstr ""
+msgstr "Volymnummer matchar inte"
 
 #: ../duplicity/manifest.py:458
 msgid "start_indicies don't match"
@@ -1717,7 +1738,7 @@ msgstr "Symboliska länken %%s pekar till %s, förväntade %s"
 #: ../duplicity/path.py:419
 #, python-format
 msgid "Device file %%s has numbers %s, expected %s"
-msgstr ""
+msgstr "Enhetsfilen %%s har numrorna %s, förväntade %s"
 
 #: ../duplicity/path.py:601
 #, python-format
@@ -1746,7 +1767,7 @@ msgstr ""
 #: ../duplicity/gpginterface.py:705
 #, python-format
 msgid "GPG process %d terminated before wait()"
-msgstr ""
+msgstr "GPG-processen %d avslutades före wait()"
 
 #: ../duplicity/dup_time.py:62
 #, python-format
@@ -1801,22 +1822,24 @@ msgstr ""
 #: ../duplicity/tempdir.py:255
 #, python-format
 msgid "Removing still remembered temporary file %s"
-msgstr ""
+msgstr "Tar bort fortfarande ihågkommen temporär fil %s"
 
 #: ../duplicity/tempdir.py:258
 #, python-format
 msgid "Cleanup of temporary file %s failed"
-msgstr ""
+msgstr "Rensning av tillfälliga filen %s misslyckades"
 
 #: ../duplicity/tempdir.py:263
 #, python-format
 msgid "Cleanup of temporary directory %s failed - this is probably a bug."
 msgstr ""
+"Rensning av tillfälliga katalogen %s misslyckades - det här är förmodligen "
+"ett fel."
 
 #: ../duplicity/util.py:138
 #, python-format
 msgid "IGNORED_ERROR: Warning: ignoring error as requested: %s: %s"
-msgstr ""
+msgstr "IGNORED_ERROR: Warning: ignoring error as requested: %s: %s"
 
 #: ../duplicity/util.py:205
 #, python-format
