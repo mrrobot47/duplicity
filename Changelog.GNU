@@ -3,6 +3,7 @@
     * Merged in lp:~stragerneds/duplicity/duplicity
       - improve test backup speed
       - insure all test output is read
+    * Prep for 0.8.00 release
 
 2019-05-26  Kenneth Loafman  <kenneth@loafman.com>
 

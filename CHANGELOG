@@ -1,4 +1,4 @@
-New in v0.8.00 (2019/??/??)
+New in v0.8.00 (2019/05/29)
 ---------------------------
 * Merged in lp:~aaron-whitehouse/duplicity/remove-python26
   - Remove Python 2.6 support references and tests.
