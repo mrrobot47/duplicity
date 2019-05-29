@@ -1,3 +1,9 @@
+2019-05-29  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~stragerneds/duplicity/duplicity
+      - improve test backup speed
+      - insure all test output is read
+
 2019-05-26  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix TestGlobToRegex.test_glob_to_regex for py3.6 and above
