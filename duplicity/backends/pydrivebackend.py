@@ -23,6 +23,7 @@ import os
 
 import duplicity.backend
 from duplicity import log
+from duplicity import util
 from duplicity.errors import BackendException
 
 
@@ -115,6 +116,10 @@ Exception: %s""" % str(e))
         self.id_cache = {}
 
     def file_by_name(self, filename):
+        from pydrive.files import ApiRequestError
+
+        filename = util.fsdecode(filename)  # PyDrive deals with unicode filenames
+
         if filename in self.id_cache:
             # It might since have been locally moved, renamed or deleted, so we
             # need to validate the entry.
@@ -164,20 +169,20 @@ Exception: %s""" % str(e))
         drive_file = self.file_by_name(remote_filename)
         if drive_file is None:
             # No existing file, make a new one
-            drive_file = self.drive.CreateFile({u'title': remote_filename,
+            drive_file = self.drive.CreateFile({u'title': util.fsdecode(remote_filename),
                                                 u'parents': [{u"kind": u"drive#fileLink",
                                                              u"id": self.folder}]})
-            log.Info(u"PyDrive backend: creating new file '%s'" % (remote_filename,))
+            log.Info(u"PyDrive backend: creating new file '%s'" % (util.fsdecode(remote_filename),))
         else:
             log.Info(u"PyDrive backend: replacing existing file '%s' with id '%s'" % (
-                remote_filename, drive_file[u'id']))
-        drive_file.SetContentFile(source_path.name)
+                util.fsdecode(remote_filename), drive_file[u'id']))
+        drive_file.SetContentFile(util.fsdecode(source_path.name))
         drive_file.Upload()
         self.id_cache[remote_filename] = drive_file[u'id']
 
     def _get(self, remote_filename, local_path):
         drive_file = self.file_by_name(remote_filename)
-        drive_file.GetContentFile(local_path.name)
+        drive_file.GetContentFile(util.fsdecode(local_path.name))
 
     def _list(self):
         drive_files = self.drive.ListFile({
@@ -198,7 +203,7 @@ Exception: %s""" % str(e))
         if file_id != u'':
             self.drive.auth.service.files().delete(fileId=file_id).execute()
         else:
-            log.Warn(u"File '%s' does not exist while trying to delete it" % (filename,))
+            log.Warn(u"File '%s' does not exist while trying to delete it" % (util.fsdecode(filename),))
 
     def _query(self, filename):
         drive_file = self.file_by_name(filename)
@@ -209,6 +214,7 @@ Exception: %s""" % str(e))
         return {u'size': size}
 
     def _error_code(self, operation, error):
+        from pydrive.files import ApiRequestError, FileNotUploadedError
         if isinstance(error, FileNotUploadedError):
             return log.ErrorCode.backend_not_found
         elif isinstance(error, ApiRequestError):

@@ -1,5 +1,10 @@
 2019-05-29  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Merged in lp:~mterry/duplicity/gio-pydrive-fsdecode
+      - Fix gio and pydrive backends to use fsdecode
+
+2019-05-29  Kenneth Loafman  <kenneth@loafman.com>
+
     * Merged in lp:~stragerneds/duplicity/duplicity
       - improve test backup speed
       - insure all test output is read
