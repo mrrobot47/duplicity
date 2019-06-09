@@ -3,6 +3,7 @@
 fasteners
 future
 mock
+python-gettext
 requests
 urllib3
 
