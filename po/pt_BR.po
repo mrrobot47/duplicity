@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-05-26 10:24-0500\n"
+"POT-Creation-Date: 2019-06-09 12:05-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2019-05-27 05:55+0000\n"
-"X-Generator: Launchpad (build 18968)\n"
+"X-Launchpad-Export-Date: 2019-06-10 04:51+0000\n"
+"X-Generator: Launchpad (build 18978)\n"
 
 #: ../bin/duplicity:128
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -1458,7 +1458,7 @@ msgid ""
 "succeeded"
 msgstr ""
 
-#: ../duplicity/backends/pydrivebackend.py:145
+#: ../duplicity/backends/pydrivebackend.py:150
 #, python-format
 msgid "PyDrive backend: multiple files called '%s'."
 msgstr ""
