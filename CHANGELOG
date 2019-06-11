@@ -1,7 +1,9 @@
-New in v0.8.00 (2019/0?/??)
+New in v0.8.01 (2019/0?/??)
 ---------------------------
 * Merged in lp:~mterry/duplicity/gio-pydrive-fsdecode
   - Fix gio and pydrive backends to use fsdecode
+* Merged in lp:~mterry/duplicity/uexc-string
+  - The return type of util.uexc should always be a string.
 
 
 New in v0.8.00 (2019/05/29)

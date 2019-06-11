@@ -1,3 +1,8 @@
+2019-06-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mterry/duplicity/uexc-string
+      - The return type of util.uexc should always be a string.
+
 2019-05-29  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~mterry/duplicity/gio-pydrive-fsdecode
