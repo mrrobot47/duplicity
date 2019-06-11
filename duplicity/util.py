@@ -119,7 +119,7 @@ def uexc(e):
             # Encoded, likely in filesystem encoding
             return fsdecode(m)
     else:
-        return None
+        return u''
 
 
 def maybe_ignore_errors(fn):
