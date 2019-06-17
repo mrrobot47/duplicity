@@ -1556,8 +1556,8 @@ def do_backup(action):
 
     # get current collection status
     col_stats = dup_collections.CollectionsStatus(globals.backend,
-                                              globals.archive_dir_path,
-                                              action).set_values()
+                                                  globals.archive_dir_path,
+                                                  action).set_values()
 
     # check archive synch with remote, fix if needed
     if action not in [u"collection-status", u"replicate"]:
@@ -1591,8 +1591,8 @@ def do_backup(action):
                     log.Notice(_(u"Cleaning up previous partial %s backup set, restarting." % action))
                     last_backup.delete()
                     col_stats = dup_collections.CollectionsStatus(globals.backend,
-                                                              globals.archive_dir_path,
-                                                              action).set_values()
+                                                                  globals.archive_dir_path,
+                                                                  action).set_values()
                     continue
             break
         break
