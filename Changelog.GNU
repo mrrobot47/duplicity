@@ -8,6 +8,8 @@
         import fail is "from future import standard_library"
     * Fixed bug #1831178 sequence item 0: expected str instance, int found
       - Simply converted int to str when making list
+    * Merged in lp:~kaffeekiffer/duplicity/azure-python3-fix
+      - Use util.fsencode to encode file string
 
 2019-06-11  Kenneth Loafman  <kenneth@loafman.com>
 

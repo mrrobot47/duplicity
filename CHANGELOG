@@ -12,6 +12,8 @@ New in v0.8.01 (2019/0?/??)
     import fail is "from future import standard_library"
 * Fixed bug #1831178 sequence item 0: expected str instance, int found
   - Simply converted int to str when making list
+* Merged in lp:~kaffeekiffer/duplicity/azure-python3-fix
+  - Use util.fsencode to encode file string
 
 
 New in v0.8.00 (2019/05/29)
