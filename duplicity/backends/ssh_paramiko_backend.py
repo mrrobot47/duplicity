@@ -102,7 +102,7 @@ class SSHParamikoBackend(duplicity.backend.Backend):
             """
             def missing_host_key(self, client, hostname, key):
                 fp = hexlify(key.get_fingerprint())
-                fingerprint = u':'.join(a + b for a, b in list(zip(fp[::2], fp[1::2])))
+                fingerprint = u':'.join(str(a + b) for a, b in list(zip(fp[::2], fp[1::2])))
                 question = u"""The authenticity of host '%s' can't be established.
 %s key fingerprint is %s.
 Are you sure you want to continue connecting (yes/no)? """ % (hostname,

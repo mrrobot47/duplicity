@@ -4,8 +4,10 @@
       - Rename collections.py to dup_collections.py
       - Remove all "from future.utils import old_div"
       - Replace old_div() with "//" (in py27 for a while).
-      - All tests run for py3, unit tests run for py3.  The new
+      - All tests run for py3, unit tests run for py2.  The new
         import fail is "from future import standard_library"
+    * Fixed bug #1831178 sequence item 0: expected str instance, int found
+      - Simply converted int to str when making list
 
 2019-06-11  Kenneth Loafman  <kenneth@loafman.com>
 
