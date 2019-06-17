@@ -170,7 +170,7 @@ class FunctionalTestCase(DuplicityTestCase):
         before_files = self.get_backend_files()
 
         # If a chain ends with time X and the next full chain begins at time X,
-        # we may trigger an assert in collections.py.  If needed, sleep to
+        # we may trigger an assert in dup_collections.py.  If needed, sleep to
         # avoid such problems
         now = time.time()
         if self.last_backup == int(now):

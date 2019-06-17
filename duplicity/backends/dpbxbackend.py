@@ -31,7 +31,6 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import input
 from builtins import str
-from past.utils import old_div
 import io
 import os
 import re
@@ -348,7 +347,7 @@ Exception: %s""" % str(e))
                     # reupload
                     log.Info(u'dpbx: sleeping a bit before chunk retry')
                     time.sleep(30)
-                    current_chunk_size = old_div(DPBX_UPLOAD_CHUNK_SIZE, 5)
+                    current_chunk_size = DPBX_UPLOAD_CHUNK_SIZE // 5
                     requested_offset = None
                     continue
 

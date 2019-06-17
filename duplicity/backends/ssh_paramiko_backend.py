@@ -27,7 +27,6 @@ from __future__ import division
 from builtins import oct
 from builtins import input
 from builtins import zip
-from past.utils import old_div
 import re
 import string
 import os
@@ -246,7 +245,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                 self.config[u'user'],
                 self.config[u'hostname'],
                 self.config[u'port'], e))
-        self.client.get_transport().set_keepalive((int)(old_div(globals.timeout, 2)))
+        self.client.get_transport().set_keepalive((int)(globals.timeout // 2))
 
         self.scheme = duplicity.backend.strip_prefix(parsed_url.scheme,
                                                      u'paramiko')

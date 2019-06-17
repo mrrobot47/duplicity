@@ -34,7 +34,6 @@ from builtins import map
 from builtins import next
 from builtins import str
 from builtins import range
-from past.utils import old_div
 from builtins import object
 from future.builtins import map
 
@@ -766,5 +765,5 @@ def get_block_size(file_len):
         return 512  # set minimum of 512 bytes
     else:
         # Split file into about 2000 pieces, rounding to 512
-        file_blocksize = int((old_div(file_len, (2000 * 512))) * 512)
+        file_blocksize = int((file_len // (2000 * 512))) * 512
         return min(file_blocksize, globals.max_blocksize)

@@ -49,9 +49,9 @@ import fasteners
 
 from datetime import datetime
 from duplicity import asyncscheduler
-from duplicity import collections
 from duplicity import commandline
 from duplicity import diffdir
+from duplicity import dup_collections
 from duplicity import dup_temp
 from duplicity import dup_time
 from duplicity import file_naming
@@ -972,8 +972,8 @@ def remove_old(col_stats):
     if globals.remove_all_inc_of_but_n_full_mode:
         # ignore chains without incremental backups:
         chainlist = list(x for x in chainlist if
-                         (isinstance(x, collections.SignatureChain) and x.inclist) or
-                         (isinstance(x, collections.BackupChain) and x.incset_list))
+                         (isinstance(x, dup_collections.SignatureChain) and x.inclist) or
+                         (isinstance(x, dup_collections.BackupChain) and x.incset_list))
 
     if not chainlist:
         log.Notice(_(u"No old backup sets found, nothing deleted."))
@@ -990,12 +990,12 @@ def remove_old(col_stats):
             # if remove_all_inc_of_but_n_full_mode mode, remove only
             # incrementals one and not full
             if globals.remove_all_inc_of_but_n_full_mode:
-                if isinstance(chain, collections.SignatureChain):
+                if isinstance(chain, dup_collections.SignatureChain):
                     chain_desc = _(u"Deleting any incremental signature chain rooted at %s")
                 else:
                     chain_desc = _(u"Deleting any incremental backup chain rooted at %s")
             else:
-                if isinstance(chain, collections.SignatureChain):
+                if isinstance(chain, dup_collections.SignatureChain):
                     chain_desc = _(u"Deleting complete signature chain %s")
                 else:
                     chain_desc = _(u"Deleting complete backup chain %s")
@@ -1020,8 +1020,8 @@ def replicate():
     """
     action = u"replicate"
     time = globals.restore_time or dup_time.curtime
-    src_stats = collections.CollectionsStatus(globals.src_backend, None, action).set_values(sig_chain_warning=None)
-    tgt_stats = collections.CollectionsStatus(globals.backend, None, action).set_values(sig_chain_warning=None)
+    src_stats = dup_collections.CollectionsStatus(globals.src_backend, None, action).set_values(sig_chain_warning=None)
+    tgt_stats = dup_collections.CollectionsStatus(globals.backend, None, action).set_values(sig_chain_warning=None)
 
     src_list = globals.src_backend.list()
     tgt_list = globals.backend.list()
@@ -1153,7 +1153,7 @@ def sync_archive(col_stats):
         try:
             target_chain = col_stats.get_backup_chain_at_time(
                 globals.restore_time or dup_time.curtime)
-        except collections.CollectionsError:
+        except dup_collections.CollectionsError:
             # With zero or multiple chains at this time, do a full sync
             return True
         if parsed.start_time is None and parsed.end_time is None:
@@ -1555,7 +1555,7 @@ def do_backup(action):
     check_resources(action)
 
     # get current collection status
-    col_stats = collections.CollectionsStatus(globals.backend,
+    col_stats = dup_collections.CollectionsStatus(globals.backend,
                                               globals.archive_dir_path,
                                               action).set_values()
 
@@ -1590,7 +1590,7 @@ def do_backup(action):
                     # remove last partial backup and get new collection status
                     log.Notice(_(u"Cleaning up previous partial %s backup set, restarting." % action))
                     last_backup.delete()
-                    col_stats = collections.CollectionsStatus(globals.backend,
+                    col_stats = dup_collections.CollectionsStatus(globals.backend,
                                                               globals.archive_dir_path,
                                                               action).set_values()
                     continue

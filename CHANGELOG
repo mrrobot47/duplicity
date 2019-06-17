@@ -4,6 +4,12 @@ New in v0.8.01 (2019/0?/??)
   - Fix gio and pydrive backends to use fsdecode
 * Merged in lp:~mterry/duplicity/uexc-string
   - The return type of util.uexc should always be a string.
+* Fix some import conflicts with the "past" module
+  - Rename collections.py to dup_collections.py
+  - Remove all "from future.utils import old_div"
+  - Replace old_div() with "//" (in py27 for a while).
+  - All tests run for py3, unit tests run for py3.  The new
+    import fail is "from future import standard_library"
 
 
 New in v0.8.00 (2019/05/29)
@@ -11,7 +17,7 @@ New in v0.8.00 (2019/05/29)
 * Merged in lp:~aaron-whitehouse/duplicity/remove-python26
   - Remove Python 2.6 support references and tests.
 * Fixed bug #1600692 with patch from Wolfgang Rohdewald
-  - Allow symlink to have optional trailing slash during verify.
+  - allow symlink to have optional trailing slash during verify.
 * Merged in lp:~aaron-whitehouse/duplicity/07-fix_deja_dup_error_on_locked_files
   - Revert log.Error to log.Warn, as it was prior to the merge in rev 1224,
     as this was affecting other applications (e.g. deja dup; Bug #1605939).

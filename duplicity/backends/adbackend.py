@@ -22,7 +22,6 @@
 from __future__ import print_function
 from __future__ import division
 from builtins import input
-from past.utils import old_div
 import os.path
 import json
 import sys
@@ -322,7 +321,7 @@ class ADBackend(duplicity.backend.Backend):
                      u'waiting for %d seconds to see if Amazon Drive finished the '
                      u'upload anyway' % (remote_filename, response.status_code,
                                          globals.timeout))
-            tries = old_div(globals.timeout, 15)
+            tries = globals.timeout // 15
             while tries >= 0:
                 tries -= 1
                 time.sleep(15)
