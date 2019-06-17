@@ -26,6 +26,7 @@ import duplicity.backend
 from duplicity import globals
 from duplicity import log
 from duplicity.errors import BackendException
+from duplicity.util import fsdecode
 
 
 class AzureBackend(duplicity.backend.Backend):
@@ -136,7 +137,7 @@ Exception: %s""" % str(e))
 
     def _get(self, remote_filename, local_path):
         # https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#download-blobs
-        self.blob_service.get_blob_to_path(self.container, remote_filename, local_path.name)
+        self.blob_service.get_blob_to_path(self.container, fsdecode(remote_filename), local_path.name)
 
     def _list(self):
         # https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#list-the-blobs-in-a-container
