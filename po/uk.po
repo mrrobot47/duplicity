@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-06-09 12:05-0500\n"
+"POT-Creation-Date: 2019-06-17 09:44-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2019-06-10 04:51+0000\n"
-"X-Generator: Launchpad (build 18978)\n"
+"X-Launchpad-Export-Date: 2019-06-18 05:51+0000\n"
+"X-Generator: Launchpad (build 18981)\n"
 
 #: ../bin/duplicity:128
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -451,92 +451,329 @@ msgstr "Помилка відкривання файлу \"%s\""
 msgid "File %s already exists, will not overwrite."
 msgstr "Файл %s вже існує, його не буде перезаписано."
 
-#: ../duplicity/selection.py:121
+#: ../duplicity/asyncscheduler.py:71
 #, python-format
-msgid "Skipping socket %s"
-msgstr "Пропуск сокету %s"
+msgid "instantiating at concurrency %d"
+msgstr "паралельне створення %d"
 
-#: ../duplicity/selection.py:125
+#: ../duplicity/asyncscheduler.py:98
+msgid "inserting barrier"
+msgstr "вставка бар’єру"
+
+#: ../duplicity/asyncscheduler.py:147
+msgid "running task synchronously (asynchronicity disabled)"
+msgstr "виконання завдання синхронно (асинхронність вимкнено)"
+
+#: ../duplicity/asyncscheduler.py:153
+msgid "scheduling task for asynchronous execution"
+msgstr "планування завдання для асинхронного виконання"
+
+#: ../duplicity/asyncscheduler.py:182
+msgid "task completed successfully"
+msgstr "завдання успішно закінчено"
+
+#: ../duplicity/asyncscheduler.py:193
+msgid ""
+"a previously scheduled task has failed; propagating the result immediately"
+msgstr ""
+"не вдалося виконати заплановане раніше завдання; виконується миттєве "
+"розповсюдження результату"
+
+#: ../duplicity/asyncscheduler.py:216 ../duplicity/asyncscheduler.py:237
 #, python-format
-msgid "Error initializing file %s"
-msgstr "Помилка ініціалізації файлу %s"
+msgid "active workers = %d"
+msgstr "активні обробники = %d"
 
-#: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:463
+#: ../duplicity/asyncscheduler.py:257
 #, python-format
-msgid "Error accessing possibly locked file %s"
-msgstr "Помилка доступу до можливо заблокованого файлу %s"
+msgid "task execution done (success: %s)"
+msgstr "закінчено виконання завдання (успіх: %s)"
 
-#: ../duplicity/selection.py:169
+#: ../duplicity/backend.py:107
 #, python-format
-msgid "Warning: base %s doesn't exist, continuing"
-msgstr "Увага: база %s не існує, виконується продовження"
+msgid "Import of %s %s"
+msgstr ""
 
-#: ../duplicity/selection.py:172 ../duplicity/selection.py:190
-#: ../duplicity/selection.py:193
+#: ../duplicity/backend.py:216
 #, python-format
-msgid "Selecting %s"
-msgstr "Вибір %s"
+msgid "Could not initialize backend: %s"
+msgstr "Не вдається ініціалізувати бекенд: %s"
 
-#: ../duplicity/selection.py:295
+#: ../duplicity/backend.py:380
+#, python-format
+msgid "Backtrace of previous error: %s"
+msgstr "Стек викликів попередньої помилки: %s"
+
+#: ../duplicity/backend.py:395
+#, python-format
+msgid "Giving up after %s attempts. %s: %s"
+msgstr ""
+
+#: ../duplicity/backend.py:399
+#, python-format
+msgid "Attempt %s failed. %s: %s"
+msgstr ""
+
+#: ../duplicity/backend.py:493
+#, python-format
+msgid "Reading results of '%s'"
+msgstr "Читання результату '%s'"
+
+#: ../duplicity/backend.py:519
+#, python-format
+msgid "Writing %s"
+msgstr "Записується %s"
+
+#: ../duplicity/backend.py:560
+#, python-format
+msgid "File %s not found locally after get from backend"
+msgstr ""
+
+#: ../duplicity/backends/giobackend.py:108
+#, python-format
+msgid "Connection failed, please check your password: %s"
+msgstr "Не вдалося під’єднатися, перевірте пароль: %s"
+
+#: ../duplicity/backends/multibackend.py:89
+#, python-format
+msgid "MultiBackend: Could not parse query string %s: %s "
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:98
+#, python-format
+msgid "MultiBackend: Invalid query string %s: more than one value for %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:103
+#, python-format
+msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:153
+#: ../duplicity/backends/multibackend.py:158
+#, python-format
+msgid "MultiBackend: illegal value for %s: %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:166
+#, python-format
+msgid "MultiBackend: Url %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:170
+#, python-format
+msgid "MultiBackend: Could not load config file %s: %s "
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:179
+#, python-format
+msgid "MultiBackend: use store %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:184
+#, python-format
+msgid "MultiBackend: set env %s = %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:197
+#, python-format
+msgid "Multibackend: register affinity for prefix %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:238
+#, python-format
+msgid "MultiBackend: _put: write to store #%s (%s)"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:251
 #, python-format
 msgid ""
-"Fatal Error: The file specification\n"
-"    %s\n"
-"cannot match any files in the base directory\n"
-"    %s\n"
-"Useful file specifications begin with the base directory or some\n"
-"pattern (such as '**') which matches the base directory."
+"MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
 msgstr ""
-"Фатальна помилка: Специфікація файлу\n"
-"    %s\n"
-"не може відповідати будь-яким файлам у базовому каталозі\n"
-"    %s\n"
-"Корисні специфікації файлу починаються з базового каталогу або\n"
-"маски (наприклад '**'), яка відповідає базовому каталогу."
 
-#: ../duplicity/selection.py:304
+#: ../duplicity/backends/multibackend.py:258
+#, python-format
+msgid "MultiBackend: failed to write %s. Aborting process."
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:265
 #, python-format
 msgid ""
-"Fatal Error while processing expression\n"
-"%s"
+"MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
 msgstr ""
-"Фатальна помилка при обробці виразу\n"
-"%s"
 
-#: ../duplicity/selection.py:313
+#: ../duplicity/backends/multibackend.py:284
+#, python-format
+msgid "MultiBackend: failed to get %s to %s from %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:287
 #, python-format
 msgid ""
-"Last selection expression:\n"
-"    %s\n"
-"only specifies that files be included.  Because the default is to\n"
-"include all files, the expression is redundant.  Exiting because this\n"
-"probably isn't what you meant."
+"MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
 msgstr ""
-"Вираз останнього виділення:\n"
-"    %s\n"
-"лише вказує на те, що файли буде включено. Оскільки\n"
-"типово включаються усі файли, отже вираз надлишковий.\n"
-"Виконання виходу, оскільки можливо, що ймовірно, це не те, що ви мали на "
-"увазі."
 
-#: ../duplicity/selection.py:369
+#: ../duplicity/backends/multibackend.py:296
 #, python-format
-msgid "Reading globbing filelist %s"
-msgstr "Читання підстановочного списку файлів %s"
+msgid "MultiBackend: list from %s: %s"
+msgstr ""
 
-#: ../duplicity/selection.py:402
+#: ../duplicity/backends/multibackend.py:302
 #, python-format
-msgid "Error compiling regular expression %s"
-msgstr "Помилка компілювання регулярного виразу %s"
+msgid "MultiBackend: combined list: %s"
+msgstr ""
 
-#: ../duplicity/selection.py:419
+#: ../duplicity/backends/multibackend.py:327
+#, python-format
+msgid "MultiBackend: failed to delete %s from %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:331
+#, python-format
 msgid ""
-"Warning: exclude-device-files is not the first selector.\n"
-"This may not be what you intended"
+"MultiBackend: failed to delete %s. Tried all backing stores and none "
+"succeeded"
 msgstr ""
-"Увага: exclude-device-files не є  першим виборщиком.\n"
-"можливо, це не те, що ви хотіли"
+
+#: ../duplicity/backends/pydrivebackend.py:150
+#, python-format
+msgid "PyDrive backend: multiple files called '%s'."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:66
+msgid "Missing socket or ssl python modules."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:84
+#, python-format
+msgid "Cacert database file '%s' is not readable."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:105
+msgid ""
+"Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:109
+#, python-format
+msgid ""
+"For certificate verification with python 2.7.8 or earlier a cacert database\n"
+"file is needed in one of these locations: %s\n"
+"Hints:\n"
+"Consult the man page, chapter 'SSL Certificate Verification'.\n"
+"Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:155
+#, python-format
+msgid "Using WebDAV protocol %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:156
+#, python-format
+msgid "Using WebDAV host %s port %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:158
+#, python-format
+msgid "Using WebDAV directory %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:189
+#, python-format
+msgid "WebDAV create connection on '%s'"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:200
+#, python-format
+msgid "WebDAV Unknown URI scheme: %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:219
+#, python-format
+msgid "WebDAV %s %s request with headers: %s "
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:220
+#: ../duplicity/backends/webdavbackend.py:243
+#, python-format
+msgid "WebDAV data length: %s "
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:223
+#, python-format
+msgid "WebDAV response status %s with reason '%s'."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:229
+#, python-format
+msgid "WebDAV redirect to: %s "
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:231
+msgid "WebDAV redirected 10 times. Giving up."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:236
+msgid "WebDAV missing location header in redirect response."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:241
+msgid "WebDAV retry request with authentification headers."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:242
+#, python-format
+msgid "WebDAV %s %s request2 with headers: %s "
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:246
+#, python-format
+msgid "WebDAV response2 status %s with reason '%s'."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:263
+msgid ""
+"python-kerberos needed to use kerberos                           "
+"authorization, falling back to basic auth."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:267
+#, python-format
+msgid ""
+"Kerberos authorization failed: %s.                          Falling back to "
+"basic auth."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:365
+#, python-format
+msgid "Creating missing directory %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:369
+#, python-format
+msgid "WebDAV MKCOL %s failed: %s %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:382
+#, python-format
+msgid "WebDAV path decoding and translation: %s -> %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:427
+#, python-format
+msgid "WebDAV GET Bad status code %s reason %s."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:449
+#, python-format
+msgid "WebDAV PUT Bad status code %s reason %s."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:469
+#, python-format
+msgid "WebDAV DEL Bad status code %s reason %s."
+msgstr ""
 
 #: ../duplicity/commandline.py:78
 #, python-format
@@ -933,109 +1170,46 @@ msgstr ""
 msgid "Main action: "
 msgstr "Основна дія: "
 
-#: ../duplicity/backend.py:107
+#: ../duplicity/diffdir.py:116 ../duplicity/diffdir.py:418
 #, python-format
-msgid "Import of %s %s"
-msgstr ""
+msgid "Error %s getting delta for %s"
+msgstr "Помилка %s при отриманні відмінностей для %s"
 
-#: ../duplicity/backend.py:216
+#: ../duplicity/diffdir.py:130
 #, python-format
-msgid "Could not initialize backend: %s"
-msgstr "Не вдається ініціалізувати бекенд: %s"
+msgid "Getting delta of %s and %s"
+msgstr "Отримання дельти %s та %s"
 
-#: ../duplicity/backend.py:380
+#: ../duplicity/diffdir.py:181
 #, python-format
-msgid "Backtrace of previous error: %s"
-msgstr "Стек викликів попередньої помилки: %s"
+msgid "A %s"
+msgstr "A %s"
 
-#: ../duplicity/backend.py:395
+#: ../duplicity/diffdir.py:188
 #, python-format
-msgid "Giving up after %s attempts. %s: %s"
-msgstr ""
+msgid "M %s"
+msgstr "M %s"
 
-#: ../duplicity/backend.py:399
+#: ../duplicity/diffdir.py:210
 #, python-format
-msgid "Attempt %s failed. %s: %s"
-msgstr ""
+msgid "Comparing %s and %s"
+msgstr "Порівняння %s та %s"
 
-#: ../duplicity/backend.py:493
+#: ../duplicity/diffdir.py:218
 #, python-format
-msgid "Reading results of '%s'"
-msgstr "Читання результату '%s'"
+msgid "D %s"
+msgstr "D %s"
 
-#: ../duplicity/backend.py:519
-#, python-format
-msgid "Writing %s"
-msgstr "Записується %s"
-
-#: ../duplicity/backend.py:560
-#, python-format
-msgid "File %s not found locally after get from backend"
-msgstr ""
-
-#: ../duplicity/asyncscheduler.py:71
-#, python-format
-msgid "instantiating at concurrency %d"
-msgstr "паралельне створення %d"
-
-#: ../duplicity/asyncscheduler.py:98
-msgid "inserting barrier"
-msgstr "вставка бар’єру"
-
-#: ../duplicity/asyncscheduler.py:147
-msgid "running task synchronously (asynchronicity disabled)"
-msgstr "виконання завдання синхронно (асинхронність вимкнено)"
-
-#: ../duplicity/asyncscheduler.py:153
-msgid "scheduling task for asynchronous execution"
-msgstr "планування завдання для асинхронного виконання"
-
-#: ../duplicity/asyncscheduler.py:182
-msgid "task completed successfully"
-msgstr "завдання успішно закінчено"
-
-#: ../duplicity/asyncscheduler.py:193
-msgid ""
-"a previously scheduled task has failed; propagating the result immediately"
-msgstr ""
-"не вдалося виконати заплановане раніше завдання; виконується миттєве "
-"розповсюдження результату"
-
-#: ../duplicity/asyncscheduler.py:216 ../duplicity/asyncscheduler.py:237
-#, python-format
-msgid "active workers = %d"
-msgstr "активні обробники = %d"
-
-#: ../duplicity/asyncscheduler.py:257
-#, python-format
-msgid "task execution done (success: %s)"
-msgstr "закінчено виконання завдання (успіх: %s)"
-
-#: ../duplicity/patchdir.py:85 ../duplicity/patchdir.py:90
-#, python-format
-msgid "Patching %s"
-msgstr "Внесення змін у %s"
-
-#: ../duplicity/patchdir.py:551
-#, python-format
-msgid "Error '%s' patching %s"
-msgstr ""
-
-#: ../duplicity/patchdir.py:626
-#, python-format
-msgid "Writing %s of type %s"
-msgstr "Запис %s типу %s"
-
-#: ../duplicity/collections.py:178 ../duplicity/collections.py:192
+#: ../duplicity/dup_collections.py:178 ../duplicity/dup_collections.py:192
 #, python-format
 msgid "BackupSet.delete: missing %s"
 msgstr "BackupSet.delete: відсутній %s"
 
-#: ../duplicity/collections.py:217
+#: ../duplicity/dup_collections.py:217
 msgid "Fatal Error: No manifests found for most recent backup"
 msgstr "Фатальна помилка: відсутні маніфести для недавньої резервної копії"
 
-#: ../duplicity/collections.py:226
+#: ../duplicity/dup_collections.py:226
 msgid ""
 "Fatal Error: Remote manifest does not match local one.  Either the remote "
 "backup set or the local archive directory has been corrupted."
@@ -1043,104 +1217,104 @@ msgstr ""
 "Фатальна помилка: Вилучений маніфест не відповідає локальному. Несправний "
 "віддалений набір резервного копіювання або тека локального архіву."
 
-#: ../duplicity/collections.py:234
+#: ../duplicity/dup_collections.py:234
 msgid "Fatal Error: Neither remote nor local manifest is readable."
 msgstr ""
 "Фатальна помилка: Немає доступу до читання віддаленого та локального "
 "маніфесту."
 
-#: ../duplicity/collections.py:245
+#: ../duplicity/dup_collections.py:245
 #, python-format
 msgid "Processing local manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/collections.py:257
+#: ../duplicity/dup_collections.py:257
 #, python-format
 msgid "Error processing remote manifest (%s): %s"
 msgstr ""
 
-#: ../duplicity/collections.py:260
+#: ../duplicity/dup_collections.py:260
 #, python-format
 msgid "Processing remote manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/collections.py:356
+#: ../duplicity/dup_collections.py:356
 msgid "Preferring Backupset over previous one!"
 msgstr "Перевага набору резервного копіювання замість попереднього!"
 
-#: ../duplicity/collections.py:359
+#: ../duplicity/dup_collections.py:359
 #, python-format
 msgid "Ignoring incremental Backupset (start_time: %s; needed: %s)"
 msgstr ""
 "Ігнорування інкрементального набору резервного копіювання (час_запуску: %s; "
 "необхідно: %s)"
 
-#: ../duplicity/collections.py:364
+#: ../duplicity/dup_collections.py:364
 #, python-format
 msgid "Added incremental Backupset (start_time: %s / end_time: %s)"
 msgstr "Додано покрокову резервну копію (час_початку: %s / час_кінця: %s)"
 
-#: ../duplicity/collections.py:434
+#: ../duplicity/dup_collections.py:434
 msgid "Chain start time: "
 msgstr "Ланцюжок почато: "
 
-#: ../duplicity/collections.py:435
+#: ../duplicity/dup_collections.py:435
 msgid "Chain end time: "
 msgstr "Ланцюжок закінчено: "
 
-#: ../duplicity/collections.py:436
+#: ../duplicity/dup_collections.py:436
 #, python-format
 msgid "Number of contained backup sets: %d"
 msgstr "Кількість  наборів резервного копіювання що містяться: %d"
 
-#: ../duplicity/collections.py:438
+#: ../duplicity/dup_collections.py:438
 #, python-format
 msgid "Total number of contained volumes: %d"
 msgstr "Загальне число томів що містяться: %d"
 
-#: ../duplicity/collections.py:440 ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:440 ../duplicity/dup_collections.py:1236
 msgid "Type of backup set:"
 msgstr "Тип резервної копії:"
 
-#: ../duplicity/collections.py:440 ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:440 ../duplicity/dup_collections.py:1236
 msgid "Time:"
 msgstr "Час:"
 
-#: ../duplicity/collections.py:440
+#: ../duplicity/dup_collections.py:440
 msgid "Num volumes:"
 msgstr "Число томів:"
 
-#: ../duplicity/collections.py:444 ../duplicity/collections.py:1242
+#: ../duplicity/dup_collections.py:444 ../duplicity/dup_collections.py:1242
 msgid "Full"
 msgstr "Повна"
 
-#: ../duplicity/collections.py:447 ../duplicity/collections.py:1244
+#: ../duplicity/dup_collections.py:447 ../duplicity/dup_collections.py:1244
 msgid "Incremental"
 msgstr "Покрокова"
 
-#: ../duplicity/collections.py:507
+#: ../duplicity/dup_collections.py:507
 msgid "local"
 msgstr "місцева"
 
-#: ../duplicity/collections.py:509
+#: ../duplicity/dup_collections.py:509
 msgid "remote"
 msgstr "віддалено"
 
-#: ../duplicity/collections.py:664
+#: ../duplicity/dup_collections.py:664
 msgid "Collection Status"
 msgstr "Стан збору"
 
-#: ../duplicity/collections.py:666
+#: ../duplicity/dup_collections.py:666
 #, python-format
 msgid "Connecting with backend: %s"
 msgstr "З’єднання з внутрішнім інтерфейсом: %s"
 
-#: ../duplicity/collections.py:668
+#: ../duplicity/dup_collections.py:668
 #, python-format
 msgid "Archive dir: %s"
 msgstr "Тека архіву: %s"
 
-#: ../duplicity/collections.py:671
+#: ../duplicity/dup_collections.py:671
 #, python-format
 msgid "Found %d secondary backup chain."
 msgid_plural "Found %d secondary backup chains."
@@ -1148,23 +1322,23 @@ msgstr[0] "Знайдено %d вторинний ланцюжок резерв�
 msgstr[1] "Знайдено %d вторинні ланцюжки резервних копій."
 msgstr[2] "Знайдено %d вторинних ланцюжків резервних копій."
 
-#: ../duplicity/collections.py:676
+#: ../duplicity/dup_collections.py:676
 #, python-format
 msgid "Secondary chain %d of %d:"
 msgstr "Вторинний ланцюжок %d з %d:"
 
-#: ../duplicity/collections.py:682
+#: ../duplicity/dup_collections.py:682
 msgid "Found primary backup chain with matching signature chain:"
 msgstr ""
 "Знайдено первинний ланцюжок резервного копіювання з відповідним ланцюжком "
 "підпису:"
 
-#: ../duplicity/collections.py:686
+#: ../duplicity/dup_collections.py:686
 msgid "No backup chains with active signatures found"
 msgstr ""
 "Відсутні ланцюжки резервного копіювання зі знайденими, залученими підписами"
 
-#: ../duplicity/collections.py:689
+#: ../duplicity/dup_collections.py:689
 #, python-format
 msgid "Also found %d backup set not part of any chain,"
 msgid_plural "Also found %d backup sets not part of any chain,"
@@ -1178,7 +1352,7 @@ msgstr[2] ""
 "Також знайдено %d наборів резервного копіювання, що не є частиною жодного "
 "ланцюжка,"
 
-#: ../duplicity/collections.py:693
+#: ../duplicity/dup_collections.py:693
 #, python-format
 msgid "and %d incomplete backup set."
 msgid_plural "and %d incomplete backup sets."
@@ -1187,17 +1361,17 @@ msgstr[1] "а також %d неповних набори резервного �
 msgstr[2] "а також %d неповних наборів резервного копіювання."
 
 #. "cleanup" is a hard-coded command, so do not translate it
-#: ../duplicity/collections.py:698
+#: ../duplicity/dup_collections.py:698
 msgid ""
 "These may be deleted by running duplicity with the \"cleanup\" command."
 msgstr ""
 "Це може бути вилучено за допомогою запуску duplicity з командою \"cleanup\"."
 
-#: ../duplicity/collections.py:701
+#: ../duplicity/dup_collections.py:701
 msgid "No orphaned or incomplete backup sets found."
 msgstr "Відсутні ізольовані або неповні набори резервного копіювання."
 
-#: ../duplicity/collections.py:717
+#: ../duplicity/dup_collections.py:717
 #, python-format
 msgid "%d file exists on backend"
 msgid_plural "%d files exist on backend"
@@ -1205,7 +1379,7 @@ msgstr[0] "%d файл існує у внутрішньому интерфейс
 msgstr[1] "%d файли існує у внутрішньому интерфейсі"
 msgstr[2] "%d файлів існує у внутрішньому интерфейсі"
 
-#: ../duplicity/collections.py:727
+#: ../duplicity/dup_collections.py:727
 #, python-format
 msgid "%d file exists in cache"
 msgid_plural "%d files exist in cache"
@@ -1213,135 +1387,146 @@ msgstr[0] "%d файл існує у тимчасових файлах"
 msgstr[1] "%d файли існує у тимчасових файлах"
 msgstr[2] "%d файлів існує у тимчасових файлах"
 
-#: ../duplicity/collections.py:780
+#: ../duplicity/dup_collections.py:780
 msgid ""
 "Warning, discarding last backup set, because of missing signature file."
 msgstr ""
 "Увага, відкликано останній набір резервного копіювання, у зв’язку з "
 "відсутністю файлу підпису."
 
-#: ../duplicity/collections.py:803
+#: ../duplicity/dup_collections.py:803
 msgid "Warning, found the following local orphaned signature file:"
 msgid_plural "Warning, found the following local orphaned signature files:"
 msgstr[0] "Увага, знайдено наступний локальний ізольований файл підпису:"
 msgstr[1] "Увага, знайдено наступні локальні ізольовані файли підписів:"
 msgstr[2] "Увага, знайдено наступні локальні ізольовані файли підписів:"
 
-#: ../duplicity/collections.py:812
+#: ../duplicity/dup_collections.py:812
 msgid "Warning, found the following remote orphaned signature file:"
 msgid_plural "Warning, found the following remote orphaned signature files:"
 msgstr[0] "Увага, знайдено наступний віддалений ізольований файл підпису:"
 msgstr[1] "Увага, знайдено наступні віддалені ізольовані файли підписів:"
 msgstr[2] "Увага, знайдено наступні віддалені ізольовані файли підписів:"
 
-#: ../duplicity/collections.py:821
+#: ../duplicity/dup_collections.py:821
 msgid "Warning, found signatures but no corresponding backup files"
 msgstr "Увага, знайдено підписи, які не відповідають файлам резервної копії"
 
-#: ../duplicity/collections.py:825
+#: ../duplicity/dup_collections.py:825
 msgid ""
 "Warning, found incomplete backup sets, probably left from aborted session"
 msgstr ""
 "Увага, знайдено незакінчені набори резервних копій, можливо вони залишилися "
 "від перерваного сеансу"
 
-#: ../duplicity/collections.py:829
+#: ../duplicity/dup_collections.py:829
 msgid "Warning, found the following orphaned backup file:"
 msgid_plural "Warning, found the following orphaned backup files:"
 msgstr[0] "Увага, знайдено наступний ізольований файл резервного копіювання:"
 msgstr[1] "Увага, знайдено наступні ізольовані файли резервного копіювання:"
 msgstr[2] "Увага, знайдено наступні ізольовані файли резервного копіювання:"
 
-#: ../duplicity/collections.py:846
+#: ../duplicity/dup_collections.py:846
 #, python-format
 msgid "Extracting backup chains from list of files: %s"
 msgstr "Витягнення ланцюжків резервного копіювання зі списку файлів: %s"
 
-#: ../duplicity/collections.py:857
+#: ../duplicity/dup_collections.py:857
 #, python-format
 msgid "File %s is part of known set"
 msgstr "Файл %s є частиною відомого набору"
 
-#: ../duplicity/collections.py:860
+#: ../duplicity/dup_collections.py:860
 #, python-format
 msgid "File %s is not part of a known set; creating new set"
 msgstr "Файл %s не є частиною відомого набору; створюється новий набір"
 
-#: ../duplicity/collections.py:865
+#: ../duplicity/dup_collections.py:865
 #, python-format
 msgid "Ignoring file (rejected by backup set) '%s'"
 msgstr "Ігнорування файлу (відхилено набором резервного копіювання) '%s'"
 
-#: ../duplicity/collections.py:881
+#: ../duplicity/dup_collections.py:881
 #, python-format
 msgid "Found backup chain %s"
 msgstr "Знайдено резервну копію %s"
 
-#: ../duplicity/collections.py:886
+#: ../duplicity/dup_collections.py:886
 #, python-format
 msgid "Added set %s to pre-existing chain %s"
 msgstr "Додавання набору %s для раніше існуючого ланцюжка %s"
 
-#: ../duplicity/collections.py:890
+#: ../duplicity/dup_collections.py:890
 #, python-format
 msgid "Found orphaned set %s"
 msgstr "Знайдено ізольований набір %s"
 
-#: ../duplicity/collections.py:1040
+#: ../duplicity/dup_collections.py:1040
 #, python-format
 msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
 "starting at time %s."
 msgstr ""
 
-#: ../duplicity/collections.py:1234
+#: ../duplicity/dup_collections.py:1234
 #, python-format
 msgid "File: %s"
 msgstr "Файл: %s"
 
-#: ../duplicity/collections.py:1235
+#: ../duplicity/dup_collections.py:1235
 #, python-format
 msgid "Total number of backup: %d"
 msgstr ""
 
-#: ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:1236
 msgid "Type of file change:"
 msgstr "Тип змінення файлу:"
 
-#: ../duplicity/robust.py:64
+#: ../duplicity/dup_time.py:62
 #, python-format
-msgid "Error listing directory %s"
-msgstr "Помилка переліку каталогу %s"
+msgid ""
+"Bad interval string \"%s\"\n"
+"\n"
+"Intervals are specified like 2Y (2 years) or 2h30m (2.5 hours).  The\n"
+"allowed special characters are s, m, h, D, W, M, and Y.  See the man\n"
+"page for more information."
+msgstr ""
+"Рядок з неприпустимим інтервалом \"%s\"\n"
+"\n"
+"Інтервали вказуються на подобі 2Y (2 роки) або 2h30m (2.5 години).\n"
+"Припустимі особливі символи s (с.), m (хв.), h (год.), D(Д.), W (Т.), M (М.) "
+"и Y (Р.).\n"
+"Зверніться до посібника користувача (man) для отримання додаткових "
+"відомостей."
 
-#: ../duplicity/diffdir.py:117 ../duplicity/diffdir.py:419
+#: ../duplicity/dup_time.py:68
 #, python-format
-msgid "Error %s getting delta for %s"
-msgstr "Помилка %s при отриманні відмінностей для %s"
+msgid ""
+"Bad time string \"%s\"\n"
+"\n"
+"The acceptible time strings are intervals (like \"3D64s\"), w3-datetime\n"
+"strings, like \"2002-04-26T04:22:01-07:00\" (strings like\n"
+"\"2002-04-26T04:22:01\" are also acceptable - duplicity will use the\n"
+"current time zone), or ordinary dates like 2/4/1997 or 2001-04-23\n"
+"(various combinations are acceptable, but the month always precedes\n"
+"the day)."
+msgstr ""
+"Рядок з неприпустимим часом \"%s\"\n"
+"\n"
+"Допускається вказування інтервалів часу (наприклад \"3D64s\"), рядка\n"
+"дати/часу формату w3, наприклад \"2002-04-26T04:22:01-07:00\" (рядка типу\n"
+"\"2002-04-26T04:22:01\" також припустимі - duplicity буде використовувати\n"
+"поточну часову зону) або звичайні дати, наприклад 2/4/1997 або 2001-04-23\n"
+"(припустимі різноманітні комбінації, але місяць завжди передує дню)."
 
-#: ../duplicity/diffdir.py:131
-#, python-format
-msgid "Getting delta of %s and %s"
-msgstr "Отримання дельти %s та %s"
+#: ../duplicity/gpginterface.py:238
+msgid "Threading not available -- zombie processes may appear"
+msgstr ""
 
-#: ../duplicity/diffdir.py:182
+#: ../duplicity/gpginterface.py:705
 #, python-format
-msgid "A %s"
-msgstr "A %s"
-
-#: ../duplicity/diffdir.py:189
-#, python-format
-msgid "M %s"
-msgstr "M %s"
-
-#: ../duplicity/diffdir.py:211
-#, python-format
-msgid "Comparing %s and %s"
-msgstr "Порівняння %s та %s"
-
-#: ../duplicity/diffdir.py:219
-#, python-format
-msgid "D %s"
-msgstr "D %s"
+msgid "GPG process %d terminated before wait()"
+msgstr ""
 
 #: ../duplicity/lazy.py:352
 #, python-format
@@ -1357,252 +1542,6 @@ msgstr "Помилка '%s' при обробці %s"
 #, python-format
 msgid "Skipping %s because of previous error"
 msgstr "Пропуск %s з-за попередньої помилки"
-
-#: ../duplicity/backends/giobackend.py:108
-#, python-format
-msgid "Connection failed, please check your password: %s"
-msgstr "Не вдалося під’єднатися, перевірте пароль: %s"
-
-#: ../duplicity/backends/multibackend.py:89
-#, python-format
-msgid "MultiBackend: Could not parse query string %s: %s "
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:98
-#, python-format
-msgid "MultiBackend: Invalid query string %s: more than one value for %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:103
-#, python-format
-msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:153
-#: ../duplicity/backends/multibackend.py:158
-#, python-format
-msgid "MultiBackend: illegal value for %s: %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:166
-#, python-format
-msgid "MultiBackend: Url %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:170
-#, python-format
-msgid "MultiBackend: Could not load config file %s: %s "
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:179
-#, python-format
-msgid "MultiBackend: use store %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:184
-#, python-format
-msgid "MultiBackend: set env %s = %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:197
-#, python-format
-msgid "Multibackend: register affinity for prefix %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:238
-#, python-format
-msgid "MultiBackend: _put: write to store #%s (%s)"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:251
-#, python-format
-msgid ""
-"MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:258
-#, python-format
-msgid "MultiBackend: failed to write %s. Aborting process."
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:265
-#, python-format
-msgid ""
-"MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:284
-#, python-format
-msgid "MultiBackend: failed to get %s to %s from %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:287
-#, python-format
-msgid ""
-"MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:296
-#, python-format
-msgid "MultiBackend: list from %s: %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:302
-#, python-format
-msgid "MultiBackend: combined list: %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:327
-#, python-format
-msgid "MultiBackend: failed to delete %s from %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:331
-#, python-format
-msgid ""
-"MultiBackend: failed to delete %s. Tried all backing stores and none "
-"succeeded"
-msgstr ""
-
-#: ../duplicity/backends/pydrivebackend.py:150
-#, python-format
-msgid "PyDrive backend: multiple files called '%s'."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:66
-msgid "Missing socket or ssl python modules."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:84
-#, python-format
-msgid "Cacert database file '%s' is not readable."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:105
-msgid ""
-"Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:109
-#, python-format
-msgid ""
-"For certificate verification with python 2.7.8 or earlier a cacert database\n"
-"file is needed in one of these locations: %s\n"
-"Hints:\n"
-"Consult the man page, chapter 'SSL Certificate Verification'.\n"
-"Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:155
-#, python-format
-msgid "Using WebDAV protocol %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:156
-#, python-format
-msgid "Using WebDAV host %s port %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:158
-#, python-format
-msgid "Using WebDAV directory %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:189
-#, python-format
-msgid "WebDAV create connection on '%s'"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:200
-#, python-format
-msgid "WebDAV Unknown URI scheme: %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:219
-#, python-format
-msgid "WebDAV %s %s request with headers: %s "
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:220
-#: ../duplicity/backends/webdavbackend.py:243
-#, python-format
-msgid "WebDAV data length: %s "
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:223
-#, python-format
-msgid "WebDAV response status %s with reason '%s'."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:229
-#, python-format
-msgid "WebDAV redirect to: %s "
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:231
-msgid "WebDAV redirected 10 times. Giving up."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:236
-msgid "WebDAV missing location header in redirect response."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:241
-msgid "WebDAV retry request with authentification headers."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:242
-#, python-format
-msgid "WebDAV %s %s request2 with headers: %s "
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:246
-#, python-format
-msgid "WebDAV response2 status %s with reason '%s'."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:263
-msgid ""
-"python-kerberos needed to use kerberos                           "
-"authorization, falling back to basic auth."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:267
-#, python-format
-msgid ""
-"Kerberos authorization failed: %s.                          Falling back to "
-"basic auth."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:365
-#, python-format
-msgid "Creating missing directory %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:369
-#, python-format
-msgid "WebDAV MKCOL %s failed: %s %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:382
-#, python-format
-msgid "WebDAV path decoding and translation: %s -> %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:427
-#, python-format
-msgid "WebDAV GET Bad status code %s reason %s."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:449
-#, python-format
-msgid "WebDAV PUT Bad status code %s reason %s."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:469
-#, python-format
-msgid "WebDAV DEL Bad status code %s reason %s."
-msgstr ""
 
 #: ../duplicity/librsync.py:195
 msgid ""
@@ -1697,6 +1636,21 @@ msgstr "end_index не відповідає"
 msgid "Hashes don't match"
 msgstr "Хеші не збігаються"
 
+#: ../duplicity/patchdir.py:85 ../duplicity/patchdir.py:90
+#, python-format
+msgid "Patching %s"
+msgstr "Внесення змін у %s"
+
+#: ../duplicity/patchdir.py:551
+#, python-format
+msgid "Error '%s' patching %s"
+msgstr ""
+
+#: ../duplicity/patchdir.py:626
+#, python-format
+msgid "Writing %s of type %s"
+msgstr "Запис %s типу %s"
+
 #: ../duplicity/path.py:114
 #, python-format
 msgid "Warning: %s invalid devnums (0x%X), treating as (0, 0)."
@@ -1771,51 +1725,97 @@ msgstr "Зв’язатися %s"
 msgid "Deleting tree %s"
 msgstr "Вилучення дерева %s"
 
-#: ../duplicity/gpginterface.py:238
-msgid "Threading not available -- zombie processes may appear"
-msgstr ""
-
-#: ../duplicity/gpginterface.py:705
+#: ../duplicity/robust.py:64
 #, python-format
-msgid "GPG process %d terminated before wait()"
-msgstr ""
+msgid "Error listing directory %s"
+msgstr "Помилка переліку каталогу %s"
 
-#: ../duplicity/dup_time.py:62
+#: ../duplicity/selection.py:121
+#, python-format
+msgid "Skipping socket %s"
+msgstr "Пропуск сокету %s"
+
+#: ../duplicity/selection.py:125
+#, python-format
+msgid "Error initializing file %s"
+msgstr "Помилка ініціалізації файлу %s"
+
+#: ../duplicity/selection.py:129 ../duplicity/selection.py:154
+#: ../duplicity/selection.py:463
+#, python-format
+msgid "Error accessing possibly locked file %s"
+msgstr "Помилка доступу до можливо заблокованого файлу %s"
+
+#: ../duplicity/selection.py:169
+#, python-format
+msgid "Warning: base %s doesn't exist, continuing"
+msgstr "Увага: база %s не існує, виконується продовження"
+
+#: ../duplicity/selection.py:172 ../duplicity/selection.py:190
+#: ../duplicity/selection.py:193
+#, python-format
+msgid "Selecting %s"
+msgstr "Вибір %s"
+
+#: ../duplicity/selection.py:295
 #, python-format
 msgid ""
-"Bad interval string \"%s\"\n"
-"\n"
-"Intervals are specified like 2Y (2 years) or 2h30m (2.5 hours).  The\n"
-"allowed special characters are s, m, h, D, W, M, and Y.  See the man\n"
-"page for more information."
+"Fatal Error: The file specification\n"
+"    %s\n"
+"cannot match any files in the base directory\n"
+"    %s\n"
+"Useful file specifications begin with the base directory or some\n"
+"pattern (such as '**') which matches the base directory."
 msgstr ""
-"Рядок з неприпустимим інтервалом \"%s\"\n"
-"\n"
-"Інтервали вказуються на подобі 2Y (2 роки) або 2h30m (2.5 години).\n"
-"Припустимі особливі символи s (с.), m (хв.), h (год.), D(Д.), W (Т.), M (М.) "
-"и Y (Р.).\n"
-"Зверніться до посібника користувача (man) для отримання додаткових "
-"відомостей."
+"Фатальна помилка: Специфікація файлу\n"
+"    %s\n"
+"не може відповідати будь-яким файлам у базовому каталозі\n"
+"    %s\n"
+"Корисні специфікації файлу починаються з базового каталогу або\n"
+"маски (наприклад '**'), яка відповідає базовому каталогу."
 
-#: ../duplicity/dup_time.py:68
+#: ../duplicity/selection.py:304
 #, python-format
 msgid ""
-"Bad time string \"%s\"\n"
-"\n"
-"The acceptible time strings are intervals (like \"3D64s\"), w3-datetime\n"
-"strings, like \"2002-04-26T04:22:01-07:00\" (strings like\n"
-"\"2002-04-26T04:22:01\" are also acceptable - duplicity will use the\n"
-"current time zone), or ordinary dates like 2/4/1997 or 2001-04-23\n"
-"(various combinations are acceptable, but the month always precedes\n"
-"the day)."
+"Fatal Error while processing expression\n"
+"%s"
 msgstr ""
-"Рядок з неприпустимим часом \"%s\"\n"
-"\n"
-"Допускається вказування інтервалів часу (наприклад \"3D64s\"), рядка\n"
-"дати/часу формату w3, наприклад \"2002-04-26T04:22:01-07:00\" (рядка типу\n"
-"\"2002-04-26T04:22:01\" також припустимі - duplicity буде використовувати\n"
-"поточну часову зону) або звичайні дати, наприклад 2/4/1997 або 2001-04-23\n"
-"(припустимі різноманітні комбінації, але місяць завжди передує дню)."
+"Фатальна помилка при обробці виразу\n"
+"%s"
+
+#: ../duplicity/selection.py:313
+#, python-format
+msgid ""
+"Last selection expression:\n"
+"    %s\n"
+"only specifies that files be included.  Because the default is to\n"
+"include all files, the expression is redundant.  Exiting because this\n"
+"probably isn't what you meant."
+msgstr ""
+"Вираз останнього виділення:\n"
+"    %s\n"
+"лише вказує на те, що файли буде включено. Оскільки\n"
+"типово включаються усі файли, отже вираз надлишковий.\n"
+"Виконання виходу, оскільки можливо, що ймовірно, це не те, що ви мали на "
+"увазі."
+
+#: ../duplicity/selection.py:369
+#, python-format
+msgid "Reading globbing filelist %s"
+msgstr "Читання підстановочного списку файлів %s"
+
+#: ../duplicity/selection.py:402
+#, python-format
+msgid "Error compiling regular expression %s"
+msgstr "Помилка компілювання регулярного виразу %s"
+
+#: ../duplicity/selection.py:419
+msgid ""
+"Warning: exclude-device-files is not the first selector.\n"
+"This may not be what you intended"
+msgstr ""
+"Увага: exclude-device-files не є  першим виборщиком.\n"
+"можливо, це не те, що ви хотіли"
 
 #: ../duplicity/tempdir.py:135
 #, python-format

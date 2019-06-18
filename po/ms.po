@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-06-09 12:05-0500\n"
+"POT-Creation-Date: 2019-06-17 09:44-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-06-10 04:51+0000\n"
-"X-Generator: Launchpad (build 18978)\n"
+"X-Launchpad-Export-Date: 2019-06-18 05:51+0000\n"
+"X-Generator: Launchpad (build 18981)\n"
 
 #: ../bin/duplicity:128
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -439,91 +439,338 @@ msgstr "Ralat membuka fail %s"
 msgid "File %s already exists, will not overwrite."
 msgstr "Fail %s sudah wujud, tidak akan ditulis-ganti."
 
-#: ../duplicity/selection.py:121
+#: ../duplicity/asyncscheduler.py:71
 #, python-format
-msgid "Skipping socket %s"
-msgstr "Melangkau soket %s"
+msgid "instantiating at concurrency %d"
+msgstr "disegerakan pada kesetemuan %d"
 
-#: ../duplicity/selection.py:125
+#: ../duplicity/asyncscheduler.py:98
+msgid "inserting barrier"
+msgstr "menyisip sawar"
+
+#: ../duplicity/asyncscheduler.py:147
+msgid "running task synchronously (asynchronicity disabled)"
+msgstr "menjalankan tugas secara segerak (ketaksegerakan dilumpuhkan)"
+
+#: ../duplicity/asyncscheduler.py:153
+msgid "scheduling task for asynchronous execution"
+msgstr "menjadualkan tugas untuk pelakuan ketaksegerakan"
+
+#: ../duplicity/asyncscheduler.py:182
+msgid "task completed successfully"
+msgstr "tugas berjaya diselesaikan"
+
+#: ../duplicity/asyncscheduler.py:193
+msgid ""
+"a previously scheduled task has failed; propagating the result immediately"
+msgstr ""
+"tugas terjadual sebelum ini mengalami kegagalan; menghasilkan keputusan "
+"serta-merta"
+
+#: ../duplicity/asyncscheduler.py:216 ../duplicity/asyncscheduler.py:237
 #, python-format
-msgid "Error initializing file %s"
-msgstr "Ralat mengawalkan fail %s"
+msgid "active workers = %d"
+msgstr "pekerja aktif = %d"
 
-#: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:463
+#: ../duplicity/asyncscheduler.py:257
 #, python-format
-msgid "Error accessing possibly locked file %s"
-msgstr "Ralat mencapai fail %s yang mungkin terkunci"
+msgid "task execution done (success: %s)"
+msgstr "pelakuan tugas dibuat (berjaya: %s)"
 
-#: ../duplicity/selection.py:169
+#: ../duplicity/backend.py:107
 #, python-format
-msgid "Warning: base %s doesn't exist, continuing"
-msgstr "Amaran: pangkalan %s tidak wujud, teruskan"
+msgid "Import of %s %s"
+msgstr "Import %s %s"
 
-#: ../duplicity/selection.py:172 ../duplicity/selection.py:190
-#: ../duplicity/selection.py:193
+#: ../duplicity/backend.py:216
 #, python-format
-msgid "Selecting %s"
-msgstr "Memilih %s"
+msgid "Could not initialize backend: %s"
+msgstr "Tidak dapat awalkan bahagian belakang: %s"
 
-#: ../duplicity/selection.py:295
+#: ../duplicity/backend.py:380
+#, python-format
+msgid "Backtrace of previous error: %s"
+msgstr "Surih kembali ralat terdahulu: %s"
+
+#: ../duplicity/backend.py:395
+#, python-format
+msgid "Giving up after %s attempts. %s: %s"
+msgstr "Mengalah selepas %s percubaan. %s: %s"
+
+#: ../duplicity/backend.py:399
+#, python-format
+msgid "Attempt %s failed. %s: %s"
+msgstr "Percubaan %s mengalami kegagalan. %s: %s"
+
+#: ../duplicity/backend.py:493
+#, python-format
+msgid "Reading results of '%s'"
+msgstr "Membaca keputusan '%s'"
+
+#: ../duplicity/backend.py:519
+#, python-format
+msgid "Writing %s"
+msgstr "Menulis %s"
+
+#: ../duplicity/backend.py:560
+#, python-format
+msgid "File %s not found locally after get from backend"
+msgstr ""
+"Fail %s tidak ditemui secara setempat selepas didapati melalui bahagian "
+"belakang"
+
+#: ../duplicity/backends/giobackend.py:108
+#, python-format
+msgid "Connection failed, please check your password: %s"
+msgstr "Sambungan gagal, sila semak kata laluan anda: %s"
+
+#: ../duplicity/backends/multibackend.py:89
+#, python-format
+msgid "MultiBackend: Could not parse query string %s: %s "
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:98
+#, python-format
+msgid "MultiBackend: Invalid query string %s: more than one value for %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:103
+#, python-format
+msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:153
+#: ../duplicity/backends/multibackend.py:158
+#, python-format
+msgid "MultiBackend: illegal value for %s: %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:166
+#, python-format
+msgid "MultiBackend: Url %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:170
+#, python-format
+msgid "MultiBackend: Could not load config file %s: %s "
+msgstr "MultiBackend: Tidak dapat muat fail konfig %s: %s "
+
+#: ../duplicity/backends/multibackend.py:179
+#, python-format
+msgid "MultiBackend: use store %s"
+msgstr "MultiBackend: guna stor %s"
+
+#: ../duplicity/backends/multibackend.py:184
+#, python-format
+msgid "MultiBackend: set env %s = %s"
+msgstr "MultiBackend: tetapkan env %s = %s"
+
+#: ../duplicity/backends/multibackend.py:197
+#, python-format
+msgid "Multibackend: register affinity for prefix %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:238
+#, python-format
+msgid "MultiBackend: _put: write to store #%s (%s)"
+msgstr "MultiBackend: _put: tulis ke stor #%s (%s)"
+
+#: ../duplicity/backends/multibackend.py:251
 #, python-format
 msgid ""
-"Fatal Error: The file specification\n"
-"    %s\n"
-"cannot match any files in the base directory\n"
-"    %s\n"
-"Useful file specifications begin with the base directory or some\n"
-"pattern (such as '**') which matches the base directory."
+"MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
 msgstr ""
-"Ralat Matir: Spesifikasi fail\n"
-"    %s\n"
-"tidak dapat padankan sebarang fail dalam direktori dasar\n"
-"    %s\n"
-"Spesifikasi fail yang berguna bermula dengan direktori dasar atau\n"
-"corak (seperti '**') yang memadani direktori dasar."
+"MultiBackend: gagal tulis ke stor #%s (%s), cuba #%s, Pengecualian: %s"
 
-#: ../duplicity/selection.py:304
+#: ../duplicity/backends/multibackend.py:258
+#, python-format
+msgid "MultiBackend: failed to write %s. Aborting process."
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:265
 #, python-format
 msgid ""
-"Fatal Error while processing expression\n"
-"%s"
+"MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
 msgstr ""
-"Ralat Mati semasa memproses ungkapan\n"
-"%s"
+"MultiBackend: gagal tulis %s. Mencuba semua stor sandar dan tiada yang "
+"berjaya"
 
-#: ../duplicity/selection.py:313
+#: ../duplicity/backends/multibackend.py:284
+#, python-format
+msgid "MultiBackend: failed to get %s to %s from %s"
+msgstr "MultiBackend: gagal dapatkan %s kepada %s daripada %s"
+
+#: ../duplicity/backends/multibackend.py:287
 #, python-format
 msgid ""
-"Last selection expression:\n"
-"    %s\n"
-"only specifies that files be included.  Because the default is to\n"
-"include all files, the expression is redundant.  Exiting because this\n"
-"probably isn't what you meant."
+"MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
 msgstr ""
-"Ungkapan pemilihan terakhir:\n"
-"    %s\n"
-"hanya nyatakan fail yang disertakan. Kerana lalai menyertakan semua\n"
-"fail, ungkapan adalah lewah, Keluar kerana ini bukanlah apa yang anda\n"
-"maksudkan."
+"MultiBackend: gagal dapatkan %s. Mencuba semua stor sandar dan tiada yang "
+"berjaya"
 
-#: ../duplicity/selection.py:369
+#: ../duplicity/backends/multibackend.py:296
 #, python-format
-msgid "Reading globbing filelist %s"
-msgstr "Membaca senarai fail %s"
+msgid "MultiBackend: list from %s: %s"
+msgstr "MultiBackend: senarai dari %s: %s"
 
-#: ../duplicity/selection.py:402
+#: ../duplicity/backends/multibackend.py:302
 #, python-format
-msgid "Error compiling regular expression %s"
-msgstr "Ralat mengompil ungkapan nalar %s"
+msgid "MultiBackend: combined list: %s"
+msgstr "MultiBackend: senarai tergabung: %s"
 
-#: ../duplicity/selection.py:419
+#: ../duplicity/backends/multibackend.py:327
+#, python-format
+msgid "MultiBackend: failed to delete %s from %s"
+msgstr "MultiBackend: gagal padamkan %s dari %s"
+
+#: ../duplicity/backends/multibackend.py:331
+#, python-format
 msgid ""
-"Warning: exclude-device-files is not the first selector.\n"
-"This may not be what you intended"
+"MultiBackend: failed to delete %s. Tried all backing stores and none "
+"succeeded"
 msgstr ""
-"Amaran: exclude-device-files bukanlah pemilih pertama.\n"
-"Ia mungkin bukan yang anda kehendaki"
+"MultiBackend: gagal padamkan %s. Mencuba semua stor sandar dan tiada yang "
+"berjaya"
+
+#: ../duplicity/backends/pydrivebackend.py:150
+#, python-format
+msgid "PyDrive backend: multiple files called '%s'."
+msgstr "Bahagian belakang PyDrive: fail berbilang dipanggil '%s'."
+
+#: ../duplicity/backends/webdavbackend.py:66
+msgid "Missing socket or ssl python modules."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:84
+#, python-format
+msgid "Cacert database file '%s' is not readable."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:105
+msgid ""
+"Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:109
+#, python-format
+msgid ""
+"For certificate verification with python 2.7.8 or earlier a cacert database\n"
+"file is needed in one of these locations: %s\n"
+"Hints:\n"
+"Consult the man page, chapter 'SSL Certificate Verification'.\n"
+"Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:155
+#, python-format
+msgid "Using WebDAV protocol %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:156
+#, python-format
+msgid "Using WebDAV host %s port %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:158
+#, python-format
+msgid "Using WebDAV directory %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:189
+#, python-format
+msgid "WebDAV create connection on '%s'"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:200
+#, python-format
+msgid "WebDAV Unknown URI scheme: %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:219
+#, python-format
+msgid "WebDAV %s %s request with headers: %s "
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:220
+#: ../duplicity/backends/webdavbackend.py:243
+#, python-format
+msgid "WebDAV data length: %s "
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:223
+#, python-format
+msgid "WebDAV response status %s with reason '%s'."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:229
+#, python-format
+msgid "WebDAV redirect to: %s "
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:231
+msgid "WebDAV redirected 10 times. Giving up."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:236
+msgid "WebDAV missing location header in redirect response."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:241
+msgid "WebDAV retry request with authentification headers."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:242
+#, python-format
+msgid "WebDAV %s %s request2 with headers: %s "
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:246
+#, python-format
+msgid "WebDAV response2 status %s with reason '%s'."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:263
+msgid ""
+"python-kerberos needed to use kerberos                           "
+"authorization, falling back to basic auth."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:267
+#, python-format
+msgid ""
+"Kerberos authorization failed: %s.                          Falling back to "
+"basic auth."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:365
+#, python-format
+msgid "Creating missing directory %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:369
+#, python-format
+msgid "WebDAV MKCOL %s failed: %s %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:382
+#, python-format
+msgid "WebDAV path decoding and translation: %s -> %s"
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:427
+#, python-format
+msgid "WebDAV GET Bad status code %s reason %s."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:449
+#, python-format
+msgid "WebDAV PUT Bad status code %s reason %s."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:469
+#, python-format
+msgid "WebDAV DEL Bad status code %s reason %s."
+msgstr ""
 
 #: ../duplicity/commandline.py:78
 #, python-format
@@ -930,111 +1177,46 @@ msgstr ""
 msgid "Main action: "
 msgstr "Tindakan utama: "
 
-#: ../duplicity/backend.py:107
+#: ../duplicity/diffdir.py:116 ../duplicity/diffdir.py:418
 #, python-format
-msgid "Import of %s %s"
-msgstr "Import %s %s"
+msgid "Error %s getting delta for %s"
+msgstr "Ralat %s mendapatkan delta untuk %s"
 
-#: ../duplicity/backend.py:216
+#: ../duplicity/diffdir.py:130
 #, python-format
-msgid "Could not initialize backend: %s"
-msgstr "Tidak dapat awalkan bahagian belakang: %s"
+msgid "Getting delta of %s and %s"
+msgstr "Mendapatkan delta bagi %sdan %s"
 
-#: ../duplicity/backend.py:380
+#: ../duplicity/diffdir.py:181
 #, python-format
-msgid "Backtrace of previous error: %s"
-msgstr "Surih kembali ralat terdahulu: %s"
+msgid "A %s"
+msgstr "A %s"
 
-#: ../duplicity/backend.py:395
+#: ../duplicity/diffdir.py:188
 #, python-format
-msgid "Giving up after %s attempts. %s: %s"
-msgstr "Mengalah selepas %s percubaan. %s: %s"
+msgid "M %s"
+msgstr "M %s"
 
-#: ../duplicity/backend.py:399
+#: ../duplicity/diffdir.py:210
 #, python-format
-msgid "Attempt %s failed. %s: %s"
-msgstr "Percubaan %s mengalami kegagalan. %s: %s"
+msgid "Comparing %s and %s"
+msgstr "Membandingkan %s dengan %s"
 
-#: ../duplicity/backend.py:493
+#: ../duplicity/diffdir.py:218
 #, python-format
-msgid "Reading results of '%s'"
-msgstr "Membaca keputusan '%s'"
+msgid "D %s"
+msgstr "D %s"
 
-#: ../duplicity/backend.py:519
-#, python-format
-msgid "Writing %s"
-msgstr "Menulis %s"
-
-#: ../duplicity/backend.py:560
-#, python-format
-msgid "File %s not found locally after get from backend"
-msgstr ""
-"Fail %s tidak ditemui secara setempat selepas didapati melalui bahagian "
-"belakang"
-
-#: ../duplicity/asyncscheduler.py:71
-#, python-format
-msgid "instantiating at concurrency %d"
-msgstr "disegerakan pada kesetemuan %d"
-
-#: ../duplicity/asyncscheduler.py:98
-msgid "inserting barrier"
-msgstr "menyisip sawar"
-
-#: ../duplicity/asyncscheduler.py:147
-msgid "running task synchronously (asynchronicity disabled)"
-msgstr "menjalankan tugas secara segerak (ketaksegerakan dilumpuhkan)"
-
-#: ../duplicity/asyncscheduler.py:153
-msgid "scheduling task for asynchronous execution"
-msgstr "menjadualkan tugas untuk pelakuan ketaksegerakan"
-
-#: ../duplicity/asyncscheduler.py:182
-msgid "task completed successfully"
-msgstr "tugas berjaya diselesaikan"
-
-#: ../duplicity/asyncscheduler.py:193
-msgid ""
-"a previously scheduled task has failed; propagating the result immediately"
-msgstr ""
-"tugas terjadual sebelum ini mengalami kegagalan; menghasilkan keputusan "
-"serta-merta"
-
-#: ../duplicity/asyncscheduler.py:216 ../duplicity/asyncscheduler.py:237
-#, python-format
-msgid "active workers = %d"
-msgstr "pekerja aktif = %d"
-
-#: ../duplicity/asyncscheduler.py:257
-#, python-format
-msgid "task execution done (success: %s)"
-msgstr "pelakuan tugas dibuat (berjaya: %s)"
-
-#: ../duplicity/patchdir.py:85 ../duplicity/patchdir.py:90
-#, python-format
-msgid "Patching %s"
-msgstr "Menampal %s"
-
-#: ../duplicity/patchdir.py:551
-#, python-format
-msgid "Error '%s' patching %s"
-msgstr "Ralat '%s' menampal %s"
-
-#: ../duplicity/patchdir.py:626
-#, python-format
-msgid "Writing %s of type %s"
-msgstr "Menulis %s dari jenis %s"
-
-#: ../duplicity/collections.py:178 ../duplicity/collections.py:192
+#: ../duplicity/dup_collections.py:178 ../duplicity/dup_collections.py:192
 #, python-format
 msgid "BackupSet.delete: missing %s"
 msgstr "BackupSet.delete: %s hilang"
 
-#: ../duplicity/collections.py:217
+#: ../duplicity/dup_collections.py:217
 msgid "Fatal Error: No manifests found for most recent backup"
 msgstr "Ralat Mati: Tiada manifes ditemui untuk kebanyakan sandar terkini"
 
-#: ../duplicity/collections.py:226
+#: ../duplicity/dup_collections.py:226
 msgid ""
 "Fatal Error: Remote manifest does not match local one.  Either the remote "
 "backup set or the local archive directory has been corrupted."
@@ -1042,121 +1224,121 @@ msgstr ""
 "Ralar Mati: Manifes jauh tidak sepadan dengan yang setempat. Sama ada set "
 "sandar jauh atau direktori setempat telah rosak."
 
-#: ../duplicity/collections.py:234
+#: ../duplicity/dup_collections.py:234
 msgid "Fatal Error: Neither remote nor local manifest is readable."
 msgstr "Ralat Mati: Tiada manifes jauh atau setempat boleh dibaca."
 
-#: ../duplicity/collections.py:245
+#: ../duplicity/dup_collections.py:245
 #, python-format
 msgid "Processing local manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/collections.py:257
+#: ../duplicity/dup_collections.py:257
 #, python-format
 msgid "Error processing remote manifest (%s): %s"
 msgstr ""
 
-#: ../duplicity/collections.py:260
+#: ../duplicity/dup_collections.py:260
 #, python-format
 msgid "Processing remote manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/collections.py:356
+#: ../duplicity/dup_collections.py:356
 msgid "Preferring Backupset over previous one!"
 msgstr "Mengutamakan Set Sandar berbanding yang terdahulu!"
 
-#: ../duplicity/collections.py:359
+#: ../duplicity/dup_collections.py:359
 #, python-format
 msgid "Ignoring incremental Backupset (start_time: %s; needed: %s)"
 msgstr "Mengabaikan Set Sandar tokokan (masa_mula: %s; diperlukan: %s)"
 
-#: ../duplicity/collections.py:364
+#: ../duplicity/dup_collections.py:364
 #, python-format
 msgid "Added incremental Backupset (start_time: %s / end_time: %s)"
 msgstr "Set Sandar tokokan ditambah (masa_mula: %s; / masa_akhir: %s)"
 
-#: ../duplicity/collections.py:434
+#: ../duplicity/dup_collections.py:434
 msgid "Chain start time: "
 msgstr "Masa mula rantaian: "
 
-#: ../duplicity/collections.py:435
+#: ../duplicity/dup_collections.py:435
 msgid "Chain end time: "
 msgstr "Masa tamat rantaian: "
 
-#: ../duplicity/collections.py:436
+#: ../duplicity/dup_collections.py:436
 #, python-format
 msgid "Number of contained backup sets: %d"
 msgstr "Bilangan set sandar yang dikandungi: %d"
 
-#: ../duplicity/collections.py:438
+#: ../duplicity/dup_collections.py:438
 #, python-format
 msgid "Total number of contained volumes: %d"
 msgstr "Sejumlah volum yang dikandungi: %d"
 
-#: ../duplicity/collections.py:440 ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:440 ../duplicity/dup_collections.py:1236
 msgid "Type of backup set:"
 msgstr "Jenis set sandar:"
 
-#: ../duplicity/collections.py:440 ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:440 ../duplicity/dup_collections.py:1236
 msgid "Time:"
 msgstr "Masa:"
 
-#: ../duplicity/collections.py:440
+#: ../duplicity/dup_collections.py:440
 msgid "Num volumes:"
 msgstr "Bil volum:"
 
-#: ../duplicity/collections.py:444 ../duplicity/collections.py:1242
+#: ../duplicity/dup_collections.py:444 ../duplicity/dup_collections.py:1242
 msgid "Full"
 msgstr "Penuh"
 
-#: ../duplicity/collections.py:447 ../duplicity/collections.py:1244
+#: ../duplicity/dup_collections.py:447 ../duplicity/dup_collections.py:1244
 msgid "Incremental"
 msgstr "Tokokan"
 
-#: ../duplicity/collections.py:507
+#: ../duplicity/dup_collections.py:507
 msgid "local"
 msgstr "setempat"
 
-#: ../duplicity/collections.py:509
+#: ../duplicity/dup_collections.py:509
 msgid "remote"
 msgstr "jauh"
 
-#: ../duplicity/collections.py:664
+#: ../duplicity/dup_collections.py:664
 msgid "Collection Status"
 msgstr "Status Koleksi"
 
-#: ../duplicity/collections.py:666
+#: ../duplicity/dup_collections.py:666
 #, python-format
 msgid "Connecting with backend: %s"
 msgstr "Menyambung dengan bahagian belakang: %s"
 
-#: ../duplicity/collections.py:668
+#: ../duplicity/dup_collections.py:668
 #, python-format
 msgid "Archive dir: %s"
 msgstr "Dir arkib: %s"
 
-#: ../duplicity/collections.py:671
+#: ../duplicity/dup_collections.py:671
 #, python-format
 msgid "Found %d secondary backup chain."
 msgid_plural "Found %d secondary backup chains."
 msgstr[0] "Temui %d rantaian sandar sekunder."
 msgstr[1] "Temui %d rantaian sandar sekunder."
 
-#: ../duplicity/collections.py:676
+#: ../duplicity/dup_collections.py:676
 #, python-format
 msgid "Secondary chain %d of %d:"
 msgstr "Rantaian kedua %d daripada %d:"
 
-#: ../duplicity/collections.py:682
+#: ../duplicity/dup_collections.py:682
 msgid "Found primary backup chain with matching signature chain:"
 msgstr ""
 "Temui rantaian sandar utama dengan rantaian tandatangan yang sepadan:"
 
-#: ../duplicity/collections.py:686
+#: ../duplicity/dup_collections.py:686
 msgid "No backup chains with active signatures found"
 msgstr "Tiada rantaian sandar dengan tandatangan aktif ditemui"
 
-#: ../duplicity/collections.py:689
+#: ../duplicity/dup_collections.py:689
 #, python-format
 msgid "Also found %d backup set not part of any chain,"
 msgid_plural "Also found %d backup sets not part of any chain,"
@@ -1165,7 +1347,7 @@ msgstr[0] ""
 msgstr[1] ""
 "Juga temui %d set sandar yang bukan sebahagian mana-mana rantaian,"
 
-#: ../duplicity/collections.py:693
+#: ../duplicity/dup_collections.py:693
 #, python-format
 msgid "and %d incomplete backup set."
 msgid_plural "and %d incomplete backup sets."
@@ -1173,157 +1355,166 @@ msgstr[0] "dan %d set sandar tidak lengkap."
 msgstr[1] "dan %d set sandar tidak lengkap."
 
 #. "cleanup" is a hard-coded command, so do not translate it
-#: ../duplicity/collections.py:698
+#: ../duplicity/dup_collections.py:698
 msgid ""
 "These may be deleted by running duplicity with the \"cleanup\" command."
 msgstr ""
 "Ia mungkin telah dipadam dengan menjalankan duplicity bersama perintah "
 "\"cleanup\"."
 
-#: ../duplicity/collections.py:701
+#: ../duplicity/dup_collections.py:701
 msgid "No orphaned or incomplete backup sets found."
 msgstr "Tiada set sandar yatim atau tidak lengkap ditemui."
 
-#: ../duplicity/collections.py:717
+#: ../duplicity/dup_collections.py:717
 #, python-format
 msgid "%d file exists on backend"
 msgid_plural "%d files exist on backend"
 msgstr[0] "%d fail wujud dibahagian belakang"
 msgstr[1] "%d fail wujud dibahagian belakang"
 
-#: ../duplicity/collections.py:727
+#: ../duplicity/dup_collections.py:727
 #, python-format
 msgid "%d file exists in cache"
 msgid_plural "%d files exist in cache"
 msgstr[0] "%d fail wujud dalam cache"
 msgstr[1] "%d fail wujud dalam cache"
 
-#: ../duplicity/collections.py:780
+#: ../duplicity/dup_collections.py:780
 msgid ""
 "Warning, discarding last backup set, because of missing signature file."
 msgstr ""
 "Amaran, menyingkirkan set sandar terakhir, keranan fail tandatangan hilang."
 
-#: ../duplicity/collections.py:803
+#: ../duplicity/dup_collections.py:803
 msgid "Warning, found the following local orphaned signature file:"
 msgid_plural "Warning, found the following local orphaned signature files:"
 msgstr[0] "Amaran, temui fail tandatangan yatim setempat berikut:"
 msgstr[1] "Amaran, temui fail tandatangan yatim setempat berikut:"
 
-#: ../duplicity/collections.py:812
+#: ../duplicity/dup_collections.py:812
 msgid "Warning, found the following remote orphaned signature file:"
 msgid_plural "Warning, found the following remote orphaned signature files:"
 msgstr[0] "Amaran, temui fail tandatangan yatim jauh berikut:"
 msgstr[1] "Amaran, temui fail tandatangan yatim jauh berikut:"
 
-#: ../duplicity/collections.py:821
+#: ../duplicity/dup_collections.py:821
 msgid "Warning, found signatures but no corresponding backup files"
 msgstr "Amaran, temui tandatangan tetapi tiada fail sandar berkaitan"
 
-#: ../duplicity/collections.py:825
+#: ../duplicity/dup_collections.py:825
 msgid ""
 "Warning, found incomplete backup sets, probably left from aborted session"
 msgstr ""
 "Amaran, temui set sandar tidak lengkap, berkemungkinan baki dari sesi yang "
 "dihenti paksa"
 
-#: ../duplicity/collections.py:829
+#: ../duplicity/dup_collections.py:829
 msgid "Warning, found the following orphaned backup file:"
 msgid_plural "Warning, found the following orphaned backup files:"
 msgstr[0] "Amaran, temui fail sandar yatim berikut:"
 msgstr[1] "Amaran, temui fail sandar yatim berikut:"
 
-#: ../duplicity/collections.py:846
+#: ../duplicity/dup_collections.py:846
 #, python-format
 msgid "Extracting backup chains from list of files: %s"
 msgstr "Mengekstrak rantaian sandar dari senarai fail: %s"
 
-#: ../duplicity/collections.py:857
+#: ../duplicity/dup_collections.py:857
 #, python-format
 msgid "File %s is part of known set"
 msgstr "Fail %s adalah sebahagian dari set yang diketahui"
 
-#: ../duplicity/collections.py:860
+#: ../duplicity/dup_collections.py:860
 #, python-format
 msgid "File %s is not part of a known set; creating new set"
 msgstr ""
 "Fail %s bukanlah sebahagian dari set yang diketahui; mencipta set baru"
 
-#: ../duplicity/collections.py:865
+#: ../duplicity/dup_collections.py:865
 #, python-format
 msgid "Ignoring file (rejected by backup set) '%s'"
 msgstr "Mengabaikan fail (ditolak oleh set sandar) '%s'"
 
-#: ../duplicity/collections.py:881
+#: ../duplicity/dup_collections.py:881
 #, python-format
 msgid "Found backup chain %s"
 msgstr "Temui rantaian sandar %s"
 
-#: ../duplicity/collections.py:886
+#: ../duplicity/dup_collections.py:886
 #, python-format
 msgid "Added set %s to pre-existing chain %s"
 msgstr "Tambah set %s ke rantaian pra-wujud %s"
 
-#: ../duplicity/collections.py:890
+#: ../duplicity/dup_collections.py:890
 #, python-format
 msgid "Found orphaned set %s"
 msgstr "Temui set yatim %s"
 
-#: ../duplicity/collections.py:1040
+#: ../duplicity/dup_collections.py:1040
 #, python-format
 msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
 "starting at time %s."
 msgstr ""
 
-#: ../duplicity/collections.py:1234
+#: ../duplicity/dup_collections.py:1234
 #, python-format
 msgid "File: %s"
 msgstr "Fail: %s"
 
-#: ../duplicity/collections.py:1235
+#: ../duplicity/dup_collections.py:1235
 #, python-format
 msgid "Total number of backup: %d"
 msgstr "Jumlah bilangan sandar: %d"
 
-#: ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:1236
 msgid "Type of file change:"
 msgstr "Jenis perubahan fail:"
 
-#: ../duplicity/robust.py:64
+#: ../duplicity/dup_time.py:62
 #, python-format
-msgid "Error listing directory %s"
-msgstr "Ralat menyenaraikan direktori %s"
+msgid ""
+"Bad interval string \"%s\"\n"
+"\n"
+"Intervals are specified like 2Y (2 years) or 2h30m (2.5 hours).  The\n"
+"allowed special characters are s, m, h, D, W, M, and Y.  See the man\n"
+"page for more information."
+msgstr ""
+"Rentetan sela \"%s\" teruk\n"
+"\n"
+"Sela dinyatakan seperti 2Y (2 tahun) atau 2h30m (2.5 jam).\n"
+"aksara khas yang dibenarkan adalah s, m, h, D, W, M, dan Y. Rujuk\n"
+"halaman manual untuk maklumat lanjut."
 
-#: ../duplicity/diffdir.py:117 ../duplicity/diffdir.py:419
+#: ../duplicity/dup_time.py:68
 #, python-format
-msgid "Error %s getting delta for %s"
-msgstr "Ralat %s mendapatkan delta untuk %s"
+msgid ""
+"Bad time string \"%s\"\n"
+"\n"
+"The acceptible time strings are intervals (like \"3D64s\"), w3-datetime\n"
+"strings, like \"2002-04-26T04:22:01-07:00\" (strings like\n"
+"\"2002-04-26T04:22:01\" are also acceptable - duplicity will use the\n"
+"current time zone), or ordinary dates like 2/4/1997 or 2001-04-23\n"
+"(various combinations are acceptable, but the month always precedes\n"
+"the day)."
+msgstr ""
+"Rentetan masa \"%s\" teruk\n"
+"\n"
+"Rentetan masa yang boleh diterima adalah sela (seperti \"3D64s\"), \n"
+"rentetan w3-datetime, seperti \"2002-04-26T04:22:01-07:00\" (rentetan\n"
+"seperti \"2002-04-26T04:22:01\" juga diterima - duplicity akan guna zon\n"
+"waktu semasa), atau tarikh biasa seperti 2/4/1997 atau 2001-04-23\n"
+"(gabungan pelbagai diterima, tetapi bulan sentiasa mendahului hari)."
 
-#: ../duplicity/diffdir.py:131
-#, python-format
-msgid "Getting delta of %s and %s"
-msgstr "Mendapatkan delta bagi %sdan %s"
+#: ../duplicity/gpginterface.py:238
+msgid "Threading not available -- zombie processes may appear"
+msgstr "Pembebenangan tidak tersedia -- proses zombi mungkin muncul"
 
-#: ../duplicity/diffdir.py:182
+#: ../duplicity/gpginterface.py:705
 #, python-format
-msgid "A %s"
-msgstr "A %s"
-
-#: ../duplicity/diffdir.py:189
-#, python-format
-msgid "M %s"
-msgstr "M %s"
-
-#: ../duplicity/diffdir.py:211
-#, python-format
-msgid "Comparing %s and %s"
-msgstr "Membandingkan %s dengan %s"
-
-#: ../duplicity/diffdir.py:219
-#, python-format
-msgid "D %s"
-msgstr "D %s"
+msgid "GPG process %d terminated before wait()"
+msgstr "Proses GPG %d ditamatkan sebelum wait()"
 
 #: ../duplicity/lazy.py:352
 #, python-format
@@ -1339,259 +1530,6 @@ msgstr "Ralat '%s' memproses %s"
 #, python-format
 msgid "Skipping %s because of previous error"
 msgstr "Melangkau %s kerana ralat terdahulu"
-
-#: ../duplicity/backends/giobackend.py:108
-#, python-format
-msgid "Connection failed, please check your password: %s"
-msgstr "Sambungan gagal, sila semak kata laluan anda: %s"
-
-#: ../duplicity/backends/multibackend.py:89
-#, python-format
-msgid "MultiBackend: Could not parse query string %s: %s "
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:98
-#, python-format
-msgid "MultiBackend: Invalid query string %s: more than one value for %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:103
-#, python-format
-msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:153
-#: ../duplicity/backends/multibackend.py:158
-#, python-format
-msgid "MultiBackend: illegal value for %s: %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:166
-#, python-format
-msgid "MultiBackend: Url %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:170
-#, python-format
-msgid "MultiBackend: Could not load config file %s: %s "
-msgstr "MultiBackend: Tidak dapat muat fail konfig %s: %s "
-
-#: ../duplicity/backends/multibackend.py:179
-#, python-format
-msgid "MultiBackend: use store %s"
-msgstr "MultiBackend: guna stor %s"
-
-#: ../duplicity/backends/multibackend.py:184
-#, python-format
-msgid "MultiBackend: set env %s = %s"
-msgstr "MultiBackend: tetapkan env %s = %s"
-
-#: ../duplicity/backends/multibackend.py:197
-#, python-format
-msgid "Multibackend: register affinity for prefix %s"
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:238
-#, python-format
-msgid "MultiBackend: _put: write to store #%s (%s)"
-msgstr "MultiBackend: _put: tulis ke stor #%s (%s)"
-
-#: ../duplicity/backends/multibackend.py:251
-#, python-format
-msgid ""
-"MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
-msgstr ""
-"MultiBackend: gagal tulis ke stor #%s (%s), cuba #%s, Pengecualian: %s"
-
-#: ../duplicity/backends/multibackend.py:258
-#, python-format
-msgid "MultiBackend: failed to write %s. Aborting process."
-msgstr ""
-
-#: ../duplicity/backends/multibackend.py:265
-#, python-format
-msgid ""
-"MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
-msgstr ""
-"MultiBackend: gagal tulis %s. Mencuba semua stor sandar dan tiada yang "
-"berjaya"
-
-#: ../duplicity/backends/multibackend.py:284
-#, python-format
-msgid "MultiBackend: failed to get %s to %s from %s"
-msgstr "MultiBackend: gagal dapatkan %s kepada %s daripada %s"
-
-#: ../duplicity/backends/multibackend.py:287
-#, python-format
-msgid ""
-"MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
-msgstr ""
-"MultiBackend: gagal dapatkan %s. Mencuba semua stor sandar dan tiada yang "
-"berjaya"
-
-#: ../duplicity/backends/multibackend.py:296
-#, python-format
-msgid "MultiBackend: list from %s: %s"
-msgstr "MultiBackend: senarai dari %s: %s"
-
-#: ../duplicity/backends/multibackend.py:302
-#, python-format
-msgid "MultiBackend: combined list: %s"
-msgstr "MultiBackend: senarai tergabung: %s"
-
-#: ../duplicity/backends/multibackend.py:327
-#, python-format
-msgid "MultiBackend: failed to delete %s from %s"
-msgstr "MultiBackend: gagal padamkan %s dari %s"
-
-#: ../duplicity/backends/multibackend.py:331
-#, python-format
-msgid ""
-"MultiBackend: failed to delete %s. Tried all backing stores and none "
-"succeeded"
-msgstr ""
-"MultiBackend: gagal padamkan %s. Mencuba semua stor sandar dan tiada yang "
-"berjaya"
-
-#: ../duplicity/backends/pydrivebackend.py:150
-#, python-format
-msgid "PyDrive backend: multiple files called '%s'."
-msgstr "Bahagian belakang PyDrive: fail berbilang dipanggil '%s'."
-
-#: ../duplicity/backends/webdavbackend.py:66
-msgid "Missing socket or ssl python modules."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:84
-#, python-format
-msgid "Cacert database file '%s' is not readable."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:105
-msgid ""
-"Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:109
-#, python-format
-msgid ""
-"For certificate verification with python 2.7.8 or earlier a cacert database\n"
-"file is needed in one of these locations: %s\n"
-"Hints:\n"
-"Consult the man page, chapter 'SSL Certificate Verification'.\n"
-"Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:155
-#, python-format
-msgid "Using WebDAV protocol %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:156
-#, python-format
-msgid "Using WebDAV host %s port %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:158
-#, python-format
-msgid "Using WebDAV directory %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:189
-#, python-format
-msgid "WebDAV create connection on '%s'"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:200
-#, python-format
-msgid "WebDAV Unknown URI scheme: %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:219
-#, python-format
-msgid "WebDAV %s %s request with headers: %s "
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:220
-#: ../duplicity/backends/webdavbackend.py:243
-#, python-format
-msgid "WebDAV data length: %s "
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:223
-#, python-format
-msgid "WebDAV response status %s with reason '%s'."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:229
-#, python-format
-msgid "WebDAV redirect to: %s "
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:231
-msgid "WebDAV redirected 10 times. Giving up."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:236
-msgid "WebDAV missing location header in redirect response."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:241
-msgid "WebDAV retry request with authentification headers."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:242
-#, python-format
-msgid "WebDAV %s %s request2 with headers: %s "
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:246
-#, python-format
-msgid "WebDAV response2 status %s with reason '%s'."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:263
-msgid ""
-"python-kerberos needed to use kerberos                           "
-"authorization, falling back to basic auth."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:267
-#, python-format
-msgid ""
-"Kerberos authorization failed: %s.                          Falling back to "
-"basic auth."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:365
-#, python-format
-msgid "Creating missing directory %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:369
-#, python-format
-msgid "WebDAV MKCOL %s failed: %s %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:382
-#, python-format
-msgid "WebDAV path decoding and translation: %s -> %s"
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:427
-#, python-format
-msgid "WebDAV GET Bad status code %s reason %s."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:449
-#, python-format
-msgid "WebDAV PUT Bad status code %s reason %s."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:469
-#, python-format
-msgid "WebDAV DEL Bad status code %s reason %s."
-msgstr ""
 
 #: ../duplicity/librsync.py:195
 msgid ""
@@ -1685,6 +1623,21 @@ msgstr "end_index tidak sepadan"
 msgid "Hashes don't match"
 msgstr "Cincangan tidak sepadan"
 
+#: ../duplicity/patchdir.py:85 ../duplicity/patchdir.py:90
+#, python-format
+msgid "Patching %s"
+msgstr "Menampal %s"
+
+#: ../duplicity/patchdir.py:551
+#, python-format
+msgid "Error '%s' patching %s"
+msgstr "Ralat '%s' menampal %s"
+
+#: ../duplicity/patchdir.py:626
+#, python-format
+msgid "Writing %s of type %s"
+msgstr "Menulis %s dari jenis %s"
+
 #: ../duplicity/path.py:114
 #, python-format
 msgid "Warning: %s invalid devnums (0x%X), treating as (0, 0)."
@@ -1759,49 +1712,96 @@ msgstr "Menyentuh %s"
 msgid "Deleting tree %s"
 msgstr "Memadam pepohon %s"
 
-#: ../duplicity/gpginterface.py:238
-msgid "Threading not available -- zombie processes may appear"
-msgstr "Pembebenangan tidak tersedia -- proses zombi mungkin muncul"
-
-#: ../duplicity/gpginterface.py:705
+#: ../duplicity/robust.py:64
 #, python-format
-msgid "GPG process %d terminated before wait()"
-msgstr "Proses GPG %d ditamatkan sebelum wait()"
+msgid "Error listing directory %s"
+msgstr "Ralat menyenaraikan direktori %s"
 
-#: ../duplicity/dup_time.py:62
+#: ../duplicity/selection.py:121
+#, python-format
+msgid "Skipping socket %s"
+msgstr "Melangkau soket %s"
+
+#: ../duplicity/selection.py:125
+#, python-format
+msgid "Error initializing file %s"
+msgstr "Ralat mengawalkan fail %s"
+
+#: ../duplicity/selection.py:129 ../duplicity/selection.py:154
+#: ../duplicity/selection.py:463
+#, python-format
+msgid "Error accessing possibly locked file %s"
+msgstr "Ralat mencapai fail %s yang mungkin terkunci"
+
+#: ../duplicity/selection.py:169
+#, python-format
+msgid "Warning: base %s doesn't exist, continuing"
+msgstr "Amaran: pangkalan %s tidak wujud, teruskan"
+
+#: ../duplicity/selection.py:172 ../duplicity/selection.py:190
+#: ../duplicity/selection.py:193
+#, python-format
+msgid "Selecting %s"
+msgstr "Memilih %s"
+
+#: ../duplicity/selection.py:295
 #, python-format
 msgid ""
-"Bad interval string \"%s\"\n"
-"\n"
-"Intervals are specified like 2Y (2 years) or 2h30m (2.5 hours).  The\n"
-"allowed special characters are s, m, h, D, W, M, and Y.  See the man\n"
-"page for more information."
+"Fatal Error: The file specification\n"
+"    %s\n"
+"cannot match any files in the base directory\n"
+"    %s\n"
+"Useful file specifications begin with the base directory or some\n"
+"pattern (such as '**') which matches the base directory."
 msgstr ""
-"Rentetan sela \"%s\" teruk\n"
-"\n"
-"Sela dinyatakan seperti 2Y (2 tahun) atau 2h30m (2.5 jam).\n"
-"aksara khas yang dibenarkan adalah s, m, h, D, W, M, dan Y. Rujuk\n"
-"halaman manual untuk maklumat lanjut."
+"Ralat Matir: Spesifikasi fail\n"
+"    %s\n"
+"tidak dapat padankan sebarang fail dalam direktori dasar\n"
+"    %s\n"
+"Spesifikasi fail yang berguna bermula dengan direktori dasar atau\n"
+"corak (seperti '**') yang memadani direktori dasar."
 
-#: ../duplicity/dup_time.py:68
+#: ../duplicity/selection.py:304
 #, python-format
 msgid ""
-"Bad time string \"%s\"\n"
-"\n"
-"The acceptible time strings are intervals (like \"3D64s\"), w3-datetime\n"
-"strings, like \"2002-04-26T04:22:01-07:00\" (strings like\n"
-"\"2002-04-26T04:22:01\" are also acceptable - duplicity will use the\n"
-"current time zone), or ordinary dates like 2/4/1997 or 2001-04-23\n"
-"(various combinations are acceptable, but the month always precedes\n"
-"the day)."
+"Fatal Error while processing expression\n"
+"%s"
 msgstr ""
-"Rentetan masa \"%s\" teruk\n"
-"\n"
-"Rentetan masa yang boleh diterima adalah sela (seperti \"3D64s\"), \n"
-"rentetan w3-datetime, seperti \"2002-04-26T04:22:01-07:00\" (rentetan\n"
-"seperti \"2002-04-26T04:22:01\" juga diterima - duplicity akan guna zon\n"
-"waktu semasa), atau tarikh biasa seperti 2/4/1997 atau 2001-04-23\n"
-"(gabungan pelbagai diterima, tetapi bulan sentiasa mendahului hari)."
+"Ralat Mati semasa memproses ungkapan\n"
+"%s"
+
+#: ../duplicity/selection.py:313
+#, python-format
+msgid ""
+"Last selection expression:\n"
+"    %s\n"
+"only specifies that files be included.  Because the default is to\n"
+"include all files, the expression is redundant.  Exiting because this\n"
+"probably isn't what you meant."
+msgstr ""
+"Ungkapan pemilihan terakhir:\n"
+"    %s\n"
+"hanya nyatakan fail yang disertakan. Kerana lalai menyertakan semua\n"
+"fail, ungkapan adalah lewah, Keluar kerana ini bukanlah apa yang anda\n"
+"maksudkan."
+
+#: ../duplicity/selection.py:369
+#, python-format
+msgid "Reading globbing filelist %s"
+msgstr "Membaca senarai fail %s"
+
+#: ../duplicity/selection.py:402
+#, python-format
+msgid "Error compiling regular expression %s"
+msgstr "Ralat mengompil ungkapan nalar %s"
+
+#: ../duplicity/selection.py:419
+msgid ""
+"Warning: exclude-device-files is not the first selector.\n"
+"This may not be what you intended"
+msgstr ""
+"Amaran: exclude-device-files bukanlah pemilih pertama.\n"
+"Ia mungkin bukan yang anda kehendaki"
 
 #: ../duplicity/tempdir.py:135
 #, python-format

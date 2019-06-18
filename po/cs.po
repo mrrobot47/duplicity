@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-06-09 12:05-0500\n"
+"POT-Creation-Date: 2019-06-17 09:44-0500\n"
 "PO-Revision-Date: 2018-02-23 14:32+0000\n"
 "Last-Translator: Pavel Borecki <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2019-06-10 04:51+0000\n"
-"X-Generator: Launchpad (build 18978)\n"
+"X-Launchpad-Export-Date: 2019-06-18 05:51+0000\n"
+"X-Generator: Launchpad (build 18981)\n"
 
 #: ../bin/duplicity:128
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -445,91 +445,343 @@ msgstr "Chyba při otevírání souboru %s"
 msgid "File %s already exists, will not overwrite."
 msgstr "Soubor %s už existuje, nebude přepsán."
 
-#: ../duplicity/selection.py:121
+#: ../duplicity/asyncscheduler.py:71
 #, python-format
-msgid "Skipping socket %s"
-msgstr "Vynechává se soket %s"
+msgid "instantiating at concurrency %d"
+msgstr "doloženo příkladem v konkurenci %d"
 
-#: ../duplicity/selection.py:125
+#: ../duplicity/asyncscheduler.py:98
+msgid "inserting barrier"
+msgstr "vkládání bariéry"
+
+#: ../duplicity/asyncscheduler.py:147
+msgid "running task synchronously (asynchronicity disabled)"
+msgstr "spouštění úlohy synchronně (asynchronní je vypnuté)"
+
+#: ../duplicity/asyncscheduler.py:153
+msgid "scheduling task for asynchronous execution"
+msgstr "naplánování úlohy pro asynchronní vykonání"
+
+#: ../duplicity/asyncscheduler.py:182
+msgid "task completed successfully"
+msgstr "úloha úspěšně dokončena"
+
+#: ../duplicity/asyncscheduler.py:193
+msgid ""
+"a previously scheduled task has failed; propagating the result immediately"
+msgstr ""
+"dříve naplánovaná úloha se nezdařila, výsledek je proto propagován okamžitě"
+
+#: ../duplicity/asyncscheduler.py:216 ../duplicity/asyncscheduler.py:237
 #, python-format
-msgid "Error initializing file %s"
-msgstr "Chyba při inicializaci souboru %s"
+msgid "active workers = %d"
+msgstr "aktivní zpracovávající procesy = %d"
 
-#: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:463
+#: ../duplicity/asyncscheduler.py:257
 #, python-format
-msgid "Error accessing possibly locked file %s"
-msgstr "Chyba při přístupu k nejspíš zamčenému souboru %s"
+msgid "task execution done (success: %s)"
+msgstr "vykonání úlohy dokončeno (úspěch: %s)"
 
-#: ../duplicity/selection.py:169
+#: ../duplicity/backend.py:107
 #, python-format
-msgid "Warning: base %s doesn't exist, continuing"
-msgstr "Varování: základ %s neexistuje, pokračuje se"
+msgid "Import of %s %s"
+msgstr "Import %s %s"
 
-#: ../duplicity/selection.py:172 ../duplicity/selection.py:190
-#: ../duplicity/selection.py:193
+#: ../duplicity/backend.py:216
 #, python-format
-msgid "Selecting %s"
-msgstr "Vybírá se %s"
+msgid "Could not initialize backend: %s"
+msgstr "Nedaří se inicializovat podpůrnou vrstvu: %s"
 
-#: ../duplicity/selection.py:295
+#: ../duplicity/backend.py:380
+#, python-format
+msgid "Backtrace of previous error: %s"
+msgstr "Výpis zpětného volání funkce (backtrace) u předchozí chyby: %s"
+
+#: ../duplicity/backend.py:395
+#, python-format
+msgid "Giving up after %s attempts. %s: %s"
+msgstr "Vzdává se po %s pokusech. %s: %s"
+
+#: ../duplicity/backend.py:399
+#, python-format
+msgid "Attempt %s failed. %s: %s"
+msgstr "Pokus %s se nezdařil. %s: %s"
+
+#: ../duplicity/backend.py:493
+#, python-format
+msgid "Reading results of '%s'"
+msgstr "Čtení výsledků „%s“"
+
+#: ../duplicity/backend.py:519
+#, python-format
+msgid "Writing %s"
+msgstr "Zápis %s"
+
+#: ../duplicity/backend.py:560
+#, python-format
+msgid "File %s not found locally after get from backend"
+msgstr ""
+"Soubor %s nebyl nalezen lokálně po získání z podpůrné vrstvy (backend)"
+
+#: ../duplicity/backends/giobackend.py:108
+#, python-format
+msgid "Connection failed, please check your password: %s"
+msgstr "Připojení se nezdařilo, prosím zkontrolujte své heslo: %s"
+
+#: ../duplicity/backends/multibackend.py:89
+#, python-format
+msgid "MultiBackend: Could not parse query string %s: %s "
+msgstr "MultiBackend: nepodařilo se zpracovat řetězec dotazu %s: %s "
+
+#: ../duplicity/backends/multibackend.py:98
+#, python-format
+msgid "MultiBackend: Invalid query string %s: more than one value for %s"
+msgstr ""
+"MultiBackend: neplatný řetězec dotazu %s: více než jedna hodnota pro %s"
+
+#: ../duplicity/backends/multibackend.py:103
+#, python-format
+msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
+msgstr "MultiBackend: neplatný řetězec dotazu %s: neznámý parametr %s"
+
+#: ../duplicity/backends/multibackend.py:153
+#: ../duplicity/backends/multibackend.py:158
+#, python-format
+msgid "MultiBackend: illegal value for %s: %s"
+msgstr "MultiBackend: neplatná hodnota pro %s: %s"
+
+#: ../duplicity/backends/multibackend.py:166
+#, python-format
+msgid "MultiBackend: Url %s"
+msgstr "MultiBackend: URL %s"
+
+#: ../duplicity/backends/multibackend.py:170
+#, python-format
+msgid "MultiBackend: Could not load config file %s: %s "
+msgstr "MultiBackend: Nedaří se načíst soubor s nastavením %s: %s "
+
+#: ../duplicity/backends/multibackend.py:179
+#, python-format
+msgid "MultiBackend: use store %s"
+msgstr "MultiBackend: použít uložení %s"
+
+#: ../duplicity/backends/multibackend.py:184
+#, python-format
+msgid "MultiBackend: set env %s = %s"
+msgstr "MultiBackend: nastavit proměnnou prostředí %s = %s"
+
+#: ../duplicity/backends/multibackend.py:197
+#, python-format
+msgid "Multibackend: register affinity for prefix %s"
+msgstr "Multibackend: registrovat přiřazení pro předponu %s"
+
+#: ../duplicity/backends/multibackend.py:238
+#, python-format
+msgid "MultiBackend: _put: write to store #%s (%s)"
+msgstr "MultiBackend: _put: zapsat do uložení č. %s (%s)"
+
+#: ../duplicity/backends/multibackend.py:251
 #, python-format
 msgid ""
-"Fatal Error: The file specification\n"
-"    %s\n"
-"cannot match any files in the base directory\n"
-"    %s\n"
-"Useful file specifications begin with the base directory or some\n"
-"pattern (such as '**') which matches the base directory."
+"MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
 msgstr ""
-"Fatální chyba: specifikace souboru\n"
-"    %s\n"
-"neodpovídá žádnému ze souborů v základní složce\n"
-"    %s\n"
-"Použitelné specifikace souboru začínají základní složkou nebo  nějakým\n"
-"vzorem (jako např. „**“) což se shoduje se základní složkou."
+"MultiBackend: nepodařilo se zapsat do uložení č. %s (%s), zkuste č. %s, "
+"výjimka: %s"
 
-#: ../duplicity/selection.py:304
+#: ../duplicity/backends/multibackend.py:258
+#, python-format
+msgid "MultiBackend: failed to write %s. Aborting process."
+msgstr "MultiBackend: nezdařilo se zapsat do %s. Proces bude přerušen."
+
+#: ../duplicity/backends/multibackend.py:265
 #, python-format
 msgid ""
-"Fatal Error while processing expression\n"
-"%s"
+"MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
 msgstr ""
-"Fatální chyba při zpracovávání výrazu\n"
-"%s"
+"MultiBackend: nepodařilo se zapsat %s. Vyzkoušena všechny uložení a v žádném "
+"se neuspělo"
 
-#: ../duplicity/selection.py:313
+#: ../duplicity/backends/multibackend.py:284
+#, python-format
+msgid "MultiBackend: failed to get %s to %s from %s"
+msgstr "MultiBackend: nepodařilo se získat %s do %s z %s"
+
+#: ../duplicity/backends/multibackend.py:287
 #, python-format
 msgid ""
-"Last selection expression:\n"
-"    %s\n"
-"only specifies that files be included.  Because the default is to\n"
-"include all files, the expression is redundant.  Exiting because this\n"
-"probably isn't what you meant."
+"MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
 msgstr ""
-"Poslední výběrový dotaz:\n"
-"    %s\n"
-"určuje pouze soubory, které zahrnout. Protože výchozí je\n"
-"zahrnout všechny soubory, výraz je nadbytečný. Ukončuje se,\n"
-"protože to nejspíš není to, co chcete."
+"MultiBackend: nepodařilo se získat %s. Vyzkoušena všechna úložiště a na "
+"žádném neuspělo"
 
-#: ../duplicity/selection.py:369
+#: ../duplicity/backends/multibackend.py:296
 #, python-format
-msgid "Reading globbing filelist %s"
-msgstr "Čtení seznamu souborů %s, určeného zástupnými znaky"
+msgid "MultiBackend: list from %s: %s"
+msgstr "MultiBackend: seznam z %s: %s"
 
-#: ../duplicity/selection.py:402
+#: ../duplicity/backends/multibackend.py:302
 #, python-format
-msgid "Error compiling regular expression %s"
-msgstr "Chyba při kompilaci regulárního výrazu %s"
+msgid "MultiBackend: combined list: %s"
+msgstr "MultiBackend: kombinovaný seznam: %s"
 
-#: ../duplicity/selection.py:419
+#: ../duplicity/backends/multibackend.py:327
+#, python-format
+msgid "MultiBackend: failed to delete %s from %s"
+msgstr "MultiBackend: nepodařilo se smazat %s z %s"
+
+#: ../duplicity/backends/multibackend.py:331
+#, python-format
 msgid ""
-"Warning: exclude-device-files is not the first selector.\n"
-"This may not be what you intended"
+"MultiBackend: failed to delete %s. Tried all backing stores and none "
+"succeeded"
 msgstr ""
-"Varování: vynechání souborů zařízení není první výběr.\n"
-"To nemusí být to, co chcete"
+"MultiBackend: nepodařilo se smazat %s. Vyzkoušena všechna úložiště a na "
+"žádném se neuspělo"
+
+#: ../duplicity/backends/pydrivebackend.py:150
+#, python-format
+msgid "PyDrive backend: multiple files called '%s'."
+msgstr "Podpůrná vrstva PyDrive: vícero souborů nazvaných „%s“."
+
+#: ../duplicity/backends/webdavbackend.py:66
+msgid "Missing socket or ssl python modules."
+msgstr "Chybějící python moduly pro socket nebo ssl."
+
+#: ../duplicity/backends/webdavbackend.py:84
+#, python-format
+msgid "Cacert database file '%s' is not readable."
+msgstr "Soubor „%s“ s certifikáty cert. autorit není čitelný."
+
+#: ../duplicity/backends/webdavbackend.py:105
+msgid ""
+"Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
+msgstr ""
+"Volba „--ssl-cacert-path“ není podporovaná v python 2.7.8 a starších."
+
+#: ../duplicity/backends/webdavbackend.py:109
+#, python-format
+msgid ""
+"For certificate verification with python 2.7.8 or earlier a cacert database\n"
+"file is needed in one of these locations: %s\n"
+"Hints:\n"
+"Consult the man page, chapter 'SSL Certificate Verification'.\n"
+"Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
+msgstr ""
+
+#: ../duplicity/backends/webdavbackend.py:155
+#, python-format
+msgid "Using WebDAV protocol %s"
+msgstr "Pomocí WebDAV protokolu %s"
+
+#: ../duplicity/backends/webdavbackend.py:156
+#, python-format
+msgid "Using WebDAV host %s port %s"
+msgstr "S použitím WebDAV hostitele %s, port %s"
+
+#: ../duplicity/backends/webdavbackend.py:158
+#, python-format
+msgid "Using WebDAV directory %s"
+msgstr "S použitím WebDAV složky %s"
+
+#: ../duplicity/backends/webdavbackend.py:189
+#, python-format
+msgid "WebDAV create connection on '%s'"
+msgstr "WebDAV vytvořit spojení na „%s“"
+
+#: ../duplicity/backends/webdavbackend.py:200
+#, python-format
+msgid "WebDAV Unknown URI scheme: %s"
+msgstr "WebDAV neznámé schéma URI: %s"
+
+#: ../duplicity/backends/webdavbackend.py:219
+#, python-format
+msgid "WebDAV %s %s request with headers: %s "
+msgstr "WebDAV %s %s požadavek s hlavičkami: %s "
+
+#: ../duplicity/backends/webdavbackend.py:220
+#: ../duplicity/backends/webdavbackend.py:243
+#, python-format
+msgid "WebDAV data length: %s "
+msgstr "WebDAV datový objem: %s "
+
+#: ../duplicity/backends/webdavbackend.py:223
+#, python-format
+msgid "WebDAV response status %s with reason '%s'."
+msgstr "Stav %s WebDAV odpovědi s důvodem „%s“."
+
+#: ../duplicity/backends/webdavbackend.py:229
+#, python-format
+msgid "WebDAV redirect to: %s "
+msgstr "WebDAV přeměrovat na: %s "
+
+#: ../duplicity/backends/webdavbackend.py:231
+msgid "WebDAV redirected 10 times. Giving up."
+msgstr "WebDAV přesměroval 10 krát. Dále už se zkoušet nebude."
+
+#: ../duplicity/backends/webdavbackend.py:236
+msgid "WebDAV missing location header in redirect response."
+msgstr "WebDAV chybí hlavička umístění v přesměrovávací odpovědi."
+
+#: ../duplicity/backends/webdavbackend.py:241
+msgid "WebDAV retry request with authentification headers."
+msgstr "WebDAV požadavek na opětovný pokus s ověřovacími hlavičkami."
+
+#: ../duplicity/backends/webdavbackend.py:242
+#, python-format
+msgid "WebDAV %s %s request2 with headers: %s "
+msgstr "WebDAV %s %s druhý požadavek s hlavičkami: %s "
+
+#: ../duplicity/backends/webdavbackend.py:246
+#, python-format
+msgid "WebDAV response2 status %s with reason '%s'."
+msgstr "WebDAV stav %s druhé odpovědi s důvodem „%s“."
+
+#: ../duplicity/backends/webdavbackend.py:263
+msgid ""
+"python-kerberos needed to use kerberos                           "
+"authorization, falling back to basic auth."
+msgstr ""
+"Pro použití kerberos ověřování je třeba python-kerberos, náhradně se použije "
+"ověření uživatelským jménem a heslem."
+
+#: ../duplicity/backends/webdavbackend.py:267
+#, python-format
+msgid ""
+"Kerberos authorization failed: %s.                          Falling back to "
+"basic auth."
+msgstr ""
+"Kerberos ověřování se nezdařilo: %s. Náhradně se bude ověřovat uživatelským "
+"jménem a heslem."
+
+#: ../duplicity/backends/webdavbackend.py:365
+#, python-format
+msgid "Creating missing directory %s"
+msgstr "Vytváření chybějící složky %s"
+
+#: ../duplicity/backends/webdavbackend.py:369
+#, python-format
+msgid "WebDAV MKCOL %s failed: %s %s"
+msgstr "WebDAV MKCOL %s se nezdařilo: %s %s"
+
+#: ../duplicity/backends/webdavbackend.py:382
+#, python-format
+msgid "WebDAV path decoding and translation: %s -> %s"
+msgstr "WebDAV dekódování a překlad popisu umístění: %s -> %s"
+
+#: ../duplicity/backends/webdavbackend.py:427
+#, python-format
+msgid "WebDAV GET Bad status code %s reason %s."
+msgstr "WebDAV GET chybný stavový kód %s důvod %s."
+
+#: ../duplicity/backends/webdavbackend.py:449
+#, python-format
+msgid "WebDAV PUT Bad status code %s reason %s."
+msgstr "WebDAV PUT chybný stavový kód %s důvod %s."
+
+#: ../duplicity/backends/webdavbackend.py:469
+#, python-format
+msgid "WebDAV DEL Bad status code %s reason %s."
+msgstr "WebDAV DEL chybný stavový kód %s důvod %s."
 
 #: ../duplicity/commandline.py:78
 #, python-format
@@ -932,109 +1184,46 @@ msgstr ""
 msgid "Main action: "
 msgstr "Hlavní akce: "
 
-#: ../duplicity/backend.py:107
+#: ../duplicity/diffdir.py:116 ../duplicity/diffdir.py:418
 #, python-format
-msgid "Import of %s %s"
-msgstr "Import %s %s"
+msgid "Error %s getting delta for %s"
+msgstr "Chyba %s při získávání rozdílu pro %s"
 
-#: ../duplicity/backend.py:216
+#: ../duplicity/diffdir.py:130
 #, python-format
-msgid "Could not initialize backend: %s"
-msgstr "Nedaří se inicializovat podpůrnou vrstvu: %s"
+msgid "Getting delta of %s and %s"
+msgstr "Získávání rozdílu %s a %s"
 
-#: ../duplicity/backend.py:380
+#: ../duplicity/diffdir.py:181
 #, python-format
-msgid "Backtrace of previous error: %s"
-msgstr "Výpis zpětného volání funkce (backtrace) u předchozí chyby: %s"
+msgid "A %s"
+msgstr "A %s"
 
-#: ../duplicity/backend.py:395
+#: ../duplicity/diffdir.py:188
 #, python-format
-msgid "Giving up after %s attempts. %s: %s"
-msgstr "Vzdává se po %s pokusech. %s: %s"
+msgid "M %s"
+msgstr "M %s"
 
-#: ../duplicity/backend.py:399
+#: ../duplicity/diffdir.py:210
 #, python-format
-msgid "Attempt %s failed. %s: %s"
-msgstr "Pokus %s se nezdařil. %s: %s"
+msgid "Comparing %s and %s"
+msgstr "Porovnávání %s a %s"
 
-#: ../duplicity/backend.py:493
+#: ../duplicity/diffdir.py:218
 #, python-format
-msgid "Reading results of '%s'"
-msgstr "Čtení výsledků „%s“"
+msgid "D %s"
+msgstr "D %s"
 
-#: ../duplicity/backend.py:519
-#, python-format
-msgid "Writing %s"
-msgstr "Zápis %s"
-
-#: ../duplicity/backend.py:560
-#, python-format
-msgid "File %s not found locally after get from backend"
-msgstr ""
-"Soubor %s nebyl nalezen lokálně po získání z podpůrné vrstvy (backend)"
-
-#: ../duplicity/asyncscheduler.py:71
-#, python-format
-msgid "instantiating at concurrency %d"
-msgstr "doloženo příkladem v konkurenci %d"
-
-#: ../duplicity/asyncscheduler.py:98
-msgid "inserting barrier"
-msgstr "vkládání bariéry"
-
-#: ../duplicity/asyncscheduler.py:147
-msgid "running task synchronously (asynchronicity disabled)"
-msgstr "spouštění úlohy synchronně (asynchronní je vypnuté)"
-
-#: ../duplicity/asyncscheduler.py:153
-msgid "scheduling task for asynchronous execution"
-msgstr "naplánování úlohy pro asynchronní vykonání"
-
-#: ../duplicity/asyncscheduler.py:182
-msgid "task completed successfully"
-msgstr "úloha úspěšně dokončena"
-
-#: ../duplicity/asyncscheduler.py:193
-msgid ""
-"a previously scheduled task has failed; propagating the result immediately"
-msgstr ""
-"dříve naplánovaná úloha se nezdařila, výsledek je proto propagován okamžitě"
-
-#: ../duplicity/asyncscheduler.py:216 ../duplicity/asyncscheduler.py:237
-#, python-format
-msgid "active workers = %d"
-msgstr "aktivní zpracovávající procesy = %d"
-
-#: ../duplicity/asyncscheduler.py:257
-#, python-format
-msgid "task execution done (success: %s)"
-msgstr "vykonání úlohy dokončeno (úspěch: %s)"
-
-#: ../duplicity/patchdir.py:85 ../duplicity/patchdir.py:90
-#, python-format
-msgid "Patching %s"
-msgstr "Opravuje se %s"
-
-#: ../duplicity/patchdir.py:551
-#, python-format
-msgid "Error '%s' patching %s"
-msgstr "Chyba „%s“ při opravování %s"
-
-#: ../duplicity/patchdir.py:626
-#, python-format
-msgid "Writing %s of type %s"
-msgstr "Zápisování %s typu %s"
-
-#: ../duplicity/collections.py:178 ../duplicity/collections.py:192
+#: ../duplicity/dup_collections.py:178 ../duplicity/dup_collections.py:192
 #, python-format
 msgid "BackupSet.delete: missing %s"
 msgstr "BackupSet.delete: chybějící %s"
 
-#: ../duplicity/collections.py:217
+#: ../duplicity/dup_collections.py:217
 msgid "Fatal Error: No manifests found for most recent backup"
 msgstr "Fatální chyba: nebyly nalezeny žádné manifesty pro nejnovější zálohu"
 
-#: ../duplicity/collections.py:226
+#: ../duplicity/dup_collections.py:226
 msgid ""
 "Fatal Error: Remote manifest does not match local one.  Either the remote "
 "backup set or the local archive directory has been corrupted."
@@ -1042,100 +1231,100 @@ msgstr ""
 "Fatální chyba: Vzdálený manifest se neshoduje s tím místním. Buď byla "
 "poškozena vzdálená sada záloh, nebo místní archivní složka."
 
-#: ../duplicity/collections.py:234
+#: ../duplicity/dup_collections.py:234
 msgid "Fatal Error: Neither remote nor local manifest is readable."
 msgstr "Fatální chyba: Ani vzdálený, ani místní manifest nejsou čitelné."
 
-#: ../duplicity/collections.py:245
+#: ../duplicity/dup_collections.py:245
 #, python-format
 msgid "Processing local manifest %s (%s)"
 msgstr "Zpracovávání místního manifestu %s (%s)"
 
-#: ../duplicity/collections.py:257
+#: ../duplicity/dup_collections.py:257
 #, python-format
 msgid "Error processing remote manifest (%s): %s"
 msgstr "Chyba při zpracovávání místního manifestu (%s): %s"
 
-#: ../duplicity/collections.py:260
+#: ../duplicity/dup_collections.py:260
 #, python-format
 msgid "Processing remote manifest %s (%s)"
 msgstr "Zpracovávání vzdáleného manifestu %s (%s)"
 
-#: ../duplicity/collections.py:356
+#: ../duplicity/dup_collections.py:356
 msgid "Preferring Backupset over previous one!"
 msgstr "Upřednostňování sady záloh před předchozím!"
 
-#: ../duplicity/collections.py:359
+#: ../duplicity/dup_collections.py:359
 #, python-format
 msgid "Ignoring incremental Backupset (start_time: %s; needed: %s)"
 msgstr "Ignoruje se přírůstková sada záloh (start_time: %s, potřebný: %s)"
 
-#: ../duplicity/collections.py:364
+#: ../duplicity/dup_collections.py:364
 #, python-format
 msgid "Added incremental Backupset (start_time: %s / end_time: %s)"
 msgstr "Přidána přírůstková sada záloh (start_time: %s / end_time: %s)"
 
-#: ../duplicity/collections.py:434
+#: ../duplicity/dup_collections.py:434
 msgid "Chain start time: "
 msgstr "Čas začátku řetězu: "
 
-#: ../duplicity/collections.py:435
+#: ../duplicity/dup_collections.py:435
 msgid "Chain end time: "
 msgstr "Čas konce řetězu: "
 
-#: ../duplicity/collections.py:436
+#: ../duplicity/dup_collections.py:436
 #, python-format
 msgid "Number of contained backup sets: %d"
 msgstr "Počet obsažených sad záloh: %d"
 
-#: ../duplicity/collections.py:438
+#: ../duplicity/dup_collections.py:438
 #, python-format
 msgid "Total number of contained volumes: %d"
 msgstr "Celkový počet obsažených svazků: %d"
 
-#: ../duplicity/collections.py:440 ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:440 ../duplicity/dup_collections.py:1236
 msgid "Type of backup set:"
 msgstr "Typ sad záloh:"
 
-#: ../duplicity/collections.py:440 ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:440 ../duplicity/dup_collections.py:1236
 msgid "Time:"
 msgstr "Čas:"
 
-#: ../duplicity/collections.py:440
+#: ../duplicity/dup_collections.py:440
 msgid "Num volumes:"
 msgstr "Poč. svazků:"
 
-#: ../duplicity/collections.py:444 ../duplicity/collections.py:1242
+#: ../duplicity/dup_collections.py:444 ../duplicity/dup_collections.py:1242
 msgid "Full"
 msgstr "Plná"
 
-#: ../duplicity/collections.py:447 ../duplicity/collections.py:1244
+#: ../duplicity/dup_collections.py:447 ../duplicity/dup_collections.py:1244
 msgid "Incremental"
 msgstr "Přírůstková"
 
-#: ../duplicity/collections.py:507
+#: ../duplicity/dup_collections.py:507
 msgid "local"
 msgstr "místní"
 
-#: ../duplicity/collections.py:509
+#: ../duplicity/dup_collections.py:509
 msgid "remote"
 msgstr "vzdálená"
 
-#: ../duplicity/collections.py:664
+#: ../duplicity/dup_collections.py:664
 msgid "Collection Status"
 msgstr "Stav sběru"
 
-#: ../duplicity/collections.py:666
+#: ../duplicity/dup_collections.py:666
 #, python-format
 msgid "Connecting with backend: %s"
 msgstr "Spojování se s podpůrnou vrstvou: %s"
 
-#: ../duplicity/collections.py:668
+#: ../duplicity/dup_collections.py:668
 #, python-format
 msgid "Archive dir: %s"
 msgstr "Archivní složka: %s"
 
-#: ../duplicity/collections.py:671
+#: ../duplicity/dup_collections.py:671
 #, python-format
 msgid "Found %d secondary backup chain."
 msgid_plural "Found %d secondary backup chains."
@@ -1143,20 +1332,20 @@ msgstr[0] "Nalezen %d pomocný řetězec zálohy."
 msgstr[1] "Nalezeny %d pomocné řetězce zálohy."
 msgstr[2] "Nalezeno %d pomocných řetězců zálohy."
 
-#: ../duplicity/collections.py:676
+#: ../duplicity/dup_collections.py:676
 #, python-format
 msgid "Secondary chain %d of %d:"
 msgstr "Sekundární řetěz %d z %d:"
 
-#: ../duplicity/collections.py:682
+#: ../duplicity/dup_collections.py:682
 msgid "Found primary backup chain with matching signature chain:"
 msgstr "Nalezen hlavní řetěz zálohy s odpovídajícím podpisovým řetězem:"
 
-#: ../duplicity/collections.py:686
+#: ../duplicity/dup_collections.py:686
 msgid "No backup chains with active signatures found"
 msgstr "Nebyly nalezený žádné řetězce záloh s aktivními podpisy"
 
-#: ../duplicity/collections.py:689
+#: ../duplicity/dup_collections.py:689
 #, python-format
 msgid "Also found %d backup set not part of any chain,"
 msgid_plural "Also found %d backup sets not part of any chain,"
@@ -1166,7 +1355,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Také nalezeno %d sad záloh, které nejsou součástí žádného řetězce,"
 
-#: ../duplicity/collections.py:693
+#: ../duplicity/dup_collections.py:693
 #, python-format
 msgid "and %d incomplete backup set."
 msgid_plural "and %d incomplete backup sets."
@@ -1175,17 +1364,17 @@ msgstr[1] "a %d neúplné sady záloh."
 msgstr[2] "a %d neúplných sad záloh."
 
 #. "cleanup" is a hard-coded command, so do not translate it
-#: ../duplicity/collections.py:698
+#: ../duplicity/dup_collections.py:698
 msgid ""
 "These may be deleted by running duplicity with the \"cleanup\" command."
 msgstr ""
 "Ty mohou být smazány spuštěním duplicity s příkazem „cleanup“ (vyčištění)."
 
-#: ../duplicity/collections.py:701
+#: ../duplicity/dup_collections.py:701
 msgid "No orphaned or incomplete backup sets found."
 msgstr "Nebyly nalezeny žádné k ničemu nepatřící nebo neúplné sady záloh."
 
-#: ../duplicity/collections.py:717
+#: ../duplicity/dup_collections.py:717
 #, python-format
 msgid "%d file exists on backend"
 msgid_plural "%d files exist on backend"
@@ -1193,7 +1382,7 @@ msgstr[0] "%d soubor existuje na podpůrné vrstvě"
 msgstr[1] "%d soubory existují na podpůrné vrstvě"
 msgstr[2] "%d souborů existuje na podpůrné vrstvě"
 
-#: ../duplicity/collections.py:727
+#: ../duplicity/dup_collections.py:727
 #, python-format
 msgid "%d file exists in cache"
 msgid_plural "%d files exist in cache"
@@ -1201,13 +1390,13 @@ msgstr[0] "%d soubor existuje v mezipaměti"
 msgstr[1] "%d soubory existují v mezipaměti"
 msgstr[2] "%d souborů existuje v mezipaměti"
 
-#: ../duplicity/collections.py:780
+#: ../duplicity/dup_collections.py:780
 msgid ""
 "Warning, discarding last backup set, because of missing signature file."
 msgstr ""
 "Varování, zahazuje se nejnovější sada záloh, protože chybí soubor s podpisem."
 
-#: ../duplicity/collections.py:803
+#: ../duplicity/dup_collections.py:803
 msgid "Warning, found the following local orphaned signature file:"
 msgid_plural "Warning, found the following local orphaned signature files:"
 msgstr[0] ""
@@ -1218,7 +1407,7 @@ msgstr[2] ""
 "Varování, nalezeno následujících místních, k ničemu nepatřící podpisových "
 "souborů:"
 
-#: ../duplicity/collections.py:812
+#: ../duplicity/dup_collections.py:812
 msgid "Warning, found the following remote orphaned signature file:"
 msgid_plural "Warning, found the following remote orphaned signature files:"
 msgstr[0] ""
@@ -1231,18 +1420,18 @@ msgstr[2] ""
 "Varování, nalezeno následujících vzdálených souborů s podpisem, které k "
 "ničemu nepatří:"
 
-#: ../duplicity/collections.py:821
+#: ../duplicity/dup_collections.py:821
 msgid "Warning, found signatures but no corresponding backup files"
 msgstr "Varování, nalezeny podpisy ale žádné odpovídající soubory záloh"
 
-#: ../duplicity/collections.py:825
+#: ../duplicity/dup_collections.py:825
 msgid ""
 "Warning, found incomplete backup sets, probably left from aborted session"
 msgstr ""
 "Varování, nalezeny neúplné sady záloh, pravděpodobně zůstaly pro přerušeném "
 "sezení"
 
-#: ../duplicity/collections.py:829
+#: ../duplicity/dup_collections.py:829
 msgid "Warning, found the following orphaned backup file:"
 msgid_plural "Warning, found the following orphaned backup files:"
 msgstr[0] ""
@@ -1252,42 +1441,42 @@ msgstr[1] ""
 msgstr[2] ""
 "Varování, nalezeno následujících souborů zálohy, které k ničemu nepatří:"
 
-#: ../duplicity/collections.py:846
+#: ../duplicity/dup_collections.py:846
 #, python-format
 msgid "Extracting backup chains from list of files: %s"
 msgstr "Vyzískávají se řetězce zálohy ze seznamu souborů: %s"
 
-#: ../duplicity/collections.py:857
+#: ../duplicity/dup_collections.py:857
 #, python-format
 msgid "File %s is part of known set"
 msgstr "Soubor %s je součástí známé sady"
 
-#: ../duplicity/collections.py:860
+#: ../duplicity/dup_collections.py:860
 #, python-format
 msgid "File %s is not part of a known set; creating new set"
 msgstr "Soubor %s není součástí známé sady, bude proto vytvořena nová"
 
-#: ../duplicity/collections.py:865
+#: ../duplicity/dup_collections.py:865
 #, python-format
 msgid "Ignoring file (rejected by backup set) '%s'"
 msgstr "Ignoruje se soubor (odmítnutý sadou záloh) „%s“"
 
-#: ../duplicity/collections.py:881
+#: ../duplicity/dup_collections.py:881
 #, python-format
 msgid "Found backup chain %s"
 msgstr "Nalezen řetězec záloh %s"
 
-#: ../duplicity/collections.py:886
+#: ../duplicity/dup_collections.py:886
 #, python-format
 msgid "Added set %s to pre-existing chain %s"
 msgstr "Přidána sada %s k už existujícímu řetězci %s"
 
-#: ../duplicity/collections.py:890
+#: ../duplicity/dup_collections.py:890
 #, python-format
 msgid "Found orphaned set %s"
 msgstr "Nalezena sada %s, která k ničemu nepatří"
 
-#: ../duplicity/collections.py:1040
+#: ../duplicity/dup_collections.py:1040
 #, python-format
 msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
@@ -1296,54 +1485,52 @@ msgstr ""
 "Pro požadovaný čas neexistuje žádný řetězec podpisu. Náhradně se použije "
 "starší dostupný řetězec, začínající v čase %s."
 
-#: ../duplicity/collections.py:1234
+#: ../duplicity/dup_collections.py:1234
 #, python-format
 msgid "File: %s"
 msgstr "Soubor: %s"
 
-#: ../duplicity/collections.py:1235
+#: ../duplicity/dup_collections.py:1235
 #, python-format
 msgid "Total number of backup: %d"
 msgstr "Celkový počet záloh: %d"
 
-#: ../duplicity/collections.py:1236
+#: ../duplicity/dup_collections.py:1236
 msgid "Type of file change:"
 msgstr "Typ změny souboru:"
 
-#: ../duplicity/robust.py:64
+#: ../duplicity/dup_time.py:62
 #, python-format
-msgid "Error listing directory %s"
-msgstr "Chyba při vypisování obsahu složky %s"
+msgid ""
+"Bad interval string \"%s\"\n"
+"\n"
+"Intervals are specified like 2Y (2 years) or 2h30m (2.5 hours).  The\n"
+"allowed special characters are s, m, h, D, W, M, and Y.  See the man\n"
+"page for more information."
+msgstr "Chybný řetězec intervalu „%s“"
 
-#: ../duplicity/diffdir.py:117 ../duplicity/diffdir.py:419
+#: ../duplicity/dup_time.py:68
 #, python-format
-msgid "Error %s getting delta for %s"
-msgstr "Chyba %s při získávání rozdílu pro %s"
+msgid ""
+"Bad time string \"%s\"\n"
+"\n"
+"The acceptible time strings are intervals (like \"3D64s\"), w3-datetime\n"
+"strings, like \"2002-04-26T04:22:01-07:00\" (strings like\n"
+"\"2002-04-26T04:22:01\" are also acceptable - duplicity will use the\n"
+"current time zone), or ordinary dates like 2/4/1997 or 2001-04-23\n"
+"(various combinations are acceptable, but the month always precedes\n"
+"the day)."
+msgstr "Chybný časový řetězec „%s“"
 
-#: ../duplicity/diffdir.py:131
-#, python-format
-msgid "Getting delta of %s and %s"
-msgstr "Získávání rozdílu %s a %s"
+#: ../duplicity/gpginterface.py:238
+msgid "Threading not available -- zombie processes may appear"
+msgstr ""
+"Zpracování ve vláknech není k dispozici – mohou se objevovat zombie procesy"
 
-#: ../duplicity/diffdir.py:182
+#: ../duplicity/gpginterface.py:705
 #, python-format
-msgid "A %s"
-msgstr "A %s"
-
-#: ../duplicity/diffdir.py:189
-#, python-format
-msgid "M %s"
-msgstr "M %s"
-
-#: ../duplicity/diffdir.py:211
-#, python-format
-msgid "Comparing %s and %s"
-msgstr "Porovnávání %s a %s"
-
-#: ../duplicity/diffdir.py:219
-#, python-format
-msgid "D %s"
-msgstr "D %s"
+msgid "GPG process %d terminated before wait()"
+msgstr "GPG proces %d ukončen před funkcí wait()"
 
 #: ../duplicity/lazy.py:352
 #, python-format
@@ -1359,266 +1546,6 @@ msgstr "Chyba „%s“ při zpracování %s"
 #, python-format
 msgid "Skipping %s because of previous error"
 msgstr "Přeskakuje se %s kvůli předchozí chybě"
-
-#: ../duplicity/backends/giobackend.py:108
-#, python-format
-msgid "Connection failed, please check your password: %s"
-msgstr "Připojení se nezdařilo, prosím zkontrolujte své heslo: %s"
-
-#: ../duplicity/backends/multibackend.py:89
-#, python-format
-msgid "MultiBackend: Could not parse query string %s: %s "
-msgstr "MultiBackend: nepodařilo se zpracovat řetězec dotazu %s: %s "
-
-#: ../duplicity/backends/multibackend.py:98
-#, python-format
-msgid "MultiBackend: Invalid query string %s: more than one value for %s"
-msgstr ""
-"MultiBackend: neplatný řetězec dotazu %s: více než jedna hodnota pro %s"
-
-#: ../duplicity/backends/multibackend.py:103
-#, python-format
-msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
-msgstr "MultiBackend: neplatný řetězec dotazu %s: neznámý parametr %s"
-
-#: ../duplicity/backends/multibackend.py:153
-#: ../duplicity/backends/multibackend.py:158
-#, python-format
-msgid "MultiBackend: illegal value for %s: %s"
-msgstr "MultiBackend: neplatná hodnota pro %s: %s"
-
-#: ../duplicity/backends/multibackend.py:166
-#, python-format
-msgid "MultiBackend: Url %s"
-msgstr "MultiBackend: URL %s"
-
-#: ../duplicity/backends/multibackend.py:170
-#, python-format
-msgid "MultiBackend: Could not load config file %s: %s "
-msgstr "MultiBackend: Nedaří se načíst soubor s nastavením %s: %s "
-
-#: ../duplicity/backends/multibackend.py:179
-#, python-format
-msgid "MultiBackend: use store %s"
-msgstr "MultiBackend: použít uložení %s"
-
-#: ../duplicity/backends/multibackend.py:184
-#, python-format
-msgid "MultiBackend: set env %s = %s"
-msgstr "MultiBackend: nastavit proměnnou prostředí %s = %s"
-
-#: ../duplicity/backends/multibackend.py:197
-#, python-format
-msgid "Multibackend: register affinity for prefix %s"
-msgstr "Multibackend: registrovat přiřazení pro předponu %s"
-
-#: ../duplicity/backends/multibackend.py:238
-#, python-format
-msgid "MultiBackend: _put: write to store #%s (%s)"
-msgstr "MultiBackend: _put: zapsat do uložení č. %s (%s)"
-
-#: ../duplicity/backends/multibackend.py:251
-#, python-format
-msgid ""
-"MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
-msgstr ""
-"MultiBackend: nepodařilo se zapsat do uložení č. %s (%s), zkuste č. %s, "
-"výjimka: %s"
-
-#: ../duplicity/backends/multibackend.py:258
-#, python-format
-msgid "MultiBackend: failed to write %s. Aborting process."
-msgstr "MultiBackend: nezdařilo se zapsat do %s. Proces bude přerušen."
-
-#: ../duplicity/backends/multibackend.py:265
-#, python-format
-msgid ""
-"MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
-msgstr ""
-"MultiBackend: nepodařilo se zapsat %s. Vyzkoušena všechny uložení a v žádném "
-"se neuspělo"
-
-#: ../duplicity/backends/multibackend.py:284
-#, python-format
-msgid "MultiBackend: failed to get %s to %s from %s"
-msgstr "MultiBackend: nepodařilo se získat %s do %s z %s"
-
-#: ../duplicity/backends/multibackend.py:287
-#, python-format
-msgid ""
-"MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
-msgstr ""
-"MultiBackend: nepodařilo se získat %s. Vyzkoušena všechna úložiště a na "
-"žádném neuspělo"
-
-#: ../duplicity/backends/multibackend.py:296
-#, python-format
-msgid "MultiBackend: list from %s: %s"
-msgstr "MultiBackend: seznam z %s: %s"
-
-#: ../duplicity/backends/multibackend.py:302
-#, python-format
-msgid "MultiBackend: combined list: %s"
-msgstr "MultiBackend: kombinovaný seznam: %s"
-
-#: ../duplicity/backends/multibackend.py:327
-#, python-format
-msgid "MultiBackend: failed to delete %s from %s"
-msgstr "MultiBackend: nepodařilo se smazat %s z %s"
-
-#: ../duplicity/backends/multibackend.py:331
-#, python-format
-msgid ""
-"MultiBackend: failed to delete %s. Tried all backing stores and none "
-"succeeded"
-msgstr ""
-"MultiBackend: nepodařilo se smazat %s. Vyzkoušena všechna úložiště a na "
-"žádném se neuspělo"
-
-#: ../duplicity/backends/pydrivebackend.py:150
-#, python-format
-msgid "PyDrive backend: multiple files called '%s'."
-msgstr "Podpůrná vrstva PyDrive: vícero souborů nazvaných „%s“."
-
-#: ../duplicity/backends/webdavbackend.py:66
-msgid "Missing socket or ssl python modules."
-msgstr "Chybějící python moduly pro socket nebo ssl."
-
-#: ../duplicity/backends/webdavbackend.py:84
-#, python-format
-msgid "Cacert database file '%s' is not readable."
-msgstr "Soubor „%s“ s certifikáty cert. autorit není čitelný."
-
-#: ../duplicity/backends/webdavbackend.py:105
-msgid ""
-"Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
-msgstr ""
-"Volba „--ssl-cacert-path“ není podporovaná v python 2.7.8 a starších."
-
-#: ../duplicity/backends/webdavbackend.py:109
-#, python-format
-msgid ""
-"For certificate verification with python 2.7.8 or earlier a cacert database\n"
-"file is needed in one of these locations: %s\n"
-"Hints:\n"
-"Consult the man page, chapter 'SSL Certificate Verification'.\n"
-"Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
-msgstr ""
-
-#: ../duplicity/backends/webdavbackend.py:155
-#, python-format
-msgid "Using WebDAV protocol %s"
-msgstr "Pomocí WebDAV protokolu %s"
-
-#: ../duplicity/backends/webdavbackend.py:156
-#, python-format
-msgid "Using WebDAV host %s port %s"
-msgstr "S použitím WebDAV hostitele %s, port %s"
-
-#: ../duplicity/backends/webdavbackend.py:158
-#, python-format
-msgid "Using WebDAV directory %s"
-msgstr "S použitím WebDAV složky %s"
-
-#: ../duplicity/backends/webdavbackend.py:189
-#, python-format
-msgid "WebDAV create connection on '%s'"
-msgstr "WebDAV vytvořit spojení na „%s“"
-
-#: ../duplicity/backends/webdavbackend.py:200
-#, python-format
-msgid "WebDAV Unknown URI scheme: %s"
-msgstr "WebDAV neznámé schéma URI: %s"
-
-#: ../duplicity/backends/webdavbackend.py:219
-#, python-format
-msgid "WebDAV %s %s request with headers: %s "
-msgstr "WebDAV %s %s požadavek s hlavičkami: %s "
-
-#: ../duplicity/backends/webdavbackend.py:220
-#: ../duplicity/backends/webdavbackend.py:243
-#, python-format
-msgid "WebDAV data length: %s "
-msgstr "WebDAV datový objem: %s "
-
-#: ../duplicity/backends/webdavbackend.py:223
-#, python-format
-msgid "WebDAV response status %s with reason '%s'."
-msgstr "Stav %s WebDAV odpovědi s důvodem „%s“."
-
-#: ../duplicity/backends/webdavbackend.py:229
-#, python-format
-msgid "WebDAV redirect to: %s "
-msgstr "WebDAV přeměrovat na: %s "
-
-#: ../duplicity/backends/webdavbackend.py:231
-msgid "WebDAV redirected 10 times. Giving up."
-msgstr "WebDAV přesměroval 10 krát. Dále už se zkoušet nebude."
-
-#: ../duplicity/backends/webdavbackend.py:236
-msgid "WebDAV missing location header in redirect response."
-msgstr "WebDAV chybí hlavička umístění v přesměrovávací odpovědi."
-
-#: ../duplicity/backends/webdavbackend.py:241
-msgid "WebDAV retry request with authentification headers."
-msgstr "WebDAV požadavek na opětovný pokus s ověřovacími hlavičkami."
-
-#: ../duplicity/backends/webdavbackend.py:242
-#, python-format
-msgid "WebDAV %s %s request2 with headers: %s "
-msgstr "WebDAV %s %s druhý požadavek s hlavičkami: %s "
-
-#: ../duplicity/backends/webdavbackend.py:246
-#, python-format
-msgid "WebDAV response2 status %s with reason '%s'."
-msgstr "WebDAV stav %s druhé odpovědi s důvodem „%s“."
-
-#: ../duplicity/backends/webdavbackend.py:263
-msgid ""
-"python-kerberos needed to use kerberos                           "
-"authorization, falling back to basic auth."
-msgstr ""
-"Pro použití kerberos ověřování je třeba python-kerberos, náhradně se použije "
-"ověření uživatelským jménem a heslem."
-
-#: ../duplicity/backends/webdavbackend.py:267
-#, python-format
-msgid ""
-"Kerberos authorization failed: %s.                          Falling back to "
-"basic auth."
-msgstr ""
-"Kerberos ověřování se nezdařilo: %s. Náhradně se bude ověřovat uživatelským "
-"jménem a heslem."
-
-#: ../duplicity/backends/webdavbackend.py:365
-#, python-format
-msgid "Creating missing directory %s"
-msgstr "Vytváření chybějící složky %s"
-
-#: ../duplicity/backends/webdavbackend.py:369
-#, python-format
-msgid "WebDAV MKCOL %s failed: %s %s"
-msgstr "WebDAV MKCOL %s se nezdařilo: %s %s"
-
-#: ../duplicity/backends/webdavbackend.py:382
-#, python-format
-msgid "WebDAV path decoding and translation: %s -> %s"
-msgstr "WebDAV dekódování a překlad popisu umístění: %s -> %s"
-
-#: ../duplicity/backends/webdavbackend.py:427
-#, python-format
-msgid "WebDAV GET Bad status code %s reason %s."
-msgstr "WebDAV GET chybný stavový kód %s důvod %s."
-
-#: ../duplicity/backends/webdavbackend.py:449
-#, python-format
-msgid "WebDAV PUT Bad status code %s reason %s."
-msgstr "WebDAV PUT chybný stavový kód %s důvod %s."
-
-#: ../duplicity/backends/webdavbackend.py:469
-#, python-format
-msgid "WebDAV DEL Bad status code %s reason %s."
-msgstr "WebDAV DEL chybný stavový kód %s důvod %s."
 
 #: ../duplicity/librsync.py:195
 msgid ""
@@ -1716,6 +1643,21 @@ msgstr "end_index se neshoduje"
 msgid "Hashes don't match"
 msgstr "Otisky (hash) se neshodují"
 
+#: ../duplicity/patchdir.py:85 ../duplicity/patchdir.py:90
+#, python-format
+msgid "Patching %s"
+msgstr "Opravuje se %s"
+
+#: ../duplicity/patchdir.py:551
+#, python-format
+msgid "Error '%s' patching %s"
+msgstr "Chyba „%s“ při opravování %s"
+
+#: ../duplicity/patchdir.py:626
+#, python-format
+msgid "Writing %s of type %s"
+msgstr "Zápisování %s typu %s"
+
 #: ../duplicity/path.py:114
 #, python-format
 msgid "Warning: %s invalid devnums (0x%X), treating as (0, 0)."
@@ -1793,38 +1735,96 @@ msgstr ""
 msgid "Deleting tree %s"
 msgstr "Mazání stromu %s"
 
-#: ../duplicity/gpginterface.py:238
-msgid "Threading not available -- zombie processes may appear"
+#: ../duplicity/robust.py:64
+#, python-format
+msgid "Error listing directory %s"
+msgstr "Chyba při vypisování obsahu složky %s"
+
+#: ../duplicity/selection.py:121
+#, python-format
+msgid "Skipping socket %s"
+msgstr "Vynechává se soket %s"
+
+#: ../duplicity/selection.py:125
+#, python-format
+msgid "Error initializing file %s"
+msgstr "Chyba při inicializaci souboru %s"
+
+#: ../duplicity/selection.py:129 ../duplicity/selection.py:154
+#: ../duplicity/selection.py:463
+#, python-format
+msgid "Error accessing possibly locked file %s"
+msgstr "Chyba při přístupu k nejspíš zamčenému souboru %s"
+
+#: ../duplicity/selection.py:169
+#, python-format
+msgid "Warning: base %s doesn't exist, continuing"
+msgstr "Varování: základ %s neexistuje, pokračuje se"
+
+#: ../duplicity/selection.py:172 ../duplicity/selection.py:190
+#: ../duplicity/selection.py:193
+#, python-format
+msgid "Selecting %s"
+msgstr "Vybírá se %s"
+
+#: ../duplicity/selection.py:295
+#, python-format
+msgid ""
+"Fatal Error: The file specification\n"
+"    %s\n"
+"cannot match any files in the base directory\n"
+"    %s\n"
+"Useful file specifications begin with the base directory or some\n"
+"pattern (such as '**') which matches the base directory."
 msgstr ""
-"Zpracování ve vláknech není k dispozici – mohou se objevovat zombie procesy"
+"Fatální chyba: specifikace souboru\n"
+"    %s\n"
+"neodpovídá žádnému ze souborů v základní složce\n"
+"    %s\n"
+"Použitelné specifikace souboru začínají základní složkou nebo  nějakým\n"
+"vzorem (jako např. „**“) což se shoduje se základní složkou."
 
-#: ../duplicity/gpginterface.py:705
-#, python-format
-msgid "GPG process %d terminated before wait()"
-msgstr "GPG proces %d ukončen před funkcí wait()"
-
-#: ../duplicity/dup_time.py:62
-#, python-format
-msgid ""
-"Bad interval string \"%s\"\n"
-"\n"
-"Intervals are specified like 2Y (2 years) or 2h30m (2.5 hours).  The\n"
-"allowed special characters are s, m, h, D, W, M, and Y.  See the man\n"
-"page for more information."
-msgstr "Chybný řetězec intervalu „%s“"
-
-#: ../duplicity/dup_time.py:68
+#: ../duplicity/selection.py:304
 #, python-format
 msgid ""
-"Bad time string \"%s\"\n"
-"\n"
-"The acceptible time strings are intervals (like \"3D64s\"), w3-datetime\n"
-"strings, like \"2002-04-26T04:22:01-07:00\" (strings like\n"
-"\"2002-04-26T04:22:01\" are also acceptable - duplicity will use the\n"
-"current time zone), or ordinary dates like 2/4/1997 or 2001-04-23\n"
-"(various combinations are acceptable, but the month always precedes\n"
-"the day)."
-msgstr "Chybný časový řetězec „%s“"
+"Fatal Error while processing expression\n"
+"%s"
+msgstr ""
+"Fatální chyba při zpracovávání výrazu\n"
+"%s"
+
+#: ../duplicity/selection.py:313
+#, python-format
+msgid ""
+"Last selection expression:\n"
+"    %s\n"
+"only specifies that files be included.  Because the default is to\n"
+"include all files, the expression is redundant.  Exiting because this\n"
+"probably isn't what you meant."
+msgstr ""
+"Poslední výběrový dotaz:\n"
+"    %s\n"
+"určuje pouze soubory, které zahrnout. Protože výchozí je\n"
+"zahrnout všechny soubory, výraz je nadbytečný. Ukončuje se,\n"
+"protože to nejspíš není to, co chcete."
+
+#: ../duplicity/selection.py:369
+#, python-format
+msgid "Reading globbing filelist %s"
+msgstr "Čtení seznamu souborů %s, určeného zástupnými znaky"
+
+#: ../duplicity/selection.py:402
+#, python-format
+msgid "Error compiling regular expression %s"
+msgstr "Chyba při kompilaci regulárního výrazu %s"
+
+#: ../duplicity/selection.py:419
+msgid ""
+"Warning: exclude-device-files is not the first selector.\n"
+"This may not be what you intended"
+msgstr ""
+"Varování: vynechání souborů zařízení není první výběr.\n"
+"To nemusí být to, co chcete"
 
 #: ../duplicity/tempdir.py:135
 #, python-format
