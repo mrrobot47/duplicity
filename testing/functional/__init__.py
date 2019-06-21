@@ -101,7 +101,7 @@ class FunctionalTestCase(DuplicityTestCase):
                 cmd_list.extend([u"-w"])
         else:
             cmd_list = []
-        cmd_list.extend([u"duplicity"])
+        cmd_list.extend([u"../bin/duplicity"])
         cmd_list.extend(options)
         cmd_list.extend([u"-v0"])
         cmd_list.extend([u"--no-print-statistics"])

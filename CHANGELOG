@@ -16,6 +16,8 @@ New in v0.8.01 (2019/0?/??)
   - Use util.fsencode to encode file string
 * Fixed bug #1833573 0.8.00 does not work on Python 2
   - Fixed shebang to use /usr/bin/python instead of python2
+* Fixed bug #1833559 0.8 test fails with 'duplicity not found' errors
+  - Fixed assumption that duplicity/rdiffdir were in $PATH
 
 
 New in v0.8.00 (2019/05/29)

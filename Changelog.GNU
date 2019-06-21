@@ -2,6 +2,8 @@
 
     * Fixed bug #1833573 0.8.00 does not work on Python 2
       - Fixed shebang to use /usr/bin/python instead of python2
+    * Fixed bug #1833559 0.8 test fails with 'duplicity not found' errors
+      - Fixed assumption that duplicity/rdiffdir were in $PATH
 
 2019-06-17  Kenneth Loafman  <kenneth@loafman.com>
 
