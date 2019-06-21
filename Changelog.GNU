@@ -4,6 +4,9 @@
       - Fixed shebang to use /usr/bin/python instead of python2
     * Fixed bug #1833559 0.8 test fails with 'duplicity not found' errors
       - Fixed assumption that duplicity/rdiffdir were in $PATH
+    * Fixed failing test in testing/unit/test_globmatch.py
+      - Someone is messing with regex.  Fix same.
+      - See https://bugs.python.org/issue29995 for details
 
 2019-06-17  Kenneth Loafman  <kenneth@loafman.com>
 

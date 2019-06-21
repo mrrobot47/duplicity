@@ -87,7 +87,7 @@ class TestGlobToRegex(UnitTestCase):
         # see https://bugs.python.org/issue29995 for details
         if sys.version_info[:2] >= (3, 6):
             self.assertEqual(glob_to_regex(u"/usr/*/bin/"),
-                             u"/usr/[^/]*/bin/")
+                             u"\\/usr\\/[^/]*\\/bin\\/")
         else:
             self.assertEqual(glob_to_regex(u"/usr/*/bin/"),
                              u"\/usr\/[^/]*\/bin\/")
