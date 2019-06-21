@@ -14,6 +14,8 @@ New in v0.8.01 (2019/0?/??)
   - Simply converted int to str when making list
 * Merged in lp:~kaffeekiffer/duplicity/azure-python3-fix
   - Use util.fsencode to encode file string
+* Fixed bug #1833573 0.8.00 does not work on Python 2
+  - Fixed shebang to use /usr/bin/python instead of python2
 
 
 New in v0.8.00 (2019/05/29)

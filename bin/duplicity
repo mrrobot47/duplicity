@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # duplicity -- Encrypted bandwidth efficient backup
@@ -27,27 +27,31 @@
 # Please send mail to me or the mailing list if you find bugs or have
 # any suggestions.
 
-from builtins import filter
-from builtins import next
-from builtins import map
-from builtins import range
-from builtins import object
-import duplicity.errors
+from future import standard_library
+standard_library.install_aliases()
+from future.builtins import filter
+from future.builtins import map
+from future.builtins import next
+from future.builtins import object
+from future.builtins import range
+
 import copy
+import fasteners
 import gzip
 import os
 import platform
 import re
 import resource
-from os import statvfs
 import sys
-import threading
 import time
 import traceback
 import types
-import fasteners
+
+import duplicity.errors
 
 from datetime import datetime
+from os import statvfs
+
 from duplicity import asyncscheduler
 from duplicity import commandline
 from duplicity import diffdir

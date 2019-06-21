@@ -1,3 +1,8 @@
+2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1833573 0.8.00 does not work on Python 2
+      - Fixed shebang to use /usr/bin/python instead of python2
+
 2019-06-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix some import conflicts with the "past" module
