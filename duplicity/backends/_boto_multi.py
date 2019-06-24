@@ -113,6 +113,8 @@ class BotoBackend(BotoSingleBackend):
         self._pool.join()
 
     def upload(self, filename, key, headers=None):
+        import boto
+
         chunk_size = globals.s3_multipart_chunk_size
 
         # Check minimum chunk size for S3
