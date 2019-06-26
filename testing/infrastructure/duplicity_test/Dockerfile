@@ -24,6 +24,10 @@ FROM ubuntu:18.04
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
+
+# Set to non-interactive so no tzdata prompt
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Installing some pre-requisites and some
 # packages needed for testing duplicity
 RUN apt-get update \
@@ -41,7 +45,8 @@ RUN apt-get update \
             python-pip \
             python3-dev \
             python3-pip \
-            rdiff
+            rdiff \
+            tzdata  # required for testing/unit/test_statistics.py
 
 # The following packages are not necessary for testing but make life easier or support debugging
 RUN apt-get install -y \
