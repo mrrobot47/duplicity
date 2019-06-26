@@ -32,6 +32,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # packages needed for testing duplicity
 RUN apt-get update \
     && apt-get install -y \
+            2to3 \
             build-essential \
             bzr \
             intltool \
