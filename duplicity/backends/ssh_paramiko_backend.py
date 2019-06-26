@@ -27,7 +27,6 @@ from __future__ import division
 from builtins import oct
 from builtins import input
 from builtins import zip
-from past.utils import old_div
 import re
 import string
 import os
@@ -103,7 +102,7 @@ class SSHParamikoBackend(duplicity.backend.Backend):
             """
             def missing_host_key(self, client, hostname, key):
                 fp = hexlify(key.get_fingerprint())
-                fingerprint = u':'.join(a + b for a, b in list(zip(fp[::2], fp[1::2])))
+                fingerprint = u':'.join(str(a + b) for a, b in list(zip(fp[::2], fp[1::2])))
                 question = u"""The authenticity of host '%s' can't be established.
 %s key fingerprint is %s.
 Are you sure you want to continue connecting (yes/no)? """ % (hostname,
@@ -246,7 +245,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                 self.config[u'user'],
                 self.config[u'hostname'],
                 self.config[u'port'], e))
-        self.client.get_transport().set_keepalive((int)(old_div(globals.timeout, 2)))
+        self.client.get_transport().set_keepalive((int)(globals.timeout // 2))
 
         self.scheme = duplicity.backend.strip_prefix(parsed_url.scheme,
                                                      u'paramiko')

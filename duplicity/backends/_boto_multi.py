@@ -24,7 +24,6 @@ from __future__ import division
 from future import standard_library
 standard_library.install_aliases()
 from builtins import range
-from past.utils import old_div
 import os
 import sys
 import threading
@@ -127,7 +126,7 @@ class BotoBackend(BotoSingleBackend):
         if bytes < chunk_size:
             chunks = 1
         else:
-            chunks = old_div(bytes, chunk_size)
+            chunks = bytes // chunk_size
             if (bytes % chunk_size):
                 chunks += 1
 

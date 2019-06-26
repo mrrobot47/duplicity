@@ -101,7 +101,7 @@ class FunctionalTestCase(DuplicityTestCase):
                 cmd_list.extend([u"-w"])
         else:
             cmd_list = []
-        cmd_list.extend([u"duplicity"])
+        cmd_list.extend([u"../bin/duplicity"])
         cmd_list.extend(options)
         cmd_list.extend([u"-v0"])
         cmd_list.extend([u"--no-print-statistics"])
@@ -170,7 +170,7 @@ class FunctionalTestCase(DuplicityTestCase):
         before_files = self.get_backend_files()
 
         # If a chain ends with time X and the next full chain begins at time X,
-        # we may trigger an assert in collections.py.  If needed, sleep to
+        # we may trigger an assert in dup_collections.py.  If needed, sleep to
         # avoid such problems
         now = time.time()
         if self.last_backup == int(now):

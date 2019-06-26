@@ -36,7 +36,6 @@ from __future__ import absolute_import
 from __future__ import division
 
 from builtins import object
-from past.utils import old_div
 import collections as sys_collections
 import math
 import threading
@@ -197,14 +196,14 @@ class ProgressTracker(object):
 
         if self.is_full:
             # Compute mean ratio of data transfer, assuming 1:1 data density
-            self.current_estimation = old_div(float(self.total_bytecount), float(total_changes))
+            self.current_estimation = float(self.total_bytecount) // float(total_changes)
         else:
             # Compute mean ratio of data transfer, estimating unknown progress
-            change_ratio = old_div(float(self.total_bytecount), float(diffdir.stats.RawDeltaSize))
+            change_ratio = float(self.total_bytecount) // float(diffdir.stats.RawDeltaSize)
             change_delta = change_ratio - self.change_mean_ratio
-            self.change_mean_ratio += old_div(change_delta, float(self.nsteps))  # mean cumulated ratio
+            self.change_mean_ratio += change_delta // float(self.nsteps)  # mean cumulated ratio
             self.change_r_estimation += change_delta * (change_ratio - self.change_mean_ratio)
-            change_sigma = math.sqrt(math.fabs(old_div(self.change_r_estimation, float(self.nsteps))))
+            change_sigma = math.sqrt(math.fabs(self.change_r_estimation // float(self.nsteps)))
 
             u"""
             Combine variables for progress estimation
@@ -252,7 +251,7 @@ class ProgressTracker(object):
         self.elapsed_sum += elapsed
         projection = 1.0
         if self.progress_estimation > 0:
-            projection = old_div((1.0 - self.progress_estimation), self.progress_estimation)
+            projection = (1.0 - self.progress_estimation) // self.progress_estimation
         self.time_estimation = int(projection * float(self.elapsed_sum.total_seconds()))
 
         # Apply values only when monotonic, so the estimates look more consistent to the human eye

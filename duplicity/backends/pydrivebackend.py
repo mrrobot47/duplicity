@@ -116,7 +116,7 @@ Exception: %s""" % str(e))
         self.id_cache = {}
 
     def file_by_name(self, filename):
-        from pydrive.files import ApiRequestError
+        from pydrive.files import ApiRequestError  # pylint: disable=import-error
 
         filename = util.fsdecode(filename)  # PyDrive deals with unicode filenames
 
@@ -214,7 +214,7 @@ Exception: %s""" % str(e))
         return {u'size': size}
 
     def _error_code(self, operation, error):
-        from pydrive.files import ApiRequestError, FileNotUploadedError
+        from pydrive.files import ApiRequestError, FileNotUploadedError  # pylint: disable=import-error
         if isinstance(error, FileNotUploadedError):
             return log.ErrorCode.backend_not_found
         elif isinstance(error, ApiRequestError):

@@ -26,7 +26,6 @@ from builtins import zip
 from builtins import map
 from builtins import str
 from builtins import object
-from past.utils import old_div
 from future.builtins import map
 
 import re
@@ -207,7 +206,7 @@ class StatsObj(object):
         for abbrev_bytes, abbrev_string in self.byte_abbrev_list:
             if byte_count >= abbrev_bytes:
                 # Now get 3 significant figures
-                abbrev_count = old_div(float(byte_count), abbrev_bytes)
+                abbrev_count = float(byte_count) / abbrev_bytes
                 if abbrev_count >= 100:
                     precision = 0
                 elif abbrev_count >= 10:
@@ -296,7 +295,7 @@ class StatsObj(object):
         for attr in self.stat_attrs:
             if self.get_stat(attr) is not None:
                 self.set_stat(attr,
-                              old_div(self.get_stat(attr), float(len(statobj_list))))
+                              self.get_stat(attr) / float(len(statobj_list)))
         return self
 
     def get_statsobj_copy(self):

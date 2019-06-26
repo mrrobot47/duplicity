@@ -1,3 +1,26 @@
+2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1833573 0.8.00 does not work on Python 2
+      - Fixed shebang to use /usr/bin/python instead of python2
+    * Fixed bug #1833559 0.8 test fails with 'duplicity not found' errors
+      - Fixed assumption that duplicity/rdiffdir were in $PATH
+    * Fixed failing test in testing/unit/test_globmatch.py
+      - Someone is messing with regex.  Fix same.
+      - See https://bugs.python.org/issue29995 for details
+
+2019-06-17  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix some import conflicts with the "past" module
+      - Rename collections.py to dup_collections.py
+      - Remove all "from future.utils import old_div"
+      - Replace old_div() with "//" (in py27 for a while).
+      - All tests run for py3, unit tests run for py2.  The new
+        import fail is "from future import standard_library"
+    * Fixed bug #1831178 sequence item 0: expected str instance, int found
+      - Simply converted int to str when making list
+    * Merged in lp:~kaffeekiffer/duplicity/azure-python3-fix
+      - Use util.fsencode to encode file string
+
 2019-06-11  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~mterry/duplicity/uexc-string

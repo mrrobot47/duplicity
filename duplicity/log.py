@@ -25,7 +25,6 @@ u"""Log various messages depending on verbosity level"""
 from __future__ import division
 
 from builtins import str
-from past.utils import old_div
 from builtins import object
 import os
 import sys
@@ -184,7 +183,7 @@ def _RemainingSecs2Str(secs):
 def TransferProgress(progress, eta, changed_bytes, elapsed, speed, stalled):
     u"""Shortcut used for upload progress messages (verbosity 5)."""
     dots = int(0.4 * progress)  # int(40.0 * progress / 100.0) -- for 40 chars
-    data_amount = old_div(float(changed_bytes), 1024.0)
+    data_amount = float(changed_bytes) // 1024.0
     data_scale = u"KB"
     if data_amount > 1000.0:
         data_amount /= 1024.0
@@ -198,7 +197,7 @@ def TransferProgress(progress, eta, changed_bytes, elapsed, speed, stalled):
         speed_scale = u"B"
     else:
         eta_str = _RemainingSecs2Str(eta)
-        speed_amount = old_div(float(speed), 1024.0)
+        speed_amount = float(speed) // 1024.0
         speed_scale = u"KB"
         if speed_amount > 1000.0:
             speed_amount /= 1024.0

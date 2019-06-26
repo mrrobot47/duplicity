@@ -28,7 +28,6 @@ from __future__ import division
 from future import standard_library
 standard_library.install_aliases()
 from builtins import map
-from past.utils import old_div
 from future.builtins import map
 
 import re
@@ -86,7 +85,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
             globals.ssh_options = globals.ssh_options + u" -oPort=%s" % parsed_url.port
         # set some defaults if user has not specified already.
         if u"ServerAliveInterval" not in globals.ssh_options:
-            globals.ssh_options += u" -oServerAliveInterval=%d" % ((int)(old_div(globals.timeout, 2)))
+            globals.ssh_options += u" -oServerAliveInterval=%d" % ((int)(globals.timeout // 2))
         if u"ServerAliveCountMax" not in globals.ssh_options:
             globals.ssh_options += u" -oServerAliveCountMax=2"
 

@@ -39,7 +39,7 @@ class LogTest(FunctionalTestCase):
         u"""Check notification of a simple error code"""
 
         # Run actual duplicity command (will fail, because no arguments passed)
-        os.system(u"duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
+        os.system(u"../bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
 
         # The format of the file should be:
         # """ERROR 2

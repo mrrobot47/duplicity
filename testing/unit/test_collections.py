@@ -26,7 +26,7 @@ import random
 import pytest
 import unittest
 
-from duplicity import collections
+from duplicity import dup_collections
 from duplicity import backend
 from duplicity import globals
 from duplicity import path
@@ -99,7 +99,7 @@ class CollectionTest(UnitTestCase):
     def test_backup_chains(self):
         u"""Test basic backup chain construction"""
         random.shuffle(filename_list1)
-        cs = collections.CollectionsStatus(None, globals.archive_dir_path, u"full")
+        cs = dup_collections.CollectionsStatus(None, globals.archive_dir_path, u"full")
         chains, orphaned, incomplete = cs.get_backup_chains(filename_list1)  # @UnusedVariable
         if len(chains) != 1 or len(orphaned) != 0:
             print(chains)
@@ -120,26 +120,26 @@ class CollectionTest(UnitTestCase):
             assert cs.matched_chain_pair[0].end_time == 1029826800
             assert len(cs.all_backup_chains) == 1, cs.all_backup_chains
 
-        cs = collections.CollectionsStatus(self.real_backend, globals.archive_dir_path, u"full").set_values()
+        cs = dup_collections.CollectionsStatus(self.real_backend, globals.archive_dir_path, u"full").set_values()
         check_cs(cs)
         assert cs.matched_chain_pair[0].islocal()
 
     def test_sig_chain(self):
         u"""Test a single signature chain"""
-        chain = collections.SignatureChain(1, globals.archive_dir_path)
+        chain = dup_collections.SignatureChain(1, globals.archive_dir_path)
         for filename in local_sigchain_filename_list:
             assert chain.add_filename(filename)
         assert not chain.add_filename(b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg")
 
     def test_sig_chains(self):
         u"""Test making signature chains from filename list"""
-        cs = collections.CollectionsStatus(None, globals.archive_dir_path, u"full")
+        cs = dup_collections.CollectionsStatus(None, globals.archive_dir_path, u"full")
         chains, orphaned_paths = cs.get_signature_chains(local=1)
         self.sig_chains_helper(chains, orphaned_paths)
 
     def test_sig_chains2(self):
         u"""Test making signature chains from filename list on backend"""
-        cs = collections.CollectionsStatus(self.archive_dir_backend, globals.archive_dir_path, u"full")
+        cs = dup_collections.CollectionsStatus(self.archive_dir_backend, globals.archive_dir_path, u"full")
         chains, orphaned_paths = cs.get_signature_chains(local=None)
         self.sig_chains_helper(chains, orphaned_paths)
 
@@ -155,11 +155,11 @@ class CollectionTest(UnitTestCase):
     def sigchain_fileobj_get(self, local):
         u"""Return chain, local if local is true with filenames added"""
         if local:
-            chain = collections.SignatureChain(1, globals.archive_dir_path)
+            chain = dup_collections.SignatureChain(1, globals.archive_dir_path)
             for filename in local_sigchain_filename_list:
                 assert chain.add_filename(filename)
         else:
-            chain = collections.SignatureChain(None, self.real_backend)
+            chain = dup_collections.SignatureChain(None, self.real_backend)
             for filename in remote_sigchain_filename_list:
                 assert chain.add_filename(filename)
         return chain
@@ -197,7 +197,7 @@ class CollectionTest(UnitTestCase):
             p = self.output_dir.append(filename)
             p.touch()
 
-        cs = collections.CollectionsStatus(self.output_dir_backend, globals.archive_dir_path, u"full")
+        cs = dup_collections.CollectionsStatus(self.output_dir_backend, globals.archive_dir_path, u"full")
         cs.set_values()
         return cs
 

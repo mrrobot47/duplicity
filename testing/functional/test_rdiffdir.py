@@ -34,7 +34,7 @@ class RdiffdirTest(FunctionalTestCase):
 
     def run_rdiffdir(self, argstring):
         u"""Run rdiffdir with given arguments"""
-        self.run_cmd(u"rdiffdir " + argstring)
+        self.run_cmd(u"../bin/rdiffdir " + argstring)
 
     def run_cycle(self, dirname_list):
         u"""Run diff/patch cycle on directories in dirname_list"""
