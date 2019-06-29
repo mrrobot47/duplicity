@@ -29,6 +29,7 @@ from duplicity import globals
 from duplicity import log
 from duplicity.errors import FatalBackendException, BackendException
 from duplicity import progress
+from duplicity import util
 
 BOTO_MIN_VERSION = u"2.1.1"
 
@@ -203,6 +204,8 @@ class BotoBackend(duplicity.backend.Backend):
         self.resetConnection()
 
     def _put(self, source_path, remote_filename):
+        remote_filename = util.fsdecode(remote_filename)
+
         if globals.s3_european_buckets:
             if not globals.s3_use_new_style:
                 raise FatalBackendException(u"European bucket creation was requested, but not new-style "
@@ -267,6 +270,7 @@ class BotoBackend(duplicity.backend.Backend):
                    rough_upload_speed))
 
     def _get(self, remote_filename, local_path):
+        remote_filename = util.fsdecode(remote_filename)
         key_name = self.key_prefix + remote_filename
         self.pre_process_download(remote_filename, wait=True)
         key = self._listed_keys[key_name]
@@ -300,9 +304,11 @@ class BotoBackend(duplicity.backend.Backend):
         return filename_list
 
     def _delete(self, filename):
+        filename = util.fsdecode(filename)
         self.bucket.delete_key(self.key_prefix + filename)
 
     def _query(self, filename):
+        filename = util.fsdecode(filename)
         key = self.bucket.lookup(self.key_prefix + filename)
         if key is None:
             return {u'size': -1}

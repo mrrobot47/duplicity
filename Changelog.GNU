@@ -14,6 +14,8 @@
         * Use Ubuntu 18.04 version of pip
         * Add Python3 and 2to3 as a dependencies
         * Set docker locale as UTF-8
+    * Merged in lp:~mterry/duplicity/s3fsdecode
+      - Fix s3 backups by encoding remote filenames
 
 2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
 
