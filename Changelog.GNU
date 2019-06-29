@@ -5,6 +5,9 @@
       - from __future__ import print_function
         from future import standard_library
         standard_library.install_aliases()
+    * Merged lp:~mterry/duplicity/boto-import
+      - A couple functions in the boto backend were using the boto module
+        without importing it first.
 
 2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
 

@@ -182,6 +182,8 @@ class BotoBackend(duplicity.backend.Backend):
         del self.storage_uri
 
     def resetConnection(self):
+        import boto
+
         if getattr(self, u'conn', False):
             self.conn.close()
         self.bucket = None
