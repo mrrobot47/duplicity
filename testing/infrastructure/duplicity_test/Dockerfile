@@ -18,12 +18,21 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
+
+# Set locale to prevent UTF-8 errors
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
+
+# Set to non-interactive so no tzdata prompt
+ARG DEBIAN_FRONTEND=noninteractive
 
 # Installing some pre-requisites and some
 # packages needed for testing duplicity
 RUN apt-get update \
     && apt-get install -y \
+            2to3 \
             build-essential \
             bzr \
             intltool \
@@ -34,8 +43,11 @@ RUN apt-get update \
             openssl \
             par2 \
             python-dev \
+            python-pip \
+            python3-dev \
+            python3-pip \
             rdiff \
-            tzdata
+            tzdata  # required for testing/unit/test_statistics.py
 
 # The following packages are not necessary for testing but make life easier or support debugging
 RUN apt-get install -y \
@@ -45,12 +57,6 @@ RUN apt-get install -y \
             net-tools \
             ftp \
     && rm -rf /var/lib/apt/lists/*
-
-# Need to make gpg2 the default gpg
-RUN mv /usr/bin/gpg /usr/bin/gpg1 && ln -s /usr/bin/gpg2 /usr/bin/gpg
-
-# Installing pip
-RUN curl https://bootstrap.pypa.io/get-pip.py | python
 
 # Installing requirements for pip
 COPY requirements.txt /tmp
@@ -77,5 +83,10 @@ USER test
 # Branch the duplicity repo for testing
 RUN bzr branch lp:duplicity duplicity
 
+# Build rsync binding
+WORKDIR duplicity/duplicity
+RUN python2 compilec.py
+RUN python3 compilec.py
+
 # Set final workdir to duplicity
-WORKDIR duplicity
+WORKDIR ..

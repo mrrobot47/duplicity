@@ -8,6 +8,12 @@
     * Merged lp:~mterry/duplicity/boto-import
       - A couple functions in the boto backend were using the boto module
         without importing it first.
+    * Merged in lp:~aaron-whitehouse/duplicity/08-dockerfixes
+      - Update duplicity_test Dockerfile:
+        * Use 18.04 instead of 16.04
+        * Use Ubuntu 18.04 version of pip
+        * Add Python3 and 2to3 as a dependencies
+        * Set docker locale as UTF-8
 
 2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
 
