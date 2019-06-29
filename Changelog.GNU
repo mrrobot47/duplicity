@@ -1,7 +1,15 @@
 2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Normalize shebang to just python, no version number
+    * Fix so most testing/*.py files have the future suggested lines
+      - from __future__ import print_function
+        from future import standard_library
+        standard_library.install_aliases()
+
+2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
+
     * Fixed bug #1833573 0.8.00 does not work on Python 2
-      - Fixed shebang to use /usr/bin/python instead of python2
+      - Fixed shebang to use /usr/bin/python instead of python
     * Fixed bug #1833559 0.8 test fails with 'duplicity not found' errors
       - Fixed assumption that duplicity/rdiffdir were in $PATH
     * Fixed failing test in testing/unit/test_globmatch.py
@@ -815,7 +823,7 @@
 
 2016-07-03  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Merged in lp:~aaron-whitehouse/duplicity/remove-python26
+    * Merged in lp:~aaron-whitehouse/duplicity/remove-python6
       - Remove Python 2.6 support references and tests.
 
 2016-07-02  Kenneth Loafman  <kenneth@loafman.com>
@@ -1266,7 +1274,7 @@
 
     * Merged in lp:~aaron-whitehouse/duplicity/trailing_slash_match_dirs
       - Made globs with trailing slashes only match directories, not files, fixing Bug #1479545.
-    * Merged in lp:~aaron-whitehouse/duplicity/improve_tox_and_python2-6_testing
+    * Merged in lp:~aaron-whitehouse/duplicity/improve_tox_and_python-6_testing
       - Testing improvements, particularly in relation to testing against Python version 2.6:
         * tox.ini fixed so that it is possible to run individual tests against both Python 2.6 and 2.7;
         * updated test_code.py to use unittest2 for Python versions < 2.7 (instead of failing);
@@ -1796,7 +1804,7 @@
         identifier to the lock filename (we don't need a separate lock per thread,
         since our locking is per process).
       - I've tested with 2.6.0 and 2.7.6 (both extremes of our current support).
-    * Update shebang line to python2 instead of python to avoid confusion.
+    * Update shebang line to python instead of python to avoid confusion.
 
 2014-05-07  Kenneth Loafman  <kenneth@loafman.com>
 
@@ -1898,7 +1906,7 @@
 
     * Merged in lp:~mterry/duplicity/2.6isms
       - Here's a whole stack of minor syntax modernizations that will become
-        necessary in python3. They all work in python2.6.
+        necessary in python3. They all work in python.6.
       - I've added a new test to keep us honest and prevent backsliding on these
         modernizations. It runs 2to3 and will fail the test if 2to3 finds anything
         that needs fixing (with a specific set of exceptions carved out).
@@ -1913,7 +1921,7 @@
       - Drop static.py.
       - This is some of the oldest code in duplicity! A bzr blame says it is
         unmodified (except for whitespace / comment changes) since revision 1.
-      - But it's not needed anymore. Not really even since we updated to python2.4,
+      - But it's not needed anymore. Not really even since we updated to python.4,
         which introduced the @staticmethod decorator. So this branch drops it and
         its test file.
     * Merged in lp:~mterry/duplicity/encode-for-print
@@ -2526,7 +2534,7 @@
 
     probably fix
 
-    File "/usr/local/lib/python2.7/dist-packages/duplicity/backends/_ssh_pexpect.py", line 223, in run_sftp_command
+    File "/usr/local/lib/python.7/dist-packages/duplicity/backends/_ssh_pexpect.py", line 223, in run_sftp_command
     log.Warn("Running '%s' with commands:\n %s\n failed (attempt #%d): %s" % (commandline, "\n ".join(commands), n, msg))
     UnboundLocalError: local variable 'msg' referenced before assignment
 
@@ -3401,7 +3409,7 @@
 
 2011-08-23  Michael Terry  <mike@mterry.name>
 
-    use python2.7's tarfile instead of whichever version comes with user's python
+    use python.7's tarfile instead of whichever version comes with user's python
 
 2011-08-20  Michael Terry  <mike@mterry.name>
 

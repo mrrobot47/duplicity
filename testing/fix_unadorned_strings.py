@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2018 Aaron Whitehouse <aaron@whitehouse.kiwi.nz>
@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-# For predictable results in python2/3 all string literals need to be marked as unicode, bytes or raw
+# For predictable results in python/3 all string literals need to be marked as unicode, bytes or raw
 # This code finds all unadorned string literals (strings that are not marked with a u, b or r)
 
 from __future__ import print_function
@@ -28,17 +28,17 @@ import sys
 import tokenize
 import token
 
-# Unfortunately Python2 does not have the useful named tuple result from tokenize.tokenize,
+# Unfortunately python does not have the useful named tuple result from tokenize.tokenize,
 # so we have to recreate the effect using namedtuple and tokenize.generate_tokens
 from collections import namedtuple
-Python2_token = namedtuple(u'Python2_token', u'type string start end line')
+python_token = namedtuple(u'python_token', u'type string start end line')
 
 
 def return_unadorned_string_tokens(f):
     if sys.version_info[0] < 3:
         unnamed_tokens = tokenize.generate_tokens(f.readline)
         for t in unnamed_tokens:
-            named_token = Python2_token(token.tok_name[t[0]], *t[1:])
+            named_token = python_token(token.tok_name[t[0]], *t[1:])
             if named_token.type == u"STRING" and named_token.string[0] in [u'"', u"'"]:
                 yield named_token
 

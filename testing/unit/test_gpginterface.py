@@ -22,6 +22,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 or see http://www.gnu.org/copyleft/lesser.html
 """
 
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+
 import unittest
 
 import tempfile

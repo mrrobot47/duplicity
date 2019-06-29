@@ -19,8 +19,12 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 from builtins import next
 from builtins import range
+
 import unittest
 import pickle
 import sys

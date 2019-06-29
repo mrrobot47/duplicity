@@ -15,17 +15,22 @@ New in v0.8.01 (2019/0?/??)
 * Merged in lp:~kaffeekiffer/duplicity/azure-python3-fix
   - Use util.fsencode to encode file string
 * Fixed bug #1833573 0.8.00 does not work on Python 2
-  - Fixed shebang to use /usr/bin/python instead of python2
+  - Fixed shebang to use /usr/bin/python instead of python
 * Fixed bug #1833559 0.8 test fails with 'duplicity not found' errors
   - Fixed assumption that duplicity/rdiffdir were in $PATH
 * Fixed failing test in testing/unit/test_globmatch.py
   - Someone is messing with regex.  Fix same.
   - See https://bugs.python.org/issue29995 for details
+* Normalize shebang to just python, no version number
+* Fix so most testing/*.py files have the future suggested lines
+  - from __future__ import print_function
+    from future import standard_library
+    standard_library.install_aliases()
 
 
 New in v0.8.00 (2019/05/29)
 ---------------------------
-* Merged in lp:~aaron-whitehouse/duplicity/remove-python26
+* Merged in lp:~aaron-whitehouse/duplicity/remove-python6
   - Remove Python 2.6 support references and tests.
 * Fixed bug #1600692 with patch from Wolfgang Rohdewald
   - allow symlink to have optional trailing slash during verify.
@@ -818,7 +823,7 @@ New in v0.7.04 (2015/08/02)
   - Re-enable unit.test_selection tests that had been temporarily commented out.
 * Merged in lp:~aaron-whitehouse/duplicity/trailing_slash_match_dirs
   - Made globs with trailing slashes only match directories, not files, fixing Bug #1479545.
-* Merged in lp:~aaron-whitehouse/duplicity/improve_tox_and_python2-6_testing
+* Merged in lp:~aaron-whitehouse/duplicity/improve_tox_and_python-6_testing
   - Testing improvements, particularly in relation to testing against Python version 2.6:
     * tox.ini fixed so that it is possible to run individual tests against both Python 2.6 and 2.7;
     * updated test_code.py to use unittest2 for Python versions < 2.7 (instead of failing);
@@ -1081,7 +1086,7 @@ Enhancements:
     of pexpect.
 * Merged in lp:~mterry/duplicity/2.6isms
   - Here's a whole stack of minor syntax modernizations that will become
-    necessary in python3. They all work in python2.6.
+    necessary in python3. They all work in python.6.
   - I've added a new test to keep us honest and prevent backsliding on these
     modernizations. It runs 2to3 and will fail the test if 2to3 finds anything
     that needs fixing (with a specific set of exceptions carved out).
@@ -1096,7 +1101,7 @@ Enhancements:
   - Drop static.py.
   - This is some of the oldest code in duplicity! A bzr blame says it is
     unmodified (except for whitespace / comment changes) since revision 1.
-  - But it's not needed anymore. Not really even since we updated to python2.4,
+  - But it's not needed anymore. Not really even since we updated to python.4,
     which introduced the @staticmethod decorator. So this branch drops it and
     its test file.
 * Merged in lp:~mterry/duplicity/py3-map-filter
@@ -1151,7 +1156,7 @@ Enhancements:
     identifier to the lock filename (we don't need a separate lock per thread,
     since our locking is per process).
   - I've tested with 2.6.0 and 2.7.6 (both extremes of our current support).
-* Update shebang line to python2 instead of python to avoid confusion.
+* Update shebang line to python instead of python to avoid confusion.
 * Merged in lp:~3v1n0/duplicity/copy.com-backend
   - I've added a backend for Copy.com cloud storage, this supports all the
     required operations and works as it should from my tests.
@@ -1250,7 +1255,7 @@ Enhancements:
     of pexpect.
 * Merged in lp:~mterry/duplicity/2.6isms
   - Here's a whole stack of minor syntax modernizations that will become
-    necessary in python3. They all work in python2.6.
+    necessary in python3. They all work in python.6.
   - I've added a new test to keep us honest and prevent backsliding on these
     modernizations. It runs 2to3 and will fail the test if 2to3 finds anything
     that needs fixing (with a specific set of exceptions carved out).
@@ -1265,7 +1270,7 @@ Enhancements:
   - Drop static.py.
   - This is some of the oldest code in duplicity! A bzr blame says it is
     unmodified (except for whitespace / comment changes) since revision 1.
-  - But it's not needed anymore. Not really even since we updated to python2.4,
+  - But it's not needed anymore. Not really even since we updated to python.4,
     which introduced the @staticmethod decorator. So this branch drops it and
     its test file.
 * Merged in lp:~mterry/duplicity/encode-for-print
@@ -2204,7 +2209,7 @@ Fixed issues in Checkpoint/Restart:
 
 Bugs fixed this release:
 * 388034     Unable to backup
-* 378940     python2-6 issue / UTF-8 charset / Ubuntu 9.04
+* 378940     python-6 issue / UTF-8 charset / Ubuntu 9.04
 * 379386     Fix list-current-files w/ missing archive dir
 * 387102     Asynchronous upload not working properly
 * 387218     Make scp/ssh into sftp-only backend

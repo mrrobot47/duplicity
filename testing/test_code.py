@@ -106,7 +106,7 @@ class CodeTest(DuplicityTestCase):
 
     @skipCodeTest
     def test_unadorned_string_literals(self):
-        u"""For predictable results in python2/3 all string literals need to be marked as unicode, bytes or raw"""
+        u"""For predictable results in python/3 all string literals need to be marked as unicode, bytes or raw"""
 
         ignored_files = [
                          # These are not source files we want to check

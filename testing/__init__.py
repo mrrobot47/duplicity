@@ -18,6 +18,15 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from future.builtins import filter
+from future.builtins import map
+from future.builtins import next
+from future.builtins import object
+from future.builtins import range
+
 import os
 import sys
 import time

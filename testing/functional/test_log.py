@@ -18,6 +18,10 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+
 import unittest
 import os
 
@@ -39,7 +43,10 @@ class LogTest(FunctionalTestCase):
         u"""Check notification of a simple error code"""
 
         # Run actual duplicity command (will fail, because no arguments passed)
-        os.system(u"../bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
+        if "TOX_WORK_DIR" in os.environ:
+            os.system(u"duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
+        else:
+            os.system(u"../bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
 
         # The format of the file should be:
         # """ERROR 2

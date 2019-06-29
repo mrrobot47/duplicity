@@ -1,11 +1,15 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
+
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 
 import os
 import subprocess
 import sys
 
 if sys.argv[1] == '--version':
-    print 'blah | blah 1.0'
+    print('blah | blah 1.0')
     sys.exit(0)
 
 command = ""

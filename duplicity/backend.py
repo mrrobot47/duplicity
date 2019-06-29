@@ -29,6 +29,7 @@ standard_library.install_aliases()
 from builtins import str
 from builtins import range
 from builtins import object
+
 import errno
 import os
 import sys
@@ -303,7 +304,7 @@ class ParsedUrl(object):
         self.port = None
         try:
             self.port = pu.port
-        except Exception:  # not raised in python2.7+, just returns None
+        except Exception:  # not raised in python.7+, just returns None
             # old style rsync://host::[/]dest, are still valid, though they contain no port
             if not (self.scheme in [u'rsync'] and re.search(u'::[^:]*$', self.url_string)):
                 raise InvalidBackendURL(u"Syntax error (port) in: %s A%s B%s C%s" %

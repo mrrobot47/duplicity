@@ -44,7 +44,7 @@ except ImportError:
     # Most likely Python version < 3.2, so define our own fsencode/fsdecode.
     # These are functions that encode/decode unicode paths to filesystem encoding,
     # but the cleverness is that they handle non-unicode characters on Linux
-    # There is a *partial* backport to Python2 available here:
+    # There is a *partial* backport to python available here:
     # https://github.com/pjdelport/backports.os/blob/master/src/backports/os.py
     # but if it cannot be trusted for full-circle translation, then we may as well
     # just read and store the bytes version of the path as path.name before

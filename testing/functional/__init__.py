@@ -1,4 +1,3 @@
-from __future__ import print_function
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2012 Canonical Ltd
@@ -19,7 +18,9 @@ from __future__ import print_function
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from future.builtins import map
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 
 import os
 import pexpect
@@ -101,7 +102,10 @@ class FunctionalTestCase(DuplicityTestCase):
                 cmd_list.extend([u"-w"])
         else:
             cmd_list = []
-        cmd_list.extend([u"../bin/duplicity"])
+        if "TOX_WORK_DIR" in os.environ:
+            cmd_list.extend([u"duplicity"])
+        else:
+            cmd_list.extend([u"../bin/duplicity"])
         cmd_list.extend(options)
         cmd_list.extend([u"-v0"])
         cmd_list.extend([u"--no-print-statistics"])
