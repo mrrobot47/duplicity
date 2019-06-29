@@ -28,7 +28,6 @@ from builtins import zip
 from builtins import map
 from builtins import range
 from builtins import object
-from future.builtins import filter, map
 
 import types
 import gettext

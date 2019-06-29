@@ -25,7 +25,6 @@ from __future__ import print_function
 from builtins import filter
 from builtins import str
 from builtins import range
-from future.builtins import filter
 
 from copy import copy
 import optparse

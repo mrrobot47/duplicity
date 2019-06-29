@@ -22,7 +22,6 @@
 u"""Provide time related exceptions and functions"""
 
 from builtins import map
-from future.builtins import map
 
 import time
 import types

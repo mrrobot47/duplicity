@@ -28,7 +28,6 @@ from __future__ import division
 from future import standard_library
 standard_library.install_aliases()
 from builtins import map
-from future.builtins import map
 
 import re
 import string

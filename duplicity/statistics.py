@@ -26,7 +26,6 @@ from builtins import zip
 from builtins import map
 from builtins import str
 from builtins import object
-from future.builtins import map
 
 import re
 import time

@@ -16,6 +16,9 @@
         * Set docker locale as UTF-8
     * Merged in lp:~mterry/duplicity/s3fsdecode
       - Fix s3 backups by encoding remote filenames
+    * Fix reimport problem where "from future.builtins" was being treated
+      the differently than "from builtins".  They are both the same, so
+      converted to shorter form "from builtins" and removed duplicates.
 
 2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
 

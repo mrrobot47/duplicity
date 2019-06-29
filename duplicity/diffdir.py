@@ -35,7 +35,6 @@ from builtins import next
 from builtins import str
 from builtins import range
 from builtins import object
-from future.builtins import map
 
 import io
 import types

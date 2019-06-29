@@ -24,7 +24,6 @@ from builtins import filter
 from builtins import next
 from builtins import range
 from builtins import object
-from future.builtins import filter, map
 
 import re  # @UnusedImport
 import types

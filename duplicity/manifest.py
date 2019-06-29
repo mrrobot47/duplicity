@@ -25,7 +25,6 @@ from builtins import filter
 from builtins import map
 from builtins import range
 from builtins import object
-from future.builtins import filter
 
 import re
 import sys

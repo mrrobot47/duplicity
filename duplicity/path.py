@@ -29,7 +29,6 @@ associates stat information with filenames
 from builtins import filter
 from builtins import str
 from builtins import object
-from future.builtins import filter
 
 import stat
 import errno
