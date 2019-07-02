@@ -18,6 +18,10 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+# This Dockerfile assumes that docker built will be called from the parent
+# duplicity folder with -f testing/infrastructure/ so that the whole folder
+# can be copied into the container for testing.
+
 FROM ubuntu:18.04
 
 # Set locale to prevent UTF-8 errors
@@ -74,14 +78,15 @@ WORKDIR /home/test
 
 # Copy a SSH key to the users folder that is used for some test cases
 USER root
-COPY ./id_rsa /home/test/.ssh/
-COPY ./id_rsa.pub /home/test/.ssh/
+COPY testing/infrastructure/id_rsa /home/test/.ssh/
+COPY testing/infrastructure/id_rsa.pub /home/test/.ssh/
 RUN chown -R test:test /home/test/.ssh
 RUN chmod 400 /home/test/.ssh/id_rsa
-USER test 
 
-# Branch the duplicity repo for testing
-RUN bzr branch lp:duplicity duplicity
+# Copy the local duplicity folder into the container
+COPY . duplicity/
+RUN chown -R test:test duplicity
+USER test
 
 # Build rsync binding
 WORKDIR duplicity/duplicity
