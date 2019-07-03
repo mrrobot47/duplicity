@@ -40,6 +40,7 @@ New in v0.8.01 (2019/0?/??)
 * Fix reimport problem where "from future.builtins" was being treated
   the differently than "from builtins".  They are both the same, so
   converted to shorter form "from builtins" and removed duplicates.
+* Fix reversed port assignments (FTP & SSH) in docker-compose.yml.
 
 
 New in v0.8.00 (2019/05/29)

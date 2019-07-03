@@ -1,4 +1,8 @@
-2019-06-21  Kenneth Loafman  <kenneth@loafman.com>
+2019-07-03  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix reversed port assignments (FTP & SSH) in docker-compose.yml.
+
+2019-06-29  Kenneth Loafman  <kenneth@loafman.com>
 
     * Normalize shebang to just python, no version number
     * Fix so most testing/*.py files have the future suggested lines
