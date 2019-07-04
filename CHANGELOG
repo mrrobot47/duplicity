@@ -41,6 +41,7 @@ New in v0.8.01 (2019/0?/??)
   the differently than "from builtins".  They are both the same, so
   converted to shorter form "from builtins" and removed duplicates.
 * Fix reversed port assignments (FTP & SSH) in docker-compose.yml.
+* Fix some issues found by test_code.py.
 
 
 New in v0.8.00 (2019/05/29)

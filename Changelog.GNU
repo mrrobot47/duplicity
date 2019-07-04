@@ -1,3 +1,7 @@
+2019-07-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix some issues found by test_code.py.
+
 2019-07-03  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix reversed port assignments (FTP & SSH) in docker-compose.yml.

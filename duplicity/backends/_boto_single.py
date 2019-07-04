@@ -133,7 +133,7 @@ class BotoBackend(duplicity.backend.Backend):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
         try:
-            import boto
+            import boto  # pylint: disable=import-error
             from boto.s3.connection import Location
         except ImportError:
             raise
@@ -183,7 +183,7 @@ class BotoBackend(duplicity.backend.Backend):
         del self.storage_uri
 
     def resetConnection(self):
-        import boto
+        import boto  # pylint: disable=import-error
 
         if getattr(self, u'conn', False):
             self.conn.close()
