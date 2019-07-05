@@ -102,8 +102,8 @@ class FunctionalTestCase(DuplicityTestCase):
                 cmd_list.extend([u"-w"])
         else:
             cmd_list = []
-        if "TOX_WORK_DIR" in os.environ:
-            cmd_list.extend([u"duplicity"])
+        if u"TOX_WORK_DIR" in os.environ:
+            cmd_list.extend([u"bin/duplicity"])
         else:
             cmd_list.extend([u"../bin/duplicity"])
         cmd_list.extend(options)

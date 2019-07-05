@@ -43,8 +43,8 @@ class LogTest(FunctionalTestCase):
         u"""Check notification of a simple error code"""
 
         # Run actual duplicity command (will fail, because no arguments passed)
-        if "TOX_WORK_DIR" in os.environ:
-            os.system(u"duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
+        if u"TOX_WORK_DIR" in os.environ:
+            os.system(u"bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
         else:
             os.system(u"../bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
 
