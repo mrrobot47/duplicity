@@ -81,7 +81,7 @@ class BackupSet(object):
         """
         return self.remote_manifest_name
 
-    def add_filename(self, filename):
+    def add_filename(self, filename, pr=None):
         u"""
         Add a filename to given set.  Return true if it fits.
 
@@ -91,8 +91,12 @@ class BackupSet(object):
 
         @param filename: name of file to add
         @type filename: string
+
+        @param pr: pre-computed result of file_naming.parse(filename)
+        @type pr: Optional[ParseResults]
         """
-        pr = file_naming.parse(filename)
+        if not pr:
+            pr = file_naming.parse(filename)
         if not pr or not (pr.type == u"full" or pr.type == u"inc"):
             return False
 
@@ -851,14 +855,15 @@ class CollectionsStatus(object):
             u"""
             Try adding filename to existing sets, or make new one
             """
+            pr = file_naming.parse(filename)
             for set in sets:
-                if set.add_filename(filename):
+                if set.add_filename(filename, pr):
                     log.Debug(_(u"File %s is part of known set") % (util.fsdecode(filename),))
                     break
             else:
                 log.Debug(_(u"File %s is not part of a known set; creating new set") % (util.fsdecode(filename),))
                 new_set = BackupSet(self.backend, self.action)
-                if new_set.add_filename(filename):
+                if new_set.add_filename(filename, pr):
                     sets.append(new_set)
                 else:
                     log.Debug(_(u"Ignoring file (rejected by backup set) '%s'") % util.fsdecode(filename))
