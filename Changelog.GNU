@@ -4,6 +4,7 @@
     * Add encoding to logging.FileHandler call to make log file utf8
     * Ensure _librsync.so is regenned before tox testing.
     * Adjust POTFILES.in for compilec.py move.
+    * Fix so we start duplicity with the base python we run under.
 
 2019-07-04  Kenneth Loafman  <kenneth@loafman.com>
 

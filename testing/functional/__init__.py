@@ -102,10 +102,10 @@ class FunctionalTestCase(DuplicityTestCase):
                 cmd_list.extend([u"-w"])
         else:
             cmd_list = []
-        if u"TOX_WORK_DIR" in os.environ:
-            cmd_list.extend([u"bin/duplicity"])
-        else:
-            cmd_list.extend([u"../bin/duplicity"])
+        basepython = os.environ.get(u'TOXPYTHON', None)
+        if basepython is not None:
+            cmd_list.extend([basepython])
+        cmd_list.extend([u"../bin/duplicity"])
         cmd_list.extend(options)
         cmd_list.extend([u"-v0"])
         cmd_list.extend([u"--no-print-statistics"])
