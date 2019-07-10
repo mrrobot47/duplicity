@@ -1,3 +1,7 @@
+2019-07-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix warning in _librsync.c module.
+
 2019-07-04  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix some issues found by test_code.py.
