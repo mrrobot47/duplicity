@@ -1,6 +1,7 @@
 2019-07-10  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix warning in _librsync.c module.
+    * Add encoding to logging.FileHandler call to make log file utf8
 
 2019-07-04  Kenneth Loafman  <kenneth@loafman.com>
 
