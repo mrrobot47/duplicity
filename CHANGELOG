@@ -47,6 +47,7 @@ New in v0.8.01 (2019/0?/??)
 * Ensure _librsync.so is regenned before tox testing.
 * Adjust POTFILES.in for compilec.py move.
 * Fix so we start duplicity with the base python we run under.
+* Cleanup some trailing spaces/lines in Docker files.
 
 
 New in v0.8.00 (2019/05/29)

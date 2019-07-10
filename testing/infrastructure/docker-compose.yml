@@ -69,7 +69,3 @@ networks:
       driver: default
       config:
         - subnet: ${DUPLICITY_TEST_SUBNET}.0/24
-
-
-
-

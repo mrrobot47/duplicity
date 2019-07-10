@@ -3,7 +3,7 @@
 # Copyright 2017 Nils Tekampe <nils@tekampe.org>
 #
 # This file is part of duplicity.
-# It is the Dockerfile of a simple ftp server that is used for backend testing 
+# It is the Dockerfile of a simple ftp server that is used for backend testing
 #
 # Duplicity is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the
@@ -19,7 +19,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-FROM stilliard/pure-ftpd 
+FROM stilliard/pure-ftpd
 
 # Install some tools for convenience
 RUN apt-get update \
@@ -29,4 +29,4 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # Creating a ftp user account for testing testuser:testuser
-COPY pureftpd.passwd /etc/pure-ftpd/passwd/pureftpd.passwd 
+COPY pureftpd.passwd /etc/pure-ftpd/passwd/pureftpd.passwd

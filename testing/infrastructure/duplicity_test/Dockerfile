@@ -78,7 +78,7 @@ COPY ./id_rsa /home/test/.ssh/
 COPY ./id_rsa.pub /home/test/.ssh/
 RUN chown -R test:test /home/test/.ssh
 RUN chmod 400 /home/test/.ssh/id_rsa
-USER test 
+USER test
 
 # Branch the duplicity repo for testing
 RUN bzr branch lp:duplicity duplicity
