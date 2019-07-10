@@ -44,6 +44,7 @@ New in v0.8.01 (2019/0?/??)
 * Fix some issues found by test_code.py.
 * Fix warning in _librsync.c module.
 * Add encoding to logging.FileHandler call to make log file utf8
+* Ensure _librsync.so is regenned before tox testing.
 
 
 New in v0.8.00 (2019/05/29)

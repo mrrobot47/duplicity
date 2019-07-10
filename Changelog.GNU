@@ -2,6 +2,7 @@
 
     * Fix warning in _librsync.c module.
     * Add encoding to logging.FileHandler call to make log file utf8
+    * Ensure _librsync.so is regenned before tox testing.
 
 2019-07-04  Kenneth Loafman  <kenneth@loafman.com>
 
