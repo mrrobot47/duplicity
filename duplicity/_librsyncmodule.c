@@ -330,8 +330,7 @@ _librsync_new_patchmaker(PyObject* self, PyObject* args)
   fd = dup(fd);
   if (fd == -1) {
     char buf[256];
-    int dummy;
-    dummy = strerror_r(errno, buf, sizeof(buf));
+    strerror_r(errno, buf, sizeof(buf));
     PyErr_SetString(PyExc_TypeError, buf);
     return NULL;
   }
