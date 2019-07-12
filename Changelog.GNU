@@ -1,3 +1,10 @@
+2019-07-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Another unadorned string.
+    * Cleanup some trailing spaces/lines in Docker files.
+    * Make sure test filenames a bytes not unicode.
+    * Fix test_glob_to_regex to work on Python 3.7
+
 2019-07-10  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix warning in _librsync.c module.

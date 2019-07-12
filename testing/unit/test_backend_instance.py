@@ -52,7 +52,7 @@ class BackendInstanceBase(UnitTestCase):
     def test_get(self):
         if self.backend is None:
             return
-        self.backend._put(self.local, u'a')
+        self.backend._put(self.local, b'a')
         getfile = path.Path(u'testfiles/getfile')
         self.backend._get(b'a', getfile)
         self.assertTrue(self.local.compare_data(getfile))
@@ -129,7 +129,7 @@ class BackendInstanceBase(UnitTestCase):
         copy = path.Path(u'testfiles/copy')
         self.local.copy(copy)
 
-        self.backend._move(self.local, u'a')
+        self.backend._move(self.local, b'a')
         self.assertTrue(b'a' in self.backend._list())
         self.assertFalse(self.local.exists())
 
@@ -142,8 +142,8 @@ class BackendInstanceBase(UnitTestCase):
             return
         if not hasattr(self.backend, u'_query'):
             return
-        self.backend._put(self.local, u'a')
-        info = self.backend._query(u'a')
+        self.backend._put(self.local, b'a')
+        info = self.backend._query(b'a')
         self.assertEqual(info[u'size'], self.local.getsize())
 
     def test_query_missing(self):
@@ -154,7 +154,7 @@ class BackendInstanceBase(UnitTestCase):
         # Backends can either return -1 themselves, or throw an error
         # that gives log.ErrorCode.backend_not_found.
         try:
-            info = self.backend._query(u'a')
+            info = self.backend._query(b'a')
         except BackendException as e:
             pass  # Something went wrong, but it was an 'expected' something
         except Exception as e:
@@ -168,12 +168,12 @@ class BackendInstanceBase(UnitTestCase):
             return
         if not hasattr(self.backend, u'_query_list'):
             return
-        self.backend._put(self.local, u'a')
-        self.backend._put(self.local, u'c')
-        info = self.backend._query_list([u'a', u'b'])
-        self.assertEqual(info[u'a'][u'size'], self.local.getsize())
-        self.assertEqual(info[u'b'][u'size'], -1)
-        self.assertFalse(u'c' in info)
+        self.backend._put(self.local, b'a')
+        self.backend._put(self.local, b'c')
+        info = self.backend._query_list([b'a', b'b'])
+        self.assertEqual(info[b'a'][u'size'], self.local.getsize())
+        self.assertEqual(info[b'b'][u'size'], -1)
+        self.assertFalse(b'c' in info)
 
 
 class LocalBackendTest(BackendInstanceBase):

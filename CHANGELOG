@@ -47,7 +47,10 @@ New in v0.8.01 (2019/0?/??)
 * Ensure _librsync.so is regenned before tox testing.
 * Adjust POTFILES.in for compilec.py move.
 * Fix so we start duplicity with the base python we run under.
+* Another unadorned string.
 * Cleanup some trailing spaces/lines in Docker files.
+* Make sure test filenames a bytes not unicode.
+* Fix test_glob_to_regex to work on Python 3.7
 
 
 New in v0.8.00 (2019/05/29)
