@@ -53,6 +53,7 @@ New in v0.8.01 (2019/0?/??)
 * Fix test_glob_to_regex to work on Python 3.7
 * Install python3.6 and 3.7 explicitly in Dockerfile.  Tox and Docker
   now support testing Python 2,7, 3.6, and 3.7.
+* Comment out HSIBackendTest since shim is not up-to-date.
 
 
 New in v0.8.00 (2019/05/29)

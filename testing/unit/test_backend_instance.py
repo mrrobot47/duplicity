@@ -213,14 +213,14 @@ class TahoeBackendTest(BackendInstanceBase):
         self.assertEqual(self.backend.__class__.__name__, u'TAHOEBackend')
 
 
-class HSIBackendTest(BackendInstanceBase):
-    def setUp(self):
-        super(HSIBackendTest, self).setUp()
-        os.makedirs(u'testfiles/output')
-        # hostname is ignored...  Seemingly on purpose
-        url = u'hsi://hostname%s/testfiles/output' % os.getcwd()
-        self.backend = duplicity.backend.get_backend_object(url)
-        self.assertEqual(self.backend.__class__.__name__, u'HSIBackend')
+#  class HSIBackendTest(BackendInstanceBase):
+#      def setUp(self):
+#          super(HSIBackendTest, self).setUp()
+#          os.makedirs(u'testfiles/output')
+#          # hostname is ignored...  Seemingly on purpose
+#          url = u'hsi://hostname%s/testfiles/output' % os.getcwd()
+#          self.backend = duplicity.backend.get_backend_object(url)
+#          self.assertEqual(self.backend.__class__.__name__, u'HSIBackend')
 
 
 class FTPBackendTest(BackendInstanceBase):
