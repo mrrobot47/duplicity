@@ -1,4 +1,4 @@
-New in v0.8.01 (2019/0?/??)
+New in v0.8.01 (2019/07/14)
 ---------------------------
 * Merged in lp:~mterry/duplicity/gio-pydrive-fsdecode
   - Fix gio and pydrive backends to use fsdecode
@@ -54,6 +54,7 @@ New in v0.8.01 (2019/0?/??)
 * Install python3.6 and 3.7 explicitly in Dockerfile.  Tox and Docker
   now support testing Python 2,7, 3.6, and 3.7.
 * Comment out HSIBackendTest since shim is not up-to-date.
+* Merged in po-updates.
 
 
 New in v0.8.00 (2019/05/29)

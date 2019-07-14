@@ -3,6 +3,7 @@
     * Install python3.6 and 3.7 explicitly in Dockerfile.  Tox and Docker
       now support testing Python 2,7, 3.6, and 3.7.
     * Comment out HSIBackendTest since shim is not up-to-date.
+    * Merged in po-updates.
 
 2019-07-11  Kenneth Loafman  <kenneth@loafman.com>
 
