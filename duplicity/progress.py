@@ -262,8 +262,8 @@ class ProgressTracker(object):
         Compute Exponential Moving Average of speed as bytes/sec of the last 30 probes
         """
         if elapsed.total_seconds() > 0:
-            self.transfers.append(old_div(float(self.total_bytecount - self.last_total_bytecount),
-                                  float(elapsed.total_seconds())))
+            self.transfers.append(float(self.total_bytecount - self.last_total_bytecount) //
+                                  float(elapsed.total_seconds()))
         self.last_total_bytecount = self.total_bytecount
         if len(self.transfers) > 30:
             self.transfers.popleft()
