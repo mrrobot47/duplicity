@@ -1,3 +1,9 @@
+2019-07-17  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Remove python-gettext from requirements.txt.  Normal
+      Python installation includes gettext.
+    * Mod README to include Python 3.6 and 3.7
+
 2019-07-14  Kenneth Loafman  <kenneth@loafman.com>
 
     * Install python3.6 and 3.7 explicitly in Dockerfile.  Tox and Docker

@@ -1,3 +1,10 @@
+New in v0.8.02 (2019/07/??)
+---------------------------
+* Remove python-gettext from requirements.txt.  Normal
+  Python installation includes gettext.
+* Mod README to include Python 3.6 and 3.7
+
+
 New in v0.8.01 (2019/07/14)
 ---------------------------
 * Merged in lp:~mterry/duplicity/gio-pydrive-fsdecode
