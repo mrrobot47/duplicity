@@ -5,6 +5,8 @@ New in v0.8.02 (2019/07/??)
 * Mod README to include Python 3.6 and 3.7
 * Fixed bug #1836829 progress.py: old_div not defined
   - also fixed old_div in _boto_multi.py
+* Merged in lp:~limburgher/duplicity/dropbox
+  - Fixes bug #1836611 dropbox mixing bytes and strings
 
 
 New in v0.8.01 (2019/07/14)
