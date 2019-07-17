@@ -7,6 +7,8 @@
       - also fixed old_div in _boto_multi.py
     * Merged in lp:~limburgher/duplicity/dropbox
       - Fixes bug #1836611 dropbox mixing bytes and strings
+    * Merged in lp:~stragerneds/duplicity/duplicity
+      - Cache results of filename parsing for speedup
 
 2019-07-14  Kenneth Loafman  <kenneth@loafman.com>
 
