@@ -3,6 +3,8 @@
     * Remove python-gettext from requirements.txt.  Normal
       Python installation includes gettext.
     * Mod README to include Python 3.6 and 3.7
+    * Fixed bug #1836829 progress.py: old_div not defined
+      - also fixed old_div in _boto_multi.py
 
 2019-07-14  Kenneth Loafman  <kenneth@loafman.com>
 
