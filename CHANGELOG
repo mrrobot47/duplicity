@@ -13,6 +13,8 @@ New in v0.8.02 (2019/07/??)
 * Merged in lp:~mterry/duplicity/pytest-runner-move
   - Move pytest-runner to testing requirements in setup
 * Fix language classifiers in setup.py
+* Remove speedup in testing backup.  The math was correct,
+  but it's failing on Docker and Launchpad testing.
 
 
 New in v0.8.01 (2019/07/14)

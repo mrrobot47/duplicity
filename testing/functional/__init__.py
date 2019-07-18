@@ -178,10 +178,7 @@ class FunctionalTestCase(DuplicityTestCase):
         # avoid such problems
         now = time.time()
         if self.last_backup == int(now):
-            seconds_to_sleep = (self.last_backup + 1) - now
-            assert 0 <= seconds_to_sleep <= 1
-            time.sleep(seconds_to_sleep)
-            assert int(time.time()) != self.last_backup
+            time.sleep(1)
 
         result = self.run_duplicity(options=options, **kwargs)
         self.last_backup = int(time.time())
