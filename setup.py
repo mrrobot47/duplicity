@@ -196,9 +196,8 @@ setup(name=u"duplicity",
     ext_modules=ext_modules,
     scripts=[u'bin/rdiffdir', u'bin/duplicity'],
     data_files=data_files,
-    setup_requires=[u'pytest-runner'],
     install_requires=[u'fasteners', u'future'],
-    tests_require=[u'pytest',u'fasteners', u'future', u'mock', u'pexpect'],
+    tests_require=[u'pytest', u'pytest-runner', u'fasteners', u'future', u'mock', u'pexpect'],
     test_suite=u'testing',
     cmdclass={u'test': TestCommand,
               u'install': InstallCommand,
@@ -207,5 +206,6 @@ setup(name=u"duplicity",
     classifiers=[u"Programming Language :: Python :: 2",
                  u"Programming Language :: Python :: 2.7",
                  u"Programming Language :: Python :: 3",
-                 u"Programming Language :: Python :: 3.5"]
+                 u"Programming Language :: Python :: 3.6",
+                 u"Programming Language :: Python :: 3.7"]
     )

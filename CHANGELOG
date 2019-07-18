@@ -10,6 +10,9 @@ New in v0.8.02 (2019/07/??)
 * Merged in lp:~stragerneds/duplicity/duplicity
   - Cache results of filename parsing for speedup
 * Removed python-gettext from setup.py.  Whoops!
+* Merged in lp:~mterry/duplicity/pytest-runner-move
+  - Move pytest-runner to testing requirements in setup
+* Fix language classifiers in setup.py
 
 
 New in v0.8.01 (2019/07/14)

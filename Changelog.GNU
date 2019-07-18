@@ -1,6 +1,10 @@
 2019-07-18  Kenneth Loafman  <kenneth@loafman.com>
 
     * Removed python-gettext from setup.py.  Whoops!
+    * Merged in lp:~mterry/duplicity/pytest-runner-move
+      - Move pytest-runner to testing requirements in setup
+    * Fix language classifiers in setup.py
+
 
 2019-07-17  Kenneth Loafman  <kenneth@loafman.com>
 
