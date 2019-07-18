@@ -9,6 +9,8 @@ New in v0.8.02 (2019/07/??)
   - Fixes bug #1836611 dropbox mixing bytes and strings
 * Merged in lp:~stragerneds/duplicity/duplicity
   - Cache results of filename parsing for speedup
+* Removed python-gettext from setup.py.  Whoops!
+
 
 New in v0.8.01 (2019/07/14)
 ---------------------------

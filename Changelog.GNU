@@ -1,3 +1,7 @@
+2019-07-18  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Removed python-gettext from setup.py.  Whoops!
+
 2019-07-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Remove python-gettext from requirements.txt.  Normal
