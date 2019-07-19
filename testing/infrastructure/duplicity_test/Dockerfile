@@ -84,7 +84,8 @@ RUN chmod 400 /home/test/.ssh/id_rsa
 USER test
 
 # Branch the duplicity repo for testing
-RUN bzr branch lp:duplicity duplicity
+ARG REVNO=-1
+RUN bzr branch -r $REVNO lp:duplicity duplicity
 
 # Set final workdir to duplicity
 WORKDIR /home/test/duplicity

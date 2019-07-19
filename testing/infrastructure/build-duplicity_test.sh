@@ -4,7 +4,8 @@ cd duplicity_test
 cp -p ../../../requirements.txt .
 cp -p ../id_rsa .
 cp -p ../id_rsa.pub .
-docker build --tag firstprime/duplicity_test .
+REVNO=`bzr revno`
+docker build --build-arg REVNO=$REVNO --tag firstprime/duplicity_test .
 rm requirements.txt
 rm id_rsa
 rm id_rsa.pub

@@ -1,3 +1,8 @@
+2019-07-19  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix so Docker image duplicity_test will update and pull
+      new bzr revisions if changed since last build.
+
 2019-07-18  Kenneth Loafman  <kenneth@loafman.com>
 
     * Removed python-gettext from setup.py.  Whoops!
