@@ -17,6 +17,11 @@ New in v0.8.02 (2019/07/??)
   but it's failing on Docker and Launchpad testing.
 * Fix so Docker image duplicity_test will update and pull
   new bzr revisions if changed since last build.
+* Enhanced build_duplicity_test.sh
+  - Use -h to get help and defaults
+  - Takes arguments for distro, revno, help
+  - Distros supported are 18.04, 18.10, 19.04, 19.10
+  - Revnos are passed to bzr -r option
 
 
 New in v0.8.01 (2019/07/14)

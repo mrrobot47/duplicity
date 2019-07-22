@@ -1,3 +1,11 @@
+2019-07-22  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Enhanced build_duplicity_test.sh
+      - Use -h to get help and defaults
+      - Takes arguments for distro, revno, help
+      - Distros supported are 18.04, 18.10, 19.04, 19.10
+      - Revnos are passed to bzr -r option
+
 2019-07-19  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix so Docker image duplicity_test will update and pull

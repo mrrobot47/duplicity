@@ -18,7 +18,7 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-FROM ubuntu:18.04
+FROM ubuntu:19.10
 
 # Set locale to prevent UTF-8 errors
 ENV LANG C.UTF-8
@@ -44,8 +44,6 @@ RUN apt-get update \
             python-dev \
             python-pip \
             python3-pip \
-            python3.6 \
-            python3.6-dev \
             python3.7 \
             python3.7-dev \
             rdiff \
