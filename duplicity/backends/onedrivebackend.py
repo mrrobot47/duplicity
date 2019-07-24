@@ -203,6 +203,7 @@ class OneDriveBackend(duplicity.backend.Backend):
         return [x[u'name'] for x in accum]
 
     def _get(self, remote_filename, local_path):
+        remote_filename = remote_filename.decode(u"UTF-8")
         with local_path.open(u'wb') as f:
             response = self.http_client.get(
                 self.API_URI + self.directory_onedrive_path + remote_filename + u':/content', stream=True)
