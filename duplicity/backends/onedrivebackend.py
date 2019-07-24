@@ -217,6 +217,7 @@ class OneDriveBackend(duplicity.backend.Backend):
 
         # Check if the user has enough space available on OneDrive before even
         # attempting to upload the file.
+        remote_filename = remote_filename.decode(u"UTF-8")
         source_size = os.path.getsize(source_path.name)
         start = time.time()
         response = self.http_client.get(self.API_URI + u'me/drive?$select=quota')
@@ -239,7 +240,7 @@ class OneDriveBackend(duplicity.backend.Backend):
 
             response = self.http_client.post(url)
             response.raise_for_status()
-            response_json = json.loads(response.content)
+            response_json = json.loads(response.content.decode(u"UTF-8"))
             if u'uploadUrl' not in response_json:
                 raise BackendException((
                     u'File "%s" cannot be uploaded: could not create upload session: %s' % (
@@ -269,6 +270,7 @@ class OneDriveBackend(duplicity.backend.Backend):
             log.Debug(u"PUT file in %fs" % (time.time() - start))
 
     def _delete(self, remote_filename):
+        remote_filename = remote_filename.decode(u"UTF-8")
         response = self.http_client.delete(self.API_URI + self.directory_onedrive_path + remote_filename)
         if response.status_code == 404:
             raise BackendException((
@@ -277,6 +279,7 @@ class OneDriveBackend(duplicity.backend.Backend):
         response.raise_for_status()
 
     def _query(self, remote_filename):
+        remote_filename = remote_filename.decode(u"UTF-8")
         response = self.http_client.get(self.API_URI + self.directory_onedrive_path + remote_filename)
         if response.status_code != 200:
             return {u'size': -1}

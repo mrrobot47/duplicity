@@ -22,6 +22,9 @@ New in v0.8.02 (2019/07/??)
   - Takes arguments for distro, revno, help
   - Distros supported are 18.04, 18.10, 19.04, 19.10
   - Revnos are passed to bzr -r option
+* Merged in po-updates.
+* Fixed bug #1829416 with help from charlie4096
+  - onedrive: Can’t convert ‘bytes’ object to str implicitly
 
 
 New in v0.8.01 (2019/07/14)
