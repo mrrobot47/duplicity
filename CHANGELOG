@@ -1,4 +1,4 @@
-New in v0.8.02 (2019/07/??)
+New in v0.8.02 (2019/07/25)
 ---------------------------
 * Remove python-gettext from requirements.txt.  Normal
   Python installation includes gettext.

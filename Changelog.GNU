@@ -1,8 +1,8 @@
 2019-07-24  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Merged in po-updates.
     * Fixed bug #1829416 with help from charlie4096
       - onedrive: Can’t convert ‘bytes’ object to str implicitly
+    * Merged in po-updates.
 
 2019-07-22  Kenneth Loafman  <kenneth@loafman.com>
 
