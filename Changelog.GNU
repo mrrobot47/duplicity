@@ -1,5 +1,9 @@
 2019-07-24  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Fix dist/makedist to run on python3
+
+2019-07-24  Kenneth Loafman  <kenneth@loafman.com>
+
     * Fixed bug #1829416 with help from charlie4096
       - onedrive: Can’t convert ‘bytes’ object to str implicitly
     * Merged in po-updates.

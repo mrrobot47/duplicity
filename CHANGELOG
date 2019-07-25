@@ -25,6 +25,7 @@ New in v0.8.02 (2019/07/25)
 * Merged in po-updates.
 * Fixed bug #1829416 with help from charlie4096
   - onedrive: Can’t convert ‘bytes’ object to str implicitly
+* Fix dist/makedist to run on python3
 
 
 New in v0.8.01 (2019/07/14)

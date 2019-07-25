@@ -20,54 +20,57 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 import os
 import re
 import shutil
 import time
 import sys
 from subprocess import Popen, PIPE, STDOUT
-sys.path.insert(0, os.path.abspath("./"))
+sys.path.insert(0, os.path.abspath(u"./"))
 
 from duplicity import util
 
-SourceDir = "duplicity"
+SourceDir = u"duplicity"
 
 
 def VersionedCopy(source, dest):
-    """
+    u"""
     Copy source to dest, substituting $version with version
     $reldate with today's date, i.e. December 28, 2008.
     """
-    fin = open(source, "rb")
+    fin = open(source, u"rb")
     inbuf = fin.read()
     assert not fin.close()
 
-    (outbuf, cnt) = re.subn("\$version", Version, inbuf)
-    assert cnt != 0, "No $version string replaced in" + source
+    (outbuf, cnt) = re.subn(u"\$version", Version, inbuf)
+    assert cnt != 0, u"No $version string replaced in" + source
 
     inbuf = outbuf
-    (outbuf, cnt) = re.subn("\$reldate", Reldate, inbuf)
+    (outbuf, cnt) = re.subn(u"\$reldate", Reldate, inbuf)
 
-    fout = open(dest, "wb")
+    fout = open(dest, u"wb")
     fout.write(outbuf)
     assert not fout.close()
 
 
 def MakeTar():
-    """Create duplicity tar file"""
-    tardir = "duplicity-%s" % Version
-    tarfile = "duplicity-%s.tar.gz" % Version
+    u"""Create duplicity tar file"""
+    tardir = u"duplicity-%s" % Version
+    tarfile = u"duplicity-%s.tar.gz" % Version
     try:
-        os.system("rm -rf " + tardir)
+        os.system(u"rm -rf " + tardir)
     except OSError:
         pass
 
     # tarball contains the entire versioned release
     os.mkdir(tardir)
-    bzr = Popen(["bzr", "ls", "-RV", "."], stdout=PIPE)
+    bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE)
     testfiles = bzr.communicate()[0].split()
     if len(testfiles) == 0:
-        git = Popen(["git", "ls-files"], stdout=PIPE)
+        git = Popen([u"git", u"ls-files"], stdout=PIPE)
         testfiles = git.communicate()[0].split()
 
     for filename in testfiles:
@@ -76,54 +79,54 @@ def MakeTar():
         if not os.path.exists(pathname):
             os.makedirs(pathname)
         if fname:
-            assert not os.system("cp -p %s %s" % (filename, pathname)), fname + " to " + pathname
+            assert not os.system(u"cp -p %s %s" % (filename, pathname)), fname + u" to " + pathname
 
     # msgfmt the translation files that we have for release
-    assert not os.system("cd po && ./update-pot")
-    linguas = open('po/LINGUAS').readlines()
+    assert not os.system(u"cd po && ./update-pot")
+    linguas = open(u'po/LINGUAS').readlines()
     for line in linguas:
         langs = line.split()
         for lang in langs:
-            assert not os.mkdir(os.path.join(tardir, "po", lang)), lang
-            assert not os.system("cp po/%s.po %s/po/%s" % (lang, tardir, lang)), lang
-            assert not os.system("msgfmt po/%s.po -o %s/po/%s/duplicity.mo" % (lang, tardir, lang)), lang
+            assert not os.mkdir(os.path.join(tardir, u"po", lang)), lang
+            assert not os.system(u"cp po/%s.po %s/po/%s" % (lang, tardir, lang)), lang
+            assert not os.system(u"msgfmt po/%s.po -o %s/po/%s/duplicity.mo" % (lang, tardir, lang)), lang
 
     # recopy the versioned files and add correct version
-    VersionedCopy(os.path.join(SourceDir, "globals.py"),
-                  os.path.join(tardir, "duplicity", "globals.py"))
-    VersionedCopy(os.path.join("bin", "duplicity"),
-                  os.path.join(tardir, "bin", "duplicity"))
-    VersionedCopy(os.path.join("bin", "rdiffdir"),
-                  os.path.join(tardir, "bin", "rdiffdir"))
-    VersionedCopy(os.path.join("bin", "duplicity.1"),
-                  os.path.join(tardir, "bin", "duplicity.1"))
-    VersionedCopy(os.path.join("bin", "rdiffdir.1"),
-                  os.path.join(tardir, "bin", "rdiffdir.1"))
-    VersionedCopy("setup.py",
-                  os.path.join(tardir, "setup.py"))
+    VersionedCopy(os.path.join(SourceDir, u"globals.py"),
+                  os.path.join(tardir, u"duplicity", u"globals.py"))
+    VersionedCopy(os.path.join(u"bin", u"duplicity"),
+                  os.path.join(tardir, u"bin", u"duplicity"))
+    VersionedCopy(os.path.join(u"bin", u"rdiffdir"),
+                  os.path.join(tardir, u"bin", u"rdiffdir"))
+    VersionedCopy(os.path.join(u"bin", u"duplicity.1"),
+                  os.path.join(tardir, u"bin", u"duplicity.1"))
+    VersionedCopy(os.path.join(u"bin", u"rdiffdir.1"),
+                  os.path.join(tardir, u"bin", u"rdiffdir.1"))
+    VersionedCopy(u"setup.py",
+                  os.path.join(tardir, u"setup.py"))
 
     # make sure executables are
-    os.chmod(os.path.join(tardir, "setup.py"), 0755)
-    os.chmod(os.path.join(tardir, "bin", "duplicity"), 0755)
-    os.chmod(os.path.join(tardir, "bin", "rdiffdir"), 0755)
+    os.chmod(os.path.join(tardir, u"setup.py"), 0755)
+    os.chmod(os.path.join(tardir, u"bin", u"duplicity"), 0755)
+    os.chmod(os.path.join(tardir, u"bin", u"rdiffdir"), 0755)
 
     # set COPYFILE_DISABLE to disable appledouble file creation
-    os.environ['COPYFILE_DISABLE'] = 'true'
+    os.environ[u'COPYFILE_DISABLE'] = u'true'
 
     # make the tarball and clean up
-    os.system("tar -czf %s %s" % (tarfile, tardir))
+    os.system(u"tar -czf %s %s" % (tarfile, tardir))
     shutil.rmtree(tardir)
     return tarfile
 
 def Main():
-    print "Processing version " + Version
+    print(u"Processing version " + Version)
     tarfile = MakeTar()
-    print "Made tar file " + tarfile
+    print(u"Made tar file " + tarfile)
 
-if __name__ == "__main__" and not globals().has_key('__no_execute__'):
+if __name__ == u"__main__" and not globals().has_key(u'__no_execute__'):
     if len(sys.argv) != 2:
-        print "Syntax: makedist [version_number]"
+        print(u"Syntax: makedist [version_number]")
         sys.exit(1)
     Version = sys.argv[1]
-    Reldate = time.strftime("%B %d, %Y", time.localtime())
+    Reldate = time.strftime(u"%B %d, %Y", time.localtime())
     Main()
