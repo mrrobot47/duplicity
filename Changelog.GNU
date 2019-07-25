@@ -1,4 +1,4 @@
-2019-07-24  Kenneth Loafman  <kenneth@loafman.com>
+2019-07-25  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix dist/makedist to run on python3
 
