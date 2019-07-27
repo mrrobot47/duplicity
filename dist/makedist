@@ -41,7 +41,7 @@ def VersionedCopy(source, dest):
     Copy source to dest, substituting $version with version
     $reldate with today's date, i.e. December 28, 2008.
     """
-    fin = open(source, u"rb")
+    fin = open(source, u"rt")
     inbuf = fin.read()
     assert not fin.close()
 
@@ -51,7 +51,7 @@ def VersionedCopy(source, dest):
     inbuf = outbuf
     (outbuf, cnt) = re.subn(u"\$reldate", Reldate, inbuf)
 
-    fout = open(dest, u"wb")
+    fout = open(dest, u"wt")
     fout.write(outbuf)
     assert not fout.close()
 
@@ -67,10 +67,10 @@ def MakeTar():
 
     # tarball contains the entire versioned release
     os.mkdir(tardir)
-    bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE)
+    bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE, text=True)
     testfiles = bzr.communicate()[0].split()
     if len(testfiles) == 0:
-        git = Popen([u"git", u"ls-files"], stdout=PIPE)
+        git = Popen([u"git", u"ls-files"], stdout=PIPE, text=True)
         testfiles = git.communicate()[0].split()
 
     for filename in testfiles:
@@ -106,9 +106,9 @@ def MakeTar():
                   os.path.join(tardir, u"setup.py"))
 
     # make sure executables are
-    os.chmod(os.path.join(tardir, u"setup.py"), 0755)
-    os.chmod(os.path.join(tardir, u"bin", u"duplicity"), 0755)
-    os.chmod(os.path.join(tardir, u"bin", u"rdiffdir"), 0755)
+    os.chmod(os.path.join(tardir, u"setup.py"), 0o755)
+    os.chmod(os.path.join(tardir, u"bin", u"duplicity"), 0o755)
+    os.chmod(os.path.join(tardir, u"bin", u"rdiffdir"), 0o755)
 
     # set COPYFILE_DISABLE to disable appledouble file creation
     os.environ[u'COPYFILE_DISABLE'] = u'true'
@@ -123,7 +123,7 @@ def Main():
     tarfile = MakeTar()
     print(u"Made tar file " + tarfile)
 
-if __name__ == u"__main__" and not globals().has_key(u'__no_execute__'):
+if __name__ == u"__main__" and u'__no_execute__' not in globals():
     if len(sys.argv) != 2:
         print(u"Syntax: makedist [version_number]")
         sys.exit(1)
