@@ -67,10 +67,10 @@ def MakeTar():
 
     # tarball contains the entire versioned release
     os.mkdir(tardir)
-    bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE, text=True)
+    bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE, universal_newlines=True)
     testfiles = bzr.communicate()[0].split()
     if len(testfiles) == 0:
-        git = Popen([u"git", u"ls-files"], stdout=PIPE, text=True)
+        git = Popen([u"git", u"ls-files"], stdout=PIPE, universal_newlines=True)
         testfiles = git.communicate()[0].split()
 
     for filename in testfiles:
