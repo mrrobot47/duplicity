@@ -1,5 +1,5 @@
 .. duplicity-src8 documentation master file, created by
-   sphinx-quickstart on Tue Jul 24 09:22:22 2018.
+   sphinx-quickstart on Wed Jul 31 10:32:30 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
@@ -10,6 +10,7 @@ Welcome to duplicity-src8's documentation!
    :maxdepth: 4
    :caption: Contents:
 
+   compilec
    duplicity
    setup
    testing

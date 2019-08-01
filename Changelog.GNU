@@ -1,6 +1,16 @@
+2019-08-01  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Some changes to provide Python test coverage:
+      - Coverage runs with every test cycle
+      - Does not cover functional tests that spawn
+        duplicity itself.  Next pass.
+      - After a run use 'coverage report html' to see
+        an overview list and links to drill down.  It
+        shows up in htmlcov/index.html.
+
 2019-07-25  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix dist/makedist to run on python3
+    * Fix dist/makedist to run on python2/3
 
 2019-07-24  Kenneth Loafman  <kenneth@loafman.com>
 

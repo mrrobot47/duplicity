@@ -14,7 +14,9 @@ pexpect
 pycodestyle
 pylint
 pytest
+pytest-cov
 pytest-runner
+sphinx
 tox
 
 

@@ -16,10 +16,9 @@ Submodules
    duplicity.asyncscheduler
    duplicity.backend
    duplicity.cached_ops
-   duplicity.collections
    duplicity.commandline
-   duplicity.compilec
    duplicity.diffdir
+   duplicity.dup_collections
    duplicity.dup_temp
    duplicity.dup_threading
    duplicity.dup_time

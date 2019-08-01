@@ -16,6 +16,7 @@ Submodules
 
 .. toctree::
 
+   testing.conftest
    testing.find_unadorned_strings
    testing.fix_unadorned_strings
    testing.test_code
