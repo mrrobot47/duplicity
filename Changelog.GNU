@@ -1,5 +1,11 @@
 2019-08-01  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Fixed bugs #1838427 and #1838702 with a fix
+      suggested by Stephen Miller.  The fix was to
+      supply tarfile with a unicode grpid, not bytes.
+
+2019-08-01  Kenneth Loafman  <kenneth@loafman.com>
+
     * Some changes to provide Python test coverage:
       - Coverage runs with every test cycle
       - Does not cover functional tests that spawn

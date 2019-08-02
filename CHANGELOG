@@ -1,4 +1,4 @@
-New in v0.8.3 (2019/08/??)
+New in v0.8.03 (2019/08/??)
 ---------------------------
 * Some changes to provide Python test coverage:
   - Coverage runs with every test cycle
@@ -7,6 +7,9 @@ New in v0.8.3 (2019/08/??)
   - After a run use 'coverage report html' to see
     an overview list and links to drill down.  It
     shows up in htmlcov/index.html.
+* Fixed bugs #1838427 and #1838702 with a fix
+  suggested by Stephen Miller.  The fix was to
+  supply tarfile with a unicode grpid, not bytes.
 
 
 New in v0.8.02 (2019/07/25)
