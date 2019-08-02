@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-07-13 14:09-0500\n"
+"POT-Creation-Date: 2019-07-31 10:52-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2019-07-15 05:57+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-02 06:00+0000\n"
+"X-Generator: Launchpad (build 19014)\n"
 "Language: uk\n"
 
 #: ../bin/duplicity:133
@@ -1201,16 +1201,16 @@ msgstr "Порівняння %s та %s"
 msgid "D %s"
 msgstr "D %s"
 
-#: ../duplicity/dup_collections.py:177 ../duplicity/dup_collections.py:191
+#: ../duplicity/dup_collections.py:181 ../duplicity/dup_collections.py:195
 #, python-format
 msgid "BackupSet.delete: missing %s"
 msgstr "BackupSet.delete: відсутній %s"
 
-#: ../duplicity/dup_collections.py:216
+#: ../duplicity/dup_collections.py:220
 msgid "Fatal Error: No manifests found for most recent backup"
 msgstr "Фатальна помилка: відсутні маніфести для недавньої резервної копії"
 
-#: ../duplicity/dup_collections.py:225
+#: ../duplicity/dup_collections.py:229
 msgid ""
 "Fatal Error: Remote manifest does not match local one.  Either the remote "
 "backup set or the local archive directory has been corrupted."
@@ -1218,104 +1218,104 @@ msgstr ""
 "Фатальна помилка: Вилучений маніфест не відповідає локальному. Несправний "
 "віддалений набір резервного копіювання або тека локального архіву."
 
-#: ../duplicity/dup_collections.py:233
+#: ../duplicity/dup_collections.py:237
 msgid "Fatal Error: Neither remote nor local manifest is readable."
 msgstr ""
 "Фатальна помилка: Немає доступу до читання віддаленого та локального "
 "маніфесту."
 
-#: ../duplicity/dup_collections.py:244
+#: ../duplicity/dup_collections.py:248
 #, python-format
 msgid "Processing local manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:256
+#: ../duplicity/dup_collections.py:260
 #, python-format
 msgid "Error processing remote manifest (%s): %s"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:259
+#: ../duplicity/dup_collections.py:263
 #, python-format
 msgid "Processing remote manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:355
+#: ../duplicity/dup_collections.py:359
 msgid "Preferring Backupset over previous one!"
 msgstr "Перевага набору резервного копіювання замість попереднього!"
 
-#: ../duplicity/dup_collections.py:358
+#: ../duplicity/dup_collections.py:362
 #, python-format
 msgid "Ignoring incremental Backupset (start_time: %s; needed: %s)"
 msgstr ""
 "Ігнорування інкрементального набору резервного копіювання (час_запуску: %s; "
 "необхідно: %s)"
 
-#: ../duplicity/dup_collections.py:363
+#: ../duplicity/dup_collections.py:367
 #, python-format
 msgid "Added incremental Backupset (start_time: %s / end_time: %s)"
 msgstr "Додано покрокову резервну копію (час_початку: %s / час_кінця: %s)"
 
-#: ../duplicity/dup_collections.py:433
+#: ../duplicity/dup_collections.py:437
 msgid "Chain start time: "
 msgstr "Ланцюжок почато: "
 
-#: ../duplicity/dup_collections.py:434
+#: ../duplicity/dup_collections.py:438
 msgid "Chain end time: "
 msgstr "Ланцюжок закінчено: "
 
-#: ../duplicity/dup_collections.py:435
+#: ../duplicity/dup_collections.py:439
 #, python-format
 msgid "Number of contained backup sets: %d"
 msgstr "Кількість  наборів резервного копіювання що містяться: %d"
 
-#: ../duplicity/dup_collections.py:437
+#: ../duplicity/dup_collections.py:441
 #, python-format
 msgid "Total number of contained volumes: %d"
 msgstr "Загальне число томів що містяться: %d"
 
-#: ../duplicity/dup_collections.py:439 ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1240
 msgid "Type of backup set:"
 msgstr "Тип резервної копії:"
 
-#: ../duplicity/dup_collections.py:439 ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1240
 msgid "Time:"
 msgstr "Час:"
 
-#: ../duplicity/dup_collections.py:439
+#: ../duplicity/dup_collections.py:443
 msgid "Num volumes:"
 msgstr "Число томів:"
 
-#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1241
+#: ../duplicity/dup_collections.py:447 ../duplicity/dup_collections.py:1246
 msgid "Full"
 msgstr "Повна"
 
-#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1243
+#: ../duplicity/dup_collections.py:450 ../duplicity/dup_collections.py:1248
 msgid "Incremental"
 msgstr "Покрокова"
 
-#: ../duplicity/dup_collections.py:506
+#: ../duplicity/dup_collections.py:510
 msgid "local"
 msgstr "місцева"
 
-#: ../duplicity/dup_collections.py:508
+#: ../duplicity/dup_collections.py:512
 msgid "remote"
 msgstr "віддалено"
 
-#: ../duplicity/dup_collections.py:663
+#: ../duplicity/dup_collections.py:667
 msgid "Collection Status"
 msgstr "Стан збору"
 
-#: ../duplicity/dup_collections.py:665
+#: ../duplicity/dup_collections.py:669
 #, python-format
 msgid "Connecting with backend: %s"
 msgstr "З’єднання з внутрішнім інтерфейсом: %s"
 
-#: ../duplicity/dup_collections.py:667
+#: ../duplicity/dup_collections.py:671
 #, python-format
 msgid "Archive dir: %s"
 msgstr "Тека архіву: %s"
 
-#: ../duplicity/dup_collections.py:670
+#: ../duplicity/dup_collections.py:674
 #, python-format
 msgid "Found %d secondary backup chain."
 msgid_plural "Found %d secondary backup chains."
@@ -1323,23 +1323,23 @@ msgstr[0] "Знайдено %d вторинний ланцюжок резерв�
 msgstr[1] "Знайдено %d вторинні ланцюжки резервних копій."
 msgstr[2] "Знайдено %d вторинних ланцюжків резервних копій."
 
-#: ../duplicity/dup_collections.py:675
+#: ../duplicity/dup_collections.py:679
 #, python-format
 msgid "Secondary chain %d of %d:"
 msgstr "Вторинний ланцюжок %d з %d:"
 
-#: ../duplicity/dup_collections.py:681
+#: ../duplicity/dup_collections.py:685
 msgid "Found primary backup chain with matching signature chain:"
 msgstr ""
 "Знайдено первинний ланцюжок резервного копіювання з відповідним ланцюжком "
 "підпису:"
 
-#: ../duplicity/dup_collections.py:685
+#: ../duplicity/dup_collections.py:689
 msgid "No backup chains with active signatures found"
 msgstr ""
 "Відсутні ланцюжки резервного копіювання зі знайденими, залученими підписами"
 
-#: ../duplicity/dup_collections.py:688
+#: ../duplicity/dup_collections.py:692
 #, python-format
 msgid "Also found %d backup set not part of any chain,"
 msgid_plural "Also found %d backup sets not part of any chain,"
@@ -1353,7 +1353,7 @@ msgstr[2] ""
 "Також знайдено %d наборів резервного копіювання, що не є частиною жодного "
 "ланцюжка,"
 
-#: ../duplicity/dup_collections.py:692
+#: ../duplicity/dup_collections.py:696
 #, python-format
 msgid "and %d incomplete backup set."
 msgid_plural "and %d incomplete backup sets."
@@ -1362,17 +1362,17 @@ msgstr[1] "а також %d неповних набори резервного �
 msgstr[2] "а також %d неповних наборів резервного копіювання."
 
 #. "cleanup" is a hard-coded command, so do not translate it
-#: ../duplicity/dup_collections.py:697
+#: ../duplicity/dup_collections.py:701
 msgid ""
 "These may be deleted by running duplicity with the \"cleanup\" command."
 msgstr ""
 "Це може бути вилучено за допомогою запуску duplicity з командою \"cleanup\"."
 
-#: ../duplicity/dup_collections.py:700
+#: ../duplicity/dup_collections.py:704
 msgid "No orphaned or incomplete backup sets found."
 msgstr "Відсутні ізольовані або неповні набори резервного копіювання."
 
-#: ../duplicity/dup_collections.py:716
+#: ../duplicity/dup_collections.py:720
 #, python-format
 msgid "%d file exists on backend"
 msgid_plural "%d files exist on backend"
@@ -1380,7 +1380,7 @@ msgstr[0] "%d файл існує у внутрішньому интерфейс
 msgstr[1] "%d файли існує у внутрішньому интерфейсі"
 msgstr[2] "%d файлів існує у внутрішньому интерфейсі"
 
-#: ../duplicity/dup_collections.py:726
+#: ../duplicity/dup_collections.py:730
 #, python-format
 msgid "%d file exists in cache"
 msgid_plural "%d files exist in cache"
@@ -1388,98 +1388,98 @@ msgstr[0] "%d файл існує у тимчасових файлах"
 msgstr[1] "%d файли існує у тимчасових файлах"
 msgstr[2] "%d файлів існує у тимчасових файлах"
 
-#: ../duplicity/dup_collections.py:779
+#: ../duplicity/dup_collections.py:783
 msgid ""
 "Warning, discarding last backup set, because of missing signature file."
 msgstr ""
 "Увага, відкликано останній набір резервного копіювання, у зв’язку з "
 "відсутністю файлу підпису."
 
-#: ../duplicity/dup_collections.py:802
+#: ../duplicity/dup_collections.py:806
 msgid "Warning, found the following local orphaned signature file:"
 msgid_plural "Warning, found the following local orphaned signature files:"
 msgstr[0] "Увага, знайдено наступний локальний ізольований файл підпису:"
 msgstr[1] "Увага, знайдено наступні локальні ізольовані файли підписів:"
 msgstr[2] "Увага, знайдено наступні локальні ізольовані файли підписів:"
 
-#: ../duplicity/dup_collections.py:811
+#: ../duplicity/dup_collections.py:815
 msgid "Warning, found the following remote orphaned signature file:"
 msgid_plural "Warning, found the following remote orphaned signature files:"
 msgstr[0] "Увага, знайдено наступний віддалений ізольований файл підпису:"
 msgstr[1] "Увага, знайдено наступні віддалені ізольовані файли підписів:"
 msgstr[2] "Увага, знайдено наступні віддалені ізольовані файли підписів:"
 
-#: ../duplicity/dup_collections.py:820
+#: ../duplicity/dup_collections.py:824
 msgid "Warning, found signatures but no corresponding backup files"
 msgstr "Увага, знайдено підписи, які не відповідають файлам резервної копії"
 
-#: ../duplicity/dup_collections.py:824
+#: ../duplicity/dup_collections.py:828
 msgid ""
 "Warning, found incomplete backup sets, probably left from aborted session"
 msgstr ""
 "Увага, знайдено незакінчені набори резервних копій, можливо вони залишилися "
 "від перерваного сеансу"
 
-#: ../duplicity/dup_collections.py:828
+#: ../duplicity/dup_collections.py:832
 msgid "Warning, found the following orphaned backup file:"
 msgid_plural "Warning, found the following orphaned backup files:"
 msgstr[0] "Увага, знайдено наступний ізольований файл резервного копіювання:"
 msgstr[1] "Увага, знайдено наступні ізольовані файли резервного копіювання:"
 msgstr[2] "Увага, знайдено наступні ізольовані файли резервного копіювання:"
 
-#: ../duplicity/dup_collections.py:845
+#: ../duplicity/dup_collections.py:849
 #, python-format
 msgid "Extracting backup chains from list of files: %s"
 msgstr "Витягнення ланцюжків резервного копіювання зі списку файлів: %s"
 
-#: ../duplicity/dup_collections.py:856
+#: ../duplicity/dup_collections.py:861
 #, python-format
 msgid "File %s is part of known set"
 msgstr "Файл %s є частиною відомого набору"
 
-#: ../duplicity/dup_collections.py:859
+#: ../duplicity/dup_collections.py:864
 #, python-format
 msgid "File %s is not part of a known set; creating new set"
 msgstr "Файл %s не є частиною відомого набору; створюється новий набір"
 
-#: ../duplicity/dup_collections.py:864
+#: ../duplicity/dup_collections.py:869
 #, python-format
 msgid "Ignoring file (rejected by backup set) '%s'"
 msgstr "Ігнорування файлу (відхилено набором резервного копіювання) '%s'"
 
-#: ../duplicity/dup_collections.py:880
+#: ../duplicity/dup_collections.py:885
 #, python-format
 msgid "Found backup chain %s"
 msgstr "Знайдено резервну копію %s"
 
-#: ../duplicity/dup_collections.py:885
+#: ../duplicity/dup_collections.py:890
 #, python-format
 msgid "Added set %s to pre-existing chain %s"
 msgstr "Додавання набору %s для раніше існуючого ланцюжка %s"
 
-#: ../duplicity/dup_collections.py:889
+#: ../duplicity/dup_collections.py:894
 #, python-format
 msgid "Found orphaned set %s"
 msgstr "Знайдено ізольований набір %s"
 
-#: ../duplicity/dup_collections.py:1039
+#: ../duplicity/dup_collections.py:1044
 #, python-format
 msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
 "starting at time %s."
 msgstr ""
 
-#: ../duplicity/dup_collections.py:1233
+#: ../duplicity/dup_collections.py:1238
 #, python-format
 msgid "File: %s"
 msgstr "Файл: %s"
 
-#: ../duplicity/dup_collections.py:1234
+#: ../duplicity/dup_collections.py:1239
 #, python-format
 msgid "Total number of backup: %d"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:1240
 msgid "Type of file change:"
 msgstr "Тип змінення файлу:"
 
