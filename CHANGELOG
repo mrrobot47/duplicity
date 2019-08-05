@@ -10,6 +10,9 @@ New in v0.8.03 (2019/08/??)
 * Fixed bugs #1838427 and #1838702 with a fix
   suggested by Stephen Miller.  The fix was to
   supply tarfile with a unicode grpid, not bytes.
+* More changes to provide Python test coverage:
+  - Now covers functional tests spawning duplicity
+  - Does not cover bin/duplicity for some reason
 
 
 New in v0.8.02 (2019/07/25)

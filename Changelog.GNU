@@ -1,4 +1,10 @@
-2019-08-01  Kenneth Loafman  <kenneth@loafman.com>
+2019-08-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * More changes to provide Python test coverage:
+      - Now covers functional tests spawning duplicity
+      - Does not cover bin/duplicity for some reason
+
+2019-08-02  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bugs #1838427 and #1838702 with a fix
       suggested by Stephen Miller.  The fix was to
