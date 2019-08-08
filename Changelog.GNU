@@ -1,3 +1,10 @@
+2019-08-08  Kenneth Loafman  <kenneth@loafman.com>
+
+    * More changes to provide Python test coverage:
+      - Moved bulk of code from bin/duplicity to
+        duplicity/dup_main.py for coverage.
+    * Fixed some 2to3 issues in dup_main.py
+
 2019-08-05  Kenneth Loafman  <kenneth@loafman.com>
 
     * More changes to provide Python test coverage:

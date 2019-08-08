@@ -13,6 +13,10 @@ New in v0.8.03 (2019/08/??)
 * More changes to provide Python test coverage:
   - Now covers functional tests spawning duplicity
   - Does not cover bin/duplicity for some reason
+* More changes to provide Python test coverage:
+  - Moved bulk of code from bin/duplicity to
+    duplicity/dup_main.py for coverage.
+* Fixed some 2to3 issues in dup_main.py
 
 
 New in v0.8.02 (2019/07/25)

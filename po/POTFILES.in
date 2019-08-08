@@ -40,6 +40,7 @@ duplicity/cached_ops.py
 duplicity/commandline.py
 duplicity/diffdir.py
 duplicity/dup_collections.py
+duplicity/dup_main.py
 duplicity/dup_temp.py
 duplicity/dup_threading.py
 duplicity/dup_time.py
