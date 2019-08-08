@@ -4,6 +4,7 @@
       - Moved bulk of code from bin/duplicity to
         duplicity/dup_main.py for coverage.
     * Fixed some 2to3 issues in dup_main.py
+    * Fixed division differences with futurize
 
 2019-08-05  Kenneth Loafman  <kenneth@loafman.com>
 

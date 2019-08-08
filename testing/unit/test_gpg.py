@@ -20,6 +20,8 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
+from __future__ import division
+from past.utils import old_div
 from future import standard_library
 standard_library.install_aliases()
 
@@ -181,7 +183,7 @@ class GPGWriteFile_Helper:
 
     def get_buffer(self, size):
         u"""Return buffer of size size, consisting of half random data"""
-        s1 = int(size / 2)
+        s1 = int(old_div(size, 2))
         s2 = size - s1
         return b"a" * s1 + self.from_random_fp.read(s2)
 

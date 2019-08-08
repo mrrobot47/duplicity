@@ -128,7 +128,7 @@ class BotoBackend(BotoSingleBackend):
         if bytes < chunk_size:
             chunks = 1
         else:
-            chunks = bytes // chunk_size
+            chunks = bytes / chunk_size
             if (bytes % chunk_size):
                 chunks += 1
 
@@ -217,7 +217,7 @@ def multipart_upload_worker(scheme, parsed_url, storage_uri, bucket_name, multip
                         log.Debug((u"{name}: Uploaded chunk {chunk}"
                                    u"at roughly {speed} bytes/second").format(name=worker_name,
                                                                               chunk=offset + 1,
-                                                                              speed=(bytes //
+                                                                              speed=(bytes /
                                                                                      max(1, abs(end - start)))))
                     break
             conn.close()

@@ -196,14 +196,14 @@ class ProgressTracker(object):
 
         if self.is_full:
             # Compute mean ratio of data transfer, assuming 1:1 data density
-            self.current_estimation = float(self.total_bytecount) // float(total_changes)
+            self.current_estimation = float(self.total_bytecount) / float(total_changes)
         else:
             # Compute mean ratio of data transfer, estimating unknown progress
-            change_ratio = float(self.total_bytecount) // float(diffdir.stats.RawDeltaSize)
+            change_ratio = float(self.total_bytecount) / float(diffdir.stats.RawDeltaSize)
             change_delta = change_ratio - self.change_mean_ratio
-            self.change_mean_ratio += change_delta // float(self.nsteps)  # mean cumulated ratio
+            self.change_mean_ratio += change_delta / float(self.nsteps)  # mean cumulated ratio
             self.change_r_estimation += change_delta * (change_ratio - self.change_mean_ratio)
-            change_sigma = math.sqrt(math.fabs(self.change_r_estimation // float(self.nsteps)))
+            change_sigma = math.sqrt(math.fabs(self.change_r_estimation / float(self.nsteps)))
 
             u"""
             Combine variables for progress estimation
@@ -251,7 +251,7 @@ class ProgressTracker(object):
         self.elapsed_sum += elapsed
         projection = 1.0
         if self.progress_estimation > 0:
-            projection = (1.0 - self.progress_estimation) // self.progress_estimation
+            projection = (1.0 - self.progress_estimation) / self.progress_estimation
         self.time_estimation = int(projection * float(self.elapsed_sum.total_seconds()))
 
         # Apply values only when monotonic, so the estimates look more consistent to the human eye
@@ -262,7 +262,7 @@ class ProgressTracker(object):
         Compute Exponential Moving Average of speed as bytes/sec of the last 30 probes
         """
         if elapsed.total_seconds() > 0:
-            self.transfers.append(float(self.total_bytecount - self.last_total_bytecount) //
+            self.transfers.append(float(self.total_bytecount - self.last_total_bytecount) /
                                   float(elapsed.total_seconds()))
         self.last_total_bytecount = self.total_bytecount
         if len(self.transfers) > 30:

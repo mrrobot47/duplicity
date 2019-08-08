@@ -347,7 +347,7 @@ Exception: %s""" % str(e))
                     # reupload
                     log.Info(u'dpbx: sleeping a bit before chunk retry')
                     time.sleep(30)
-                    current_chunk_size = DPBX_UPLOAD_CHUNK_SIZE // 5
+                    current_chunk_size = DPBX_UPLOAD_CHUNK_SIZE / 5
                     requested_offset = None
                     continue
 
