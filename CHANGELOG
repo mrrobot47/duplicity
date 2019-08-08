@@ -17,6 +17,7 @@ New in v0.8.03 (2019/08/??)
   - Moved bulk of code from bin/duplicity to
     duplicity/dup_main.py for coverage.
 * Fixed some 2to3 issues in dup_main.py
+* Fixed division differences with futurize
 
 
 New in v0.8.02 (2019/07/25)
