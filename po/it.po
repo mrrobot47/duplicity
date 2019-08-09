@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-07-31 10:52-0500\n"
+"POT-Creation-Date: 2019-08-07 15:49-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Milo Casagrande <milo.casagrande@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -15,423 +15,25 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-08-02 05:59+0000\n"
-"X-Generator: Launchpad (build 19014)\n"
+"X-Launchpad-Export-Date: 2019-08-09 06:06+0000\n"
+"X-Generator: Launchpad (build 19015)\n"
 "Language: it\n"
 
-#: ../bin/duplicity:133
-msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
-msgstr "Riutilizza PASSPHRASE configurata come SIGN_PASSPHRASE"
-
-#: ../bin/duplicity:140
-msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
-msgstr "Riutilizza SIGN_PASSPHRASE configurata come PASSPHRASE"
-
-#: ../bin/duplicity:179
-msgid "PASSPHRASE variable not set, asking user."
-msgstr "Variabile PASSPHRASE non impostata, richiesta all'utente."
-
-#: ../bin/duplicity:194
-msgid "GnuPG passphrase for signing key:"
-msgstr "Passphrase GnuPG della chiave:"
-
-#: ../bin/duplicity:199
-msgid "GnuPG passphrase:"
-msgstr "Passphrase GnuPG:"
-
-#: ../bin/duplicity:204
-msgid "Retype passphrase for signing key to confirm: "
-msgstr "Inserire nuovamente la passpharse chiave per confermare: "
-
-#: ../bin/duplicity:206
-msgid "Retype passphrase to confirm: "
-msgstr "Inserire nuovamente la passphrase per confermare: "
-
-#: ../bin/duplicity:209
-msgid "First and second passphrases do not match!  Please try again."
-msgstr "La prima e la seconda passphrase non corrispondono. Riprovare."
-
-#: ../bin/duplicity:216
-msgid ""
-"Cannot use empty passphrase with symmetric encryption!  Please try again."
-msgstr ""
-"Impossibile usare una passphrase vuota con cifratura simmetrica. Riprovare."
-
-#: ../bin/duplicity:273
-#, python-format
-msgid ""
-"File %s complete in backup set.\n"
-"Continuing restart on file %s."
-msgstr ""
-"File %s completo nel set di backup.\n"
-"Continuare ripartendo dal file %s."
-
-#: ../bin/duplicity:282
-#, python-format
-msgid ""
-"File %s missing in backup set.\n"
-"Continuing restart on file %s."
-msgstr ""
-"File %s mancante nel set di backup.\n"
-"Continuare ripartendo dal file %s."
-
-#: ../bin/duplicity:331
-#, python-format
-msgid "File %s was corrupted during upload."
-msgstr "Il file %s è stato danneggiato durante il caricamento."
-
-#: ../bin/duplicity:364
-msgid ""
-"Restarting backup, but current encryption settings do not match original "
-"settings"
-msgstr ""
-"Il backup verrà riavviato, ma le impostazioni di cifratura attuali non "
-"corrispondono a quelle originali"
-
-#: ../bin/duplicity:387
-#, python-format
-msgid "Restarting after volume %s, file %s, block %s"
-msgstr "Riavvio dopo volume %s, file %s, blocco %s"
-
-#: ../bin/duplicity:457
-#, python-format
-msgid "Processed volume %d"
-msgstr "Volume %d elaborato"
-
-#: ../bin/duplicity:607
-msgid ""
-"Fatal Error: Unable to start incremental backup.  Old signatures not found "
-"and incremental specified"
-msgstr ""
-"Errore fatale: impossibile avviare il backup incrementale. Vecchie firme non "
-"trovate per il backup specificato"
-
-#: ../bin/duplicity:611
-msgid "No signatures found, switching to full backup."
-msgstr "Nessuna firma trovata, viene usato il backup completo."
-
-#: ../bin/duplicity:625
-msgid "Backup Statistics"
-msgstr "Statistiche del backup"
-
-#: ../bin/duplicity:731
-#, python-format
-msgid "%s not found in archive - no files restored."
-msgstr "%s non trovato nell'archivio. Nessun file ripristinato."
-
-#: ../bin/duplicity:735
-msgid "No files found in archive - nothing restored."
-msgstr "Nessun file trovato nell'archivio - non è stato ripristinato nulla."
-
-#: ../bin/duplicity:768
-#, python-format
-msgid "Processed volume %d of %d"
-msgstr "Volume %d di %d elaborato"
-
-#: ../bin/duplicity:802
-#, python-format
-msgid "Invalid data - %s hash mismatch for file:"
-msgstr "Dati non validi - nessuna corrispondenza hash %s per il file:"
-
-#: ../bin/duplicity:805
-#, python-format
-msgid "Calculated hash: %s"
-msgstr "Hash calcolato: %s"
-
-#: ../bin/duplicity:806
-#, python-format
-msgid "Manifest hash: %s"
-msgstr "Hash del file manifest: %s"
-
-#: ../bin/duplicity:849
-#, python-format
-msgid "Volume was signed by key %s, not %s"
-msgstr "Il volume è stato firmato con la chiave %s, non %s"
-
-#: ../bin/duplicity:881
-#, python-format
-msgid "Verify complete: %s, %s."
-msgstr "Verifica completata: %s, %s"
-
-#: ../bin/duplicity:882
-#, python-format
-msgid "%d file compared"
-msgid_plural "%d files compared"
-msgstr[0] "%d file confrontato"
-msgstr[1] "%d file confrontati"
-
-#: ../bin/duplicity:884
-#, python-format
-msgid "%d difference found"
-msgid_plural "%d differences found"
-msgstr[0] "%d differenza trovata"
-msgstr[1] "%d differenze trovate"
-
-#: ../bin/duplicity:903
-msgid "No extraneous files found, nothing deleted in cleanup."
-msgstr ""
-"Non sono stati trovati file estranei, non è stato eliminato nulla durante la "
-"pulizia."
-
-#: ../bin/duplicity:908
-msgid "Deleting this file from backend:"
-msgid_plural "Deleting these files from backend:"
-msgstr[0] "Eliminazione di questo file dal backend:"
-msgstr[1] "Eliminazione di questi file dal backend:"
-
-#: ../bin/duplicity:919
-msgid "Found the following file to delete:"
-msgid_plural "Found the following files to delete:"
-msgstr[0] "Trovato il seguente file da eliminare:"
-msgstr[1] "Trovati i seguenti file da eliminare:"
-
-#: ../bin/duplicity:922
-msgid "Run duplicity again with the --force option to actually delete."
-msgstr ""
-"Eseguire nuovamente duplicity con l'opzione --force per la reale "
-"eliminazione."
-
-#: ../bin/duplicity:965
-msgid "There are backup set(s) at time(s):"
-msgstr "Ci sono set di backup alla data:"
-
-#: ../bin/duplicity:967
-msgid "Which can't be deleted because newer sets depend on them."
-msgstr ""
-"che non possono essere eliminati in quanto i set più recenti dipendono da "
-"questi."
-
-#: ../bin/duplicity:971
-msgid ""
-"Current active backup chain is older than specified time.  However, it will "
-"not be deleted.  To remove all your backups, manually purge the repository."
-msgstr ""
-"La catena di backup attualmente attiva è più vecchia della data specificata. "
-"Tuttavia non verrà eliminata. Per rimuovere tutti i backup, ripulire "
-"manualmente il repository."
-
-#: ../bin/duplicity:984
-msgid "No old backup sets found, nothing deleted."
-msgstr "Nessun vecchio set di backup trovato, non è stato eliminato nulla."
-
-#: ../bin/duplicity:987
-msgid "Deleting backup chain at time:"
-msgid_plural "Deleting backup chains at times:"
-msgstr[0] "Eliminazione della catena di backup alla data:"
-msgstr[1] "Eliminazione delle catene di backup alla data:"
-
-#: ../bin/duplicity:999
-#, python-format
-msgid "Deleting any incremental signature chain rooted at %s"
-msgstr ""
-
-#: ../bin/duplicity:1001
-#, python-format
-msgid "Deleting any incremental backup chain rooted at %s"
-msgstr ""
-
-#: ../bin/duplicity:1004
-#, python-format
-msgid "Deleting complete signature chain %s"
-msgstr "Eliminazione catena completa di firma %s"
-
-#: ../bin/duplicity:1006
-#, python-format
-msgid "Deleting complete backup chain %s"
-msgstr "Eliminazione catena completa di backup %s"
-
-#: ../bin/duplicity:1012
-msgid "Found old backup chain at the following time:"
-msgid_plural "Found old backup chains at the following times:"
-msgstr[0] "Trovata vecchia catena di backup alla seguente data:"
-msgstr[1] "Trovate vecchie catene di backup alle seguenti date:"
-
-#: ../bin/duplicity:1016
-msgid "Rerun command with --force option to actually delete."
-msgstr ""
-"Eseguire nuovamente il comando con l'opzione --force per la reale "
-"eliminazione."
-
-#: ../bin/duplicity:1039
-msgid "No old backup sets found."
-msgstr ""
-
-#: ../bin/duplicity:1054
-#, python-format
-msgid "Signature %s already replicated"
-msgstr ""
-
-#: ../bin/duplicity:1061 ../bin/duplicity:1100
-#, python-format
-msgid "Replicating %s."
-msgstr ""
-
-#: ../bin/duplicity:1088
-#, python-format
-msgid "Backupset %s already replicated"
-msgstr ""
-
-#: ../bin/duplicity:1236
-#, python-format
-msgid "Deleting local %s (not authoritative at backend)."
-msgstr "Eliminazione locale di %s (non autorevole per il backend)."
-
-#: ../bin/duplicity:1241
-#, python-format
-msgid "Unable to delete %s: %s"
-msgstr "Impossibile eliminare %s: %s"
-
-#: ../bin/duplicity:1275 ../duplicity/dup_temp.py:267
-#, python-format
-msgid "Failed to read %s: %s"
-msgstr "Impossibile leggere %s: %s"
-
-#: ../bin/duplicity:1289
-#, python-format
-msgid "Copying %s to local cache."
-msgstr "Copia di %s nella cache locale."
-
-#: ../bin/duplicity:1337
-msgid "Local and Remote metadata are synchronized, no sync needed."
-msgstr ""
-"I metadati locali e remoti sono sincronizzati, non è necessario "
-"sincronizzare nuovamente."
-
-#: ../bin/duplicity:1342
-msgid "Synchronizing remote metadata to local cache..."
-msgstr "Sincronizzazione dei metadati remoti nella cache locale..."
-
-#: ../bin/duplicity:1355
-msgid "Sync would copy the following from remote to local:"
-msgstr "La sincronizzazione copierebbe i seguenti file da remoto a locale:"
-
-#: ../bin/duplicity:1358
-msgid "Sync would remove the following spurious local files:"
-msgstr "La sincronizzazione rimuoverebbe i seguenti file locali:"
-
-#: ../bin/duplicity:1402
-msgid "Unable to get free space on temp."
-msgstr "Impossibile ottenere spazio libero nella directory temporanea."
-
-#: ../bin/duplicity:1410
-#, python-format
-msgid "Temp space has %d available, backup needs approx %d."
-msgstr ""
-"La directory temporanea ha %d di spazio disponibile, il backup richiede "
-"approssimativamente %d."
-
-#: ../bin/duplicity:1413
-#, python-format
-msgid "Temp has %d available, backup will use approx %d."
-msgstr ""
-"La directory temporanea dispone di %d, il backup userà approssimativamente "
-"%d."
-
-#: ../bin/duplicity:1421
-msgid "Unable to get max open files."
-msgstr "Impossibile ottenere il massimo numero di file aperti."
-
-#: ../bin/duplicity:1425
-#, python-format
-msgid ""
-"Max open files of %s is too low, should be >= 1024.\n"
-"Use 'ulimit -n 1024' or higher to correct.\n"
-msgstr ""
-"Numero massimo di file aperti in %s è troppo basso, dovrebbe essere >= "
-"1024.\n"
-"Usare \"ulimit -n 1024\" o superiore per correggere.\n"
-
-#: ../bin/duplicity:1477
-msgid ""
-"RESTART: The first volume failed to upload before termination.\n"
-"         Restart is impossible...starting backup from beginning."
-msgstr ""
-"RIAVVIO: caricamento del primo volume non riuscito prima del termine.\n"
-"          Riavvio impossibile...avvio del backup dall'inizio."
-
-#: ../bin/duplicity:1483
-#, python-format
-msgid ""
-"RESTART: Volumes %d to %d failed to upload before termination.\n"
-"         Restarting backup at volume %d."
-msgstr ""
-"RIAVVIO: caricamento dei volumi da %d a %d non riuscito prima del termine.\n"
-"          Riavvio del backup dal volume %d."
-
-#: ../bin/duplicity:1490
-#, python-format
-msgid ""
-"RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
-"         Restart is impossible ... duplicity will clean off the last "
-"partial\n"
-"         backup then restart the backup from the beginning."
-msgstr ""
-"RIAVVIO: stato del backup impossibile: il file manifest ha %d volumi, la "
-"destinazione remota ne contiene %d.\n"
-"         Riavvio impossibile...duplicity ripulirà l'ultimo backup\n"
-"         parziale quindi verrà riavviato il backup dall'inizio."
-
-#: ../bin/duplicity:1511
-msgid ""
-"\n"
-"PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
-"recognize its own backups.  Please remove PYTHONOPTIMIZE from\n"
-"the environment and rerun the backup.\n"
-"\n"
-"See https://bugs.launchpad.net/duplicity/+bug/931175\n"
-msgstr ""
-
-#: ../bin/duplicity:1534
-#, python-format
-msgid "Acquiring lockfile %s"
-msgstr ""
-
-#: ../bin/duplicity:1592
-#, python-format
-msgid "Last %s backup left a partial set, restarting."
-msgstr "L'ultimo backup %s ha lasciato un set parziale. Riavvio."
-
-#: ../bin/duplicity:1596
-#, python-format
-msgid "Cleaning up previous partial %s backup set, restarting."
-msgstr "Pulizia del precedente set di backup %s parziale, riavvio."
-
-#: ../bin/duplicity:1608
-msgid "Last full backup date:"
-msgstr "Data dell'ultimo backup completo:"
-
-#: ../bin/duplicity:1610
-msgid "Last full backup date: none"
-msgstr "Data dell'ultimo backup completo: nessuna"
-
-#: ../bin/duplicity:1613
-msgid "Last full backup is too old, forcing full backup"
-msgstr ""
-"L'ultimo backup completo è troppo vecchio, viene forzato il backup completo"
-
-#: ../bin/duplicity:1662
-msgid ""
-"When using symmetric encryption, the signing passphrase must equal the "
-"encryption passphrase."
-msgstr ""
-"Quando si usa la cifratura simmetrica, la passphrase di firma deve "
-"corrispondere alla passphrase di cifratura."
-
-#: ../bin/duplicity:1731
+#: ../bin/duplicity:121
 msgid "INT intercepted...exiting."
 msgstr "Intercettato INT...uscita."
 
-#: ../bin/duplicity:1739
+#: ../bin/duplicity:129
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "Dettagli errore GPG: %s"
 
-#: ../bin/duplicity:1749
+#: ../bin/duplicity:139
 #, python-format
 msgid "User error detail: %s"
 msgstr "Dettagli errore utente: %s"
 
-#: ../bin/duplicity:1759
+#: ../bin/duplicity:149
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Dettagli errore backend: %s"
@@ -1461,6 +1063,404 @@ msgstr "Numero totale di backup: %d"
 #: ../duplicity/dup_collections.py:1240
 msgid "Type of file change:"
 msgstr ""
+
+#: ../duplicity/dup_main.py:123
+msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
+msgstr "Riutilizza PASSPHRASE configurata come SIGN_PASSPHRASE"
+
+#: ../duplicity/dup_main.py:130
+msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
+msgstr "Riutilizza SIGN_PASSPHRASE configurata come PASSPHRASE"
+
+#: ../duplicity/dup_main.py:169
+msgid "PASSPHRASE variable not set, asking user."
+msgstr "Variabile PASSPHRASE non impostata, richiesta all'utente."
+
+#: ../duplicity/dup_main.py:184
+msgid "GnuPG passphrase for signing key:"
+msgstr "Passphrase GnuPG della chiave:"
+
+#: ../duplicity/dup_main.py:189
+msgid "GnuPG passphrase:"
+msgstr "Passphrase GnuPG:"
+
+#: ../duplicity/dup_main.py:194
+msgid "Retype passphrase for signing key to confirm: "
+msgstr "Inserire nuovamente la passpharse chiave per confermare: "
+
+#: ../duplicity/dup_main.py:196
+msgid "Retype passphrase to confirm: "
+msgstr "Inserire nuovamente la passphrase per confermare: "
+
+#: ../duplicity/dup_main.py:199
+msgid "First and second passphrases do not match!  Please try again."
+msgstr "La prima e la seconda passphrase non corrispondono. Riprovare."
+
+#: ../duplicity/dup_main.py:206
+msgid ""
+"Cannot use empty passphrase with symmetric encryption!  Please try again."
+msgstr ""
+"Impossibile usare una passphrase vuota con cifratura simmetrica. Riprovare."
+
+#: ../duplicity/dup_main.py:263
+#, python-format
+msgid ""
+"File %s complete in backup set.\n"
+"Continuing restart on file %s."
+msgstr ""
+"File %s completo nel set di backup.\n"
+"Continuare ripartendo dal file %s."
+
+#: ../duplicity/dup_main.py:272
+#, python-format
+msgid ""
+"File %s missing in backup set.\n"
+"Continuing restart on file %s."
+msgstr ""
+"File %s mancante nel set di backup.\n"
+"Continuare ripartendo dal file %s."
+
+#: ../duplicity/dup_main.py:321
+#, python-format
+msgid "File %s was corrupted during upload."
+msgstr "Il file %s è stato danneggiato durante il caricamento."
+
+#: ../duplicity/dup_main.py:354
+msgid ""
+"Restarting backup, but current encryption settings do not match original "
+"settings"
+msgstr ""
+"Il backup verrà riavviato, ma le impostazioni di cifratura attuali non "
+"corrispondono a quelle originali"
+
+#: ../duplicity/dup_main.py:377
+#, python-format
+msgid "Restarting after volume %s, file %s, block %s"
+msgstr "Riavvio dopo volume %s, file %s, blocco %s"
+
+#: ../duplicity/dup_main.py:447
+#, python-format
+msgid "Processed volume %d"
+msgstr "Volume %d elaborato"
+
+#: ../duplicity/dup_main.py:597
+msgid ""
+"Fatal Error: Unable to start incremental backup.  Old signatures not found "
+"and incremental specified"
+msgstr ""
+"Errore fatale: impossibile avviare il backup incrementale. Vecchie firme non "
+"trovate per il backup specificato"
+
+#: ../duplicity/dup_main.py:601
+msgid "No signatures found, switching to full backup."
+msgstr "Nessuna firma trovata, viene usato il backup completo."
+
+#: ../duplicity/dup_main.py:615
+msgid "Backup Statistics"
+msgstr "Statistiche del backup"
+
+#: ../duplicity/dup_main.py:721
+#, python-format
+msgid "%s not found in archive - no files restored."
+msgstr "%s non trovato nell'archivio. Nessun file ripristinato."
+
+#: ../duplicity/dup_main.py:725
+msgid "No files found in archive - nothing restored."
+msgstr "Nessun file trovato nell'archivio - non è stato ripristinato nulla."
+
+#: ../duplicity/dup_main.py:758
+#, python-format
+msgid "Processed volume %d of %d"
+msgstr "Volume %d di %d elaborato"
+
+#: ../duplicity/dup_main.py:792
+#, python-format
+msgid "Invalid data - %s hash mismatch for file:"
+msgstr "Dati non validi - nessuna corrispondenza hash %s per il file:"
+
+#: ../duplicity/dup_main.py:795
+#, python-format
+msgid "Calculated hash: %s"
+msgstr "Hash calcolato: %s"
+
+#: ../duplicity/dup_main.py:796
+#, python-format
+msgid "Manifest hash: %s"
+msgstr "Hash del file manifest: %s"
+
+#: ../duplicity/dup_main.py:839
+#, python-format
+msgid "Volume was signed by key %s, not %s"
+msgstr "Il volume è stato firmato con la chiave %s, non %s"
+
+#: ../duplicity/dup_main.py:871
+#, python-format
+msgid "Verify complete: %s, %s."
+msgstr "Verifica completata: %s, %s"
+
+#: ../duplicity/dup_main.py:872
+#, python-format
+msgid "%d file compared"
+msgid_plural "%d files compared"
+msgstr[0] "%d file confrontato"
+msgstr[1] "%d file confrontati"
+
+#: ../duplicity/dup_main.py:874
+#, python-format
+msgid "%d difference found"
+msgid_plural "%d differences found"
+msgstr[0] "%d differenza trovata"
+msgstr[1] "%d differenze trovate"
+
+#: ../duplicity/dup_main.py:893
+msgid "No extraneous files found, nothing deleted in cleanup."
+msgstr ""
+"Non sono stati trovati file estranei, non è stato eliminato nulla durante la "
+"pulizia."
+
+#: ../duplicity/dup_main.py:898
+msgid "Deleting this file from backend:"
+msgid_plural "Deleting these files from backend:"
+msgstr[0] "Eliminazione di questo file dal backend:"
+msgstr[1] "Eliminazione di questi file dal backend:"
+
+#: ../duplicity/dup_main.py:909
+msgid "Found the following file to delete:"
+msgid_plural "Found the following files to delete:"
+msgstr[0] "Trovato il seguente file da eliminare:"
+msgstr[1] "Trovati i seguenti file da eliminare:"
+
+#: ../duplicity/dup_main.py:912
+msgid "Run duplicity again with the --force option to actually delete."
+msgstr ""
+"Eseguire nuovamente duplicity con l'opzione --force per la reale "
+"eliminazione."
+
+#: ../duplicity/dup_main.py:955
+msgid "There are backup set(s) at time(s):"
+msgstr "Ci sono set di backup alla data:"
+
+#: ../duplicity/dup_main.py:957
+msgid "Which can't be deleted because newer sets depend on them."
+msgstr ""
+"che non possono essere eliminati in quanto i set più recenti dipendono da "
+"questi."
+
+#: ../duplicity/dup_main.py:961
+msgid ""
+"Current active backup chain is older than specified time.  However, it will "
+"not be deleted.  To remove all your backups, manually purge the repository."
+msgstr ""
+"La catena di backup attualmente attiva è più vecchia della data specificata. "
+"Tuttavia non verrà eliminata. Per rimuovere tutti i backup, ripulire "
+"manualmente il repository."
+
+#: ../duplicity/dup_main.py:974
+msgid "No old backup sets found, nothing deleted."
+msgstr "Nessun vecchio set di backup trovato, non è stato eliminato nulla."
+
+#: ../duplicity/dup_main.py:977
+msgid "Deleting backup chain at time:"
+msgid_plural "Deleting backup chains at times:"
+msgstr[0] "Eliminazione della catena di backup alla data:"
+msgstr[1] "Eliminazione delle catene di backup alla data:"
+
+#: ../duplicity/dup_main.py:989
+#, python-format
+msgid "Deleting any incremental signature chain rooted at %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:991
+#, python-format
+msgid "Deleting any incremental backup chain rooted at %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:994
+#, python-format
+msgid "Deleting complete signature chain %s"
+msgstr "Eliminazione catena completa di firma %s"
+
+#: ../duplicity/dup_main.py:996
+#, python-format
+msgid "Deleting complete backup chain %s"
+msgstr "Eliminazione catena completa di backup %s"
+
+#: ../duplicity/dup_main.py:1002
+msgid "Found old backup chain at the following time:"
+msgid_plural "Found old backup chains at the following times:"
+msgstr[0] "Trovata vecchia catena di backup alla seguente data:"
+msgstr[1] "Trovate vecchie catene di backup alle seguenti date:"
+
+#: ../duplicity/dup_main.py:1006
+msgid "Rerun command with --force option to actually delete."
+msgstr ""
+"Eseguire nuovamente il comando con l'opzione --force per la reale "
+"eliminazione."
+
+#: ../duplicity/dup_main.py:1029
+msgid "No old backup sets found."
+msgstr ""
+
+#: ../duplicity/dup_main.py:1044
+#, python-format
+msgid "Signature %s already replicated"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1051 ../duplicity/dup_main.py:1090
+#, python-format
+msgid "Replicating %s."
+msgstr ""
+
+#: ../duplicity/dup_main.py:1078
+#, python-format
+msgid "Backupset %s already replicated"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1226
+#, python-format
+msgid "Deleting local %s (not authoritative at backend)."
+msgstr "Eliminazione locale di %s (non autorevole per il backend)."
+
+#: ../duplicity/dup_main.py:1231
+#, python-format
+msgid "Unable to delete %s: %s"
+msgstr "Impossibile eliminare %s: %s"
+
+#: ../duplicity/dup_main.py:1265 ../duplicity/dup_temp.py:267
+#, python-format
+msgid "Failed to read %s: %s"
+msgstr "Impossibile leggere %s: %s"
+
+#: ../duplicity/dup_main.py:1279
+#, python-format
+msgid "Copying %s to local cache."
+msgstr "Copia di %s nella cache locale."
+
+#: ../duplicity/dup_main.py:1327
+msgid "Local and Remote metadata are synchronized, no sync needed."
+msgstr ""
+"I metadati locali e remoti sono sincronizzati, non è necessario "
+"sincronizzare nuovamente."
+
+#: ../duplicity/dup_main.py:1332
+msgid "Synchronizing remote metadata to local cache..."
+msgstr "Sincronizzazione dei metadati remoti nella cache locale..."
+
+#: ../duplicity/dup_main.py:1345
+msgid "Sync would copy the following from remote to local:"
+msgstr "La sincronizzazione copierebbe i seguenti file da remoto a locale:"
+
+#: ../duplicity/dup_main.py:1348
+msgid "Sync would remove the following spurious local files:"
+msgstr "La sincronizzazione rimuoverebbe i seguenti file locali:"
+
+#: ../duplicity/dup_main.py:1392
+msgid "Unable to get free space on temp."
+msgstr "Impossibile ottenere spazio libero nella directory temporanea."
+
+#: ../duplicity/dup_main.py:1400
+#, python-format
+msgid "Temp space has %d available, backup needs approx %d."
+msgstr ""
+"La directory temporanea ha %d di spazio disponibile, il backup richiede "
+"approssimativamente %d."
+
+#: ../duplicity/dup_main.py:1403
+#, python-format
+msgid "Temp has %d available, backup will use approx %d."
+msgstr ""
+"La directory temporanea dispone di %d, il backup userà approssimativamente "
+"%d."
+
+#: ../duplicity/dup_main.py:1411
+msgid "Unable to get max open files."
+msgstr "Impossibile ottenere il massimo numero di file aperti."
+
+#: ../duplicity/dup_main.py:1415
+#, python-format
+msgid ""
+"Max open files of %s is too low, should be >= 1024.\n"
+"Use 'ulimit -n 1024' or higher to correct.\n"
+msgstr ""
+"Numero massimo di file aperti in %s è troppo basso, dovrebbe essere >= "
+"1024.\n"
+"Usare \"ulimit -n 1024\" o superiore per correggere.\n"
+
+#: ../duplicity/dup_main.py:1467
+msgid ""
+"RESTART: The first volume failed to upload before termination.\n"
+"         Restart is impossible...starting backup from beginning."
+msgstr ""
+"RIAVVIO: caricamento del primo volume non riuscito prima del termine.\n"
+"          Riavvio impossibile...avvio del backup dall'inizio."
+
+#: ../duplicity/dup_main.py:1473
+#, python-format
+msgid ""
+"RESTART: Volumes %d to %d failed to upload before termination.\n"
+"         Restarting backup at volume %d."
+msgstr ""
+"RIAVVIO: caricamento dei volumi da %d a %d non riuscito prima del termine.\n"
+"          Riavvio del backup dal volume %d."
+
+#: ../duplicity/dup_main.py:1480
+#, python-format
+msgid ""
+"RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
+"         Restart is impossible ... duplicity will clean off the last "
+"partial\n"
+"         backup then restart the backup from the beginning."
+msgstr ""
+"RIAVVIO: stato del backup impossibile: il file manifest ha %d volumi, la "
+"destinazione remota ne contiene %d.\n"
+"         Riavvio impossibile...duplicity ripulirà l'ultimo backup\n"
+"         parziale quindi verrà riavviato il backup dall'inizio."
+
+#: ../duplicity/dup_main.py:1501
+msgid ""
+"\n"
+"PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
+"recognize its own backups.  Please remove PYTHONOPTIMIZE from\n"
+"the environment and rerun the backup.\n"
+"\n"
+"See https://bugs.launchpad.net/duplicity/+bug/931175\n"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1524
+#, python-format
+msgid "Acquiring lockfile %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1582
+#, python-format
+msgid "Last %s backup left a partial set, restarting."
+msgstr "L'ultimo backup %s ha lasciato un set parziale. Riavvio."
+
+#: ../duplicity/dup_main.py:1586
+#, python-format
+msgid "Cleaning up previous partial %s backup set, restarting."
+msgstr "Pulizia del precedente set di backup %s parziale, riavvio."
+
+#: ../duplicity/dup_main.py:1598
+msgid "Last full backup date:"
+msgstr "Data dell'ultimo backup completo:"
+
+#: ../duplicity/dup_main.py:1600
+msgid "Last full backup date: none"
+msgstr "Data dell'ultimo backup completo: nessuna"
+
+#: ../duplicity/dup_main.py:1603
+msgid "Last full backup is too old, forcing full backup"
+msgstr ""
+"L'ultimo backup completo è troppo vecchio, viene forzato il backup completo"
+
+#: ../duplicity/dup_main.py:1652
+msgid ""
+"When using symmetric encryption, the signing passphrase must equal the "
+"encryption passphrase."
+msgstr ""
+"Quando si usa la cifratura simmetrica, la passphrase di firma deve "
+"corrispondere alla passphrase di cifratura."
 
 #: ../duplicity/dup_time.py:61
 #, python-format
