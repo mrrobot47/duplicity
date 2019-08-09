@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-07-13 14:09-0500\n"
+"POT-Creation-Date: 2019-08-07 15:49-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Hertatijanto Hartono <dvertx@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -16,409 +16,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2019-07-15 05:57+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-09 06:06+0000\n"
+"X-Generator: Launchpad (build 19015)\n"
 
-#: ../bin/duplicity:133
-msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
-msgstr "Pakai lagi PASSPHRASE yang dikonfigurasi sebagai SIGN_PASSPHRASE"
-
-#: ../bin/duplicity:140
-msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
-msgstr "Pakai lagi SIGN_PASSPHRASE yang dikonfigurasi sebagai PASSPHRASE"
-
-#: ../bin/duplicity:179
-msgid "PASSPHRASE variable not set, asking user."
-msgstr "Variabel PASSPHRASE tak diisi, menanyakan ke pengguna."
-
-#: ../bin/duplicity:194
-msgid "GnuPG passphrase for signing key:"
-msgstr "Frasa sandi GnuPG untuk kunci penandatanganan:"
-
-#: ../bin/duplicity:199
-msgid "GnuPG passphrase:"
-msgstr "Frasa sandi GnuPG:"
-
-#: ../bin/duplicity:204
-msgid "Retype passphrase for signing key to confirm: "
-msgstr "Ketikkan ulang frasa sandi bagi kunci penyandian untuk konfirmasi: "
-
-#: ../bin/duplicity:206
-msgid "Retype passphrase to confirm: "
-msgstr "Ketikkan ulang frasa sandi untuk konfirmasi: "
-
-#: ../bin/duplicity:209
-msgid "First and second passphrases do not match!  Please try again."
-msgstr "Frasa sandi pertama dan kedua tak cocok! Harap coba lagi."
-
-#: ../bin/duplicity:216
-msgid ""
-"Cannot use empty passphrase with symmetric encryption!  Please try again."
-msgstr ""
-"Tak bisa memakai frasa sandi kosong dengan enkripsi simetrik! Harap coba "
-"lagi."
-
-#: ../bin/duplicity:273
-#, python-format
-msgid ""
-"File %s complete in backup set.\n"
-"Continuing restart on file %s."
-msgstr ""
-"Berkas %s lengkap dalam set cadangan.\n"
-"Melanjutkan memulai lagi pada berkas %s."
-
-#: ../bin/duplicity:282
-#, python-format
-msgid ""
-"File %s missing in backup set.\n"
-"Continuing restart on file %s."
-msgstr ""
-"Berkas %s hilang dalam set cadangan.\n"
-"Melanjutkan mulai ulang pada berkas %s."
-
-#: ../bin/duplicity:331
-#, python-format
-msgid "File %s was corrupted during upload."
-msgstr "Berkas %s terkorupsi selama pengunggahan."
-
-#: ../bin/duplicity:364
-msgid ""
-"Restarting backup, but current encryption settings do not match original "
-"settings"
-msgstr ""
-"Memulai ulang membuat cadangan, tapi pengaturan enkripsi kini tak cocok "
-"dengan pengaturan asli."
-
-#: ../bin/duplicity:387
-#, python-format
-msgid "Restarting after volume %s, file %s, block %s"
-msgstr ""
-
-#: ../bin/duplicity:457
-#, python-format
-msgid "Processed volume %d"
-msgstr ""
-
-#: ../bin/duplicity:607
-msgid ""
-"Fatal Error: Unable to start incremental backup.  Old signatures not found "
-"and incremental specified"
-msgstr ""
-"Kesalahan Fatal: Tidak dapat memulai backup inkremental. Tiada penanda lama, "
-"dan inkremental dispesifikasikan."
-
-#: ../bin/duplicity:611
-msgid "No signatures found, switching to full backup."
-msgstr "Tiada penanda, beralih ke backup penuh."
-
-#: ../bin/duplicity:625
-msgid "Backup Statistics"
-msgstr "Statistik Backup"
-
-#: ../bin/duplicity:731
-#, python-format
-msgid "%s not found in archive - no files restored."
-msgstr ""
-
-#: ../bin/duplicity:735
-msgid "No files found in archive - nothing restored."
-msgstr "Tiada berkas dalam arsip - tak ada yang dipulihkan."
-
-#: ../bin/duplicity:768
-#, python-format
-msgid "Processed volume %d of %d"
-msgstr "Volume %d dari %d telah diproses"
-
-#: ../bin/duplicity:802
-#, python-format
-msgid "Invalid data - %s hash mismatch for file:"
-msgstr "Data tak valid - hash %s tak cocok bagi berkas:"
-
-#: ../bin/duplicity:805
-#, python-format
-msgid "Calculated hash: %s"
-msgstr "Perhitungan cacahan: %s"
-
-#: ../bin/duplicity:806
-#, python-format
-msgid "Manifest hash: %s"
-msgstr "Wujud cacahan: %s"
-
-#: ../bin/duplicity:849
-#, python-format
-msgid "Volume was signed by key %s, not %s"
-msgstr "Volume ditandai dengan kunci %s, bukan %s"
-
-#: ../bin/duplicity:881
-#, python-format
-msgid "Verify complete: %s, %s."
-msgstr "Verifikasi selesai:  %s, %s."
-
-#: ../bin/duplicity:882
-#, python-format
-msgid "%d file compared"
-msgid_plural "%d files compared"
-msgstr[0] "%d berkas dibandingkan"
-
-#: ../bin/duplicity:884
-#, python-format
-msgid "%d difference found"
-msgid_plural "%d differences found"
-msgstr[0] "%d perbedaan ditemukan"
-
-#: ../bin/duplicity:903
-msgid "No extraneous files found, nothing deleted in cleanup."
-msgstr "Tiada berkas ekstra ditemui, tidak ada yang dhapus saat pembenahan."
-
-#: ../bin/duplicity:908
-msgid "Deleting this file from backend:"
-msgid_plural "Deleting these files from backend:"
-msgstr[0] "Menghapus berkas berikut dari latar belakang:"
-
-#: ../bin/duplicity:919
-msgid "Found the following file to delete:"
-msgid_plural "Found the following files to delete:"
-msgstr[0] "Menemukan berkas berikut untuk dihapus:"
-
-#: ../bin/duplicity:922
-msgid "Run duplicity again with the --force option to actually delete."
-msgstr ""
-"Jalankan kembali duplicity dengan opsi --force untuk melakukan penghapusan."
-
-#: ../bin/duplicity:965
-msgid "There are backup set(s) at time(s):"
-msgstr "Ditemui kelompok backup pada waktu:"
-
-#: ../bin/duplicity:967
-msgid "Which can't be deleted because newer sets depend on them."
-msgstr ""
-"Tidak diperkenankan untuk dihapus karena kelompok baru tergantung kepadanya."
-
-#: ../bin/duplicity:971
-msgid ""
-"Current active backup chain is older than specified time.  However, it will "
-"not be deleted.  To remove all your backups, manually purge the repository."
-msgstr ""
-"Untaian backup yang sedang aktif ini lebih tua dibanfingkan dengan waktu "
-"yang ditentukan. Walaupun demikian ia tidak akan dihapus. Untuk membuang "
-"semua backup anda, hapus penyimpanannya secara manual."
-
-#: ../bin/duplicity:984
-msgid "No old backup sets found, nothing deleted."
-msgstr "Tiada kelompok backup lama, tidak ada yang dihapus."
-
-#: ../bin/duplicity:987
-msgid "Deleting backup chain at time:"
-msgid_plural "Deleting backup chains at times:"
-msgstr[0] "Menghapus rantai backup pada waktu:"
-
-#: ../bin/duplicity:999
-#, python-format
-msgid "Deleting any incremental signature chain rooted at %s"
-msgstr ""
-
-#: ../bin/duplicity:1001
-#, python-format
-msgid "Deleting any incremental backup chain rooted at %s"
-msgstr ""
-
-#: ../bin/duplicity:1004
-#, python-format
-msgid "Deleting complete signature chain %s"
-msgstr "Menghapus rantai tanda tangan lengkap %s"
-
-#: ../bin/duplicity:1006
-#, python-format
-msgid "Deleting complete backup chain %s"
-msgstr "Menghapus rantai backup lengkap %s"
-
-#: ../bin/duplicity:1012
-msgid "Found old backup chain at the following time:"
-msgid_plural "Found old backup chains at the following times:"
-msgstr[0] "Menemukan rantai backup lama pada waktu berikut:"
-
-#: ../bin/duplicity:1016
-msgid "Rerun command with --force option to actually delete."
-msgstr ""
-"Jalankan ulang perintah dengan opsi --force untuk melakukan penghapusan."
-
-#: ../bin/duplicity:1039
-msgid "No old backup sets found."
-msgstr ""
-
-#: ../bin/duplicity:1054
-#, python-format
-msgid "Signature %s already replicated"
-msgstr ""
-
-#: ../bin/duplicity:1061 ../bin/duplicity:1100
-#, python-format
-msgid "Replicating %s."
-msgstr ""
-
-#: ../bin/duplicity:1088
-#, python-format
-msgid "Backupset %s already replicated"
-msgstr ""
-
-#: ../bin/duplicity:1236
-#, python-format
-msgid "Deleting local %s (not authoritative at backend)."
-msgstr "Menghapus lokal %s (bukan otorita pada latar belakang)."
-
-#: ../bin/duplicity:1241
-#, python-format
-msgid "Unable to delete %s: %s"
-msgstr "Tak bisa menghapus %s: %s"
-
-#: ../bin/duplicity:1275 ../duplicity/dup_temp.py:267
-#, python-format
-msgid "Failed to read %s: %s"
-msgstr "Gagal membaca %s: %s"
-
-#: ../bin/duplicity:1289
-#, python-format
-msgid "Copying %s to local cache."
-msgstr "Menduplikasikan %s ke tembolok lokal."
-
-#: ../bin/duplicity:1337
-msgid "Local and Remote metadata are synchronized, no sync needed."
-msgstr ""
-"Metadata Lokal dan Remot telah disinkronisasi, tidak dibutuhkan penyesuaian."
-
-#: ../bin/duplicity:1342
-msgid "Synchronizing remote metadata to local cache..."
-msgstr "Mensinkronisasi metadata remot ke tembolok lokal..."
-
-#: ../bin/duplicity:1355
-msgid "Sync would copy the following from remote to local:"
-msgstr "Sinkronisasi akan menduplikasikan hal berikut dari remot ke lokal:"
-
-#: ../bin/duplicity:1358
-msgid "Sync would remove the following spurious local files:"
-msgstr "Sinkronisasi akan menghapus berbagai berkas lokal berikut:"
-
-#: ../bin/duplicity:1402
-msgid "Unable to get free space on temp."
-msgstr "Tidak ada sisa ruang kosong pada temp."
-
-#: ../bin/duplicity:1410
-#, python-format
-msgid "Temp space has %d available, backup needs approx %d."
-msgstr "Sisa ruang temp %d, backup membutuhkan sekitar %d."
-
-#: ../bin/duplicity:1413
-#, python-format
-msgid "Temp has %d available, backup will use approx %d."
-msgstr "Sisa ruang temp %d, backup akan menggunakan sekitar %d."
-
-#: ../bin/duplicity:1421
-msgid "Unable to get max open files."
-msgstr ""
-"Tidak mengetahui jumlah berkas maksimum yang diperbolehkan terbuka pada saat "
-"yang bersamaan."
-
-#: ../bin/duplicity:1425
-#, python-format
-msgid ""
-"Max open files of %s is too low, should be >= 1024.\n"
-"Use 'ulimit -n 1024' or higher to correct.\n"
-msgstr ""
-"Jumlah maksimum berkas terbuka %s bernilai terlalu rendah , seharusnya >= "
-"1024.\n"
-"Gunakan perintah 'ulimit -n 1024' atau lebih besar untuk memperbaikinya.\n"
-
-#: ../bin/duplicity:1477
-msgid ""
-"RESTART: The first volume failed to upload before termination.\n"
-"         Restart is impossible...starting backup from beginning."
-msgstr ""
-"ULANGI KEMBALI: Volume pertama gagal diunggah sebelum waktu terminasi.\n"
-"                Tidak mungkin mencoba memulai kembali... jalankan backup "
-"dari awal."
-
-#: ../bin/duplicity:1483
-#, python-format
-msgid ""
-"RESTART: Volumes %d to %d failed to upload before termination.\n"
-"         Restarting backup at volume %d."
-msgstr ""
-"ULANGI KEMBALI: Volume %d hingga %d gagal diunggah sebelum waktu terminasi.\n"
-"                Memulai backup dari volume %d."
-
-#: ../bin/duplicity:1490
-#, python-format
-msgid ""
-"RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
-"         Restart is impossible ... duplicity will clean off the last "
-"partial\n"
-"         backup then restart the backup from the beginning."
-msgstr ""
-"ULANGI KEMBALI: Ditemui kejanggalan: muatan memiliki %d volume, remot "
-"memiliki %d volume.\n"
-"                Tidak mungkin mencoba memulai kembali... duplicity akan "
-"membuang potongan backup terakhir\n"
-"                backup kemudian akan dimulai kembali dari awal."
-
-#: ../bin/duplicity:1511
-msgid ""
-"\n"
-"PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
-"recognize its own backups.  Please remove PYTHONOPTIMIZE from\n"
-"the environment and rerun the backup.\n"
-"\n"
-"See https://bugs.launchpad.net/duplicity/+bug/931175\n"
-msgstr ""
-
-#: ../bin/duplicity:1534
-#, python-format
-msgid "Acquiring lockfile %s"
-msgstr ""
-
-#: ../bin/duplicity:1592
-#, python-format
-msgid "Last %s backup left a partial set, restarting."
-msgstr "Backup terakhir %s menghasilkan potongan parsial, memulai kembali."
-
-#: ../bin/duplicity:1596
-#, python-format
-msgid "Cleaning up previous partial %s backup set, restarting."
-msgstr ""
-"Membenahi potongan %s pada kelompok backup sebelumnya, memulai kembali."
-
-#: ../bin/duplicity:1608
-msgid "Last full backup date:"
-msgstr "Tanggal backup penuh terakhir:"
-
-#: ../bin/duplicity:1610
-msgid "Last full backup date: none"
-msgstr "Tanggal backup penuh terakhir: Kosong"
-
-#: ../bin/duplicity:1613
-msgid "Last full backup is too old, forcing full backup"
-msgstr "Backup penuh terakhir terlalu tua, melaksanakan backup penuh."
-
-#: ../bin/duplicity:1662
-msgid ""
-"When using symmetric encryption, the signing passphrase must equal the "
-"encryption passphrase."
-msgstr ""
-
-#: ../bin/duplicity:1731
+#: ../bin/duplicity:121
 msgid "INT intercepted...exiting."
 msgstr "INT tertangkap...keluar."
 
-#: ../bin/duplicity:1739
+#: ../bin/duplicity:129
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "Detil kesalahan GPG: %s"
 
-#: ../bin/duplicity:1749
+#: ../bin/duplicity:139
 #, python-format
 msgid "User error detail: %s"
 msgstr "Detil kesalahan pengguna: %s"
 
-#: ../bin/duplicity:1759
+#: ../bin/duplicity:149
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Detil kesalahan latar: %s"
@@ -1176,16 +791,16 @@ msgstr "Membandingkan %s dan %s"
 msgid "D %s"
 msgstr "D %s"
 
-#: ../duplicity/dup_collections.py:177 ../duplicity/dup_collections.py:191
+#: ../duplicity/dup_collections.py:181 ../duplicity/dup_collections.py:195
 #, python-format
 msgid "BackupSet.delete: missing %s"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:216
+#: ../duplicity/dup_collections.py:220
 msgid "Fatal Error: No manifests found for most recent backup"
 msgstr "Kesalahan Fatal: Tiada daftar muatan untuk backup terakhir"
 
-#: ../duplicity/dup_collections.py:225
+#: ../duplicity/dup_collections.py:229
 msgid ""
 "Fatal Error: Remote manifest does not match local one.  Either the remote "
 "backup set or the local archive directory has been corrupted."
@@ -1193,245 +808,630 @@ msgstr ""
 "Kesalahan Fatal: Daftar muatan remot tidak sesuai dengan yang lokal. "
 "Kemungkinan kumpulan backup remot atau direktori arsip lokal korup."
 
-#: ../duplicity/dup_collections.py:233
+#: ../duplicity/dup_collections.py:237
 msgid "Fatal Error: Neither remote nor local manifest is readable."
 msgstr "Kesalahan Fatal: Daftar muatan remot serta lokal tidak dapat dibaca."
 
-#: ../duplicity/dup_collections.py:244
+#: ../duplicity/dup_collections.py:248
 #, python-format
 msgid "Processing local manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:256
+#: ../duplicity/dup_collections.py:260
 #, python-format
 msgid "Error processing remote manifest (%s): %s"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:259
+#: ../duplicity/dup_collections.py:263
 #, python-format
 msgid "Processing remote manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:355
+#: ../duplicity/dup_collections.py:359
 msgid "Preferring Backupset over previous one!"
 msgstr "Preferensi Backup ini dibanding sebelumnya!"
 
-#: ../duplicity/dup_collections.py:358
+#: ../duplicity/dup_collections.py:362
 #, python-format
 msgid "Ignoring incremental Backupset (start_time: %s; needed: %s)"
 msgstr ""
 "Mengabaikan kumpulan backup inkremental (waktu_mulai: %s; dibutuhkan: %s)"
 
-#: ../duplicity/dup_collections.py:363
+#: ../duplicity/dup_collections.py:367
 #, python-format
 msgid "Added incremental Backupset (start_time: %s / end_time: %s)"
 msgstr ""
 "Menambahkan kumpulan backup inkremental (waktu_mulai: %s / waktu_selesai: %s)"
 
-#: ../duplicity/dup_collections.py:433
+#: ../duplicity/dup_collections.py:437
 msgid "Chain start time: "
 msgstr "Waktu mulai untaian: "
 
-#: ../duplicity/dup_collections.py:434
+#: ../duplicity/dup_collections.py:438
 msgid "Chain end time: "
 msgstr "Waktu selesai untaian: "
 
-#: ../duplicity/dup_collections.py:435
+#: ../duplicity/dup_collections.py:439
 #, python-format
 msgid "Number of contained backup sets: %d"
 msgstr "Jumlah kumpulan backup: %d"
 
-#: ../duplicity/dup_collections.py:437
+#: ../duplicity/dup_collections.py:441
 #, python-format
 msgid "Total number of contained volumes: %d"
 msgstr "Jumlah volume: %d"
 
-#: ../duplicity/dup_collections.py:439 ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1240
 msgid "Type of backup set:"
 msgstr "Jenis kumpulan backup:"
 
-#: ../duplicity/dup_collections.py:439 ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1240
 msgid "Time:"
 msgstr "Waktu:"
 
-#: ../duplicity/dup_collections.py:439
+#: ../duplicity/dup_collections.py:443
 msgid "Num volumes:"
 msgstr "Jumlah volume:"
 
-#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1241
+#: ../duplicity/dup_collections.py:447 ../duplicity/dup_collections.py:1246
 msgid "Full"
 msgstr "Penuh"
 
-#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1243
+#: ../duplicity/dup_collections.py:450 ../duplicity/dup_collections.py:1248
 msgid "Incremental"
 msgstr "Inkremental"
 
-#: ../duplicity/dup_collections.py:506
+#: ../duplicity/dup_collections.py:510
 msgid "local"
 msgstr "lokal"
 
-#: ../duplicity/dup_collections.py:508
+#: ../duplicity/dup_collections.py:512
 msgid "remote"
 msgstr "remot"
 
-#: ../duplicity/dup_collections.py:663
+#: ../duplicity/dup_collections.py:667
 msgid "Collection Status"
 msgstr "Status Koleksi"
 
-#: ../duplicity/dup_collections.py:665
+#: ../duplicity/dup_collections.py:669
 #, python-format
 msgid "Connecting with backend: %s"
 msgstr "Menghubungkan dengan latar: %s"
 
-#: ../duplicity/dup_collections.py:667
+#: ../duplicity/dup_collections.py:671
 #, python-format
 msgid "Archive dir: %s"
 msgstr "Dir arsip: %s"
 
-#: ../duplicity/dup_collections.py:670
+#: ../duplicity/dup_collections.py:674
 #, python-format
 msgid "Found %d secondary backup chain."
 msgid_plural "Found %d secondary backup chains."
 msgstr[0] "Ditemui %d untaian backup sekunder."
 
-#: ../duplicity/dup_collections.py:675
+#: ../duplicity/dup_collections.py:679
 #, python-format
 msgid "Secondary chain %d of %d:"
 msgstr "Untaian sekunder %d dari %d:"
 
-#: ../duplicity/dup_collections.py:681
+#: ../duplicity/dup_collections.py:685
 msgid "Found primary backup chain with matching signature chain:"
 msgstr "Ditemui untaian backup primer dengan untaian penanda yang sesuai:"
 
-#: ../duplicity/dup_collections.py:685
+#: ../duplicity/dup_collections.py:689
 msgid "No backup chains with active signatures found"
 msgstr "Tidak ditemui untaian backup dengan penanda aktif"
 
-#: ../duplicity/dup_collections.py:688
+#: ../duplicity/dup_collections.py:692
 #, python-format
 msgid "Also found %d backup set not part of any chain,"
 msgid_plural "Also found %d backup sets not part of any chain,"
 msgstr[0] ""
 "Juga ditemui %d kelompok backup yang bukan merupakan bagian dari untaian."
 
-#: ../duplicity/dup_collections.py:692
+#: ../duplicity/dup_collections.py:696
 #, python-format
 msgid "and %d incomplete backup set."
 msgid_plural "and %d incomplete backup sets."
 msgstr[0] "dan %d kumpulan backup terpotong."
 
 #. "cleanup" is a hard-coded command, so do not translate it
-#: ../duplicity/dup_collections.py:697
+#: ../duplicity/dup_collections.py:701
 msgid "These may be deleted by running duplicity with the \"cleanup\" command."
 msgstr ""
 "Kesemuanya dapat dihapus dengan menjalankan duplicity dengan perintah "
 "\"cleanup\"."
 
-#: ../duplicity/dup_collections.py:700
+#: ../duplicity/dup_collections.py:704
 msgid "No orphaned or incomplete backup sets found."
 msgstr "Tidak ditemui kumpulan backup yatim atau terpotong."
 
-#: ../duplicity/dup_collections.py:716
+#: ../duplicity/dup_collections.py:720
 #, python-format
 msgid "%d file exists on backend"
 msgid_plural "%d files exist on backend"
 msgstr[0] "%d berkas ada pada latar"
 
-#: ../duplicity/dup_collections.py:726
+#: ../duplicity/dup_collections.py:730
 #, python-format
 msgid "%d file exists in cache"
 msgid_plural "%d files exist in cache"
 msgstr[0] "%d berkas ada dalam tembolok"
 
-#: ../duplicity/dup_collections.py:779
+#: ../duplicity/dup_collections.py:783
 msgid "Warning, discarding last backup set, because of missing signature file."
 msgstr ""
 "Peringatan, menghapus kumpulan backup terakhir, karena tiadanya berkas "
 "penanda."
 
-#: ../duplicity/dup_collections.py:802
+#: ../duplicity/dup_collections.py:806
 msgid "Warning, found the following local orphaned signature file:"
 msgid_plural "Warning, found the following local orphaned signature files:"
 msgstr[0] "Peringatan, ditemui berkas penanda yatim lokal berikut:"
 
-#: ../duplicity/dup_collections.py:811
+#: ../duplicity/dup_collections.py:815
 msgid "Warning, found the following remote orphaned signature file:"
 msgid_plural "Warning, found the following remote orphaned signature files:"
 msgstr[0] "Peringatan, ditemui berkas penanda yatim remot berikut:"
 
-#: ../duplicity/dup_collections.py:820
+#: ../duplicity/dup_collections.py:824
 msgid "Warning, found signatures but no corresponding backup files"
 msgstr ""
 "Peringatan, ditemui berkas penanda tapi tiada berkas backup pasangannya"
 
-#: ../duplicity/dup_collections.py:824
+#: ../duplicity/dup_collections.py:828
 msgid ""
 "Warning, found incomplete backup sets, probably left from aborted session"
 msgstr ""
 "Peringatan, ditemui kumpulan backup terpotong, kemungkinan berasal dari sesi "
 "yang digagalkan"
 
-#: ../duplicity/dup_collections.py:828
+#: ../duplicity/dup_collections.py:832
 msgid "Warning, found the following orphaned backup file:"
 msgid_plural "Warning, found the following orphaned backup files:"
 msgstr[0] "Peringatan, ditemui berkas backup yatim berikut:"
 
-#: ../duplicity/dup_collections.py:845
+#: ../duplicity/dup_collections.py:849
 #, python-format
 msgid "Extracting backup chains from list of files: %s"
 msgstr "Mengekstrak untaian backup dari daftar berkas: %s"
 
-#: ../duplicity/dup_collections.py:856
+#: ../duplicity/dup_collections.py:861
 #, python-format
 msgid "File %s is part of known set"
 msgstr "Berkas %s merupakan bagian dari kumpulan yang dikenali"
 
-#: ../duplicity/dup_collections.py:859
+#: ../duplicity/dup_collections.py:864
 #, python-format
 msgid "File %s is not part of a known set; creating new set"
 msgstr ""
 "Berkas %s bukan merupakan bagian dari kumpulan yang dikenali; membuat "
 "kumpulan baru"
 
-#: ../duplicity/dup_collections.py:864
+#: ../duplicity/dup_collections.py:869
 #, python-format
 msgid "Ignoring file (rejected by backup set) '%s'"
 msgstr "Mengabaikan berkas (yang ditolak oelh kumpulan backup) '%s'"
 
-#: ../duplicity/dup_collections.py:880
+#: ../duplicity/dup_collections.py:885
 #, python-format
 msgid "Found backup chain %s"
 msgstr "Ditemui untaian backup %s"
 
-#: ../duplicity/dup_collections.py:885
+#: ../duplicity/dup_collections.py:890
 #, python-format
 msgid "Added set %s to pre-existing chain %s"
 msgstr "Menambahkan kumpulan %s ke untaian %s yang sudah ada"
 
-#: ../duplicity/dup_collections.py:889
+#: ../duplicity/dup_collections.py:894
 #, python-format
 msgid "Found orphaned set %s"
 msgstr "Ditemui kumpulan yatim %s"
 
-#: ../duplicity/dup_collections.py:1039
+#: ../duplicity/dup_collections.py:1044
 #, python-format
 msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
 "starting at time %s."
 msgstr ""
 
-#: ../duplicity/dup_collections.py:1233
+#: ../duplicity/dup_collections.py:1238
 #, python-format
 msgid "File: %s"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:1234
+#: ../duplicity/dup_collections.py:1239
 #, python-format
 msgid "Total number of backup: %d"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:1240
 msgid "Type of file change:"
+msgstr ""
+
+#: ../duplicity/dup_main.py:123
+msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
+msgstr "Pakai lagi PASSPHRASE yang dikonfigurasi sebagai SIGN_PASSPHRASE"
+
+#: ../duplicity/dup_main.py:130
+msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
+msgstr "Pakai lagi SIGN_PASSPHRASE yang dikonfigurasi sebagai PASSPHRASE"
+
+#: ../duplicity/dup_main.py:169
+msgid "PASSPHRASE variable not set, asking user."
+msgstr "Variabel PASSPHRASE tak diisi, menanyakan ke pengguna."
+
+#: ../duplicity/dup_main.py:184
+msgid "GnuPG passphrase for signing key:"
+msgstr "Frasa sandi GnuPG untuk kunci penandatanganan:"
+
+#: ../duplicity/dup_main.py:189
+msgid "GnuPG passphrase:"
+msgstr "Frasa sandi GnuPG:"
+
+#: ../duplicity/dup_main.py:194
+msgid "Retype passphrase for signing key to confirm: "
+msgstr "Ketikkan ulang frasa sandi bagi kunci penyandian untuk konfirmasi: "
+
+#: ../duplicity/dup_main.py:196
+msgid "Retype passphrase to confirm: "
+msgstr "Ketikkan ulang frasa sandi untuk konfirmasi: "
+
+#: ../duplicity/dup_main.py:199
+msgid "First and second passphrases do not match!  Please try again."
+msgstr "Frasa sandi pertama dan kedua tak cocok! Harap coba lagi."
+
+#: ../duplicity/dup_main.py:206
+msgid ""
+"Cannot use empty passphrase with symmetric encryption!  Please try again."
+msgstr ""
+"Tak bisa memakai frasa sandi kosong dengan enkripsi simetrik! Harap coba "
+"lagi."
+
+#: ../duplicity/dup_main.py:263
+#, python-format
+msgid ""
+"File %s complete in backup set.\n"
+"Continuing restart on file %s."
+msgstr ""
+"Berkas %s lengkap dalam set cadangan.\n"
+"Melanjutkan memulai lagi pada berkas %s."
+
+#: ../duplicity/dup_main.py:272
+#, python-format
+msgid ""
+"File %s missing in backup set.\n"
+"Continuing restart on file %s."
+msgstr ""
+"Berkas %s hilang dalam set cadangan.\n"
+"Melanjutkan mulai ulang pada berkas %s."
+
+#: ../duplicity/dup_main.py:321
+#, python-format
+msgid "File %s was corrupted during upload."
+msgstr "Berkas %s terkorupsi selama pengunggahan."
+
+#: ../duplicity/dup_main.py:354
+msgid ""
+"Restarting backup, but current encryption settings do not match original "
+"settings"
+msgstr ""
+"Memulai ulang membuat cadangan, tapi pengaturan enkripsi kini tak cocok "
+"dengan pengaturan asli."
+
+#: ../duplicity/dup_main.py:377
+#, python-format
+msgid "Restarting after volume %s, file %s, block %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:447
+#, python-format
+msgid "Processed volume %d"
+msgstr ""
+
+#: ../duplicity/dup_main.py:597
+msgid ""
+"Fatal Error: Unable to start incremental backup.  Old signatures not found "
+"and incremental specified"
+msgstr ""
+"Kesalahan Fatal: Tidak dapat memulai backup inkremental. Tiada penanda lama, "
+"dan inkremental dispesifikasikan."
+
+#: ../duplicity/dup_main.py:601
+msgid "No signatures found, switching to full backup."
+msgstr "Tiada penanda, beralih ke backup penuh."
+
+#: ../duplicity/dup_main.py:615
+msgid "Backup Statistics"
+msgstr "Statistik Backup"
+
+#: ../duplicity/dup_main.py:721
+#, python-format
+msgid "%s not found in archive - no files restored."
+msgstr ""
+
+#: ../duplicity/dup_main.py:725
+msgid "No files found in archive - nothing restored."
+msgstr "Tiada berkas dalam arsip - tak ada yang dipulihkan."
+
+#: ../duplicity/dup_main.py:758
+#, python-format
+msgid "Processed volume %d of %d"
+msgstr "Volume %d dari %d telah diproses"
+
+#: ../duplicity/dup_main.py:792
+#, python-format
+msgid "Invalid data - %s hash mismatch for file:"
+msgstr "Data tak valid - hash %s tak cocok bagi berkas:"
+
+#: ../duplicity/dup_main.py:795
+#, python-format
+msgid "Calculated hash: %s"
+msgstr "Perhitungan cacahan: %s"
+
+#: ../duplicity/dup_main.py:796
+#, python-format
+msgid "Manifest hash: %s"
+msgstr "Wujud cacahan: %s"
+
+#: ../duplicity/dup_main.py:839
+#, python-format
+msgid "Volume was signed by key %s, not %s"
+msgstr "Volume ditandai dengan kunci %s, bukan %s"
+
+#: ../duplicity/dup_main.py:871
+#, python-format
+msgid "Verify complete: %s, %s."
+msgstr "Verifikasi selesai:  %s, %s."
+
+#: ../duplicity/dup_main.py:872
+#, python-format
+msgid "%d file compared"
+msgid_plural "%d files compared"
+msgstr[0] "%d berkas dibandingkan"
+
+#: ../duplicity/dup_main.py:874
+#, python-format
+msgid "%d difference found"
+msgid_plural "%d differences found"
+msgstr[0] "%d perbedaan ditemukan"
+
+#: ../duplicity/dup_main.py:893
+msgid "No extraneous files found, nothing deleted in cleanup."
+msgstr "Tiada berkas ekstra ditemui, tidak ada yang dhapus saat pembenahan."
+
+#: ../duplicity/dup_main.py:898
+msgid "Deleting this file from backend:"
+msgid_plural "Deleting these files from backend:"
+msgstr[0] "Menghapus berkas berikut dari latar belakang:"
+
+#: ../duplicity/dup_main.py:909
+msgid "Found the following file to delete:"
+msgid_plural "Found the following files to delete:"
+msgstr[0] "Menemukan berkas berikut untuk dihapus:"
+
+#: ../duplicity/dup_main.py:912
+msgid "Run duplicity again with the --force option to actually delete."
+msgstr ""
+"Jalankan kembali duplicity dengan opsi --force untuk melakukan penghapusan."
+
+#: ../duplicity/dup_main.py:955
+msgid "There are backup set(s) at time(s):"
+msgstr "Ditemui kelompok backup pada waktu:"
+
+#: ../duplicity/dup_main.py:957
+msgid "Which can't be deleted because newer sets depend on them."
+msgstr ""
+"Tidak diperkenankan untuk dihapus karena kelompok baru tergantung kepadanya."
+
+#: ../duplicity/dup_main.py:961
+msgid ""
+"Current active backup chain is older than specified time.  However, it will "
+"not be deleted.  To remove all your backups, manually purge the repository."
+msgstr ""
+"Untaian backup yang sedang aktif ini lebih tua dibanfingkan dengan waktu "
+"yang ditentukan. Walaupun demikian ia tidak akan dihapus. Untuk membuang "
+"semua backup anda, hapus penyimpanannya secara manual."
+
+#: ../duplicity/dup_main.py:974
+msgid "No old backup sets found, nothing deleted."
+msgstr "Tiada kelompok backup lama, tidak ada yang dihapus."
+
+#: ../duplicity/dup_main.py:977
+msgid "Deleting backup chain at time:"
+msgid_plural "Deleting backup chains at times:"
+msgstr[0] "Menghapus rantai backup pada waktu:"
+
+#: ../duplicity/dup_main.py:989
+#, python-format
+msgid "Deleting any incremental signature chain rooted at %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:991
+#, python-format
+msgid "Deleting any incremental backup chain rooted at %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:994
+#, python-format
+msgid "Deleting complete signature chain %s"
+msgstr "Menghapus rantai tanda tangan lengkap %s"
+
+#: ../duplicity/dup_main.py:996
+#, python-format
+msgid "Deleting complete backup chain %s"
+msgstr "Menghapus rantai backup lengkap %s"
+
+#: ../duplicity/dup_main.py:1002
+msgid "Found old backup chain at the following time:"
+msgid_plural "Found old backup chains at the following times:"
+msgstr[0] "Menemukan rantai backup lama pada waktu berikut:"
+
+#: ../duplicity/dup_main.py:1006
+msgid "Rerun command with --force option to actually delete."
+msgstr ""
+"Jalankan ulang perintah dengan opsi --force untuk melakukan penghapusan."
+
+#: ../duplicity/dup_main.py:1029
+msgid "No old backup sets found."
+msgstr ""
+
+#: ../duplicity/dup_main.py:1044
+#, python-format
+msgid "Signature %s already replicated"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1051 ../duplicity/dup_main.py:1090
+#, python-format
+msgid "Replicating %s."
+msgstr ""
+
+#: ../duplicity/dup_main.py:1078
+#, python-format
+msgid "Backupset %s already replicated"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1226
+#, python-format
+msgid "Deleting local %s (not authoritative at backend)."
+msgstr "Menghapus lokal %s (bukan otorita pada latar belakang)."
+
+#: ../duplicity/dup_main.py:1231
+#, python-format
+msgid "Unable to delete %s: %s"
+msgstr "Tak bisa menghapus %s: %s"
+
+#: ../duplicity/dup_main.py:1265 ../duplicity/dup_temp.py:267
+#, python-format
+msgid "Failed to read %s: %s"
+msgstr "Gagal membaca %s: %s"
+
+#: ../duplicity/dup_main.py:1279
+#, python-format
+msgid "Copying %s to local cache."
+msgstr "Menduplikasikan %s ke tembolok lokal."
+
+#: ../duplicity/dup_main.py:1327
+msgid "Local and Remote metadata are synchronized, no sync needed."
+msgstr ""
+"Metadata Lokal dan Remot telah disinkronisasi, tidak dibutuhkan penyesuaian."
+
+#: ../duplicity/dup_main.py:1332
+msgid "Synchronizing remote metadata to local cache..."
+msgstr "Mensinkronisasi metadata remot ke tembolok lokal..."
+
+#: ../duplicity/dup_main.py:1345
+msgid "Sync would copy the following from remote to local:"
+msgstr "Sinkronisasi akan menduplikasikan hal berikut dari remot ke lokal:"
+
+#: ../duplicity/dup_main.py:1348
+msgid "Sync would remove the following spurious local files:"
+msgstr "Sinkronisasi akan menghapus berbagai berkas lokal berikut:"
+
+#: ../duplicity/dup_main.py:1392
+msgid "Unable to get free space on temp."
+msgstr "Tidak ada sisa ruang kosong pada temp."
+
+#: ../duplicity/dup_main.py:1400
+#, python-format
+msgid "Temp space has %d available, backup needs approx %d."
+msgstr "Sisa ruang temp %d, backup membutuhkan sekitar %d."
+
+#: ../duplicity/dup_main.py:1403
+#, python-format
+msgid "Temp has %d available, backup will use approx %d."
+msgstr "Sisa ruang temp %d, backup akan menggunakan sekitar %d."
+
+#: ../duplicity/dup_main.py:1411
+msgid "Unable to get max open files."
+msgstr ""
+"Tidak mengetahui jumlah berkas maksimum yang diperbolehkan terbuka pada saat "
+"yang bersamaan."
+
+#: ../duplicity/dup_main.py:1415
+#, python-format
+msgid ""
+"Max open files of %s is too low, should be >= 1024.\n"
+"Use 'ulimit -n 1024' or higher to correct.\n"
+msgstr ""
+"Jumlah maksimum berkas terbuka %s bernilai terlalu rendah , seharusnya >= "
+"1024.\n"
+"Gunakan perintah 'ulimit -n 1024' atau lebih besar untuk memperbaikinya.\n"
+
+#: ../duplicity/dup_main.py:1467
+msgid ""
+"RESTART: The first volume failed to upload before termination.\n"
+"         Restart is impossible...starting backup from beginning."
+msgstr ""
+"ULANGI KEMBALI: Volume pertama gagal diunggah sebelum waktu terminasi.\n"
+"                Tidak mungkin mencoba memulai kembali... jalankan backup "
+"dari awal."
+
+#: ../duplicity/dup_main.py:1473
+#, python-format
+msgid ""
+"RESTART: Volumes %d to %d failed to upload before termination.\n"
+"         Restarting backup at volume %d."
+msgstr ""
+"ULANGI KEMBALI: Volume %d hingga %d gagal diunggah sebelum waktu terminasi.\n"
+"                Memulai backup dari volume %d."
+
+#: ../duplicity/dup_main.py:1480
+#, python-format
+msgid ""
+"RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
+"         Restart is impossible ... duplicity will clean off the last "
+"partial\n"
+"         backup then restart the backup from the beginning."
+msgstr ""
+"ULANGI KEMBALI: Ditemui kejanggalan: muatan memiliki %d volume, remot "
+"memiliki %d volume.\n"
+"                Tidak mungkin mencoba memulai kembali... duplicity akan "
+"membuang potongan backup terakhir\n"
+"                backup kemudian akan dimulai kembali dari awal."
+
+#: ../duplicity/dup_main.py:1501
+msgid ""
+"\n"
+"PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
+"recognize its own backups.  Please remove PYTHONOPTIMIZE from\n"
+"the environment and rerun the backup.\n"
+"\n"
+"See https://bugs.launchpad.net/duplicity/+bug/931175\n"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1524
+#, python-format
+msgid "Acquiring lockfile %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1582
+#, python-format
+msgid "Last %s backup left a partial set, restarting."
+msgstr "Backup terakhir %s menghasilkan potongan parsial, memulai kembali."
+
+#: ../duplicity/dup_main.py:1586
+#, python-format
+msgid "Cleaning up previous partial %s backup set, restarting."
+msgstr ""
+"Membenahi potongan %s pada kelompok backup sebelumnya, memulai kembali."
+
+#: ../duplicity/dup_main.py:1598
+msgid "Last full backup date:"
+msgstr "Tanggal backup penuh terakhir:"
+
+#: ../duplicity/dup_main.py:1600
+msgid "Last full backup date: none"
+msgstr "Tanggal backup penuh terakhir: Kosong"
+
+#: ../duplicity/dup_main.py:1603
+msgid "Last full backup is too old, forcing full backup"
+msgstr "Backup penuh terakhir terlalu tua, melaksanakan backup penuh."
+
+#: ../duplicity/dup_main.py:1652
+msgid ""
+"When using symmetric encryption, the signing passphrase must equal the "
+"encryption passphrase."
 msgstr ""
 
 #: ../duplicity/dup_time.py:61

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-07-13 14:09-0500\n"
+"POT-Creation-Date: 2019-08-07 15:49-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -17,432 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2019-07-15 05:57+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-09 06:06+0000\n"
+"X-Generator: Launchpad (build 19015)\n"
 
-#: ../bin/duplicity:133
-msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
-msgstr "Ponovno uporabi nastavljeno ŠIFRIRNO_FRAZO kot FRAZO_PODPISA"
-
-#: ../bin/duplicity:140
-msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
-msgstr "Ponovno uporabi nastavljeno FRAZO_PODPISA kot ŠIFRIRNO_FRAZO"
-
-#: ../bin/duplicity:179
-msgid "PASSPHRASE variable not set, asking user."
-msgstr "Spremenljivka ŠIFRIRNA_FRAZA ni nastavljena, zato bo vprašan uporabnik"
-
-#: ../bin/duplicity:194
-msgid "GnuPG passphrase for signing key:"
-msgstr "Šifrirna fraza GnuPG za ključ podpisovanja:"
-
-#: ../bin/duplicity:199
-msgid "GnuPG passphrase:"
-msgstr "Šifrirna fraza GnuPG:"
-
-#: ../bin/duplicity:204
-msgid "Retype passphrase for signing key to confirm: "
-msgstr "Ponovno vnesite šifrirno frazo za ključ podpisovanja za potrditev: "
-
-#: ../bin/duplicity:206
-msgid "Retype passphrase to confirm: "
-msgstr "Ponovno vnesite šifrirno frazo za potrditev: "
-
-#: ../bin/duplicity:209
-msgid "First and second passphrases do not match!  Please try again."
-msgstr "Prva in druga šifrirna fraza se ne ujemati! Poskusite znova."
-
-#: ../bin/duplicity:216
-msgid ""
-"Cannot use empty passphrase with symmetric encryption!  Please try again."
-msgstr ""
-"Prazne šifrirne fraze ni mogoče uporabiti s simetričnim šifriranjem! "
-"Poskusite znova."
-
-#: ../bin/duplicity:273
-#, python-format
-msgid ""
-"File %s complete in backup set.\n"
-"Continuing restart on file %s."
-msgstr ""
-"Datoteka %s je celotna v zbirki varnostnih kopij.\n"
-"Nadaljevanje ponovnega zagona na datoteki %s."
-
-#: ../bin/duplicity:282
-#, python-format
-msgid ""
-"File %s missing in backup set.\n"
-"Continuing restart on file %s."
-msgstr ""
-"Datoteka %s manjka v zbirki varnostnih kopij.\n"
-"Nadaljevanje ponovnega zagona na datoteki %s."
-
-#: ../bin/duplicity:331
-#, python-format
-msgid "File %s was corrupted during upload."
-msgstr "Datoteka %s je bila med pošiljanjem pokvarjena."
-
-#: ../bin/duplicity:364
-msgid ""
-"Restarting backup, but current encryption settings do not match original "
-"settings"
-msgstr ""
-"Ponovno začenjanje varnostne kopije, vendar se trenutne nastavitve "
-"šifriranja ne ujemajo z izvirnimi nastavitvami."
-
-#: ../bin/duplicity:387
-#, python-format
-msgid "Restarting after volume %s, file %s, block %s"
-msgstr ""
-
-#: ../bin/duplicity:457
-#, python-format
-msgid "Processed volume %d"
-msgstr ""
-
-#: ../bin/duplicity:607
-msgid ""
-"Fatal Error: Unable to start incremental backup.  Old signatures not found "
-"and incremental specified"
-msgstr ""
-"Usodna napaka: ni mogoče začetni koračne varnostne kopije. Starih podpisov "
-"ni mogoče najti in korak ni določen"
-
-#: ../bin/duplicity:611
-msgid "No signatures found, switching to full backup."
-msgstr "Ni bilo mogoče najti podpisov. Preklop na polno varnostno kopijo."
-
-#: ../bin/duplicity:625
-msgid "Backup Statistics"
-msgstr "Statistika varnostne kopije"
-
-#: ../bin/duplicity:731
-#, python-format
-msgid "%s not found in archive - no files restored."
-msgstr "%s ni bila najdena v arhivu - datoteke niso bile obnovljene."
-
-#: ../bin/duplicity:735
-msgid "No files found in archive - nothing restored."
-msgstr "V arhivu ni bilo mogoče najti datotek - nič ni bilo obnovljenega."
-
-#: ../bin/duplicity:768
-#, python-format
-msgid "Processed volume %d of %d"
-msgstr "Obdelan je bil nosilec %d od %d"
-
-#: ../bin/duplicity:802
-#, python-format
-msgid "Invalid data - %s hash mismatch for file:"
-msgstr "Neveljavni podatki - neujemanje razpršil %s za datoteko:"
-
-#: ../bin/duplicity:805
-#, python-format
-msgid "Calculated hash: %s"
-msgstr "Izračunano razpršilo: %s"
-
-#: ../bin/duplicity:806
-#, python-format
-msgid "Manifest hash: %s"
-msgstr "Razpršilo manifesta: %s"
-
-#: ../bin/duplicity:849
-#, python-format
-msgid "Volume was signed by key %s, not %s"
-msgstr "Nosilec je bil podpisan s ključem %s, ne %s"
-
-#: ../bin/duplicity:881
-#, python-format
-msgid "Verify complete: %s, %s."
-msgstr "Potrditev veljavnosti je končana: %s, %s."
-
-#: ../bin/duplicity:882
-#, python-format
-msgid "%d file compared"
-msgid_plural "%d files compared"
-msgstr[0] "%d datotek je bilo primerjanih"
-msgstr[1] "%d datoteka je bila primerjana"
-msgstr[2] "%d datoteki sta bili primerjani"
-msgstr[3] "%d datoteke so bile primerjane"
-
-#: ../bin/duplicity:884
-#, python-format
-msgid "%d difference found"
-msgid_plural "%d differences found"
-msgstr[0] "Najdenih je bilo %d razlik"
-msgstr[1] "Najdena je bila %d razlika"
-msgstr[2] "Najdeni sta bili %d razliki"
-msgstr[3] "Najdene so bile %d razlike"
-
-#: ../bin/duplicity:903
-msgid "No extraneous files found, nothing deleted in cleanup."
-msgstr ""
-"Zunanje datoteke niso bile najdene. Med čiščenjem ni bilo nič izbrisanega."
-
-#: ../bin/duplicity:908
-msgid "Deleting this file from backend:"
-msgid_plural "Deleting these files from backend:"
-msgstr[0] "Brisanje teh datotek iz zaledja:"
-msgstr[1] "Brisanje te datoteke iz zaledja:"
-msgstr[2] "Brisanje teh datotek iz zaledja:"
-msgstr[3] "Brisanje teh datotek iz zaledja:"
-
-#: ../bin/duplicity:919
-msgid "Found the following file to delete:"
-msgid_plural "Found the following files to delete:"
-msgstr[0] "Najdene so bile naslednje datoteke za izbris:"
-msgstr[1] "Najdena je bila naslednja datoteka za izbris:"
-msgstr[2] "Najdeni sta bili naslednji datoteki za izbris:"
-msgstr[3] "Najdene so bile naslednje datoteke za izbris:"
-
-#: ../bin/duplicity:922
-msgid "Run duplicity again with the --force option to actually delete."
-msgstr "Za dejanski izbris ponovno poženite duplicity z možnostjo --force."
-
-#: ../bin/duplicity:965
-msgid "There are backup set(s) at time(s):"
-msgstr "Obstajajo naslednje zbirke varnostnih kopij ob časih:"
-
-#: ../bin/duplicity:967
-msgid "Which can't be deleted because newer sets depend on them."
-msgstr "Ki jih ni mogoče izbrisati, ker so od njih odvisne novejše zbirke."
-
-#: ../bin/duplicity:971
-msgid ""
-"Current active backup chain is older than specified time.  However, it will "
-"not be deleted.  To remove all your backups, manually purge the repository."
-msgstr ""
-"Trenutno dejavna veriga varnostnih kopij je starejša od določenega časa. "
-"Vendar ne bo izbrisana. Za odstranitev vseh svojih varnostnih kopij ročno "
-"počistite skladišče."
-
-#: ../bin/duplicity:984
-msgid "No old backup sets found, nothing deleted."
-msgstr ""
-"Starejših zbirk varnostnih kopij ni bilo mogoče najti. Nič ne bo izbrisano."
-
-#: ../bin/duplicity:987
-msgid "Deleting backup chain at time:"
-msgid_plural "Deleting backup chains at times:"
-msgstr[0] "Brisanje verig varnostnih kopij ob časih:"
-msgstr[1] "Brisanje verige varnostne kopije ob času:"
-msgstr[2] "Brisanje verig varnostnih kopij ob časih:"
-msgstr[3] "Brisanje verig varnostnih kopij ob času:"
-
-#: ../bin/duplicity:999
-#, python-format
-msgid "Deleting any incremental signature chain rooted at %s"
-msgstr ""
-
-#: ../bin/duplicity:1001
-#, python-format
-msgid "Deleting any incremental backup chain rooted at %s"
-msgstr ""
-
-#: ../bin/duplicity:1004
-#, python-format
-msgid "Deleting complete signature chain %s"
-msgstr "Brisanje celotne verige podpisa %s"
-
-#: ../bin/duplicity:1006
-#, python-format
-msgid "Deleting complete backup chain %s"
-msgstr "Brisanje celotne verige varnostne kopije %s"
-
-#: ../bin/duplicity:1012
-msgid "Found old backup chain at the following time:"
-msgid_plural "Found old backup chains at the following times:"
-msgstr[0] "Najdenih starih verig varnostnih kopij ob sledečih časih:"
-msgstr[1] "Najdena stara veriga varnostne kopije ob sledečem času:"
-msgstr[2] "Najdeni stari verigi varnostnih kopij ob sledečih časih:"
-msgstr[3] "Najdene stare verige varnostnih kopij ob sledečih časih:"
-
-#: ../bin/duplicity:1016
-msgid "Rerun command with --force option to actually delete."
-msgstr "Ponovno zaženite ukaz z možnostjo --force za dejanski izbris."
-
-#: ../bin/duplicity:1039
-msgid "No old backup sets found."
-msgstr ""
-
-#: ../bin/duplicity:1054
-#, python-format
-msgid "Signature %s already replicated"
-msgstr ""
-
-#: ../bin/duplicity:1061 ../bin/duplicity:1100
-#, python-format
-msgid "Replicating %s."
-msgstr ""
-
-#: ../bin/duplicity:1088
-#, python-format
-msgid "Backupset %s already replicated"
-msgstr ""
-
-#: ../bin/duplicity:1236
-#, python-format
-msgid "Deleting local %s (not authoritative at backend)."
-msgstr "Izbris krajevnega %s (ni overitveno na ozadju)."
-
-#: ../bin/duplicity:1241
-#, python-format
-msgid "Unable to delete %s: %s"
-msgstr "Ni mogoče izbrisati %s: %s"
-
-#: ../bin/duplicity:1275 ../duplicity/dup_temp.py:267
-#, python-format
-msgid "Failed to read %s: %s"
-msgstr "Ni mogoče brati %s: %s"
-
-#: ../bin/duplicity:1289
-#, python-format
-msgid "Copying %s to local cache."
-msgstr "Kopiranje %s v krajevni medpomnilnik."
-
-#: ../bin/duplicity:1337
-msgid "Local and Remote metadata are synchronized, no sync needed."
-msgstr ""
-"Krajevni in oddaljeni metapodatki so usklajeni. Ni potrebe po usklajevanju."
-
-#: ../bin/duplicity:1342
-msgid "Synchronizing remote metadata to local cache..."
-msgstr "Usklajevanje oddaljenih metapodatkov s krajevnim predpomnilnikom ..."
-
-#: ../bin/duplicity:1355
-msgid "Sync would copy the following from remote to local:"
-msgstr ""
-"Usklajevanje bi kopiralo naslednje datoteke z oddaljenega na krajevni "
-"računalnik:"
-
-#: ../bin/duplicity:1358
-msgid "Sync would remove the following spurious local files:"
-msgstr "Usklajevanje bi odstranilo naslednje odvečne krajevne datoteke:"
-
-#: ../bin/duplicity:1402
-msgid "Unable to get free space on temp."
-msgstr "Ni mogoče dobiti nezasedenega prostora v začasni mapi."
-
-#: ../bin/duplicity:1410
-#, python-format
-msgid "Temp space has %d available, backup needs approx %d."
-msgstr ""
-"Začasni prostor ima na voljo %d, varnostna kopija potrebuje %d prostora."
-
-#: ../bin/duplicity:1413
-#, python-format
-msgid "Temp has %d available, backup will use approx %d."
-msgstr ""
-"Začasni prostor ima na voljo %d prostora, varnostna kopija bo uporabila "
-"približno %d."
-
-#: ../bin/duplicity:1421
-msgid "Unable to get max open files."
-msgstr "Ni mogoče dobiti največjega števila odprtih datotek."
-
-#: ../bin/duplicity:1425
-#, python-format
-msgid ""
-"Max open files of %s is too low, should be >= 1024.\n"
-"Use 'ulimit -n 1024' or higher to correct.\n"
-msgstr ""
-"Največje število odprtih datotek %s je prenizko. Moralo bi biti >=1024.\n"
-"Uporabite 'ulimit -n 1024' ali višji za popravilo.\n"
-
-#: ../bin/duplicity:1477
-msgid ""
-"RESTART: The first volume failed to upload before termination.\n"
-"         Restart is impossible...starting backup from beginning."
-msgstr ""
-"PONOVEN ZAGON: pošiljanje prvega nosilca pred končanjem je spodletelo.\n"
-"          Ponovni zagon je nemogoč ... začenjanje ustvarjanja varnostne "
-"kopije od začetka."
-
-#: ../bin/duplicity:1483
-#, python-format
-msgid ""
-"RESTART: Volumes %d to %d failed to upload before termination.\n"
-"         Restarting backup at volume %d."
-msgstr ""
-"PONOVEN ZAGON: pošiljanje nosilcev %d od %d pred končanjem je spodletelo.\n"
-"          Ponovno začenjanje ustvarjanja varnostne kopije pri nosilcu %d."
-
-#: ../bin/duplicity:1490
-#, python-format
-msgid ""
-"RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
-"         Restart is impossible ... duplicity will clean off the last "
-"partial\n"
-"         backup then restart the backup from the beginning."
-msgstr ""
-"PONOVEN ZAGON: nemogoče stanje varnostne kopije: nosilec ima %d nosilcev, "
-"oddaljeno mesto ima %d nosilcev.\n"
-"          Ponoven zagon je nemogoč. Duplicity bo počistil zadnjo delno\n"
-"          nadgradnjo in nato ponovno začel ustvarjanje varnostne kopije od "
-"začetka."
-
-#: ../bin/duplicity:1511
-msgid ""
-"\n"
-"PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
-"recognize its own backups.  Please remove PYTHONOPTIMIZE from\n"
-"the environment and rerun the backup.\n"
-"\n"
-"See https://bugs.launchpad.net/duplicity/+bug/931175\n"
-msgstr ""
-
-#: ../bin/duplicity:1534
-#, python-format
-msgid "Acquiring lockfile %s"
-msgstr ""
-
-#: ../bin/duplicity:1592
-#, python-format
-msgid "Last %s backup left a partial set, restarting."
-msgstr "Zadnja varnostna kopija %s je pustila delno zbirko, ponoven zagon."
-
-#: ../bin/duplicity:1596
-#, python-format
-msgid "Cleaning up previous partial %s backup set, restarting."
-msgstr ""
-"Čiščenje predhodne delne zbirke varnostne kopije %s, ponovno zaganjanje."
-
-#: ../bin/duplicity:1608
-msgid "Last full backup date:"
-msgstr "Datum zadnje polne varnostne kopije:"
-
-#: ../bin/duplicity:1610
-msgid "Last full backup date: none"
-msgstr "Datum zadnje polne varnostne kopije: brez"
-
-#: ../bin/duplicity:1613
-msgid "Last full backup is too old, forcing full backup"
-msgstr ""
-"Zadnja polna varnostna kopija je prestara. Vsiljena bo polna varnostna "
-"kopija."
-
-#: ../bin/duplicity:1662
-msgid ""
-"When using symmetric encryption, the signing passphrase must equal the "
-"encryption passphrase."
-msgstr ""
-"Pri uporabi simetričnega šifriranja mora biti geslo za podpisovanje enako "
-"šifrirnemu geslu."
-
-#: ../bin/duplicity:1731
+#: ../bin/duplicity:121
 msgid "INT intercepted...exiting."
 msgstr "Prestrežen je bil INT ... končanje."
 
-#: ../bin/duplicity:1739
+#: ../bin/duplicity:129
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "Podrobnosti napake GPG: %s"
 
-#: ../bin/duplicity:1749
+#: ../bin/duplicity:139
 #, python-format
 msgid "User error detail: %s"
 msgstr "Podrobnosti napake uporabnika: %s"
 
-#: ../bin/duplicity:1759
+#: ../bin/duplicity:149
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Podrobnosti napake zaledja: %s"
@@ -1199,18 +791,18 @@ msgstr "Primerjanje %s in %s"
 msgid "D %s"
 msgstr "D %s"
 
-#: ../duplicity/dup_collections.py:177 ../duplicity/dup_collections.py:191
+#: ../duplicity/dup_collections.py:181 ../duplicity/dup_collections.py:195
 #, python-format
 msgid "BackupSet.delete: missing %s"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:216
+#: ../duplicity/dup_collections.py:220
 msgid "Fatal Error: No manifests found for most recent backup"
 msgstr ""
 "Usodna napaka: za najbolj nedavno varnostno kopijo ni bilo mogoče najti "
 "manifesta"
 
-#: ../duplicity/dup_collections.py:225
+#: ../duplicity/dup_collections.py:229
 msgid ""
 "Fatal Error: Remote manifest does not match local one.  Either the remote "
 "backup set or the local archive directory has been corrupted."
@@ -1218,103 +810,103 @@ msgstr ""
 "Usodna napaka: oddaljeni manifest se ne ujema s krajevnim. Oddaljena zbirka "
 "varnostne kopija ali krajevna mapa arhivov je okvarjena."
 
-#: ../duplicity/dup_collections.py:233
+#: ../duplicity/dup_collections.py:237
 msgid "Fatal Error: Neither remote nor local manifest is readable."
 msgstr ""
 "Usodna napaka: prebrati ni mogoče niti oddaljenega niti krajevnega manifesta."
 
-#: ../duplicity/dup_collections.py:244
+#: ../duplicity/dup_collections.py:248
 #, python-format
 msgid "Processing local manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:256
+#: ../duplicity/dup_collections.py:260
 #, python-format
 msgid "Error processing remote manifest (%s): %s"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:259
+#: ../duplicity/dup_collections.py:263
 #, python-format
 msgid "Processing remote manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:355
+#: ../duplicity/dup_collections.py:359
 msgid "Preferring Backupset over previous one!"
 msgstr "Prednostna zbirka varnostnih kopij nad predhodno!"
 
-#: ../duplicity/dup_collections.py:358
+#: ../duplicity/dup_collections.py:362
 #, python-format
 msgid "Ignoring incremental Backupset (start_time: %s; needed: %s)"
 msgstr ""
 "Prezrtje koračne zbirke varnostnih kopij (začetni_čas: %s, zahtevano: %s)"
 
-#: ../duplicity/dup_collections.py:363
+#: ../duplicity/dup_collections.py:367
 #, python-format
 msgid "Added incremental Backupset (start_time: %s / end_time: %s)"
 msgstr ""
 "Dodana je bila koračna varnostna kopija (začetni_čas: %s / končni_čas: %s)"
 
-#: ../duplicity/dup_collections.py:433
+#: ../duplicity/dup_collections.py:437
 msgid "Chain start time: "
 msgstr "Začetni čas verige: "
 
-#: ../duplicity/dup_collections.py:434
+#: ../duplicity/dup_collections.py:438
 msgid "Chain end time: "
 msgstr "Končni čas verige: "
 
-#: ../duplicity/dup_collections.py:435
+#: ../duplicity/dup_collections.py:439
 #, python-format
 msgid "Number of contained backup sets: %d"
 msgstr "Število vsebovanih zbirk varnostnih kopij: %d"
 
-#: ../duplicity/dup_collections.py:437
+#: ../duplicity/dup_collections.py:441
 #, python-format
 msgid "Total number of contained volumes: %d"
 msgstr "Skupno število vsebovanih nosilcev: %d"
 
-#: ../duplicity/dup_collections.py:439 ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1240
 msgid "Type of backup set:"
 msgstr "Vrsta zbirke varnostne kopije"
 
-#: ../duplicity/dup_collections.py:439 ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1240
 msgid "Time:"
 msgstr "Čas:"
 
-#: ../duplicity/dup_collections.py:439
+#: ../duplicity/dup_collections.py:443
 msgid "Num volumes:"
 msgstr "Število nosilcev:"
 
-#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1241
+#: ../duplicity/dup_collections.py:447 ../duplicity/dup_collections.py:1246
 msgid "Full"
 msgstr "Polno"
 
-#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1243
+#: ../duplicity/dup_collections.py:450 ../duplicity/dup_collections.py:1248
 msgid "Incremental"
 msgstr "Koračna"
 
-#: ../duplicity/dup_collections.py:506
+#: ../duplicity/dup_collections.py:510
 msgid "local"
 msgstr "krajevno"
 
-#: ../duplicity/dup_collections.py:508
+#: ../duplicity/dup_collections.py:512
 msgid "remote"
 msgstr "oddaljeno"
 
-#: ../duplicity/dup_collections.py:663
+#: ../duplicity/dup_collections.py:667
 msgid "Collection Status"
 msgstr "Stanje zbirke"
 
-#: ../duplicity/dup_collections.py:665
+#: ../duplicity/dup_collections.py:669
 #, python-format
 msgid "Connecting with backend: %s"
 msgstr "Povezovanje z zaledjem: %s"
 
-#: ../duplicity/dup_collections.py:667
+#: ../duplicity/dup_collections.py:671
 #, python-format
 msgid "Archive dir: %s"
 msgstr "Mapa arhiva: %s"
 
-#: ../duplicity/dup_collections.py:670
+#: ../duplicity/dup_collections.py:674
 #, python-format
 msgid "Found %d secondary backup chain."
 msgid_plural "Found %d secondary backup chains."
@@ -1323,22 +915,22 @@ msgstr[1] "Najdena je bila %d drugotna veriga varnostnih kopij."
 msgstr[2] "Najdeni sta bili %d drugotni verigi varnostnih kopij."
 msgstr[3] "Najdene so bile %d drugotne verige varnostnih kopij."
 
-#: ../duplicity/dup_collections.py:675
+#: ../duplicity/dup_collections.py:679
 #, python-format
 msgid "Secondary chain %d of %d:"
 msgstr "Drugotna veriga %d od %d:"
 
-#: ../duplicity/dup_collections.py:681
+#: ../duplicity/dup_collections.py:685
 msgid "Found primary backup chain with matching signature chain:"
 msgstr ""
 "Najdena je bila osnovna veriga varnostnih kopij z ujemajočo se verigo "
 "podpisa:"
 
-#: ../duplicity/dup_collections.py:685
+#: ../duplicity/dup_collections.py:689
 msgid "No backup chains with active signatures found"
 msgstr "Verig varnostnih kopij s podpisi ni bilo mogoče najti"
 
-#: ../duplicity/dup_collections.py:688
+#: ../duplicity/dup_collections.py:692
 #, python-format
 msgid "Also found %d backup set not part of any chain,"
 msgid_plural "Also found %d backup sets not part of any chain,"
@@ -1351,7 +943,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Najdene so bile tudi %d zbirke varnostnih kopij, ki niso del nobene verige,"
 
-#: ../duplicity/dup_collections.py:692
+#: ../duplicity/dup_collections.py:696
 #, python-format
 msgid "and %d incomplete backup set."
 msgid_plural "and %d incomplete backup sets."
@@ -1361,17 +953,17 @@ msgstr[2] "in %d nedokončani zbirki varnostnih kopij."
 msgstr[3] "in %d nedokončane zbirke varnostnih kopij."
 
 #. "cleanup" is a hard-coded command, so do not translate it
-#: ../duplicity/dup_collections.py:697
+#: ../duplicity/dup_collections.py:701
 msgid "These may be deleted by running duplicity with the \"cleanup\" command."
 msgstr ""
 "Lahko jih izbrišete s poganjanjem programa duplicity z ukazom \"cleanup\"."
 
-#: ../duplicity/dup_collections.py:700
+#: ../duplicity/dup_collections.py:704
 msgid "No orphaned or incomplete backup sets found."
 msgstr ""
 "Osirotelih ali nedokončanih zbirk varnostnih kopij ni bilo mogoče najti."
 
-#: ../duplicity/dup_collections.py:716
+#: ../duplicity/dup_collections.py:720
 #, python-format
 msgid "%d file exists on backend"
 msgid_plural "%d files exist on backend"
@@ -1380,7 +972,7 @@ msgstr[1] "V začelju obstaja %d datoteka"
 msgstr[2] "V začelju obstajata %d datoteki"
 msgstr[3] "V začelju obstajajo %d datoteke"
 
-#: ../duplicity/dup_collections.py:726
+#: ../duplicity/dup_collections.py:730
 #, python-format
 msgid "%d file exists in cache"
 msgid_plural "%d files exist in cache"
@@ -1389,13 +981,13 @@ msgstr[1] "V predpomnilniku obstaja %d datoteka"
 msgstr[2] "V predpomnilniku obstajata %d datoteki"
 msgstr[3] "V predpomnilniku obstajajo %d datoteke"
 
-#: ../duplicity/dup_collections.py:779
+#: ../duplicity/dup_collections.py:783
 msgid "Warning, discarding last backup set, because of missing signature file."
 msgstr ""
 "Opozorilo, zadnja zbirka varnostnih kopij je bila zavržena zaradi manjkajoče "
 "datoteke podpisa."
 
-#: ../duplicity/dup_collections.py:802
+#: ../duplicity/dup_collections.py:806
 msgid "Warning, found the following local orphaned signature file:"
 msgid_plural "Warning, found the following local orphaned signature files:"
 msgstr[0] ""
@@ -1408,7 +1000,7 @@ msgstr[2] ""
 msgstr[3] ""
 "Opozorilo. Najdene so bile naslednje krajevne datoteke z osirotelim podpisom:"
 
-#: ../duplicity/dup_collections.py:811
+#: ../duplicity/dup_collections.py:815
 msgid "Warning, found the following remote orphaned signature file:"
 msgid_plural "Warning, found the following remote orphaned signature files:"
 msgstr[0] ""
@@ -1424,20 +1016,20 @@ msgstr[3] ""
 "Opozorilo. Najdene so bile naslednje oddaljene datoteke z osirotelim "
 "podpisom:"
 
-#: ../duplicity/dup_collections.py:820
+#: ../duplicity/dup_collections.py:824
 msgid "Warning, found signatures but no corresponding backup files"
 msgstr ""
 "Opozorilo. Najdeni so bili podpisi, ne pa tudi ustrezne datoteke varnostnih "
 "kopij"
 
-#: ../duplicity/dup_collections.py:824
+#: ../duplicity/dup_collections.py:828
 msgid ""
 "Warning, found incomplete backup sets, probably left from aborted session"
 msgstr ""
 "Opozorilo. Najdene so bile nepopolne zbirke varnostnih kopij. Verjetno so "
 "ostale iz prekinjene seje."
 
-#: ../duplicity/dup_collections.py:828
+#: ../duplicity/dup_collections.py:832
 msgid "Warning, found the following orphaned backup file:"
 msgid_plural "Warning, found the following orphaned backup files:"
 msgstr[0] ""
@@ -1449,61 +1041,469 @@ msgstr[2] ""
 msgstr[3] ""
 "Opozorilo. Najdene so bile naslednje datoteke z osirotelim podpisom:"
 
-#: ../duplicity/dup_collections.py:845
+#: ../duplicity/dup_collections.py:849
 #, python-format
 msgid "Extracting backup chains from list of files: %s"
 msgstr "Izvleka verig varnostnih kopij s seznama datotek: %s"
 
-#: ../duplicity/dup_collections.py:856
+#: ../duplicity/dup_collections.py:861
 #, python-format
 msgid "File %s is part of known set"
 msgstr "Datoteka %s je del znanega niza"
 
-#: ../duplicity/dup_collections.py:859
+#: ../duplicity/dup_collections.py:864
 #, python-format
 msgid "File %s is not part of a known set; creating new set"
 msgstr "Datoteka %s ni del znanega niza, ustvarjanje novega niza"
 
-#: ../duplicity/dup_collections.py:864
+#: ../duplicity/dup_collections.py:869
 #, python-format
 msgid "Ignoring file (rejected by backup set) '%s'"
 msgstr "Preziranje datoteke (zavrnjeno s strani zbirke varnostnih kopij) '%s'"
 
-#: ../duplicity/dup_collections.py:880
+#: ../duplicity/dup_collections.py:885
 #, python-format
 msgid "Found backup chain %s"
 msgstr "Najdena je bila veriga varnostnih kopij %s"
 
-#: ../duplicity/dup_collections.py:885
+#: ../duplicity/dup_collections.py:890
 #, python-format
 msgid "Added set %s to pre-existing chain %s"
 msgstr "Zbirka %s je bila dodana k že obstoječi verigi %s"
 
-#: ../duplicity/dup_collections.py:889
+#: ../duplicity/dup_collections.py:894
 #, python-format
 msgid "Found orphaned set %s"
 msgstr "Najdena je bila osirotela zbirka %s"
 
-#: ../duplicity/dup_collections.py:1039
+#: ../duplicity/dup_collections.py:1044
 #, python-format
 msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
 "starting at time %s."
 msgstr ""
 
-#: ../duplicity/dup_collections.py:1233
+#: ../duplicity/dup_collections.py:1238
 #, python-format
 msgid "File: %s"
 msgstr "Datoteka: %s"
 
-#: ../duplicity/dup_collections.py:1234
+#: ../duplicity/dup_collections.py:1239
 #, python-format
 msgid "Total number of backup: %d"
 msgstr "Skupno število varnostne kopije: %d"
 
-#: ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:1240
 msgid "Type of file change:"
 msgstr "Tip spremembe datoteke:"
+
+#: ../duplicity/dup_main.py:123
+msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
+msgstr "Ponovno uporabi nastavljeno ŠIFRIRNO_FRAZO kot FRAZO_PODPISA"
+
+#: ../duplicity/dup_main.py:130
+msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
+msgstr "Ponovno uporabi nastavljeno FRAZO_PODPISA kot ŠIFRIRNO_FRAZO"
+
+#: ../duplicity/dup_main.py:169
+msgid "PASSPHRASE variable not set, asking user."
+msgstr "Spremenljivka ŠIFRIRNA_FRAZA ni nastavljena, zato bo vprašan uporabnik"
+
+#: ../duplicity/dup_main.py:184
+msgid "GnuPG passphrase for signing key:"
+msgstr "Šifrirna fraza GnuPG za ključ podpisovanja:"
+
+#: ../duplicity/dup_main.py:189
+msgid "GnuPG passphrase:"
+msgstr "Šifrirna fraza GnuPG:"
+
+#: ../duplicity/dup_main.py:194
+msgid "Retype passphrase for signing key to confirm: "
+msgstr "Ponovno vnesite šifrirno frazo za ključ podpisovanja za potrditev: "
+
+#: ../duplicity/dup_main.py:196
+msgid "Retype passphrase to confirm: "
+msgstr "Ponovno vnesite šifrirno frazo za potrditev: "
+
+#: ../duplicity/dup_main.py:199
+msgid "First and second passphrases do not match!  Please try again."
+msgstr "Prva in druga šifrirna fraza se ne ujemati! Poskusite znova."
+
+#: ../duplicity/dup_main.py:206
+msgid ""
+"Cannot use empty passphrase with symmetric encryption!  Please try again."
+msgstr ""
+"Prazne šifrirne fraze ni mogoče uporabiti s simetričnim šifriranjem! "
+"Poskusite znova."
+
+#: ../duplicity/dup_main.py:263
+#, python-format
+msgid ""
+"File %s complete in backup set.\n"
+"Continuing restart on file %s."
+msgstr ""
+"Datoteka %s je celotna v zbirki varnostnih kopij.\n"
+"Nadaljevanje ponovnega zagona na datoteki %s."
+
+#: ../duplicity/dup_main.py:272
+#, python-format
+msgid ""
+"File %s missing in backup set.\n"
+"Continuing restart on file %s."
+msgstr ""
+"Datoteka %s manjka v zbirki varnostnih kopij.\n"
+"Nadaljevanje ponovnega zagona na datoteki %s."
+
+#: ../duplicity/dup_main.py:321
+#, python-format
+msgid "File %s was corrupted during upload."
+msgstr "Datoteka %s je bila med pošiljanjem pokvarjena."
+
+#: ../duplicity/dup_main.py:354
+msgid ""
+"Restarting backup, but current encryption settings do not match original "
+"settings"
+msgstr ""
+"Ponovno začenjanje varnostne kopije, vendar se trenutne nastavitve "
+"šifriranja ne ujemajo z izvirnimi nastavitvami."
+
+#: ../duplicity/dup_main.py:377
+#, python-format
+msgid "Restarting after volume %s, file %s, block %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:447
+#, python-format
+msgid "Processed volume %d"
+msgstr ""
+
+#: ../duplicity/dup_main.py:597
+msgid ""
+"Fatal Error: Unable to start incremental backup.  Old signatures not found "
+"and incremental specified"
+msgstr ""
+"Usodna napaka: ni mogoče začetni koračne varnostne kopije. Starih podpisov "
+"ni mogoče najti in korak ni določen"
+
+#: ../duplicity/dup_main.py:601
+msgid "No signatures found, switching to full backup."
+msgstr "Ni bilo mogoče najti podpisov. Preklop na polno varnostno kopijo."
+
+#: ../duplicity/dup_main.py:615
+msgid "Backup Statistics"
+msgstr "Statistika varnostne kopije"
+
+#: ../duplicity/dup_main.py:721
+#, python-format
+msgid "%s not found in archive - no files restored."
+msgstr "%s ni bila najdena v arhivu - datoteke niso bile obnovljene."
+
+#: ../duplicity/dup_main.py:725
+msgid "No files found in archive - nothing restored."
+msgstr "V arhivu ni bilo mogoče najti datotek - nič ni bilo obnovljenega."
+
+#: ../duplicity/dup_main.py:758
+#, python-format
+msgid "Processed volume %d of %d"
+msgstr "Obdelan je bil nosilec %d od %d"
+
+#: ../duplicity/dup_main.py:792
+#, python-format
+msgid "Invalid data - %s hash mismatch for file:"
+msgstr "Neveljavni podatki - neujemanje razpršil %s za datoteko:"
+
+#: ../duplicity/dup_main.py:795
+#, python-format
+msgid "Calculated hash: %s"
+msgstr "Izračunano razpršilo: %s"
+
+#: ../duplicity/dup_main.py:796
+#, python-format
+msgid "Manifest hash: %s"
+msgstr "Razpršilo manifesta: %s"
+
+#: ../duplicity/dup_main.py:839
+#, python-format
+msgid "Volume was signed by key %s, not %s"
+msgstr "Nosilec je bil podpisan s ključem %s, ne %s"
+
+#: ../duplicity/dup_main.py:871
+#, python-format
+msgid "Verify complete: %s, %s."
+msgstr "Potrditev veljavnosti je končana: %s, %s."
+
+#: ../duplicity/dup_main.py:872
+#, python-format
+msgid "%d file compared"
+msgid_plural "%d files compared"
+msgstr[0] "%d datotek je bilo primerjanih"
+msgstr[1] "%d datoteka je bila primerjana"
+msgstr[2] "%d datoteki sta bili primerjani"
+msgstr[3] "%d datoteke so bile primerjane"
+
+#: ../duplicity/dup_main.py:874
+#, python-format
+msgid "%d difference found"
+msgid_plural "%d differences found"
+msgstr[0] "Najdenih je bilo %d razlik"
+msgstr[1] "Najdena je bila %d razlika"
+msgstr[2] "Najdeni sta bili %d razliki"
+msgstr[3] "Najdene so bile %d razlike"
+
+#: ../duplicity/dup_main.py:893
+msgid "No extraneous files found, nothing deleted in cleanup."
+msgstr ""
+"Zunanje datoteke niso bile najdene. Med čiščenjem ni bilo nič izbrisanega."
+
+#: ../duplicity/dup_main.py:898
+msgid "Deleting this file from backend:"
+msgid_plural "Deleting these files from backend:"
+msgstr[0] "Brisanje teh datotek iz zaledja:"
+msgstr[1] "Brisanje te datoteke iz zaledja:"
+msgstr[2] "Brisanje teh datotek iz zaledja:"
+msgstr[3] "Brisanje teh datotek iz zaledja:"
+
+#: ../duplicity/dup_main.py:909
+msgid "Found the following file to delete:"
+msgid_plural "Found the following files to delete:"
+msgstr[0] "Najdene so bile naslednje datoteke za izbris:"
+msgstr[1] "Najdena je bila naslednja datoteka za izbris:"
+msgstr[2] "Najdeni sta bili naslednji datoteki za izbris:"
+msgstr[3] "Najdene so bile naslednje datoteke za izbris:"
+
+#: ../duplicity/dup_main.py:912
+msgid "Run duplicity again with the --force option to actually delete."
+msgstr "Za dejanski izbris ponovno poženite duplicity z možnostjo --force."
+
+#: ../duplicity/dup_main.py:955
+msgid "There are backup set(s) at time(s):"
+msgstr "Obstajajo naslednje zbirke varnostnih kopij ob časih:"
+
+#: ../duplicity/dup_main.py:957
+msgid "Which can't be deleted because newer sets depend on them."
+msgstr "Ki jih ni mogoče izbrisati, ker so od njih odvisne novejše zbirke."
+
+#: ../duplicity/dup_main.py:961
+msgid ""
+"Current active backup chain is older than specified time.  However, it will "
+"not be deleted.  To remove all your backups, manually purge the repository."
+msgstr ""
+"Trenutno dejavna veriga varnostnih kopij je starejša od določenega časa. "
+"Vendar ne bo izbrisana. Za odstranitev vseh svojih varnostnih kopij ročno "
+"počistite skladišče."
+
+#: ../duplicity/dup_main.py:974
+msgid "No old backup sets found, nothing deleted."
+msgstr ""
+"Starejših zbirk varnostnih kopij ni bilo mogoče najti. Nič ne bo izbrisano."
+
+#: ../duplicity/dup_main.py:977
+msgid "Deleting backup chain at time:"
+msgid_plural "Deleting backup chains at times:"
+msgstr[0] "Brisanje verig varnostnih kopij ob časih:"
+msgstr[1] "Brisanje verige varnostne kopije ob času:"
+msgstr[2] "Brisanje verig varnostnih kopij ob časih:"
+msgstr[3] "Brisanje verig varnostnih kopij ob času:"
+
+#: ../duplicity/dup_main.py:989
+#, python-format
+msgid "Deleting any incremental signature chain rooted at %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:991
+#, python-format
+msgid "Deleting any incremental backup chain rooted at %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:994
+#, python-format
+msgid "Deleting complete signature chain %s"
+msgstr "Brisanje celotne verige podpisa %s"
+
+#: ../duplicity/dup_main.py:996
+#, python-format
+msgid "Deleting complete backup chain %s"
+msgstr "Brisanje celotne verige varnostne kopije %s"
+
+#: ../duplicity/dup_main.py:1002
+msgid "Found old backup chain at the following time:"
+msgid_plural "Found old backup chains at the following times:"
+msgstr[0] "Najdenih starih verig varnostnih kopij ob sledečih časih:"
+msgstr[1] "Najdena stara veriga varnostne kopije ob sledečem času:"
+msgstr[2] "Najdeni stari verigi varnostnih kopij ob sledečih časih:"
+msgstr[3] "Najdene stare verige varnostnih kopij ob sledečih časih:"
+
+#: ../duplicity/dup_main.py:1006
+msgid "Rerun command with --force option to actually delete."
+msgstr "Ponovno zaženite ukaz z možnostjo --force za dejanski izbris."
+
+#: ../duplicity/dup_main.py:1029
+msgid "No old backup sets found."
+msgstr ""
+
+#: ../duplicity/dup_main.py:1044
+#, python-format
+msgid "Signature %s already replicated"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1051 ../duplicity/dup_main.py:1090
+#, python-format
+msgid "Replicating %s."
+msgstr ""
+
+#: ../duplicity/dup_main.py:1078
+#, python-format
+msgid "Backupset %s already replicated"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1226
+#, python-format
+msgid "Deleting local %s (not authoritative at backend)."
+msgstr "Izbris krajevnega %s (ni overitveno na ozadju)."
+
+#: ../duplicity/dup_main.py:1231
+#, python-format
+msgid "Unable to delete %s: %s"
+msgstr "Ni mogoče izbrisati %s: %s"
+
+#: ../duplicity/dup_main.py:1265 ../duplicity/dup_temp.py:267
+#, python-format
+msgid "Failed to read %s: %s"
+msgstr "Ni mogoče brati %s: %s"
+
+#: ../duplicity/dup_main.py:1279
+#, python-format
+msgid "Copying %s to local cache."
+msgstr "Kopiranje %s v krajevni medpomnilnik."
+
+#: ../duplicity/dup_main.py:1327
+msgid "Local and Remote metadata are synchronized, no sync needed."
+msgstr ""
+"Krajevni in oddaljeni metapodatki so usklajeni. Ni potrebe po usklajevanju."
+
+#: ../duplicity/dup_main.py:1332
+msgid "Synchronizing remote metadata to local cache..."
+msgstr "Usklajevanje oddaljenih metapodatkov s krajevnim predpomnilnikom ..."
+
+#: ../duplicity/dup_main.py:1345
+msgid "Sync would copy the following from remote to local:"
+msgstr ""
+"Usklajevanje bi kopiralo naslednje datoteke z oddaljenega na krajevni "
+"računalnik:"
+
+#: ../duplicity/dup_main.py:1348
+msgid "Sync would remove the following spurious local files:"
+msgstr "Usklajevanje bi odstranilo naslednje odvečne krajevne datoteke:"
+
+#: ../duplicity/dup_main.py:1392
+msgid "Unable to get free space on temp."
+msgstr "Ni mogoče dobiti nezasedenega prostora v začasni mapi."
+
+#: ../duplicity/dup_main.py:1400
+#, python-format
+msgid "Temp space has %d available, backup needs approx %d."
+msgstr ""
+"Začasni prostor ima na voljo %d, varnostna kopija potrebuje %d prostora."
+
+#: ../duplicity/dup_main.py:1403
+#, python-format
+msgid "Temp has %d available, backup will use approx %d."
+msgstr ""
+"Začasni prostor ima na voljo %d prostora, varnostna kopija bo uporabila "
+"približno %d."
+
+#: ../duplicity/dup_main.py:1411
+msgid "Unable to get max open files."
+msgstr "Ni mogoče dobiti največjega števila odprtih datotek."
+
+#: ../duplicity/dup_main.py:1415
+#, python-format
+msgid ""
+"Max open files of %s is too low, should be >= 1024.\n"
+"Use 'ulimit -n 1024' or higher to correct.\n"
+msgstr ""
+"Največje število odprtih datotek %s je prenizko. Moralo bi biti >=1024.\n"
+"Uporabite 'ulimit -n 1024' ali višji za popravilo.\n"
+
+#: ../duplicity/dup_main.py:1467
+msgid ""
+"RESTART: The first volume failed to upload before termination.\n"
+"         Restart is impossible...starting backup from beginning."
+msgstr ""
+"PONOVEN ZAGON: pošiljanje prvega nosilca pred končanjem je spodletelo.\n"
+"          Ponovni zagon je nemogoč ... začenjanje ustvarjanja varnostne "
+"kopije od začetka."
+
+#: ../duplicity/dup_main.py:1473
+#, python-format
+msgid ""
+"RESTART: Volumes %d to %d failed to upload before termination.\n"
+"         Restarting backup at volume %d."
+msgstr ""
+"PONOVEN ZAGON: pošiljanje nosilcev %d od %d pred končanjem je spodletelo.\n"
+"          Ponovno začenjanje ustvarjanja varnostne kopije pri nosilcu %d."
+
+#: ../duplicity/dup_main.py:1480
+#, python-format
+msgid ""
+"RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
+"         Restart is impossible ... duplicity will clean off the last "
+"partial\n"
+"         backup then restart the backup from the beginning."
+msgstr ""
+"PONOVEN ZAGON: nemogoče stanje varnostne kopije: nosilec ima %d nosilcev, "
+"oddaljeno mesto ima %d nosilcev.\n"
+"          Ponoven zagon je nemogoč. Duplicity bo počistil zadnjo delno\n"
+"          nadgradnjo in nato ponovno začel ustvarjanje varnostne kopije od "
+"začetka."
+
+#: ../duplicity/dup_main.py:1501
+msgid ""
+"\n"
+"PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
+"recognize its own backups.  Please remove PYTHONOPTIMIZE from\n"
+"the environment and rerun the backup.\n"
+"\n"
+"See https://bugs.launchpad.net/duplicity/+bug/931175\n"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1524
+#, python-format
+msgid "Acquiring lockfile %s"
+msgstr ""
+
+#: ../duplicity/dup_main.py:1582
+#, python-format
+msgid "Last %s backup left a partial set, restarting."
+msgstr "Zadnja varnostna kopija %s je pustila delno zbirko, ponoven zagon."
+
+#: ../duplicity/dup_main.py:1586
+#, python-format
+msgid "Cleaning up previous partial %s backup set, restarting."
+msgstr ""
+"Čiščenje predhodne delne zbirke varnostne kopije %s, ponovno zaganjanje."
+
+#: ../duplicity/dup_main.py:1598
+msgid "Last full backup date:"
+msgstr "Datum zadnje polne varnostne kopije:"
+
+#: ../duplicity/dup_main.py:1600
+msgid "Last full backup date: none"
+msgstr "Datum zadnje polne varnostne kopije: brez"
+
+#: ../duplicity/dup_main.py:1603
+msgid "Last full backup is too old, forcing full backup"
+msgstr ""
+"Zadnja polna varnostna kopija je prestara. Vsiljena bo polna varnostna "
+"kopija."
+
+#: ../duplicity/dup_main.py:1652
+msgid ""
+"When using symmetric encryption, the signing passphrase must equal the "
+"encryption passphrase."
+msgstr ""
+"Pri uporabi simetričnega šifriranja mora biti geslo za podpisovanje enako "
+"šifrirnemu geslu."
 
 #: ../duplicity/dup_time.py:61
 #, python-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-07-13 14:09-0500\n"
+"POT-Creation-Date: 2019-08-07 15:49-0500\n"
 "PO-Revision-Date: 2019-05-26 09:31+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -16,421 +16,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-07-15 05:57+0000\n"
-"X-Generator: Launchpad (build 19007)\n"
+"X-Launchpad-Export-Date: 2019-08-09 06:06+0000\n"
+"X-Generator: Launchpad (build 19015)\n"
 
-#: ../bin/duplicity:133
-msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
-msgstr "Återanvänd inställd PASSPHRASE som SIGN_PASSPHRASE"
-
-#: ../bin/duplicity:140
-msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
-msgstr "Återanvänd inställd SIGN_PASSPHRASE som PASSPHRASE"
-
-#: ../bin/duplicity:179
-msgid "PASSPHRASE variable not set, asking user."
-msgstr "LÖSENFRAS-variabeln är inte inställd, frågar användaren."
-
-#: ../bin/duplicity:194
-msgid "GnuPG passphrase for signing key:"
-msgstr "GnuPG-lösenfras för signeringsnyckel:"
-
-#: ../bin/duplicity:199
-msgid "GnuPG passphrase:"
-msgstr "GnuPG-lösenfras:"
-
-#: ../bin/duplicity:204
-msgid "Retype passphrase for signing key to confirm: "
-msgstr "Ange lösenfrasen för signeringsnyckeln igen för att bekräfta: "
-
-#: ../bin/duplicity:206
-msgid "Retype passphrase to confirm: "
-msgstr "Ange lösenfrasen igen för att bekräfta: "
-
-#: ../bin/duplicity:209
-msgid "First and second passphrases do not match!  Please try again."
-msgstr "Första och andra lösenfrasen stämmer inte överens! Försök igen."
-
-#: ../bin/duplicity:216
-msgid ""
-"Cannot use empty passphrase with symmetric encryption!  Please try again."
-msgstr "Kan inte använda tom lösenfras med symmetrisk kryptering! Försök igen."
-
-#: ../bin/duplicity:273
-#, python-format
-msgid ""
-"File %s complete in backup set.\n"
-"Continuing restart on file %s."
-msgstr ""
-"Filen %s är komplett i det säkerhetskopierade arkivet.\n"
-"Fortsätter omstart för filen %s."
-
-#: ../bin/duplicity:282
-#, python-format
-msgid ""
-"File %s missing in backup set.\n"
-"Continuing restart on file %s."
-msgstr ""
-"Filen %s saknas i det säkerhetskopierade arkivet.\n"
-"Fortsätter omstart för filen %s."
-
-#: ../bin/duplicity:331
-#, python-format
-msgid "File %s was corrupted during upload."
-msgstr "Filen %s fördärvades vid uppladdningen."
-
-#: ../bin/duplicity:364
-msgid ""
-"Restarting backup, but current encryption settings do not match original "
-"settings"
-msgstr ""
-"Startar om säkerhetskopiering, men aktuella krypteringsinställningar skiljer "
-"sig från de ursprungliga inställningarna"
-
-#: ../bin/duplicity:387
-#, python-format
-msgid "Restarting after volume %s, file %s, block %s"
-msgstr "Startar om efter volym %s, fil %s, block %s"
-
-#: ../bin/duplicity:457
-#, python-format
-msgid "Processed volume %d"
-msgstr "Behandlade volym %d"
-
-#: ../bin/duplicity:607
-msgid ""
-"Fatal Error: Unable to start incremental backup.  Old signatures not found "
-"and incremental specified"
-msgstr ""
-"Allvarligt fel: Kunde inte starta stegvis säkerhetskopiering. Gamla "
-"signaturer hittades inte och stegvis angavs"
-
-#: ../bin/duplicity:611
-msgid "No signatures found, switching to full backup."
-msgstr "Inga signaturer hittades, växlar till fullständig säkerhetskopiering."
-
-#: ../bin/duplicity:625
-msgid "Backup Statistics"
-msgstr "Statistik för säkerhetskopiering"
-
-#: ../bin/duplicity:731
-#, python-format
-msgid "%s not found in archive - no files restored."
-msgstr "%s kunde inte hittas i arkivet - inga filer återställdes."
-
-#: ../bin/duplicity:735
-msgid "No files found in archive - nothing restored."
-msgstr "Inga filer hittades i arkivet - ingenting har återskapats."
-
-#: ../bin/duplicity:768
-#, python-format
-msgid "Processed volume %d of %d"
-msgstr "Behandlade volym %d av %d"
-
-#: ../bin/duplicity:802
-#, python-format
-msgid "Invalid data - %s hash mismatch for file:"
-msgstr "Ogiltig data - %s hash stämmer inte för filen:"
-
-#: ../bin/duplicity:805
-#, python-format
-msgid "Calculated hash: %s"
-msgstr "Beräknad hash: %s"
-
-#: ../bin/duplicity:806
-#, python-format
-msgid "Manifest hash: %s"
-msgstr "Manifest-hash: %s"
-
-#: ../bin/duplicity:849
-#, python-format
-msgid "Volume was signed by key %s, not %s"
-msgstr "Volymen signerades av nyckeln %s, inte %s"
-
-#: ../bin/duplicity:881
-#, python-format
-msgid "Verify complete: %s, %s."
-msgstr "Verifiering färdig: %s, %s."
-
-#: ../bin/duplicity:882
-#, python-format
-msgid "%d file compared"
-msgid_plural "%d files compared"
-msgstr[0] "%d fil jämfördes"
-msgstr[1] "%d filer jämfördes"
-
-#: ../bin/duplicity:884
-#, python-format
-msgid "%d difference found"
-msgid_plural "%d differences found"
-msgstr[0] "%d skillnad hittades"
-msgstr[1] "%d skillnader hittades"
-
-#: ../bin/duplicity:903
-msgid "No extraneous files found, nothing deleted in cleanup."
-msgstr "Inga överflödiga filer hittades, inget togs bort vid städning."
-
-#: ../bin/duplicity:908
-msgid "Deleting this file from backend:"
-msgid_plural "Deleting these files from backend:"
-msgstr[0] "Raderar denna fil från bakgrundsprogrammet:"
-msgstr[1] "Raderar dessa filer från bakgrundsprogrammet:"
-
-#: ../bin/duplicity:919
-msgid "Found the following file to delete:"
-msgid_plural "Found the following files to delete:"
-msgstr[0] "Hittade följande fil att ta bort:"
-msgstr[1] "Hittade följande filer att ta bort:"
-
-#: ../bin/duplicity:922
-msgid "Run duplicity again with the --force option to actually delete."
-msgstr "Kör duplicity igen med flaggan --force för att faktiskt ta bort."
-
-#: ../bin/duplicity:965
-msgid "There are backup set(s) at time(s):"
-msgstr "Det finns säkerhetskopior för tid(er):"
-
-#: ../bin/duplicity:967
-msgid "Which can't be deleted because newer sets depend on them."
-msgstr "Vilka inte kan raderas, eftersom nyare arkiv baseras på dem."
-
-#: ../bin/duplicity:971
-msgid ""
-"Current active backup chain is older than specified time.  However, it will "
-"not be deleted.  To remove all your backups, manually purge the repository."
-msgstr ""
-"Den nu aktiva säkerhetskopieringskedjan är äldre än angiven tid. Men den "
-"kommer inte raderas. För att ta bort alla dina säkerhetskopieringar, rensa "
-"arkivet manuellt."
-
-#: ../bin/duplicity:984
-msgid "No old backup sets found, nothing deleted."
-msgstr "Inga gamla säkerhetskopierade arkiv hittades, inget togs bort."
-
-#: ../bin/duplicity:987
-msgid "Deleting backup chain at time:"
-msgid_plural "Deleting backup chains at times:"
-msgstr[0] "Raderar säkerhetskopiekedja vid tid:"
-msgstr[1] "Raderar säkerhetskopiekedjor vid tider:"
-
-#: ../bin/duplicity:999
-#, python-format
-msgid "Deleting any incremental signature chain rooted at %s"
-msgstr "Raderar alla stegvisa signaturkedjor rotade vid %s"
-
-#: ../bin/duplicity:1001
-#, python-format
-msgid "Deleting any incremental backup chain rooted at %s"
-msgstr "Raderar alla stegvisa sökerhetskopiekedjor rootade vid %s"
-
-#: ../bin/duplicity:1004
-#, python-format
-msgid "Deleting complete signature chain %s"
-msgstr "Raderar fullständig signaturkedja %s"
-
-#: ../bin/duplicity:1006
-#, python-format
-msgid "Deleting complete backup chain %s"
-msgstr "Raderar fullständig säkerhetskopiekedja %s"
-
-#: ../bin/duplicity:1012
-msgid "Found old backup chain at the following time:"
-msgid_plural "Found old backup chains at the following times:"
-msgstr[0] "Hittade en gammal säkerhetskopiekedja vid följande tid:"
-msgstr[1] "Hittade gamla säkerhetskopiekedjor vid följande tider:"
-
-#: ../bin/duplicity:1016
-msgid "Rerun command with --force option to actually delete."
-msgstr "Kör kommandot på nytt med väljaren --force för att utföra raderingen."
-
-#: ../bin/duplicity:1039
-msgid "No old backup sets found."
-msgstr "Inga gamla säkerhetkopieringsuppsättningar hittades."
-
-#: ../bin/duplicity:1054
-#, python-format
-msgid "Signature %s already replicated"
-msgstr "Signatur %s har redan replikerats"
-
-#: ../bin/duplicity:1061 ../bin/duplicity:1100
-#, python-format
-msgid "Replicating %s."
-msgstr "Replikerar %s."
-
-#: ../bin/duplicity:1088
-#, python-format
-msgid "Backupset %s already replicated"
-msgstr "Säkerhetskopierngsuppsättning %s redan replikerad"
-
-#: ../bin/duplicity:1236
-#, python-format
-msgid "Deleting local %s (not authoritative at backend)."
-msgstr "Raderar lokal %s (utan behörighetskrav från bakände)."
-
-#: ../bin/duplicity:1241
-#, python-format
-msgid "Unable to delete %s: %s"
-msgstr "Kunde inte ta bort %s: %s"
-
-#: ../bin/duplicity:1275 ../duplicity/dup_temp.py:267
-#, python-format
-msgid "Failed to read %s: %s"
-msgstr "Misslyckades med att läsa %s: %s"
-
-#: ../bin/duplicity:1289
-#, python-format
-msgid "Copying %s to local cache."
-msgstr "Kopierar %s till lokal cache."
-
-#: ../bin/duplicity:1337
-msgid "Local and Remote metadata are synchronized, no sync needed."
-msgstr ""
-"Lokala och fjärrserverns metadata är synkroniserade, ingen synkronisering "
-"behövs."
-
-#: ../bin/duplicity:1342
-msgid "Synchronizing remote metadata to local cache..."
-msgstr "Synkroniserar fjärrserverns metadata mot lokal lagring..."
-
-#: ../bin/duplicity:1355
-msgid "Sync would copy the following from remote to local:"
-msgstr ""
-"Synkronisering vill kopiera följande från fjärrservern till lokal lagring:"
-
-#: ../bin/duplicity:1358
-msgid "Sync would remove the following spurious local files:"
-msgstr "Synkronisering vill ta bort följande felaktiga lokala filer:"
-
-#: ../bin/duplicity:1402
-msgid "Unable to get free space on temp."
-msgstr "Kunde inte hämta ledigt utrymme på temp."
-
-#: ../bin/duplicity:1410
-#, python-format
-msgid "Temp space has %d available, backup needs approx %d."
-msgstr ""
-"Temporärt utrymme har %d tillgängligt, säkerhetskopieringen behöver ungefär "
-"%d."
-
-#: ../bin/duplicity:1413
-#, python-format
-msgid "Temp has %d available, backup will use approx %d."
-msgstr ""
-"Temp har %d tillgängligt, säkerhetskopieringen kommer använda ungefär %d."
-
-#: ../bin/duplicity:1421
-msgid "Unable to get max open files."
-msgstr "Kunde inte hämta högsta antal öppna filer."
-
-#: ../bin/duplicity:1425
-#, python-format
-msgid ""
-"Max open files of %s is too low, should be >= 1024.\n"
-"Use 'ulimit -n 1024' or higher to correct.\n"
-msgstr ""
-"Högsta antal öppna filer för %s är för lågt, bör vara >= 1024.\n"
-"Använd 'ulimit -n 1024' eller högre för att rätta till detta.\n"
-
-#: ../bin/duplicity:1477
-msgid ""
-"RESTART: The first volume failed to upload before termination.\n"
-"         Restart is impossible...starting backup from beginning."
-msgstr ""
-"OMSTART: Den första volymen kunde inte laddas upp före avslutning.\n"
-"          Omstart kan inte utföras... Kör säkerhetskopieringen från början."
-
-#: ../bin/duplicity:1483
-#, python-format
-msgid ""
-"RESTART: Volumes %d to %d failed to upload before termination.\n"
-"         Restarting backup at volume %d."
-msgstr ""
-"OMSTART: Volymerna %d till %d kunde inte laddas upp före avslutning.\n"
-"          Startar om säkerhetskopieringen vid volym %d."
-
-#: ../bin/duplicity:1490
-#, python-format
-msgid ""
-"RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
-"         Restart is impossible ... duplicity will clean off the last "
-"partial\n"
-"         backup then restart the backup from the beginning."
-msgstr ""
-"OMSTART: Omöjligt säkerhetskopieringstillstånd: manifestet har %d volymer, "
-"fjärrservern har %d volymer.\n"
-"          Omstart omöjlig... duplicity kommer städa upp efter den tidigare "
-"delvisa\n"
-"          säkerhetskopieringen, och sedan börja om från början."
-
-#: ../bin/duplicity:1511
-msgid ""
-"\n"
-"PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
-"recognize its own backups.  Please remove PYTHONOPTIMIZE from\n"
-"the environment and rerun the backup.\n"
-"\n"
-"See https://bugs.launchpad.net/duplicity/+bug/931175\n"
-msgstr ""
-"\n"
-"PYTHONOPTIMIZE i miljön leder till att duplicity inte kan\n"
-"känna igen sina egna säkerhetskopior. Ta bort PYTHONOPTIMIZE\n"
-"från miljön och gör om kopieringen.\n"
-"\n"
-"Se https://bugs.launchpad.net/duplicity/+bug/931175\n"
-
-#: ../bin/duplicity:1534
-#, python-format
-msgid "Acquiring lockfile %s"
-msgstr "Hämtar låsfil %s"
-
-#: ../bin/duplicity:1592
-#, python-format
-msgid "Last %s backup left a partial set, restarting."
-msgstr ""
-"Senaste %s säkerhetskopiering lämnade ett ofullständigt arkiv, startar om."
-
-#: ../bin/duplicity:1596
-#, python-format
-msgid "Cleaning up previous partial %s backup set, restarting."
-msgstr "Städar upp föregående delvisa säkerhetskopieringsarkiv %s, startar om."
-
-#: ../bin/duplicity:1608
-msgid "Last full backup date:"
-msgstr "Datum för senaste fullständiga säkerhetskopiering:"
-
-#: ../bin/duplicity:1610
-msgid "Last full backup date: none"
-msgstr "Datum för senaste fullständiga säkerhetskopiering: inget"
-
-#: ../bin/duplicity:1613
-msgid "Last full backup is too old, forcing full backup"
-msgstr ""
-"Senaste fullständiga säkerhetskopiering är för gammal, framtvingar "
-"fullständig säkerhetskopiering"
-
-#: ../bin/duplicity:1662
-msgid ""
-"When using symmetric encryption, the signing passphrase must equal the "
-"encryption passphrase."
-msgstr ""
-"När du använder symmetrisk kryptering måste det signerande lösenordet vara "
-"samma som krypteringens lösenord."
-
-#: ../bin/duplicity:1731
+#: ../bin/duplicity:121
 msgid "INT intercepted...exiting."
 msgstr "INT mottogs... avslutar."
 
-#: ../bin/duplicity:1739
+#: ../bin/duplicity:129
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "GPG-feldetaljer: %s"
 
-#: ../bin/duplicity:1749
+#: ../bin/duplicity:139
 #, python-format
 msgid "User error detail: %s"
 msgstr "Detaljer om användarfel: %s"
 
-#: ../bin/duplicity:1759
+#: ../bin/duplicity:149
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Detaljer om bakändesfel: %s"
@@ -1199,135 +802,135 @@ msgstr "Jämför %s och %s"
 msgid "D %s"
 msgstr "D %s"
 
-#: ../duplicity/dup_collections.py:177 ../duplicity/dup_collections.py:191
+#: ../duplicity/dup_collections.py:181 ../duplicity/dup_collections.py:195
 #, python-format
 msgid "BackupSet.delete: missing %s"
 msgstr "BackupSet.delete: saknar %s"
 
-#: ../duplicity/dup_collections.py:216
+#: ../duplicity/dup_collections.py:220
 msgid "Fatal Error: No manifests found for most recent backup"
 msgstr "Allvarligt fel: Inget manifest hittades för senaste säkerhetskopia"
 
-#: ../duplicity/dup_collections.py:225
+#: ../duplicity/dup_collections.py:229
 msgid ""
 "Fatal Error: Remote manifest does not match local one.  Either the remote "
 "backup set or the local archive directory has been corrupted."
 msgstr ""
 
-#: ../duplicity/dup_collections.py:233
+#: ../duplicity/dup_collections.py:237
 msgid "Fatal Error: Neither remote nor local manifest is readable."
 msgstr ""
 
-#: ../duplicity/dup_collections.py:244
+#: ../duplicity/dup_collections.py:248
 #, python-format
 msgid "Processing local manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:256
+#: ../duplicity/dup_collections.py:260
 #, python-format
 msgid "Error processing remote manifest (%s): %s"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:259
+#: ../duplicity/dup_collections.py:263
 #, python-format
 msgid "Processing remote manifest %s (%s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:355
+#: ../duplicity/dup_collections.py:359
 msgid "Preferring Backupset over previous one!"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:358
+#: ../duplicity/dup_collections.py:362
 #, python-format
 msgid "Ignoring incremental Backupset (start_time: %s; needed: %s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:363
+#: ../duplicity/dup_collections.py:367
 #, python-format
 msgid "Added incremental Backupset (start_time: %s / end_time: %s)"
 msgstr ""
 
-#: ../duplicity/dup_collections.py:433
+#: ../duplicity/dup_collections.py:437
 msgid "Chain start time: "
 msgstr "Kedjans starttid: "
 
-#: ../duplicity/dup_collections.py:434
+#: ../duplicity/dup_collections.py:438
 msgid "Chain end time: "
 msgstr "Chain end time: "
 
-#: ../duplicity/dup_collections.py:435
+#: ../duplicity/dup_collections.py:439
 #, python-format
 msgid "Number of contained backup sets: %d"
 msgstr "Antal inneslutna säkerhetskopieringsuppsättningar: %d"
 
-#: ../duplicity/dup_collections.py:437
+#: ../duplicity/dup_collections.py:441
 #, python-format
 msgid "Total number of contained volumes: %d"
 msgstr "Totalt antal inneslutna volymer: %d"
 
-#: ../duplicity/dup_collections.py:439 ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1240
 msgid "Type of backup set:"
 msgstr "Typ av säkerhetskopieringsuppsättning:"
 
-#: ../duplicity/dup_collections.py:439 ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1240
 msgid "Time:"
 msgstr "Tid:"
 
-#: ../duplicity/dup_collections.py:439
+#: ../duplicity/dup_collections.py:443
 msgid "Num volumes:"
 msgstr "Num volymer:"
 
-#: ../duplicity/dup_collections.py:443 ../duplicity/dup_collections.py:1241
+#: ../duplicity/dup_collections.py:447 ../duplicity/dup_collections.py:1246
 msgid "Full"
 msgstr "Fullständig"
 
-#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1243
+#: ../duplicity/dup_collections.py:450 ../duplicity/dup_collections.py:1248
 msgid "Incremental"
 msgstr "Inkrementell"
 
-#: ../duplicity/dup_collections.py:506
+#: ../duplicity/dup_collections.py:510
 msgid "local"
 msgstr "lokal"
 
-#: ../duplicity/dup_collections.py:508
+#: ../duplicity/dup_collections.py:512
 msgid "remote"
 msgstr "fjärr"
 
-#: ../duplicity/dup_collections.py:663
+#: ../duplicity/dup_collections.py:667
 msgid "Collection Status"
 msgstr "Samlingsstatus"
 
-#: ../duplicity/dup_collections.py:665
+#: ../duplicity/dup_collections.py:669
 #, python-format
 msgid "Connecting with backend: %s"
 msgstr "Ansluter med bakände: %s"
 
-#: ../duplicity/dup_collections.py:667
+#: ../duplicity/dup_collections.py:671
 #, python-format
 msgid "Archive dir: %s"
 msgstr "Arkivkatalog: %s"
 
-#: ../duplicity/dup_collections.py:670
+#: ../duplicity/dup_collections.py:674
 #, python-format
 msgid "Found %d secondary backup chain."
 msgid_plural "Found %d secondary backup chains."
 msgstr[0] "Hittade %d sekundär säkerhetskopieringskedja."
 msgstr[1] "Hittade %d sekundära säkerhetskopieringskedjor."
 
-#: ../duplicity/dup_collections.py:675
+#: ../duplicity/dup_collections.py:679
 #, python-format
 msgid "Secondary chain %d of %d:"
 msgstr "Sekundär kedja %d av %d:"
 
-#: ../duplicity/dup_collections.py:681
+#: ../duplicity/dup_collections.py:685
 msgid "Found primary backup chain with matching signature chain:"
 msgstr "Hittade primär säkerhetskopieringskedja med matchande signaturkedja:"
 
-#: ../duplicity/dup_collections.py:685
+#: ../duplicity/dup_collections.py:689
 msgid "No backup chains with active signatures found"
 msgstr "Inga säkerhetskopieringskedjor med aktiva signaturer hittades"
 
-#: ../duplicity/dup_collections.py:688
+#: ../duplicity/dup_collections.py:692
 #, python-format
 msgid "Also found %d backup set not part of any chain,"
 msgid_plural "Also found %d backup sets not part of any chain,"
@@ -1338,7 +941,7 @@ msgstr[1] ""
 "Hittade också %d säkerhetskopieringsuppsättningar som inte en del av någon "
 "kedja,"
 
-#: ../duplicity/dup_collections.py:692
+#: ../duplicity/dup_collections.py:696
 #, python-format
 msgid "and %d incomplete backup set."
 msgid_plural "and %d incomplete backup sets."
@@ -1346,102 +949,102 @@ msgstr[0] "och %d ofullständig säkerhetskopieringsuppsättning."
 msgstr[1] "och %d ofullständiga säkerhetskopieringsuppsättningar."
 
 #. "cleanup" is a hard-coded command, so do not translate it
-#: ../duplicity/dup_collections.py:697
+#: ../duplicity/dup_collections.py:701
 msgid "These may be deleted by running duplicity with the \"cleanup\" command."
 msgstr "Dessa kan tas bort genom att köra duplicity med kommandot \"cleanup\"."
 
-#: ../duplicity/dup_collections.py:700
+#: ../duplicity/dup_collections.py:704
 msgid "No orphaned or incomplete backup sets found."
 msgstr ""
 "Inga föräldralösa eller ofullständiga säkerhetskopieringsuppsättningar "
 "hittades."
 
-#: ../duplicity/dup_collections.py:716
+#: ../duplicity/dup_collections.py:720
 #, python-format
 msgid "%d file exists on backend"
 msgid_plural "%d files exist on backend"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../duplicity/dup_collections.py:726
+#: ../duplicity/dup_collections.py:730
 #, python-format
 msgid "%d file exists in cache"
 msgid_plural "%d files exist in cache"
 msgstr[0] "%d fil finns i cache"
 msgstr[1] "%d filer finns i cache"
 
-#: ../duplicity/dup_collections.py:779
+#: ../duplicity/dup_collections.py:783
 msgid "Warning, discarding last backup set, because of missing signature file."
 msgstr ""
 "Varning, förkastar senaste säkerhetskopieringsuppsättning därför att "
 "signaturfilen saknas."
 
-#: ../duplicity/dup_collections.py:802
+#: ../duplicity/dup_collections.py:806
 msgid "Warning, found the following local orphaned signature file:"
 msgid_plural "Warning, found the following local orphaned signature files:"
 msgstr[0] "Varning, hittade följande lokal föräldralös signaturfil:"
 msgstr[1] "Varning, hittade följande lokala föräldralösa signaturfiler:"
 
-#: ../duplicity/dup_collections.py:811
+#: ../duplicity/dup_collections.py:815
 msgid "Warning, found the following remote orphaned signature file:"
 msgid_plural "Warning, found the following remote orphaned signature files:"
 msgstr[0] "Varning, hittade följande fjärrföräldralös signaturfil:"
 msgstr[1] "Varning, hittade följande fjärrföräldralösa signaturfiler:"
 
-#: ../duplicity/dup_collections.py:820
+#: ../duplicity/dup_collections.py:824
 msgid "Warning, found signatures but no corresponding backup files"
 msgstr ""
 "Varning, hittade signaturer men inga motsvarande säkerhetskopieringsfiler"
 
-#: ../duplicity/dup_collections.py:824
+#: ../duplicity/dup_collections.py:828
 msgid ""
 "Warning, found incomplete backup sets, probably left from aborted session"
 msgstr ""
 "Varning, hittade ofullständiga säkerhetskopieringsuppsättningar, förmodligen "
 "kvar från avbruten session"
 
-#: ../duplicity/dup_collections.py:828
+#: ../duplicity/dup_collections.py:832
 msgid "Warning, found the following orphaned backup file:"
 msgid_plural "Warning, found the following orphaned backup files:"
 msgstr[0] "Varning, hittade följande föräldralös säkerhetskopieringsfil:"
 msgstr[1] "Varning, hittade följande föräldralösa säkerhetskopieringsfiler:"
 
-#: ../duplicity/dup_collections.py:845
+#: ../duplicity/dup_collections.py:849
 #, python-format
 msgid "Extracting backup chains from list of files: %s"
 msgstr "Packa upp säkerhetskopieringskedjor från listan över filer: %s"
 
-#: ../duplicity/dup_collections.py:856
+#: ../duplicity/dup_collections.py:861
 #, python-format
 msgid "File %s is part of known set"
 msgstr "Filen %s är del av en känd uppsättning"
 
-#: ../duplicity/dup_collections.py:859
+#: ../duplicity/dup_collections.py:864
 #, python-format
 msgid "File %s is not part of a known set; creating new set"
 msgstr "Filen %s är inte del av en känd uppsättning; skapar ny uppsättning"
 
-#: ../duplicity/dup_collections.py:864
+#: ../duplicity/dup_collections.py:869
 #, python-format
 msgid "Ignoring file (rejected by backup set) '%s'"
 msgstr "Ignorerar fil (avvisas av säkerhetskopieringsuppsättningar) \"%s\""
 
-#: ../duplicity/dup_collections.py:880
+#: ../duplicity/dup_collections.py:885
 #, python-format
 msgid "Found backup chain %s"
 msgstr "Hittade säkerhetskopieringskedjan %s"
 
-#: ../duplicity/dup_collections.py:885
+#: ../duplicity/dup_collections.py:890
 #, python-format
 msgid "Added set %s to pre-existing chain %s"
 msgstr "Lade till uppsättningen %s till den befintliga kedjan %s"
 
-#: ../duplicity/dup_collections.py:889
+#: ../duplicity/dup_collections.py:894
 #, python-format
 msgid "Found orphaned set %s"
 msgstr "Hittade föräldralösa uppsättningen %s"
 
-#: ../duplicity/dup_collections.py:1039
+#: ../duplicity/dup_collections.py:1044
 #, python-format
 msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
@@ -1450,19 +1053,416 @@ msgstr ""
 "Ingen signaturkedja för den begärda tiden. Använda äldsta tillgängliga "
 "kedjan, börjar vid tiden %s."
 
-#: ../duplicity/dup_collections.py:1233
+#: ../duplicity/dup_collections.py:1238
 #, python-format
 msgid "File: %s"
 msgstr "Fil: %s"
 
-#: ../duplicity/dup_collections.py:1234
+#: ../duplicity/dup_collections.py:1239
 #, python-format
 msgid "Total number of backup: %d"
 msgstr "Totalt antal säkerhetskopior: %d"
 
-#: ../duplicity/dup_collections.py:1235
+#: ../duplicity/dup_collections.py:1240
 msgid "Type of file change:"
 msgstr "Typ av filändring:"
+
+#: ../duplicity/dup_main.py:123
+msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
+msgstr "Återanvänd inställd PASSPHRASE som SIGN_PASSPHRASE"
+
+#: ../duplicity/dup_main.py:130
+msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
+msgstr "Återanvänd inställd SIGN_PASSPHRASE som PASSPHRASE"
+
+#: ../duplicity/dup_main.py:169
+msgid "PASSPHRASE variable not set, asking user."
+msgstr "LÖSENFRAS-variabeln är inte inställd, frågar användaren."
+
+#: ../duplicity/dup_main.py:184
+msgid "GnuPG passphrase for signing key:"
+msgstr "GnuPG-lösenfras för signeringsnyckel:"
+
+#: ../duplicity/dup_main.py:189
+msgid "GnuPG passphrase:"
+msgstr "GnuPG-lösenfras:"
+
+#: ../duplicity/dup_main.py:194
+msgid "Retype passphrase for signing key to confirm: "
+msgstr "Ange lösenfrasen för signeringsnyckeln igen för att bekräfta: "
+
+#: ../duplicity/dup_main.py:196
+msgid "Retype passphrase to confirm: "
+msgstr "Ange lösenfrasen igen för att bekräfta: "
+
+#: ../duplicity/dup_main.py:199
+msgid "First and second passphrases do not match!  Please try again."
+msgstr "Första och andra lösenfrasen stämmer inte överens! Försök igen."
+
+#: ../duplicity/dup_main.py:206
+msgid ""
+"Cannot use empty passphrase with symmetric encryption!  Please try again."
+msgstr "Kan inte använda tom lösenfras med symmetrisk kryptering! Försök igen."
+
+#: ../duplicity/dup_main.py:263
+#, python-format
+msgid ""
+"File %s complete in backup set.\n"
+"Continuing restart on file %s."
+msgstr ""
+"Filen %s är komplett i det säkerhetskopierade arkivet.\n"
+"Fortsätter omstart för filen %s."
+
+#: ../duplicity/dup_main.py:272
+#, python-format
+msgid ""
+"File %s missing in backup set.\n"
+"Continuing restart on file %s."
+msgstr ""
+"Filen %s saknas i det säkerhetskopierade arkivet.\n"
+"Fortsätter omstart för filen %s."
+
+#: ../duplicity/dup_main.py:321
+#, python-format
+msgid "File %s was corrupted during upload."
+msgstr "Filen %s fördärvades vid uppladdningen."
+
+#: ../duplicity/dup_main.py:354
+msgid ""
+"Restarting backup, but current encryption settings do not match original "
+"settings"
+msgstr ""
+"Startar om säkerhetskopiering, men aktuella krypteringsinställningar skiljer "
+"sig från de ursprungliga inställningarna"
+
+#: ../duplicity/dup_main.py:377
+#, python-format
+msgid "Restarting after volume %s, file %s, block %s"
+msgstr "Startar om efter volym %s, fil %s, block %s"
+
+#: ../duplicity/dup_main.py:447
+#, python-format
+msgid "Processed volume %d"
+msgstr "Behandlade volym %d"
+
+#: ../duplicity/dup_main.py:597
+msgid ""
+"Fatal Error: Unable to start incremental backup.  Old signatures not found "
+"and incremental specified"
+msgstr ""
+"Allvarligt fel: Kunde inte starta stegvis säkerhetskopiering. Gamla "
+"signaturer hittades inte och stegvis angavs"
+
+#: ../duplicity/dup_main.py:601
+msgid "No signatures found, switching to full backup."
+msgstr "Inga signaturer hittades, växlar till fullständig säkerhetskopiering."
+
+#: ../duplicity/dup_main.py:615
+msgid "Backup Statistics"
+msgstr "Statistik för säkerhetskopiering"
+
+#: ../duplicity/dup_main.py:721
+#, python-format
+msgid "%s not found in archive - no files restored."
+msgstr "%s kunde inte hittas i arkivet - inga filer återställdes."
+
+#: ../duplicity/dup_main.py:725
+msgid "No files found in archive - nothing restored."
+msgstr "Inga filer hittades i arkivet - ingenting har återskapats."
+
+#: ../duplicity/dup_main.py:758
+#, python-format
+msgid "Processed volume %d of %d"
+msgstr "Behandlade volym %d av %d"
+
+#: ../duplicity/dup_main.py:792
+#, python-format
+msgid "Invalid data - %s hash mismatch for file:"
+msgstr "Ogiltig data - %s hash stämmer inte för filen:"
+
+#: ../duplicity/dup_main.py:795
+#, python-format
+msgid "Calculated hash: %s"
+msgstr "Beräknad hash: %s"
+
+#: ../duplicity/dup_main.py:796
+#, python-format
+msgid "Manifest hash: %s"
+msgstr "Manifest-hash: %s"
+
+#: ../duplicity/dup_main.py:839
+#, python-format
+msgid "Volume was signed by key %s, not %s"
+msgstr "Volymen signerades av nyckeln %s, inte %s"
+
+#: ../duplicity/dup_main.py:871
+#, python-format
+msgid "Verify complete: %s, %s."
+msgstr "Verifiering färdig: %s, %s."
+
+#: ../duplicity/dup_main.py:872
+#, python-format
+msgid "%d file compared"
+msgid_plural "%d files compared"
+msgstr[0] "%d fil jämfördes"
+msgstr[1] "%d filer jämfördes"
+
+#: ../duplicity/dup_main.py:874
+#, python-format
+msgid "%d difference found"
+msgid_plural "%d differences found"
+msgstr[0] "%d skillnad hittades"
+msgstr[1] "%d skillnader hittades"
+
+#: ../duplicity/dup_main.py:893
+msgid "No extraneous files found, nothing deleted in cleanup."
+msgstr "Inga överflödiga filer hittades, inget togs bort vid städning."
+
+#: ../duplicity/dup_main.py:898
+msgid "Deleting this file from backend:"
+msgid_plural "Deleting these files from backend:"
+msgstr[0] "Raderar denna fil från bakgrundsprogrammet:"
+msgstr[1] "Raderar dessa filer från bakgrundsprogrammet:"
+
+#: ../duplicity/dup_main.py:909
+msgid "Found the following file to delete:"
+msgid_plural "Found the following files to delete:"
+msgstr[0] "Hittade följande fil att ta bort:"
+msgstr[1] "Hittade följande filer att ta bort:"
+
+#: ../duplicity/dup_main.py:912
+msgid "Run duplicity again with the --force option to actually delete."
+msgstr "Kör duplicity igen med flaggan --force för att faktiskt ta bort."
+
+#: ../duplicity/dup_main.py:955
+msgid "There are backup set(s) at time(s):"
+msgstr "Det finns säkerhetskopior för tid(er):"
+
+#: ../duplicity/dup_main.py:957
+msgid "Which can't be deleted because newer sets depend on them."
+msgstr "Vilka inte kan raderas, eftersom nyare arkiv baseras på dem."
+
+#: ../duplicity/dup_main.py:961
+msgid ""
+"Current active backup chain is older than specified time.  However, it will "
+"not be deleted.  To remove all your backups, manually purge the repository."
+msgstr ""
+"Den nu aktiva säkerhetskopieringskedjan är äldre än angiven tid. Men den "
+"kommer inte raderas. För att ta bort alla dina säkerhetskopieringar, rensa "
+"arkivet manuellt."
+
+#: ../duplicity/dup_main.py:974
+msgid "No old backup sets found, nothing deleted."
+msgstr "Inga gamla säkerhetskopierade arkiv hittades, inget togs bort."
+
+#: ../duplicity/dup_main.py:977
+msgid "Deleting backup chain at time:"
+msgid_plural "Deleting backup chains at times:"
+msgstr[0] "Raderar säkerhetskopiekedja vid tid:"
+msgstr[1] "Raderar säkerhetskopiekedjor vid tider:"
+
+#: ../duplicity/dup_main.py:989
+#, python-format
+msgid "Deleting any incremental signature chain rooted at %s"
+msgstr "Raderar alla stegvisa signaturkedjor rotade vid %s"
+
+#: ../duplicity/dup_main.py:991
+#, python-format
+msgid "Deleting any incremental backup chain rooted at %s"
+msgstr "Raderar alla stegvisa sökerhetskopiekedjor rootade vid %s"
+
+#: ../duplicity/dup_main.py:994
+#, python-format
+msgid "Deleting complete signature chain %s"
+msgstr "Raderar fullständig signaturkedja %s"
+
+#: ../duplicity/dup_main.py:996
+#, python-format
+msgid "Deleting complete backup chain %s"
+msgstr "Raderar fullständig säkerhetskopiekedja %s"
+
+#: ../duplicity/dup_main.py:1002
+msgid "Found old backup chain at the following time:"
+msgid_plural "Found old backup chains at the following times:"
+msgstr[0] "Hittade en gammal säkerhetskopiekedja vid följande tid:"
+msgstr[1] "Hittade gamla säkerhetskopiekedjor vid följande tider:"
+
+#: ../duplicity/dup_main.py:1006
+msgid "Rerun command with --force option to actually delete."
+msgstr "Kör kommandot på nytt med väljaren --force för att utföra raderingen."
+
+#: ../duplicity/dup_main.py:1029
+msgid "No old backup sets found."
+msgstr "Inga gamla säkerhetkopieringsuppsättningar hittades."
+
+#: ../duplicity/dup_main.py:1044
+#, python-format
+msgid "Signature %s already replicated"
+msgstr "Signatur %s har redan replikerats"
+
+#: ../duplicity/dup_main.py:1051 ../duplicity/dup_main.py:1090
+#, python-format
+msgid "Replicating %s."
+msgstr "Replikerar %s."
+
+#: ../duplicity/dup_main.py:1078
+#, python-format
+msgid "Backupset %s already replicated"
+msgstr "Säkerhetskopierngsuppsättning %s redan replikerad"
+
+#: ../duplicity/dup_main.py:1226
+#, python-format
+msgid "Deleting local %s (not authoritative at backend)."
+msgstr "Raderar lokal %s (utan behörighetskrav från bakände)."
+
+#: ../duplicity/dup_main.py:1231
+#, python-format
+msgid "Unable to delete %s: %s"
+msgstr "Kunde inte ta bort %s: %s"
+
+#: ../duplicity/dup_main.py:1265 ../duplicity/dup_temp.py:267
+#, python-format
+msgid "Failed to read %s: %s"
+msgstr "Misslyckades med att läsa %s: %s"
+
+#: ../duplicity/dup_main.py:1279
+#, python-format
+msgid "Copying %s to local cache."
+msgstr "Kopierar %s till lokal cache."
+
+#: ../duplicity/dup_main.py:1327
+msgid "Local and Remote metadata are synchronized, no sync needed."
+msgstr ""
+"Lokala och fjärrserverns metadata är synkroniserade, ingen synkronisering "
+"behövs."
+
+#: ../duplicity/dup_main.py:1332
+msgid "Synchronizing remote metadata to local cache..."
+msgstr "Synkroniserar fjärrserverns metadata mot lokal lagring..."
+
+#: ../duplicity/dup_main.py:1345
+msgid "Sync would copy the following from remote to local:"
+msgstr ""
+"Synkronisering vill kopiera följande från fjärrservern till lokal lagring:"
+
+#: ../duplicity/dup_main.py:1348
+msgid "Sync would remove the following spurious local files:"
+msgstr "Synkronisering vill ta bort följande felaktiga lokala filer:"
+
+#: ../duplicity/dup_main.py:1392
+msgid "Unable to get free space on temp."
+msgstr "Kunde inte hämta ledigt utrymme på temp."
+
+#: ../duplicity/dup_main.py:1400
+#, python-format
+msgid "Temp space has %d available, backup needs approx %d."
+msgstr ""
+"Temporärt utrymme har %d tillgängligt, säkerhetskopieringen behöver ungefär "
+"%d."
+
+#: ../duplicity/dup_main.py:1403
+#, python-format
+msgid "Temp has %d available, backup will use approx %d."
+msgstr ""
+"Temp har %d tillgängligt, säkerhetskopieringen kommer använda ungefär %d."
+
+#: ../duplicity/dup_main.py:1411
+msgid "Unable to get max open files."
+msgstr "Kunde inte hämta högsta antal öppna filer."
+
+#: ../duplicity/dup_main.py:1415
+#, python-format
+msgid ""
+"Max open files of %s is too low, should be >= 1024.\n"
+"Use 'ulimit -n 1024' or higher to correct.\n"
+msgstr ""
+"Högsta antal öppna filer för %s är för lågt, bör vara >= 1024.\n"
+"Använd 'ulimit -n 1024' eller högre för att rätta till detta.\n"
+
+#: ../duplicity/dup_main.py:1467
+msgid ""
+"RESTART: The first volume failed to upload before termination.\n"
+"         Restart is impossible...starting backup from beginning."
+msgstr ""
+"OMSTART: Den första volymen kunde inte laddas upp före avslutning.\n"
+"          Omstart kan inte utföras... Kör säkerhetskopieringen från början."
+
+#: ../duplicity/dup_main.py:1473
+#, python-format
+msgid ""
+"RESTART: Volumes %d to %d failed to upload before termination.\n"
+"         Restarting backup at volume %d."
+msgstr ""
+"OMSTART: Volymerna %d till %d kunde inte laddas upp före avslutning.\n"
+"          Startar om säkerhetskopieringen vid volym %d."
+
+#: ../duplicity/dup_main.py:1480
+#, python-format
+msgid ""
+"RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
+"         Restart is impossible ... duplicity will clean off the last "
+"partial\n"
+"         backup then restart the backup from the beginning."
+msgstr ""
+"OMSTART: Omöjligt säkerhetskopieringstillstånd: manifestet har %d volymer, "
+"fjärrservern har %d volymer.\n"
+"          Omstart omöjlig... duplicity kommer städa upp efter den tidigare "
+"delvisa\n"
+"          säkerhetskopieringen, och sedan börja om från början."
+
+#: ../duplicity/dup_main.py:1501
+msgid ""
+"\n"
+"PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
+"recognize its own backups.  Please remove PYTHONOPTIMIZE from\n"
+"the environment and rerun the backup.\n"
+"\n"
+"See https://bugs.launchpad.net/duplicity/+bug/931175\n"
+msgstr ""
+"\n"
+"PYTHONOPTIMIZE i miljön leder till att duplicity inte kan\n"
+"känna igen sina egna säkerhetskopior. Ta bort PYTHONOPTIMIZE\n"
+"från miljön och gör om kopieringen.\n"
+"\n"
+"Se https://bugs.launchpad.net/duplicity/+bug/931175\n"
+
+#: ../duplicity/dup_main.py:1524
+#, python-format
+msgid "Acquiring lockfile %s"
+msgstr "Hämtar låsfil %s"
+
+#: ../duplicity/dup_main.py:1582
+#, python-format
+msgid "Last %s backup left a partial set, restarting."
+msgstr ""
+"Senaste %s säkerhetskopiering lämnade ett ofullständigt arkiv, startar om."
+
+#: ../duplicity/dup_main.py:1586
+#, python-format
+msgid "Cleaning up previous partial %s backup set, restarting."
+msgstr "Städar upp föregående delvisa säkerhetskopieringsarkiv %s, startar om."
+
+#: ../duplicity/dup_main.py:1598
+msgid "Last full backup date:"
+msgstr "Datum för senaste fullständiga säkerhetskopiering:"
+
+#: ../duplicity/dup_main.py:1600
+msgid "Last full backup date: none"
+msgstr "Datum för senaste fullständiga säkerhetskopiering: inget"
+
+#: ../duplicity/dup_main.py:1603
+msgid "Last full backup is too old, forcing full backup"
+msgstr ""
+"Senaste fullständiga säkerhetskopiering är för gammal, framtvingar "
+"fullständig säkerhetskopiering"
+
+#: ../duplicity/dup_main.py:1652
+msgid ""
+"When using symmetric encryption, the signing passphrase must equal the "
+"encryption passphrase."
+msgstr ""
+"När du använder symmetrisk kryptering måste det signerande lösenordet vara "
+"samma som krypteringens lösenord."
 
 #: ../duplicity/dup_time.py:61
 #, python-format

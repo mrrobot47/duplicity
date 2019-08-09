@@ -1,3 +1,8 @@
+2019-08-09  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.03
+
 2019-08-08  Kenneth Loafman  <kenneth@loafman.com>
 
     * More changes to provide Python test coverage:
