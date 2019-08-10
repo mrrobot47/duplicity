@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-08-07 15:49-0500\n"
+"POT-Creation-Date: 2019-08-09 09:11-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Careone <zzbusagain@yahoo.com.cn>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2019-08-09 06:06+0000\n"
-"X-Generator: Launchpad (build 19015)\n"
+"X-Launchpad-Export-Date: 2019-08-10 04:51+0000\n"
+"X-Generator: Launchpad (build 19021)\n"
 "Language: \n"
 
 #: ../bin/duplicity:121
@@ -1413,7 +1413,7 @@ msgid ""
 "encryption passphrase."
 msgstr "使用对称加密时，必须采用相同的签名密码与加密密码。"
 
-#: ../duplicity/dup_time.py:61
+#: ../duplicity/dup_time.py:63
 #, python-format
 msgid ""
 "Bad interval string \"%s\"\n"
@@ -1428,7 +1428,7 @@ msgstr ""
 "可用的字符包括 s, m, h, D, W, M 和 Y。请查阅 man 手册获取更多\n"
 "信息。"
 
-#: ../duplicity/dup_time.py:67
+#: ../duplicity/dup_time.py:69
 #, python-format
 msgid ""
 "Bad time string \"%s\"\n"

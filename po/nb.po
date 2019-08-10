@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-08-07 15:49-0500\n"
+"POT-Creation-Date: 2019-08-09 09:11-0500\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-08-09 06:06+0000\n"
-"X-Generator: Launchpad (build 19015)\n"
+"X-Launchpad-Export-Date: 2019-08-10 04:50+0000\n"
+"X-Generator: Launchpad (build 19021)\n"
 "Language: nb\n"
 
 #: ../bin/duplicity:121
@@ -1466,7 +1466,7 @@ msgstr ""
 "Passordfrasen for signering må være den samme som passordfrasen for "
 "kryptering ved bruk av symmetrisk kryptering."
 
-#: ../duplicity/dup_time.py:61
+#: ../duplicity/dup_time.py:63
 #, python-format
 msgid ""
 "Bad interval string \"%s\"\n"
@@ -1481,7 +1481,7 @@ msgstr ""
 "Tillatte spesialtegn er s, m, h, D, W, M og Y.  Se bruksanvisning\n"
 "(man page) for mer informasjon."
 
-#: ../duplicity/dup_time.py:67
+#: ../duplicity/dup_time.py:69
 #, python-format
 msgid ""
 "Bad time string \"%s\"\n"
