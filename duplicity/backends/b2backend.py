@@ -67,6 +67,8 @@ class B2Backend(duplicity.backend.Backend):
         try:
             global b2
             import b2
+            global b2sdk
+            import b2sdk
             import b2.api
             import b2.account_info
             import b2.download_dest

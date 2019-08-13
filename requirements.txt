@@ -24,6 +24,7 @@ tox
 
 # azure
 # b2
+# b2sdk
 # boto
 # dropbox==6.9.0
 # gdata

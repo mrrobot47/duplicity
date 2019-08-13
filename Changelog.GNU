@@ -1,5 +1,10 @@
 2019-08-09  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Fixed bug #1839728 with info from Avleen Vig
+      - b2 backend requires additional import
+
+2019-08-09  Kenneth Loafman  <kenneth@loafman.com>
+
     * Merged in translation updates
     * Prep for 0.8.03
 
