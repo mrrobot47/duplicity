@@ -2,6 +2,11 @@ New in v0.8.04 (2019/08/??)
 ---------------------------
 * Fixed bug #1839728 with info from Avleen Vig
   - b2 backend requires additional import
+* Fixed bug #1839886 with hint from denick
+  - Duplicity crashes when using --file-prefix
+* Removed socket.settimeout from backend.py.
+  It was already set in commandline.py.
+* Removed pycryptopp from README requirements
 
 
 New in v0.8.03 (2019/08/09)

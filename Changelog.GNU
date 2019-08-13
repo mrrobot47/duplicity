@@ -1,4 +1,12 @@
-2019-08-09  Kenneth Loafman  <kenneth@loafman.com>
+2019-08-13  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1839886 with hint from denick
+      - Duplicity crashes when using --file-prefix
+    * Removed socket.settimeout from backend.py.
+      It was already set in commandline.py.
+    * Removed pycryptopp from README requirements
+
+2019-08-12  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1839728 with info from Avleen Vig
       - b2 backend requires additional import
