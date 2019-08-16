@@ -1,0 +1,54 @@
+name: duplicity
+version: $version
+summary: Efficient, encrypted backup to local or remote hosts
+description: |
+  Duplicity backs directories by producing encrypted tar-format volumes and uploading them to a remote or local file server. Because duplicity uses librsync, the incremental archives are space efficient and only record the parts of files that have changed since the last backup. Because duplicity uses GnuPG to encrypt and/or sign these archives, they will be safe from spying and/or modification by the server.
+
+grade: stable
+confinement: classic
+base: core18
+
+apps:
+  duplicity:
+    command: bin/duplicity
+
+parts:
+  duplicity:
+    plugin: python
+    python-version: python2
+    stage-packages:
+    - gnupg
+    - lftp		# for lftpbackend.py
+    - librsync1
+    - librsync-dev
+    - megatools		# for megabackend.py
+    - ncftp		# for ncftpbackend.py
+    - openssh-client    # for ssh_pexpect_backend.py
+    - python-azure	# for azurebackend.py
+    - python-boto	# for botobackend.py
+    - python-cloudfiles	# for cfbackend.py
+    - python-fasteners
+    - python-future
+    - python-gdata	# for gdocsbackend.py
+    - python-gi		# for giobackend.py
+    - python-googleapi	# for pydrivebackend.py
+    - python-httplib2	# for pydrivebackend.py
+    - python-lockfile
+    - python-oauthlib
+    - python-paramiko	# for ssh_paramiko_backend.py
+    - python-requests	# for adbackend.py, onedrivebackend.py
+    - python-requests-oauthlib # as above
+    - python-swiftclient # for swiftbackend.py
+    - python-urllib3
+    - rsync		# for rsyncbackend.py
+    - tahoe-lafs	# for tahoebackend.py
+    # -sx for sxbackend.py, but looks dead http://www.skylable.com/
+    python-packages: [b2, dropbox, jottalib, mediafire, pydrive, pyrax]
+    # b2 for b2backend.py
+    # dropbox for dpbxbackend.py
+    # mediafire for mediafirebackend.py
+    # pydrive for pydrivebackend.py
+    # pyrax for hubicbackend, _cf_pyrax.py
+    # jottalib for jottalib backend (new in 0.8 series)
+    source: .
+

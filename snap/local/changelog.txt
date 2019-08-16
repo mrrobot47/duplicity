@@ -1,0 +1,12 @@
+Snap changelog
+
+Revision	Version		Change
+6		0.7.19		Added a large number of dependencies beyond those in
+				requirements.txt based on those imported or used in
+				backends.  
+7		0.7.19		Added additional dependencies from .deb package.
+8		0.8.00		Added openssh-client, jottalib
+9		0.8.00		Changed bin/duplicity to use python2
+10		0.8.01		New duplicity version, no snap changes
+11		0.8.02		New duplicity version, no snap changes
+12		0.8.03		New duplicity version, no snap changes

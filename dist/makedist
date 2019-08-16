@@ -102,6 +102,8 @@ def MakeTar():
                   os.path.join(tardir, u"bin", u"duplicity.1"))
     VersionedCopy(os.path.join(u"bin", u"rdiffdir.1"),
                   os.path.join(tardir, u"bin", u"rdiffdir.1"))
+    VersionedCopy(os.path.join(u"snap", u"snapcraft.yaml"),
+                  os.path.join(tardir, u"snap", u"snapcraft.yaml"))
     VersionedCopy(u"setup.py",
                   os.path.join(tardir, u"setup.py"))
 
