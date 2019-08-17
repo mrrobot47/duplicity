@@ -1,7 +1,9 @@
 2019-08-17  Kenneth Loafman  <kenneth@loafman.com>
 
-* Merged in lp:~aaron-whitehouse/duplicity/08-snap-python2
-  - Add packaging code for Snapcraft/Snap packages
+    * Merged in lp:~aaron-whitehouse/duplicity/08-snap-python2
+      - Add packaging code for Snapcraft/Snap packages
+    * Fixed build on Launchpad for 0.8.x, so now there is a new PPA at
+      https://launchpad.net/~duplicity-team/+archive/ubuntu/daily-dev-trunk
 
 2019-08-13  Kenneth Loafman  <kenneth@loafman.com>
 
