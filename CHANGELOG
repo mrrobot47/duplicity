@@ -7,6 +7,8 @@ New in v0.8.04 (2019/08/??)
 * Removed socket.settimeout from backend.py.
   It was already set in commandline.py.
 * Removed pycryptopp from README requirements
+* Merged in lp:~aaron-whitehouse/duplicity/08-snap-python2
+  - Add packaging code for Snapcraft/Snap packages
 
 
 New in v0.8.03 (2019/08/09)

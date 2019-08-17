@@ -1,3 +1,8 @@
+2019-08-17  Kenneth Loafman  <kenneth@loafman.com>
+
+* Merged in lp:~aaron-whitehouse/duplicity/08-snap-python2
+  - Add packaging code for Snapcraft/Snap packages
+
 2019-08-13  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1839886 with hint from denick
