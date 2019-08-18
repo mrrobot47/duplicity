@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Duplicity Team <duplicity-team@lists.launchpad.net>
 Build-Depends: debhelper (>= 7),
-               dh-python2 | python (>= 3.7),
+               dh-python | python (>= 3.7),
                gnupg,
                librsync-dev (>= 0.9.6),
                par2,
@@ -25,7 +25,7 @@ X-Python3-Version: 3.7
 Package: duplicity
 Architecture: any
 Depends: ${misc:Depends},
-         ${python:Depends},
+         ${python3:Depends},
          ${shlibs:Depends},
          gnupg,
          python3-fasteners,
