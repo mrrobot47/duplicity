@@ -20,6 +20,7 @@ Build-Depends: debhelper (>= 7),
                rsync,
 Homepage: https://launchpad.net/duplicity
 Standards-Version: 3.9.5
+X-Python-Version: >= 2.7
 X-Python3-Version: >= 3.7
 
 Package: duplicity
