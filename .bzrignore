@@ -16,6 +16,7 @@ config.py
 docs/_build
 duplicity.egg-info
 duplicity.spec
+filters.txt
 po/duplicity.pot-e
 random_seed
 testfiles

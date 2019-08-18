@@ -20,6 +20,7 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
+from builtins import object
 from future import standard_library
 standard_library.install_aliases()
 
@@ -43,7 +44,7 @@ class Test36(UnitTestCase):
             assert file_naming.from_base36(b) == n, (b, n)
 
 
-class FileNamingBase:
+class FileNamingBase(object):
     u"""Holds file naming test functions, for use in subclasses"""
     def test_basic(self):
         u"""Check get/parse cycle"""

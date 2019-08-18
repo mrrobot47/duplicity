@@ -21,6 +21,8 @@
 
 from __future__ import print_function
 from __future__ import division
+from builtins import range
+from builtins import object
 from past.utils import old_div
 from future import standard_library
 standard_library.install_aliases()
@@ -166,12 +168,12 @@ class GPGTest(UnitTestCase):
         # print os.stat("testfiles/output/gzwrite.gz").st_size
 
 
-class GPGWriteHelper2:
+class GPGWriteHelper2(object):
     def __init__(self, data):
         self.data = data
 
 
-class GPGWriteFile_Helper:
+class GPGWriteFile_Helper(object):
     u"""Used in test_GPGWriteFile above"""
     def __init__(self):
         self.from_random_fp = open(u"/dev/urandom", u"rb")

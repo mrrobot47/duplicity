@@ -1,3 +1,7 @@
+2019-08-18  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Ran futurize selectively filter-by-filter to find the ones that work.
+
 2019-08-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~aaron-whitehouse/duplicity/08-snap-python2

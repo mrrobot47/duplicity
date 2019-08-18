@@ -20,9 +20,11 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
+from builtins import map
+from builtins import object
+from builtins import range
 from future import standard_library
 standard_library.install_aliases()
-from builtins import map
 
 import io
 import unittest
@@ -132,7 +134,7 @@ class PatchingTest(UnitTestCase):
         assert not Path(u"testfiles/output/warning-security-error").exists()
 
 
-class index:
+class index(object):
     u"""Used below to test the iter collation"""
     def __init__(self, index):
         self.index = index
