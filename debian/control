@@ -3,38 +3,38 @@ Section: utils
 Priority: optional
 Maintainer: Duplicity Team <duplicity-team@lists.launchpad.net>
 Build-Depends: debhelper (>= 9),
-               dh-python | python (>= 3.7),
+               dh-python | python (>= 2.7),
                gnupg,
                librsync-dev (>= 0.9.6),
                par2,
                pep8,
                pylint,
-               python3-dev,
-               python3-fasteners,
-               python3-future,
-               python3-mock,
-               python3-pexpect,
-               python3-setuptools,
+               python-dev,
+               python-fasteners,
+               python-future,
+               python-mock,
+               python-pexpect,
+               python-setuptools,
                rdiff,
                rename,
                rsync,
 Homepage: https://launchpad.net/duplicity
 Standards-Version: 3.9.5
-X-Python3-Version: 3.7
+X-Python-Version: 2.7
 
 Package: duplicity
 Architecture: any
 Depends: ${misc:Depends},
-         ${python3:Depends},
+         ${python:Depends},
          ${shlibs:Depends},
          gnupg,
-         python3-fasteners,
-         python3-future,
-         python3-pexpect,
+         python-fasteners,
+         python-future,
+         python-pexpect,
 Suggests: ncftp,
-          python3-boto,
-          python3-paramiko,
-          python3-kerberos,
+          python-boto,
+          python-paramiko,
+          python-kerberos,
 Description: encrypted bandwidth-efficient backup
  Duplicity backs directories by producing encrypted tar-format volumes
  and uploading them to a remote or local file server. Because duplicity
