@@ -13,8 +13,10 @@ New in v0.8.04 (2019/08/??)
   https://launchpad.net/~duplicity-team/+archive/ubuntu/daily-dev-trunk
 * Ran futurize selectively filter-by-filter to find the ones that work.
 * Merged in lp:~aaron-whitehouse/duplicity/08-README-TESTING
-  - Change README-TESTING to be correct for running individual tests 
+  - Change README-TESTING to be correct for running individual tests
     now that we have moved to Tox/Pytest.
+* Merged in lp:~kaffeekiffer/duplicity/azure-filename
+  - Encode Azure back-end paths
 
 
 New in v0.8.03 (2019/08/09)
