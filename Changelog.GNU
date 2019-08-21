@@ -1,3 +1,9 @@
+2019-08-21  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~aaron-whitehouse/duplicity/08-README-TESTING
+      - Change README-TESTING to be correct for running individual tests
+        now that we have moved to Tox/Pytest.
+
 2019-08-18  Kenneth Loafman  <kenneth@loafman.com>
 
     * Ran futurize selectively filter-by-filter to find the ones that work.

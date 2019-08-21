@@ -12,6 +12,9 @@ New in v0.8.04 (2019/08/??)
 * Fixed build on Launchpad for 0.8.x, so now there is a new PPA at
   https://launchpad.net/~duplicity-team/+archive/ubuntu/daily-dev-trunk
 * Ran futurize selectively filter-by-filter to find the ones that work.
+* Merged in lp:~aaron-whitehouse/duplicity/08-README-TESTING
+  - Change README-TESTING to be correct for running individual tests 
+    now that we have moved to Tox/Pytest.
 
 
 New in v0.8.03 (2019/08/09)
