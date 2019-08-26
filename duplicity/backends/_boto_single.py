@@ -133,7 +133,7 @@ class BotoBackend(duplicity.backend.Backend):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
         try:
-            import boto
+            import boto  # pylint: disable=import-error
             from boto.s3.connection import Location
         except ImportError:
             raise
@@ -183,7 +183,7 @@ class BotoBackend(duplicity.backend.Backend):
         del self.storage_uri
 
     def resetConnection(self):
-        import boto
+        import boto  # pylint: disable=import-error
 
         if getattr(self, u'conn', False):
             self.conn.close()
@@ -264,7 +264,7 @@ class BotoBackend(duplicity.backend.Backend):
         self.upload(source_path.name, key, headers)
         upload_end = time.time()
         total_s = abs(upload_end - upload_start) or 1  # prevent a zero value!
-        rough_upload_speed = os.path.getsize(source_path.name) // total_s
+        rough_upload_speed = os.path.getsize(source_path.name) / total_s
         log.Debug(u"Uploaded %s/%s to %s Storage at roughly %f bytes/second" %
                   (self.straight_url, remote_filename, storage_class,
                    rough_upload_speed))

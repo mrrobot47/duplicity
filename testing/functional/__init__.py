@@ -19,6 +19,7 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
+from builtins import range
 from future import standard_library
 standard_library.install_aliases()
 
@@ -102,10 +103,11 @@ class FunctionalTestCase(DuplicityTestCase):
                 cmd_list.extend([u"-w"])
         else:
             cmd_list = []
-        if "TOX_WORK_DIR" in os.environ:
-            cmd_list.extend([u"duplicity"])
-        else:
-            cmd_list.extend([u"../bin/duplicity"])
+        basepython = os.environ.get(u'TOXPYTHON', None)
+        if basepython is not None:
+            cmd_list.extend([basepython])
+            cmd_list.extend([u"-m", u"coverage", u"run", u"--source=duplicity", u"-p"])
+        cmd_list.extend([u"../bin/duplicity"])
         cmd_list.extend(options)
         cmd_list.extend([u"-v0"])
         cmd_list.extend([u"--no-print-statistics"])
@@ -178,10 +180,7 @@ class FunctionalTestCase(DuplicityTestCase):
         # avoid such problems
         now = time.time()
         if self.last_backup == int(now):
-            seconds_to_sleep = (self.last_backup + 1) - now
-            assert 0 <= seconds_to_sleep <= 1
-            time.sleep(seconds_to_sleep)
-            assert int(time.time()) != self.last_backup
+            time.sleep(1)
 
         result = self.run_duplicity(options=options, **kwargs)
         self.last_backup = int(time.time())

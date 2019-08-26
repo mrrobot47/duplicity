@@ -313,7 +313,7 @@ class ROPath(object):
             try:
                 ti.gname = cached_ops.getgrgid(ti.gid)[0]
             except KeyError:
-                ti.gname = b''
+                ti.gname = u''
 
             if ti.type in (tarfile.CHRTYPE, tarfile.BLKTYPE):
                 if hasattr(os, u"major") and hasattr(os, u"minor"):

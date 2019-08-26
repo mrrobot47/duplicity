@@ -20,7 +20,9 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 u"""Provide time related exceptions and functions"""
+from __future__ import division
 
+from past.utils import old_div
 from builtins import map
 
 import time
@@ -232,9 +234,9 @@ def gettzd(dstflag):
     # time.localtime()
 
     if dstflag > 0:
-        offset = -1 * time.altzone / 60
+        offset = old_div(-1 * time.altzone, 60)
     else:
-        offset = -1 * time.timezone / 60
+        offset = old_div(-1 * time.timezone, 60)
     if offset > 0:
         prefix = u"+"
     elif offset < 0:

@@ -321,7 +321,7 @@ class ADBackend(duplicity.backend.Backend):
                      u'waiting for %d seconds to see if Amazon Drive finished the '
                      u'upload anyway' % (remote_filename, response.status_code,
                                          globals.timeout))
-            tries = globals.timeout // 15
+            tries = globals.timeout / 15
             while tries >= 0:
                 tries -= 1
                 time.sleep(15)

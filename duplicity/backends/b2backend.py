@@ -22,9 +22,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from builtins import object
 from future import standard_library
 standard_library.install_aliases()
-from builtins import object
+
 import os
 import hashlib
 from urllib.parse import quote_plus  # pylint: disable=import-error
@@ -35,7 +36,7 @@ from duplicity import log
 from duplicity import progress
 
 
-class B2ProgressListener:
+class B2ProgressListener(object):
     def __enter__(self):
         pass
 
@@ -67,6 +68,8 @@ class B2Backend(duplicity.backend.Backend):
         try:
             global b2
             import b2
+            global b2sdk
+            import b2sdk
             import b2.api
             import b2.account_info
             import b2.download_dest

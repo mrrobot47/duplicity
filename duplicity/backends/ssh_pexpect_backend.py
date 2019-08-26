@@ -84,7 +84,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
             globals.ssh_options = globals.ssh_options + u" -oPort=%s" % parsed_url.port
         # set some defaults if user has not specified already.
         if u"ServerAliveInterval" not in globals.ssh_options:
-            globals.ssh_options += u" -oServerAliveInterval=%d" % ((int)(globals.timeout // 2))
+            globals.ssh_options += u" -oServerAliveInterval=%d" % ((int)(globals.timeout / 2))
         if u"ServerAliveCountMax" not in globals.ssh_options:
             globals.ssh_options += u" -oServerAliveCountMax=2"
 

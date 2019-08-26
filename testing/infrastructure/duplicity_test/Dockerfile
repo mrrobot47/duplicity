@@ -28,7 +28,6 @@ FROM ubuntu:18.04
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
 
-
 # Set to non-interactive so no tzdata prompt
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -48,21 +47,25 @@ RUN apt-get update \
             par2 \
             python-dev \
             python-pip \
-            python3-dev \
             python3-pip \
+            python3.6 \
+            python3.6-dev \
+            python3.7 \
+            python3.7-dev \
             rdiff \
             tzdata  # required for testing/unit/test_statistics.py
 
 # The following packages are not necessary for testing but make life easier or support debugging
 RUN apt-get install -y \
-            nano \
-            mc \
-            iputils-ping \
-            net-tools \
             ftp \
+            iputils-ping \
+            mc \
+            nano \
+            net-tools \
+            rsync \
     && rm -rf /var/lib/apt/lists/*
 
-# Installing requirements for pip
+# Installing requirements w/pip
 COPY requirements.txt /tmp
 RUN pip install --requirement /tmp/requirements.txt
 
@@ -88,10 +91,5 @@ COPY . duplicity/
 RUN chown -R test:test duplicity
 USER test
 
-# Build rsync binding
-WORKDIR duplicity/duplicity
-RUN python2 compilec.py
-RUN python3 compilec.py
-
 # Set final workdir to duplicity
-WORKDIR ..
+WORKDIR /home/test/duplicity

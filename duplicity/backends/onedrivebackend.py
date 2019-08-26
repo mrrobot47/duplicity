@@ -23,6 +23,8 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
+from __future__ import division
+from past.utils import old_div
 from builtins import input
 from builtins import str
 import time
@@ -203,6 +205,7 @@ class OneDriveBackend(duplicity.backend.Backend):
         return [x[u'name'] for x in accum]
 
     def _get(self, remote_filename, local_path):
+        remote_filename = remote_filename.decode(u"UTF-8")
         with local_path.open(u'wb') as f:
             response = self.http_client.get(
                 self.API_URI + self.directory_onedrive_path + remote_filename + u':/content', stream=True)
@@ -217,6 +220,7 @@ class OneDriveBackend(duplicity.backend.Backend):
 
         # Check if the user has enough space available on OneDrive before even
         # attempting to upload the file.
+        remote_filename = remote_filename.decode(u"UTF-8")
         source_size = os.path.getsize(source_path.name)
         start = time.time()
         response = self.http_client.get(self.API_URI + u'me/drive?$select=quota')
@@ -239,7 +243,7 @@ class OneDriveBackend(duplicity.backend.Backend):
 
             response = self.http_client.post(url)
             response.raise_for_status()
-            response_json = json.loads(response.content)
+            response_json = json.loads(response.content.decode(u"UTF-8"))
             if u'uploadUrl' not in response_json:
                 raise BackendException((
                     u'File "%s" cannot be uploaded: could not create upload session: %s' % (
@@ -249,7 +253,7 @@ class OneDriveBackend(duplicity.backend.Backend):
             # https://docs.microsoft.com/en-us/onedrive/developer/rest-api/api/driveitem_createuploadsession?
             # indicates 10 MiB is optimal for stable high speed connections.
             offset = 0
-            desired_num_fragments = 10 * 1024 * 1024 // self.REQUIRED_FRAGMENT_SIZE_MULTIPLE
+            desired_num_fragments = old_div(10 * 1024 * 1024, self.REQUIRED_FRAGMENT_SIZE_MULTIPLE)
             while True:
                 chunk = source_file.read(desired_num_fragments * self.REQUIRED_FRAGMENT_SIZE_MULTIPLE)
                 if len(chunk) == 0:
@@ -269,6 +273,7 @@ class OneDriveBackend(duplicity.backend.Backend):
             log.Debug(u"PUT file in %fs" % (time.time() - start))
 
     def _delete(self, remote_filename):
+        remote_filename = remote_filename.decode(u"UTF-8")
         response = self.http_client.delete(self.API_URI + self.directory_onedrive_path + remote_filename)
         if response.status_code == 404:
             raise BackendException((
@@ -277,6 +282,7 @@ class OneDriveBackend(duplicity.backend.Backend):
         response.raise_for_status()
 
     def _query(self, remote_filename):
+        remote_filename = remote_filename.decode(u"UTF-8")
         response = self.http_client.get(self.API_URI + self.directory_onedrive_path + remote_filename)
         if response.status_code != 200:
             return {u'size': -1}

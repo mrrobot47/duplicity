@@ -36,15 +36,16 @@ class LogTest(FunctionalTestCase):
         assert not os.system(u"rm -f /tmp/duplicity.log")
 
     def tearDown(self):
-        assert not os.system(u"rm -f /tmp/duplicity.log")
         super(LogTest, self).tearDown()
+        assert not os.system(u"rm -f /tmp/duplicity.log")
 
     def test_command_line_error(self):
         u"""Check notification of a simple error code"""
 
         # Run actual duplicity command (will fail, because no arguments passed)
-        if "TOX_WORK_DIR" in os.environ:
-            os.system(u"duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
+        basepython = os.environ.get(u'TOXPYTHON', None)
+        if basepython is not None:
+            os.system(u"%s ../bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1" % (basepython,))
         else:
             os.system(u"../bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
 

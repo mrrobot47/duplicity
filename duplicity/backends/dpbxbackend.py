@@ -209,7 +209,7 @@ Exception: %s""" % str(e))
     @command()
     def _put(self, source_path, remote_filename):
         remote_dir = urllib.parse.unquote(self.parsed_url.path.lstrip(u'/'))
-        remote_path = u'/' + os.path.join(remote_dir, remote_filename).rstrip()
+        remote_path = u'/' + os.path.join(remote_dir, remote_filename.decode()).rstrip()
 
         file_size = os.path.getsize(source_path.name)
         progress.report_transfer(0, file_size)
@@ -347,7 +347,7 @@ Exception: %s""" % str(e))
                     # reupload
                     log.Info(u'dpbx: sleeping a bit before chunk retry')
                     time.sleep(30)
-                    current_chunk_size = DPBX_UPLOAD_CHUNK_SIZE // 5
+                    current_chunk_size = DPBX_UPLOAD_CHUNK_SIZE / 5
                     requested_offset = None
                     continue
 
@@ -368,7 +368,7 @@ Exception: %s""" % str(e))
             self.login()
 
         remote_dir = urllib.parse.unquote(self.parsed_url.path.lstrip(u'/'))
-        remote_path = u'/' + os.path.join(remote_dir, remote_filename).rstrip()
+        remote_path = u'/' + os.path.join(remote_dir, remote_filename.decode()).rstrip()
 
         log.Debug(u'dpbx,files_download(%s)' % remote_path)
         res_metadata, http_fd = self.api_client.files_download(remote_path)
@@ -433,7 +433,7 @@ Exception: %s""" % str(e))
             self.login()
 
         remote_dir = urllib.parse.unquote(self.parsed_url.path.lstrip(u'/'))
-        remote_path = u'/' + os.path.join(remote_dir, filename).rstrip()
+        remote_path = u'/' + os.path.join(remote_dir, filename.decode()).rstrip()
 
         log.Debug(u'dpbx.files_delete(%s)' % remote_path)
         self.api_client.files_delete(remote_path)
@@ -452,7 +452,7 @@ Exception: %s""" % str(e))
         if not self.user_authenticated():
             self.login()
         remote_dir = urllib.parse.unquote(self.parsed_url.path.lstrip(u'/'))
-        remote_path = u'/' + os.path.join(remote_dir, filename).rstrip()
+        remote_path = u'/' + os.path.join(remote_dir, filename.decode()).rstrip()
 
         log.Debug(u'dpbx.files_get_metadata(%s)' % remote_path)
         info = self.api_client.files_get_metadata(remote_path)

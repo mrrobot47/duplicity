@@ -245,7 +245,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                 self.config[u'user'],
                 self.config[u'hostname'],
                 self.config[u'port'], e))
-        self.client.get_transport().set_keepalive((int)(globals.timeout // 2))
+        self.client.get_transport().set_keepalive((int)(globals.timeout / 2))
 
         self.scheme = duplicity.backend.strip_prefix(parsed_url.scheme,
                                                      u'paramiko')

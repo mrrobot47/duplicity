@@ -3,7 +3,6 @@
 fasteners
 future
 mock
-python-gettext
 requests
 urllib3
 
@@ -15,7 +14,9 @@ pexpect
 pycodestyle
 pylint
 pytest
+pytest-cov
 pytest-runner
+sphinx
 tox
 
 
@@ -23,6 +24,7 @@ tox
 
 # azure
 # b2
+# b2sdk
 # boto
 # dropbox==6.9.0
 # gdata

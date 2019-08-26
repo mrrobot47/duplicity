@@ -47,7 +47,7 @@ services:
   duplicity_ftp:
     image: firstprime/duplicity_ftp
     ports:
-      - "2222:22"
+      - "21:21"
     networks:
       duplicity_test_net:
         ipv4_address: ${DUPLICITY_TEST_SUBNET}.3
@@ -56,7 +56,7 @@ services:
   duplicity_ssh:
     image: firstprime/duplicity_ssh
     ports:
-      - "21:21"
+      - "2222:22"
     tty: true
     networks:
       duplicity_test_net:
@@ -69,7 +69,3 @@ networks:
       driver: default
       config:
         - subnet: ${DUPLICITY_TEST_SUBNET}.0/24
-
-
-
-

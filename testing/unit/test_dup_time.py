@@ -20,6 +20,8 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
+from past.builtins import cmp
+from builtins import object
 from future import standard_library
 standard_library.install_aliases()
 
@@ -37,7 +39,7 @@ else:
     integer_types = (int,)
 
 
-class TimeTest:
+class TimeTest(object):
     def testConversion(self):
         u"""test timetostring and stringtotime"""
         dup_time.setcurtime()

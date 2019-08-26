@@ -20,6 +20,10 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
+from __future__ import division
+from builtins import range
+from builtins import object
+from past.utils import old_div
 from future import standard_library
 standard_library.install_aliases()
 
@@ -164,12 +168,12 @@ class GPGTest(UnitTestCase):
         # print os.stat("testfiles/output/gzwrite.gz").st_size
 
 
-class GPGWriteHelper2:
+class GPGWriteHelper2(object):
     def __init__(self, data):
         self.data = data
 
 
-class GPGWriteFile_Helper:
+class GPGWriteFile_Helper(object):
     u"""Used in test_GPGWriteFile above"""
     def __init__(self):
         self.from_random_fp = open(u"/dev/urandom", u"rb")
@@ -181,7 +185,7 @@ class GPGWriteFile_Helper:
 
     def get_buffer(self, size):
         u"""Return buffer of size size, consisting of half random data"""
-        s1 = int(size / 2)
+        s1 = int(old_div(size, 2))
         s2 = size - s1
         return b"a" * s1 + self.from_random_fp.read(s2)
 

@@ -2,13 +2,16 @@ Source: duplicity
 Section: utils
 Priority: optional
 Maintainer: Duplicity Team <duplicity-team@lists.launchpad.net>
-Build-Depends: debhelper (>= 7),
-               dh-python | python (>= 2.6.6-3~),
+Build-Depends: debhelper (>= 9),
+               dh-python | python (>= 2.7),
                gnupg,
                librsync-dev (>= 0.9.6),
                par2,
                pep8,
                pylint,
+               python-pytest,
+               python-pytest-cov,
+               python-pytest-runner,
                python-dev,
                python-fasteners,
                python-future,
@@ -20,7 +23,7 @@ Build-Depends: debhelper (>= 7),
                rsync,
 Homepage: https://launchpad.net/duplicity
 Standards-Version: 3.9.5
-X-Python-Version: >= 3.5
+X-Python-Version: 2.7
 
 Package: duplicity
 Architecture: any

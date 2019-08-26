@@ -116,6 +116,7 @@ Exception: %s""" % str(e))
                            log.ErrorCode.connection_failed)
 
     def _put(self, source_path, remote_filename):
+        remote_filename = fsdecode(remote_filename)
         kwargs = {}
         if globals.azure_max_connections:
             kwargs[u'max_connections'] = globals.azure_max_connections
@@ -153,10 +154,10 @@ Exception: %s""" % str(e))
 
     def _delete(self, filename):
         # http://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#delete-blobs
-        self.blob_service.delete_blob(self.container, filename)
+        self.blob_service.delete_blob(self.container, fsdecode(filename))
 
     def _query(self, filename):
-        prop = self.blob_service.get_blob_properties(self.container, filename)
+        prop = self.blob_service.get_blob_properties(self.container, fsdecode(filename))
         try:
             info = {u'size': int(prop.properties.content_length)}
         except AttributeError:

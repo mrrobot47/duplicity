@@ -24,6 +24,7 @@ Submodules
    testing.unit.test_statistics
    testing.unit.test_tarfile
    testing.unit.test_tempdir
+   testing.unit.test_util
 
 Module contents
 ---------------

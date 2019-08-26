@@ -693,6 +693,18 @@ def parse_cmdline_options(arglist):
         if v is not None:
             setattr(globals, f, v)
 
+    # convert file_prefix* string
+    if sys.version_info.major >= 3:
+        if isinstance(globals.file_prefix, str):
+            globals.file_prefix = bytes(globals.file_prefix, u'utf-8')
+        if isinstance(globals.file_prefix_manifest, str):
+            globals.file_prefix_manifest = bytes(globals.file_prefix_manifest, u'utf-8')
+        if isinstance(globals.file_prefix_archive, str):
+            globals.file_prefix_archive = bytes(globals.file_prefix_archive, u'utf-8')
+        if isinstance(globals.file_prefix_signature, str):
+            globals.file_prefix_signature = bytes(globals.file_prefix_signature, u'utf-8')
+
+    # todo: this should really NOT be done here
     socket.setdefaulttimeout(globals.timeout)
 
     # expect no cmd and two positional args
