@@ -1,6 +1,7 @@
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
-# Copyright 2017 Nils Tekampe <nils@tekampe.org>
+# Copyright 2019 Nils Tekampe <nils@tekampe.org>,
+# Kenneth Loafman <kenneth@loafman.com> and Aaron Whitehouse <code@whitehouse.kiwi.nz>
 #
 # This file is part of duplicity.
 #
