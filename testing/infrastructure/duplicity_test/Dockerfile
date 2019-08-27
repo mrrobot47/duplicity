@@ -1,6 +1,7 @@
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
-# Copyright 2017 Nils Tekampe <nils@tekampe.org>
+# Copyright 2019 Nils Tekampe <nils@tekampe.org>,
+# Kenneth Loafman <kenneth@loafman.com> and Aaron Whitehouse <code@whitehouse.kiwi.nz>
 #
 # This file is part of duplicity.
 #
@@ -17,6 +18,10 @@
 # You should have received a copy of the GNU General Public License
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+# This Dockerfile assumes that docker built will be called from the parent
+# duplicity folder with -f testing/infrastructure/ so that the whole folder
+# can be copied into the container for testing.
 
 FROM ubuntu:18.04
 
@@ -77,15 +82,15 @@ WORKDIR /home/test
 
 # Copy a SSH key to the users folder that is used for some test cases
 USER root
-COPY ./id_rsa /home/test/.ssh/
-COPY ./id_rsa.pub /home/test/.ssh/
+COPY testing/infrastructure/id_rsa /home/test/.ssh/
+COPY testing/infrastructure/id_rsa.pub /home/test/.ssh/
 RUN chown -R test:test /home/test/.ssh
 RUN chmod 400 /home/test/.ssh/id_rsa
-USER test
 
-# Branch the duplicity repo for testing
-ARG REVNO=-1
-RUN bzr branch -r $REVNO lp:duplicity duplicity
+# Copy the local duplicity folder into the container
+COPY . duplicity/
+RUN chown -R test:test duplicity
+USER test
 
 # Set final workdir to duplicity
 WORKDIR /home/test/duplicity

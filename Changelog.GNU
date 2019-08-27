@@ -1,3 +1,14 @@
+2019-08-26  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~aaron-whitehouse/duplicity/08-docker-local-import
+      - Convert the Docker infrastructure to pull the local branch into
+        duplicity_test. This allows testing the local branch with the
+        known-good Docker environment, even if it has not yet been
+        committed to trunk.
+      - As a consequence, remove the -r option to build-duplicity_test.sh.
+        This functionality can be achieved by branching that revision
+        before running the script.
+
 2019-08-21  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~aaron-whitehouse/duplicity/08-README-TESTING

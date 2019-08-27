@@ -23,9 +23,8 @@
 #
 
 usage() {
-    echo "Usage: $0 [-d <distro>] [-r <revno>]" 1>&2
+    echo "Usage: $0 [-d <distro>]" 1>&2
     echo "  - Default distro is 18.04" 1>&2
-    echo "  - Default revno is `bzr revno`" 1>&2
     exit 1;
 }
 
@@ -35,19 +34,12 @@ if [ "$DISTRO" == "" ]; then
     DISTRO=18.04
 fi
 
-if [ "$REVNO" == "" ]; then
-    REVNO=`bzr revno`
-fi
-
 # possibly override with commandline
 
-while getopts ":d:r:h" opt; do
+while getopts ":d:h" opt; do
     case ${opt} in
         d )
             DISTRO=$OPTARG
-            ;;
-        r )
-            REVNO=$OPTARG
             ;;
         h )
             usage
@@ -66,19 +58,12 @@ shift $((OPTIND -1))
 
 # build duplicity_test
 
-cd duplicity_test
-cp -p ../../../requirements.txt .
-cp -p ../id_rsa .
-cp -p ../id_rsa.pub .
-docker build --build-arg REVNO=$REVNO -f Dockerfile-$DISTRO --tag firstprime/duplicity_test .
-rm requirements.txt
-rm id_rsa
-rm id_rsa.pub
-cd ..
+cd ../..
+docker build -f testing/infrastructure/duplicity_test/Dockerfile-$DISTRO --tag firstprime/duplicity_test .
 
+cd testing/infrastructure/ftp_server
 # build duplicity_ftp
 
-cd ftp_server
 docker build --tag firstprime/duplicity_ftp .
 cd ..
 
