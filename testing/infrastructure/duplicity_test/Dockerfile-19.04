@@ -1,6 +1,7 @@
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
-# Copyright 2017 Nils Tekampe <nils@tekampe.org>
+# Copyright 2019 Nils Tekampe <nils@tekampe.org>,
+# Kenneth Loafman <kenneth@loafman.com> and Aaron Whitehouse <code@whitehouse.kiwi.nz>
 #
 # This file is part of duplicity.
 #
@@ -75,13 +76,13 @@ WORKDIR /home/test
 
 # Copy a SSH key to the users folder that is used for some test cases
 USER root
-COPY testing/infrastructure/id_rsa /home/test/.ssh/
-COPY testing/infrastructure/id_rsa.pub /home/test/.ssh/
+COPY id_rsa /home/test/.ssh/
+COPY id_rsa.pub /home/test/.ssh/
 RUN chown -R test:test /home/test/.ssh
 RUN chmod 400 /home/test/.ssh/id_rsa
 
 # Copy the local duplicity folder into the container
-COPY . duplicity/
+COPY dupcopy/ duplicity/
 RUN chown -R test:test duplicity
 USER test
 

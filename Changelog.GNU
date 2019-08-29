@@ -1,3 +1,12 @@
+2019-08-29  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Made some changes to the Docker infrastructure:
+      - All scripts run from any directory, assuming directory
+        structure remains the same.
+      - Changed from Docker's COPY internal command which is slow to
+        using external rsync which is faster and allows excludes.
+      - Removed a couple of unused files.
+
 2019-08-26  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~aaron-whitehouse/duplicity/08-docker-local-import

@@ -25,6 +25,12 @@ New in v0.8.04 (2019/08/??)
   - As a consequence, remove the -r option to build-duplicity_test.sh.
     This functionality can be achieved by branching that revision
     before running the script.
+* Made some changes to the Docker infrastructure:
+  - All scripts run from any directory, assuming directory
+    structure remains the same.
+  - Changed from Docker's COPY internal command which is slow to
+    using external rsync which is faster and allows excludes.
+  - Removed a couple of unused files.
 
 
 New in v0.8.03 (2019/08/09)

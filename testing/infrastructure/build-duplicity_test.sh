@@ -1,6 +1,7 @@
 #!/bin/bash
 #
-# Copyright 2017 Nils Tekampe <nils@tekampe.org>
+# Copyright 2019 Nils Tekampe <nils@tekampe.org>,
+# Kenneth Loafman <kenneth@loafman.com> and Aaron Whitehouse <code@whitehouse.kiwi.nz>
 #
 # This file is part of duplicity.
 # This script sets up a test network for the tests of dupclicity
@@ -58,19 +59,34 @@ shift $((OPTIND -1))
 
 # build duplicity_test
 
-cd ../..
-docker build -f testing/infrastructure/duplicity_test/Dockerfile-$DISTRO --tag firstprime/duplicity_test .
+cd `dirname $0`/duplicity_test
+cp -p ../../../requirements.txt .
+cp -p ../id_rsa* .
+mkdir dupcopy
+rsync -a \
+    --exclude=*.pyc \
+    --exclude=*.so \
+    --exclude=.DS_Store \
+    --exclude=.tox \
+    --exclude=S.* \
+    --exclude=__pycache__ \
+    --exclude=docs \
+    --exclude=htmlcov \
+    --exclude=infrastructure \
+    ../../../ \
+    dupcopy/
+docker build -f Dockerfile-$DISTRO --tag firstprime/duplicity_test .
+rm requirements.txt id_rsa*
+rm -r dupcopy
 
-cd testing/infrastructure/ftp_server
 # build duplicity_ftp
 
+cd ../ftp_server
 docker build --tag firstprime/duplicity_ftp .
-cd ..
 
 # build duplicity_ssh
 
-cd ssh_server
+cd ../ssh_server
 cp -p ../id_rsa.pub .
 docker build --tag firstprime/duplicity_ssh .
 rm id_rsa.pub
-cd ..
