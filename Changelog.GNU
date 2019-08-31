@@ -1,3 +1,8 @@
+2019-08-31  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.04
+
 2019-08-29  Kenneth Loafman  <kenneth@loafman.com>
 
     * Made some changes to the Docker infrastructure:

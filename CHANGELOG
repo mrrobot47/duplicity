@@ -1,4 +1,4 @@
-New in v0.8.04 (2019/08/??)
+New in v0.8.04 (2019/08/31)
 ---------------------------
 * Fixed bug #1839728 with info from Avleen Vig
   - b2 backend requires additional import
@@ -31,6 +31,7 @@ New in v0.8.04 (2019/08/??)
   - Changed from Docker's COPY internal command which is slow to
     using external rsync which is faster and allows excludes.
   - Removed a couple of unused files.
+* Merged in translation updates
 
 
 New in v0.8.03 (2019/08/09)
