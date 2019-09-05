@@ -69,8 +69,8 @@ def MakeTar():
     testfiles = list()
 
     # use dist/relfiles.txt as files list
-    dir = os.path.dirname(sys.argv[0])
-    relfiles = os.path.join(dir, u"relfiles.txt")
+    dist = os.path.dirname(sys.argv[0])
+    relfiles = os.path.join(dist, u"relfiles.txt")
     if os.path.exists(relfiles):
         testfiles = open(relfiles).readlines()
 
@@ -86,7 +86,7 @@ def MakeTar():
 
     # got files list so save it
     if len(testfiles) > 0:
-        open(relfiles, u"wt").writelines([fn + u"\n" for fn in testfiles])
+        open(relfiles, u"wt").writelines(testfiles)
 
     assert len(testfiles) > 0, u"No files list returned from any source."
 
