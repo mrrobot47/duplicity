@@ -46,7 +46,6 @@ def VersionedCopy(source, dest):
     assert not fin.close()
 
     (outbuf, cnt) = re.subn(u"\$version", Version, inbuf)
-    assert cnt != 0, u"No $version string replaced in" + source
 
     inbuf = outbuf
     (outbuf, cnt) = re.subn(u"\$reldate", Reldate, inbuf)
@@ -67,11 +66,31 @@ def MakeTar():
 
     # tarball contains the entire versioned release
     os.mkdir(tardir)
-    bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE, universal_newlines=True)
-    testfiles = bzr.communicate()[0].split()
+    testfiles = list()
+
+    # use dist/relfiles.txt as files list
+    dir = os.path.dirname(sys.argv[0])
+    relfiles = os.path.join(dir, u"relfiles.txt")
+    if os.path.exists(relfiles):
+        testfiles = open(relfiles).readlines()
+
+    # or use bzr to get files list
+    if len(testfiles) == 0:
+        bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE, universal_newlines=True)
+        testfiles = bzr.communicate()[0].split()
+
+    # or use git to get files list
     if len(testfiles) == 0:
         git = Popen([u"git", u"ls-files"], stdout=PIPE, universal_newlines=True)
         testfiles = git.communicate()[0].split()
+
+    # got files list so save it
+    if len(testfiles) > 0:
+        open(relfiles, u"wt").writelines([fn + u"\n" for fn in testfiles])
+
+    assert len(testfiles) > 0, u"No files list returned from any source."
+
+    testfiles = [fn.strip() for fn in testfiles]
 
     for filename in testfiles:
         pname, fname = os.path.split(filename)

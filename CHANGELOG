@@ -1,3 +1,11 @@
+New in v0.8.05 (2019/09/??)
+---------------------------
+* Changed dist/makedist to fall back to dist/relfiles.txt
+  in case bzr or git is not available to get files list.
+  Tox sdist needs setup.py which needs dist/makedist.
+* Updatated LINGUAS file to add four new translations.
+
+
 New in v0.8.04 (2019/08/31)
 ---------------------------
 * Fixed bug #1839728 with info from Avleen Vig

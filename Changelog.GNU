@@ -1,3 +1,10 @@
+2019-09-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Changed dist/makedist to fall back to dist/relfiles.txt
+      in case bzr or git is not available to get files list.
+      Tox sdist needs setup.py which needs dist/makedist.
+    * Updatated LINGUAS file to add four new translations.
+
 2019-08-31  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in translation updates
