@@ -6,6 +6,9 @@ New in v0.8.05 (2019/09/??)
 * Updatated LINGUAS file to add four new translations.
 * Set to allow pydevd usage during tox testing.
 * Adjust exclusion list for rsync into duplicity_test.
+* Fix exc.args handling.  Sometimes it's (message, int),
+  other times its (int, message).  We look for the
+  message and use that for the exception report.
 
 
 New in v0.8.04 (2019/08/31)

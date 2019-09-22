@@ -2,6 +2,9 @@
 
     * Set to allow pydevd usage during tox testing.
     * Adjust exclusion list for rsync into duplicity_test.
+    * Fix exc.args handling.  Sometimes it's (message, int),
+      other times its (int, message).  We look for the
+      message and use that for the exception report.
 
 2019-09-05  Kenneth Loafman  <kenneth@loafman.com>
 

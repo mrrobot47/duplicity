@@ -23,9 +23,14 @@ u"""
 Miscellaneous utilities.
 """
 
-from builtins import str
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import isinstance
 from builtins import map
 from builtins import object
+from builtins import str
+
 import errno
 import os
 import string
@@ -111,10 +116,11 @@ def uexc(e):
     # unicode.  So we decode manually, using the filesystem encoding.
     # 99.99% of the time, this will be a fine encoding to use.
     if e.args:
-        m = e.args[0]  # exception.message is deprecated, but this is equivalent
-        if isinstance(m, str):
-            # Already unicode
-            return m
+        # Find arg that is a string
+        for m in e.args:
+            if isinstance(m, str):
+                # Already unicode
+                return m
         else:
             # Encoded, likely in filesystem encoding
             return fsdecode(m)
