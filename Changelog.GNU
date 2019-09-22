@@ -1,6 +1,7 @@
 2019-09-22  Kenneth Loafman  <kenneth@loafman.com>
 
     * Set to allow pydevd usage during tox testing.
+    * Adjust exclusion list for rsync into duplicity_test.
 
 2019-09-05  Kenneth Loafman  <kenneth@loafman.com>
 

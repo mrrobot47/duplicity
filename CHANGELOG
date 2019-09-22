@@ -5,6 +5,7 @@ New in v0.8.05 (2019/09/??)
   Tox sdist needs setup.py which needs dist/makedist.
 * Updatated LINGUAS file to add four new translations.
 * Set to allow pydevd usage during tox testing.
+* Adjust exclusion list for rsync into duplicity_test.
 
 
 New in v0.8.04 (2019/08/31)

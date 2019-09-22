@@ -64,15 +64,13 @@ cp -p ../../../requirements.txt .
 cp -p ../id_rsa* .
 mkdir dupcopy
 rsync -a \
-    --exclude=*.pyc \
+    --exclude=*.py[co] \
     --exclude=*.so \
     --exclude=.DS_Store \
     --exclude=.tox \
     --exclude=S.* \
     --exclude=__pycache__ \
-    --exclude=docs \
     --exclude=htmlcov \
-    --exclude=infrastructure \
     ../../../ \
     dupcopy/
 docker build -f Dockerfile-$DISTRO --tag firstprime/duplicity_test .
