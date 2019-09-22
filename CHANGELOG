@@ -4,6 +4,7 @@ New in v0.8.05 (2019/09/??)
   in case bzr or git is not available to get files list.
   Tox sdist needs setup.py which needs dist/makedist.
 * Updatated LINGUAS file to add four new translations.
+* Set to allow pydevd usage during tox testing.
 
 
 New in v0.8.04 (2019/08/31)

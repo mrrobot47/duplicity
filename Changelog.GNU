@@ -1,3 +1,7 @@
+2019-09-22  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Set to allow pydevd usage during tox testing.
+
 2019-09-05  Kenneth Loafman  <kenneth@loafman.com>
 
     * Changed dist/makedist to fall back to dist/relfiles.txt

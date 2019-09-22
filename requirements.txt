@@ -12,6 +12,7 @@ urllib3
 coverage
 pexpect
 pycodestyle
+pydevd
 pylint
 pytest
 pytest-cov
