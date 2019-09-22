@@ -28,13 +28,13 @@
 # any suggestions.
 
 from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 from builtins import filter
 from builtins import map
 from builtins import next
 from builtins import object
 from builtins import range
-from future import standard_library
-standard_library.install_aliases()
 
 import copy
 import fasteners
@@ -47,7 +47,6 @@ import sys
 import time
 import traceback
 import types
-
 
 from datetime import datetime
 from os import statvfs

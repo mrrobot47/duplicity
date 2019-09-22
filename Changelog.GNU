@@ -5,6 +5,8 @@
     * Fix exc.args handling.  Sometimes it's (message, int),
       other times its (int, message).  We look for the
       message and use that for the exception report.
+    * Added more python future includes to support using
+      python3 code mixed with python2.
 
 2019-09-05  Kenneth Loafman  <kenneth@loafman.com>
 

@@ -20,8 +20,10 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 u"""Parse command line, check for consistency, and set globals"""
-from __future__ import print_function
 
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 from builtins import filter
 from builtins import str
 from builtins import range
