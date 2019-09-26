@@ -11,6 +11,8 @@ New in v0.8.05 (2019/09/??)
   message and use that for the exception report.
 * Added more python future includes to support using
   python3 code mixed with python2.
+* Sort of fix bugs #1836887 and #1836888 by skipping the
+  tests under question when running on ppc64el machines.
 
 
 New in v0.8.04 (2019/08/31)

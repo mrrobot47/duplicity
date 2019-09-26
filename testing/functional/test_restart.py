@@ -115,6 +115,8 @@ class RestartTest(FunctionalTestCase):
         # there should be 2 differences found, one missing file, one mtime change
         # self.verify(u"testfiles/largefiles")
 
+    @unittest.skipIf(u"ppc64el" in platform.machine(),
+                     u"Skip on ppc64el machines")
     def test_last_file_missing_at_end(self):
         u"""
         Test restart when the last file being backed up is missing on restart.

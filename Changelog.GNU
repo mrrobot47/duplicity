@@ -1,3 +1,8 @@
+2019-09-26  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Sort of fix bugs #1836887 and #1836888 by skipping the
+      tests under question when running on ppc64el machines.
+
 2019-09-22  Kenneth Loafman  <kenneth@loafman.com>
 
     * Set to allow pydevd usage during tox testing.

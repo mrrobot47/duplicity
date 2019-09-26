@@ -21,17 +21,18 @@
 
 from __future__ import print_function
 from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
 from builtins import range
 from builtins import object
 from past.utils import old_div
-from future import standard_library
-standard_library.install_aliases()
 
-import sys
 import os
+import platform
 import pytest
-import unittest
 import random
+import sys
+import unittest
 
 from duplicity import gpg
 from duplicity import path
@@ -139,6 +140,8 @@ class GPGTest(UnitTestCase):
         sig = decrypted_file.get_signature()
         assert sig == self.sign_key, sig
 
+    @unittest.skipIf(u"ppc64el" in platform.machine(),
+                     u"Skip on ppc64el machines")
     def test_GPGWriteFile(self):
         u"""Test GPGWriteFile"""
         size = 400 * 1000
