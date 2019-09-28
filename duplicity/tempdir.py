@@ -32,12 +32,14 @@ standard_library.install_aliases()
 from builtins import object
 
 import os
-import threading
+import platform
+import subprocess
 import tempfile
+import threading
 
+from duplicity import globals
 from duplicity import log
 from duplicity import util
-from duplicity import globals
 
 # Set up state related to managing the default temporary directory
 # instance
@@ -126,6 +128,19 @@ class TemporaryDirectory(object):
         tempbase - The temp root directory, or None to use system
         default (recommended).
         """
+        def defaults_to_tmp(path):
+            u'''Determine if path point to a MAcOS system tmp'''
+            sys_temps = [
+                os.path.realpath(u"/tmp"),
+                os.path.realpath(u"/var/tmp"),
+                ]
+
+            user_temp = os.path.realpath(path)
+            for sys_temp in sys_temps:
+                if user_temp.startswith(sys_temp):
+                    return True
+            return False
+
         if temproot is None:
             if globals.temproot:
                 temproot = globals.temproot
@@ -134,6 +149,12 @@ class TemporaryDirectory(object):
                 temproot = _initialSystemTempRoot
         if isinstance(temproot, b"".__class__):
             temproot = util.fsdecode(temproot)
+
+        if (platform.system().startswith(u'Darwin') and defaults_to_tmp(temproot)):
+            # Use temp space from getconf, never /tmp
+            temproot = subprocess.check_output([u'getconf', u'DARWIN_USER_TEMP_DIR'])
+            temproot = util.fsdecode(temproot).rstrip()
+
         self.__dir = tempfile.mkdtemp(u"-tempdir", u"duplicity-", temproot)
 
         log.Info(_(u"Using temporary directory %s") % self.__dir)

@@ -13,6 +13,8 @@ New in v0.8.05 (2019/09/??)
   python3 code mixed with python2.
 * Sort of fix bugs #1836887 and #1836888 by skipping the
   tests under question when running on ppc64el machines.
+* Fix MacOS tempfile selection to avoid /tmp and /var/tmp.  See thread:
+  https://lists.nongnu.org/archive/html/duplicity-talk/2019-09/msg00000.html
 
 
 New in v0.8.04 (2019/08/31)

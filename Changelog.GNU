@@ -1,3 +1,8 @@
+2019-09-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix MacOS tempfile selection to avoid /tmp and /var/tmp.  See thread:
+      https://lists.nongnu.org/archive/html/duplicity-talk/2019-09/msg00000.html
+
 2019-09-26  Kenneth Loafman  <kenneth@loafman.com>
 
     * Sort of fix bugs #1836887 and #1836888 by skipping the
