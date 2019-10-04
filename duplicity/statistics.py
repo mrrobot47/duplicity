@@ -154,10 +154,10 @@ class StatsObj(object):
         u"""Return portion of statistics string dealing with time"""
         timelist = []
         if self.StartTime is not None:
-            timelist.append(u"StartTime %.2f (%s)\n" %
+            timelist.append(u"StartTime %.2f (%s)\n" %  # pylint: disable=bad-string-format-type
                             (self.StartTime, dup_time.timetopretty(self.StartTime)))
         if self.EndTime is not None:
-            timelist.append(u"EndTime %.2f (%s)\n" %
+            timelist.append(u"EndTime %.2f (%s)\n" %  # pylint: disable=bad-string-format-type
                             (self.EndTime, dup_time.timetopretty(self.EndTime)))
         if self.ElapsedTime or (self.StartTime is not None and
                                 self.EndTime is not None):

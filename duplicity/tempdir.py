@@ -133,7 +133,7 @@ class TemporaryDirectory(object):
             sys_temps = [
                 os.path.realpath(u"/tmp"),
                 os.path.realpath(u"/var/tmp"),
-                ]
+            ]
 
             user_temp = os.path.realpath(path)
             for sys_temp in sys_temps:

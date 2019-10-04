@@ -1,6 +1,7 @@
 2019-10-04  Kenneth Loafman  <kenneth@loafman.com>
 
     * Add testenv:coverage and took it out of defaults.  Some cleanup.
+    * Clean up some pylint warnings.
 
 2019-09-28  Kenneth Loafman  <kenneth@loafman.com>
 
