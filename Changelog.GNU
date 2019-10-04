@@ -1,3 +1,7 @@
+2019-10-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Add testenv:coverage and took it out of defaults.  Some cleanup.
+
 2019-09-28  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix MacOS tempfile selection to avoid /tmp and /var/tmp.  See thread:

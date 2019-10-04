@@ -15,6 +15,7 @@ New in v0.8.05 (2019/09/??)
   tests under question when running on ppc64el machines.
 * Fix MacOS tempfile selection to avoid /tmp and /var/tmp.  See thread:
   https://lists.nongnu.org/archive/html/duplicity-talk/2019-09/msg00000.html
+* Add testenv:coverage and took it out of defaults.  Some cleanup.
 
 
 New in v0.8.04 (2019/08/31)
