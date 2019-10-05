@@ -34,6 +34,7 @@ import duplicity.backend
 from duplicity.errors import BackendException, FatalBackendException
 from duplicity import log
 from duplicity import progress
+from duplicity import util
 
 
 class B2ProgressListener(object):
@@ -110,16 +111,16 @@ class B2Backend(duplicity.backend.Backend):
         u"""
         Download remote_filename to local_path
         """
-        log.Log(u"Get: %s -> %s" % (self.path + remote_filename, local_path.name), log.INFO)
-        self.bucket.download_file_by_name(quote_plus(self.path + remote_filename),
+        log.Log(u"Get: %s -> %s" % (self.path + util.fsdecode(remote_filename), local_path.name), log.INFO)
+        self.bucket.download_file_by_name(quote_plus(self.path + util.fsdecode(remote_filename)),
                                           b2.download_dest.DownloadDestLocalFile(local_path.name))
 
     def _put(self, source_path, remote_filename):
         u"""
         Copy source_path to remote_filename
         """
-        log.Log(u"Put: %s -> %s" % (source_path.name, self.path + remote_filename), log.INFO)
-        self.bucket.upload_local_file(source_path.name, quote_plus(self.path + remote_filename),
+        log.Log(u"Put: %s -> %s" % (source_path.name, self.path + util.fsdecode(remote_filename)), log.INFO)
+        self.bucket.upload_local_file(source_path.name, quote_plus(self.path + util.fsdecode(remote_filename)),
                                       content_type=u'application/pgp-encrypted',
                                       progress_listener=B2ProgressListener())
 

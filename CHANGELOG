@@ -17,6 +17,8 @@ New in v0.8.05 (2019/09/??)
   https://lists.nongnu.org/archive/html/duplicity-talk/2019-09/msg00000.html
 * Add testenv:coverage and took it out of defaults.  Some cleanup.
 * Clean up some pylint warnings.
+* Fix bug #1843995 - B2 fails on string concatenation.
+  - use util.fsdecode() to get a string not bytes.
 
 
 New in v0.8.04 (2019/08/31)

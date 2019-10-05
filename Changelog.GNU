@@ -1,3 +1,8 @@
+2019-10-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1843995 - B2 fails on string concatenation.
+      - use util.fsdecode() to get a string not bytes.
+
 2019-10-04  Kenneth Loafman  <kenneth@loafman.com>
 
     * Add testenv:coverage and took it out of defaults.  Some cleanup.
