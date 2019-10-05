@@ -6,6 +6,8 @@
       - used patch provided by KDM to fix.
     * Fixed bug reported on maillist - Python error in Webdav backend.  See:
       https://lists.nongnu.org/archive/html/duplicity-talk/2019-09/msg00026.html
+    * Fixed bug #1846167 - webdavbackend.py: expected bytes-like object, not str
+      - base64 now returns bytes where it used to be strings, so just decode().
 
 2019-10-04  Kenneth Loafman  <kenneth@loafman.com>
 
