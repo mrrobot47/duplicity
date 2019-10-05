@@ -48,8 +48,8 @@ class SSHPExpectBackend(duplicity.backend.Backend):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
         try:
-            import pexpect
             global pexpect
+            import pexpect
 
         except ImportError:
             raise

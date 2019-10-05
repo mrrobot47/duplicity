@@ -327,9 +327,9 @@ class MultiBackend(duplicity.backend.Backend):
         for s in stores:
             list = s.list()
             if filename in list:
-                if hasattr(s, '_delete_list'):
+                if hasattr(s, u'_delete_list'):
                     s._do_delete_list([filename, ])
-                elif hasattr(s, '_delete'):
+                elif hasattr(s, u'_delete'):
                     s._do_delete(filename)
                 passed = True
                 # In stripe mode, only one item will have the file
