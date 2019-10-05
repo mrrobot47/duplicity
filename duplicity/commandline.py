@@ -260,7 +260,8 @@ def parse_cmdline_options(arglist):
         old_fn_deprecation(opt)
 
     def add_selection(o, option, additional_arg, p):
-        select_opts.append((util.fsdecode(option), util.fsdecode(additional_arg)))
+        addarg = None if additional_arg is None else util.fsdecode(additional_arg)
+        select_opts.append((util.fsdecode(option), addarg))
 
     def add_filelist(o, s, filename, p):
         select_opts.append((util.fsdecode(s), util.fsdecode(filename)))

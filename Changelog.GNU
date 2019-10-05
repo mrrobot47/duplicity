@@ -10,6 +10,8 @@
       - base64 now returns bytes where it used to be strings, so just decode().
     * Fixed bug #1844950 - ssh-pexpect backend syntax error
       - put the global before the import.
+    * Fixed bug #1846678 - --exclude-device-files and -other-filesystems crashes
+      - assuming all options had arguments was fixed.
 
 2019-10-04  Kenneth Loafman  <kenneth@loafman.com>
 
