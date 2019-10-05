@@ -19,6 +19,8 @@ New in v0.8.05 (2019/09/??)
 * Clean up some pylint warnings.
 * Fix bug #1843995 - B2 fails on string concatenation.
   - use util.fsdecode() to get a string not bytes.
+* Fix bug #1844750 - RsyncBackend fails if used with multi-backend.
+  - used patch provided by KDM to fix.
 
 
 New in v0.8.04 (2019/08/31)

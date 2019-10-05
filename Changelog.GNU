@@ -2,6 +2,8 @@
 
     * Fix bug #1843995 - B2 fails on string concatenation.
       - use util.fsdecode() to get a string not bytes.
+    * Fix bug #1844750 - RsyncBackend fails if used with multi-backend.
+      - used patch provided by KDM to fix.
 
 2019-10-04  Kenneth Loafman  <kenneth@loafman.com>
 

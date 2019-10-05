@@ -50,6 +50,7 @@ class MultiBackend(duplicity.backend.Backend):
     __knownQueryParameters = frozenset([
         u'mode',
         u'onfail',
+        u'subpath',
     ])
 
     # the mode of operation to follow
@@ -69,6 +70,10 @@ class MultiBackend(duplicity.backend.Backend):
         u'abort',
         u'continue',
     ])
+
+    # sub path to dynamically add sub directories to backends
+    # will be appended to the url value
+    __subpath = u''
 
     # when we write in stripe mode, we "stripe" via a simple round-robin across
     # remote stores.  It's hard to get too much more sophisticated
@@ -159,6 +164,9 @@ class MultiBackend(duplicity.backend.Backend):
                     % (u'onfail', self.__onfail_mode), log.ERROR)
             raise BackendException(u"MultiBackend: invalid onfail value")
 
+        if u'subpath' in queryParams:
+            self.__subpath = queryParams[u'subpath']
+
         try:
             with open(parsed_url.path) as f:
                 configs = json.load(f)
@@ -173,7 +181,7 @@ class MultiBackend(duplicity.backend.Backend):
             raise BackendException(u'Could not load config file')
 
         for config in configs:
-            url = config[u'url']
+            url = config[u'url'] + self.__subpath
             # Fix advised in bug #1471795
             url = url.encode(u'utf-8')
             log.Log(_(u"MultiBackend: use store %s")
@@ -319,7 +327,10 @@ class MultiBackend(duplicity.backend.Backend):
         for s in stores:
             list = s.list()
             if filename in list:
-                s._do_delete(filename)
+                if hasattr(s, '_delete_list'):
+                    s._do_delete_list([filename, ])
+                elif hasattr(s, '_delete'):
+                    s._do_delete(filename)
                 passed = True
                 # In stripe mode, only one item will have the file
                 if self.__mode == u'stripe':
