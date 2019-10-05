@@ -4,6 +4,8 @@
       - use util.fsdecode() to get a string not bytes.
     * Fix bug #1844750 - RsyncBackend fails if used with multi-backend.
       - used patch provided by KDM to fix.
+    * Fixed bug reported on maillist - Python error in Webdav backend.  See:
+      https://lists.nongnu.org/archive/html/duplicity-talk/2019-09/msg00026.html
 
 2019-10-04  Kenneth Loafman  <kenneth@loafman.com>
 
