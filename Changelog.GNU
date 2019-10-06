@@ -1,3 +1,8 @@
+2019-10-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.05
+
 2019-10-05  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix bug #1843995 - B2 fails on string concatenation.

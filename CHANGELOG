@@ -1,4 +1,4 @@
-New in v0.8.05 (2019/09/??)
+New in v0.8.05 (2019/10/06)
 ---------------------------
 * Changed dist/makedist to fall back to dist/relfiles.txt
   in case bzr or git is not available to get files list.
@@ -29,6 +29,7 @@ New in v0.8.05 (2019/09/??)
   - put the global before the import.
 * Fixed bug #1846678 - --exclude-device-files and -other-filesystems crashes
   - assuming all options had arguments was fixed.
+* Merged in translation updates
 
 
 New in v0.8.04 (2019/08/31)
