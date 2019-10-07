@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-10-05 13:39-0500\n"
+"POT-Creation-Date: 2019-10-06 10:49-0500\n"
 "PO-Revision-Date: 2019-08-12 16:30+0000\n"
 "Last-Translator: Pavel Borecki <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2019-10-06 06:32+0000\n"
+"X-Launchpad-Export-Date: 2019-10-07 06:38+0000\n"
 "X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
 "Language: cs\n"
 
@@ -38,7 +38,7 @@ msgstr "Podrobnosti uživateské chyby: %s"
 msgid "Backend error detail: %s"
 msgstr "Podrobnosti chyby na podpůrné vrstvě (backend): %s"
 
-#: ../bin/rdiffdir:63 ../duplicity/commandline.py:270
+#: ../bin/rdiffdir:63 ../duplicity/commandline.py:271
 #, python-format
 msgid "Error opening file %s"
 msgstr "Chyba při otevírání souboru %s"
@@ -432,10 +432,10 @@ msgstr ""
 
 #. Used in usage help to represent a Unix-style path name. Example:
 #. --archive-dir <path>
-#: ../duplicity/commandline.py:291 ../duplicity/commandline.py:301
-#: ../duplicity/commandline.py:322 ../duplicity/commandline.py:396
-#: ../duplicity/commandline.py:414 ../duplicity/commandline.py:643
-#: ../duplicity/commandline.py:676 ../duplicity/commandline.py:887
+#: ../duplicity/commandline.py:292 ../duplicity/commandline.py:302
+#: ../duplicity/commandline.py:323 ../duplicity/commandline.py:397
+#: ../duplicity/commandline.py:415 ../duplicity/commandline.py:644
+#: ../duplicity/commandline.py:677 ../duplicity/commandline.py:888
 msgid "path"
 msgstr "popis umístění"
 
@@ -445,9 +445,9 @@ msgstr "popis umístění"
 #. --hidden-encrypt-key <gpg_key_id>
 #. Used in usage help to represent an ID for a GnuPG key. Example:
 #. --encrypt-key <gpg_key_id>
-#: ../duplicity/commandline.py:317 ../duplicity/commandline.py:324
-#: ../duplicity/commandline.py:420 ../duplicity/commandline.py:627
-#: ../duplicity/commandline.py:860
+#: ../duplicity/commandline.py:318 ../duplicity/commandline.py:325
+#: ../duplicity/commandline.py:421 ../duplicity/commandline.py:628
+#: ../duplicity/commandline.py:861
 msgid "gpg-key-id"
 msgstr "identifikator_gpg_klice"
 
@@ -455,43 +455,43 @@ msgstr "identifikator_gpg_klice"
 #. matching one or more files, as described in the documentation.
 #. Example:
 #. --exclude <shell_pattern>
-#: ../duplicity/commandline.py:332 ../duplicity/commandline.py:445
-#: ../duplicity/commandline.py:910
+#: ../duplicity/commandline.py:333 ../duplicity/commandline.py:446
+#: ../duplicity/commandline.py:911
 msgid "shell_pattern"
 msgstr "shellovy_vzor"
 
 #. Used in usage help to represent the name of a file. Example:
 #. --log-file <filename>
-#: ../duplicity/commandline.py:338 ../duplicity/commandline.py:347
-#: ../duplicity/commandline.py:354 ../duplicity/commandline.py:447
-#: ../duplicity/commandline.py:454 ../duplicity/commandline.py:467
-#: ../duplicity/commandline.py:856
+#: ../duplicity/commandline.py:339 ../duplicity/commandline.py:348
+#: ../duplicity/commandline.py:355 ../duplicity/commandline.py:448
+#: ../duplicity/commandline.py:455 ../duplicity/commandline.py:468
+#: ../duplicity/commandline.py:857
 msgid "filename"
 msgstr "soubor"
 
 #. Used in usage help to represent a regular expression (regexp).
-#: ../duplicity/commandline.py:361 ../duplicity/commandline.py:458
+#: ../duplicity/commandline.py:362 ../duplicity/commandline.py:459
 msgid "regular_expression"
 msgstr "r_egulární výraz"
 
 #. Used in usage help to represent a time spec for a previous
 #. point in time, as described in the documentation. Example:
 #. duplicity remove-older-than time [options] target_url
-#: ../duplicity/commandline.py:365 ../duplicity/commandline.py:408
-#: ../duplicity/commandline.py:534 ../duplicity/commandline.py:942
+#: ../duplicity/commandline.py:366 ../duplicity/commandline.py:409
+#: ../duplicity/commandline.py:535 ../duplicity/commandline.py:943
 msgid "time"
 msgstr "čas"
 
 #. Used in usage help. (Should be consistent with the "Options:"
 #. header.) Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:416 ../duplicity/commandline.py:514
-#: ../duplicity/commandline.py:537 ../duplicity/commandline.py:635
-#: ../duplicity/commandline.py:875
+#: ../duplicity/commandline.py:417 ../duplicity/commandline.py:515
+#: ../duplicity/commandline.py:538 ../duplicity/commandline.py:636
+#: ../duplicity/commandline.py:876
 msgid "options"
 msgstr "volby"
 
-#: ../duplicity/commandline.py:431
+#: ../duplicity/commandline.py:432
 #, python-format
 msgid ""
 "Running in 'ignore errors' mode due to %s; please re-consider if this was "
@@ -501,54 +501,54 @@ msgstr ""
 "zamýšleno"
 
 #. Used in usage help to represent an imap mailbox
-#: ../duplicity/commandline.py:443
+#: ../duplicity/commandline.py:444
 msgid "imap_mailbox"
 msgstr "imap_schranka"
 
-#: ../duplicity/commandline.py:461
+#: ../duplicity/commandline.py:462
 msgid "file_descriptor"
 msgstr "popisovač souboru"
 
 #. Used in usage help to represent a desired number of
 #. something. Example:
 #. --num-retries <number>
-#: ../duplicity/commandline.py:472 ../duplicity/commandline.py:494
-#: ../duplicity/commandline.py:511 ../duplicity/commandline.py:520
-#: ../duplicity/commandline.py:567 ../duplicity/commandline.py:572
-#: ../duplicity/commandline.py:576 ../duplicity/commandline.py:595
-#: ../duplicity/commandline.py:601 ../duplicity/commandline.py:605
-#: ../duplicity/commandline.py:671 ../duplicity/commandline.py:870
+#: ../duplicity/commandline.py:473 ../duplicity/commandline.py:495
+#: ../duplicity/commandline.py:512 ../duplicity/commandline.py:521
+#: ../duplicity/commandline.py:568 ../duplicity/commandline.py:573
+#: ../duplicity/commandline.py:577 ../duplicity/commandline.py:596
+#: ../duplicity/commandline.py:602 ../duplicity/commandline.py:606
+#: ../duplicity/commandline.py:672 ../duplicity/commandline.py:871
 msgid "number"
 msgstr "číslo"
 
 #. Used in usage help (noun)
-#: ../duplicity/commandline.py:475
+#: ../duplicity/commandline.py:476
 msgid "backup name"
 msgstr "název zálohy"
 
-#: ../duplicity/commandline.py:590
+#: ../duplicity/commandline.py:591
 msgid "policy"
 msgstr "zásada"
 
-#: ../duplicity/commandline.py:608
+#: ../duplicity/commandline.py:609
 msgid "Hot|Cool|Archive"
 msgstr ""
 
 #. noun
-#: ../duplicity/commandline.py:611 ../duplicity/commandline.py:614
-#: ../duplicity/commandline.py:841
+#: ../duplicity/commandline.py:612 ../duplicity/commandline.py:615
+#: ../duplicity/commandline.py:842
 msgid "command"
 msgstr "příkaz"
 
-#: ../duplicity/commandline.py:617
+#: ../duplicity/commandline.py:618
 msgid "pyrax|cloudfiles"
 msgstr "pyrax|cloudfiles"
 
-#: ../duplicity/commandline.py:638
+#: ../duplicity/commandline.py:639
 msgid "pem formatted bundle of certificate authorities"
 msgstr "balíček certifikátů cert. autorit ve formátu pem"
 
-#: ../duplicity/commandline.py:639
+#: ../duplicity/commandline.py:640
 msgid "path to a folder with certificate authority files"
 msgstr "popis umístění složky se soubory certifikačních autorit"
 
@@ -558,113 +558,113 @@ msgstr "popis umístění složky se soubory certifikačních autorit"
 #. --backend-retry-delay <seconds>
 #. Used in usage help. Example:
 #. --timeout <seconds>
-#: ../duplicity/commandline.py:648 ../duplicity/commandline.py:682
-#: ../duplicity/commandline.py:904
+#: ../duplicity/commandline.py:649 ../duplicity/commandline.py:683
+#: ../duplicity/commandline.py:905
 msgid "seconds"
 msgstr "sekund"
 
 #. abbreviation for "character" (noun)
-#: ../duplicity/commandline.py:654 ../duplicity/commandline.py:838
+#: ../duplicity/commandline.py:655 ../duplicity/commandline.py:839
 msgid "char"
 msgstr "znak"
 
-#: ../duplicity/commandline.py:804
+#: ../duplicity/commandline.py:805
 #, python-format
 msgid "Using archive dir: %s"
 msgstr "S použitím archivní složky: %s"
 
-#: ../duplicity/commandline.py:805
+#: ../duplicity/commandline.py:806
 #, python-format
 msgid "Using backup name: %s"
 msgstr "S použitím názvu zálohy: %s"
 
-#: ../duplicity/commandline.py:812
+#: ../duplicity/commandline.py:813
 #, python-format
 msgid "Command line error: %s"
 msgstr "Chyba na příkazovém řádku: %s"
 
-#: ../duplicity/commandline.py:813
+#: ../duplicity/commandline.py:814
 msgid "Enter 'duplicity --help' for help screen."
 msgstr "Pro nápovědu zadejte „duplicty --help“."
 
 #. Used in usage help to represent a Unix-style path name. Example:
 #. rsync://user[:password]@other_host[:port]//absolute_path
-#: ../duplicity/commandline.py:826
+#: ../duplicity/commandline.py:827
 msgid "absolute_path"
 msgstr "absolutni_popis_umisteni"
 
 #. Used in usage help. Example:
 #. tahoe://alias/some_dir
-#: ../duplicity/commandline.py:830
+#: ../duplicity/commandline.py:831
 msgid "alias"
 msgstr "alternativni_nazev"
 
 #. Used in help to represent a "bucket name" for Amazon Web
 #. Services' Simple Storage Service (S3). Example:
 #. s3://other.host/bucket_name[/prefix]
-#: ../duplicity/commandline.py:835
+#: ../duplicity/commandline.py:836
 msgid "bucket_name"
 msgstr "nazev_kontejneru"
 
 #. Used in usage help to represent the name of a container in
 #. Amazon Web Services' Cloudfront. Example:
 #. cf+http://container_name
-#: ../duplicity/commandline.py:846
+#: ../duplicity/commandline.py:847
 msgid "container_name"
 msgstr "název_kontejneru"
 
 #. noun
-#: ../duplicity/commandline.py:849
+#: ../duplicity/commandline.py:850
 msgid "count"
 msgstr "počet"
 
 #. Used in usage help to represent the name of a file directory
-#: ../duplicity/commandline.py:852
+#: ../duplicity/commandline.py:853
 msgid "directory"
 msgstr "složka"
 
 #. Used in usage help, e.g. to represent the name of a code
 #. module. Example:
 #. rsync://user[:password]@other.host[:port]::/module/some_dir
-#: ../duplicity/commandline.py:865
+#: ../duplicity/commandline.py:866
 msgid "module"
 msgstr "modul"
 
 #. Used in usage help to represent an internet hostname. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:879
+#: ../duplicity/commandline.py:880
 msgid "other.host"
 msgstr "druhy.stroj"
 
 #. Used in usage help. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:883
+#: ../duplicity/commandline.py:884
 msgid "password"
 msgstr "heslo"
 
 #. Used in usage help to represent a TCP port number. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:891
+#: ../duplicity/commandline.py:892
 msgid "port"
 msgstr "port"
 
 #. Used in usage help. This represents a string to be used as a
 #. prefix to names for backup files created by Duplicity. Example:
 #. s3://other.host/bucket_name[/prefix]
-#: ../duplicity/commandline.py:896
+#: ../duplicity/commandline.py:897
 msgid "prefix"
 msgstr "předpona"
 
 #. Used in usage help to represent a Unix-style path name. Example:
 #. rsync://user[:password]@other.host[:port]/relative_path
-#: ../duplicity/commandline.py:900
+#: ../duplicity/commandline.py:901
 msgid "relative_path"
 msgstr "relativni_popis_umisteni"
 
 #. Used in usage help to represent the name of a single file
 #. directory or a Unix-style path to a directory. Example:
 #. file:///some_dir
-#: ../duplicity/commandline.py:915
+#: ../duplicity/commandline.py:916
 msgid "some_dir"
 msgstr "nejaka_slozka"
 
@@ -672,14 +672,14 @@ msgstr "nejaka_slozka"
 #. directory or a Unix-style path to a directory where files will be
 #. coming FROM. Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:921
+#: ../duplicity/commandline.py:922
 msgid "source_dir"
 msgstr "zdrojová_složka"
 
 #. Used in usage help to represent a URL files will be coming
 #. FROM. Example:
 #. duplicity [restore] [options] source_url target_dir
-#: ../duplicity/commandline.py:926
+#: ../duplicity/commandline.py:927
 msgid "source_url"
 msgstr "zdrojova_url"
 
@@ -687,52 +687,52 @@ msgstr "zdrojova_url"
 #. directory or a Unix-style path to a directory. where files will be
 #. going TO. Example:
 #. duplicity [restore] [options] source_url target_dir
-#: ../duplicity/commandline.py:932
+#: ../duplicity/commandline.py:933
 msgid "target_dir"
 msgstr "cílová_složka"
 
 #. Used in usage help to represent a URL files will be going TO.
 #. Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:937
+#: ../duplicity/commandline.py:938
 msgid "target_url"
 msgstr "cilova_url"
 
 #. Used in usage help to represent a user name (i.e. login).
 #. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:947
+#: ../duplicity/commandline.py:948
 msgid "user"
 msgstr "uživatel"
 
 #. account id for b2. Example: b2://account_id@bucket/
-#: ../duplicity/commandline.py:950
+#: ../duplicity/commandline.py:951
 msgid "account_id"
 msgstr "identifikator_uctu"
 
 #. application_key for b2.
 #. Example: b2://account_id:application_key@bucket/
-#: ../duplicity/commandline.py:954
+#: ../duplicity/commandline.py:955
 msgid "application_key"
 msgstr "aplikacni_klic"
 
 #. Header in usage help
-#: ../duplicity/commandline.py:973
+#: ../duplicity/commandline.py:974
 msgid "Backends and their URL formats:"
 msgstr "Podpůrné vrstvy (backend) a formáty jejich URL adres:"
 
 #. Header in usage help
-#: ../duplicity/commandline.py:1005
+#: ../duplicity/commandline.py:1006
 msgid "Commands:"
 msgstr "Příkazy:"
 
-#: ../duplicity/commandline.py:1030
+#: ../duplicity/commandline.py:1031
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr "Zadaná složka archivu „%s“ neexistuje, nebo se nejedná o složku"
 
-#: ../duplicity/commandline.py:1039
+#: ../duplicity/commandline.py:1040
 #, python-format
 msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
@@ -742,7 +742,7 @@ msgstr ""
 "např. „AA0E73D2“.\n"
 "Namísto toho obdrženo „%s“."
 
-#: ../duplicity/commandline.py:1099
+#: ../duplicity/commandline.py:1100
 #, python-format
 msgid ""
 "Restore destination directory %s already exists.\n"
@@ -751,22 +751,22 @@ msgstr ""
 "Složka %s do které se má obnovit už existuje.\n"
 "Nebude přepsána."
 
-#: ../duplicity/commandline.py:1104
+#: ../duplicity/commandline.py:1105
 #, python-format
 msgid "Verify directory %s does not exist"
 msgstr "Ověřovací složka %s neexistuje"
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1111
 #, python-format
 msgid "Backup source directory %s does not exist."
 msgstr "Zdrojová složka zálohy %s neexistuje."
 
-#: ../duplicity/commandline.py:1141
+#: ../duplicity/commandline.py:1142
 #, python-format
 msgid "Command line warning: %s"
 msgstr "Varování příkazového řádku: %s"
 
-#: ../duplicity/commandline.py:1141
+#: ../duplicity/commandline.py:1142
 msgid ""
 "Selection options --exclude/--include\n"
 "currently work only when backing up,not restoring."
@@ -774,12 +774,12 @@ msgstr ""
 "Volby výběru --exclude/--include\n"
 "v tuto chvíli fungují pouze pro zálohování, ne při obnovování."
 
-#: ../duplicity/commandline.py:1177
+#: ../duplicity/commandline.py:1178
 #, python-format
 msgid "GPG binary is %s, version %s"
 msgstr "Spustitelný soubor GPG je %s, verze %s"
 
-#: ../duplicity/commandline.py:1204
+#: ../duplicity/commandline.py:1205
 #, python-format
 msgid ""
 "Bad URL '%s'.\n"
@@ -790,7 +790,7 @@ msgstr ""
 "Příklady URL řetězců jsou „scp://uzivatel@stroj.net:1234/popis_umisteni“ a\n"
 "\"file:///usr/local“. Další informace viz manuálová stránka."
 
-#: ../duplicity/commandline.py:1234
+#: ../duplicity/commandline.py:1235
 msgid "Main action: "
 msgstr "Hlavní akce: "
 
@@ -1759,7 +1759,7 @@ msgid "Error initializing file %s"
 msgstr "Chyba při inicializaci souboru %s"
 
 #: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:463
+#: ../duplicity/selection.py:464
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Chyba při přístupu k nejspíš zamčenému souboru %s"
@@ -1775,7 +1775,7 @@ msgstr "Varování: základ %s neexistuje, pokračuje se"
 msgid "Selecting %s"
 msgstr "Vybírá se %s"
 
-#: ../duplicity/selection.py:295
+#: ../duplicity/selection.py:296
 #, python-format
 msgid ""
 "Fatal Error: The file specification\n"
@@ -1792,7 +1792,7 @@ msgstr ""
 "Použitelné specifikace souboru začínají základní složkou nebo  nějakým\n"
 "vzorem (jako např. „**“) což se shoduje se základní složkou."
 
-#: ../duplicity/selection.py:304
+#: ../duplicity/selection.py:305
 #, python-format
 msgid ""
 "Fatal Error while processing expression\n"
@@ -1801,7 +1801,7 @@ msgstr ""
 "Fatální chyba při zpracovávání výrazu\n"
 "%s"
 
-#: ../duplicity/selection.py:313
+#: ../duplicity/selection.py:314
 #, python-format
 msgid ""
 "Last selection expression:\n"
@@ -1816,17 +1816,17 @@ msgstr ""
 "zahrnout všechny soubory, výraz je nadbytečný. Ukončuje se,\n"
 "protože to nejspíš není to, co chcete."
 
-#: ../duplicity/selection.py:369
+#: ../duplicity/selection.py:370
 #, python-format
 msgid "Reading globbing filelist %s"
 msgstr "Čtení seznamu souborů %s, určeného zástupnými znaky"
 
-#: ../duplicity/selection.py:402
+#: ../duplicity/selection.py:403
 #, python-format
 msgid "Error compiling regular expression %s"
 msgstr "Chyba při kompilaci regulárního výrazu %s"
 
-#: ../duplicity/selection.py:419
+#: ../duplicity/selection.py:420
 msgid ""
 "Warning: exclude-device-files is not the first selector.\n"
 "This may not be what you intended"
