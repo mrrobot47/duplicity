@@ -1,3 +1,9 @@
+New in v0.8.06 (2019/10/??)
+---------------------------
+* Removed a setting in tox.ini that causes coverage to
+  be activated during testing duplicity.
+
+
 New in v0.8.05 (2019/10/06)
 ---------------------------
 * Changed dist/makedist to fall back to dist/relfiles.txt

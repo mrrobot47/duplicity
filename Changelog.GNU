@@ -1,3 +1,8 @@
+2019-10-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Removed a setting in tox.ini that causes coverage to
+      be activated during testing duplicity.
+
 2019-10-06  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in translation updates
