@@ -88,6 +88,7 @@ class SSHParamikoBackend(duplicity.backend.Backend):
         # depreciation warning note also: passphrased private keys work with
         # squeeze's paramiko only if done with DES, not AES
         with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
             try:
                 import paramiko
             except ImportError:
