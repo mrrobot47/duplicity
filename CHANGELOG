@@ -2,6 +2,10 @@ New in v0.8.06 (2019/10/??)
 ---------------------------
 * Removed a setting in tox.ini that causes coverage to
   be activated during testing duplicity.
+* Fixed Resouce warnings when using paramiko.  It turns out
+  that duplicity's ssh_paramiko_backend.py was not handling
+  warning suppression and ended up clearing all warnings,
+  including those that default to off.
 
 
 New in v0.8.05 (2019/10/06)

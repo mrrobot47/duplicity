@@ -24,16 +24,19 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import division
-from builtins import oct
 from builtins import input
+from builtins import oct
 from builtins import zip
-import re
-import string
-import os
+
 import errno
-import sys
 import getpass
 import logging
+import os
+import re
+import string
+import sys
+import warnings
+
 from binascii import hexlify
 
 import duplicity.backend
@@ -84,13 +87,11 @@ class SSHParamikoBackend(duplicity.backend.Backend):
         # debian squeeze's paramiko is a bit old, so we silence randompool
         # depreciation warning note also: passphrased private keys work with
         # squeeze's paramiko only if done with DES, not AES
-        import warnings
-        warnings.simplefilter(u"ignore")
-        try:
-            import paramiko
-        except ImportError:
-            raise
-        warnings.resetwarnings()
+        with warnings.catch_warnings():
+            try:
+                import paramiko
+            except ImportError:
+                raise
 
         class AgreedAddPolicy (paramiko.AutoAddPolicy):
             u"""

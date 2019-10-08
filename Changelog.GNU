@@ -1,3 +1,10 @@
+2019-10-08  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed Resouce warnings when using paramiko.  It turns out
+      that duplicity's ssh_paramiko_backend.py was not handling
+      warning suppression and ended up clearing all warnings,
+      including those that default to off.
+
 2019-10-07  Kenneth Loafman  <kenneth@loafman.com>
 
     * Removed a setting in tox.ini that causes coverage to
