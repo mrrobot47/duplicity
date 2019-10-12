@@ -135,16 +135,16 @@ class B2Backend(duplicity.backend.Backend):
         u"""
         Delete filename from remote server
         """
-        log.Log(u"Delete: %s" % self.path + filename, log.INFO)
-        file_version_info = self.file_info(quote_plus(self.path + filename))
+        log.Log(u"Delete: %s" % self.path + util.fsdecode(filename), log.INFO)
+        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename)))
         self.bucket.delete_file_version(file_version_info.id_, file_version_info.file_name)
 
     def _query(self, filename):
         u"""
         Get size info of filename
         """
-        log.Log(u"Query: %s" % self.path + filename, log.INFO)
-        file_version_info = self.file_info(quote_plus(self.path + filename))
+        log.Log(u"Query: %s" % self.path + util.fsdecode(filename), log.INFO)
+        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename)))
         return {u'size': file_version_info.size
                 if file_version_info is not None and file_version_info.size is not None else -1}
 
