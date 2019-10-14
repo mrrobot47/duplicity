@@ -1,3 +1,11 @@
+2019-10-12  Adam Jacobs  <alj@boxyfrog.com>
+
+    * Updated b2 backend to work with both v0 and v1 of b2sdk
+    * Fixed bug #1847885 - B2 fails on string concatenation.
+      - use util.fsdecode() to get a string not bytes.
+      - Partially fixed in bug #1843995, this applies same fix to
+        remaining instances of the problem
+
 2019-10-08  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed Resouce warnings when using paramiko.  It turns out

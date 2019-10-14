@@ -6,6 +6,11 @@ New in v0.8.06 (2019/10/??)
   that duplicity's ssh_paramiko_backend.py was not handling
   warning suppression and ended up clearing all warnings,
   including those that default to off.
+* Updated b2 backend to work with both v0 and v1 of b2sdk
+* Fixed bug #1847885 - B2 fails on string concatenation.
+  - use util.fsdecode() to get a string not bytes.
+  - Partially fixed in bug #1843995, this applies same fix to
+    remaining instances of the problem
 
 
 New in v0.8.05 (2019/10/06)
