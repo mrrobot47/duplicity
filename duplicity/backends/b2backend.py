@@ -135,21 +135,21 @@ class B2Backend(duplicity.backend.Backend):
         u"""
         Delete filename from remote server
         """
-        log.Log(u"Delete: %s" % self.path + filename, log.INFO)
-        file_version_info = self.file_info(quote_plus(self.path + filename))
+        log.Log(u"Delete: %s" % self.path + util.fsdecode(filename), log.INFO)
+        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename)))
         self.bucket.delete_file_version(file_version_info.id_, file_version_info.file_name)
 
     def _query(self, filename):
         u"""
         Get size info of filename
         """
-        log.Log(u"Query: %s" % self.path + filename, log.INFO)
-        file_version_info = self.file_info(quote_plus(self.path + filename))
+        log.Log(u"Query: %s" % self.path + util.fsdecode(filename), log.INFO)
+        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename)))
         return {u'size': file_version_info.size
                 if file_version_info is not None and file_version_info.size is not None else -1}
 
     def file_info(self, filename):
-        response = self.bucket.list_file_names(filename, 1)
+        response = self.bucket.api.session.list_file_names(self.bucket.id_, filename, 1, None)
         for entry in response[u'files']:
             file_version_info = b2.file_version.FileVersionInfoFactory.from_api_response(entry)
             if file_version_info.file_name == filename:
