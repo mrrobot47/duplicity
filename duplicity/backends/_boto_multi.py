@@ -142,7 +142,7 @@ class BotoBackend(BotoSingleBackend):
         if globals.progress:
             manager = multiprocessing.Manager()
             queue = manager.Queue()
-            consumer = ConsumerThread(queue)
+            consumer = ConsumerThread(queue, bytes)
             consumer.start()
         tasks = []
         for n in range(chunks):
@@ -197,7 +197,7 @@ def multipart_upload_worker(scheme, parsed_url, storage_uri, bucket_name, multip
         worker_name = multiprocessing.current_process().name
         log.Debug(u"%s: Uploaded %s/%s bytes" % (worker_name, uploaded, total))
         if queue is not None:
-            queue.put([uploaded, total])  # Push data to the consumer thread
+            queue.put([offset, uploaded])  # Push data to the consumer thread
 
     def _upload(num_retries):
         worker_name = multiprocessing.current_process().name
@@ -214,7 +214,7 @@ def multipart_upload_worker(scheme, parsed_url, storage_uri, bucket_name, multip
                                                  num_cb=max(2, 8 * bytes / (1024 * 1024))
                                                  )  # Max num of callbacks = 8 times x megabyte
                         end = time.time()
-                        log.Debug((u"{name}: Uploaded chunk {chunk}"
+                        log.Debug((u"{name}: Uploaded chunk {chunk} "
                                    u"at roughly {speed} bytes/second").format(name=worker_name,
                                                                               chunk=offset + 1,
                                                                               speed=(bytes /
