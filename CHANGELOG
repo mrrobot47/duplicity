@@ -11,6 +11,8 @@ New in v0.8.06 (2019/10/??)
   - use util.fsdecode() to get a string not bytes.
   - Partially fixed in bug #1843995, this applies same fix to
     remaining instances of the problem
+* Fixed bug #1848203 with patch from Michael Apozyan
+  - convert to integer division
 
 
 New in v0.8.05 (2019/10/06)

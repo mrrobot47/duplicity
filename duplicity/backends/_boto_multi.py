@@ -128,7 +128,7 @@ class BotoBackend(BotoSingleBackend):
         if bytes < chunk_size:
             chunks = 1
         else:
-            chunks = bytes / chunk_size
+            chunks = bytes // chunk_size
             if (bytes % chunk_size):
                 chunks += 1
 

@@ -1,3 +1,8 @@
+2019-10-15  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1848203 with patch from Michael Apozyan
+      - convert to integer division
+
 2019-10-12  Adam Jacobs  <alj@boxyfrog.com>
 
     * Updated b2 backend to work with both v0 and v1 of b2sdk
