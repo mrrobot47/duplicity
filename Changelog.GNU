@@ -2,11 +2,6 @@
 
     * Fixed bug #1848203 with patch from Michael Apozyan
       - convert to integer division
-    * Fixed bug #1626061 with patch from Michael Apozyan
-      - While doing multipart upload to s3 we need to report the
-        total size of uploaded data, and not the size of each part
-        individually.  So we need to keep track of all parts
-        uploaded so far and sum it up on the fly.
 
 2019-10-12  Adam Jacobs  <alj@boxyfrog.com>
 
