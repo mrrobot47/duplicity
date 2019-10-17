@@ -1,3 +1,11 @@
+2019-10-17  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1626061 with patch from Michael Apozyan
+      - While doing multipart upload to s3 we need to report the
+        total size of uploaded data, and not the size of each part
+        individually.  So we need to keep track of all parts
+        uploaded so far and sum it up on the fly.
+
 2019-10-15  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1848203 with patch from Michael Apozyan
