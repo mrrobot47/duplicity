@@ -18,6 +18,8 @@ New in v0.8.06 (2019/10/??)
     total size of uploaded data, and not the size of each part
     individually.  So we need to keep track of all parts
     uploaded so far and sum it up on the fly.
+* Fixed bug #1848783 with patch from Jacob Middag
+  - Don't use byte strings in regex
 
 
 New in v0.8.05 (2019/10/06)
