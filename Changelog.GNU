@@ -1,3 +1,8 @@
+2019-10-19  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1848783 with patch from Jacob Middag
+      - Don't use byte strings in regex
+
 2019-10-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1626061 with patch from Michael Apozyan
