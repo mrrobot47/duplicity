@@ -145,11 +145,14 @@ Exception: %s""" % str(e))
                 return log.ErrorCode.backend_not_found
 
     def _put(self, source_path, remote_filename):
-        self.conn.put_object(self.container, self.prefix + remote_filename,
-                             file(source_path.name))
+        self.conn.put_object(self.container,
+                             self.prefix + util.fsdecode(remote_filename),
+                             file(util.fsdecode(source_path.name)))
 
     def _get(self, remote_filename, local_path):
-        headers, body = self.conn.get_object(self.container, self.prefix + remote_filename, resp_chunk_size=1024)
+        headers, body = self.conn.get_object(self.container,
+                                             self.prefix + util.fsdecode(remote_filename),
+                                             resp_chunk_size=1024)
         with open(local_path.name, u'wb') as f:
             for chunk in body:
                 f.write(chunk)
@@ -160,10 +163,10 @@ Exception: %s""" % str(e))
         return [o[u'name'][len(self.prefix):] for o in objs]
 
     def _delete(self, filename):
-        self.conn.delete_object(self.container, self.prefix + filename)
+        self.conn.delete_object(self.container, self.prefix + util.fsdecode(filename))
 
     def _query(self, filename):
-        sobject = self.conn.head_object(self.container, self.prefix + filename)
+        sobject = self.conn.head_object(self.container, self.prefix + util.fsdecode(filename))
         return {u'size': int(sobject[u'content-length'])}
 
 
