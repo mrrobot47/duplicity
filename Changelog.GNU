@@ -5,6 +5,9 @@
         destination URL without specifying the 'safe' argument as
         '/'. Note that 'quote' defaults 'safe' to '/', but
         'quote_plus' does not!
+    * Added additional fsdecode's to uses of local_path.name and
+      source_path.name in b2backend's _get() and _put.  See bug
+      #1847885 for more details.
 
 2019-10-23  Kenneth Loafman  <kenneth@loafman.com>
 
