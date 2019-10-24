@@ -85,8 +85,6 @@ class CodeTest(DuplicityTestCase):
             u"--disable=E0611",  # No name in module
             u"--disable=E1101",  # Has no member
             u"--disable=E1102",  # is not callable (_)
-            u"--disable=E1103",  # Maybe has no member
-            u"--disable=E0712",  # Catching an exception which doesn't inherit from BaseException
             u"--ignore=_librsync.so",
             u"--msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'",
             os.path.join(_top_dir, u'duplicity'),

@@ -8,6 +8,9 @@
     * Added additional fsdecode's to uses of local_path.name and
       source_path.name in b2backend's _get() and _put.  See bug
       #1847885 for more details.
+    * Removed a couple of disables from pylint code test.
+      - E1103 - Maybe has no member
+      - E0712 - Catching an exception which doesn't inherit from BaseException
 
 2019-10-23  Kenneth Loafman  <kenneth@loafman.com>
 
