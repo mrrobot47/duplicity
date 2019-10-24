@@ -112,7 +112,7 @@ class B2Backend(duplicity.backend.Backend):
         Download remote_filename to local_path
         """
         log.Log(u"Get: %s -> %s" % (self.path + util.fsdecode(remote_filename), local_path.name), log.INFO)
-        self.bucket.download_file_by_name(quote_plus(self.path + util.fsdecode(remote_filename)),
+        self.bucket.download_file_by_name(quote_plus(self.path + util.fsdecode(remote_filename), u'/'),
                                           b2.download_dest.DownloadDestLocalFile(local_path.name))
 
     def _put(self, source_path, remote_filename):
@@ -120,7 +120,7 @@ class B2Backend(duplicity.backend.Backend):
         Copy source_path to remote_filename
         """
         log.Log(u"Put: %s -> %s" % (source_path.name, self.path + util.fsdecode(remote_filename)), log.INFO)
-        self.bucket.upload_local_file(source_path.name, quote_plus(self.path + util.fsdecode(remote_filename)),
+        self.bucket.upload_local_file(source_path.name, quote_plus(self.path + util.fsdecode(remote_filename), u'/'),
                                       content_type=u'application/pgp-encrypted',
                                       progress_listener=B2ProgressListener())
 
@@ -136,7 +136,7 @@ class B2Backend(duplicity.backend.Backend):
         Delete filename from remote server
         """
         log.Log(u"Delete: %s" % self.path + util.fsdecode(filename), log.INFO)
-        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename)))
+        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename), u'/'))
         self.bucket.delete_file_version(file_version_info.id_, file_version_info.file_name)
 
     def _query(self, filename):
@@ -144,7 +144,7 @@ class B2Backend(duplicity.backend.Backend):
         Get size info of filename
         """
         log.Log(u"Query: %s" % self.path + util.fsdecode(filename), log.INFO)
-        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename)))
+        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename), u'/'))
         return {u'size': file_version_info.size
                 if file_version_info is not None and file_version_info.size is not None else -1}
 

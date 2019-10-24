@@ -1,3 +1,11 @@
+2019-10-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1849661 with patch from Graham Cobb
+      - The problem is that b2backend uses 'quote_plus' on the
+        destination URL without specifying the 'safe' argument as
+        '/'. Note that 'quote' defaults 'safe' to '/', but
+        'quote_plus' does not!
+
 2019-10-23  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1848166 - Swift backend fails on string concat
