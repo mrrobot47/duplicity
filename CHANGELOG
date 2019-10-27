@@ -33,6 +33,8 @@ New in v0.8.06 (2019/10/??)
 * Removed a couple of disables from pylint code test.
   - E1103 - Maybe has no member
   - E0712 - Catching an exception which doesn't inherit from BaseException
+* Revisited bug #1848783 - par2+webdav raises TypeError on Python 3
+  - Fixed so bytes filenames were compared as unicode in re.match()
 
 
 New in v0.8.05 (2019/10/06)

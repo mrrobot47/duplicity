@@ -1,3 +1,8 @@
+2019-10-27  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Revisited bug #1848783 - par2+webdav raises TypeError on Python 3
+      - Fixed so bytes filenames were compared as unicode in re.match()
+
 2019-10-25  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1849661 with patch from Graham Cobb
