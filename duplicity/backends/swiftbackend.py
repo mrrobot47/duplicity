@@ -147,7 +147,7 @@ Exception: %s""" % str(e))
     def _put(self, source_path, remote_filename):
         self.conn.put_object(self.container,
                              self.prefix + util.fsdecode(remote_filename),
-                             file(util.fsdecode(source_path.name)))
+                             open(util.fsdecode(source_path.name), u'rb'))
 
     def _get(self, remote_filename, local_path):
         headers, body = self.conn.get_object(self.container,

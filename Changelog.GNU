@@ -1,3 +1,7 @@
+2019-10-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Removed file() call in swiftbackend.  It's been deprecated since py2.
+
 2019-10-27  Kenneth Loafman  <kenneth@loafman.com>
 
     * Revisited bug #1848783 - par2+webdav raises TypeError on Python 3

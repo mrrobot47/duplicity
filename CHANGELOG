@@ -35,6 +35,7 @@ New in v0.8.06 (2019/10/??)
   - E0712 - Catching an exception which doesn't inherit from BaseException
 * Revisited bug #1848783 - par2+webdav raises TypeError on Python 3
   - Fixed so bytes filenames were compared as unicode in re.match()
+* Removed file() call in swiftbackend.  It's been deprecated since py2.
 
 
 New in v0.8.05 (2019/10/06)
