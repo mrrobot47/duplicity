@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-10-27 23:56+0000\n"
+"POT-Creation-Date: 2019-10-28 15:44+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-10-28 06:19+0000\n"
+"X-Launchpad-Export-Date: 2019-10-29 06:19+0000\n"
 "X-Generator: Launchpad (build 469f241f4e73cc0bdffa4e30654052a2af068e06)\n"
 "Language: de\n"
 
@@ -1358,22 +1358,22 @@ msgstr ""
 
 #: ../duplicity/dup_main.py:1028
 msgid "No old backup sets found."
-msgstr ""
+msgstr "Keine alten Backup-Sets gefunden."
 
 #: ../duplicity/dup_main.py:1043
 #, python-format
 msgid "Signature %s already replicated"
-msgstr ""
+msgstr "Signatur %s bereits repliziert"
 
 #: ../duplicity/dup_main.py:1050 ../duplicity/dup_main.py:1089
 #, python-format
 msgid "Replicating %s."
-msgstr ""
+msgstr "Replizieren von %s."
 
 #: ../duplicity/dup_main.py:1077
 #, python-format
 msgid "Backupset %s already replicated"
-msgstr ""
+msgstr "Backup-Set %s bereits repliziert"
 
 #: ../duplicity/dup_main.py:1225
 #, python-format
