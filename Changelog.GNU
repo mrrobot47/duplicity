@@ -1,3 +1,7 @@
+2019-11-03  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Updated snapcraft.yaml to include rdiffdir and did some reformatting.
+
 2019-10-28  Kenneth Loafman  <kenneth@loafman.com>
 
     * Removed file() call in swiftbackend.  It's been deprecated since py2.
