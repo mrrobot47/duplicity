@@ -15,8 +15,6 @@ base: core18
 apps:
     duplicity:
         command: bin/duplicity
-    rdiffdir:
-        command: bin/rdiffdir
 
 parts:
   duplicity:
@@ -25,6 +23,7 @@ parts:
         stage-packages:
             - gnupg
             - lftp                  # lftpbackend.py
+            - libatf1
             - librsync1
             - librsync-dev
             - megatools             # megabackend.py

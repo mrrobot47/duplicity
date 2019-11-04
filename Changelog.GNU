@@ -1,3 +1,7 @@
+2019-11-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Updated snapcraft.yaml to remove rdiffdir and add libaft1 to stage.
+
 2019-11-03  Kenneth Loafman  <kenneth@loafman.com>
 
     * Updated snapcraft.yaml to include rdiffdir and did some reformatting.

@@ -37,6 +37,7 @@ New in v0.8.06 (2019/11/03)
   - Fixed so bytes filenames were compared as unicode in re.match()
 * Removed file() call in swiftbackend.  It's been deprecated since py2.
 * Updated snapcraft.yaml to include rdiffdir and did some reformatting.
+* Updated snapcraft.yaml to remove rdiffdir and add libaft1 to stage.
 
 
 New in v0.8.05 (2019/10/06)
