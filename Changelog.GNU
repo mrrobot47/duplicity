@@ -1,6 +1,7 @@
 2019-11-04  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Updated snapcraft.yaml to remove rdiffdir and add libaft1 to stage.
+    * Updated snapcraft.yaml to remove rdiffdir and add libatm1 to stage.
+    * Updated snapcraft.yaml to remove python-lockfile and fix spelling.
 
 2019-11-03  Kenneth Loafman  <kenneth@loafman.com>
 
