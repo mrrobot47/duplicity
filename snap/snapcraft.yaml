@@ -15,7 +15,7 @@ base: core18
 apps:
     duplicity:
         command: bin/duplicity
-    duplicity:
+    rdiffdir:
         command: bin/rdiffdir
 
 parts:
