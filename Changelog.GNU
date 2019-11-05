@@ -1,3 +1,7 @@
+2019-11-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+
 2019-11-04  Kenneth Loafman  <kenneth@loafman.com>
 
     * Updated snapcraft.yaml to remove rdiffdir and add libatm1 to stage.
