@@ -1,4 +1,4 @@
-New in v0.8.06 (2019/11/04)
+New in v0.8.06 (2019/11/05)
 ---------------------------
 * Removed a setting in tox.ini that causes coverage to
   be activated during testing duplicity.
