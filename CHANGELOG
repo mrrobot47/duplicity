@@ -1,4 +1,4 @@
-New in v0.8.06 (2019/11/05)
+New in v0.8.07 (2019/11/??)
 ---------------------------
 * Added b2sdk to snapcraft.yaml
 * Fixed bug #1850440 - Can't mix strings and bytes.
