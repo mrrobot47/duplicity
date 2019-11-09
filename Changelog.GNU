@@ -1,3 +1,8 @@
+2019-11-09  Kenneth Loafman  <kenneth@loafman.com>
+
+* Added b2sdk to snapcraft.yaml.
+* Fixed bug #1850440 - Can't mix strings and bytes.
+
 2019-11-05  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in translation updates

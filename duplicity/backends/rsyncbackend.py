@@ -123,7 +123,7 @@ class RsyncBackend(duplicity.backend.Backend):
     def _list(self):
         def split(str):
             line = str.split()
-            if len(line) > 4 and line[4] != u'.':
+            if len(line) > 4 and line[4] != b'.':
                 return line[4]
             else:
                 return None
@@ -144,9 +144,14 @@ class RsyncBackend(duplicity.backend.Backend):
         exclude, exclude_name = tempdir.default().mkstemp_file()
         to_delete = [exclude_name]
         for file in dont_delete_list:
+            file = util.fsdecode(file)
             path = os.path.join(dir, file)
             to_delete.append(path)
-            f = open(path, u'w')
+            try:
+                f = open(path, u'w')
+            except IsADirectoryError:
+                print(file, file=exclude)
+                continue
             print(file, file=exclude)
             f.close()
         exclude.close()
@@ -154,7 +159,10 @@ class RsyncBackend(duplicity.backend.Backend):
                        (self.cmd, exclude_name, dir, self.url_string))
         self.subprocess_popen(commandline)
         for file in to_delete:
-            util.ignore_missing(os.unlink, file)
+            try:
+                util.ignore_missing(os.unlink, file)
+            except IsADirectoryError:
+                pass
         os.rmdir(dir)
 
 

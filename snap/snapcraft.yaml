@@ -17,7 +17,7 @@ apps:
         command: bin/duplicity
 
 parts:
-  duplicity:
+    duplicity:
         plugin: python
         python-version: python2
         stage-packages:
@@ -49,6 +49,7 @@ parts:
             - sx                    # sxbackend.py
         python-packages:
             - b2                    # b2backend.py
+            - b2sdk                 # b2backend.py
             - dropbox               # dpbxbackend.py
             - jottalib              # jottalib backend (new in 0.8 series)
             - mediafire             # mediafirebackend.py
