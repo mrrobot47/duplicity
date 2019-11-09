@@ -1,7 +1,10 @@
 New in v0.8.07 (2019/11/??)
 ---------------------------
 * Added b2sdk to snapcraft.yaml
-* Fixed bug #1850440 - Can't mix strings and bytes.
+* Fixed bug #1850440 with suggestion from Paolo Montrasio
+  - TypeError: Can't mix strings and bytes in path components
+* Fixed bug #1850990 with suggestion from Jon Wilson
+  - --s3-use-glacier and --no-encryption cause slow backups
 
 
 New in v0.8.06 (2019/11/05)

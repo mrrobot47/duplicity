@@ -1,7 +1,10 @@
 2019-11-09  Kenneth Loafman  <kenneth@loafman.com>
 
-* Added b2sdk to snapcraft.yaml.
-* Fixed bug #1850440 - Can't mix strings and bytes.
+    * Added b2sdk to snapcraft.yaml
+    * Fixed bug #1850440 with suggestion from Paolo Montrasio
+      - TypeError: Can't mix strings and bytes in path components
+    * Fixed bug #1850990 with suggestion from Jon Wilson
+      - --s3-use-glacier and --no-encryption cause slow backups
 
 2019-11-05  Kenneth Loafman  <kenneth@loafman.com>
 
