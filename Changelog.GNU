@@ -1,6 +1,8 @@
 2019-11-12  Kenneth Loafman  <kenneth@loafman.com>
 
     * Added dist/makesnap to make spaps automagically.
+    * Fixed bug #1851167 with help from Aspen Barnes
+      - Had Popen() to return strings not bytes
 
 2019-11-09  Kenneth Loafman  <kenneth@loafman.com>
 

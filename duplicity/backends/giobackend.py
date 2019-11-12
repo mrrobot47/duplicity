@@ -33,7 +33,8 @@ def ensure_dbus():
     # when required.  So we make sure that such a bus exists and that our
     # environment points to it.
     if u'DBUS_SESSION_BUS_ADDRESS' not in os.environ:
-        output = subprocess.Popen([u'dbus-launch'], stdout=subprocess.PIPE).communicate()[0]
+        p = subprocess.Popen([u'dbus-launch'], stdout=subprocess.PIPE, universal_newlines=True)
+        output = p.communicate()[0]
         lines = output.split(u'\n')
         for line in lines:
             parts = line.split(u'=', 1)

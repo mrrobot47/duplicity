@@ -6,7 +6,8 @@ New in v0.8.07 (2019/11/??)
 * Fixed bug #1850990 with suggestion from Jon Wilson
   - --s3-use-glacier and --no-encryption cause slow backups
 * Added dist/makesnap to make spaps automagically.
-
+* Fixed bug #1851167 with help from Aspen Barnes
+  - Had Popen() to return strings not bytes
 
 
 New in v0.8.06 (2019/11/05)
