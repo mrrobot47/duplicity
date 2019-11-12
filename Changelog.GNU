@@ -1,3 +1,7 @@
+2019-11-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Added dist/makesnap to make spaps automagically.
+
 2019-11-09  Kenneth Loafman  <kenneth@loafman.com>
 
     * Added b2sdk to snapcraft.yaml

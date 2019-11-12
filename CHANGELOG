@@ -5,6 +5,8 @@ New in v0.8.07 (2019/11/??)
   - TypeError: Can't mix strings and bytes in path components
 * Fixed bug #1850990 with suggestion from Jon Wilson
   - --s3-use-glacier and --no-encryption cause slow backups
+* Added dist/makesnap to make spaps automagically.
+
 
 
 New in v0.8.06 (2019/11/05)

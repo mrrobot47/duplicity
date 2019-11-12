@@ -146,7 +146,7 @@ def Main():
 
 if __name__ == u"__main__" and u'__no_execute__' not in globals():
     if len(sys.argv) != 2:
-        print(u"Syntax: makedist [version_number]")
+        print(u"Syntax: makedist <version_number>")
         sys.exit(1)
     Version = sys.argv[1]
     Reldate = time.strftime(u"%B %d, %Y", time.localtime())

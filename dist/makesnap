@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+
+if [ "$#" -ne 1 ]; then
+    echo "usage: makesnap <version>"
+    exit 2
+else
+    VERSION=$1
+    echo "Making snap of version ${VERSION}"
+fi
+
+export PYTHONWARNINGS="ignore::DeprecationWarning"
+
+# get the working source tree
+rsync -a --delete \
+    --exclude=*.pyc \
+    --exclude=*.so \
+    --exclude=.tox \
+    --exclude=docs \
+    --exclude=__pycache__ \
+    dione.local:///Users/ken/workspace/duplicity-src8/ \
+    ~/workspace/duplicity-src8/
+
+# run makedist to set ${VERSION}
+cd ~/workspace/duplicity-src8
+dist/makedist ${VERSION}
+
+# build snap from clean source
+mkdir -p build
+tar xf duplicity-${VERSION}.tar.gz -C build
+cd build/duplicity-${VERSION}
+snapcraft snap
+mv duplicity_${VERSION}*.snap ../..
+cd ../..
+
+# push to edge
+# snapcraft push duplicity_${VERSION}*.snap --release edge
+
+# clean up
+rm -rf build
