@@ -153,14 +153,14 @@ def get_passphrase(n, action, for_signing=False):
     # there is no sign_key and there are recipients
     elif (action == u"full" and
           (globals.gpg_profile.recipients or globals.gpg_profile.hidden_recipients) and not
-          globals.gpg_profile.sign_key and not globals.restart):
+          globals.gpg_profile.sign_key):
         return u""
 
     # for an inc backup, we don't need a password if
     # there is no sign_key and there are recipients
     elif (action == u"inc" and
           (globals.gpg_profile.recipients or globals.gpg_profile.hidden_recipients) and not
-          globals.gpg_profile.sign_key and not globals.restart):
+          globals.gpg_profile.sign_key):
         return u""
 
     # Finally, ask the user for the passphrase
@@ -346,6 +346,13 @@ def write_multivol(backup_type, tarblock_iter, man_outfp, sig_outfp, backend):
         from encrypted to non in the middle of a backup chain), so we check
         that the vol1 filename on the server matches the settings of this run.
         """
+        if ((globals.gpg_profile.recipients or globals.gpg_profile.hidden_recipients) and
+                not globals.gpg_profile.sign_key):
+            # When using gpg encryption without a signing key, we skip this validation
+            # step to ensure that we can still backup without needing the secret key
+            # on the machine.
+            return
+
         vol1_filename = file_naming.get(backup_type, 1,
                                         encrypted=globals.encryption,
                                         gzipped=globals.compression)
