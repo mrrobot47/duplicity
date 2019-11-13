@@ -79,6 +79,22 @@ class RestartTest(FunctionalTestCase):
         self.backup(u"full", u"testfiles/largefiles")
         self.verify(u"testfiles/largefiles")
 
+    def test_restart_encrypt_without_password(self):
+        u"""
+        Test that we can successfully restart a encrypt-key-only backup without
+        providing a password for it. (Normally, we'd need to decrypt the first
+        volume, but there is special code to skip that with an encrypt key.)
+        """
+        self.set_environ(u'PASSPHRASE', None)
+        self.set_environ(u'SIGN_PASSPHRASE', None)
+        self.make_largefiles()
+        enc_opts = [u"--encrypt-key", self.encrypt_key1]
+        self.backup(u"full", u"testfiles/largefiles", options=enc_opts, fail=2)
+        self.backup(u"full", u"testfiles/largefiles", options=enc_opts)
+
+        self.set_environ(u'PASSPHRASE', self.sign_passphrase)
+        self.verify(u"testfiles/largefiles")
+
     def test_restart_sign_and_encrypt(self):
         u"""
         Test restarting a backup using same key for sign and encrypt

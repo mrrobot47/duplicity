@@ -16,6 +16,11 @@ New in v0.8.07 (2019/11/??)
     And we'd end up thinking there were two of the same filename on the backend,
     which would cause a crash at the end of an otherwise successful backup,
     because the collections code would assert on the filenames being unique.
+* Merged in lp:~mterry/duplicity/resume-encrypt-no-pass
+  - This branch arose from a Debian patch that has been disabling the
+    encryption validation of volume1 during restarts for years.
+  - Debian has been preserving the ability to back up with just an encrypt
+    key and no password (i.e. to have no secrets on the backup machine).
 
 
 New in v0.8.06 (2019/11/05)
