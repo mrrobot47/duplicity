@@ -28,6 +28,7 @@ standard_library.install_aliases()
 import os
 import os.path
 import string
+import sys
 import urllib.request  # pylint: disable=import-error
 import urllib.parse  # pylint: disable=import-error
 import urllib.error  # pylint: disable=import-error
@@ -182,8 +183,8 @@ class MultiBackend(duplicity.backend.Backend):
 
         for config in configs:
             url = config[u'url'] + self.__subpath
-            # Fix advised in bug #1471795
-            url = url.encode(u'utf-8')
+            if sys.version_info.major == 2:
+                url = url.encode(u'utf-8')
             log.Log(_(u"MultiBackend: use store %s")
                     % (url),
                     log.INFO)

@@ -21,6 +21,8 @@ New in v0.8.07 (2019/11/??)
     encryption validation of volume1 during restarts for years.
   - Debian has been preserving the ability to back up with just an encrypt
     key and no password (i.e. to have no secrets on the backup machine).
+* Fixed bug #1851727 - InvalidBackendURL for multi backend
+  - Encode to utf8 only on Python2, otherwise leave as unicode
 
 
 New in v0.8.06 (2019/11/05)
