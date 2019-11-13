@@ -1,3 +1,14 @@
+2019-11-13  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~mterry/duplicity/pydrive-cache-fix
+      - The pydrive backend had another of the ongoing bytes/string issues. :)
+      - This time, it was saving a bytes filename in its internal cache after
+        each volume upload. Then when asked for a list of files later, it
+        would add the byte-filenames from its cache to the results.
+        And we'd end up thinking there were two of the same filename on the backend,
+        which would cause a crash at the end of an otherwise successful backup,
+        because the collections code would assert on the filenames being unique.
+
 2019-11-12  Kenneth Loafman  <kenneth@loafman.com>
 
     * Added dist/makesnap to make spaps automagically.
