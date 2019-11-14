@@ -1,3 +1,8 @@
+2019-11-14  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.07
+
 2019-11-13  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~mterry/duplicity/pydrive-cache-fix

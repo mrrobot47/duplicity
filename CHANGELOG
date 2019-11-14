@@ -1,4 +1,4 @@
-New in v0.8.07 (2019/11/??)
+New in v0.8.07 (2019/11/14)
 ---------------------------
 * Added b2sdk to snapcraft.yaml
 * Fixed bug #1850440 with suggestion from Paolo Montrasio
@@ -23,6 +23,7 @@ New in v0.8.07 (2019/11/??)
     key and no password (i.e. to have no secrets on the backup machine).
 * Fixed bug #1851727 - InvalidBackendURL for multi backend
   - Encode to utf8 only on Python2, otherwise leave as unicode
+* Merged in translation updates
 
 
 New in v0.8.06 (2019/11/05)

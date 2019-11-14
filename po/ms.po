@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-11-02 14:19-0500\n"
+"POT-Creation-Date: 2019-11-13 14:04-0600\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-11-05 06:15+0000\n"
-"X-Generator: Launchpad (build 469f241f4e73cc0bdffa4e30654052a2af068e06)\n"
+"X-Launchpad-Export-Date: 2019-11-14 06:33+0000\n"
+"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 
 #: ../bin/duplicity:121
 msgid "INT intercepted...exiting."
@@ -128,7 +128,7 @@ msgstr ""
 "Fail %s tidak ditemui secara setempat selepas didapati melalui bahagian "
 "belakang"
 
-#: ../duplicity/backends/giobackend.py:108
+#: ../duplicity/backends/giobackend.py:109
 #, python-format
 msgid "Connection failed, please check your password: %s"
 msgstr "Sambungan gagal, sila semak kata laluan anda: %s"
@@ -164,37 +164,37 @@ msgstr ""
 msgid "MultiBackend: Could not load config file %s: %s "
 msgstr "MultiBackend: Tidak dapat muat fail konfig %s: %s "
 
-#: ../duplicity/backends/multibackend.py:187
+#: ../duplicity/backends/multibackend.py:185
 #, python-format
 msgid "MultiBackend: use store %s"
 msgstr "MultiBackend: guna stor %s"
 
-#: ../duplicity/backends/multibackend.py:192
+#: ../duplicity/backends/multibackend.py:190
 #, python-format
 msgid "MultiBackend: set env %s = %s"
 msgstr "MultiBackend: tetapkan env %s = %s"
 
-#: ../duplicity/backends/multibackend.py:205
+#: ../duplicity/backends/multibackend.py:203
 #, python-format
 msgid "Multibackend: register affinity for prefix %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:246
+#: ../duplicity/backends/multibackend.py:244
 #, python-format
 msgid "MultiBackend: _put: write to store #%s (%s)"
 msgstr "MultiBackend: _put: tulis ke stor #%s (%s)"
 
-#: ../duplicity/backends/multibackend.py:259
+#: ../duplicity/backends/multibackend.py:257
 #, python-format
 msgid "MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
 msgstr "MultiBackend: gagal tulis ke stor #%s (%s), cuba #%s, Pengecualian: %s"
 
-#: ../duplicity/backends/multibackend.py:266
+#: ../duplicity/backends/multibackend.py:264
 #, python-format
 msgid "MultiBackend: failed to write %s. Aborting process."
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:273
+#: ../duplicity/backends/multibackend.py:271
 #, python-format
 msgid ""
 "MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
@@ -202,12 +202,12 @@ msgstr ""
 "MultiBackend: gagal tulis %s. Mencuba semua stor sandar dan tiada yang "
 "berjaya"
 
-#: ../duplicity/backends/multibackend.py:292
+#: ../duplicity/backends/multibackend.py:290
 #, python-format
 msgid "MultiBackend: failed to get %s to %s from %s"
 msgstr "MultiBackend: gagal dapatkan %s kepada %s daripada %s"
 
-#: ../duplicity/backends/multibackend.py:295
+#: ../duplicity/backends/multibackend.py:293
 #, python-format
 msgid ""
 "MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
@@ -215,22 +215,22 @@ msgstr ""
 "MultiBackend: gagal dapatkan %s. Mencuba semua stor sandar dan tiada yang "
 "berjaya"
 
-#: ../duplicity/backends/multibackend.py:304
+#: ../duplicity/backends/multibackend.py:302
 #, python-format
 msgid "MultiBackend: list from %s: %s"
 msgstr "MultiBackend: senarai dari %s: %s"
 
-#: ../duplicity/backends/multibackend.py:310
+#: ../duplicity/backends/multibackend.py:308
 #, python-format
 msgid "MultiBackend: combined list: %s"
 msgstr "MultiBackend: senarai tergabung: %s"
 
-#: ../duplicity/backends/multibackend.py:338
+#: ../duplicity/backends/multibackend.py:336
 #, python-format
 msgid "MultiBackend: failed to delete %s from %s"
 msgstr "MultiBackend: gagal padamkan %s dari %s"
 
-#: ../duplicity/backends/multibackend.py:342
+#: ../duplicity/backends/multibackend.py:340
 #, python-format
 msgid ""
 "MultiBackend: failed to delete %s. Tried all backing stores and none "
@@ -1134,7 +1134,7 @@ msgstr ""
 msgid "File %s was corrupted during upload."
 msgstr "Fail %s telah rosak semasa muat naik."
 
-#: ../duplicity/dup_main.py:353
+#: ../duplicity/dup_main.py:360
 msgid ""
 "Restarting backup, but current encryption settings do not match original "
 "settings"
@@ -1142,17 +1142,17 @@ msgstr ""
 "Memulakan semula sandar, tetapi tetapan penyulitan semasa tidak sepadan "
 "dengan tetapan asal"
 
-#: ../duplicity/dup_main.py:376
+#: ../duplicity/dup_main.py:383
 #, python-format
 msgid "Restarting after volume %s, file %s, block %s"
 msgstr "Dimulakan semula selepas volum %s, fail %s, blok %s"
 
-#: ../duplicity/dup_main.py:446
+#: ../duplicity/dup_main.py:453
 #, python-format
 msgid "Processed volume %d"
 msgstr "Volum terproses %d"
 
-#: ../duplicity/dup_main.py:596
+#: ../duplicity/dup_main.py:603
 msgid ""
 "Fatal Error: Unable to start incremental backup.  Old signatures not found "
 "and incremental specified"
@@ -1160,97 +1160,97 @@ msgstr ""
 "Ralat Mati: Tidak dapat mulakan sandar bertokokan. Tandatangan lama tidak "
 "ditemui dan tokokan dinyatakan"
 
-#: ../duplicity/dup_main.py:600
+#: ../duplicity/dup_main.py:607
 msgid "No signatures found, switching to full backup."
 msgstr "Tiada tandatangan ditemui, bertukar ke sandar penuh."
 
-#: ../duplicity/dup_main.py:614
+#: ../duplicity/dup_main.py:621
 msgid "Backup Statistics"
 msgstr "Statistik Sandar"
 
-#: ../duplicity/dup_main.py:720
+#: ../duplicity/dup_main.py:727
 #, python-format
 msgid "%s not found in archive - no files restored."
 msgstr "%s tidak ditemui dalam arkib - tiada fail dipulihkan."
 
-#: ../duplicity/dup_main.py:724
+#: ../duplicity/dup_main.py:731
 msgid "No files found in archive - nothing restored."
 msgstr "Tiada fail ditemui dalam arkib - tiada apa dipulihkan."
 
-#: ../duplicity/dup_main.py:757
+#: ../duplicity/dup_main.py:764
 #, python-format
 msgid "Processed volume %d of %d"
 msgstr "Memproses volum %d daripada %d"
 
-#: ../duplicity/dup_main.py:791
+#: ../duplicity/dup_main.py:798
 #, python-format
 msgid "Invalid data - %s hash mismatch for file:"
 msgstr "Data tidak sah - %s cincangan tidak sepadan untuk fail:"
 
-#: ../duplicity/dup_main.py:794
+#: ../duplicity/dup_main.py:801
 #, python-format
 msgid "Calculated hash: %s"
 msgstr "Cincangan terkira: %s"
 
-#: ../duplicity/dup_main.py:795
+#: ../duplicity/dup_main.py:802
 #, python-format
 msgid "Manifest hash: %s"
 msgstr "Cincangan jelas: %s"
 
-#: ../duplicity/dup_main.py:838
+#: ../duplicity/dup_main.py:845
 #, python-format
 msgid "Volume was signed by key %s, not %s"
 msgstr "Volum telah ditandatangan oleh kunci %s, bukan %s"
 
-#: ../duplicity/dup_main.py:870
+#: ../duplicity/dup_main.py:877
 #, python-format
 msgid "Verify complete: %s, %s."
 msgstr "Pengesahan selesai: %s, %s."
 
-#: ../duplicity/dup_main.py:871
+#: ../duplicity/dup_main.py:878
 #, python-format
 msgid "%d file compared"
 msgid_plural "%d files compared"
 msgstr[0] "%d fail dibandingkan"
 msgstr[1] "%d fail dibandingkan"
 
-#: ../duplicity/dup_main.py:873
+#: ../duplicity/dup_main.py:880
 #, python-format
 msgid "%d difference found"
 msgid_plural "%d differences found"
 msgstr[0] "%d perbezaan ditemui"
 msgstr[1] "%d perbezaan ditemui"
 
-#: ../duplicity/dup_main.py:892
+#: ../duplicity/dup_main.py:899
 msgid "No extraneous files found, nothing deleted in cleanup."
 msgstr "Tiada fail tambahan ditemui, tiada apa dipadam dalam pembersihan."
 
-#: ../duplicity/dup_main.py:897
+#: ../duplicity/dup_main.py:904
 msgid "Deleting this file from backend:"
 msgid_plural "Deleting these files from backend:"
 msgstr[0] "Memadam fail ini dari bahagian belakang:"
 msgstr[1] "Memadam fail ini dari bahagian belakang:"
 
-#: ../duplicity/dup_main.py:908
+#: ../duplicity/dup_main.py:915
 msgid "Found the following file to delete:"
 msgid_plural "Found the following files to delete:"
 msgstr[0] "Temui fail berikut untuk dipadamkan:"
 msgstr[1] "Temui fail berikut untuk dipadamkan:"
 
-#: ../duplicity/dup_main.py:911
+#: ../duplicity/dup_main.py:918
 msgid "Run duplicity again with the --force option to actually delete."
 msgstr ""
 "Jalan duplicity sekali lagi dengan pilihan --force untuk padam sebenarnya."
 
-#: ../duplicity/dup_main.py:954
+#: ../duplicity/dup_main.py:961
 msgid "There are backup set(s) at time(s):"
 msgstr "Terdapat set sandar pada masa:"
 
-#: ../duplicity/dup_main.py:956
+#: ../duplicity/dup_main.py:963
 msgid "Which can't be deleted because newer sets depend on them."
 msgstr "Yang tidak dapat dipadam kerana set lebih baru bergantung padanya."
 
-#: ../duplicity/dup_main.py:960
+#: ../duplicity/dup_main.py:967
 msgid ""
 "Current active backup chain is older than specified time.  However, it will "
 "not be deleted.  To remove all your backups, manually purge the repository."
@@ -1259,120 +1259,120 @@ msgstr ""
 "Namun, ia tidak akan dipadam. Untuk membuang semua sandar anda, singkirkan "
 "repositori secara manual."
 
-#: ../duplicity/dup_main.py:973
+#: ../duplicity/dup_main.py:980
 msgid "No old backup sets found, nothing deleted."
 msgstr "Tiada set sandar lama ditemui, tiada apa dipadamkan."
 
-#: ../duplicity/dup_main.py:976
+#: ../duplicity/dup_main.py:983
 msgid "Deleting backup chain at time:"
 msgid_plural "Deleting backup chains at times:"
 msgstr[0] "Memadam rantaian sandar pada masa:"
 msgstr[1] "Memadam rantaian sandar pada masa:"
 
-#: ../duplicity/dup_main.py:988
+#: ../duplicity/dup_main.py:995
 #, python-format
 msgid "Deleting any incremental signature chain rooted at %s"
 msgstr ""
 
-#: ../duplicity/dup_main.py:990
+#: ../duplicity/dup_main.py:997
 #, python-format
 msgid "Deleting any incremental backup chain rooted at %s"
 msgstr ""
 
-#: ../duplicity/dup_main.py:993
+#: ../duplicity/dup_main.py:1000
 #, python-format
 msgid "Deleting complete signature chain %s"
 msgstr "Memadam rantaian tandatangan selesai %s"
 
-#: ../duplicity/dup_main.py:995
+#: ../duplicity/dup_main.py:1002
 #, python-format
 msgid "Deleting complete backup chain %s"
 msgstr "Memadam rantaian sandar selesai %s"
 
-#: ../duplicity/dup_main.py:1001
+#: ../duplicity/dup_main.py:1008
 msgid "Found old backup chain at the following time:"
 msgid_plural "Found old backup chains at the following times:"
 msgstr[0] "Temui rantaian sandar lama pada masa berikut:"
 msgstr[1] "Temui rantaian sandar lama pada masa berikut:"
 
-#: ../duplicity/dup_main.py:1005
+#: ../duplicity/dup_main.py:1012
 msgid "Rerun command with --force option to actually delete."
 msgstr "Jalan semula perintah dengan pilihan --force untuk padam sebenarnya."
 
-#: ../duplicity/dup_main.py:1028
+#: ../duplicity/dup_main.py:1035
 msgid "No old backup sets found."
 msgstr ""
 
-#: ../duplicity/dup_main.py:1043
+#: ../duplicity/dup_main.py:1050
 #, python-format
 msgid "Signature %s already replicated"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1050 ../duplicity/dup_main.py:1089
+#: ../duplicity/dup_main.py:1057 ../duplicity/dup_main.py:1096
 #, python-format
 msgid "Replicating %s."
 msgstr ""
 
-#: ../duplicity/dup_main.py:1077
+#: ../duplicity/dup_main.py:1084
 #, python-format
 msgid "Backupset %s already replicated"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1225
+#: ../duplicity/dup_main.py:1232
 #, python-format
 msgid "Deleting local %s (not authoritative at backend)."
 msgstr "Memadam setempat %s (bukan autoriti pada bahagian belakang)."
 
-#: ../duplicity/dup_main.py:1230
+#: ../duplicity/dup_main.py:1237
 #, python-format
 msgid "Unable to delete %s: %s"
 msgstr "Tidak boleh padam %s: %s"
 
-#: ../duplicity/dup_main.py:1264 ../duplicity/dup_temp.py:271
+#: ../duplicity/dup_main.py:1271 ../duplicity/dup_temp.py:271
 #, python-format
 msgid "Failed to read %s: %s"
 msgstr "Gagal membaca %s: %s"
 
-#: ../duplicity/dup_main.py:1278
+#: ../duplicity/dup_main.py:1285
 #, python-format
 msgid "Copying %s to local cache."
 msgstr "Menyalin %s ke cache setempat."
 
-#: ../duplicity/dup_main.py:1326
+#: ../duplicity/dup_main.py:1333
 msgid "Local and Remote metadata are synchronized, no sync needed."
 msgstr "Data meta Setempat dan Jauh telah disegerak, tiada segerak diperlukan."
 
-#: ../duplicity/dup_main.py:1331
+#: ../duplicity/dup_main.py:1338
 msgid "Synchronizing remote metadata to local cache..."
 msgstr "Menyegerak data meta jauh ke cache setempat..."
 
-#: ../duplicity/dup_main.py:1344
+#: ../duplicity/dup_main.py:1351
 msgid "Sync would copy the following from remote to local:"
 msgstr "Segerak akan salin yang berikut dari jauh ke setempat:"
 
-#: ../duplicity/dup_main.py:1347
+#: ../duplicity/dup_main.py:1354
 msgid "Sync would remove the following spurious local files:"
 msgstr "Segera akan buang fail setempat yang palsu:"
 
-#: ../duplicity/dup_main.py:1391
+#: ../duplicity/dup_main.py:1398
 msgid "Unable to get free space on temp."
 msgstr "Tidak boleh dapatkan ruang bebas pada temp."
 
-#: ../duplicity/dup_main.py:1399
+#: ../duplicity/dup_main.py:1406
 #, python-format
 msgid "Temp space has %d available, backup needs approx %d."
 msgstr "Ruang sementara mempunyai %d, sandar perlu sekurang-kurangnya %d."
 
-#: ../duplicity/dup_main.py:1402
+#: ../duplicity/dup_main.py:1409
 #, python-format
 msgid "Temp has %d available, backup will use approx %d."
 msgstr "Temp mempunyai %d, sandar akan guna kira-kira %d."
 
-#: ../duplicity/dup_main.py:1410
+#: ../duplicity/dup_main.py:1417
 msgid "Unable to get max open files."
 msgstr "Tidak boleh dapatkan fail terbuka max."
 
-#: ../duplicity/dup_main.py:1414
+#: ../duplicity/dup_main.py:1421
 #, python-format
 msgid ""
 "Max open files of %s is too low, should be >= 1024.\n"
@@ -1381,7 +1381,7 @@ msgstr ""
 "Fail terbuka max %s terlalu rendah, sepatutnya >= 1024.\n"
 "Guna 'ulimit -n 1024' atau lebih tinggi untuk betulkan.\n"
 
-#: ../duplicity/dup_main.py:1466
+#: ../duplicity/dup_main.py:1473
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
@@ -1389,7 +1389,7 @@ msgstr ""
 "MULA SEMULA: Volum pertama gagal dimuat naik sebelum dihentikan.\n"
 "         Mula semula adalah mustahil...memulakan sandar dari pemulaan."
 
-#: ../duplicity/dup_main.py:1472
+#: ../duplicity/dup_main.py:1479
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
@@ -1398,7 +1398,7 @@ msgstr ""
 "MULA SEMULA: Volum %d daripada %d gagal dimuat naik sebelum dihentikan.\n"
 "         Mula semula sandar pada volum %d."
 
-#: ../duplicity/dup_main.py:1479
+#: ../duplicity/dup_main.py:1486
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -1412,7 +1412,7 @@ msgstr ""
 "terakhir.\n"
 "         sandar kemudian mula semula sandar dari pemulaan."
 
-#: ../duplicity/dup_main.py:1500
+#: ../duplicity/dup_main.py:1507
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -1428,34 +1428,34 @@ msgstr ""
 "\n"
 "Sila rujuk https://bugs.launchpad.net/duplicity/+bug/931175\n"
 
-#: ../duplicity/dup_main.py:1523
+#: ../duplicity/dup_main.py:1530
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1581
+#: ../duplicity/dup_main.py:1588
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr "%s sandar terakhir meninggalkan set separa, memulakan semula."
 
-#: ../duplicity/dup_main.py:1585
+#: ../duplicity/dup_main.py:1592
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr "Membersihkan %s set sandar separa yang terdahulu, memulakan semula."
 
-#: ../duplicity/dup_main.py:1597
+#: ../duplicity/dup_main.py:1604
 msgid "Last full backup date:"
 msgstr "Tarikh sandar penuh terakhir:"
 
-#: ../duplicity/dup_main.py:1599
+#: ../duplicity/dup_main.py:1606
 msgid "Last full backup date: none"
 msgstr "Tarikh sandar penuh terakhir: tiada"
 
-#: ../duplicity/dup_main.py:1602
+#: ../duplicity/dup_main.py:1609
 msgid "Last full backup is too old, forcing full backup"
 msgstr "Sandar penuh terakhir terlalu lama, memaksa sandar penuh"
 
-#: ../duplicity/dup_main.py:1651
+#: ../duplicity/dup_main.py:1658
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-11-02 14:19-0500\n"
+"POT-Creation-Date: 2019-11-13 14:04-0600\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Kenneth Loafman <kenneth@loafman.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2019-11-05 06:15+0000\n"
-"X-Generator: Launchpad (build 469f241f4e73cc0bdffa4e30654052a2af068e06)\n"
+"X-Launchpad-Export-Date: 2019-11-14 06:33+0000\n"
+"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 
 #: ../bin/duplicity:121
 msgid "INT intercepted...exiting."
@@ -127,7 +127,7 @@ msgstr "Записывается %s"
 msgid "File %s not found locally after get from backend"
 msgstr ""
 
-#: ../duplicity/backends/giobackend.py:108
+#: ../duplicity/backends/giobackend.py:109
 #, python-format
 msgid "Connection failed, please check your password: %s"
 msgstr "Не удалось подключиться, проверьте пароль: %s"
@@ -163,69 +163,69 @@ msgstr ""
 msgid "MultiBackend: Could not load config file %s: %s "
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:187
+#: ../duplicity/backends/multibackend.py:185
 #, python-format
 msgid "MultiBackend: use store %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:192
+#: ../duplicity/backends/multibackend.py:190
 #, python-format
 msgid "MultiBackend: set env %s = %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:205
+#: ../duplicity/backends/multibackend.py:203
 #, python-format
 msgid "Multibackend: register affinity for prefix %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:246
+#: ../duplicity/backends/multibackend.py:244
 #, python-format
 msgid "MultiBackend: _put: write to store #%s (%s)"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:259
+#: ../duplicity/backends/multibackend.py:257
 #, python-format
 msgid "MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:266
+#: ../duplicity/backends/multibackend.py:264
 #, python-format
 msgid "MultiBackend: failed to write %s. Aborting process."
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:273
+#: ../duplicity/backends/multibackend.py:271
 #, python-format
 msgid ""
 "MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:292
+#: ../duplicity/backends/multibackend.py:290
 #, python-format
 msgid "MultiBackend: failed to get %s to %s from %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:295
+#: ../duplicity/backends/multibackend.py:293
 #, python-format
 msgid ""
 "MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:304
+#: ../duplicity/backends/multibackend.py:302
 #, python-format
 msgid "MultiBackend: list from %s: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:310
+#: ../duplicity/backends/multibackend.py:308
 #, python-format
 msgid "MultiBackend: combined list: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:338
+#: ../duplicity/backends/multibackend.py:336
 #, python-format
 msgid "MultiBackend: failed to delete %s from %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:342
+#: ../duplicity/backends/multibackend.py:340
 #, python-format
 msgid ""
 "MultiBackend: failed to delete %s. Tried all backing stores and none "
@@ -1143,7 +1143,7 @@ msgstr ""
 msgid "File %s was corrupted during upload."
 msgstr "Файл %s был повреждён во время выгрузки."
 
-#: ../duplicity/dup_main.py:353
+#: ../duplicity/dup_main.py:360
 msgid ""
 "Restarting backup, but current encryption settings do not match original "
 "settings"
@@ -1151,17 +1151,17 @@ msgstr ""
 "Перезапуск резервного копирования, но настройки текущего шифрования не "
 "соответствуют исходным настройкам"
 
-#: ../duplicity/dup_main.py:376
+#: ../duplicity/dup_main.py:383
 #, python-format
 msgid "Restarting after volume %s, file %s, block %s"
 msgstr ""
 
-#: ../duplicity/dup_main.py:446
+#: ../duplicity/dup_main.py:453
 #, python-format
 msgid "Processed volume %d"
 msgstr ""
 
-#: ../duplicity/dup_main.py:596
+#: ../duplicity/dup_main.py:603
 msgid ""
 "Fatal Error: Unable to start incremental backup.  Old signatures not found "
 "and incremental specified"
@@ -1169,54 +1169,54 @@ msgstr ""
 "Фатальная ошибка: Не удалось начать пошаговое резервное копирование. Старая "
 "сигнатура не найдена и указан пошаговый режим"
 
-#: ../duplicity/dup_main.py:600
+#: ../duplicity/dup_main.py:607
 msgid "No signatures found, switching to full backup."
 msgstr "Сигнатуры не найдены, переключение на полную резервную копию."
 
-#: ../duplicity/dup_main.py:614
+#: ../duplicity/dup_main.py:621
 msgid "Backup Statistics"
 msgstr "Статистика резервного копирования"
 
-#: ../duplicity/dup_main.py:720
+#: ../duplicity/dup_main.py:727
 #, python-format
 msgid "%s not found in archive - no files restored."
 msgstr "%s не найден в архиве, нет восстановленных файлов."
 
-#: ../duplicity/dup_main.py:724
+#: ../duplicity/dup_main.py:731
 msgid "No files found in archive - nothing restored."
 msgstr "Ничего не найдено в архиве - ничего не восстановлено."
 
-#: ../duplicity/dup_main.py:757
+#: ../duplicity/dup_main.py:764
 #, python-format
 msgid "Processed volume %d of %d"
 msgstr "Обработан том %d из %d"
 
-#: ../duplicity/dup_main.py:791
+#: ../duplicity/dup_main.py:798
 #, python-format
 msgid "Invalid data - %s hash mismatch for file:"
 msgstr "Недопустимые данные - %s hash не соответствует файлу:"
 
-#: ../duplicity/dup_main.py:794
+#: ../duplicity/dup_main.py:801
 #, python-format
 msgid "Calculated hash: %s"
 msgstr "Вычисленный хэш: %s"
 
-#: ../duplicity/dup_main.py:795
+#: ../duplicity/dup_main.py:802
 #, python-format
 msgid "Manifest hash: %s"
 msgstr "Хеш манифеста: %s"
 
-#: ../duplicity/dup_main.py:838
+#: ../duplicity/dup_main.py:845
 #, python-format
 msgid "Volume was signed by key %s, not %s"
 msgstr "Том был подписан ключом %s, а не %s"
 
-#: ../duplicity/dup_main.py:870
+#: ../duplicity/dup_main.py:877
 #, python-format
 msgid "Verify complete: %s, %s."
 msgstr "Проверка завершена: %s, %s."
 
-#: ../duplicity/dup_main.py:871
+#: ../duplicity/dup_main.py:878
 #, python-format
 msgid "%d file compared"
 msgid_plural "%d files compared"
@@ -1224,7 +1224,7 @@ msgstr[0] "%d файл сравнён"
 msgstr[1] "%d файла сравнены"
 msgstr[2] "%d файлов сравнено"
 
-#: ../duplicity/dup_main.py:873
+#: ../duplicity/dup_main.py:880
 #, python-format
 msgid "%d difference found"
 msgid_plural "%d differences found"
@@ -1232,38 +1232,38 @@ msgstr[0] "%d отличие найдено"
 msgstr[1] "%d отличия найдено"
 msgstr[2] "%d отличий найдено"
 
-#: ../duplicity/dup_main.py:892
+#: ../duplicity/dup_main.py:899
 msgid "No extraneous files found, nothing deleted in cleanup."
 msgstr "Посторонних файлов не найдено, при очистке ничего не удалено."
 
-#: ../duplicity/dup_main.py:897
+#: ../duplicity/dup_main.py:904
 msgid "Deleting this file from backend:"
 msgid_plural "Deleting these files from backend:"
 msgstr[0] "Удаляется следующий файл из заглушки:"
 msgstr[1] "Удаляются следующие файлы из заглушки:"
 msgstr[2] "Удаляются следующие файлы из заглушки:"
 
-#: ../duplicity/dup_main.py:908
+#: ../duplicity/dup_main.py:915
 msgid "Found the following file to delete:"
 msgid_plural "Found the following files to delete:"
 msgstr[0] "Найден файл для удаления:"
 msgstr[1] "Найдены файлы для удаления:"
 msgstr[2] "Найдены файлы для удаления:"
 
-#: ../duplicity/dup_main.py:911
+#: ../duplicity/dup_main.py:918
 msgid "Run duplicity again with the --force option to actually delete."
 msgstr ""
 "Запустите duplicity ещё раз с ключом --force чтобы удалить на самом деле."
 
-#: ../duplicity/dup_main.py:954
+#: ../duplicity/dup_main.py:961
 msgid "There are backup set(s) at time(s):"
 msgstr "Есть резервные копии за следующие даты:"
 
-#: ../duplicity/dup_main.py:956
+#: ../duplicity/dup_main.py:963
 msgid "Which can't be deleted because newer sets depend on them."
 msgstr "Какие не могут быть удалены из-за новых наборов зависящих от них."
 
-#: ../duplicity/dup_main.py:960
+#: ../duplicity/dup_main.py:967
 msgid ""
 "Current active backup chain is older than specified time.  However, it will "
 "not be deleted.  To remove all your backups, manually purge the repository."
@@ -1272,129 +1272,129 @@ msgstr ""
 "менее, она не будет удалена. Чтобы удалить все резервные копии, вручную "
 "очистите хранилище."
 
-#: ../duplicity/dup_main.py:973
+#: ../duplicity/dup_main.py:980
 msgid "No old backup sets found, nothing deleted."
 msgstr "Старые резервные копии не найдены, ничего не удалено."
 
-#: ../duplicity/dup_main.py:976
+#: ../duplicity/dup_main.py:983
 msgid "Deleting backup chain at time:"
 msgid_plural "Deleting backup chains at times:"
 msgstr[0] "Удаление цепочки резервных копий по времени:"
 msgstr[1] "Удаление цепочек резервных копий по времени:"
 msgstr[2] "Удаление цепочек резервных копий по времени:"
 
-#: ../duplicity/dup_main.py:988
+#: ../duplicity/dup_main.py:995
 #, python-format
 msgid "Deleting any incremental signature chain rooted at %s"
 msgstr ""
 
-#: ../duplicity/dup_main.py:990
+#: ../duplicity/dup_main.py:997
 #, python-format
 msgid "Deleting any incremental backup chain rooted at %s"
 msgstr ""
 
-#: ../duplicity/dup_main.py:993
+#: ../duplicity/dup_main.py:1000
 #, python-format
 msgid "Deleting complete signature chain %s"
 msgstr "Удаление всей цепочки подписей %s"
 
-#: ../duplicity/dup_main.py:995
+#: ../duplicity/dup_main.py:1002
 #, python-format
 msgid "Deleting complete backup chain %s"
 msgstr "Удаление полной цепочки резервных копий  %s"
 
-#: ../duplicity/dup_main.py:1001
+#: ../duplicity/dup_main.py:1008
 msgid "Found old backup chain at the following time:"
 msgid_plural "Found old backup chains at the following times:"
 msgstr[0] "Обнаружена цепочка резервных копий, выполненных:"
 msgstr[1] "Обнаружены цепочки резервных копий, выполненных:"
 msgstr[2] "Обнаружены цепочки резервных копий, выполненных:"
 
-#: ../duplicity/dup_main.py:1005
+#: ../duplicity/dup_main.py:1012
 msgid "Rerun command with --force option to actually delete."
 msgstr "Rerun command with --force option to actually delete."
 
-#: ../duplicity/dup_main.py:1028
+#: ../duplicity/dup_main.py:1035
 msgid "No old backup sets found."
 msgstr ""
 
-#: ../duplicity/dup_main.py:1043
+#: ../duplicity/dup_main.py:1050
 #, python-format
 msgid "Signature %s already replicated"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1050 ../duplicity/dup_main.py:1089
+#: ../duplicity/dup_main.py:1057 ../duplicity/dup_main.py:1096
 #, python-format
 msgid "Replicating %s."
 msgstr ""
 
-#: ../duplicity/dup_main.py:1077
+#: ../duplicity/dup_main.py:1084
 #, python-format
 msgid "Backupset %s already replicated"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1225
+#: ../duplicity/dup_main.py:1232
 #, python-format
 msgid "Deleting local %s (not authoritative at backend)."
 msgstr ""
 "Удаление локального %s (недостаточно надёжный во внутреннем интерфейсе)."
 
-#: ../duplicity/dup_main.py:1230
+#: ../duplicity/dup_main.py:1237
 #, python-format
 msgid "Unable to delete %s: %s"
 msgstr "Невозможно удалить %s: %s"
 
-#: ../duplicity/dup_main.py:1264 ../duplicity/dup_temp.py:271
+#: ../duplicity/dup_main.py:1271 ../duplicity/dup_temp.py:271
 #, python-format
 msgid "Failed to read %s: %s"
 msgstr "Не удалось прочитать %s: %s"
 
-#: ../duplicity/dup_main.py:1278
+#: ../duplicity/dup_main.py:1285
 #, python-format
 msgid "Copying %s to local cache."
 msgstr "Копируется %s в локальный кэш."
 
-#: ../duplicity/dup_main.py:1326
+#: ../duplicity/dup_main.py:1333
 msgid "Local and Remote metadata are synchronized, no sync needed."
 msgstr ""
 "Локальные и удалённые метаданные синхронизированы, синхронизация не "
 "требуется."
 
-#: ../duplicity/dup_main.py:1331
+#: ../duplicity/dup_main.py:1338
 msgid "Synchronizing remote metadata to local cache..."
 msgstr "Синхронизация удалённых метаданных с локальными временными файлами..."
 
-#: ../duplicity/dup_main.py:1344
+#: ../duplicity/dup_main.py:1351
 msgid "Sync would copy the following from remote to local:"
 msgstr "Синхронизация скопирует это из удаленного места в локальное:"
 
-#: ../duplicity/dup_main.py:1347
+#: ../duplicity/dup_main.py:1354
 msgid "Sync would remove the following spurious local files:"
 msgstr "Синхронизация удалит следующие  неизвестные файлы:"
 
-#: ../duplicity/dup_main.py:1391
+#: ../duplicity/dup_main.py:1398
 msgid "Unable to get free space on temp."
 msgstr "Не удалось узнать объем доступного пространства во временном каталоге."
 
-#: ../duplicity/dup_main.py:1399
+#: ../duplicity/dup_main.py:1406
 #, python-format
 msgid "Temp space has %d available, backup needs approx %d."
 msgstr ""
 "Во временно каталоге доступного %d, для резервного копирования нужно "
 "примерно %d."
 
-#: ../duplicity/dup_main.py:1402
+#: ../duplicity/dup_main.py:1409
 #, python-format
 msgid "Temp has %d available, backup will use approx %d."
 msgstr ""
 "Во временном каталоге доступно %d, для резервного копирования будет "
 "использовано примерно %d."
 
-#: ../duplicity/dup_main.py:1410
+#: ../duplicity/dup_main.py:1417
 msgid "Unable to get max open files."
 msgstr "Не удалось узнать максимальное количество открытых файлов."
 
-#: ../duplicity/dup_main.py:1414
+#: ../duplicity/dup_main.py:1421
 #, python-format
 msgid ""
 "Max open files of %s is too low, should be >= 1024.\n"
@@ -1404,7 +1404,7 @@ msgstr ""
 "1024.\n"
 "Используйте 'ulimit -n 1024' или выше, чтобы исправить.\n"
 
-#: ../duplicity/dup_main.py:1466
+#: ../duplicity/dup_main.py:1473
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
@@ -1412,7 +1412,7 @@ msgstr ""
 "ПЕРЕЗАПУСК: Ошибка выгрузки первого тома перед завершением работы.\n"
 "         Перезапуск невозможен...выполнение резервного копирования с начала."
 
-#: ../duplicity/dup_main.py:1472
+#: ../duplicity/dup_main.py:1479
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
@@ -1421,7 +1421,7 @@ msgstr ""
 "ПЕРЕЗАПУСК: Ошибка выгрузки томов %d дo %d перед завершением работы.\n"
 "         Перезапуск резервного копирования в томе %d."
 
-#: ../duplicity/dup_main.py:1479
+#: ../duplicity/dup_main.py:1486
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -1435,7 +1435,7 @@ msgstr ""
 "части\n"
 "         резервной копии, затем запустит резервное копирования сначала."
 
-#: ../duplicity/dup_main.py:1500
+#: ../duplicity/dup_main.py:1507
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -1445,40 +1445,40 @@ msgid ""
 "See https://bugs.launchpad.net/duplicity/+bug/931175\n"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1523
+#: ../duplicity/dup_main.py:1530
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1581
+#: ../duplicity/dup_main.py:1588
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr ""
 "Последняя %s резервная копия оставила частичный набор, выполняется "
 "перезапуск."
 
-#: ../duplicity/dup_main.py:1585
+#: ../duplicity/dup_main.py:1592
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr ""
 "Очистка предыдущего частичного %s набора резервного копирования, выполняется "
 "перезапуск."
 
-#: ../duplicity/dup_main.py:1597
+#: ../duplicity/dup_main.py:1604
 msgid "Last full backup date:"
 msgstr "Время последней полной резервной копии:"
 
-#: ../duplicity/dup_main.py:1599
+#: ../duplicity/dup_main.py:1606
 msgid "Last full backup date: none"
 msgstr "Время последней полной резервной копии: нету"
 
-#: ../duplicity/dup_main.py:1602
+#: ../duplicity/dup_main.py:1609
 msgid "Last full backup is too old, forcing full backup"
 msgstr ""
 "Последняя полная резервная копия слишком старая, будет сделана полная "
 "резервная копия"
 
-#: ../duplicity/dup_main.py:1651
+#: ../duplicity/dup_main.py:1658
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."
