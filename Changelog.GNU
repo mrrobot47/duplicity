@@ -1,3 +1,15 @@
+2019-11-16  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1852848 with patch from Tomas Krizek
+      - B2 moved the API from "b2" package into a separate "b2sdk" package.
+        Using the old "b2" package is now deprecated. See link:
+        https://github.com/Backblaze/B2_Command_Line_Tool/blob/master/b2/_sdk_deprecation.py
+      - b2backend.py currently depends on both "b2" and "b2sdk", but use of "b2"
+        is enforced and "b2sdk" isn't used at all.
+      - The attached patch uses "b2sdk" as the primary dependency. If the new
+        "b2sdk" module isn't available, it falls back to using the old "b2" in
+        order to keep backward compatibility with older installations.
+
 2019-11-14  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in translation updates

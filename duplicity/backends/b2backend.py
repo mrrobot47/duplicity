@@ -65,20 +65,24 @@ class B2Backend(duplicity.backend.Backend):
         """
         duplicity.backend.Backend.__init__(self, parsed_url)
 
-        # Import B2 API
-        try:
-            global b2
-            import b2
-            global b2sdk
-            import b2sdk
-            import b2.api
-            import b2.account_info
-            import b2.download_dest
-            import b2.file_version
+        global DownloadDestLocalFile, FileVersionInfoFactory
+        try:  # try to import the new b2sdk if available
+            from b2sdk.api import B2Api
+            from b2sdk.account_info import InMemoryAccountInfo
+            from b2sdk.download_dest import DownloadDestLocalFile
+            from b2sdk.exception import NonExistentBucket
+            from b2sdk.file_version import FileVersionInfoFactory
         except ImportError:
-            raise BackendException(u'B2 backend requires B2 Python APIs (pip install b2)')
+            try:  # fall back to import the old b2 client
+                from b2.api import B2Api
+                from b2.account_info import InMemoryAccountInfo
+                from b2.download_dest import DownloadDestLocalFile
+                from b2.exception import NonExistentBucket
+                from b2.file_version import FileVersionInfoFactory
+            except ImportError:
+                raise BackendException(u'B2 backend requires B2 Python SDK (pip install b2sdk)')
 
-        self.service = b2.api.B2Api(b2.account_info.InMemoryAccountInfo())
+        self.service = B2Api(InMemoryAccountInfo())
         self.parsed_url.hostname = u'B2'
 
         account_id = parsed_url.username
@@ -100,7 +104,7 @@ class B2Backend(duplicity.backend.Backend):
         try:
             self.bucket = self.service.get_bucket_by_name(bucket_name)
             log.Log(u"Bucket found", log.INFO)
-        except b2.exception.NonExistentBucket:
+        except NonExistentBucket:
             try:
                 log.Log(u"Bucket not found, creating one", log.INFO)
                 self.bucket = self.service.create_bucket(bucket_name, u'allPrivate')
@@ -115,7 +119,7 @@ class B2Backend(duplicity.backend.Backend):
                                     util.fsdecode(local_path.name)),
                 log.INFO)
         self.bucket.download_file_by_name(quote_plus(self.path + util.fsdecode(remote_filename), u'/'),
-                                          b2.download_dest.DownloadDestLocalFile(util.fsdecode(local_path.name)))
+                                          DownloadDestLocalFile(util.fsdecode(local_path.name)))
 
     def _put(self, source_path, remote_filename):
         u"""
@@ -156,7 +160,7 @@ class B2Backend(duplicity.backend.Backend):
     def file_info(self, filename):
         response = self.bucket.api.session.list_file_names(self.bucket.id_, filename, 1, None)
         for entry in response[u'files']:
-            file_version_info = b2.file_version.FileVersionInfoFactory.from_api_response(entry)
+            file_version_info = FileVersionInfoFactory.from_api_response(entry)
             if file_version_info.file_name == filename:
                 return file_version_info
         raise BackendException(u'File not found')

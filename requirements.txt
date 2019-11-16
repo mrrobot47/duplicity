@@ -24,7 +24,6 @@ tox
 ##### backend libraries #####
 
 # azure
-# b2
 # b2sdk
 # boto
 # dropbox==6.9.0
