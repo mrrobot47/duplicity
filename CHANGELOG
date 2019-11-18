@@ -10,6 +10,9 @@ New in v0.8.08 (2019/12/??)
     "b2sdk" module isn't available, it falls back to using the old "b2" in
     order to keep backward compatibility with older installations.
 * Added build signing to dist/makesnap.
+* Fixed bug #1852876 '_io.BufferedReader' object has no attribute 'uc_name'
+  - Fixed a couple of instances where str() was used in place of util.uexc()
+  - The file was opened with builtins, so use name, not uc_name
 
 
 New in v0.8.07 (2019/11/14)

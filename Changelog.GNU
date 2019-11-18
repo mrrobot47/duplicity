@@ -1,6 +1,9 @@
 2019-11-18  Kenneth Loafman  <kenneth@loafman.com>
 
     * Added build signing to dist/makesnap.
+    * Fixed bug #1852876 '_io.BufferedReader' object has no attribute 'uc_name'
+      - Fixed a couple of instances where str() was used in place of util.uexc()
+      - The file was opened with builtins, so use name, not uc_name
 
 2019-11-16  Kenneth Loafman  <kenneth@loafman.com>
 
