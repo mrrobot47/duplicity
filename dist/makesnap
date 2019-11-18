@@ -13,7 +13,7 @@ fi
 export PYTHONWARNINGS="ignore::DeprecationWarning"
 
 # get the working source tree
-rsync -a --delete \
+rsync -av --delete \
     --exclude=*.pyc \
     --exclude=*.so \
     --exclude=.tox \
@@ -26,16 +26,23 @@ rsync -a --delete \
 cd ~/workspace/duplicity-src8
 dist/makedist ${VERSION}
 
-# build snap from clean source
+# make clean source dir
 mkdir -p build
 tar xf duplicity-${VERSION}.tar.gz -C build
 cd build/duplicity-${VERSION}
+
+# build snap
 snapcraft snap
-mv duplicity_${VERSION}*.snap ../..
-cd ../..
 
 # push to edge
-# snapcraft push duplicity_${VERSION}*.snap --release edge
+snapcraft push duplicity_${VERSION}*.snap --release edge
+
+# sign snap
+snapcraft sign-build duplicity_${VERSION}*.snap
+
+# mv into working source tree
+mv duplicity_${VERSION}*.snap* ../..
+cd ../..
 
 # clean up
 rm -rf build

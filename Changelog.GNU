@@ -1,3 +1,7 @@
+2019-11-18  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Added build signing to dist/makesnap.
+
 2019-11-16  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1852848 with patch from Tomas Krizek
