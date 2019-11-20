@@ -1,3 +1,8 @@
+2019-11-20  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1851668 with help from Wolfgang Rohdewald
+      - Applied patches to handle translations.
+
 2019-11-18  Kenneth Loafman  <kenneth@loafman.com>
 
     * Added build signing to dist/makesnap.

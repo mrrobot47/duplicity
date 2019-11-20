@@ -24,4 +24,4 @@ import gettext
 if sys.version_info.major >= 3:
     gettext.install(u'duplicity', names=[u'ngettext'])
 else:
-    gettext.install(u'duplicity', names=[u'ngettext'])
+    gettext.install(u'duplicity', names=[u'ngettext'], unicode=True)
