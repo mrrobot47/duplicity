@@ -25,3 +25,4 @@ testfiles
 testing/gnupg/.gpg-v21-migrated
 testing/gnupg/S.*
 testing/gnupg/private-keys-v1.d
+duplicity/backends/rclonebackend.py

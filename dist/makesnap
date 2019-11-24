@@ -22,7 +22,7 @@
 
 # Modify to fit your system
 REMOTE="dione.local:///Users/ken/workspace/duplicity-src8/"
-LOCAL="~/workspace/duplicity-src8/"
+LOCAL="/home/ken/workspace/duplicity-src8/"
 
 
 set -e

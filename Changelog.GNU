@@ -1,3 +1,9 @@
+2019-11-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1853655 - duplicity crashes with --exclude-older-than
+      - The exclusion setup checked for valid string only.  Made
+        the code comprehend datetime (int) as well.
+
 2019-11-20  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1851668 with help from Wolfgang Rohdewald
