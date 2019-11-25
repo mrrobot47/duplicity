@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-11-21 15:35+0000\n"
+"POT-Creation-Date: 2019-11-24 17:01+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-11-22 06:09+0000\n"
+"X-Launchpad-Export-Date: 2019-11-25 06:18+0000\n"
 "X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
 "Language: es\n"
 
@@ -38,7 +38,7 @@ msgstr "Detalle de error del usuario: %s"
 msgid "Backend error detail: %s"
 msgstr "Detalle de error del motor: %s"
 
-#: ../bin/rdiffdir:63 ../duplicity/commandline.py:233
+#: ../bin/rdiffdir:63 ../duplicity/commandline.py:236
 #, python-format
 msgid "Error opening file %s"
 msgstr "Error al abrir el archivo %s"
@@ -428,10 +428,10 @@ msgstr ""
 
 #. TRANSL: Used in usage help to represent a Unix-style path name. Example:
 #. --archive-dir <path>
-#: ../duplicity/commandline.py:254 ../duplicity/commandline.py:264
-#: ../duplicity/commandline.py:285 ../duplicity/commandline.py:359
-#: ../duplicity/commandline.py:377 ../duplicity/commandline.py:606
-#: ../duplicity/commandline.py:639 ../duplicity/commandline.py:850
+#: ../duplicity/commandline.py:257 ../duplicity/commandline.py:267
+#: ../duplicity/commandline.py:288 ../duplicity/commandline.py:362
+#: ../duplicity/commandline.py:380 ../duplicity/commandline.py:609
+#: ../duplicity/commandline.py:642 ../duplicity/commandline.py:853
 msgid "path"
 msgstr "ruta"
 
@@ -441,9 +441,9 @@ msgstr "ruta"
 #. --hidden-encrypt-key <gpg_key_id>
 #. TRANSL: Used in usage help to represent an ID for a GnuPG key. Example:
 #. --encrypt-key <gpg_key_id>
-#: ../duplicity/commandline.py:280 ../duplicity/commandline.py:287
-#: ../duplicity/commandline.py:383 ../duplicity/commandline.py:590
-#: ../duplicity/commandline.py:823
+#: ../duplicity/commandline.py:283 ../duplicity/commandline.py:290
+#: ../duplicity/commandline.py:386 ../duplicity/commandline.py:593
+#: ../duplicity/commandline.py:826
 msgid "gpg-key-id"
 msgstr "gpg-key-id"
 
@@ -451,43 +451,43 @@ msgstr "gpg-key-id"
 #. matching one or more files, as described in the documentation.
 #. Example:
 #. --exclude <shell_pattern>
-#: ../duplicity/commandline.py:295 ../duplicity/commandline.py:408
-#: ../duplicity/commandline.py:873
+#: ../duplicity/commandline.py:298 ../duplicity/commandline.py:411
+#: ../duplicity/commandline.py:876
 msgid "shell_pattern"
 msgstr "shell_pattern"
 
 #. TRANSL: Used in usage help to represent the name of a file. Example:
 #. --log-file <filename>
-#: ../duplicity/commandline.py:301 ../duplicity/commandline.py:310
-#: ../duplicity/commandline.py:317 ../duplicity/commandline.py:410
-#: ../duplicity/commandline.py:417 ../duplicity/commandline.py:430
-#: ../duplicity/commandline.py:819
+#: ../duplicity/commandline.py:304 ../duplicity/commandline.py:313
+#: ../duplicity/commandline.py:320 ../duplicity/commandline.py:413
+#: ../duplicity/commandline.py:420 ../duplicity/commandline.py:433
+#: ../duplicity/commandline.py:822
 msgid "filename"
 msgstr "nombre de archivo"
 
 #. TRANSL: Used in usage help to represent a regular expression (regexp).
-#: ../duplicity/commandline.py:324 ../duplicity/commandline.py:421
+#: ../duplicity/commandline.py:327 ../duplicity/commandline.py:424
 msgid "regular_expression"
 msgstr "expresión regular"
 
 #. TRANSL: Used in usage help to represent a time spec for a previous
 #. point in time, as described in the documentation. Example:
 #. duplicity remove-older-than time [options] target_url
-#: ../duplicity/commandline.py:328 ../duplicity/commandline.py:371
-#: ../duplicity/commandline.py:497 ../duplicity/commandline.py:905
+#: ../duplicity/commandline.py:331 ../duplicity/commandline.py:374
+#: ../duplicity/commandline.py:500 ../duplicity/commandline.py:908
 msgid "time"
 msgstr "hora"
 
 #. TRANSL: Used in usage help. (Should be consistent with the "Options:"
 #. header.) Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:379 ../duplicity/commandline.py:477
-#: ../duplicity/commandline.py:500 ../duplicity/commandline.py:598
-#: ../duplicity/commandline.py:838
+#: ../duplicity/commandline.py:382 ../duplicity/commandline.py:480
+#: ../duplicity/commandline.py:503 ../duplicity/commandline.py:601
+#: ../duplicity/commandline.py:841
 msgid "options"
 msgstr "opciones"
 
-#: ../duplicity/commandline.py:394
+#: ../duplicity/commandline.py:397
 #, python-format
 msgid ""
 "Running in 'ignore errors' mode due to %s; please re-consider if this was "
@@ -497,54 +497,54 @@ msgstr ""
 "no es su intención"
 
 #. TRANSL: Used in usage help to represent an imap mailbox
-#: ../duplicity/commandline.py:406
+#: ../duplicity/commandline.py:409
 msgid "imap_mailbox"
 msgstr "imap_mailbox"
 
-#: ../duplicity/commandline.py:424
+#: ../duplicity/commandline.py:427
 msgid "file_descriptor"
 msgstr "file_descriptor"
 
 #. TRANSL: Used in usage help to represent a desired number of
 #. something. Example:
 #. --num-retries <number>
-#: ../duplicity/commandline.py:435 ../duplicity/commandline.py:457
-#: ../duplicity/commandline.py:474 ../duplicity/commandline.py:483
-#: ../duplicity/commandline.py:530 ../duplicity/commandline.py:535
-#: ../duplicity/commandline.py:539 ../duplicity/commandline.py:558
-#: ../duplicity/commandline.py:564 ../duplicity/commandline.py:568
-#: ../duplicity/commandline.py:634 ../duplicity/commandline.py:833
+#: ../duplicity/commandline.py:438 ../duplicity/commandline.py:460
+#: ../duplicity/commandline.py:477 ../duplicity/commandline.py:486
+#: ../duplicity/commandline.py:533 ../duplicity/commandline.py:538
+#: ../duplicity/commandline.py:542 ../duplicity/commandline.py:561
+#: ../duplicity/commandline.py:567 ../duplicity/commandline.py:571
+#: ../duplicity/commandline.py:637 ../duplicity/commandline.py:836
 msgid "number"
 msgstr "número"
 
 #. TRANSL: Used in usage help (noun)
-#: ../duplicity/commandline.py:438
+#: ../duplicity/commandline.py:441
 msgid "backup name"
 msgstr "nombre de respaldo"
 
-#: ../duplicity/commandline.py:553
+#: ../duplicity/commandline.py:556
 msgid "policy"
 msgstr ""
 
-#: ../duplicity/commandline.py:571
+#: ../duplicity/commandline.py:574
 msgid "Hot|Cool|Archive"
 msgstr ""
 
 #. TRANSL: noun
-#: ../duplicity/commandline.py:574 ../duplicity/commandline.py:577
-#: ../duplicity/commandline.py:804
+#: ../duplicity/commandline.py:577 ../duplicity/commandline.py:580
+#: ../duplicity/commandline.py:807
 msgid "command"
 msgstr "orden"
 
-#: ../duplicity/commandline.py:580
+#: ../duplicity/commandline.py:583
 msgid "pyrax|cloudfiles"
 msgstr "pyrax|cloudfiles"
 
-#: ../duplicity/commandline.py:601
+#: ../duplicity/commandline.py:604
 msgid "pem formatted bundle of certificate authorities"
 msgstr "paquete formateado pem de entidades de certificación"
 
-#: ../duplicity/commandline.py:602
+#: ../duplicity/commandline.py:605
 msgid "path to a folder with certificate authority files"
 msgstr "ruta a una carpeta con archivos de autoridad de certificados"
 
@@ -554,113 +554,113 @@ msgstr "ruta a una carpeta con archivos de autoridad de certificados"
 #. --backend-retry-delay <seconds>
 #. TRANSL: Used in usage help. Example:
 #. --timeout <seconds>
-#: ../duplicity/commandline.py:611 ../duplicity/commandline.py:645
-#: ../duplicity/commandline.py:867
+#: ../duplicity/commandline.py:614 ../duplicity/commandline.py:648
+#: ../duplicity/commandline.py:870
 msgid "seconds"
 msgstr "segundos"
 
 #. TRANSL: abbreviation for "character" (noun)
-#: ../duplicity/commandline.py:617 ../duplicity/commandline.py:801
+#: ../duplicity/commandline.py:620 ../duplicity/commandline.py:804
 msgid "char"
 msgstr "carácter"
 
-#: ../duplicity/commandline.py:767
+#: ../duplicity/commandline.py:770
 #, python-format
 msgid "Using archive dir: %s"
 msgstr "Usando directorio de archivador: %s"
 
-#: ../duplicity/commandline.py:768
+#: ../duplicity/commandline.py:771
 #, python-format
 msgid "Using backup name: %s"
 msgstr "Usando nombre de copia de seguridad: %s"
 
-#: ../duplicity/commandline.py:775
+#: ../duplicity/commandline.py:778
 #, python-format
 msgid "Command line error: %s"
 msgstr "Error de línea de órdenes: %s"
 
-#: ../duplicity/commandline.py:776
+#: ../duplicity/commandline.py:779
 msgid "Enter 'duplicity --help' for help screen."
 msgstr "Introduzca «duplicity --help» para tener ayuda en pantalla."
 
 #. TRANSL: Used in usage help to represent a Unix-style path name. Example:
 #. rsync://user[:password]@other_host[:port]//absolute_path
-#: ../duplicity/commandline.py:789
+#: ../duplicity/commandline.py:792
 msgid "absolute_path"
 msgstr "ruta_absoluta"
 
 #. TRANSL: Used in usage help. Example:
 #. tahoe://alias/some_dir
-#: ../duplicity/commandline.py:793
+#: ../duplicity/commandline.py:796
 msgid "alias"
 msgstr "alias"
 
 #. TRANSL: Used in help to represent a "bucket name" for Amazon Web
 #. Services' Simple Storage Service (S3). Example:
 #. s3://other.host/bucket_name[/prefix]
-#: ../duplicity/commandline.py:798
+#: ../duplicity/commandline.py:801
 msgid "bucket_name"
 msgstr "nombre_cubo"
 
 #. TRANSL: Used in usage help to represent the name of a container in
 #. Amazon Web Services' Cloudfront. Example:
 #. cf+http://container_name
-#: ../duplicity/commandline.py:809
+#: ../duplicity/commandline.py:812
 msgid "container_name"
 msgstr "nombre_contenedor"
 
 #. TRANSL: noun
-#: ../duplicity/commandline.py:812
+#: ../duplicity/commandline.py:815
 msgid "count"
 msgstr "recuento"
 
 #. TRANSL: Used in usage help to represent the name of a file directory
-#: ../duplicity/commandline.py:815
+#: ../duplicity/commandline.py:818
 msgid "directory"
 msgstr "directorio"
 
 #. TRANSL: Used in usage help, e.g. to represent the name of a code
 #. module. Example:
 #. rsync://user[:password]@other.host[:port]::/module/some_dir
-#: ../duplicity/commandline.py:828
+#: ../duplicity/commandline.py:831
 msgid "module"
 msgstr "módulo"
 
 #. TRANSL: Used in usage help to represent an internet hostname. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:842
+#: ../duplicity/commandline.py:845
 msgid "other.host"
 msgstr "otro.host"
 
 #. TRANSL: Used in usage help. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:846
+#: ../duplicity/commandline.py:849
 msgid "password"
 msgstr "contraseña"
 
 #. TRANSL: Used in usage help to represent a TCP port number. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:854
+#: ../duplicity/commandline.py:857
 msgid "port"
 msgstr "puerto"
 
 #. TRANSL: Used in usage help. This represents a string to be used as a
 #. prefix to names for backup files created by Duplicity. Example:
 #. s3://other.host/bucket_name[/prefix]
-#: ../duplicity/commandline.py:859
+#: ../duplicity/commandline.py:862
 msgid "prefix"
 msgstr "prefijo"
 
 #. TRANSL: Used in usage help to represent a Unix-style path name. Example:
 #. rsync://user[:password]@other.host[:port]/relative_path
-#: ../duplicity/commandline.py:863
+#: ../duplicity/commandline.py:866
 msgid "relative_path"
 msgstr "ruta_relativa"
 
 #. TRANSL: Used in usage help to represent the name of a single file
 #. directory or a Unix-style path to a directory. Example:
 #. file:///some_dir
-#: ../duplicity/commandline.py:878
+#: ../duplicity/commandline.py:881
 msgid "some_dir"
 msgstr "algun_dir"
 
@@ -668,14 +668,14 @@ msgstr "algun_dir"
 #. directory or a Unix-style path to a directory where files will be
 #. coming FROM. Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:884
+#: ../duplicity/commandline.py:887
 msgid "source_dir"
 msgstr "dir_origen"
 
 #. TRANSL: Used in usage help to represent a URL files will be coming
 #. FROM. Example:
 #. duplicity [restore] [options] source_url target_dir
-#: ../duplicity/commandline.py:889
+#: ../duplicity/commandline.py:892
 msgid "source_url"
 msgstr "url_origen"
 
@@ -683,52 +683,52 @@ msgstr "url_origen"
 #. directory or a Unix-style path to a directory. where files will be
 #. going TO. Example:
 #. duplicity [restore] [options] source_url target_dir
-#: ../duplicity/commandline.py:895
+#: ../duplicity/commandline.py:898
 msgid "target_dir"
 msgstr "dir_objetivo"
 
 #. TRANSL: Used in usage help to represent a URL files will be going TO.
 #. Example:
 #. duplicity [full|incremental] [options] source_dir target_url
-#: ../duplicity/commandline.py:900
+#: ../duplicity/commandline.py:903
 msgid "target_url"
 msgstr "url_objetivo"
 
 #. TRANSL: Used in usage help to represent a user name (i.e. login).
 #. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
-#: ../duplicity/commandline.py:910
+#: ../duplicity/commandline.py:913
 msgid "user"
 msgstr "usuario"
 
 #. TRANSL: account id for b2. Example: b2://account_id@bucket/
-#: ../duplicity/commandline.py:913
+#: ../duplicity/commandline.py:916
 msgid "account_id"
 msgstr "id_cuenta"
 
 #. TRANSL: application_key for b2.
 #. Example: b2://account_id:application_key@bucket/
-#: ../duplicity/commandline.py:917
+#: ../duplicity/commandline.py:920
 msgid "application_key"
 msgstr "clave_aplicación"
 
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:936
+#: ../duplicity/commandline.py:939
 msgid "Backends and their URL formats:"
 msgstr "Motores y sus formatos de URL:"
 
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:968
+#: ../duplicity/commandline.py:971
 msgid "Commands:"
 msgstr "Órdenes:"
 
-#: ../duplicity/commandline.py:993
+#: ../duplicity/commandline.py:996
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr "El directorio del archivador «%s» no existe, o no es un directorio"
 
-#: ../duplicity/commandline.py:1002
+#: ../duplicity/commandline.py:1005
 #, python-format
 msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
@@ -738,7 +738,7 @@ msgstr ""
 "hexadecimales , como «AA0E732D2».\n"
 "Se ha recibido «%s» en su lugar."
 
-#: ../duplicity/commandline.py:1062
+#: ../duplicity/commandline.py:1065
 #, python-format
 msgid ""
 "Restore destination directory %s already exists.\n"
@@ -747,22 +747,22 @@ msgstr ""
 "Restaurar directorio de destino %s ya existe.\n"
 "No sobrescribir."
 
-#: ../duplicity/commandline.py:1067
+#: ../duplicity/commandline.py:1070
 #, python-format
 msgid "Verify directory %s does not exist"
 msgstr "El directorio verificado %s no existe"
 
-#: ../duplicity/commandline.py:1073
+#: ../duplicity/commandline.py:1076
 #, python-format
 msgid "Backup source directory %s does not exist."
 msgstr "El directorio de origen de respaldo %s no existe."
 
-#: ../duplicity/commandline.py:1104
+#: ../duplicity/commandline.py:1107
 #, python-format
 msgid "Command line warning: %s"
 msgstr "Aviso de línea de órdenes: %s"
 
-#: ../duplicity/commandline.py:1104
+#: ../duplicity/commandline.py:1107
 msgid ""
 "Selection options --exclude/--include\n"
 "currently work only when backing up,not restoring."
@@ -770,12 +770,12 @@ msgstr ""
 "Las opciones de selección --exclude/--include\n"
 "actualmente funcionan solo cuando se respalda no al restaurar."
 
-#: ../duplicity/commandline.py:1140
+#: ../duplicity/commandline.py:1143
 #, python-format
 msgid "GPG binary is %s, version %s"
 msgstr "El binario de GPG es %s, versión %s"
 
-#: ../duplicity/commandline.py:1167
+#: ../duplicity/commandline.py:1170
 #, python-format
 msgid ""
 "Bad URL '%s'.\n"
@@ -786,7 +786,7 @@ msgstr ""
 "Ejemplos de cadenas de URL son «scp://user@host.net:1234/path» \n"
 "y «file:///usr/local». Ver el manual para más información."
 
-#: ../duplicity/commandline.py:1197
+#: ../duplicity/commandline.py:1200
 msgid "Main action: "
 msgstr "Acción principal: "
 
@@ -1773,7 +1773,7 @@ msgid "Error initializing file %s"
 msgstr "Error al inicializar el archivo %s"
 
 #: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:464
+#: ../duplicity/selection.py:458
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Error al acceder a un archivo posiblemente bloqueado %s"
@@ -1789,7 +1789,7 @@ msgstr "Aviso: %s base no existe, continuando"
 msgid "Selecting %s"
 msgstr "Seleccionando %s"
 
-#: ../duplicity/selection.py:296
+#: ../duplicity/selection.py:290
 #, python-format
 msgid ""
 "Fatal Error: The file specification\n"
@@ -1806,7 +1806,7 @@ msgstr ""
 "Las especificaciones de archivos útiles empiezan con el directorio\n"
 "principal o pautas (tipo «**«) que coinciden con el directorio principal."
 
-#: ../duplicity/selection.py:305
+#: ../duplicity/selection.py:299
 #, python-format
 msgid ""
 "Fatal Error while processing expression\n"
@@ -1815,7 +1815,7 @@ msgstr ""
 "Error fatal al procesar la expresión\n"
 "%s"
 
-#: ../duplicity/selection.py:314
+#: ../duplicity/selection.py:308
 #, python-format
 msgid ""
 "Last selection expression:\n"
@@ -1830,17 +1830,17 @@ msgstr ""
 "incluye todos los archivos, es redundante. Salir porque probablemente\n"
 "no es la opción elegida."
 
-#: ../duplicity/selection.py:370
+#: ../duplicity/selection.py:364
 #, python-format
 msgid "Reading globbing filelist %s"
 msgstr "Leyendo listado de archivo del recuadro %s"
 
-#: ../duplicity/selection.py:403
+#: ../duplicity/selection.py:397
 #, python-format
 msgid "Error compiling regular expression %s"
 msgstr "Error al compilar la expresión regular %s"
 
-#: ../duplicity/selection.py:420
+#: ../duplicity/selection.py:414
 msgid ""
 "Warning: exclude-device-files is not the first selector.\n"
 "This may not be what you intended"
