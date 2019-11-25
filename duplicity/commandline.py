@@ -541,6 +541,9 @@ def parse_cmdline_options(arglist):
     # support european for now).
     parser.add_option(u"--s3-european-buckets", action=u"store_true")
 
+    # Use the boto3 implementation for s3
+    parser.add_option(u"--s3-use-boto3", action=u"store_true")
+
     # Whether to use S3 Reduced Redudancy Storage
     parser.add_option(u"--s3-use-rrs", action=u"store_true")
 
