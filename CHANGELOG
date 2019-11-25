@@ -18,6 +18,10 @@ New in v0.8.08 (2019/12/??)
 * Fixed bug #1853655 - duplicity crashes with --exclude-older-than
   - The exclusion setup checked for valid string only.  Made
     the code comprehend datetime (int) as well.
+* Fixed bug #1853809 - Tests failing with Python 3.8 / Deprecation warnings
+  - Fixed the deprecation warnings with patch from Sebastien Bacher
+  - Fixed test_globmatch to handle python 3.8 same as 3.7
+  - Fixed tox.ini to include python 3.8 in future tests
 
 
 New in v0.8.07 (2019/11/14)

@@ -1,3 +1,10 @@
+2019-11-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1853809 - Tests failing with Python 3.8 / Deprecation warnings
+      - Fixed the deprecation warnings with patch from Sebastien Bacher
+      - Fixed test_globmatch to handle python 3.8 same as 3.7
+      - Fixed tox.ini to include python 3.8 in future tests
+
 2019-11-24  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1853655 - duplicity crashes with --exclude-older-than

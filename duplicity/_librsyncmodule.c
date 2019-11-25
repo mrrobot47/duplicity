@@ -22,6 +22,7 @@
  *
  * ----------------------------------------------------------------------- */
 
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <errno.h>
 #include <librsync.h>
@@ -85,7 +86,7 @@ static PyObject *
 _librsync_sigmaker_cycle(_librsync_SigMakerObject *self, PyObject *args)
 {
   char *inbuf, outbuf[RS_JOB_BLOCKSIZE];
-  int inbuf_length;
+  Py_ssize_t inbuf_length;
   rs_buffers_t buf;
   rs_result result;
 
@@ -171,7 +172,7 @@ _librsync_new_deltamaker(PyObject* self, PyObject* args)
 {
   _librsync_DeltaMakerObject* dm;
   char *sig_string, outbuf[RS_JOB_BLOCKSIZE];
-  int sig_length;
+  Py_ssize_t sig_length;
   rs_job_t *sig_loader;
   rs_signature_t *sig_ptr;
   rs_buffers_t buf;
@@ -230,7 +231,7 @@ static PyObject *
 _librsync_deltamaker_cycle(_librsync_DeltaMakerObject *self, PyObject *args)
 {
   char *inbuf, outbuf[RS_JOB_BLOCKSIZE];
-  int inbuf_length;
+  Py_ssize_t inbuf_length;
   rs_buffers_t buf;
   rs_result result;
 
@@ -367,7 +368,7 @@ static PyObject *
 _librsync_patchmaker_cycle(_librsync_PatchMakerObject *self, PyObject *args)
 {
   char *inbuf, outbuf[RS_JOB_BLOCKSIZE];
-  int inbuf_length;
+  Py_ssize_t inbuf_length;
   rs_buffers_t buf;
   rs_result result;
 
