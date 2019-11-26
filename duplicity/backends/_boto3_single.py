@@ -21,15 +21,12 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import division
-from builtins import str
 import os
 import time
 
 import duplicity.backend
-from duplicity import globals
 from duplicity import log
 from duplicity.errors import FatalBackendException, BackendException
-from duplicity import progress
 from duplicity import util
 
 # Note: current gaps with the old boto backend include:
