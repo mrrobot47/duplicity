@@ -29,7 +29,8 @@ from duplicity import log
 from duplicity.errors import FatalBackendException, BackendException
 from duplicity import util
 
-# BUG: upload staus bar is not updating correctly. Not sure why yet.
+# BUG: upload status bar is not updating correctly. Not sure why yet.
+#      this leads to the progress bar reporting stalled when it is not.
 # Note: current gaps with the old boto backend include:
 #       - no "multi" support yet.
 #       - no built in retries (rely on caller's retry, so won't fix)
