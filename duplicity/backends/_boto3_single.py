@@ -133,6 +133,8 @@ class BotoBackend(duplicity.backend.Backend):
             if error_code == '404':
                 raise FatalBackendException(u'S3 bucket "%s" does not exist' % self.bucket_name,
                                             code=log.ErrorCode.backend_not_found)
+            else:
+                raise
 
         self.bucket = self.s3.Bucket(self.bucket_name) # only set if bucket is thought to exist.
 
@@ -180,7 +182,19 @@ class BotoBackend(duplicity.backend.Backend):
         self.s3.Object(self.bucket.name, key).delete()
 
     def _query(self, remote_filename):
+        import botocore
+        from botocore.exceptions import ClientError
+
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename
-        content_length = self.s3.Object(self.bucket.name, key).content_length
+        content_length = -1
+        try:
+            s3_obj = self.s3.Object(self.bucket.name, key)
+            s3_obj.load()
+            content_length = s3_obj.content_length
+        except botocore.exceptions.ClientError as bce:
+            if bce.response['Error']['Code'] == '404':
+                pass
+            else:
+                raise
         return {u'size': content_length}
