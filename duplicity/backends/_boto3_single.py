@@ -33,7 +33,6 @@ from duplicity import progress
 from duplicity import util
 
 # Note: current gaps with the old boto backend include:
-#       - _query() not implemented
 #       - no "multi" support yet.
 #       - no built in retries (rely on caller's retry, so won't fix)
 #       - no support for a hostname/port in S3 URL yet.
@@ -138,7 +137,6 @@ class BotoBackend(duplicity.backend.Backend):
 
         self.bucket = self.s3.Bucket(self.bucket_name) # only set if bucket is thought to exist.
 
-
     def _put(self, source_path, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
 
@@ -182,3 +180,8 @@ class BotoBackend(duplicity.backend.Backend):
         key = self.key_prefix + remote_filename
         self.s3.Object(self.bucket.name, key).delete()
 
+    def _query(self, remote_filename):
+        remote_filename = util.fsdecode(remote_filename)
+        key = self.key_prefix + remote_filename
+        content_length = self.s3.Object(self.bucket.name, key).content_length
+        return {u'size': content_length}
