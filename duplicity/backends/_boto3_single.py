@@ -34,9 +34,10 @@ from duplicity import util
 
 # Note: current gaps with the old boto backend include:
 #       - _query() not implemented
-#       - no "multi" support.
+#       - no "multi" support yet.
+#       - no built in retries (rely on caller's retry, so won't fix)
 #       - no support for a hostname/port in S3 URL yet.
-#       - global.s3_unencrypted_connection unsupported
+#       - global.s3_unencrypted_connection unsupported (won't fix?)
 #       - Not supporting older style buckets. (Won't fix)
 #       - Not currently supporting bucket creation
 #           - Makes the "european bucket" options obsolete
@@ -98,23 +99,17 @@ class BotoBackend(duplicity.backend.Backend):
         if url_path_parts:
             self.bucket_name = url_path_parts.pop(0)
         else:
-            # Duplicity hangs if boto gets a null bucket name.
-            # HC: Caught a socket error, trying to recover
             raise BackendException(u'S3 requires a bucket name.')
-
 
         if url_path_parts:
             self.key_prefix = u'%s/' % u'/'.join(url_path_parts)
         else:
             self.key_prefix = u''
 
-        # TODO: audit. Remove unused.
         self.parsed_url = parsed_url
-        self.scheme = parsed_url.scheme
         self.straight_url = duplicity.backend.strip_auth_from_url(parsed_url)
         self.s3 = None
         self.bucket = None
-        # self._listed_keys = {} # XXX ???
         self.resetConnection()
 
     def resetConnection(self):
@@ -143,12 +138,6 @@ class BotoBackend(duplicity.backend.Backend):
 
         self.bucket = self.s3.Bucket(self.bucket_name) # only set if bucket is thought to exist.
 
-    def _close(self):
-        # TODO: remove if listed_keys isn't needed?
-        # XXX Untested
-        # self._listed_keys = {}
-        self.bucket = None
-        self.s3 = None
 
     def _put(self, source_path, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
@@ -161,7 +150,7 @@ class BotoBackend(duplicity.backend.Backend):
         log.Info(u"Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))
 
         upload_start = time.time()
-        self.s3.Object(self.bucket.name, key).upload_file(source_path.uc_name) # XXX Lacks the retry of the old backend's upload() method (Is that our problem, or should we relay on the duplicity driver's retry)
+        self.s3.Object(self.bucket.name, key).upload_file(source_path.uc_name)
         upload_end = time.time()
 
         total_s = abs(upload_end - upload_start) or 1  # prevent a zero value!
@@ -183,7 +172,6 @@ class BotoBackend(duplicity.backend.Backend):
             try:
                 filename = obj.key.replace(self.key_prefix, u'', 1)
                 filename_list.append(filename)
-                # self._listed_keys[k.key] = k
                 log.Debug(u"Listed %s/%s" % (self.straight_url, filename))
             except AttributeError:
                 pass
