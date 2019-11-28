@@ -2,7 +2,7 @@
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
-# Copyright 2019 Carl Adams <carlalex@overlords.com>
+# Copyright 2019 Carl A. Adams <carlalex@overlords.com>
 #
 # This file is part of duplicity.
 #
@@ -21,18 +21,18 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import division
-import os
-import time
 
 import duplicity.backend
 from duplicity import log
 from duplicity.errors import FatalBackendException, BackendException
 from duplicity import util
+from duplicity import progress
 
-# BUG: upload status bar is not updating correctly. Not sure why yet.
-#      this leads to the progress bar reporting stalled when it is not.
+
 # Note: current gaps with the old boto backend include:
-#       - no "multi" support yet.
+#       - no "multi" support yet. (Boto3 transfer config may let us do
+#         here, rather than in a derived back-end as was the case with
+#         the boto backend.
 #       - no built in retries (rely on caller's retry, so won't fix)
 #       - no support for a hostname/port in S3 URL yet.
 #       - global.s3_unencrypted_connection unsupported (won't fix?)
@@ -108,24 +108,17 @@ class BotoBackend(duplicity.backend.Backend):
         self.straight_url = duplicity.backend.strip_auth_from_url(parsed_url)
         self.s3 = None
         self.bucket = None
+        self.tracker = UploadProgressTracker()
         self.resetConnection()
 
     def resetConnection(self):
-        # The older "boto" backend would try to create buckets here
-        # if they did not exist. We are currently not doing this
-        # for a couple of reasons: 1) doing it here would result
-        # in bucket creation when doing a status check on a
-        # non-existing backup or bucket, and 2) it's probably not a
-        # great practice to give any automated backup process
-        # bucket creation permissions.  Not performing bucket
-        # creation also simplifies region handling.
-
         import boto3
         import botocore
         from botocore.exceptions import ClientError
 
         self.bucket = None
         self.s3 = boto3.resource('s3')
+
         try:
             self.s3.meta.client.head_bucket(Bucket=self.bucket_name)
         except botocore.exceptions.ClientError as bce:
@@ -138,30 +131,24 @@ class BotoBackend(duplicity.backend.Backend):
 
         self.bucket = self.s3.Bucket(self.bucket_name) # only set if bucket is thought to exist.
 
-    def _put(self, source_path, remote_filename):
+    def _put(self, local_source_path, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
-
         key = self.key_prefix + remote_filename
-
         # TODO: old feature not yet implemented: CLI controlled storage class,
         # with manifest exempt from glacier.
         storage_class = u'STANDARD'
         log.Info(u"Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))
-
-        upload_start = time.time()
-        self.s3.Object(self.bucket.name, key).upload_file(source_path.uc_name)
-        upload_end = time.time()
-
-        total_s = abs(upload_end - upload_start) or 1  # prevent a zero value!
-        rough_upload_speed = os.path.getsize(source_path.name) / total_s
-        log.Debug(u"Uploaded %s/%s to %s Storage at roughly %f bytes/second" %
-                  (self.straight_url, remote_filename, storage_class,
-                   rough_upload_speed))
+        # Should the tracker be scoped to the put or the backend?
+        # The put seems right to me, but the results look a little more correct
+        # scoped to the back-end.  This brings up questions about knowing when
+        # it's proper for it to be reset.
+        # tracker = UploadProgressTracker() # Scope the tracker to the put()
+        tracker = self.tracker
+        self.s3.Object(self.bucket.name, key).upload_file(local_source_path.uc_name, Callback=tracker.progress_cb)
 
     def _get(self, remote_filename, local_path):
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename
-        # self.pre_process_download(remote_filename, wait=True) # XXX Not yet implemented for boto3
         self.s3.Object(self.bucket.name, key).download_file(local_path.uc_name)
 
     def _list(self):
@@ -198,3 +185,18 @@ class BotoBackend(duplicity.backend.Backend):
             else:
                 raise
         return {u'size': content_length}
+
+
+class UploadProgressTracker(object):
+    def __init__(self):
+        self.total_bytes = 0
+
+    def progress_cb(self, fresh_byte_count):
+        self.total_bytes += fresh_byte_count
+        progress.report_transfer(self.total_bytes, 0)  # second arg appears to be unused
+        # It would seem to me that summing progress should be the callers job,
+        # and backends should just toss bytes written numbers over the fence.
+        # But, the progress bar doesn't work in a reasonable way when we do
+        # that. (This would also eliminate the need for this class to hold
+        # the scoped rolling total.)
+        # progress.report_transfer(fresh_byte_count, 0)
