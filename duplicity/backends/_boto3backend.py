@@ -20,8 +20,6 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-from __future__ import division
-
 import duplicity.backend
 from duplicity import log
 from duplicity.errors import FatalBackendException, BackendException
@@ -125,7 +123,7 @@ class BotoBackend(duplicity.backend.Backend):
             else:
                 raise
 
-        self.bucket = self.s3.Bucket(self.bucket_name) # only set if bucket is thought to exist.
+        self.bucket = self.s3.Bucket(self.bucket_name)  # only set if bucket is thought to exist.
 
     def _put(self, local_source_path, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
@@ -150,7 +148,6 @@ class BotoBackend(duplicity.backend.Backend):
     def _list(self):
         filename_list = []
         for obj in self.bucket.objects.filter(Prefix=self.key_prefix):
-            #  .list(prefix=self.key_prefix):
             try:
                 filename = obj.key.replace(self.key_prefix, u'', 1)
                 filename_list.append(filename)
