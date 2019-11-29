@@ -30,9 +30,6 @@ from duplicity import progress
 
 
 # Note: current gaps with the old boto backend include:
-#       - no "multi" support yet. (Boto3 transfer config may let us do
-#         here, rather than in a derived back-end as was the case with
-#         the boto backend.
 #       - no built in retries (rely on caller's retry, so won't fix)
 #       - no support for a hostname/port in S3 URL yet.
 #       - global.s3_unencrypted_connection unsupported (won't fix?)
