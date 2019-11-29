@@ -89,7 +89,6 @@ class BotoBackend(duplicity.backend.Backend):
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
-
         # This folds the null prefix and all null parts, which means that:
         #  //MyBucket/ and //MyBucket are equivalent.
         #  //MyBucket//My///My/Prefix/ and //MyBucket/My/Prefix are equivalent.
