@@ -24,7 +24,7 @@ import duplicity.backend
 from duplicity import globals
 
 if globals.s3_use_boto3:
-    from ._boto3_single import BotoBackend
+    from ._boto3backend import BotoBackend
 else:
     if globals.s3_use_multiprocessing:
         from ._boto_multi import BotoBackend
