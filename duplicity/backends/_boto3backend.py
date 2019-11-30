@@ -42,11 +42,6 @@ from duplicity import progress
 #             I also think it's poor separation of privileges
 #             to give your backup credentials bucket creation
 #             rights.
-#       - Server side encryption not yet supported
-#             globals.s3_use_sse
-#             globals.s3_user_sse_kms
-#             globals.s3_kms_key_id
-#             globals.s3_lms_grant
 #        - Glacier restore to S3 not yet implemented.
 #        - No retry implemented in put. Is duplicity's retry enough?
 #          must we do this in the backend?)
@@ -124,6 +119,7 @@ class BotoBackend(duplicity.backend.Backend):
     def _put(self, local_source_path, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename
+
         if globals.s3_use_rrs:
             storage_class = u'REDUCED_REDUNDANCY'
         elif globals.s3_use_ia:
@@ -134,16 +130,31 @@ class BotoBackend(duplicity.backend.Backend):
             storage_class = u'GLACIER'
         else:
             storage_class = u'STANDARD'
-        log.Info(u"Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))
+        extra_args = {u'StorageClass': storage_class}
+
+        if globals.s3_use_sse:
+            extra_args[u'ServerSideEncryption'] = u'AES256'
+        elif globals.s3_use_sse_kms:
+            if globals.s3_kms_key_id is None:
+                raise FatalBackendException(u"S3 USE SSE KMS was requested, but key id not provided "
+                                            u"require (--s3-kms-key-id)",
+                                            code=log.ErrorCode.s3_kms_no_id)
+            extra_args[u'ServerSideEncryption'] = u'aws:kms'
+            extra_args[u'SSEKMSKeyId'] = globals.s3_kms_key_id
+            if globals.s3_kms_grant:
+                extra_args[u'GrantFullControl'] = globals.s3_kms_grant
+
         # Should the tracker be scoped to the put or the backend?
         # The put seems right to me, but the results look a little more correct
-        # scoped to the back-end.  This brings up questions about knowing when
+        # scoped to the backend.  This brings up questions about knowing when
         # it's proper for it to be reset.
         # tracker = UploadProgressTracker() # Scope the tracker to the put()
         tracker = self.tracker
+
+        log.Info(u"Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))
         self.s3.Object(self.bucket.name, key).upload_file(local_source_path.uc_name,
                                                           Callback=tracker.progress_cb,
-                                                          ExtraArgs={'StorageClass': storage_class})
+                                                          ExtraArgs=extra_args)
 
     def _get(self, remote_filename, local_path):
         remote_filename = util.fsdecode(remote_filename)
