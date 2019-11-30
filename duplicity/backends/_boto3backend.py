@@ -29,10 +29,10 @@ from duplicity import progress
 
 
 # Note: current gaps with the old boto backend include:
-#       - no built in retries (rely on caller's retry, so won't fix)
 #       - no support for a hostname/port in S3 URL yet.
-#       - global.s3_unencrypted_connection unsupported (won't fix?)
 #       - Not supporting older style buckets. (Won't fix)
+#       - global.s3_unencrypted_connection unsupported (won't fix?)
+#       - no built in retries; Rely on caller's retry. (won't fix)
 #       - Not currently supporting bucket creation
 #           - Makes the "european bucket" options obsolete
 #           - TBD if this should be supported. I personally
@@ -42,17 +42,17 @@ from duplicity import progress
 #             I also think it's poor separation of privileges
 #             to give your backup credentials bucket creation
 #             rights.
-#        - Glacier restore to S3 not yet implemented.
-#        - No retry implemented in put. Is duplicity's retry enough?
-#          must we do this in the backend?)
-# TODO: New feature, not in old impl: when restoring from glacier or deep
-#       archive, specify TTL.
-# TODO: New feature, not in old impl: if restoring from glacier/deep archive,
-#       allow user to specify how fast to restore (impacts cost).
+#        - Glacier restore to S3 not yet implemented. Should this
+#          be done here? or is that out of scope. It can take days,
+#          so waiting seems like it's not ideal. "thaw" isn't currently
+#          a generic concept that the core asks of back-ends. Perhaps
+#          that is worth exploring.
+#          If/when implemented,  We should add the the following new features:
+#              - when restoring from glacier or deep archive, specify TTL.
+#              - allow user to specify how fast to restore (impacts cost).
+#
 # TODO: Update docs
-# Note: I'm not sure if initiating glacier restores should be in scope.
-#       Waiting on them (as was done) can be days. But, large restores can
-#       be days too.
+#
 
 class BotoBackend(duplicity.backend.Backend):
     u"""
