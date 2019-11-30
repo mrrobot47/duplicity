@@ -21,6 +21,7 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import duplicity.backend
+from duplicity import globals
 from duplicity import log
 from duplicity.errors import FatalBackendException, BackendException
 from duplicity import util
@@ -128,9 +129,16 @@ class BotoBackend(duplicity.backend.Backend):
     def _put(self, local_source_path, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename
-        # TODO: old feature not yet implemented: CLI controlled storage class,
-        # with manifest exempt from glacier.
-        storage_class = u'STANDARD'
+        if globals.s3_use_rrs:
+            storage_class = u'REDUCED_REDUNDANCY'
+        elif globals.s3_use_ia:
+            storage_class = u'STANDARD_IA'
+        elif globals.s3_use_onezone_ia:
+            storage_class = u'ONEZONE_IA'
+        elif globals.s3_use_glacier and u"manifest" not in remote_filename:
+            storage_class = u'GLACIER'
+        else:
+            storage_class = u'STANDARD'
         log.Info(u"Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))
         # Should the tracker be scoped to the put or the backend?
         # The put seems right to me, but the results look a little more correct
@@ -138,7 +146,9 @@ class BotoBackend(duplicity.backend.Backend):
         # it's proper for it to be reset.
         # tracker = UploadProgressTracker() # Scope the tracker to the put()
         tracker = self.tracker
-        self.s3.Object(self.bucket.name, key).upload_file(local_source_path.uc_name, Callback=tracker.progress_cb)
+        self.s3.Object(self.bucket.name, key).upload_file(local_source_path.uc_name,
+                                                          Callback=tracker.progress_cb,
+                                                          ExtraArgs={'StorageClass': storage_class})
 
     def _get(self, remote_filename, local_path):
         remote_filename = util.fsdecode(remote_filename)
