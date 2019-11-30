@@ -544,7 +544,7 @@ def parse_cmdline_options(arglist):
     # Use the boto3 implementation for s3
     parser.add_option(u"--s3-use-boto3", action=u"store_true")
 
-    # Whether to use S3 Reduced Redudancy Storage
+    # Whether to use S3 Reduced Redundancy Storage
     parser.add_option(u"--s3-use-rrs", action=u"store_true")
 
     # Whether to use S3 Infrequent Access Storage
@@ -552,6 +552,9 @@ def parse_cmdline_options(arglist):
 
     # Whether to use S3 Glacier Storage
     parser.add_option(u"--s3-use-glacier", action=u"store_true")
+
+    # Whether to use S3 Glacier Deep Archive Storage
+    parser.add_option(u"--s3-use-deep-archive", action=u"store_true")
 
     # Whether to use S3 One Zone Infrequent Access Storage
     parser.add_option(u"--s3-use-onezone-ia", action=u"store_true")

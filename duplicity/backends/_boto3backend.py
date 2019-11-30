@@ -115,6 +115,8 @@ class BotoBackend(duplicity.backend.Backend):
             storage_class = u'ONEZONE_IA'
         elif globals.s3_use_glacier and u"manifest" not in remote_filename:
             storage_class = u'GLACIER'
+        elif globals.s3_use_deep_archive and u"manifest" not in remote_filename:
+            storage_class = u'DEEP_ARCHIVE'
         else:
             storage_class = u'STANDARD'
         extra_args = {u'StorageClass': storage_class}
