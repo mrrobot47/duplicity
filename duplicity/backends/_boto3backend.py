@@ -42,11 +42,6 @@ from duplicity import progress
 #             I also think it's poor separation of privileges
 #             to give your backup credentials bucket creation
 #             rights.
-#       - Storage classes not yet supported
-#             global.s3_use_rrs
-#             global.s3_use_onezone_ia
-#             global.s3_use_ia
-#             global.s3_use_glacier
 #       - Server side encryption not yet supported
 #             globals.s3_use_sse
 #             globals.s3_user_sse_kms
