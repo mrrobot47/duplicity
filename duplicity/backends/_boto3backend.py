@@ -30,29 +30,16 @@ from duplicity import progress
 
 # Note: current gaps with the old boto backend include:
 #       - no support for a hostname/port in S3 URL yet.
-#       - Not supporting older style buckets. (Won't fix)
-#       - global.s3_unencrypted_connection unsupported (won't fix?)
-#       - no built in retries; Rely on caller's retry. (won't fix)
-#       - Not currently supporting bucket creation
-#           - Makes the "european bucket" options obsolete
-#           - TBD if this should be supported. I personally
-#             feel that bucket creation is out of scope.
-#             The old code would create a bucket if you simply
-#             tried to stat a non-existing bucket/backup.
-#             I also think it's poor separation of privileges
-#             to give your backup credentials bucket creation
-#             rights.
-#        - Glacier restore to S3 not yet implemented. Should this
-#          be done here? or is that out of scope. It can take days,
-#          so waiting seems like it's not ideal. "thaw" isn't currently
-#          a generic concept that the core asks of back-ends. Perhaps
-#          that is worth exploring.
-#          If/when implemented,  We should add the the following new features:
+#       - Glacier restore to S3 not implemented. Should this
+#         be done here? or is that out of scope. It can take days,
+#         so waiting seems like it's not ideal. "thaw" isn't currently
+#         a generic concept that the core asks of back-ends. Perhaps
+#         that is worth exploring.  The older boto backend appeared
+#         to attempt this restore in the code, but the man page
+#         indicated that restores should be done out of band.
+#         If/when implemented,  We should add the the following new features:
 #              - when restoring from glacier or deep archive, specify TTL.
 #              - allow user to specify how fast to restore (impacts cost).
-#
-# TODO: Update docs
-#
 
 class BotoBackend(duplicity.backend.Backend):
     u"""
@@ -63,13 +50,13 @@ class BotoBackend(duplicity.backend.Backend):
 .
     Pursuant to Amazon's announced deprecation of path style S3 access,
     this backend only supports virtual host style bucket URIs.
+    See the man page for full details.
 
-    FIXME: document how boto3 gets creds
-    To make use of this backend you must set aws_access_key_id
-    and aws_secret_access_key in your ~/.boto or /etc/boto.cfg
-    with your Amazon Web Services key id and secret respectively.
-    Alternatively you can export the environment variables
-    AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.
+    To make use of this backend, you must provide AWS credentials.
+    This may be done in several ways: through the environment variables
+    AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, by the
+    ~/.aws/credentials file, by the ~/.aws/config file,
+    or by using the boto2 style ~/.boto or /etc/boto.cfg files.
     """
 
     def __init__(self, parsed_url):
@@ -94,9 +81,9 @@ class BotoBackend(duplicity.backend.Backend):
         self.s3 = None
         self.bucket = None
         self.tracker = UploadProgressTracker()
-        self.resetConnection()
+        self.reset_connection()
 
-    def resetConnection(self):
+    def reset_connection(self):
         import boto3
         import botocore
         from botocore.exceptions import ClientError

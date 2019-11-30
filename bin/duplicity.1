@@ -730,6 +730,36 @@ designating the remote port to use. Here is a possibly useful example:
 duplicity --rsync-options="--partial-dir=.rsync-partial" /home/me rsync://uid@other.host/some_dir
 
 .TP
+.BI "--s3-use-boto3"
+When backing up to Amazon S3, use the new boto3 based backend. The boto3
+backend is a rewrite of the older Amazon S3 backend, which was based on the
+now deprecated and unsupported boto library.  This new backend
+fixes known limitations in the older backend, which have crept in as
+Amazon S3 has evolved while the deprecated boto library has not kept up.
+
+The boto3 backend should behave largely the same as the older S3 backend,
+but there are some differences in the handling of some of the "S3" options.
+See the documentation for specific options for differences related to
+each.
+
+The boto3 backend does not support bucket creation.
+This is a deliberate choice which simplifies the code, and side steps
+problems related to region selection.  Additionally, it is probably
+not a good practice to give your backup role bucket creation rights.
+In most cases the role used for backups should probably be
+limited to specific buckets.
+
+The boto3 backend only supports newer domain style buckets.  Amazon is moving
+to deprecate the older bucket style, so migration is recommended.
+Use the older s3 backend for compatibility with backups stored in
+buckets using older naming conventions.
+
+The boto3 backend does not currently support initiating restores
+from the glacier storage class.  When restoring a backup from
+glacier or glacier deep archive, the backup files must first be
+restored out of band.
+
+.TP
 .BI "--s3-european-buckets"
 When using the Amazon S3 backend, create buckets in Europe instead of
 the default (requires
@@ -737,6 +767,9 @@ the default (requires
 ). Also see the
 .B EUROPEAN S3 BUCKETS
 section.
+
+This option does not apply when using the newer boto3 backend, which
+does not create buckets (see above).
 
 .TP
 .BI "--s3-unencrypted-connection"
@@ -753,12 +786,17 @@ This option affects only the connection, not the GPG encryption of the backup
 increment files.  Unless that is disabled, an observer will not be able to see
 the file names or contents.
 
+This option is not available when using the newer boto3 backend.
+
 .TP
 .BI "--s3-use-new-style"
 When operating on Amazon S3 buckets, use new-style subdomain bucket
 addressing. This is now the preferred method to access Amazon S3, but
 is not backwards compatible if your bucket name contains upper-case
 characters or other characters that are not valid in a hostname.
+
+This option has no effect when using the newer boto3 backend, which
+will always use new style subdomain bucket naming.
 
 .TP
 .BI "--s3-use-rrs"
@@ -803,6 +841,9 @@ If enabled, files duplicity uploads to S3 will be split into chunks and
 uploaded in parallel. Useful if you want to saturate your bandwidth
 or if large files are failing during upload.
 
+This has no effect when using the newer boto3 backend.  Boto3 always
+attempts to multiprocessing when it is believed it will be more efficient.
+
 .TP
 .BI "--s3-use-server-side-encryption"
 Allow use of server side encryption in S3
@@ -814,6 +855,8 @@ Chunk size (in MB) used for S3 multipart uploads. Make this smaller than
 to maximize the use of your bandwidth. For example, a chunk size of 10MB
 with a volsize of 30MB will result in 3 chunks per volume upload.
 
+This has no effect when using the newer boto3 backend.
+
 .TP
 .BI "--s3-multipart-max-procs"
 Specify the maximum number of processes to spawn when performing a multipart
@@ -822,12 +865,16 @@ on your system (e.g. 4 for a 4-core system). You can adjust this number as
 required to ensure you don't overload your system while maximizing the use of
 your bandwidth.
 
+This has no effect when using the newer boto3 backend.
+
 .TP
 .BI "--s3-multipart-max-timeout"
 You can control the maximum time (in seconds) a multipart upload can spend on
 uploading a single chunk to S3. This may be useful if you find your system
 hanging on multipart uploads or if you'd like to control the time variance
 when uploading to S3 to ensure you kill connections to slow S3 endpoints.
+
+This has no effect when using the newer boto3 backend.
 
 .TP
 .BI "--azure-blob-tier"
