@@ -248,12 +248,6 @@ class Select(object):
         filelists_index = 0
         try:
             for opt, arg in argtuples:
-                assert isinstance(opt, str), u"option " + opt.decode(sys.getfilesystemencoding(), u"ignore") + \
-                                             u" is not unicode"
-                if arg is not None:
-                    assert isinstance(arg, str), u"option " + arg.decode(sys.getfilesystemencoding(), u"ignore") + \
-                                                 u" is not unicode"
-
                 if opt == u"--exclude":
                     self.add_selection_func(self.glob_get_sf(arg, 0))
                 elif opt == u"--exclude-if-present":

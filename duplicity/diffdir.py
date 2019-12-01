@@ -112,7 +112,8 @@ def delta_iter_error_handler(exc, new_path, sig_path, sig_tar=None):
         index_string = sig_path.get_relative_path()
     else:
         assert 0, u"Both new and sig are None for some reason"
-    log.Warn(_(u"Error %s getting delta for %s") % (str(exc), util.fsdecode(index_string)))
+    log.Warn(_(u"Error %s getting delta for %s")
+             % (util.uexc(exc), util.fsdecode(index_string)))
     return None
 
 
@@ -414,7 +415,8 @@ class FileWithReadCounter(object):
             buf = self.infile.read(length)
         except IOError as ex:
             buf = u""
-            log.Warn(_(u"Error %s getting delta for %s") % (str(ex), self.infile.uc_name))
+            log.Warn(_(u"Error %s getting delta for %s")
+                     % (util.uexc(ex), util.fsdecode(self.infile.name)))
         if stats:
             stats.SourceFileSize += len(buf)
         return buf

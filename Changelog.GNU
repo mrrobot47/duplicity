@@ -1,3 +1,28 @@
+2019-11-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1853809 - Tests failing with Python 3.8 / Deprecation warnings
+      - Fixed the deprecation warnings with patch from Sebastien Bacher
+      - Fixed test_globmatch to handle python 3.8 same as 3.7
+      - Fixed tox.ini to include python 3.8 in future tests
+
+2019-11-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1853655 - duplicity crashes with --exclude-older-than
+      - The exclusion setup checked for valid string only.  Made
+        the code comprehend datetime (int) as well.
+
+2019-11-20  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1851668 with help from Wolfgang Rohdewald
+      - Applied patches to handle translations.
+
+2019-11-18  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Added build signing to dist/makesnap.
+    * Fixed bug #1852876 '_io.BufferedReader' object has no attribute 'uc_name'
+      - Fixed a couple of instances where str() was used in place of util.uexc()
+      - The file was opened with builtins, so use name, not uc_name
+
 2019-11-16  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1852848 with patch from Tomas Krizek

@@ -205,44 +205,6 @@ class DupOption(optparse.Option):
                 self, action, dest, opt, value, values, parser)
 
 
-u"""
-Fix:
-    File "/usr/lib/pythonX.X/optparse.py", line XXXX, in print_help
-    file.write(self.format_help().encode(encoding, "replace"))
-    UnicodeDecodeError: 'ascii' codec can't decode byte 0xXX in position XXXX:
-See:
-    http://bugs.python.org/issue2931
-    http://mail.python.org/pipermail/python-dev/2006-May/065458.html
-"""
-
-
-class OPHelpFix(optparse.OptionParser):
-
-    def _get_encoding(self, file):
-        u"""
-        try to get the encoding or use UTF-8
-        which is default encoding in python3 and most recent unixes
-        """
-        encoding = getattr(file, u"encoding", None)
-        return encoding or u'utf-8'
-
-    def print_help(self, file=None):
-        u"""
-        overwrite method with proper utf-8 decoding
-        """
-        if file is None:
-            file = sys.stdout
-        encoding = self._get_encoding(file)
-        help = self.format_help()
-        # The help is in unicode or bytes depending on the user's locale
-        if sys.version_info.major == 2:
-            if isinstance(help, unicode):
-                help = self.format_help().decode(u'utf-8')
-                file.write(help.encode(encoding, u"replace"))
-        else:
-            file.write(help)
-
-
 def parse_cmdline_options(arglist):
     u"""Parse argument list"""
     global select_opts, select_files, full_backup
@@ -260,7 +222,10 @@ def parse_cmdline_options(arglist):
         old_fn_deprecation(opt)
 
     def add_selection(o, option, additional_arg, p):
-        addarg = None if additional_arg is None else util.fsdecode(additional_arg)
+        if o.type in (u"string", u"file"):
+            addarg = util.fsdecode(additional_arg)
+        else:
+            addarg = additional_arg
         select_opts.append((util.fsdecode(option), addarg))
 
     def add_filelist(o, s, filename, p):
@@ -278,7 +243,7 @@ def parse_cmdline_options(arglist):
     def add_rename(o, s, v, p):
         globals.rename[os.path.normcase(os.path.normpath(v[0]))] = v[1]
 
-    parser = OPHelpFix(option_class=DupOption, usage=usage())
+    parser = optparse.OptionParser(option_class=DupOption, usage=usage())
 
     # If this is true, only warn and don't raise fatal error when backup
     # source directory doesn't match previous backup source directory.
