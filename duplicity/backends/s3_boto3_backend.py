@@ -41,7 +41,7 @@ from duplicity import progress
 #              - when restoring from glacier or deep archive, specify TTL.
 #              - allow user to specify how fast to restore (impacts cost).
 
-class BotoBackend(duplicity.backend.Backend):
+class S3Boto3Backend(duplicity.backend.Backend):
     u"""
     Backend for Amazon's Simple Storage System, (aka Amazon S3), though
     the use of the boto3 module. (See
@@ -198,3 +198,7 @@ class UploadProgressTracker(object):
         # that. (This would also eliminate the need for this class to hold
         # the scoped rolling total.)
         # progress.report_transfer(fresh_byte_count, 0)
+
+
+duplicity.backend.register_backend(u"boto3+s3", S3Boto3Backend)
+# duplicity.backend.uses_netloc.extend([u'boto3+s3'])

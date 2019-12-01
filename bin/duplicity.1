@@ -730,36 +730,6 @@ designating the remote port to use. Here is a possibly useful example:
 duplicity --rsync-options="--partial-dir=.rsync-partial" /home/me rsync://uid@other.host/some_dir
 
 .TP
-.BI "--s3-use-boto3"
-When backing up to Amazon S3, use the new boto3 based backend. The boto3
-backend is a rewrite of the older Amazon S3 backend, which was based on the
-now deprecated and unsupported boto library.  This new backend
-fixes known limitations in the older backend, which have crept in as
-Amazon S3 has evolved while the deprecated boto library has not kept up.
-
-The boto3 backend should behave largely the same as the older S3 backend,
-but there are some differences in the handling of some of the "S3" options.
-See the documentation for specific options for differences related to
-each.
-
-The boto3 backend does not support bucket creation.
-This is a deliberate choice which simplifies the code, and side steps
-problems related to region selection.  Additionally, it is probably
-not a good practice to give your backup role bucket creation rights.
-In most cases the role used for backups should probably be
-limited to specific buckets.
-
-The boto3 backend only supports newer domain style buckets.  Amazon is moving
-to deprecate the older bucket style, so migration is recommended.
-Use the older s3 backend for compatibility with backups stored in
-buckets using older naming conventions.
-
-The boto3 backend does not currently support initiating restores
-from the glacier storage class.  When restoring a backup from
-glacier or glacier deep archive, the backup files must first be
-restored out of band.
-
-.TP
 .BI "--s3-european-buckets"
 When using the Amazon S3 backend, create buckets in Europe instead of
 the default (requires
@@ -769,7 +739,11 @@ the default (requires
 section.
 
 This option does not apply when using the newer boto3 backend, which
-does not create buckets (see above).
+does not create buckets.
+
+See also
+.B "A NOTE ON AMAZON S3"
+below.
 
 .TP
 .BI "--s3-unencrypted-connection"
@@ -788,6 +762,10 @@ the file names or contents.
 
 This option is not available when using the newer boto3 backend.
 
+See also
+.B "A NOTE ON AMAZON S3"
+below.
+
 .TP
 .BI "--s3-use-new-style"
 When operating on Amazon S3 buckets, use new-style subdomain bucket
@@ -797,6 +775,10 @@ characters or other characters that are not valid in a hostname.
 
 This option has no effect when using the newer boto3 backend, which
 will always use new style subdomain bucket naming.
+
+See also
+.B "A NOTE ON AMAZON S3"
+below.
 
 .TP
 .BI "--s3-use-rrs"
@@ -837,7 +819,7 @@ all other data is stored in S3 Glacier.
 .BI "--s3-use-deep-archive"
 Store volumes using Glacier Deep Archive S3 when uploading to Amazon S3. This storage class
 has a lower cost of storage but a higher per-request cost along with delays
-of up to 12 hours from the time of retrieval request. This storage cost is
+of up to 48 hours from the time of retrieval request. This storage cost is
 calculated against a 180-day storage minimum. According to Amazon this storage is
 ideal for data archiving and long-term backup offering 99.999999999% durability.
 To restore a backup you will have to manually migrate all data stored on AWS
@@ -858,6 +840,10 @@ or if large files are failing during upload.
 This has no effect when using the newer boto3 backend.  Boto3 always
 attempts to multiprocessing when it is believed it will be more efficient.
 
+See also
+.B "A NOTE ON AMAZON S3"
+below.
+
 .TP
 .BI "--s3-use-server-side-encryption"
 Allow use of server side encryption in S3
@@ -871,6 +857,10 @@ with a volsize of 30MB will result in 3 chunks per volume upload.
 
 This has no effect when using the newer boto3 backend.
 
+See also
+.B "A NOTE ON AMAZON S3"
+below.
+
 .TP
 .BI "--s3-multipart-max-procs"
 Specify the maximum number of processes to spawn when performing a multipart
@@ -881,6 +871,10 @@ your bandwidth.
 
 This has no effect when using the newer boto3 backend.
 
+See also
+.B "A NOTE ON AMAZON S3"
+below.
+
 .TP
 .BI "--s3-multipart-max-timeout"
 You can control the maximum time (in seconds) a multipart upload can spend on
@@ -889,6 +883,10 @@ hanging on multipart uploads or if you'd like to control the time variance
 when uploading to S3 to ensure you kill connections to slow S3 endpoints.
 
 This has no effect when using the newer boto3 backend.
+
+See also
+.B "A NOTE ON AMAZON S3"
+below.
 
 .TP
 .BI "--azure-blob-tier"
@@ -1320,10 +1318,14 @@ rsync://user@host.com[:port]/[relative|/absolute]_path
 s3://host[:port]/bucket_name[/prefix]
 .br
 s3+http://bucket_name[/prefix]
+.br
+boto3+s3://bucket_name[/prefix]
 .PP
 See also
+.B "A NOTE ON AMAZON S3"
+and
 .B "A NOTE ON EUROPEAN S3 BUCKETS"
-.RE
+below.
 .PP
 .B "SCP/SFTP access"
 .PP
@@ -1688,6 +1690,40 @@ backend instead, since it interfaces directly with Amazon Drive. You will need
 to setup the OAuth once again, but can otherwise keep your backups and config.
 .IR
 .RE
+
+.SH A NOTE ON AMAZON S3
+When backing up to Amazon S3, two backend implementations are available.
+The schemes "s3" and "s3+http" are implemented using the older boto library,
+which has been deprecated and is no longer supported.  The "boto3+s3" scheme
+is based on the newer boto3 library. This new backend fixes several known
+limitations in the older backend, which have crept in as
+Amazon S3 has evolved while the deprecated boto library has not kept up.
+
+The boto3 backend should behave largely the same as the older S3 backend,
+but there are some differences in the handling of some of the "S3" options.
+Additionally, there are some compatibility differences with the new backed.
+Because of these reasons, both backends have been retained for the time being.
+See the documentation for specific options regarding differences related to
+each backend.
+
+The boto3 backend does not support bucket creation.
+This is a deliberate choice which simplifies the code, and side steps
+problems related to region selection.  Additionally, it is probably
+not a good practice to give your backup role bucket creation rights.
+In most cases the role used for backups should probably be
+limited to specific buckets.
+
+The boto3 backend only supports newer domain style buckets.  Amazon is moving
+to deprecate the older bucket style, so migration is recommended.
+Use the older s3 backend for compatibility with backups stored in
+buckets using older naming conventions.
+
+The boto3 backend does not currently support initiating restores
+from the glacier storage class.  When restoring a backup from
+glacier or glacier deep archive, the backup files must first be
+restored out of band.  There are multiple options when restoring
+backups from cold storage, which vary in both cost and speed.
+See Amazon's documentation for details.
 
 .SH A NOTE ON AZURE ACCESS
 The Azure backend requires the Microsoft Azure Storage SDK for Python to be

@@ -209,11 +209,6 @@ s3_use_onezone_ia = False
 # True if we should use boto multiprocessing version
 s3_use_multiprocessing = False
 
-# True if we should use new Boto3 backend. This backend does not
-# support some legacy features, so old back end retained for
-# compatibility with old backups.
-s3_use_boto3 = False
-
 # Chunk size used for S3 multipart uploads.The number of parallel uploads to
 # S3 be given by chunk size / volume size. Use this to maximize the use of
 # your bandwidth. Defaults to 25MB

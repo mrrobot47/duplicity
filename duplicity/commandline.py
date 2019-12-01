@@ -506,9 +506,6 @@ def parse_cmdline_options(arglist):
     # support european for now).
     parser.add_option(u"--s3-european-buckets", action=u"store_true")
 
-    # Use the boto3 implementation for s3
-    parser.add_option(u"--s3-use-boto3", action=u"store_true")
-
     # Whether to use S3 Reduced Redundancy Storage
     parser.add_option(u"--s3-use-rrs", action=u"store_true")
 
@@ -954,6 +951,7 @@ def usage():
   rsync://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]//%(absolute_path)s
   s3://%(other_host)s[:%(port)s]/%(bucket_name)s[/%(prefix)s]
   s3+http://%(bucket_name)s[/%(prefix)s]
+  boto3+s3://%(bucket_name)s[/%(prefix)s]
   scp://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   ssh://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   swift://%(container_name)s

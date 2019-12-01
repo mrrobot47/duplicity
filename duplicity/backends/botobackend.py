@@ -23,14 +23,10 @@
 import duplicity.backend
 from duplicity import globals
 
-if globals.s3_use_boto3:
-    from .s3_boto3_backend import BotoBackend
+if globals.s3_use_multiprocessing:
+    from ._boto_multi import BotoBackend
 else:
-    if globals.s3_use_multiprocessing:
-        from ._boto_multi import BotoBackend
-    else:
-        from ._boto_single import BotoBackend
-        # TODO: if globals.s3_use_boto3
+    from ._boto_single import BotoBackend
 
 duplicity.backend.register_backend(u"gs", BotoBackend)
 duplicity.backend.register_backend(u"s3", BotoBackend)
