@@ -156,7 +156,7 @@ class S3Boto3Backend(duplicity.backend.Backend):
         for obj in self.bucket.objects.filter(Prefix=self.key_prefix):
             try:
                 filename = obj.key.replace(self.key_prefix, u'', 1)
-                filename_list.append(filename)
+                filename_list.append(util.fsencode(filename))
                 log.Debug(u"Listed %s/%s" % (self.straight_url, filename))
             except AttributeError:
                 pass
