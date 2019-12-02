@@ -29,15 +29,16 @@ from duplicity import progress
 
 
 # Note: current gaps with the old boto backend include:
-#       - no support for a hostname/port in S3 URL yet.
 #       - Glacier restore to S3 not implemented. Should this
-#         be done here? or is that out of scope. It can take days,
-#         so waiting seems like it's not ideal. "thaw" isn't currently
-#         a generic concept that the core asks of back-ends. Perhaps
-#         that is worth exploring.  The older boto backend appeared
-#         to attempt this restore in the code, but the man page
-#         indicated that restores should be done out of band.
-#         If/when implemented,  We should add the the following new features:
+#         be done here? Or is that out of scope. My current opinion
+#         is that it is out of scope, and the manpage reflects this.
+#         It can take days, so waiting seems like it's not ideal.
+#         "Thaw" isn't currently a generic concept that the core asks
+#         of back-ends. Perhaps that is worth exploring.  The older
+#         boto backend appeared  to attempt this restore in the code,
+#         but the man page indicated that restores should be done out
+#         of band. If implemented,  We should add the the following
+#         new features:
 #              - when restoring from glacier or deep archive, specify TTL.
 #              - allow user to specify how fast to restore (impacts cost).
 
