@@ -829,6 +829,8 @@ Duplicity will store the manifest.gpg files from full and incremental backups on
 AWS S3 standard storage to allow quick retrieval for later incremental backups,
 all other data is stored in S3 Glacier Deep Archive.
 
+Glacier Deep Archive is only available when using the newer boto3 backend.
+
 .TP
 .BI "--s3-use-multiprocessing"
 Allow multipart volumne uploads to S3 through multiprocessing. This option
