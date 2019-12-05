@@ -22,6 +22,9 @@ New in v0.8.08 (2019/12/??)
   - Fixed the deprecation warnings with patch from Sebastien Bacher
   - Fixed test_globmatch to handle python 3.8 same as 3.7
   - Fixed tox.ini to include python 3.8 in future tests
+* Merged in lp:~carlalex/duplicity/duplicity
+  - Fixes bug #1840044: Migrate boto backend to boto3
+  - New module uses boto3+s3:// as schema.
 
 
 New in v0.8.07 (2019/11/14)

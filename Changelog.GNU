@@ -1,3 +1,9 @@
+2019-12-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~carlalex/duplicity/duplicity
+      - Fixes bug #1840044: Migrate boto backend to boto3
+      - New module uses boto3+s3:// as schema.
+
 2019-11-25  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1853809 - Tests failing with Python 3.8 / Deprecation warnings

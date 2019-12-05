@@ -26,6 +26,7 @@ tox
 # azure
 # b2sdk
 # boto
+# boto3
 # dropbox==6.9.0
 # gdata
 # jottalib

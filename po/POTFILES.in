@@ -30,6 +30,7 @@ duplicity/backends/pydrivebackend.py
 duplicity/backends/pyrax_identity/__init__.py
 duplicity/backends/pyrax_identity/hubic.py
 duplicity/backends/rsyncbackend.py
+duplicity/backends/s3_boto3_backend.py
 duplicity/backends/ssh_paramiko_backend.py
 duplicity/backends/ssh_pexpect_backend.py
 duplicity/backends/swiftbackend.py
