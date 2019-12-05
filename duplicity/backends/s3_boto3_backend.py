@@ -90,13 +90,13 @@ class S3Boto3Backend(duplicity.backend.Backend):
         from botocore.exceptions import ClientError
 
         self.bucket = None
-        self.s3 = boto3.resource('s3')
+        self.s3 = boto3.resource(u's3')
 
         try:
             self.s3.meta.client.head_bucket(Bucket=self.bucket_name)
         except botocore.exceptions.ClientError as bce:
-            error_code = bce.response['Error']['Code']
-            if error_code == '404':
+            error_code = bce.response[u'Error'][u'Code']
+            if error_code == u'404':
                 raise FatalBackendException(u'S3 bucket "%s" does not exist' % self.bucket_name,
                                             code=log.ErrorCode.backend_not_found)
             else:
@@ -179,7 +179,7 @@ class S3Boto3Backend(duplicity.backend.Backend):
             s3_obj.load()
             content_length = s3_obj.content_length
         except botocore.exceptions.ClientError as bce:
-            if bce.response['Error']['Code'] == '404':
+            if bce.response[u'Error'][u'Code'] == u'404':
                 pass
             else:
                 raise
