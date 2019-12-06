@@ -85,9 +85,9 @@ class S3Boto3Backend(duplicity.backend.Backend):
         self.reset_connection()
 
     def reset_connection(self):
-        import boto3
-        import botocore
-        from botocore.exceptions import ClientError
+        import boto3  # pylint: disable=import-error
+        import botocore  # pylint: disable=import-error
+        from botocore.exceptions import ClientError  # pylint: disable=import-error
 
         self.bucket = None
         self.s3 = boto3.resource(u's3')
@@ -168,8 +168,8 @@ class S3Boto3Backend(duplicity.backend.Backend):
         self.s3.Object(self.bucket.name, key).delete()
 
     def _query(self, remote_filename):
-        import botocore
-        from botocore.exceptions import ClientError
+        import botocore  # pylint: disable=import-error
+        from botocore.exceptions import ClientError  # pylint: disable=import-error
 
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename

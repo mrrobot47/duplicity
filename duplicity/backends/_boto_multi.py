@@ -24,6 +24,7 @@ from __future__ import division
 from future import standard_library
 standard_library.install_aliases()
 from builtins import range
+import socket
 import os
 import sys
 import threading
@@ -216,9 +217,12 @@ def multipart_upload_worker(scheme, parsed_url, storage_uri, bucket_name, multip
                 if mp.id == multipart_id:
                     with FileChunkIO(filename, u'r', offset=offset * bytes, bytes=bytes) as fd:
                         start = time.time()
-                        mp.upload_part_from_file(fd, offset + 1, cb=_upload_callback,
-                                                 num_cb=max(2, 8 * bytes / (1024 * 1024))
-                                                 )  # Max num of callbacks = 8 times x megabyte
+                        try:
+                            mp.upload_part_from_file(fd, offset + 1, cb=_upload_callback,
+                                                     num_cb=max(2, 8 * bytes / (1024 * 1024))
+                                                     )  # Max num of callbacks = 8 times x megabyte
+                        except socket.gaierror as ex:
+                            log.Warn(ex.strerror)
                         end = time.time()
                         log.Debug((u"{name}: Uploaded chunk {chunk} "
                                    u"at roughly {speed} bytes/second").format(name=worker_name,

@@ -1,3 +1,8 @@
+2019-12-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1855379 with patch from Daniel González Gasull
+      - Issue warning on temporary connection loss.
+
 2019-12-05  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~carlalex/duplicity/duplicity
