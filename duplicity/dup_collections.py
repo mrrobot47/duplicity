@@ -355,7 +355,7 @@ class BackupChain(object):
         else:
             if (self.incset_list and
                     incset.start_time == self.incset_list[-1].start_time and
-                    incset.end_time > self.incset_list[-1]):
+                    incset.end_time > self.incset_list[-1].end_time):
                 log.Info(_(u"Preferring Backupset over previous one!"))
                 self.incset_list[-1] = incset
             else:

@@ -1,3 +1,8 @@
+2019-12-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1854554 with help from Tommy Nguyen
+      - Fixed a typo made during Python 3 conversion.
+
 2019-12-06  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1855379 with patch from Daniel González Gasull
