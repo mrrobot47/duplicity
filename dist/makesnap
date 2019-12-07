@@ -65,7 +65,7 @@ snapcraft snap
 snapcraft push duplicity_${VERSION}*.snap --release edge
 
 # sign snap
-snapcraft sign-build duplicity_${VERSION}*.snap
+#snapcraft sign-build duplicity_${VERSION}*.snap --key-name kwloafman
 
 # mv into working source tree
 mv duplicity_${VERSION}*.snap* ../..
