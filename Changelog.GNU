@@ -1,5 +1,6 @@
 2019-12-08  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Merged in translation updates
     * Prep for 0.8.08
 
 2019-12-07  Kenneth Loafman  <kenneth@loafman.com>
