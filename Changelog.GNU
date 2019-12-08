@@ -1,3 +1,7 @@
+2019-12-08  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Prep for 0.8.08
+
 2019-12-07  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1854554 with help from Tommy Nguyen

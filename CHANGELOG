@@ -29,6 +29,7 @@ New in v0.8.08 (2019/12/??)
   - Issue warning on temporary connection loss.
 * Fixed bug #1854554 with help from Tommy Nguyen
   - Fixed a typo made during Python 3 conversion.
+* Merged in translation updates
 
 
 New in v0.8.07 (2019/11/14)
