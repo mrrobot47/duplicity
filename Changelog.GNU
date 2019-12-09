@@ -1,3 +1,8 @@
+2019-12-09  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1855636 with patch from Filip Slunecko
+      - Wrong buf type returned on error.  Make bytes.
+
 2019-12-08  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in translation updates

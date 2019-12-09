@@ -1,3 +1,9 @@
+New in v0.8.08 (2020/01/??)
+---------------------------
+* Fixed bug #1855636 with patch from Filip Slunecko
+  - Wrong buf type returned on error.  Make bytes.
+
+
 New in v0.8.08 (2019/12/08)
 ---------------------------
 * Fixed bug #1852848 with patch from Tomas Krizek

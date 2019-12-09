@@ -414,7 +414,7 @@ class FileWithReadCounter(object):
         try:
             buf = self.infile.read(length)
         except IOError as ex:
-            buf = u""
+            buf = b""
             log.Warn(_(u"Error %s getting delta for %s")
                      % (util.uexc(ex), util.fsdecode(self.infile.name)))
         if stats:
