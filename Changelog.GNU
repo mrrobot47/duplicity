@@ -1,3 +1,8 @@
+2019-12-11  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1855736 with help from Michael Terry
+      - Decode Popen output to utf8
+
 2019-12-09  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1855636 with patch from Filip Slunecko

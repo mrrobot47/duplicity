@@ -35,7 +35,7 @@ def ensure_dbus():
     if u'DBUS_SESSION_BUS_ADDRESS' not in os.environ:
         p = subprocess.Popen([u'dbus-launch'], stdout=subprocess.PIPE, universal_newlines=True)
         output = p.communicate()[0]
-        lines = output.split(u'\n')
+        lines = output.decode(u'utf8').split(u'\n')
         for line in lines:
             parts = line.split(u'=', 1)
             if len(parts) == 2:
