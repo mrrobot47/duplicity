@@ -51,24 +51,24 @@ import types
 from datetime import datetime
 from os import statvfs
 
-from . import asyncscheduler
-from . import commandline
-from . import diffdir
-from . import dup_collections
-from . import dup_temp
-from . import dup_time
-from . import errors
-from . import file_naming
-from . import globals
-from . import gpg
-from . import log
-from . import manifest
-from . import patchdir
-from . import path
-from . import progress
-from . import robust
-from . import tempdir
-from . import util
+from duplicity import asyncscheduler
+from duplicity import commandline
+from duplicity import diffdir
+from duplicity import dup_collections
+from duplicity import dup_temp
+from duplicity import dup_time
+from duplicity import errors
+from duplicity import file_naming
+from duplicity import globals
+from duplicity import gpg
+from duplicity import log
+from duplicity import manifest
+from duplicity import patchdir
+from duplicity import path
+from duplicity import progress
+from duplicity import robust
+from duplicity import tempdir
+from duplicity import util
 
 
 # If exit_val is not None, exit with given value at end.

@@ -2,6 +2,8 @@
 
     * Fixed bug #1856447 with hint from Enno L
       - Replaced with formatted string
+    * Fixed bug #1855736 - duplicity fails to start
+      - Made imports absolute in dup_main.py
 
 2019-12-11  Kenneth Loafman  <kenneth@loafman.com>
 
