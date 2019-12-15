@@ -1,3 +1,8 @@
+2019-12-15  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1856447 with hint from Enno L
+      - Replaced with formatted string
+
 2019-12-11  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1855736 with help from Michael Terry

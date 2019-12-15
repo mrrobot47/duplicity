@@ -259,7 +259,7 @@ class OneDriveBackend(duplicity.backend.Backend):
                 if len(chunk) == 0:
                     break
                 headers = {
-                    u'Content-Length': unicode(len(chunk)),
+                    u'Content-Length': u'%d' % (len(chunk)),
                     u'Content-Range': u'bytes %d-%d/%d' % (offset, offset + len(chunk) - 1, source_size),
                 }
                 log.Debug(u'PUT %s %s' % (remote_filename, headers[u'Content-Range']))
