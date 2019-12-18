@@ -1,5 +1,12 @@
 2019-12-15  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Fixed a mess I made.  setup.py was shebanged to
+      Py3, duplicity was shebanged to Py2.  This meant
+      that duplicity ran as Py2 but could not find its
+      modules because they were under Py3.  AArgh!
+
+2019-12-15  Kenneth Loafman  <kenneth@loafman.com>
+
     * Fixed bug #1856447 with hint from Enno L
       - Replaced with formatted string
     * Fixed bug #1855736 - duplicity fails to start
