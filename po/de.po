@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-12-15 17:33+0000\n"
+"POT-Creation-Date: 2019-12-18 16:45+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-12-16 06:01+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2019-12-19 06:07+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "Language: de\n"
 
 #: ../bin/duplicity:121
@@ -1118,49 +1118,49 @@ msgstr "Gesamtzahl an Sicherungen: %d"
 msgid "Type of file change:"
 msgstr "Art der Dateiänderung:"
 
-#: ../duplicity/dup_main.py:122
+#: ../duplicity/dup_main.py:121
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
 msgstr "Eingestellte PASSPHRASE als SIGN_PASSPHRASE benutzen"
 
-#: ../duplicity/dup_main.py:129
+#: ../duplicity/dup_main.py:128
 msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
 msgstr "Eingestellte SIGN_PASSPHRASE als PASSPHRASE benutzen"
 
-#: ../duplicity/dup_main.py:168
+#: ../duplicity/dup_main.py:167
 msgid "PASSPHRASE variable not set, asking user."
 msgstr "Variable PASSPHRASE nicht eingestellt, Benutzer wird gefragt."
 
-#: ../duplicity/dup_main.py:183
+#: ../duplicity/dup_main.py:182
 msgid "GnuPG passphrase for signing key:"
 msgstr "GnuPG-Passphrase für die Schlüsselsignierung:"
 
-#: ../duplicity/dup_main.py:188
+#: ../duplicity/dup_main.py:187
 msgid "GnuPG passphrase:"
 msgstr "GnuPG-Passphrase:"
 
-#: ../duplicity/dup_main.py:193
+#: ../duplicity/dup_main.py:192
 msgid "Retype passphrase for signing key to confirm: "
 msgstr ""
 "Zur Bestätigung bitte die Passphrase für die Schlüsselsignierung "
 "wiederholen: "
 
-#: ../duplicity/dup_main.py:195
+#: ../duplicity/dup_main.py:194
 msgid "Retype passphrase to confirm: "
 msgstr "Zur Bestätigung bitte die Passphrase wiederholen: "
 
-#: ../duplicity/dup_main.py:198
+#: ../duplicity/dup_main.py:197
 msgid "First and second passphrases do not match!  Please try again."
 msgstr ""
 "Erste und zweite Passphrase stimmen nicht überein! Bitte nochmal versuchen."
 
-#: ../duplicity/dup_main.py:205
+#: ../duplicity/dup_main.py:204
 msgid ""
 "Cannot use empty passphrase with symmetric encryption!  Please try again."
 msgstr ""
 "Bei symmetrischer Verschlüsselung darf keine leere Passphrase benutzt "
 "werden! Bitte nochmal versuchen."
 
-#: ../duplicity/dup_main.py:262
+#: ../duplicity/dup_main.py:261
 #, python-format
 msgid ""
 "File %s complete in backup set.\n"
@@ -1169,7 +1169,7 @@ msgstr ""
 "Datei %s ist komplett im Sicherungssatz.\n"
 "Nach Neustart erfolgt Fortsetzung mit Datei %s."
 
-#: ../duplicity/dup_main.py:271
+#: ../duplicity/dup_main.py:270
 #, python-format
 msgid ""
 "File %s missing in backup set.\n"
@@ -1178,12 +1178,12 @@ msgstr ""
 "Datei %s fehlt im Sicherungssatz.\n"
 "Beim Neustart wird fortgefahren mit Datei %s."
 
-#: ../duplicity/dup_main.py:320
+#: ../duplicity/dup_main.py:319
 #, python-format
 msgid "File %s was corrupted during upload."
 msgstr "Datei %s wurde während des Hochladens beschädigt."
 
-#: ../duplicity/dup_main.py:360
+#: ../duplicity/dup_main.py:359
 msgid ""
 "Restarting backup, but current encryption settings do not match original "
 "settings"
@@ -1192,17 +1192,17 @@ msgstr ""
 "Verschlüsselungseinstellungen entsprechen jedoch nicht den ursprünglichen "
 "Einstellungen"
 
-#: ../duplicity/dup_main.py:383
+#: ../duplicity/dup_main.py:382
 #, python-format
 msgid "Restarting after volume %s, file %s, block %s"
 msgstr "Neustart nach Datenträger %s, Datei %s, Block %s"
 
-#: ../duplicity/dup_main.py:453
+#: ../duplicity/dup_main.py:452
 #, python-format
 msgid "Processed volume %d"
 msgstr "Datenträger %d wurde verarbeitet"
 
-#: ../duplicity/dup_main.py:603
+#: ../duplicity/dup_main.py:602
 msgid ""
 "Fatal Error: Unable to start incremental backup.  Old signatures not found "
 "and incremental specified"
@@ -1210,100 +1210,100 @@ msgstr ""
 "Schwerwiegender Fehler: schrittweise Sicherung konnte nicht gestartet "
 "werden. Alte Signaturen nicht gefunden und schrittweise Sicherung ausgewählt."
 
-#: ../duplicity/dup_main.py:607
+#: ../duplicity/dup_main.py:606
 msgid "No signatures found, switching to full backup."
 msgstr "Keine Signaturen gefunden, vollständige Sicherung wird durchgeführt."
 
-#: ../duplicity/dup_main.py:621
+#: ../duplicity/dup_main.py:620
 msgid "Backup Statistics"
 msgstr "Sicherungsstatistiken"
 
-#: ../duplicity/dup_main.py:727
+#: ../duplicity/dup_main.py:726
 #, python-format
 msgid "%s not found in archive - no files restored."
 msgstr "%s wurde nicht im Archiv gefunden - keine Dateien wiederhergestellt."
 
-#: ../duplicity/dup_main.py:731
+#: ../duplicity/dup_main.py:730
 msgid "No files found in archive - nothing restored."
 msgstr "Keine Dateien im Archiv - nichts wiederhergestellt."
 
-#: ../duplicity/dup_main.py:764
+#: ../duplicity/dup_main.py:763
 #, python-format
 msgid "Processed volume %d of %d"
 msgstr "Datenträger %d von %d wurde verarbeitet"
 
-#: ../duplicity/dup_main.py:798
+#: ../duplicity/dup_main.py:797
 #, python-format
 msgid "Invalid data - %s hash mismatch for file:"
 msgstr "Ungültige Daten – %s-Hash stimmt nicht für die Datei:"
 
-#: ../duplicity/dup_main.py:801
+#: ../duplicity/dup_main.py:800
 #, python-format
 msgid "Calculated hash: %s"
 msgstr "Erstellter Hash: %s"
 
-#: ../duplicity/dup_main.py:802
+#: ../duplicity/dup_main.py:801
 #, python-format
 msgid "Manifest hash: %s"
 msgstr "Manifest-Hashcode: %s"
 
-#: ../duplicity/dup_main.py:845
+#: ../duplicity/dup_main.py:844
 #, python-format
 msgid "Volume was signed by key %s, not %s"
 msgstr "Datenträger wurde von Schlüssel %s, anstatt von %s unterschrieben"
 
-#: ../duplicity/dup_main.py:877
+#: ../duplicity/dup_main.py:876
 #, python-format
 msgid "Verify complete: %s, %s."
 msgstr "Überprüfung vollständig: %s, %s."
 
-#: ../duplicity/dup_main.py:878
+#: ../duplicity/dup_main.py:877
 #, python-format
 msgid "%d file compared"
 msgid_plural "%d files compared"
 msgstr[0] "%d Datei verglichen"
 msgstr[1] "%d Dateien verglichen"
 
-#: ../duplicity/dup_main.py:880
+#: ../duplicity/dup_main.py:879
 #, python-format
 msgid "%d difference found"
 msgid_plural "%d differences found"
 msgstr[0] "%d Unterschied gefunden"
 msgstr[1] "%d Unterschiede gefunden"
 
-#: ../duplicity/dup_main.py:899
+#: ../duplicity/dup_main.py:898
 msgid "No extraneous files found, nothing deleted in cleanup."
 msgstr "Keine überflüssigen Dateien gefunden, es wurde nichts gelöscht."
 
-#: ../duplicity/dup_main.py:904
+#: ../duplicity/dup_main.py:903
 msgid "Deleting this file from backend:"
 msgid_plural "Deleting these files from backend:"
 msgstr[0] "Diese Datei wird vom Hintergrundprogramm gelöscht:"
 msgstr[1] "Diese Dateien wird vom Hintergrundprogramm gelöscht:"
 
-#: ../duplicity/dup_main.py:915
+#: ../duplicity/dup_main.py:914
 msgid "Found the following file to delete:"
 msgid_plural "Found the following files to delete:"
 msgstr[0] "Folgende Datei zum Löschen gefunden:"
 msgstr[1] "Folgende Dateien zum Löschen gefunden:"
 
-#: ../duplicity/dup_main.py:918
+#: ../duplicity/dup_main.py:917
 msgid "Run duplicity again with the --force option to actually delete."
 msgstr ""
 "Bitte duplicity noch einmal mit der »--force«-Option ausführen, um "
 "tatsächlich zu löschen."
 
-#: ../duplicity/dup_main.py:961
+#: ../duplicity/dup_main.py:960
 msgid "There are backup set(s) at time(s):"
 msgstr "Es bestehen Sicherungssätze zu folgenden Zeitpunkten:"
 
-#: ../duplicity/dup_main.py:963
+#: ../duplicity/dup_main.py:962
 msgid "Which can't be deleted because newer sets depend on them."
 msgstr ""
 "Welche nicht gelöscht werden können, weil neuere Sicherungssätze davon "
 "abhängen."
 
-#: ../duplicity/dup_main.py:967
+#: ../duplicity/dup_main.py:966
 msgid ""
 "Current active backup chain is older than specified time.  However, it will "
 "not be deleted.  To remove all your backups, manually purge the repository."
@@ -1312,132 +1312,132 @@ msgstr ""
 "wird nicht gelöscht. Um alle Sicherungen zu entfernen, bitte die Paketquelle "
 "manuell löschen."
 
-#: ../duplicity/dup_main.py:980
+#: ../duplicity/dup_main.py:979
 msgid "No old backup sets found, nothing deleted."
 msgstr "Keine alten Sicherungssätze gefunden, nichts gelöscht."
 
-#: ../duplicity/dup_main.py:983
+#: ../duplicity/dup_main.py:982
 msgid "Deleting backup chain at time:"
 msgid_plural "Deleting backup chains at times:"
 msgstr[0] "Sicherungskette dieses Zeitpunkts wird gelöscht:"
 msgstr[1] "Sicherungskette dieser Zeitpunkte wird gelöscht:"
 
-#: ../duplicity/dup_main.py:995
+#: ../duplicity/dup_main.py:994
 #, python-format
 msgid "Deleting any incremental signature chain rooted at %s"
 msgstr ""
 "Jede schrittweise Signaturkette die bei %s verankert ist wird gelöscht"
 
-#: ../duplicity/dup_main.py:997
+#: ../duplicity/dup_main.py:996
 #, python-format
 msgid "Deleting any incremental backup chain rooted at %s"
 msgstr ""
 "Jede schrittweise Sicherungskette die bei %s verankert ist wird gelöscht"
 
-#: ../duplicity/dup_main.py:1000
+#: ../duplicity/dup_main.py:999
 #, python-format
 msgid "Deleting complete signature chain %s"
 msgstr "Vollständige Signaturkette wird gelöscht: %s"
 
-#: ../duplicity/dup_main.py:1002
+#: ../duplicity/dup_main.py:1001
 #, python-format
 msgid "Deleting complete backup chain %s"
 msgstr "Vollständige Sicherungskette wird gelöscht: %s"
 
-#: ../duplicity/dup_main.py:1008
+#: ../duplicity/dup_main.py:1007
 msgid "Found old backup chain at the following time:"
 msgid_plural "Found old backup chains at the following times:"
 msgstr[0] "Alte Sicherungskette zu folgendem Zeitpunkt gefunden:"
 msgstr[1] "Alte Sicherungeketten zu folgenden Zeitpunkten gefunden:"
 
-#: ../duplicity/dup_main.py:1012
+#: ../duplicity/dup_main.py:1011
 msgid "Rerun command with --force option to actually delete."
 msgstr ""
 "Bitte Befehl erneut mit »--force«-Option ausführen, um tatsächlich zu "
 "löschen."
 
-#: ../duplicity/dup_main.py:1035
+#: ../duplicity/dup_main.py:1034
 msgid "No old backup sets found."
 msgstr "Keine alten Backup-Sets gefunden."
 
-#: ../duplicity/dup_main.py:1050
+#: ../duplicity/dup_main.py:1049
 #, python-format
 msgid "Signature %s already replicated"
 msgstr "Signatur %s bereits repliziert"
 
-#: ../duplicity/dup_main.py:1057 ../duplicity/dup_main.py:1096
+#: ../duplicity/dup_main.py:1056 ../duplicity/dup_main.py:1095
 #, python-format
 msgid "Replicating %s."
 msgstr "Replizieren von %s."
 
-#: ../duplicity/dup_main.py:1084
+#: ../duplicity/dup_main.py:1083
 #, python-format
 msgid "Backupset %s already replicated"
 msgstr "Backup-Set %s bereits repliziert"
 
-#: ../duplicity/dup_main.py:1232
+#: ../duplicity/dup_main.py:1231
 #, python-format
 msgid "Deleting local %s (not authoritative at backend)."
 msgstr "Lokal %s wird gelöscht (keine Auswirkungen am Hintergrundprogramm)."
 
-#: ../duplicity/dup_main.py:1237
+#: ../duplicity/dup_main.py:1236
 #, python-format
 msgid "Unable to delete %s: %s"
 msgstr "%s kann nicht gelöscht werden: %s"
 
-#: ../duplicity/dup_main.py:1271 ../duplicity/dup_temp.py:271
+#: ../duplicity/dup_main.py:1270 ../duplicity/dup_temp.py:271
 #, python-format
 msgid "Failed to read %s: %s"
 msgstr "%s konnte nicht gelesen werden: %s"
 
-#: ../duplicity/dup_main.py:1285
+#: ../duplicity/dup_main.py:1284
 #, python-format
 msgid "Copying %s to local cache."
 msgstr "%s wird zum lokalen Puffer kopiert."
 
-#: ../duplicity/dup_main.py:1333
+#: ../duplicity/dup_main.py:1332
 msgid "Local and Remote metadata are synchronized, no sync needed."
 msgstr ""
 "Lokale und entfernte Metadaten sind bereits synchron, kein Abgleich benötigt."
 
-#: ../duplicity/dup_main.py:1338
+#: ../duplicity/dup_main.py:1337
 msgid "Synchronizing remote metadata to local cache..."
 msgstr "Entfernte Metadaten werden zum lokalen Puffer synchronisiert …"
 
-#: ../duplicity/dup_main.py:1351
+#: ../duplicity/dup_main.py:1350
 msgid "Sync would copy the following from remote to local:"
 msgstr ""
 "Synchronisation würde die folgenden Daten vom entfernten Rechner hierher "
 "kopieren:"
 
-#: ../duplicity/dup_main.py:1354
+#: ../duplicity/dup_main.py:1353
 msgid "Sync would remove the following spurious local files:"
 msgstr ""
 "Synchronisation würde die folgenden überflüssigen lokalen Dateien entfernen:"
 
-#: ../duplicity/dup_main.py:1398
+#: ../duplicity/dup_main.py:1397
 msgid "Unable to get free space on temp."
 msgstr "Der temporäre Speicherplatz ist belegt."
 
-#: ../duplicity/dup_main.py:1406
+#: ../duplicity/dup_main.py:1405
 #, python-format
 msgid "Temp space has %d available, backup needs approx %d."
 msgstr ""
 "%d temporärer Speicherplatz ist verfügbar, die Sicherung benötigt ungefähr "
 "%d."
 
-#: ../duplicity/dup_main.py:1409
+#: ../duplicity/dup_main.py:1408
 #, python-format
 msgid "Temp has %d available, backup will use approx %d."
 msgstr ""
 "%d temporärer Speicherplatz ist verfügbar, die Sicherung wird ungefähr %d "
 "nutzen."
 
-#: ../duplicity/dup_main.py:1417
+#: ../duplicity/dup_main.py:1416
 msgid "Unable to get max open files."
 msgstr "Der Höchstwert für offene Dateien konnte nicht festgestellt werden."
 
-#: ../duplicity/dup_main.py:1421
+#: ../duplicity/dup_main.py:1420
 #, python-format
 msgid ""
 "Max open files of %s is too low, should be >= 1024.\n"
@@ -1447,7 +1447,7 @@ msgstr ""
 "sein.\n"
 "Bitte »ulimit -n 1024« ausführen, um dieses zu berichtigen.\n"
 
-#: ../duplicity/dup_main.py:1473
+#: ../duplicity/dup_main.py:1472
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
@@ -1455,7 +1455,7 @@ msgstr ""
 "NEUSTART: Das Hochladen des ersten Datenträgers ist fehlgeschlagen.\n"
 "         Neustart nicht möglich, Sicherung wird vom Anfang wiederaufgenommen."
 
-#: ../duplicity/dup_main.py:1479
+#: ../duplicity/dup_main.py:1478
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
@@ -1464,7 +1464,7 @@ msgstr ""
 "NEUSTART: Das Hochladen der Datenträger %d bis %d ist fehlgeschlagen.\n"
 "        Sicherung wird mit Datenträger %d wiederaufgenommen."
 
-#: ../duplicity/dup_main.py:1486
+#: ../duplicity/dup_main.py:1485
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -1477,7 +1477,7 @@ msgstr ""
 "        Neustart nicht möglich … duplicity wird die letzte unvollständige\n"
 "        Sicherung entfernen und von vorn anfangen."
 
-#: ../duplicity/dup_main.py:1507
+#: ../duplicity/dup_main.py:1506
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -1494,40 +1494,40 @@ msgstr ""
 "\n"
 "Siehe https://bugs.launchpad.net/duplicity/+bug/931175\n"
 
-#: ../duplicity/dup_main.py:1530
+#: ../duplicity/dup_main.py:1529
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr "Die Sperrdatei %s wird erfasst"
 
-#: ../duplicity/dup_main.py:1588
+#: ../duplicity/dup_main.py:1587
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr ""
 "Das letzte %s-Sicherung hinterließ einen Teil eines Sicherungssatzes, "
 "Neustart wird durchgeführt."
 
-#: ../duplicity/dup_main.py:1592
+#: ../duplicity/dup_main.py:1591
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr ""
 "Der letzte unvollständige %s-Sicherungssatz wird entfernt, Neustart wird "
 "durchgeführt."
 
-#: ../duplicity/dup_main.py:1604
+#: ../duplicity/dup_main.py:1603
 msgid "Last full backup date:"
 msgstr "Letzte vollständige Sicherung:"
 
-#: ../duplicity/dup_main.py:1606
+#: ../duplicity/dup_main.py:1605
 msgid "Last full backup date: none"
 msgstr "Letzte vollständige Sicherung: Keine"
 
-#: ../duplicity/dup_main.py:1609
+#: ../duplicity/dup_main.py:1608
 msgid "Last full backup is too old, forcing full backup"
 msgstr ""
 "Letzte vollständige Sicherung ist zu alt, vollständige Sicherung wird "
 "erzwungen"
 
-#: ../duplicity/dup_main.py:1658
+#: ../duplicity/dup_main.py:1657
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."

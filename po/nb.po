@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-12-15 17:33+0000\n"
+"POT-Creation-Date: 2019-12-18 16:45+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-12-16 06:01+0000\n"
-"X-Generator: Launchpad (build c597c3229eb023b1e626162d5947141bf7befb13)\n"
+"X-Launchpad-Export-Date: 2019-12-19 06:07+0000\n"
+"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "Language: nb\n"
 
 #: ../bin/duplicity:121
@@ -1070,45 +1070,45 @@ msgstr "Antall sikkerhetskopier: %d"
 msgid "Type of file change:"
 msgstr "Type filendring:"
 
-#: ../duplicity/dup_main.py:122
+#: ../duplicity/dup_main.py:121
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
 msgstr "Bruk «PASSPHRASE» som «SIGN_PASSPHRASE»"
 
-#: ../duplicity/dup_main.py:129
+#: ../duplicity/dup_main.py:128
 msgid "Reuse configured SIGN_PASSPHRASE as PASSPHRASE"
 msgstr "Bruk «SIGN_PASSPHRASE» som «PASSPHRASE»"
 
-#: ../duplicity/dup_main.py:168
+#: ../duplicity/dup_main.py:167
 msgid "PASSPHRASE variable not set, asking user."
 msgstr "Variabelen «PASSPHRASE» har ingen verdi. Spør brukeren."
 
-#: ../duplicity/dup_main.py:183
+#: ../duplicity/dup_main.py:182
 msgid "GnuPG passphrase for signing key:"
 msgstr "GnuPG-passordfrase for signeringsnøkkel:"
 
-#: ../duplicity/dup_main.py:188
+#: ../duplicity/dup_main.py:187
 msgid "GnuPG passphrase:"
 msgstr "GnuPG-passordfrase:"
 
-#: ../duplicity/dup_main.py:193
+#: ../duplicity/dup_main.py:192
 msgid "Retype passphrase for signing key to confirm: "
 msgstr "Bekreft ved å skrive inn passordfrase for signeringsnøkkel på nytt: "
 
-#: ../duplicity/dup_main.py:195
+#: ../duplicity/dup_main.py:194
 msgid "Retype passphrase to confirm: "
 msgstr "Skriv inn passordfrase på nytt for å bekrefte: "
 
-#: ../duplicity/dup_main.py:198
+#: ../duplicity/dup_main.py:197
 msgid "First and second passphrases do not match!  Please try again."
 msgstr "Du skrev inn to ulike passordfraser. Prøv igjen."
 
-#: ../duplicity/dup_main.py:205
+#: ../duplicity/dup_main.py:204
 msgid ""
 "Cannot use empty passphrase with symmetric encryption!  Please try again."
 msgstr ""
 "Du kan ikke bruke tom passordfrase med symmetrisk kryptering. Prøv igjen."
 
-#: ../duplicity/dup_main.py:262
+#: ../duplicity/dup_main.py:261
 #, python-format
 msgid ""
 "File %s complete in backup set.\n"
@@ -1117,7 +1117,7 @@ msgstr ""
 "Fil %s er fullstendig i sikkerhetskopi-sett.\n"
 "Fortsetter omstart på fil %s."
 
-#: ../duplicity/dup_main.py:271
+#: ../duplicity/dup_main.py:270
 #, python-format
 msgid ""
 "File %s missing in backup set.\n"
@@ -1126,12 +1126,12 @@ msgstr ""
 "Fila %s mangler i sikkerhetskopi-sett.\n"
 "Fortsetter omstart på fil %s."
 
-#: ../duplicity/dup_main.py:320
+#: ../duplicity/dup_main.py:319
 #, python-format
 msgid "File %s was corrupted during upload."
 msgstr "Fila %s ble ødelagt under opplasting."
 
-#: ../duplicity/dup_main.py:360
+#: ../duplicity/dup_main.py:359
 msgid ""
 "Restarting backup, but current encryption settings do not match original "
 "settings"
@@ -1139,17 +1139,17 @@ msgstr ""
 "Starter sikkerhetskopiering på nytt, men gjeldende krypteringsoppsett "
 "stemmer ikke med opprinnlig oppsett"
 
-#: ../duplicity/dup_main.py:383
+#: ../duplicity/dup_main.py:382
 #, python-format
 msgid "Restarting after volume %s, file %s, block %s"
 msgstr "Starter på nytt etter volum %s, fil %s, blokk %s"
 
-#: ../duplicity/dup_main.py:453
+#: ../duplicity/dup_main.py:452
 #, python-format
 msgid "Processed volume %d"
 msgstr "Behandlet volum %d"
 
-#: ../duplicity/dup_main.py:603
+#: ../duplicity/dup_main.py:602
 msgid ""
 "Fatal Error: Unable to start incremental backup.  Old signatures not found "
 "and incremental specified"
@@ -1157,98 +1157,98 @@ msgstr ""
 "Kritisk feil: klarte ikke å starte inkrementell sikkerhetskopi. Fant ikke "
 "gamle signaturer og valgt inkrementell"
 
-#: ../duplicity/dup_main.py:607
+#: ../duplicity/dup_main.py:606
 msgid "No signatures found, switching to full backup."
 msgstr "Fant ingen signaturer. Bytter til full sikkerhetskopi."
 
-#: ../duplicity/dup_main.py:621
+#: ../duplicity/dup_main.py:620
 msgid "Backup Statistics"
 msgstr "Sikkerhetskopi-statistikk"
 
-#: ../duplicity/dup_main.py:727
+#: ../duplicity/dup_main.py:726
 #, python-format
 msgid "%s not found in archive - no files restored."
 msgstr "fant ikke %s i arkiv. Ingen filer ble gjenopprettet."
 
-#: ../duplicity/dup_main.py:731
+#: ../duplicity/dup_main.py:730
 msgid "No files found in archive - nothing restored."
 msgstr "Fant ingen filer i arkiv. Ingenting ble gjenopprettet."
 
-#: ../duplicity/dup_main.py:764
+#: ../duplicity/dup_main.py:763
 #, python-format
 msgid "Processed volume %d of %d"
 msgstr "Behandlet volum %d av %d"
 
-#: ../duplicity/dup_main.py:798
+#: ../duplicity/dup_main.py:797
 #, python-format
 msgid "Invalid data - %s hash mismatch for file:"
 msgstr "Ugyldig data. %s kontrollsum-feil for fil:"
 
-#: ../duplicity/dup_main.py:801
+#: ../duplicity/dup_main.py:800
 #, python-format
 msgid "Calculated hash: %s"
 msgstr "Utregnet kontrollsum: %s"
 
-#: ../duplicity/dup_main.py:802
+#: ../duplicity/dup_main.py:801
 #, python-format
 msgid "Manifest hash: %s"
 msgstr "Manifest-kontrollsum: %s"
 
-#: ../duplicity/dup_main.py:845
+#: ../duplicity/dup_main.py:844
 #, python-format
 msgid "Volume was signed by key %s, not %s"
 msgstr "Volumet ble signert av nøkkelen %s, ikke %s"
 
-#: ../duplicity/dup_main.py:877
+#: ../duplicity/dup_main.py:876
 #, python-format
 msgid "Verify complete: %s, %s."
 msgstr "Bekreftelse fullført: %s, %s."
 
-#: ../duplicity/dup_main.py:878
+#: ../duplicity/dup_main.py:877
 #, python-format
 msgid "%d file compared"
 msgid_plural "%d files compared"
 msgstr[0] "%d fil sammenliknet"
 msgstr[1] "%d filer sammenliknet"
 
-#: ../duplicity/dup_main.py:880
+#: ../duplicity/dup_main.py:879
 #, python-format
 msgid "%d difference found"
 msgid_plural "%d differences found"
 msgstr[0] "Fant %d ulikhet"
 msgstr[1] "Fant %d ulikheter"
 
-#: ../duplicity/dup_main.py:899
+#: ../duplicity/dup_main.py:898
 msgid "No extraneous files found, nothing deleted in cleanup."
 msgstr ""
 "Fant ingen overflødige filer. Ingenting ble slettet under opprydding."
 
-#: ../duplicity/dup_main.py:904
+#: ../duplicity/dup_main.py:903
 msgid "Deleting this file from backend:"
 msgid_plural "Deleting these files from backend:"
 msgstr[0] "Sletter følgende fil fra bakstykke:"
 msgstr[1] "Sletter følgende filer fra bakstykke:"
 
-#: ../duplicity/dup_main.py:915
+#: ../duplicity/dup_main.py:914
 msgid "Found the following file to delete:"
 msgid_plural "Found the following files to delete:"
 msgstr[0] "Fant følgende fil som skal slettes:"
 msgstr[1] "Fant følgende filer som skal slettes:"
 
-#: ../duplicity/dup_main.py:918
+#: ../duplicity/dup_main.py:917
 msgid "Run duplicity again with the --force option to actually delete."
 msgstr ""
 "Kjør duplicity på nytt med valget «--force» for å faktisk utføre sletting."
 
-#: ../duplicity/dup_main.py:961
+#: ../duplicity/dup_main.py:960
 msgid "There are backup set(s) at time(s):"
 msgstr "Det finnes sikkerhetskopi-sett ved følgende tid(er):"
 
-#: ../duplicity/dup_main.py:963
+#: ../duplicity/dup_main.py:962
 msgid "Which can't be deleted because newer sets depend on them."
 msgstr "Som ikke kan slettes fordi nyere sett avhenger av dem."
 
-#: ../duplicity/dup_main.py:967
+#: ../duplicity/dup_main.py:966
 msgid ""
 "Current active backup chain is older than specified time.  However, it will "
 "not be deleted.  To remove all your backups, manually purge the repository."
@@ -1257,123 +1257,123 @@ msgstr ""
 "ikke slettet. Tøm sikkerhetskopi-arkivet manuelt for å slette alle "
 "sikkerhetskopier."
 
-#: ../duplicity/dup_main.py:980
+#: ../duplicity/dup_main.py:979
 msgid "No old backup sets found, nothing deleted."
 msgstr "Fant ingen gamle sikkerhetskopi-sett. Ingenting ble slettet."
 
-#: ../duplicity/dup_main.py:983
+#: ../duplicity/dup_main.py:982
 msgid "Deleting backup chain at time:"
 msgid_plural "Deleting backup chains at times:"
 msgstr[0] "Sletter sikkerhetskopi-kjede ved følgende tidspunkt:"
 msgstr[1] "Sletter sikkerhetskopi-kjeder ved følgende tidspunkter:"
 
-#: ../duplicity/dup_main.py:995
+#: ../duplicity/dup_main.py:994
 #, python-format
 msgid "Deleting any incremental signature chain rooted at %s"
 msgstr "Sletter alle inkrementelle signaturkjeder med rot i %s"
 
-#: ../duplicity/dup_main.py:997
+#: ../duplicity/dup_main.py:996
 #, python-format
 msgid "Deleting any incremental backup chain rooted at %s"
 msgstr "Sletter alle inkrementelle sikkerhetskopi-kjeder med rot i %s"
 
-#: ../duplicity/dup_main.py:1000
+#: ../duplicity/dup_main.py:999
 #, python-format
 msgid "Deleting complete signature chain %s"
 msgstr "Sletter fullstendig signaturkjede %s"
 
-#: ../duplicity/dup_main.py:1002
+#: ../duplicity/dup_main.py:1001
 #, python-format
 msgid "Deleting complete backup chain %s"
 msgstr "Sletter fullstendig sikkerhetskopi-kjede %s"
 
-#: ../duplicity/dup_main.py:1008
+#: ../duplicity/dup_main.py:1007
 msgid "Found old backup chain at the following time:"
 msgid_plural "Found old backup chains at the following times:"
 msgstr[0] "Fant gammelt sikkerhetskopi-kjede ved følgende tidspunkt:"
 msgstr[1] "Fant gamle sikkerhetskopi-kjeder ved følgende tidspunkter:"
 
-#: ../duplicity/dup_main.py:1012
+#: ../duplicity/dup_main.py:1011
 msgid "Rerun command with --force option to actually delete."
 msgstr "Kjør kommandoen på nytt med valget «--force» for å utføre sletting."
 
-#: ../duplicity/dup_main.py:1035
+#: ../duplicity/dup_main.py:1034
 msgid "No old backup sets found."
 msgstr ""
 
-#: ../duplicity/dup_main.py:1050
+#: ../duplicity/dup_main.py:1049
 #, python-format
 msgid "Signature %s already replicated"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1057 ../duplicity/dup_main.py:1096
+#: ../duplicity/dup_main.py:1056 ../duplicity/dup_main.py:1095
 #, python-format
 msgid "Replicating %s."
 msgstr ""
 
-#: ../duplicity/dup_main.py:1084
+#: ../duplicity/dup_main.py:1083
 #, python-format
 msgid "Backupset %s already replicated"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1232
+#: ../duplicity/dup_main.py:1231
 #, python-format
 msgid "Deleting local %s (not authoritative at backend)."
 msgstr "Sletter lokal %s (ikke autoritativ på bakstykke)."
 
-#: ../duplicity/dup_main.py:1237
+#: ../duplicity/dup_main.py:1236
 #, python-format
 msgid "Unable to delete %s: %s"
 msgstr "Klarte ikke å slette %s. %s"
 
-#: ../duplicity/dup_main.py:1271 ../duplicity/dup_temp.py:271
+#: ../duplicity/dup_main.py:1270 ../duplicity/dup_temp.py:271
 #, python-format
 msgid "Failed to read %s: %s"
 msgstr "Klarte ikke å lese %s. %s"
 
-#: ../duplicity/dup_main.py:1285
+#: ../duplicity/dup_main.py:1284
 #, python-format
 msgid "Copying %s to local cache."
 msgstr "Kopierer %s til lokalt hurtiglager."
 
-#: ../duplicity/dup_main.py:1333
+#: ../duplicity/dup_main.py:1332
 msgid "Local and Remote metadata are synchronized, no sync needed."
 msgstr ""
 "Lokale og eksterne metadata er synkronisert. Synkronisering er ikke "
 "nødvendig."
 
-#: ../duplicity/dup_main.py:1338
+#: ../duplicity/dup_main.py:1337
 msgid "Synchronizing remote metadata to local cache..."
 msgstr "Synkroniserer eksterne metadata til lokalt hurtiglager …"
 
-#: ../duplicity/dup_main.py:1351
+#: ../duplicity/dup_main.py:1350
 msgid "Sync would copy the following from remote to local:"
 msgstr "Synkronisering ville kopiert følgende fra ekstern til lokal:"
 
-#: ../duplicity/dup_main.py:1354
+#: ../duplicity/dup_main.py:1353
 msgid "Sync would remove the following spurious local files:"
 msgstr "Synk ville fjernet følgende falske lokale filer:"
 
-#: ../duplicity/dup_main.py:1398
+#: ../duplicity/dup_main.py:1397
 msgid "Unable to get free space on temp."
 msgstr "Klarte ikke å sjekke tilgjengelig midlertidig lagringsplass."
 
-#: ../duplicity/dup_main.py:1406
+#: ../duplicity/dup_main.py:1405
 #, python-format
 msgid "Temp space has %d available, backup needs approx %d."
 msgstr ""
 "Midlertidig område har %d tilgjengelig. Sikkerhetskopier krever cirka %d."
 
-#: ../duplicity/dup_main.py:1409
+#: ../duplicity/dup_main.py:1408
 #, python-format
 msgid "Temp has %d available, backup will use approx %d."
 msgstr "Midlert. har %d tilgjengelig. Sikkerhetskopier bruker cirka %d."
 
-#: ../duplicity/dup_main.py:1417
+#: ../duplicity/dup_main.py:1416
 msgid "Unable to get max open files."
 msgstr "Klarte ikke å sjekke maksgrense for antall åpne filer."
 
-#: ../duplicity/dup_main.py:1421
+#: ../duplicity/dup_main.py:1420
 #, python-format
 msgid ""
 "Max open files of %s is too low, should be >= 1024.\n"
@@ -1383,7 +1383,7 @@ msgstr ""
 "1024.\n"
 "Bruk «ulimit -n 1024»  eller høyere for å rette opp.\n"
 
-#: ../duplicity/dup_main.py:1473
+#: ../duplicity/dup_main.py:1472
 msgid ""
 "RESTART: The first volume failed to upload before termination.\n"
 "         Restart is impossible...starting backup from beginning."
@@ -1391,7 +1391,7 @@ msgstr ""
 "OMSTART: Opplasting av første volum mislyktes før avslutning.\n"
 "         Omstart er umulig. Starter sikkerhetskopiering fra begynnelsen."
 
-#: ../duplicity/dup_main.py:1479
+#: ../duplicity/dup_main.py:1478
 #, python-format
 msgid ""
 "RESTART: Volumes %d to %d failed to upload before termination.\n"
@@ -1400,7 +1400,7 @@ msgstr ""
 "OMSTART: Opplasting av volum %d t.om. %d mislyktes før avslutning.\n"
 "         Starter sikkerhetskopiering fra volum %d."
 
-#: ../duplicity/dup_main.py:1486
+#: ../duplicity/dup_main.py:1485
 #, python-format
 msgid ""
 "RESTART: Impossible backup state: manifest has %d vols, remote has %d vols.\n"
@@ -1413,7 +1413,7 @@ msgstr ""
 "         Omstart er umulig. Duplicity fjerner forrige del-kopi\n"
 "         og starter sikkerhetskopiering fra begynnelsen."
 
-#: ../duplicity/dup_main.py:1507
+#: ../duplicity/dup_main.py:1506
 msgid ""
 "\n"
 "PYTHONOPTIMIZE in the environment causes duplicity to fail to\n"
@@ -1429,36 +1429,36 @@ msgstr ""
 "\n"
 "Se https://bugs.launchpad.net/duplicity/+bug/931175 for mer info\n"
 
-#: ../duplicity/dup_main.py:1530
+#: ../duplicity/dup_main.py:1529
 #, python-format
 msgid "Acquiring lockfile %s"
 msgstr ""
 
-#: ../duplicity/dup_main.py:1588
+#: ../duplicity/dup_main.py:1587
 #, python-format
 msgid "Last %s backup left a partial set, restarting."
 msgstr "Forrige sikkerhetskopi %s er ufullstendig. Starter på nytt."
 
-#: ../duplicity/dup_main.py:1592
+#: ../duplicity/dup_main.py:1591
 #, python-format
 msgid "Cleaning up previous partial %s backup set, restarting."
 msgstr "Rydder opp ufullstendig sikkerhetskopi-sett %s. Starter på nytt."
 
-#: ../duplicity/dup_main.py:1604
+#: ../duplicity/dup_main.py:1603
 msgid "Last full backup date:"
 msgstr "Nyeste fullstendig sikkerhetskopi:"
 
-#: ../duplicity/dup_main.py:1606
+#: ../duplicity/dup_main.py:1605
 msgid "Last full backup date: none"
 msgstr "Nyeste fullstendig sikkerhetskopi: finnes ikke"
 
-#: ../duplicity/dup_main.py:1609
+#: ../duplicity/dup_main.py:1608
 msgid "Last full backup is too old, forcing full backup"
 msgstr ""
 "Forrige fullstendige sikkerhetskopi er for gammel. Tvinger full "
 "sikkerhetskopiering"
 
-#: ../duplicity/dup_main.py:1658
+#: ../duplicity/dup_main.py:1657
 msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."
