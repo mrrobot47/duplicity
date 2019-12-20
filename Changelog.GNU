@@ -1,6 +1,11 @@
 2019-12-20  Kenneth Loafman  <kenneth@loafman.com>
 
     * Renamed testing/infrastructure to testing/docker
+    * Merged in lp:~ed.so/duplicity/boto.fixup
+      - fix manpage indention
+      - clarify difference between boto backends
+      - add boto+s3:// for future use when boto3+s3://
+        will become default s3 backend
 
 2019-12-15  Kenneth Loafman  <kenneth@loafman.com>
 

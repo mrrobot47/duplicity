@@ -1321,13 +1321,16 @@ s3://host[:port]/bucket_name[/prefix]
 .br
 s3+http://bucket_name[/prefix]
 .br
-boto3+s3://bucket_name[/prefix]
+.BR "defaults" " to the legacy boto backend based on boto v2 (last update 2018/07)"
+.br
+.BR "alternatively" " try the newer boto3+s3://bucket_name[/prefix]"
 .PP
-See also
+For details see
 .B "A NOTE ON AMAZON S3"
-and
+and see also
 .B "A NOTE ON EUROPEAN S3 BUCKETS"
 below.
+.RE
 .PP
 .B "SCP/SFTP access"
 .PP
