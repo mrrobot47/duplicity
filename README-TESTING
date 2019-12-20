@@ -7,7 +7,7 @@ Duplicity's tests are unit tests contained in the /testing folder of the main re
 The recommended approach is to test duplicity using Docker, to ensure that you are running tests in a known-good
 environment. This also creates additional containers to test backends. You can run tests on your branch as follows:
 a. Install Docker
-b. cd [BRANCH FOLDER]/testing/infrastructure/
+b. cd [BRANCH FOLDER]/testing/docker/
 c. ./build-duplicity_test.sh to build the required Docker containers and copy your branch into
    the duplicity_test container.
 d. ./setup.sh to start the containers and open a shell inside your branch folder in duplicity_test.
@@ -88,7 +88,7 @@ Assuming that your machine has all the required dependencies installed, you can 
 
 ## Dependencies for testing
 If you should prefer to execute the tests locally without using Docker, see the Dockerfile in
-testing/infrastructure/duplicity_test/
+testing/docker/duplicity_test/
 for requirements to correctly set up your environment.
 
 ## Working with test coverage

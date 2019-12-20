@@ -1,3 +1,7 @@
+2019-12-20  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Renamed testing/infrastructure to testing/docker
+
 2019-12-15  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed a mess I made.  setup.py was shebanged to
