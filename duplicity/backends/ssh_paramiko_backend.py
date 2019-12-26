@@ -296,7 +296,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
 
     def _put(self, source_path, remote_filename):
         if self.use_scp:
-            f = file(source_path.name, u'rb')
+            f = open(source_path.name, u'rb')
             try:
                 chan = self.client.get_transport().open_session()
                 chan.settimeout(globals.timeout)
@@ -345,7 +345,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
 
             size = int(m.group(2))
             togo = size
-            f = file(local_path.name, u'wb')
+            f = open(local_path.name, u'wb')
             chan.send(u'\0')  # ready for data
             try:
                 while togo > 0:

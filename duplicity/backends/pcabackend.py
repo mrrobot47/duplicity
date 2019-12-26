@@ -151,7 +151,7 @@ Exception: %s""" % str(e))
 
     def _put(self, source_path, remote_filename):
         self.conn.put_object(self.container, self.prefix + remote_filename,
-                             file(source_path.name))
+                             open(source_path.name))
 
     def _get(self, remote_filename, local_path):
         body = self.preprocess_download(remote_filename, 60)

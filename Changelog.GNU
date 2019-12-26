@@ -1,3 +1,8 @@
+2019-12-26  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1857554 name 'file' is not defined
+      - file() calls replaced by open() in 3 places.
+
 2019-12-20  Kenneth Loafman  <kenneth@loafman.com>
 
     * Renamed testing/infrastructure to testing/docker
