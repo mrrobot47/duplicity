@@ -1,3 +1,7 @@
+2019-12-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Convert all shebangs to python3 for bug #1855736
+
 2019-12-26  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1857554 name 'file' is not defined
