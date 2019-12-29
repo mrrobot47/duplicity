@@ -29,7 +29,7 @@ from __future__ import print_function
 from builtins import str
 import sys
 import getopt
-import gzip
+import mgzip
 import os
 
 from duplicity import diffdir
@@ -179,7 +179,7 @@ def get_fileobj(filename, mode):
         assert 0, u"Unknown mode " + str(mode)
 
     if gzip_compress:
-        return gzip.GzipFile(None, fp.mode, 9, fp)
+        return mgzip.MulitGzipFile(None, fp.mode, 9, fp)
     else:
         return fp
 

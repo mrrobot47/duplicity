@@ -33,7 +33,7 @@ import sys
 import types
 import tempfile
 import re
-import gzip
+import mgzip
 import locale
 import platform
 
@@ -442,7 +442,7 @@ def GzipWriteFile(block_iter, filename, size=200 * 1024 * 1024, gzipped=True):
 
     # if gzipped wrap with GzipFile else plain file out
     if gzipped:
-        outfile = gzip.GzipFile(None, u"wb", 6, file_counted)
+        outfile = mgzip.MulitGzipFile(filename, mode="wb", compresslevel=6, fileobj=file_counted)
     else:
         outfile = file_counted
     at_end_of_blockiter = 0

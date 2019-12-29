@@ -38,7 +38,7 @@ import errno
 import socket
 import time
 import re
-import gzip
+import mgzip
 import shutil
 import sys
 
@@ -794,7 +794,7 @@ class DupPath(Path):
             assert self.pr.encrypted
 
         if self.pr.compressed:
-            return gzip.GzipFile(self.name, mode)
+            return mgzip.MulitGzipFile(self.name, mode)
         elif self.pr.encrypted:
             if not gpg_profile:
                 gpg_profile = globals.gpg_profile
