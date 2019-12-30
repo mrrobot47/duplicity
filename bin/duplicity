@@ -38,7 +38,7 @@ from builtins import range
 
 import copy
 import fasteners
-import gzip
+import mgzip
 import os
 import platform
 import re

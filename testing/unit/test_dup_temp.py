@@ -23,7 +23,7 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
-import gzip
+import mgzip
 import unittest
 
 from duplicity import dup_temp
@@ -65,7 +65,7 @@ class TempTest(UnitTestCase):
         tdp.setdata()
         assert tdp.isreg()
 
-        fin1 = gzip.GzipFile(tdp.name, u"rb")
+        fin1 = mgzip.MulitGzipFile(tdp.name, u"rb")
         buf = fin1.read()
         assert buf == b"hello, there", buf
         fin1.close()
