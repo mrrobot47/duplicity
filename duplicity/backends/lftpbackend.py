@@ -26,6 +26,7 @@
 
 from future import standard_library
 standard_library.install_aliases()
+
 import os
 import os.path
 import re
@@ -195,7 +196,7 @@ class LFTPBackend(duplicity.backend.Backend):
                   u"%s" % (l))
 
         # Look for our files as the last element of a long list line
-        return [x.split()[-1] for x in l.split(b'\n') if x]
+        return [util.fsencode(x.split()[-1]) for x in l.split(u'\n') if x]
 
     def _delete(self, filename):
         commandline = u"lftp -c \"source %s; cd %s; rm %s\"" % (

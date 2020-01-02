@@ -119,7 +119,7 @@ class NCFTPBackend(duplicity.backend.Backend):
         commandline = u"ncftpls %s -l '%s'" % (self.flags, self.url_string)
         _, l, _ = self.subprocess_popen(commandline)
         # Look for our files as the last element of a long list line
-        return [x.split()[-1] for x in l.split(b'\n') if x and not x.startswith(b"total ")]
+        return [util.fsencode(x.split()[-1]) for x in l.split(u'\n') if x and not x.startswith(u"total ")]
 
     def _delete(self, filename):
         commandline = u"ncftpls %s -l -X 'DELE %s' '%s'" % \

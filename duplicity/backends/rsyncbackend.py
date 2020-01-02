@@ -123,13 +123,13 @@ class RsyncBackend(duplicity.backend.Backend):
     def _list(self):
         def split(str):
             line = str.split()
-            if len(line) > 4 and line[4] != b'.':
+            if len(line) > 4 and line[4] != u'.':
                 return line[4]
             else:
                 return None
         commandline = u"%s %s" % (self.cmd, self.url_string)
         result, stdout, stderr = self.subprocess_popen(commandline)
-        return [x for x in map(split, stdout.split(b'\n')) if x]
+        return [util.fsencode(x) for x in map(split, stdout.split(u'\n')) if x]
 
     def _delete_list(self, filename_list):
         delete_list = filename_list

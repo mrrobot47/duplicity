@@ -57,7 +57,7 @@ class HSIBackend(duplicity.backend.Backend):
         for i in range(0, len(l)):
             if l[i]:
                 l[i] = l[i].split()[-1]
-        return [x for x in l if x]
+        return [util.fsencode(x) for x in l if x]
 
     def _delete(self, filename):
         if isinstance(filename, b"".__class__):

@@ -300,9 +300,12 @@ class ParsedUrl(object):
         self.port = None
         try:
             self.port = pu.port
-        except Exception:  # not raised in python.7+, just returns None
+        except Exception:  # not raised in python2.7, just returns None
+            # TODO: remove after dropping python 2.7 support
+            if self.scheme in [u'rclone']:
+                pass
             # old style rsync://host::[/]dest, are still valid, though they contain no port
-            if not (self.scheme in [u'rsync'] and re.search(u'::[^:]*$', self.url_string)):
+            elif not (self.scheme in [u'rsync'] and re.search(u'::[^:]*$', self.url_string)):
                 raise InvalidBackendURL(u"Syntax error (port) in: %s A%s B%s C%s" %
                                         (url_string, (self.scheme in [u'rsync']),
                                          re.search(u'::[^:]+$', self.netloc), self.netloc))
@@ -461,7 +464,7 @@ class Backend(object):
         from subprocess import Popen, PIPE
 
         args[0] = util.which(args[0])
-        p = Popen(args, stdout=PIPE, stderr=PIPE)
+        p = Popen(args, stdout=PIPE, stderr=PIPE, universal_newlines=True)
         stdout, stderr = p.communicate()
 
         return p.returncode, stdout, stderr
@@ -498,7 +501,7 @@ class Backend(object):
                 return 0, u'', u''
             except (KeyError, ValueError):
                 raise BackendException(u"Error running '%s': returned %d, with output:\n%s" %
-                                       (logstr, result, stdout.decode() + u'\n' + stderr.decode()))
+                                       (logstr, result, stdout + u'\n' + stderr + u'\n'))
         return result, stdout, stderr
 
 

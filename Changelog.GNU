@@ -1,3 +1,8 @@
+2020-01-02  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bytes/string differences in subprocess_popen()
+      - Now returns unicode string not bytes, like python2
+
 2019-12-28  Kenneth Loafman  <kenneth@loafman.com>
 
     * Convert all shebangs to python3 for bug #1855736

@@ -20,9 +20,16 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
-import duplicity.backend
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from builtins import object
+
 from duplicity import log
+from duplicity import util
 from duplicity.errors import BackendException
+import duplicity.backend
 
 import os
 import subprocess
@@ -136,7 +143,7 @@ class MegaBackend(duplicity.backend.Backend):
         if files_only:
             files = [f for f in files if u'/' not in f]
 
-        return files
+        return [util.fsencode(f) for f in files]
 
     def download(self, remote_file, local_file):
 
