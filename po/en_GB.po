@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2019-12-28 21:27+0000\n"
+"POT-Creation-Date: 2020-01-03 01:16+0000\n"
 "PO-Revision-Date: 2018-03-08 01:07+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2019-12-29 06:03+0000\n"
+"X-Launchpad-Export-Date: 2020-01-03 06:04+0000\n"
 "X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
 "Language: \n"
 
@@ -95,32 +95,32 @@ msgstr "Import of %s %s"
 msgid "Could not initialize backend: %s"
 msgstr "Could not initialise backend: %s"
 
-#: ../duplicity/backend.py:377
+#: ../duplicity/backend.py:380
 #, python-format
 msgid "Backtrace of previous error: %s"
 msgstr "Backtrace of previous error: %s"
 
-#: ../duplicity/backend.py:392
+#: ../duplicity/backend.py:395
 #, python-format
 msgid "Giving up after %s attempts. %s: %s"
 msgstr "Giving up after %s attempts. %s: %s"
 
-#: ../duplicity/backend.py:396
+#: ../duplicity/backend.py:399
 #, python-format
 msgid "Attempt %s failed. %s: %s"
 msgstr "Attempt %s failed. %s: %s"
 
-#: ../duplicity/backend.py:490
+#: ../duplicity/backend.py:493
 #, python-format
 msgid "Reading results of '%s'"
 msgstr "Reading results of '%s'"
 
-#: ../duplicity/backend.py:516
+#: ../duplicity/backend.py:519
 #, python-format
 msgid "Writing %s"
 msgstr "Writing %s"
 
-#: ../duplicity/backend.py:557
+#: ../duplicity/backend.py:560
 #, python-format
 msgid "File %s not found locally after get from backend"
 msgstr "File %s not found locally after get from backend"
