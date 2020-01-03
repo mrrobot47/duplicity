@@ -94,7 +94,7 @@ class MegaBackend(duplicity.backend.Backend):
         for folder in path:
             p = p + u'/' + folder
             try:
-                self._make_dir(p)
+                self._makedir(p)
             except:
                 pass
 

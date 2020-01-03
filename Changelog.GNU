@@ -4,6 +4,8 @@
       - Now returns unicode string not bytes, like python2
     * Fix bug #1857734 - TypeError in ssh_paramiko_backend
       - conn.recv() can return bytes or string, make string
+    * Fix bug #1858153 with patch from az
+      - mega backend: fails to create directory
 
 2019-12-28  Kenneth Loafman  <kenneth@loafman.com>
 
