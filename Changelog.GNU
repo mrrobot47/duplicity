@@ -2,6 +2,8 @@
 
     * Fix bytes/string differences in subprocess_popen()
       - Now returns unicode string not bytes, like python2
+    * Fix bug #1857734 - TypeError in ssh_paramiko_backend
+      - conn.recv() can return bytes or string, make string
 
 2019-12-28  Kenneth Loafman  <kenneth@loafman.com>
 

@@ -337,6 +337,8 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
 
             chan.send(u'\0')  # overall ready indicator
             msg = chan.recv(-1)
+            if isinstance(msg, bytes):  # make msg into str
+                msg = msg.decode()
             m = re.match(r"C([0-7]{4})\s+(\d+)\s+(\S.*)$", msg)
             if (m is None or m.group(3) != remote_filename):
                 raise BackendException(u"scp get %s failed: incorrect response '%s'" %

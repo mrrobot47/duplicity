@@ -23,6 +23,8 @@ New in v0.8.09 (2020/01/??)
 * Convert all shebangs to python3 for bug #1855736
 * Fix bytes/string differences in subprocess_popen()
   - Now returns unicode string not bytes, like python2
+* Fix bug #1857734 - TypeError in ssh_paramiko_backend
+  - conn.recv() can return bytes or string, make string
 
 
 New in v0.8.08 (2019/12/08)
