@@ -1,6 +1,8 @@
 2020-01-06  Kenneth Loafman  <kenneth@loafman.com>
 
     * Add snapcraft login to makesnap
+    * Fixed bug #1858295 - Unicode error in source filename
+      - decode arg if it comes in as bytes
 
 2020-01-02  Kenneth Loafman  <kenneth@loafman.com>
 

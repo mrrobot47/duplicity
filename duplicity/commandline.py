@@ -742,6 +742,8 @@ def parse_cmdline_options(arglist):
 
     # expand pathname args, but not URL
     for loc in range(len(args)):
+        if isinstance(args[loc], bytes):
+            args[loc] = args[loc].decode(u'utf8')
         if u'://' not in args[loc]:
             args[loc] = expand_fn(args[loc])
 
