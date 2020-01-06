@@ -30,6 +30,8 @@ New in v0.8.09 (2020/01/??)
 * Add snapcraft login to makesnap
 * Fixed bug #1858295 - Unicode error in source filename
   - decode arg if it comes in as bytes
+* Fixed bug #1855736 again - Duplicity fails to start
+  - remove decode from unicode string
 
 
 New in v0.8.08 (2019/12/08)
