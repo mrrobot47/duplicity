@@ -31,6 +31,7 @@ import duplicity.backend
 from duplicity import log
 from duplicity import globals
 from duplicity import path
+from duplicity import util
 from duplicity.errors import BackendException
 from . import UnitTestCase
 
@@ -244,6 +245,7 @@ class FTPSBackendTest(BackendInstanceBase):
         self.assertEqual(self.backend.__class__.__name__, u'LFTPBackend')
 
 
+@unittest.skipIf(not util.which('rclone'), u"rclone not installed")
 class RCloneBackendTest(BackendInstanceBase):
     def setUp(self):
         super(RCloneBackendTest, self).setUp()
