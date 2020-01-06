@@ -31,8 +31,8 @@ from distutils.command.build_scripts import build_scripts
 
 version_string = u"$version"
 
-if not (sys.version_info[:2] >= (3, 5) or (sys.version_info[0] == 2 and sys.version_info[:2] >= (2, 7))):
-    print(u"Sorry, duplicity requires version 2.7 or version 3.5 or later of Python.")
+if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.version_info[:2] >= (2, 7))):
+    print(u"Sorry, duplicity requires version 2.7 or version 3.6 or later of Python.")
     sys.exit(1)
 
 incdir_list = libdir_list = None
@@ -198,7 +198,7 @@ setup(name=u"duplicity",
     scripts=[u'bin/rdiffdir', u'bin/duplicity'],
     data_files=data_files,
     install_requires=[u'fasteners', u'future'],
-    tests_require=[u'pytest', u'pytest-runner', u'fasteners', u'future', u'mock', u'pexpect'],
+    tests_require=[u'pytest', u'pytest-runner', u'fasteners', u'future', u'mock', u'pexpect', u'rclone'],
     test_suite=u'testing',
     cmdclass={u'test': TestCommand,
               u'install': InstallCommand,
@@ -208,5 +208,6 @@ setup(name=u"duplicity",
                  u"Programming Language :: Python :: 2.7",
                  u"Programming Language :: Python :: 3",
                  u"Programming Language :: Python :: 3.6",
-                 u"Programming Language :: Python :: 3.7"]
+                 u"Programming Language :: Python :: 3.7",
+                 u"Programming Language :: Python :: 3.8"]
     )
