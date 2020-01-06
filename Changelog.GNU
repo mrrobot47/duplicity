@@ -1,3 +1,7 @@
+2020-01-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Add snapcraft login to makesnap
+
 2020-01-02  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix bytes/string differences in subprocess_popen()

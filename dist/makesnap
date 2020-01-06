@@ -58,6 +58,9 @@ mkdir -p build
 tar xf duplicity-${VERSION}.tar.gz -C build
 cd build/duplicity-${VERSION}
 
+# make sure we're logged in
+snapcraft login --with ~/.snaplogin
+
 # build snap
 snapcraft snap
 
