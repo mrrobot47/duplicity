@@ -1,3 +1,8 @@
+2020-01-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.09
+
 2020-01-06  Kenneth Loafman  <kenneth@loafman.com>
 
     * Add snapcraft login to makesnap
