@@ -245,7 +245,7 @@ class FTPSBackendTest(BackendInstanceBase):
         self.assertEqual(self.backend.__class__.__name__, u'LFTPBackend')
 
 
-@unittest.skipIf(not util.which('rclone'), u"rclone not installed")
+@unittest.skipIf(not util.which(u'rclone'), u"rclone not installed")
 class RCloneBackendTest(BackendInstanceBase):
     def setUp(self):
         super(RCloneBackendTest, self).setUp()
