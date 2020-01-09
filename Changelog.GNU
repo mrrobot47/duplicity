@@ -1,3 +1,7 @@
+2020-01-09  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Switched to python3 for snaps.
+
 2020-01-07  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in translation updates
