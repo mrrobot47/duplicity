@@ -308,18 +308,18 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             # one after saving if there's a problem: 0x1 or 0x02 and some error
             # text
             response = chan.recv(1)
-            if (response != u"\0"):
+            if (response not in [b"\x00", u"\x00"]):
                 raise BackendException(u"scp remote error: %s" % chan.recv(-1))
             fstat = os.stat(source_path.name)
             chan.send(u'C%s %d %s\n' % (oct(fstat.st_mode)[-4:], fstat.st_size,
                                         remote_filename))
             response = chan.recv(1)
-            if (response != u"\0"):
+            if (response not in [b"\x00", u"\x00"]):
                 raise BackendException(u"scp remote error: %s" % chan.recv(-1))
-            chan.sendall(f.read() + u'\0')
+            chan.sendall(f.read() + b'\x00')
             f.close()
             response = chan.recv(1)
-            if (response != u"\0"):
+            if (response not in [b"\x00", u"\x00"]):
                 raise BackendException(u"scp remote error: %s" % chan.recv(-1))
             chan.close()
         else:
@@ -362,7 +362,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                 raise BackendException(u"scp get %s failed: %s" % (remote_filename, e))
 
             msg = chan.recv(1)  # check the final status
-            if msg != u'\0':
+            if msg not in [b"\00", u"\x00"]:
                 raise BackendException(u"scp get %s failed: %s" % (remote_filename,
                                                                    chan.recv(-1)))
             f.close()

@@ -1,6 +1,9 @@
 New in v0.8.10 (2020/01/??)
 ---------------------------
 * Switched to python3 for snaps.
+* Fixed bug #1858713 - paramiko socket.timeout
+  - chan.recv() can return bytes or str based on
+    the phase of the moon.  Make allowances.
 
 
 New in v0.8.09 (2020/01/07)
