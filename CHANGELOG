@@ -4,9 +4,8 @@ New in v0.8.10 (2020/01/??)
 * Fixed bug #1858713 - paramiko socket.timeout
   - chan.recv() can return bytes or str based on
     the phase of the moon.  Make allowances.
-* Py27 supports unicode returns for translations
-  - remove install that does not incude unicode
-  - Removed some unneeded includes of gettext
+* Removed some unneeded includes of gettext
+
 
 
 New in v0.8.09 (2020/01/07)
