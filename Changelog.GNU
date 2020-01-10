@@ -1,3 +1,9 @@
+2020-01-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Py27 supports unicode returns for translations
+      - remove install that does not incude unicode
+      - Removed some unneeded includes of gettext
+
 2020-01-09  Kenneth Loafman  <kenneth@loafman.com>
 
     * Switched to python3 for snaps.

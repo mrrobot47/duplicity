@@ -36,7 +36,6 @@ import sys
 import time
 import re
 import getpass
-import gettext
 import re
 import types
 import urllib.request  # pylint: disable=import-error
