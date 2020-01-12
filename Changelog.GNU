@@ -1,3 +1,8 @@
+2020-01-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1859304 with patch from Arduous
+      - Backup and restore do not work on SCP backend
+
 2020-01-10  Kenneth Loafman  <kenneth@loafman.com>
 
     * Removed some unneeded includes of gettext
@@ -8,7 +13,6 @@
     * Fixed bug #1858713 - paramiko socket.timeout
       - chan.recv() can return bytes or str based on
         the phase of the moon.  Make allowances.
-
 
 2020-01-07  Kenneth Loafman  <kenneth@loafman.com>
 
@@ -27,9 +31,9 @@
 
     * Fix bytes/string differences in subprocess_popen()
       - Now returns unicode string not bytes, like python2
-    * Fix bug #1857734 - TypeError in ssh_paramiko_backend
+    * Fixed bug #1857734 - TypeError in ssh_paramiko_backend
       - conn.recv() can return bytes or string, make string
-    * Fix bug #1858153 with patch from az
+    * Fixed bug #1858153 with patch from az
       - mega backend: fails to create directory
 
 2019-12-28  Kenneth Loafman  <kenneth@loafman.com>

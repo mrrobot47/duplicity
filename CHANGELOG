@@ -5,7 +5,8 @@ New in v0.8.10 (2020/01/??)
   - chan.recv() can return bytes or str based on
     the phase of the moon.  Make allowances.
 * Removed some unneeded includes of gettext
-
+* Fixed bug #1859304 with patch from Arduous
+  - Backup and restore do not work on SCP backend
 
 
 New in v0.8.09 (2020/01/07)
@@ -33,9 +34,9 @@ New in v0.8.09 (2020/01/07)
 * Convert all shebangs to python3 for bug #1855736
 * Fix bytes/string differences in subprocess_popen()
   - Now returns unicode string not bytes, like python2
-* Fix bug #1857734 - TypeError in ssh_paramiko_backend
+* Fixed bug #1857734 - TypeError in ssh_paramiko_backend
   - conn.recv() can return bytes or string, make string
-* Fix bug #1858153 with patch from az
+* Fixed bug #1858153 with patch from az
   - mega backend: fails to create directory
 * Add snapcraft login to makesnap
 * Fixed bug #1858295 - Unicode error in source filename
