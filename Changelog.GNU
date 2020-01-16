@@ -1,3 +1,10 @@
+2020-01-16  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Move to single-sourceing the package version
+      - Rework setup.py, dist/makedist, dist/makesnap,
+        etc., to get version from duplicity/__init__.py
+      - Drop dist/relfiles.  It was problematic.
+
 2020-01-12  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1859304 with patch from Arduous

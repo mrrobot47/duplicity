@@ -29,7 +29,9 @@ from setuptools.command.install import install
 from setuptools.command.sdist import sdist
 from distutils.command.build_scripts import build_scripts
 
-version_string = u"$version"
+from duplicity import __version__
+
+version_string = __version__
 
 if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.version_info[:2] >= (2, 7))):
     print(u"Sorry, duplicity requires version 2.7 or version 3.6 or later of Python.")
@@ -129,8 +131,6 @@ class SDistCommand(sdist):
 
     def run(self):
         version = version_string
-        if version[0] == u'$':
-            version = u"0.0dev"
         os.system(os.path.join(top_dir, u"dist", u"makedist") + u" " + version)
         os.system(u"mkdir -p " + self.dist_dir)
         os.system(u"mv duplicity-" + version + u".tar.gz " + self.dist_dir)

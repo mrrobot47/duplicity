@@ -296,7 +296,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
 
     def _put(self, source_path, remote_filename):
         # remote_filename is a byte object, not str or unicode
-        remote_filename = remote_filename.decode("utf-8")
+        remote_filename = remote_filename.decode(u"utf-8")
         if self.use_scp:
             f = open(source_path.name, u'rb')
             try:
@@ -305,7 +305,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                 # scp in sink mode uses the arg as base directory
                 chan.exec_command(u"scp -t '%s'" % self.remote_dir)
             except Exception as e:
-                raise BackendException(u"scp execution failed: %b" % e)
+                raise BackendException(u"scp execution failed: %s" % e)
             # scp protocol: one 0x0 after startup, one after the Create meta,
             # one after saving if there's a problem: 0x1 or 0x02 and some error
             # text
@@ -322,14 +322,14 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             f.close()
             response = chan.recv(1)
             if (response != b"\0"):
-                raise BackendException(u"scp remote error: %b" % chan.recv(-1))
+                raise BackendException(u"scp remote error: %s" % chan.recv(-1))
             chan.close()
         else:
             self.sftp.put(source_path.name, remote_filename)
 
     def _get(self, remote_filename, local_path):
         # remote_filename is a byte object, not str or unicode
-        remote_filename = remote_filename.decode("utf-8")
+        remote_filename = remote_filename.decode(u"utf-8")
         if self.use_scp:
             try:
                 chan = self.client.get_transport().open_session()

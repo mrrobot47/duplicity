@@ -1,5 +1,5 @@
 name: duplicity
-version: $version
+version: $VERSION  #replaced by real version in dist/makesnap
 summary: Efficient, encrypted backup to local or remote hosts
 description: |
   Duplicity backs directories by producing encrypted tar-format volumes and uploading
@@ -18,7 +18,7 @@ apps:
 
 parts:
     duplicity:
-        plugin: python 
+        plugin: python
         python-version: python3
         stage-packages:
             - gnupg
@@ -31,7 +31,6 @@ parts:
             - openssh-client        # ssh_pexpect_backend.py
             - python3-azure         # azurebackend.py
             - python3-boto          # botobackend.py
-#             - python3-cloudfiles    # cfbackend.py
             - python3-fasteners
             - python3-future
             - python3-gi            # giobackend.py

@@ -30,6 +30,7 @@ import urllib.parse  # pylint: disable=import-error
 import urllib.error  # pylint: disable=import-error
 
 import duplicity.backend
+from duplicity import __version__
 from duplicity.errors import BackendException
 
 
@@ -56,7 +57,7 @@ Google Docs backend requires Google Data APIs Python Client Library (see http://
 Exception: %s""" % str(e))
 
         # Setup client instance.
-        self.client = gdata.docs.client.DocsClient(source=u'duplicity $version')
+        self.client = gdata.docs.client.DocsClient(source=u'duplicity %s' % __version__)
         self.client.ssl = True
         self.client.http_client.debug = False
         self._authorize(parsed_url.username + u'@' + parsed_url.hostname, self.get_password())
@@ -136,7 +137,7 @@ Exception: %s""" % str(e))
         try:
             self.client.client_login(email,
                                      password,
-                                     source=u'duplicity $version',
+                                     source=u'duplicity %s' % __version__,
                                      service=u'writely',
                                      captcha_token=captcha_token,
                                      captcha_response=captcha_response)

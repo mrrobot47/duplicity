@@ -25,9 +25,11 @@ import os
 import sys
 import socket
 
+from duplicity import __version__
+
 
 # The current version of duplicity
-version = u"$version"
+version = __version__
 
 # Prefix for all files (appended before type-specific prefixes)
 file_prefix = b""

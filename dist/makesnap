@@ -23,40 +23,47 @@
 # Modify to fit your system
 REMOTE="dione.local:///Users/ken/workspace/duplicity-src8/"
 LOCAL="/home/ken/workspace/duplicity-src8/"
+KEYNAME="firstprime"
 
 
 set -e
 
-if [ "$#" -ne 1 ]; then
-    echo "usage: makesnap <version>"
+if [ "$#" -ne 0 ]; then
+    echo "usage: makesnap"
     exit 2
-else
-    VERSION=$1
-    echo "Making snap of version ${VERSION}"
 fi
 
 export PYTHONWARNINGS="ignore::DeprecationWarning"
+
+BASE=`python3 -c "from duplicity import __version__; print(__version__, end='')"`
+REVNO=`bzr revno`
+VERSION=${BASE}${REVNO}
 
 # get the working source tree
 rsync -av \
     --delete \
     --exclude=*.pyc \
     --exclude=*.so \
-    --exclude=.tox \
-    --exclude=docs \
-    --exclude=__pycache__ \
+    --exclude=.DS_Store \
     --exclude=.pytest_cache \
+    --exclude=.tox \
+    --exclude=__pycache__ \
+    --exclude=docs \
     ${REMOTE} \
     ${LOCAL}
 
-# run makedist to set ${VERSION}
-cd ~/workspace/duplicity-src8
-dist/makedist ${VERSION}
+# run makedist
+cd ${LOCAL}
+dist/makedist
 
 # make clean source dir
+rm -rf build
 mkdir -p build
 tar xf duplicity-${VERSION}.tar.gz -C build
 cd build/duplicity-${VERSION}
+
+# set version in build copy of snapcraft.yaml
+sed -i s/\$VERSION/${VERSION}/g snap/snapcraft.yaml
 
 # make sure we're logged in
 snapcraft login --with ~/.snaplogin
@@ -68,7 +75,8 @@ snapcraft snap
 snapcraft push duplicity_${VERSION}*.snap --release edge
 
 # sign snap
-#snapcraft sign-build duplicity_${VERSION}*.snap --key-name kwloafman
+# TODO: find reason for gpg timeout on signing
+#snapcraft sign-build duplicity_${VERSION}*.snap --key-name ${KEYNAME}
 
 # mv into working source tree
 mv duplicity_${VERSION}*.snap* ../..

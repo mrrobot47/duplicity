@@ -7,6 +7,10 @@ New in v0.8.10 (2020/01/??)
 * Removed some unneeded includes of gettext
 * Fixed bug #1859304 with patch from Arduous
   - Backup and restore do not work on SCP backend
+* Move to single-sourceing the package version
+  - Rework setup.py, dist/makedist, dist/makesnap,
+    etc., to get version from duplicity/__init__.py
+  - Drop dist/relfiles.  It was problematic.
 
 
 New in v0.8.09 (2020/01/07)
