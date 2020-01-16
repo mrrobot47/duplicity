@@ -5,6 +5,8 @@
         etc., to get version from duplicity/__init__.py
       - Drop dist/relfiles.  It was problematic.
     * Fixed bug #1859877 - syntax warning on python 3.8
+    * Skip functional/test_selection::TestUnicode if
+      python version is less than 3.7.
 
 2020-01-12  Kenneth Loafman  <kenneth@loafman.com>
 
