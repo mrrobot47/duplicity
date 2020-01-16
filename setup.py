@@ -28,10 +28,18 @@ from setuptools.command.test import test
 from setuptools.command.install import install
 from setuptools.command.sdist import sdist
 from distutils.command.build_scripts import build_scripts
+from subprocess import Popen, PIPE
 
 from duplicity import __version__
 
-version_string = __version__
+try:
+    bzr = Popen([u"bzr", u"revno"], stdout=PIPE, universal_newlines=True)
+    revno = bzr.communicate()[0].split()[0].strip()
+except Exception:
+    revno = u'0'
+
+version_string = __version__ + revno
+
 
 if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.version_info[:2] >= (2, 7))):
     print(u"Sorry, duplicity requires version 2.7 or version 3.6 or later of Python.")
@@ -131,7 +139,7 @@ class SDistCommand(sdist):
 
     def run(self):
         version = version_string
-        os.system(os.path.join(top_dir, u"dist", u"makedist") + u" " + version)
+        os.system(os.path.join(top_dir, u"dist", u"makedist"))
         os.system(u"mkdir -p " + self.dist_dir)
         os.system(u"mv duplicity-" + version + u".tar.gz " + self.dist_dir)
 
