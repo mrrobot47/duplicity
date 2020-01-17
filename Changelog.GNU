@@ -1,6 +1,7 @@
 2020-01-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Clean up some TODO tasks in testing code.
+    * Clean up deprecation errors in Python 3.8
 
 2020-01-16  Kenneth Loafman  <kenneth@loafman.com>
 

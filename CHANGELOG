@@ -15,6 +15,7 @@ New in v0.8.10 (2020/01/??)
 * Skip functional/test_selection::TestUnicode if
   python version is less than 3.7.
 * Clean up some TODO tasks in testing code.
+* Clean up deprecation errors in Python 3.8
 
 
 New in v0.8.09 (2020/01/07)
