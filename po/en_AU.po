@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-01-12 13:45+0000\n"
+"POT-Creation-Date: 2020-01-16 17:03+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: English (Australia) <en_AU@li.org>\n"
@@ -15,35 +15,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-01-13 06:03+0000\n"
-"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
+"X-Launchpad-Export-Date: 2020-01-17 06:00+0000\n"
+"X-Generator: Launchpad (build f1052173880d8dae43faa7c2fc45da1b42227143)\n"
 "Language: \n"
 
-#: ../bin/duplicity:121
+#: ../bin/duplicity:120
 msgid "INT intercepted...exiting."
 msgstr "INT intercepted...exiting."
 
-#: ../bin/duplicity:129
+#: ../bin/duplicity:128
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "GPG error detail: %s"
 
-#: ../bin/duplicity:139
+#: ../bin/duplicity:138
 #, python-format
 msgid "User error detail: %s"
 msgstr "User error detail: %s"
 
-#: ../bin/duplicity:149
+#: ../bin/duplicity:148
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "Backend error detail: %s"
 
-#: ../bin/rdiffdir:63 ../duplicity/commandline.py:236
+#: ../bin/rdiffdir:64 ../duplicity/commandline.py:236
 #, python-format
 msgid "Error opening file %s"
 msgstr "Error opening file %s"
 
-#: ../bin/rdiffdir:130
+#: ../bin/rdiffdir:131
 #, python-format
 msgid "File %s already exists, will not overwrite."
 msgstr "File %s already exists, will not overwrite."

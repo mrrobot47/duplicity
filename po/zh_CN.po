@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-01-12 13:45+0000\n"
+"POT-Creation-Date: 2020-01-16 17:03+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Careone <zzbusagain@yahoo.com.cn>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -15,35 +15,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2020-01-13 06:04+0000\n"
-"X-Generator: Launchpad (build bceb5ef013b87ef7aafe0755545ceb689ca7ac60)\n"
+"X-Launchpad-Export-Date: 2020-01-17 06:00+0000\n"
+"X-Generator: Launchpad (build f1052173880d8dae43faa7c2fc45da1b42227143)\n"
 "Language: \n"
 
-#: ../bin/duplicity:121
+#: ../bin/duplicity:120
 msgid "INT intercepted...exiting."
 msgstr "收到 INT 信号 ... 正在退出。"
 
-#: ../bin/duplicity:129
+#: ../bin/duplicity:128
 #, python-format
 msgid "GPG error detail: %s"
 msgstr "GPG 错误详情：%s"
 
-#: ../bin/duplicity:139
+#: ../bin/duplicity:138
 #, python-format
 msgid "User error detail: %s"
 msgstr "用户错误详情：%s"
 
-#: ../bin/duplicity:149
+#: ../bin/duplicity:148
 #, python-format
 msgid "Backend error detail: %s"
 msgstr "后台设备错误详情：%s"
 
-#: ../bin/rdiffdir:63 ../duplicity/commandline.py:236
+#: ../bin/rdiffdir:64 ../duplicity/commandline.py:236
 #, python-format
 msgid "Error opening file %s"
 msgstr "打开文件 %s 时出错"
 
-#: ../bin/rdiffdir:130
+#: ../bin/rdiffdir:131
 #, python-format
 msgid "File %s already exists, will not overwrite."
 msgstr "文件 %s 已存在，不进行覆盖。"
