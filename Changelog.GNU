@@ -1,3 +1,7 @@
+2020-01-17  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Clean up some TODO tasks in testing code.
+
 2020-01-16  Kenneth Loafman  <kenneth@loafman.com>
 
     * Move to single-sourceing the package version

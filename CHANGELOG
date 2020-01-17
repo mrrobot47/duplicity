@@ -14,6 +14,7 @@ New in v0.8.10 (2020/01/??)
 * Fixed bug #1859877 - syntax warning on python 3.8
 * Skip functional/test_selection::TestUnicode if
   python version is less than 3.7.
+* Clean up some TODO tasks in testing code.
 
 
 New in v0.8.09 (2020/01/07)

@@ -134,7 +134,6 @@ class InstallCommand(install):
         install.run(self)
 
 
-# TODO: move logic from dist/makedist inline
 class SDistCommand(sdist):
 
     def run(self):

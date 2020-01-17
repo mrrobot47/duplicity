@@ -69,7 +69,6 @@ class DuplicityTestCase(unittest.TestCase):
         self.savedEnviron = {}
         self.savedGlobals = {}
 
-        # TODO: remove these lines
         log.setup()
         log.setverbosity(log.WARNING)
         self.set_global(u'print_statistics', 0)
