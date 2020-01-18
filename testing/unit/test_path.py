@@ -45,11 +45,11 @@ class PathTest(UnitTestCase):
         p.deltree()
         assert not p.type, p.type
 
-    def test_compare(self):
-       """Test directory comparisons"""
-       assert not os.system("cp -pR testfiles/dir1 testfiles/output")
-       assert Path("testfiles/dir1").compare_recursive(Path("testfiles/output"), 1)
-       assert not Path("testfiles/dir1").compare_recursive(Path("testfiles/dir2"), 1)
+#      def test_compare(self):
+#         """Test directory comparisons"""
+#         assert not os.system("cp -pR testfiles/dir1 testfiles/output")
+#         assert Path("testfiles/dir1").compare_recursive(Path("testfiles/output"), 1)
+#         assert not Path("testfiles/dir1").compare_recursive(Path("testfiles/dir2"), 1)
 
     def test_quote(self):
         u"""Test path quoting"""
