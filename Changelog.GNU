@@ -1,3 +1,8 @@
+2020-01-19  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1858204 - ENODEV should be added to
+      list of recognized error stringa
+
 2020-01-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Clean up some TODO tasks in testing code.

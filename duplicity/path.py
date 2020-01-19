@@ -549,7 +549,7 @@ class Path(ROPath):
                 self.stat = os.lstat(self.name)
         except OSError as e:
             err_string = errno.errorcode[e.errno]
-            if err_string in [u"ENOENT", u"ENOTDIR", u"ELOOP", u"ENOTCONN"]:
+            if err_string in [u"ENOENT", u"ENOTDIR", u"ELOOP", u"ENOTCONN", "ENODEV"]:
                 self.stat, self.type = None, None  # file doesn't exist
                 self.mode = None
             else:

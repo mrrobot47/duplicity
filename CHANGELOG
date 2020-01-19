@@ -8,7 +8,7 @@ New in v0.8.10 (2020/01/??)
 * Fixed bug #1859304 with patch from Arduous
   - Backup and restore do not work on SCP backend
 * Move to single-sourceing the package version
-  - Rework setup.py, dist/makedist, dist/makesnap, 
+  - Rework setup.py, dist/makedist, dist/makesnap,
     etc., to get version from duplicity/__init__.py
   - Drop dist/relfiles.  It was problematic.
 * Fixed bug #1859877 - syntax warning on python 3.8
@@ -16,6 +16,8 @@ New in v0.8.10 (2020/01/??)
   python version is less than 3.7.
 * Clean up some TODO tasks in testing code.
 * Clean up deprecation errors in Python 3.8
+* Fixed bug #1858204 - ENODEV should be added to
+  list of recognized error stringa
 
 
 New in v0.8.09 (2020/01/07)
