@@ -1,3 +1,12 @@
+2020-01-21  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1858207 missing targets in multibackend
+      - Made it possible to return default value instead
+        of taking a fatal exception on an operation by
+        operation approach.  The only use case now is for
+        multibackend to be able to list all targets and
+        report back on the ones that don't work.
+
 2020-01-19  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1858204 - ENODEV should be added to

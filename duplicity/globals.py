@@ -79,6 +79,18 @@ restore_dir = None
 # The backend representing the remote side
 backend = None
 
+# Are errors fatal (set for retry decorator in backend.py)
+# See example of use in multibackend.py _list()
+# Do not use in normal cases!
+are_errors_fatal = {
+    u'delete': (True, None),
+    u'get': (True, None),
+    u'list': (True, None),
+    u'move': (True, None),
+    u'put': (True, None),
+    u'query': (True, None),
+}
+
 # If set, the Select object which iterates paths in the local
 # source directory.
 select = None

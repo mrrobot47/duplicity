@@ -63,6 +63,7 @@ import duplicity.backends
 
 _backends = {}
 _backend_prefixes = {}
+_last_exception = None
 
 # These URL schemes have a backend with a notion of an RFC "network location".
 # The 'file' and 's3+http' schemes should not be in this list.
@@ -368,42 +369,55 @@ def retry(operation, fatal=True):
     # have to return a decorator function (which itself returns a function!)
     def outer_retry(fn):
         def inner_retry(self, *args):
+            global _last_exception
+            errors_fatal, errors_default = globals.are_errors_fatal.get(operation, (True, None))
             for n in range(1, globals.num_retries + 1):
                 try:
                     return fn(self, *args)
                 except FatalBackendException as e:
-                    # die on fatal errors
-                    raise e
-                except Exception as e:
-                    # retry on anything else
-                    log.Debug(_(u"Backtrace of previous error: %s")
-                              % exception_traceback())
-                    at_end = n == globals.num_retries
-                    code = _get_code_from_exception(self.backend, operation, e)
-                    if code == log.ErrorCode.backend_not_found:
-                        # If we tried to do something, but the file just isn't there,
-                        # no need to retry.
-                        at_end = True
-                    if at_end and fatal:
-                        def make_filename(f):
-                            if isinstance(f, path.ROPath):
-                                return util.escape(f.uc_name)
-                            else:
-                                return util.escape(f)
-                        extra = u' '.join([operation] + [make_filename(x) for x in args if (x and isinstance(x, str))])
-                        log.FatalError(_(u"Giving up after %s attempts. %s: %s")
-                                       % (n, e.__class__.__name__,
-                                          util.uexc(e)), code=code, extra=extra)
+                    _last_exception = e
+                    if not errors_fatal:
+                        # backend wants to report and ignore errors
+                        return errors_default
                     else:
-                        log.Warn(_(u"Attempt %s failed. %s: %s")
-                                 % (n, e.__class__.__name__, util.uexc(e)))
-                    if not at_end:
-                        if isinstance(e, TemporaryLoadException):
-                            time.sleep(3 * globals.backend_retry_delay)  # wait longer before trying again
+                        # die on fatal errors
+                        raise e
+                except Exception as e:
+                    _last_exception = e
+                    if not errors_fatal:
+                        # backend wants to report and ignore errors
+                        return errors_default
+                    else:
+                        # retry on anything else
+                        log.Debug(_(u"Backtrace of previous error: %s")
+                                  % exception_traceback())
+                        at_end = n == globals.num_retries
+                        code = _get_code_from_exception(self.backend, operation, e)
+                        if code == log.ErrorCode.backend_not_found:
+                            # If we tried to do something, but the file just isn't there,
+                            # no need to retry.
+                            at_end = True
+                        if at_end and fatal:
+                            def make_filename(f):
+                                if isinstance(f, path.ROPath):
+                                    return util.escape(f.uc_name)
+                                else:
+                                    return util.escape(f)
+                            extra = u' '.join([operation] + [make_filename(x) for x in args
+                                                             if (x and isinstance(x, str))])
+                            log.FatalError(_(u"Giving up after %s attempts. %s: %s")
+                                           % (n, e.__class__.__name__,
+                                              util.uexc(e)), code=code, extra=extra)
                         else:
-                            time.sleep(globals.backend_retry_delay)  # wait a bit before trying again
-                        if hasattr(self.backend, u'_retry_cleanup'):
-                            self.backend._retry_cleanup()
+                            log.Warn(_(u"Attempt %s failed. %s: %s")
+                                     % (n, e.__class__.__name__, util.uexc(e)))
+                        if not at_end:
+                            if isinstance(e, TemporaryLoadException):
+                                time.sleep(3 * globals.backend_retry_delay)  # wait longer before trying again
+                            else:
+                                time.sleep(globals.backend_retry_delay)  # wait a bit before trying again
+                            if hasattr(self.backend, u'_retry_cleanup'):
+                                self.backend._retry_cleanup()
 
         return inner_retry
     return outer_retry

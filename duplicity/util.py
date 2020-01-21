@@ -121,9 +121,9 @@ def uexc(e):
             if isinstance(m, str):
                 # Already unicode
                 return m
-        else:
-            # Encoded, likely in filesystem encoding
-            return fsdecode(m)
+            elif isinstance(m, bytes):
+                # Encoded, likely in filesystem encoding
+                return fsdecode(m)
     else:
         return u''
 

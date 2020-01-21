@@ -18,6 +18,12 @@ New in v0.8.10 (2020/01/??)
 * Clean up deprecation errors in Python 3.8
 * Fixed bug #1858204 - ENODEV should be added to
   list of recognized error stringa
+* Fixed bug #1858207 missing targets in multibackend
+  - Made it possible to return default value instead
+    of taking a fatal exception on an operation by
+    operation approach.  The only use case now is for
+    multibackend to be able to list all targets and
+    report back on the ones that don't work.
 
 
 New in v0.8.09 (2020/01/07)

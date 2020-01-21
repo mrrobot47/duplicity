@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-01-14 15:36-0600\n"
+"POT-Creation-Date: 2020-01-20 08:44-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,100 +128,100 @@ msgstr ""
 msgid "Connection failed, please check your password: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:95
+#: ../duplicity/backends/multibackend.py:96
 #, python-format
 msgid "MultiBackend: Could not parse query string %s: %s "
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:104
+#: ../duplicity/backends/multibackend.py:105
 #, python-format
 msgid "MultiBackend: Invalid query string %s: more than one value for %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:109
+#: ../duplicity/backends/multibackend.py:110
 #, python-format
 msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:159
-#: ../duplicity/backends/multibackend.py:164
+#: ../duplicity/backends/multibackend.py:160
+#: ../duplicity/backends/multibackend.py:165
 #, python-format
 msgid "MultiBackend: illegal value for %s: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:175
+#: ../duplicity/backends/multibackend.py:176
 #, python-format
 msgid "MultiBackend: Url %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:179
+#: ../duplicity/backends/multibackend.py:180
 #, python-format
 msgid "MultiBackend: Could not load config file %s: %s "
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:188
+#: ../duplicity/backends/multibackend.py:189
 #, python-format
 msgid "MultiBackend: use store %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:193
+#: ../duplicity/backends/multibackend.py:194
 #, python-format
 msgid "MultiBackend: set env %s = %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:206
+#: ../duplicity/backends/multibackend.py:207
 #, python-format
 msgid "Multibackend: register affinity for prefix %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:247
+#: ../duplicity/backends/multibackend.py:248
 #, python-format
 msgid "MultiBackend: _put: write to store #%s (%s)"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:260
+#: ../duplicity/backends/multibackend.py:261
 #, python-format
 msgid "MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:267
+#: ../duplicity/backends/multibackend.py:268
 #, python-format
 msgid "MultiBackend: failed to write %s. Aborting process."
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:274
+#: ../duplicity/backends/multibackend.py:275
 #, python-format
 msgid ""
 "MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:293
+#: ../duplicity/backends/multibackend.py:294
 #, python-format
 msgid "MultiBackend: failed to get %s to %s from %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:296
+#: ../duplicity/backends/multibackend.py:297
 #, python-format
 msgid ""
 "MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:305
+#: ../duplicity/backends/multibackend.py:309
 #, python-format
 msgid "MultiBackend: list from %s: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:311
+#: ../duplicity/backends/multibackend.py:315
 #, python-format
 msgid "MultiBackend: combined list: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:339
+#: ../duplicity/backends/multibackend.py:343
 #, python-format
 msgid "MultiBackend: failed to delete %s from %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:343
+#: ../duplicity/backends/multibackend.py:347
 #, python-format
 msgid ""
 "MultiBackend: failed to delete %s. Tried all backing stores and none "
