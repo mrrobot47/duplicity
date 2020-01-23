@@ -1,3 +1,8 @@
+2020-01-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.10
+
 2020-01-21  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1858207 missing targets in multibackend

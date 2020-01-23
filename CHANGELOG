@@ -24,6 +24,7 @@ New in v0.8.10 (2020/01/??)
     operation approach.  The only use case now is for
     multibackend to be able to list all targets and
     report back on the ones that don't work.
+* Merged in translation updates
 
 
 New in v0.8.09 (2020/01/07)
