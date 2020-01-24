@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-01-20 08:44-0600\n"
+"POT-Creation-Date: 2020-01-23 07:45-0600\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2020-01-22 06:03+0000\n"
+"X-Launchpad-Export-Date: 2020-01-24 06:02+0000\n"
 "X-Generator: Launchpad (build b8d1327fd820d6bf500589d6da587d5037c7d88e)\n"
 "Language: bs\n"
 
@@ -85,42 +85,42 @@ msgstr ""
 msgid "task execution done (success: %s)"
 msgstr ""
 
-#: ../duplicity/backend.py:103
+#: ../duplicity/backend.py:104
 #, python-format
 msgid "Import of %s %s"
 msgstr "Uvoz od %s %s"
 
-#: ../duplicity/backend.py:212
+#: ../duplicity/backend.py:213
 #, python-format
 msgid "Could not initialize backend: %s"
 msgstr "Ne mogu inicijalizirati pozadinu: %s"
 
-#: ../duplicity/backend.py:379
+#: ../duplicity/backend.py:392
 #, python-format
 msgid "Backtrace of previous error: %s"
 msgstr "Povratno praćenje od prethodne greše: %s"
 
-#: ../duplicity/backend.py:394
+#: ../duplicity/backend.py:408
 #, python-format
 msgid "Giving up after %s attempts. %s: %s"
 msgstr "Odustajanje poslije %s pokušaji. %s: %s"
 
-#: ../duplicity/backend.py:398
+#: ../duplicity/backend.py:412
 #, python-format
 msgid "Attempt %s failed. %s: %s"
 msgstr "Pokušaj %s nije uspio. %s: %s"
 
-#: ../duplicity/backend.py:492
+#: ../duplicity/backend.py:506
 #, python-format
 msgid "Reading results of '%s'"
 msgstr ""
 
-#: ../duplicity/backend.py:518
+#: ../duplicity/backend.py:532
 #, python-format
 msgid "Writing %s"
 msgstr ""
 
-#: ../duplicity/backend.py:559
+#: ../duplicity/backend.py:573
 #, python-format
 msgid "File %s not found locally after get from backend"
 msgstr "Dadoteka %s nije pronađena lokalno nakon što je dobijena"
@@ -130,59 +130,59 @@ msgstr "Dadoteka %s nije pronađena lokalno nakon što je dobijena"
 msgid "Connection failed, please check your password: %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:96
+#: ../duplicity/backends/multibackend.py:97
 #, python-format
 msgid "MultiBackend: Could not parse query string %s: %s "
 msgstr "MultiBackend: Ne mogu razmatrati string upita %s: %s "
 
-#: ../duplicity/backends/multibackend.py:105
+#: ../duplicity/backends/multibackend.py:106
 #, python-format
 msgid "MultiBackend: Invalid query string %s: more than one value for %s"
 msgstr ""
 "MultiBackend: Nevaljan string upita %s: više od jedne vrijednosti za %s"
 
-#: ../duplicity/backends/multibackend.py:110
+#: ../duplicity/backends/multibackend.py:111
 #, python-format
 msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
 msgstr "MultiBackend: Nevaljan string upita %s: nepoznat parametar %s"
 
-#: ../duplicity/backends/multibackend.py:160
-#: ../duplicity/backends/multibackend.py:165
+#: ../duplicity/backends/multibackend.py:161
+#: ../duplicity/backends/multibackend.py:166
 #, python-format
 msgid "MultiBackend: illegal value for %s: %s"
 msgstr "MultiBackend: neodobrena vrijednost za %s: %s"
 
-#: ../duplicity/backends/multibackend.py:176
+#: ../duplicity/backends/multibackend.py:177
 #, python-format
 msgid "MultiBackend: Url %s"
 msgstr "MultiBackend: Url %s"
 
-#: ../duplicity/backends/multibackend.py:180
+#: ../duplicity/backends/multibackend.py:181
 #, python-format
 msgid "MultiBackend: Could not load config file %s: %s "
 msgstr "MultiBackend: Nije mogao učitati  config fajl %s: %s "
 
-#: ../duplicity/backends/multibackend.py:189
+#: ../duplicity/backends/multibackend.py:190
 #, python-format
 msgid "MultiBackend: use store %s"
 msgstr "MultiBackend: koristi u spremniku %s"
 
-#: ../duplicity/backends/multibackend.py:194
+#: ../duplicity/backends/multibackend.py:195
 #, python-format
 msgid "MultiBackend: set env %s = %s"
 msgstr "MultiBackend: postavi env %s = %s"
 
-#: ../duplicity/backends/multibackend.py:207
+#: ../duplicity/backends/multibackend.py:208
 #, python-format
 msgid "Multibackend: register affinity for prefix %s"
 msgstr ""
 
-#: ../duplicity/backends/multibackend.py:248
+#: ../duplicity/backends/multibackend.py:249
 #, python-format
 msgid "MultiBackend: _put: write to store #%s (%s)"
 msgstr "MultiBackend: _put:write to store #%s (%s)"
 
-#: ../duplicity/backends/multibackend.py:261
+#: ../duplicity/backends/multibackend.py:262
 #, python-format
 msgid ""
 "MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
@@ -190,12 +190,12 @@ msgstr ""
 "MultiBackend: nije uspio napisati za spremanje $%s (%s), probaj #%s, "
 "Izuzetak: %s"
 
-#: ../duplicity/backends/multibackend.py:268
+#: ../duplicity/backends/multibackend.py:269
 #, python-format
 msgid "MultiBackend: failed to write %s. Aborting process."
 msgstr "MultiBackend: nije uspjelo unošenje %s. Prekidanje procesa."
 
-#: ../duplicity/backends/multibackend.py:275
+#: ../duplicity/backends/multibackend.py:276
 #, python-format
 msgid ""
 "MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
@@ -203,12 +203,12 @@ msgstr ""
 "MultiBackend: nije uspjelo pisanje %s. Pokušali se rezervni spremnici i "
 "nijedan nije uspio"
 
-#: ../duplicity/backends/multibackend.py:294
+#: ../duplicity/backends/multibackend.py:295
 #, python-format
 msgid "MultiBackend: failed to get %s to %s from %s"
 msgstr "MultiBackend: nije uspjelo uzimanje %s do %s od %s"
 
-#: ../duplicity/backends/multibackend.py:297
+#: ../duplicity/backends/multibackend.py:298
 #, python-format
 msgid ""
 "MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
@@ -216,22 +216,27 @@ msgstr ""
 "MultiBackend: nije uspjelo uzimanje %s. Pokušali se rezervni spremnici i "
 "nijedan nije uspio"
 
-#: ../duplicity/backends/multibackend.py:309
+#: ../duplicity/backends/multibackend.py:308
 #, python-format
-msgid "MultiBackend: list from %s: %s"
-msgstr "MultiBackend: lista od %s: %s"
+msgid "MultiBackend: %s: %d files"
+msgstr ""
 
-#: ../duplicity/backends/multibackend.py:315
+#: ../duplicity/backends/multibackend.py:311
+#, python-format
+msgid "Exception during list of %s: %s"
+msgstr ""
+
+#: ../duplicity/backends/multibackend.py:318
 #, python-format
 msgid "MultiBackend: combined list: %s"
 msgstr "MultiBackend: kombinirana lista: %s"
 
-#: ../duplicity/backends/multibackend.py:343
+#: ../duplicity/backends/multibackend.py:346
 #, python-format
 msgid "MultiBackend: failed to delete %s from %s"
 msgstr "MultiBackend: nije uspjelo brisanje %s od %s"
 
-#: ../duplicity/backends/multibackend.py:347
+#: ../duplicity/backends/multibackend.py:350
 #, python-format
 msgid ""
 "MultiBackend: failed to delete %s. Tried all backing stores and none "
@@ -1776,6 +1781,10 @@ msgstr ""
 #, python-format
 msgid "Releasing lockfile %s"
 msgstr "Otpuštanje zakljucane dadoteke %s"
+
+#, python-format
+#~ msgid "MultiBackend: list from %s: %s"
+#~ msgstr "MultiBackend: lista od %s: %s"
 
 #, python-format
 #~ msgid ""
