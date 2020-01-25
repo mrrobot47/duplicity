@@ -65,7 +65,7 @@ class TempTest(UnitTestCase):
         tdp.setdata()
         assert tdp.isreg()
 
-        fin1 = mgzip.MulitGzipFile(tdp.name, u"rb")
+        fin1 = mgzip.GzipFile(tdp.name, u"rb")
         buf = fin1.read()
         assert buf == b"hello, there", buf
         fin1.close()

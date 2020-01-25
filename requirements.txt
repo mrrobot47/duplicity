@@ -2,6 +2,7 @@
 
 fasteners
 future
+mgzip
 mock
 requests
 urllib3
