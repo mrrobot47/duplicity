@@ -39,7 +39,7 @@ from duplicity import __version__
 bzr = Popen([u"bzr", u"revno"], stdout=PIPE, universal_newlines=True)
 revno = bzr.communicate()[0].split()[0].strip()
 
-Version = __version__ + revno
+Version = __version__ + u'.' + revno
 
 
 def MakeTar():

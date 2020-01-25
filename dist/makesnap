@@ -19,13 +19,6 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-
-# Modify to fit your system
-REMOTE="dione.local:///Users/ken/workspace/duplicity-src8/"
-LOCAL="/home/ken/workspace/duplicity-src8/"
-KEYNAME="firstprime"
-
-
 set -e
 
 if [ "$#" -ne 0 ]; then
@@ -33,53 +26,48 @@ if [ "$#" -ne 0 ]; then
     exit 2
 fi
 
-export PYTHONWARNINGS="ignore::DeprecationWarning"
+if [ `uname` == 'Darwin' ]; then
+    SED=gsed
+else
+    SED=sed
+fi
 
 BASE=`python3 -c "from duplicity import __version__; print(__version__, end='')"`
 REVNO=`bzr revno`
-VERSION=${BASE}${REVNO}
-
-# get the working source tree
-rsync -av \
-    --delete \
-    --exclude=*.pyc \
-    --exclude=*.so \
-    --exclude=.DS_Store \
-    --exclude=.pytest_cache \
-    --exclude=.tox \
-    --exclude=__pycache__ \
-    --exclude=docs \
-    ${REMOTE} \
-    ${LOCAL}
+MYVERSION=${BASE}.${REVNO}
+echo "makesnap of ${MYVERSION}"
 
 # run makedist
-cd ${LOCAL}
 dist/makedist
 
 # make clean source dir
 rm -rf build
 mkdir -p build
-tar xf duplicity-${VERSION}.tar.gz -C build
-cd build/duplicity-${VERSION}
+tar xf duplicity-${MYVERSION}.tar.gz -C build
+cd build/duplicity-${MYVERSION}
 
 # set version in build copy of snapcraft.yaml
-sed -i s/\$VERSION/${VERSION}/g snap/snapcraft.yaml
+${SED} -i s/\$VERSION/${MYVERSION}/g snap/snapcraft.yaml
+head -2 snap/snapcraft.yaml | tail -1
 
 # make sure we're logged in
 snapcraft login --with ~/.snaplogin
 
-# build snap
-snapcraft snap
+# build snap on Ubuntu 18.04 VM.  Multipass does not work well on MacOS.
+snapcraft snap --output duplicity_${MYVERSION}_amd64.snap --destructive-mode
+
+# run snap review tools before pushing to store
+review-tools.snap-review duplicity_${MYVERSION}_amd64.snap --allow-classic
 
 # push to edge
-snapcraft push duplicity_${VERSION}*.snap --release edge
+snapcraft push duplicity_${MYVERSION}_amd64.snap --release edge
 
 # sign snap
 # TODO: find reason for gpg timeout on signing
-#snapcraft sign-build duplicity_${VERSION}*.snap --key-name ${KEYNAME}
+#snapcraft sign-build duplicity_${MYVERSION}*.snap --key-name ${KEYNAME}
 
 # mv into working source tree
-mv duplicity_${VERSION}*.snap* ../..
+mv duplicity_${MYVERSION}_amd64.snap* ../..
 cd ../..
 
 # clean up

@@ -1,5 +1,5 @@
 name: duplicity
-version: $VERSION  #replaced by real version in dist/makesnap
+version: $VERSION
 summary: Efficient, encrypted backup to local or remote hosts
 description: |
   Duplicity backs directories by producing encrypted tar-format volumes and uploading

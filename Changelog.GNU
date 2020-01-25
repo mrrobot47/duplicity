@@ -1,3 +1,12 @@
+2020-01-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Gave up fighting the fascist version control
+      munging on snapcraft.io.  Duplicity now has the
+      form 0.8.10.1558, where the last number is the
+      bzr revno.  Can't do something nice like having
+      a dev/fin indicator like 0.8.10dev1558 for dev
+      versions and a fin for release or final.
+
 2020-01-23  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in translation updates

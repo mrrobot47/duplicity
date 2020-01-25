@@ -1,3 +1,13 @@
+New in v0.8.10 (2020/02/??)
+---------------------------
+* Gave up fighting the fascist version control
+  munging on snapcraft.io.  Duplicity now has the
+  form 0.8.10.1558, where the last number is the
+  bzr revno.  Can't do something nice like having
+  a dev/fin indicator like 0.8.10dev1558 for dev
+  versions and a fin for release or final.
+
+
 New in v0.8.10 (2020/01/23)
 ---------------------------
 * Switched to python3 for snaps.
