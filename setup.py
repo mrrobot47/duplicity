@@ -38,7 +38,7 @@ try:
 except Exception:
     revno = u'0'
 
-version_string = __version__ + revno
+version_string = __version__ + u'.' + revno
 
 
 if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.version_info[:2] >= (2, 7))):
@@ -183,12 +183,16 @@ class BSCommand (build_scripts):
                                  file, oldmode, newmode)
                         os.chmod(file, newmode)
 
+with open("README") as f:
+    long_description = f.read()
 
 setup(name=u"duplicity",
     version=version_string,
     description=u"Encrypted backup using rsync algorithm",
-    author=u"Ben Escoto <requested no contact>",
-    author_email=u"<requested no contact>",
+    long_description=long_description,
+    long_description_content_type="text/plain"
+    author=u"Ben Escoto <ben@emrose.org>",
+    author_email=u"ben@emrose.org",
     maintainer=u"Kenneth Loafman <kenneth@loafman.com>",
     maintainer_email=u"kenneth@loafman.com",
     url=u"http://duplicity.nongnu.org/index.html",
@@ -205,16 +209,25 @@ setup(name=u"duplicity",
     scripts=[u'bin/rdiffdir', u'bin/duplicity'],
     data_files=data_files,
     install_requires=[u'fasteners', u'future'],
+    python_requires='>2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4',
     tests_require=[u'pytest', u'pytest-runner', u'fasteners', u'future', u'mock', u'pexpect'],
     test_suite=u'testing',
     cmdclass={u'test': TestCommand,
               u'install': InstallCommand,
               u'sdist': SDistCommand,
               u'build_scripts': BSCommand},
-    classifiers=[u"Programming Language :: Python :: 2",
+    classifiers=[u"Development Status :: 6 - Mature",
+                 u"Environment :: Console",
+                 u"License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+                 u"Operating System :: MacOS",
+                 u"Operating System :: POSIX :: Linux",
+                 u"Programming Language :: C",
+                 u"Programming Language :: Python :: 2",
                  u"Programming Language :: Python :: 2.7",
                  u"Programming Language :: Python :: 3",
                  u"Programming Language :: Python :: 3.6",
                  u"Programming Language :: Python :: 3.7",
-                 u"Programming Language :: Python :: 3.8"]
+                 u"Programming Language :: Python :: 3.8",
+                 u"Topic :: System :: Archiving :: Backup",
+                 u"Topic :: Utilities"]
     )

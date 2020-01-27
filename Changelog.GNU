@@ -1,3 +1,7 @@
+2020-01-27  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Enhance setup.py/cfg to allow install by pip
+
 2020-01-25  Kenneth Loafman  <kenneth@loafman.com>
 
     * Gave up fighting the fascist version control
