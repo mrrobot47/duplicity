@@ -1,6 +1,8 @@
 2020-01-29  Kenneth Loafman  <kenneth@loafman.com>
 
     * Adjust Dockerfiles to new requirements.
+    * Fix bug #1861287 - Removing old backup chains
+      fails using pexpect+sftp
 
 2020-01-27  Kenneth Loafman  <kenneth@loafman.com>
 

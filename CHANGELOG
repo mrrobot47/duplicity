@@ -8,6 +8,8 @@ New in v0.8.11 (2020/02/??)
   versions and a fin for release or final.
 * Enhance setup.py/cfg to allow install by pip.
 * Adjust Dockerfiles to new requirements.
+* Fix bug #1861287 - Removing old backup chains
+  fails using pexpect+sftp
 
 
 New in v0.8.10 (2020/01/23)
