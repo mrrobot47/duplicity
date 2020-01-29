@@ -6,7 +6,8 @@ New in v0.8.11 (2020/02/??)
   bzr revno.  Can't do something nice like having
   a dev/fin indicator like 0.8.10dev1558 for dev
   versions and a fin for release or final.
-* Enhance setup.py/cfg to allow install by pip
+* Enhance setup.py/cfg to allow install by pip.
+* Adjust Dockerfiles to new requirements.
 
 
 New in v0.8.10 (2020/01/23)

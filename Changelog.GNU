@@ -1,3 +1,7 @@
+2020-01-29  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Adjust Dockerfiles to new requirements.
+
 2020-01-27  Kenneth Loafman  <kenneth@loafman.com>
 
     * Enhance setup.py/cfg to allow install by pip

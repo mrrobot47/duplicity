@@ -43,10 +43,13 @@ RUN apt-get update \
             openssl \
             par2 \
             python-dev \
+            python-future \
             python-pip \
             python3-pip \
             python3.7 \
             python3.7-dev \
+            python3.8 \
+            python3.8-dev \
             rdiff \
             tzdata  # required for testing/unit/test_statistics.py
 
