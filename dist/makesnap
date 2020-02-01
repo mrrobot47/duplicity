@@ -57,7 +57,7 @@ snapcraft login --with ~/.snaplogin
 snapcraft snap --output duplicity_${MYVERSION}_amd64.snap --destructive-mode
 
 # run snap review tools before pushing to store
-review-tools.snap-review duplicity_${MYVERSION}_amd64.snap --allow-classic
+review-tools.snap-review --allow-classic duplicity_${MYVERSION}_amd64.snap
 
 # push to edge
 snapcraft push duplicity_${MYVERSION}_amd64.snap --release edge
