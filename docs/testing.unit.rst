@@ -30,6 +30,6 @@ Module contents
 ---------------
 
 .. automodule:: testing.unit
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

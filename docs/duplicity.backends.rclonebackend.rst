@@ -1,7 +1,7 @@
-testing.functional.test\_cleanup module
+duplicity.backends.rclonebackend module
 =======================================
 
-.. automodule:: testing.functional.test_cleanup
+.. automodule:: duplicity.backends.rclonebackend
    :members:
    :undoc-members:
    :show-inheritance:

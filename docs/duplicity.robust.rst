@@ -2,6 +2,6 @@ duplicity.robust module
 =======================
 
 .. automodule:: duplicity.robust
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

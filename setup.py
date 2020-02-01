@@ -21,8 +21,11 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
-import sys
+
 import os
+import sys
+import shutil
+
 from setuptools import setup, Extension
 from setuptools.command.test import test
 from setuptools.command.install import install
@@ -49,34 +52,33 @@ except Exception:
 version_string = __version__ + u'.' + revno
 
 
-# set incdir and libdir for librsync
-incdir_list = libdir_list = None
-
-if os.name == u'posix':
-    LIBRSYNC_DIR = os.environ.get(u'LIBRSYNC_DIR', u'')
-    args = sys.argv[:]
-    for arg in args:
-        if arg.startswith(u'--librsync-dir='):
-            LIBRSYNC_DIR = arg.split(u'=')[1]
-            sys.argv.remove(arg)
-    if LIBRSYNC_DIR:
-        incdir_list = [os.path.join(LIBRSYNC_DIR, u'include')]
-        libdir_list = [os.path.join(LIBRSYNC_DIR, u'lib')]
-
-
 # READTHEDOCS uses setup.py sdist but can't handle extensions
+ext_modules = list()
+incdir_list = list()
+libdir_list = list()
 if not os.environ.get(u'READTHEDOCS') == u'True':
+    # set incdir and libdir for librsync
+    if os.name == u'posix':
+        LIBRSYNC_DIR = os.environ.get(u'LIBRSYNC_DIR', u'')
+        args = sys.argv[:]
+        for arg in args:
+            if arg.startswith(u'--librsync-dir='):
+                LIBRSYNC_DIR = arg.split(u'=')[1]
+                sys.argv.remove(arg)
+        if LIBRSYNC_DIR:
+            incdir_list = [os.path.join(LIBRSYNC_DIR, u'include')]
+            libdir_list = [os.path.join(LIBRSYNC_DIR, u'lib')]
+
+    # build the librsync extension
     ext_modules=[Extension(name=r"duplicity._librsync",
                            sources=[r"duplicity/_librsyncmodule.c"],
                            include_dirs=incdir_list,
                            library_dirs=libdir_list,
                            libraries=[u"rsync"])]
-else:
-    ext_modules = []
 
 
 def get_data_files():
-    '''gen list of data files'''
+    u'''gen list of data files'''
 
     # static data files
     data_files = [
@@ -109,7 +111,7 @@ def get_data_files():
             langs = line.split()
             for lang in langs:
                 try:
-                    os.mkdir(os.path.join(u"po", lang)), lang
+                    os.mkdir(os.path.join(u"po", lang))
                 except os.error:
                     pass
                 assert not os.system(u"cp po/%s.po po/%s" % (lang, lang)), lang
@@ -173,7 +175,7 @@ class InstallCommand(install):
 
 
 class BSCommand (build_scripts):
-    '''Build but don't touch my shebang!'''
+    u'''Build but don't touch my shebang!'''
 
     def run(self):
         u"""
@@ -212,8 +214,10 @@ class BSCommand (build_scripts):
                                  file, oldmode, newmode)
                         os.chmod(file, newmode)
 
-with open("README") as fh:
+
+with open(u"README") as fh:
     long_description = fh.read()
+
 
 setup(name=u"duplicity",
     version=version_string,
@@ -225,6 +229,8 @@ setup(name=u"duplicity",
     maintainer=u"Kenneth Loafman <kenneth@loafman.com>",
     maintainer_email=u"kenneth@loafman.com",
     url=u"http://duplicity.nongnu.org/index.html",
+    python_requires=u'>2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4',
+    platforms=[u'any'],
     packages=[
         u'duplicity',
         u'duplicity.backends',
@@ -239,25 +245,28 @@ setup(name=u"duplicity",
         u"duplicity.backends": u"duplicity/backends",
         },
     ext_modules=ext_modules,
-    scripts=[u'bin/rdiffdir', u'bin/duplicity'],
+    scripts=[
+        u'bin/rdiffdir',
+        u'bin/duplicity'
+        ],
     data_files=get_data_files(),
     install_requires=[
         u'fasteners',
         u'future'
         ],
     tests_require=[
-        u'pytest',
-        u'pytest-runner',
         u'fasteners',
         u'future',
         u'mock',
         u'pexpect'
+        u'pytest',
+        u'pytest-runner',
         ],
     test_suite=u'testing',
     cmdclass={
-        u'test': TestCommand,
+        u'build_scripts': BSCommand,
         u'install': InstallCommand,
-        u'build_scripts': BSCommand
+        u'test': TestCommand,
         },
     classifiers=[
         u"Development Status :: 6 - Mature",
@@ -273,6 +282,16 @@ setup(name=u"duplicity",
         u"Programming Language :: Python :: 3.8",
         u"Topic :: System :: Archiving :: Backup"
         ],
-    python_requires=u'>2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4',
-    platforms=[u'any'],
     )
+
+
+# TODO: is this the best way to clean up afterwards?
+if os.path.exists(u'po/LINGUAS'):
+    linguas = open(u'po/LINGUAS').readlines()
+    for line in linguas:
+        langs = line.split()
+        for lang in langs:
+            try:
+                shutil.rmtree(os.path.join(u"po", lang))
+            except Exception:
+                pass

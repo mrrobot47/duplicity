@@ -6,7 +6,7 @@ Subpackages
 
 .. toctree::
 
-    duplicity.backends.pyrax_identity
+   duplicity.backends.pyrax_identity
 
 Submodules
 ----------
@@ -35,7 +35,9 @@ Submodules
    duplicity.backends.par2backend
    duplicity.backends.pcabackend
    duplicity.backends.pydrivebackend
+   duplicity.backends.rclonebackend
    duplicity.backends.rsyncbackend
+   duplicity.backends.s3_boto3_backend
    duplicity.backends.ssh_paramiko_backend
    duplicity.backends.ssh_pexpect_backend
    duplicity.backends.swiftbackend
@@ -47,6 +49,6 @@ Module contents
 ---------------
 
 .. automodule:: duplicity.backends
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

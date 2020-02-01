@@ -6,7 +6,7 @@ Subpackages
 
 .. toctree::
 
-    duplicity.backends
+   duplicity.backends
 
 Submodules
 ----------
@@ -19,6 +19,7 @@ Submodules
    duplicity.commandline
    duplicity.diffdir
    duplicity.dup_collections
+   duplicity.dup_main
    duplicity.dup_temp
    duplicity.dup_threading
    duplicity.dup_time
@@ -47,6 +48,6 @@ Module contents
 ---------------
 
 .. automodule:: duplicity
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:
