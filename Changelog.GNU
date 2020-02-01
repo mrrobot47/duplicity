@@ -1,3 +1,9 @@
+2020-02-01  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Reworked setup.py to build a pip-compatible
+      distribution tarball of duplicity.
+    * Added dist/makepip for convenience.
+
 2020-01-29  Kenneth Loafman  <kenneth@loafman.com>
 
     * Adjust Dockerfiles to new requirements.

@@ -10,6 +10,9 @@ New in v0.8.11 (2020/02/??)
 * Adjust Dockerfiles to new requirements.
 * Fix bug #1861287 - Removing old backup chains
   fails using pexpect+sftp
+* Reworked setup.py to build a pip-compatible
+  distribution tarball of duplicity.
+* Added dist/makepip for convenience.
 
 
 New in v0.8.10 (2020/01/23)
