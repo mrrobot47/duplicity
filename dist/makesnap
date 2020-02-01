@@ -63,8 +63,7 @@ review-tools.snap-review --allow-classic duplicity_${MYVERSION}_amd64.snap
 snapcraft push duplicity_${MYVERSION}_amd64.snap --release edge
 
 # sign snap
-# TODO: find reason for gpg timeout on signing
-#snapcraft sign-build duplicity_${MYVERSION}*.snap --key-name ${KEYNAME}
+snapcraft sign-build duplicity_${MYVERSION}*.snap --key-name firstprime
 
 # mv into working source tree
 mv duplicity_${MYVERSION}_amd64.snap* ../..
