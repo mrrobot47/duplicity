@@ -1,5 +1,5 @@
 name: duplicity
-version: $version
+version: $VERSION
 summary: Efficient, encrypted backup to local or remote hosts
 description: |
   Duplicity backs directories by producing encrypted tar-format volumes and uploading
@@ -19,7 +19,7 @@ apps:
 parts:
     duplicity:
         plugin: python
-        python-version: python2
+        python-version: python3
         stage-packages:
             - gnupg
             - lftp                  # lftpbackend.py
@@ -29,27 +29,26 @@ parts:
             - megatools             # megabackend.py
             - ncftp                 # ncftpbackend.py
             - openssh-client        # ssh_pexpect_backend.py
-            - python-azure          # azurebackend.py
-            - python-boto           # botobackend.py
-            - python-cloudfiles     # cfbackend.py
-            - python-fasteners
-            - python-future
-            - python-gdata          # gdocsbackend.py
-            - python-gi             # giobackend.py
-            - python-googleapi      # pydrivebackend.py
-            - python-httplib2       # pydrivebackend.py
-            - python-oauthlib
-            - python-paramiko       # ssh_paramiko_backend.py
-            - python-requests       # adbackend.py, onedrivebackend.py
-            - python-requests-oauthlib # as above
-            - python-swiftclient    # swiftbackend.py
-            - python-urllib3
+            - python3-azure         # azurebackend.py
+            - python3-boto          # botobackend.py
+            - python3-fasteners
+            - python3-future
+            - python3-gi            # giobackend.py
+            - python3-googleapi     # pydrivebackend.py
+            - python3-httplib2      # pydrivebackend.py
+            - python3-oauthlib
+            - python3-paramiko      # ssh_paramiko_backend.py
+            - python3-requests      # adbackend.py, onedrivebackend.py
+            - python3-requests-oauthlib # as above
+            - python3-swiftclient   # swiftbackend.py
+            - python3-urllib3
             - rsync                 # rsyncbackend.py
             - tahoe-lafs            # tahoebackend.py
             - sx                    # sxbackend.py
         python-packages:
             - b2sdk                 # b2backend.py
             - dropbox               # dpbxbackend.py
+            - gdata-python3         # gdocsbackend.py
             - jottalib              # jottalib backend (new in 0.8 series)
             - mediafire             # mediafirebackend.py
             - pydrive               # pydrivebackend.py

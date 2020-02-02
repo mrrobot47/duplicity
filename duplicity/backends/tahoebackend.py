@@ -70,7 +70,7 @@ class TAHOEBackend(duplicity.backend.Backend):
 
     def _list(self):
         output = self.run(u"tahoe", u"ls", self.get_remote_path())
-        return output.split(b'\n') if output else []
+        return [util.fsencode(x) for x in output.split(u'\n') if x]
 
     def _delete(self, filename):
         self.run(u"tahoe", u"rm", self.get_remote_path(filename))

@@ -2,6 +2,6 @@ duplicity.diffdir module
 ========================
 
 .. automodule:: duplicity.diffdir
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

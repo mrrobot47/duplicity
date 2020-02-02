@@ -1,7 +1,6 @@
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # duplicity -- Encrypted bandwidth efficient backup
-# Version $version released $reldate
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -50,6 +49,7 @@ import types
 from datetime import datetime
 from os import statvfs
 
+from duplicity import __version__
 from duplicity import asyncscheduler
 from duplicity import commandline
 from duplicity import diffdir
@@ -1427,7 +1427,7 @@ def log_startup_parms(verbosity=log.INFO):
     log Python, duplicity, and system versions
     """
     log.Log(u'=' * 80, verbosity)
-    log.Log(u"duplicity $version ($reldate)", verbosity)
+    log.Log(u"duplicity %s" % __version__, verbosity)
     u_args = (util.fsdecode(arg) for arg in sys.argv)
     log.Log(u"Args: %s" % u' '.join(u_args), verbosity)
     log.Log(u' '.join(platform.uname()), verbosity)

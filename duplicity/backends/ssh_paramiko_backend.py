@@ -295,6 +295,8 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                                                (self.sftp.normalize(u".") + u"/" + d, e))
 
     def _put(self, source_path, remote_filename):
+        # remote_filename is a byte object, not str or unicode
+        remote_filename = remote_filename.decode(u"utf-8")
         if self.use_scp:
             f = open(source_path.name, u'rb')
             try:
@@ -308,24 +310,26 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             # one after saving if there's a problem: 0x1 or 0x02 and some error
             # text
             response = chan.recv(1)
-            if (response != u"\0"):
-                raise BackendException(u"scp remote error: %s" % chan.recv(-1))
+            if (response != b"\0"):
+                raise BackendException(b"scp remote error: %b" % chan.recv(-1))
             fstat = os.stat(source_path.name)
             chan.send(u'C%s %d %s\n' % (oct(fstat.st_mode)[-4:], fstat.st_size,
                                         remote_filename))
             response = chan.recv(1)
-            if (response != u"\0"):
-                raise BackendException(u"scp remote error: %s" % chan.recv(-1))
-            chan.sendall(f.read() + u'\0')
+            if (response != b"\0"):
+                raise BackendException(b"scp remote error: %b" % chan.recv(-1))
+            chan.sendall(f.read() + b'\0')
             f.close()
             response = chan.recv(1)
-            if (response != u"\0"):
+            if (response != b"\0"):
                 raise BackendException(u"scp remote error: %s" % chan.recv(-1))
             chan.close()
         else:
             self.sftp.put(source_path.name, remote_filename)
 
     def _get(self, remote_filename, local_path):
+        # remote_filename is a byte object, not str or unicode
+        remote_filename = remote_filename.decode(u"utf-8")
         if self.use_scp:
             try:
                 chan = self.client.get_transport().open_session()
@@ -337,6 +341,8 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
 
             chan.send(u'\0')  # overall ready indicator
             msg = chan.recv(-1)
+            if isinstance(msg, bytes):  # make msg into str
+                msg = msg.decode()
             m = re.match(r"C([0-7]{4})\s+(\d+)\s+(\S.*)$", msg)
             if (m is None or m.group(3) != remote_filename):
                 raise BackendException(u"scp get %s failed: incorrect response '%s'" %
@@ -360,7 +366,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                 raise BackendException(u"scp get %s failed: %s" % (remote_filename, e))
 
             msg = chan.recv(1)  # check the final status
-            if msg != u'\0':
+            if msg != b'\0':
                 raise BackendException(u"scp get %s failed: %s" % (remote_filename,
                                                                    chan.recv(-1)))
             f.close()

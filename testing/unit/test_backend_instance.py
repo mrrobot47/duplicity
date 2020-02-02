@@ -24,11 +24,14 @@ standard_library.install_aliases()
 
 import os
 import io
+import sys
 import unittest
 
 import duplicity.backend
 from duplicity import log
+from duplicity import globals
 from duplicity import path
+from duplicity import util
 from duplicity.errors import BackendException
 from . import UnitTestCase
 
@@ -44,6 +47,7 @@ class BackendInstanceBase(UnitTestCase):
         self.local.writefileobj(io.BytesIO(b"hello"))
 
     def tearDown(self):
+        assert not os.system(u"rm -rf testfiles")
         if self.backend is None:
             return
         if hasattr(self.backend, u'_close'):
@@ -184,6 +188,7 @@ class LocalBackendTest(BackendInstanceBase):
         self.assertEqual(self.backend.__class__.__name__, u'LocalBackend')
 
 
+# TODO: Add par2-specific tests here, to confirm that we can recover
 class Par2BackendTest(BackendInstanceBase):
     def setUp(self):
         super(Par2BackendTest, self).setUp()
@@ -191,17 +196,15 @@ class Par2BackendTest(BackendInstanceBase):
         self.backend = duplicity.backend.get_backend_object(url)
         self.assertEqual(self.backend.__class__.__name__, u'Par2Backend')
 
-    # TODO: Add par2-specific tests here, to confirm that we can recover from
-    # a missing file
 
-
-# class RsyncBackendTest(BackendInstanceBase):
-#     def setUp(self):
-#         super(RsyncBackendTest, self).setUp()
-#         os.makedirs('testfiles/output')  # rsync needs it to exist first
-#         url = 'rsync://%s/testfiles/output' % os.getcwd()
-#         self.backend = duplicity.backend.get_backend_object(url)
-#         self.assertEqual(self.backend.__class__.__name__, 'RsyncBackend')
+# TODO: Fix duplicity.errors.InvalidBackendURL: Missing hostname ...
+#  class RsyncBackendTest(BackendInstanceBase):
+#      def setUp(self):
+#          super(RsyncBackendTest, self).setUp()
+#          os.makedirs('testfiles/output')  # rsync needs it to exist first
+#          url = 'rsync://%s/testfiles/output' % os.getcwd()
+#          self.backend = duplicity.backend.get_backend_object(url)
+#          self.assertEqual(self.backend.__class__.__name__, 'RsyncBackend')
 
 
 class TahoeBackendTest(BackendInstanceBase):
@@ -213,6 +216,7 @@ class TahoeBackendTest(BackendInstanceBase):
         self.assertEqual(self.backend.__class__.__name__, u'TAHOEBackend')
 
 
+# TODO: Modernize hsi backend stub
 #  class HSIBackendTest(BackendInstanceBase):
 #      def setUp(self):
 #          super(HSIBackendTest, self).setUp()
@@ -241,5 +245,11 @@ class FTPSBackendTest(BackendInstanceBase):
         self.assertEqual(self.backend.__class__.__name__, u'LFTPBackend')
 
 
-if __name__ == u"__main__":
-    unittest.main()
+@unittest.skipIf(not util.which(u'rclone'), u"rclone not installed")
+class RCloneBackendTest(BackendInstanceBase):
+    def setUp(self):
+        super(RCloneBackendTest, self).setUp()
+        os.makedirs(u'testfiles/output')
+        url = u'rclone://duptest:/%s/testfiles/output' % os.getcwd()
+        self.backend = duplicity.backend.get_backend_object(url)
+        self.assertEqual(self.backend.__class__.__name__, u'RcloneBackend')

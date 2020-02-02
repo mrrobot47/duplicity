@@ -2,6 +2,6 @@ compilec module
 ===============
 
 .. automodule:: compilec
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

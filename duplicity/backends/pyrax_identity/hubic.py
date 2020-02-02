@@ -1,4 +1,3 @@
-#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 # Copyright (c) 2014 Gu1
 # Licensed under the MIT license
@@ -7,6 +6,7 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 from builtins import str
+
 import configparser
 import os
 import re

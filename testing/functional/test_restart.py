@@ -127,12 +127,9 @@ class RestartTest(FunctionalTestCase):
         self.backup(u"full", u"testfiles/largefiles", fail=3)
         assert not os.system(u"rm testfiles/largefiles/file2")
         self.backup(u"full", u"testfiles/largefiles")
-        # TODO: we can't verify but we need to to check for other errors that might show up
-        # there should be 2 differences found, one missing file, one mtime change
-        # self.verify(u"testfiles/largefiles")
+        self.verify(u"testfiles/largefiles")
 
-    @unittest.skipIf(u"ppc64el" in platform.machine(),
-                     u"Skip on ppc64el machines")
+    @unittest.skipIf(u"ppc64el" in platform.machine(), u"Skip on ppc64el machines")
     def test_last_file_missing_at_end(self):
         u"""
         Test restart when the last file being backed up is missing on restart.
@@ -143,9 +140,7 @@ class RestartTest(FunctionalTestCase):
         self.backup(u"full", u"testfiles/largefiles", fail=6)
         assert not os.system(u"rm testfiles/largefiles/file3")
         self.backup(u"full", u"testfiles/largefiles")
-        # TODO: we can't verify but we need to to check for other errors that might show up
-        # there should be 2 differences found, one missing file, one mtime change
-        # self.verify(u"testfiles/largefiles")
+        self.verify(u"testfiles/largefiles")
 
     def test_restart_incremental(self):
         u"""

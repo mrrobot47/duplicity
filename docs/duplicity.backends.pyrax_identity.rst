@@ -12,6 +12,6 @@ Module contents
 ---------------
 
 .. automodule:: duplicity.backends.pyrax_identity
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

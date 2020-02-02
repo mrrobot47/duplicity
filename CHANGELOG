@@ -1,4 +1,50 @@
-New in v0.8.09 (2020/01/??)
+New in v0.8.11 (2020/02/??)
+---------------------------
+* Gave up fighting the fascist version control
+  munging on snapcraft.io.  Duplicity now has the
+  form 0.8.10.1558, where the last number is the
+  bzr revno.  Can't do something nice like having
+  a dev/fin indicator like 0.8.10dev1558 for dev
+  versions and a fin for release or final.
+* Enhance setup.py/cfg to allow install by pip.
+* Adjust Dockerfiles to new requirements.
+* Fix bug #1861287 - Removing old backup chains
+  fails using pexpect+sftp
+* Reworked setup.py to build a pip-compatible
+  distribution tarball of duplicity.
+* Added dist/makepip for convenience.
+
+
+New in v0.8.10 (2020/01/23)
+---------------------------
+* Switched to python3 for snaps.
+* Fixed bug #1858713 - paramiko socket.timeout
+  - chan.recv() can return bytes or str based on
+    the phase of the moon.  Make allowances.
+* Removed some unneeded includes of gettext
+* Fixed bug #1859304 with patch from Arduous
+  - Backup and restore do not work on SCP backend
+* Move to single-sourceing the package version
+  - Rework setup.py, dist/makedist, dist/makesnap,
+    etc., to get version from duplicity/__init__.py
+  - Drop dist/relfiles.  It was problematic.
+* Fixed bug #1859877 - syntax warning on python 3.8
+* Skip functional/test_selection::TestUnicode if
+  python version is less than 3.7.
+* Clean up some TODO tasks in testing code.
+* Clean up deprecation errors in Python 3.8
+* Fixed bug #1858204 - ENODEV should be added to
+  list of recognized error stringa
+* Fixed bug #1858207 missing targets in multibackend
+  - Made it possible to return default value instead
+    of taking a fatal exception on an operation by
+    operation approach.  The only use case now is for
+    multibackend to be able to list all targets and
+    report back on the ones that don't work.
+* Merged in translation updates
+
+
+New in v0.8.09 (2020/01/07)
 ---------------------------
 * Fixed bug #1855636 with patch from Filip Slunecko
   - Wrong buf type returned on error.  Make bytes.
@@ -20,6 +66,19 @@ New in v0.8.09 (2020/01/??)
     will become default s3 backend
 * Fixed bug #1857554 name 'file' is not defined
   - file() calls replaced by open() in 3 places.
+* Convert all shebangs to python3 for bug #1855736
+* Fix bytes/string differences in subprocess_popen()
+  - Now returns unicode string not bytes, like python2
+* Fixed bug #1857734 - TypeError in ssh_paramiko_backend
+  - conn.recv() can return bytes or string, make string
+* Fixed bug #1858153 with patch from az
+  - mega backend: fails to create directory
+* Add snapcraft login to makesnap
+* Fixed bug #1858295 - Unicode error in source filename
+  - decode arg if it comes in as bytes
+* Fixed bug #1855736 again - Duplicity fails to start
+  - remove decode from unicode string
+* Merged in translation updates
 
 
 New in v0.8.08 (2019/12/08)

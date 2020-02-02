@@ -5,6 +5,6 @@ Module contents
 ---------------
 
 .. automodule:: testing.manual
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

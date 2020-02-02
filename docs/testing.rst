@@ -6,10 +6,10 @@ Subpackages
 
 .. toctree::
 
-    testing.functional
-    testing.manual
-    testing.overrides
-    testing.unit
+   testing.functional
+   testing.manual
+   testing.overrides
+   testing.unit
 
 Submodules
 ----------
@@ -25,6 +25,6 @@ Module contents
 ---------------
 
 .. automodule:: testing
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

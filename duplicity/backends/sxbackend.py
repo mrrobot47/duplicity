@@ -46,7 +46,8 @@ class SXBackend(duplicity.backend.Backend):
         commandline = u"sxls {0}".format(self.url_string)
         _, l, _ = self.subprocess_popen(commandline)
         # Look for our files as the last element of a long list line
-        return [x[x.rindex(u'/') + 1:].split()[-1] for x in l.split(b'\n') if x and not x.startswith(b"total ")]
+        return [util.fsencode(x[x.rindex(u'/') + 1:].split()[-1]) for x in l.split(u'\n')
+                if x and not x.startswith(u"total ")]
 
     def _delete(self, filename):
         commandline = u"sxrm {0}/{1}".format(self.url_string, filename)

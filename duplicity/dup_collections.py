@@ -30,7 +30,6 @@ from builtins import range
 from builtins import object
 
 import types
-import gettext
 import sys
 
 from duplicity import log

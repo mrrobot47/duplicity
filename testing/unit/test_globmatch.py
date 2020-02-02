@@ -92,12 +92,11 @@ class TestGlobToRegex(UnitTestCase):
         if sys.version_info[:2] == (3, 6):
             self.assertEqual(glob_to_regex(u"/usr/*/bin/"),
                              u"\\/usr\\/[^/]*\\/bin\\/")
-        elif sys.version_info[:2] >= (3, 7):
+        elif  sys.version_info[:2] >= (3, 7):
             self.assertEqual(glob_to_regex(u"/usr/*/bin/"),
                              u"/usr/[^/]*/bin/")
         else:
-            self.assertEqual(glob_to_regex(u"/usr/*/bin/"),
-                             u"\/usr\/[^/]*\/bin\/")
+            pass
 
         self.assertEqual(glob_to_regex(u"[a.b/c]"), u"[a.b/c]")
         self.assertEqual(glob_to_regex(u"[a*b-c]e[!]]"), u"[a*b-c]e[^]]")

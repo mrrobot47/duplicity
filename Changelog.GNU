@@ -1,3 +1,104 @@
+2020-02-01  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Reworked setup.py to build a pip-compatible
+      distribution tarball of duplicity.
+    * Added dist/makepip for convenience.
+
+2020-01-29  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Adjust Dockerfiles to new requirements.
+    * Fix bug #1861287 - Removing old backup chains
+      fails using pexpect+sftp
+
+2020-01-27  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Enhance setup.py/cfg to allow install by pip
+
+2020-01-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Gave up fighting the fascist version control
+      munging on snapcraft.io.  Duplicity now has the
+      form 0.8.10.1558, where the last number is the
+      bzr revno.  Can't do something nice like having
+      a dev/fin indicator like 0.8.10dev1558 for dev
+      versions and a fin for release or final.
+
+2020-01-23  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.10
+
+2020-01-21  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1858207 missing targets in multibackend
+      - Made it possible to return default value instead
+        of taking a fatal exception on an operation by
+        operation approach.  The only use case now is for
+        multibackend to be able to list all targets and
+        report back on the ones that don't work.
+
+2020-01-19  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1858204 - ENODEV should be added to
+      list of recognized error stringa
+
+2020-01-17  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Clean up some TODO tasks in testing code.
+    * Clean up deprecation errors in Python 3.8
+
+2020-01-16  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Move to single-sourceing the package version
+      - Rework setup.py, dist/makedist, dist/makesnap,
+        etc., to get version from duplicity/__init__.py
+      - Drop dist/relfiles.  It was problematic.
+    * Fixed bug #1859877 - syntax warning on python 3.8
+    * Skip functional/test_selection::TestUnicode if
+      python version is less than 3.7.
+
+2020-01-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1859304 with patch from Arduous
+      - Backup and restore do not work on SCP backend
+
+2020-01-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Removed some unneeded includes of gettext
+
+2020-01-09  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Switched to python3 for snaps.
+    * Fixed bug #1858713 - paramiko socket.timeout
+      - chan.recv() can return bytes or str based on
+        the phase of the moon.  Make allowances.
+
+2020-01-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.09
+
+2020-01-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Add snapcraft login to makesnap
+    * Fixed bug #1858295 - Unicode error in source filename
+      - decode arg if it comes in as bytes
+    * Fixed bug #1855736 again - Duplicity fails to start
+      - remove decode from unicode string
+
+2020-01-02  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bytes/string differences in subprocess_popen()
+      - Now returns unicode string not bytes, like python2
+    * Fixed bug #1857734 - TypeError in ssh_paramiko_backend
+      - conn.recv() can return bytes or string, make string
+    * Fixed bug #1858153 with patch from az
+      - mega backend: fails to create directory
+
+2019-12-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Convert all shebangs to python3 for bug #1855736
+
 2019-12-26  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1857554 name 'file' is not defined

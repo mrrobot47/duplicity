@@ -11,6 +11,7 @@ urllib3
 ##### testing libraries #####
 
 coverage
+paramiko
 pexpect
 pycodestyle
 pydevd
@@ -32,7 +33,6 @@ tox
 # gdata
 # jottalib
 # mediafire
-# paramiko
 # pydrive
 # pyrax
 # python-cloudfiles

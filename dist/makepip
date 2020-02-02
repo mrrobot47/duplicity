@@ -1,0 +1,10 @@
+#!/bin/bash
+
+BASE=`python3 -c "from duplicity import __version__; print(__version__, end='')"`
+REVNO=`bzr revno`
+MYVERSION=${BASE}.${REVNO}
+echo "makepip of ${MYVERSION}"
+
+./setup.py sdist
+mv dist/duplicity-${MYVERSION}.tar.gz .
+twine upload duplicity-${MYVERSION}.tar.gz

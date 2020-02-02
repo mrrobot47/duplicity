@@ -294,7 +294,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
 
     def _delete(self, filename):
         commands = [u"cd \"%s\"" % (self.remote_dir,)]
-        commands.append(u"rm \"%s\"" % filename)
+        commands.append(u"rm \"%s\"" % util.fsdecode(filename))
         commandline = (u"%s %s %s" % (self.sftp_command, globals.ssh_options, self.host_string))
         self.run_sftp_command(commandline, commands)
 

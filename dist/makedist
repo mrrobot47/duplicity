@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
@@ -23,36 +23,23 @@
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
+
 import os
 import re
 import shutil
 import time
 import sys
 from subprocess import Popen, PIPE, STDOUT
+
 sys.path.insert(0, os.path.abspath(u"./"))
 
 from duplicity import util
+from duplicity import __version__
 
-SourceDir = u"duplicity"
+bzr = Popen([u"bzr", u"revno"], stdout=PIPE, universal_newlines=True)
+revno = bzr.communicate()[0].split()[0].strip()
 
-
-def VersionedCopy(source, dest):
-    u"""
-    Copy source to dest, substituting $version with version
-    $reldate with today's date, i.e. December 28, 2008.
-    """
-    fin = open(source, u"rt")
-    inbuf = fin.read()
-    assert not fin.close()
-
-    (outbuf, cnt) = re.subn(u"\$version", Version, inbuf)
-
-    inbuf = outbuf
-    (outbuf, cnt) = re.subn(u"\$reldate", Reldate, inbuf)
-
-    fout = open(dest, u"wt")
-    fout.write(outbuf)
-    assert not fout.close()
+Version = __version__ + u'.' + revno
 
 
 def MakeTar():
@@ -68,13 +55,7 @@ def MakeTar():
     os.mkdir(tardir)
     testfiles = list()
 
-    # use dist/relfiles.txt as files list
-    dist = os.path.dirname(sys.argv[0])
-    relfiles = os.path.join(dist, u"relfiles.txt")
-    if os.path.exists(relfiles):
-        testfiles = open(relfiles).readlines()
-
-    # or use bzr to get files list
+    # use bzr to get files list
     if len(testfiles) == 0:
         bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE, universal_newlines=True)
         testfiles = bzr.communicate()[0].split()
@@ -83,10 +64,6 @@ def MakeTar():
     if len(testfiles) == 0:
         git = Popen([u"git", u"ls-files"], stdout=PIPE, universal_newlines=True)
         testfiles = git.communicate()[0].split()
-
-    # got files list so save it
-    if len(testfiles) > 0:
-        open(relfiles, u"wt").writelines(testfiles)
 
     assert len(testfiles) > 0, u"No files list returned from any source."
 
@@ -110,22 +87,6 @@ def MakeTar():
             assert not os.system(u"cp po/%s.po %s/po/%s" % (lang, tardir, lang)), lang
             assert not os.system(u"msgfmt po/%s.po -o %s/po/%s/duplicity.mo" % (lang, tardir, lang)), lang
 
-    # recopy the versioned files and add correct version
-    VersionedCopy(os.path.join(SourceDir, u"globals.py"),
-                  os.path.join(tardir, u"duplicity", u"globals.py"))
-    VersionedCopy(os.path.join(u"bin", u"duplicity"),
-                  os.path.join(tardir, u"bin", u"duplicity"))
-    VersionedCopy(os.path.join(u"bin", u"rdiffdir"),
-                  os.path.join(tardir, u"bin", u"rdiffdir"))
-    VersionedCopy(os.path.join(u"bin", u"duplicity.1"),
-                  os.path.join(tardir, u"bin", u"duplicity.1"))
-    VersionedCopy(os.path.join(u"bin", u"rdiffdir.1"),
-                  os.path.join(tardir, u"bin", u"rdiffdir.1"))
-    VersionedCopy(os.path.join(u"snap", u"snapcraft.yaml"),
-                  os.path.join(tardir, u"snap", u"snapcraft.yaml"))
-    VersionedCopy(u"setup.py",
-                  os.path.join(tardir, u"setup.py"))
-
     # make sure executables are
     os.chmod(os.path.join(tardir, u"setup.py"), 0o755)
     os.chmod(os.path.join(tardir, u"bin", u"duplicity"), 0o755)
@@ -145,9 +106,7 @@ def Main():
     print(u"Made tar file " + tarfile)
 
 if __name__ == u"__main__" and u'__no_execute__' not in globals():
-    if len(sys.argv) != 2:
-        print(u"Syntax: makedist <version_number>")
+    if len(sys.argv) != 1:
+        print(u"Syntax: makedist")
         sys.exit(1)
-    Version = sys.argv[1]
-    Reldate = time.strftime(u"%B %d, %Y", time.localtime())
     Main()

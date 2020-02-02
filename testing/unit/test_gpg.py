@@ -140,8 +140,7 @@ class GPGTest(UnitTestCase):
         sig = decrypted_file.get_signature()
         assert sig == self.sign_key, sig
 
-    @unittest.skipIf(u"ppc64el" in platform.machine(),
-                     u"Skip on ppc64el machines")
+    @unittest.skipIf(u"ppc64el" in platform.machine(), u"Skip on ppc64el machines")
     def test_GPGWriteFile(self):
         u"""Test GPGWriteFile"""
         size = 400 * 1000

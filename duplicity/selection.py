@@ -210,7 +210,7 @@ class Select(object):
             result = sf(path)
             log.Debug(u"Selection:     result: %4s from function: %s" %
                       (str(result), sf.name))
-            if result is 2:
+            if result == 2:
                 # Selection function says that the path should be scanned for matching files, but keep going
                 # through the selection functions looking for a real match (0 or 1).
                 scan_pending = True

@@ -28,7 +28,6 @@ dependency guarantees.
 from future import standard_library
 standard_library.install_aliases()
 from builtins import object
-import gettext
 import duplicity
 from duplicity import log
 from duplicity.dup_threading import require_threading
