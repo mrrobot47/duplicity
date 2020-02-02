@@ -258,7 +258,7 @@ setup(name=u"duplicity",
         u'fasteners',
         u'future',
         u'mock',
-        u'pexpect'
+        u'pexpect',
         u'pytest',
         u'pytest-runner',
         ],
