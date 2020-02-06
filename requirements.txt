@@ -2,7 +2,7 @@
 
 fasteners
 future
-gettext
+python-gettext
 intltool
 mock
 requests
