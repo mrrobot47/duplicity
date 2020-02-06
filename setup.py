@@ -252,7 +252,7 @@ setup(name=u"duplicity",
     data_files=get_data_files(),
     install_requires=[
         u"fasteners",
-        u"intltools",
+        u"intltool",
         u"future"
         ],
     tests_require=[
@@ -275,6 +275,7 @@ setup(name=u"duplicity",
         u"License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
         u"Operating System :: MacOS",
         u"Operating System :: POSIX",
+        u"Programming Language :: C",
         u"Programming Language :: Python :: 2",
         u"Programming Language :: Python :: 2.7",
         u"Programming Language :: Python :: 3",
