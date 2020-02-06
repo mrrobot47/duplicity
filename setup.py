@@ -250,11 +250,9 @@ setup(name=u"duplicity",
         u"bin/duplicity"
         ],
     data_files=get_data_files(),
-    setup_requires=[
-        u"intltools",
-        ],
     install_requires=[
         u"fasteners",
+        u"intltools",
         u"future"
         ],
     tests_require=[
