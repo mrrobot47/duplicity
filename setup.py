@@ -253,8 +253,6 @@ setup(name=u"duplicity",
     data_files=get_data_files(),
     install_requires=[
         u"fasteners",
-        u"gettext",
-        u"intltool",
         u"future"
         ],
     tests_require=[
