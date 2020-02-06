@@ -102,29 +102,30 @@ def get_data_files():
             ),
         ]
 
-    # msgfmt the translation files
-    assert os.path.exists(u"po"), u"Missing 'po' directory."
+    if not os.environ.get(u'READTHEDOCS') == u'True':
+        # msgfmt the translation files
+        assert os.path.exists(u"po"), u"Missing 'po' directory."
 
-    if os.path.exists(u'po/LINGUAS'):
-        linguas = open(u'po/LINGUAS').readlines()
-        for line in linguas:
-            langs = line.split()
-            for lang in langs:
-                try:
-                    os.mkdir(os.path.join(u"po", lang))
-                except os.error:
-                    pass
-                assert not os.system(u"cp po/%s.po po/%s" % (lang, lang)), lang
-                assert not os.system(u"msgfmt po/%s.po -o po/%s/duplicity.mo" % (lang, lang)), lang
+        if os.path.exists(u'po/LINGUAS'):
+            linguas = open(u'po/LINGUAS').readlines()
+            for line in linguas:
+                langs = line.split()
+                for lang in langs:
+                    try:
+                        os.mkdir(os.path.join(u"po", lang))
+                    except os.error:
+                        pass
+                    assert not os.system(u"cp po/%s.po po/%s" % (lang, lang)), lang
+                    assert not os.system(u"msgfmt po/%s.po -o po/%s/duplicity.mo" % (lang, lang)), lang
 
-    for root, dirs, files in os.walk(u"po"):
-        for file in files:
-            path = os.path.join(root, file)
-            if path.endswith(u"duplicity.mo"):
-                lang = os.path.split(root)[-1]
-                data_files.append(
-                    (u'share/locale/%s/LC_MESSAGES' % lang,
-                     [u"po/%s/duplicity.mo" % lang]))
+        for root, dirs, files in os.walk(u"po"):
+            for file in files:
+                path = os.path.join(root, file)
+                if path.endswith(u"duplicity.mo"):
+                    lang = os.path.split(root)[-1]
+                    data_files.append(
+                        (u'share/locale/%s/LC_MESSAGES' % lang,
+                         [u"po/%s/duplicity.mo" % lang]))
 
     return data_files
 
