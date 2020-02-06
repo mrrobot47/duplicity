@@ -2,9 +2,8 @@
 
 fasteners
 future
-python-gettext
-intltool
 mock
+python-gettext
 requests
 urllib3
 
