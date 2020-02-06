@@ -1,3 +1,7 @@
+2020-02-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Renamed botobackend.py to s3_boto_backend.py
+
 2020-02-01  Kenneth Loafman  <kenneth@loafman.com>
 
     * Reworked setup.py to build a pip-compatible

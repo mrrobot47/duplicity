@@ -11,7 +11,7 @@ duplicity/backends/_cf_cloudfiles.py
 duplicity/backends/_cf_pyrax.py
 duplicity/backends/azurebackend.py
 duplicity/backends/b2backend.py
-duplicity/backends/botobackend.py
+duplicity/backends/s3_boto_backend.py
 duplicity/backends/cfbackend.py
 duplicity/backends/dpbxbackend.py
 duplicity/backends/gdocsbackend.py

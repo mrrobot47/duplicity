@@ -13,6 +13,7 @@ New in v0.8.11 (2020/02/??)
 * Reworked setup.py to build a pip-compatible
   distribution tarball of duplicity.
 * Added dist/makepip for convenience.
+* Renamed botobackend.py to s3_boto_backend.py
 
 
 New in v0.8.10 (2020/01/23)

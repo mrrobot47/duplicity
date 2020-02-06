@@ -30,7 +30,7 @@ parts:
             - ncftp                 # ncftpbackend.py
             - openssh-client        # ssh_pexpect_backend.py
             - python3-azure         # azurebackend.py
-            - python3-boto          # botobackend.py
+            - python3-boto          # s3_boto_backend.py
             - python3-fasteners
             - python3-future
             - python3-gi            # giobackend.py

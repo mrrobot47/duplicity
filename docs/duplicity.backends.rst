@@ -16,7 +16,6 @@ Submodules
    duplicity.backends.adbackend
    duplicity.backends.azurebackend
    duplicity.backends.b2backend
-   duplicity.backends.botobackend
    duplicity.backends.cfbackend
    duplicity.backends.dpbxbackend
    duplicity.backends.gdocsbackend
@@ -38,6 +37,7 @@ Submodules
    duplicity.backends.rclonebackend
    duplicity.backends.rsyncbackend
    duplicity.backends.s3_boto3_backend
+   duplicity.backends.s3_boto_backend
    duplicity.backends.ssh_paramiko_backend
    duplicity.backends.ssh_pexpect_backend
    duplicity.backends.swiftbackend
