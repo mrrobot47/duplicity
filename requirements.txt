@@ -2,6 +2,8 @@
 
 fasteners
 future
+gettext
+intltool
 mock
 requests
 urllib3
