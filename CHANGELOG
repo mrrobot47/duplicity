@@ -14,6 +14,8 @@ New in v0.8.11 (2020/02/??)
   distribution tarball of duplicity.
 * Added dist/makepip for convenience.
 * Renamed botobackend.py to s3_boto_backend.py
+* Fixed bug #1860405 - Auth mechanism not supported
+  - Added python3-boto3 requirement to snapcraft.yaml
 
 
 New in v0.8.10 (2020/01/23)

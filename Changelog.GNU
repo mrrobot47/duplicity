@@ -1,3 +1,8 @@
+2020-02-10  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1860405 - Auth mechanism not supported
+      - Added python3-boto3 requirement to snapcraft.yaml
+
 2020-02-06  Kenneth Loafman  <kenneth@loafman.com>
 
     * Renamed botobackend.py to s3_boto_backend.py
