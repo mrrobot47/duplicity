@@ -8,7 +8,7 @@ New in v0.8.11 (2020/02/??)
   versions and a fin for release or final.
 * Enhance setup.py/cfg to allow install by pip.
 * Adjust Dockerfiles to new requirements.
-* Fix bug #1861287 - Removing old backup chains
+* Fixed bug #1861287 - Removing old backup chains
   fails using pexpect+sftp
 * Reworked setup.py to build a pip-compatible
   distribution tarball of duplicity.
@@ -16,6 +16,8 @@ New in v0.8.11 (2020/02/??)
 * Renamed botobackend.py to s3_boto_backend.py
 * Fixed bug #1860405 - Auth mechanism not supported
   - Added python3-boto3 requirement to snapcraft.yaml
+* Fixed bug #1862672 - test_log does not respect TMPDIR
+  - Patch supplied by Jan Tojnar.
 
 
 New in v0.8.10 (2020/01/23)

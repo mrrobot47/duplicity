@@ -2,6 +2,8 @@
 
     * Fixed bug #1860405 - Auth mechanism not supported
       - Added python3-boto3 requirement to snapcraft.yaml
+    * Fixed bug #1862672 - test_log does not respect TMPDIR
+      - Patch supplied by Jan Tojnar.
 
 2020-02-06  Kenneth Loafman  <kenneth@loafman.com>
 

@@ -31,13 +31,15 @@ from . import FunctionalTestCase
 class LogTest(FunctionalTestCase):
     u"""Test machine-readable functions/classes in log.py"""
 
+    logfile = os.environ.get(u'TMPDIR', u'/tmp') + u'/duplicity.log'
+
     def setUp(self):
         super(LogTest, self).setUp()
-        assert not os.system(u"rm -f /tmp/duplicity.log")
+        assert not os.system(u"rm -f {}".format(self.logfile))
 
     def tearDown(self):
         super(LogTest, self).tearDown()
-        assert not os.system(u"rm -f /tmp/duplicity.log")
+        assert not os.system(u"rm -f {}".format(self.logfile))
 
     def test_command_line_error(self):
         u"""Check notification of a simple error code"""
@@ -45,9 +47,9 @@ class LogTest(FunctionalTestCase):
         # Run actual duplicity command (will fail, because no arguments passed)
         basepython = os.environ.get(u'TOXPYTHON', None)
         if basepython is not None:
-            os.system(u"%s ../bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1" % (basepython,))
+            os.system(u"{} ../bin/duplicity --log-file={} >/dev/null 2>&1".format(basepython, self.logfile))
         else:
-            os.system(u"../bin/duplicity --log-file=/tmp/duplicity.log >/dev/null 2>&1")
+            os.system(u"../bin/duplicity --log-file={} >/dev/null 2>&1".format(self.logfile))
 
         # The format of the file should be:
         # """ERROR 2
@@ -55,7 +57,7 @@ class LogTest(FunctionalTestCase):
         # . Blah blah blah.
         #
         # """
-        f = open(u'/tmp/duplicity.log', u'r')
+        f = open(self.logfile, u'r')
         linecount = 0
         lastline = False
         for line in f:
