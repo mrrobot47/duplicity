@@ -45,7 +45,7 @@ target_url
 target_url
 
 .B duplicity cleanup
-.I [options] [--force] [--extra-clean]
+.I [options] [--force]
 target_url
 
 .B duplicity replicate
@@ -244,7 +244,7 @@ recent backup chain will be kept intact.  Note that
 will be needed to delete the files instead of just listing them.
 
 .TP
-.BI "cleanup " "[--force] [--extra-clean] <url>"
+.BI "cleanup " "[--force] <url>"
 Delete the extraneous duplicity files on the given backend.
 Non-duplicity files, or files in complete data sets will not be
 deleted.  This should only be necessary after a duplicity session
@@ -450,28 +450,6 @@ option, this option does not match files in a directory it matches.
 See the
 .B FILE SELECTION
 section for more information.
-
-.TP
-.BI --extra-clean
-When cleaning up, be more aggressive about saving space.  For example, this
-may delete signature files for old backup chains.
-
-.B Caution:
-Without signature files those old backup chains are unrestorable. Do not
-use --extra-clean unless you know what you're doing.
-
-See the
-.B cleanup
-argument for more information.
-
-.TP
-.BI "--file-changed " path
-This option may be given in collection-status mode, causing only
-.I path
-status to be collect instead of the entire contents of the backup archive.
-.I path
-should be given relative to the root of the directory backed up.
-
 
 .TP
 .BI "--file-prefix, --file-prefix-manifest, --file-prefix-archive, --file-prefix-signature

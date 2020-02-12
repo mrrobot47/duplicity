@@ -892,7 +892,7 @@ def cleanup(col_stats):
     @rtype: void
     @return: void
     """
-    ext_local, ext_remote = col_stats.get_extraneous(globals.extra_clean)
+    ext_local, ext_remote = col_stats.get_extraneous()
     extraneous = ext_local + ext_remote
     if not extraneous:
         log.Warn(_(u"No extraneous files found, nothing deleted in cleanup."))

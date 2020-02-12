@@ -18,6 +18,8 @@ New in v0.8.11 (2020/02/??)
   - Added python3-boto3 requirement to snapcraft.yaml
 * Fixed bug #1862672 - test_log does not respect TMPDIR
   - Patch supplied by Jan Tojnar.
+* Fixed bug #1236248 - --extra-clean clobbers old backups
+  - Removed --extra-clean, code, and docs
 
 
 New in v0.8.10 (2020/01/23)
@@ -205,7 +207,7 @@ New in v0.8.05 (2019/10/06)
   message and use that for the exception report.
 * Added more python future includes to support using
   python3 code mixed with python2.
-* Sort of fix bugs #1836887 and #1836888 by skipping the
+* Sort of Fixed bugs #1836887 and #1836888 by skipping the
   tests under question when running on ppc64el machines.
 * Fix MacOS tempfile selection to avoid /tmp and /var/tmp.  See:
   https://lists.nongnu.org/archive/html/duplicity-talk/2019-09/msg00000.html
@@ -418,7 +420,7 @@ New in v0.8.00 (2019/05/29)
   - Fixed variable renaming issue
 * Fixed bug #1642098 - does not create PAR2 archives when '--par2-options' is used
   - Missing space between par2-options plus default options
-* Fix bug using 40-char sign keys, from Richard McGraw on mail list
+* Fixed bug using 40-char sign keys, from Richard McGraw on mail list
   - Remove truncation of argument and adjust comments
 * Merged in lp:~dernils/duplicity/robust-dropbox-backend
   - Added new command line option --backend-retry-delay
@@ -437,7 +439,7 @@ New in v0.8.00 (2019/05/29)
     matches a folder, but now the contents of any matching folder is included.
 * Fix some issues with testing on MacOS
 * Fix problem with gpg2 in yakety and zesty
-* Fix Bug #1642813 with patch from Ravi
+* Fixed bug #1642813 with patch from Ravi
   - If stat() returns None, don't attempt to set perms.
 * Merged in lp:~breunigs/duplicity/amazondrive3
   - As reported on the mailinglist, if a space is entered while duplicity asks for the URL, it fails.
@@ -576,7 +578,7 @@ New in v0.8.00 (2019/05/29)
     object when on Windows or Cygwin systems.  This allows us to avoid the
     problem of tmpfile() use which creates temp files in the wrong place.
   - See discussion at https://bugs.launchpad.net/duplicity/+bug/670891
-* Fix bug #1672540 with patch from Benoit Nadeau
+* Fixed bug #1672540 with patch from Benoit Nadeau
   - Rename would fail to move par files when moving across filesystems.
   - Patch uses shutil.move() to do the rename instead.
 * Merged in lp:~dernils/duplicity/docker-compose
@@ -790,7 +792,7 @@ New in v0.8.00 (2019/05/29)
   - Removed "pylint: disable=bad-string-format-type" comment, which was throwing
     an error and does not seem to be needed.
 * Removed last mention of copy.com from man page with help from edso.
-* Fix bug #1811114 with revised onedrivebackend.py from David Martin
+* Fixed bug #1811114 with revised onedrivebackend.py from David Martin
   - Adapt to new Microsoft Graph API
 * Merged in lp:~brandon753-ba/duplicity/aws-glacier
   - Adds support for for a command line option to store data on AWS S3 Glacier.
@@ -804,7 +806,7 @@ New in v0.8.00 (2019/05/29)
     another location, in cases where big amounts of chains are found.
 * Merged in lp:~mgorse/duplicity/0.8-series
   - Python 3 fixes to imapbackend.py
-  - Fix bug 1828869: refresh CollectionsStatus after sync
+  - Fixed bug 1828869: refresh CollectionsStatus after sync
 * Fixed bug #1828662 with patch from Bas Hulsken
   - string.split() had been deprecated in 2, removed in 3.7
 * Some more work on unadorned strings
@@ -914,21 +916,21 @@ New in v0.7.07 (2016/04/10)
   - still need to fix the other backends that spawn shell commands
 * Make test_restart compatible with both GNUtar and BSDtar
 * Fix stupid issue with functional test path for duplicity
-* Applied patch from shaochun to fix bug #1531154,
+* Applied patch from shaochun to Fixed bug #1531154,
   - --file-changed failed when file contains spaces
-* Applied patch from abeverly to fix bug #1475890
+* Applied patch from abeverly to Fixed bug #1475890
   - allow port to be specified along with hostname on S3
   - adjusted help text and man page to reflect the change
 * Undo changes to test_restart.py.  GNU tar is needed.
 * Fix minor pep8 nit in collections.py
-* Applied changes from ralle-ubuntu to fix bug 1072130.
+* Applied changes from ralle-ubuntu to Fixed bug 1072130.
   - duplicity does not support ftpes://
 * Fixed bug #1296793 - Failed to create bucket
   - use S3Connection.lookup() to check bucket exists
   - skips Boto's Exception processing for this check
   - dupe of bug #1507109 and bug #1537185
 * Merged in lp:~mifchip/duplicity/duplicity
-  - fix bug #1313964, absolute path doesn't work for FTP
+  - Fixed bug #1313964, absolute path doesn't work for FTP
 * Merged in lp:~fpytloun/duplicity/webdav-gssapi
   - support GSSAPI authentication in webdav backend
 * Add more pylint ignore warnings tags
@@ -936,7 +938,7 @@ New in v0.7.07 (2016/04/10)
 * Fix for bug #1538333 - assert filecount == len(self.files_changed)
   - added flush after every write for all FileobjHooked files which
     should prevent some errors when duplicity is forcibly closed.
-* Fix bug #1540279 - mistake in --help
+* Fixed bug #1540279 - mistake in --help
 * Applied patch from kay-diam to fix error handling in ssh pexpect,
   fixes bug #1541314
 * Fixed a patching error in ssh_pexpect_backend.py
@@ -985,7 +987,7 @@ New in v0.7.07 (2016/04/10)
 * Merged in lp:~aaron-whitehouse/duplicity/split_glob_matching_from_select
   - Move glob matching code out of selection.py's Select function and
     into globmatch.py.
-* Fix bug reported on the mailing list from Mark Grandi (assertion error
+* Fixed bug reported on the mailing list from Mark Grandi (assertion error
   while backing up).  In file_naming.parse() the filename was being lower
   cased prior to parsing.  If you had used a prefix with mixed case, we
   were writing the file properly, but could not find it in the backend.
@@ -1035,7 +1037,7 @@ New in v0.7.06 (2015/12/07)
   - Fix azurebackend storage class import
 * Merged in lp:~feraudet/duplicity/fix
   - Fix missing SWIFT_ENDPOINT_TYPE env var, bug 1519694.
-* Fix bug #1520691 - Shell Code Injection in hsi backend
+* Fixed bug #1520691 - Shell Code Injection in hsi backend
   - Replace use of os.popen3() with subprocess equivalent.
   - Added code to expand relative program path to full path.
   - Fix hisbackend where it expected a list not a string.
@@ -1086,8 +1088,8 @@ New in v0.7.05 (2015/09/15)
   - This banch adds an unfiltered_list() method which is used in
     delete() and delete_list()
 * Updated man pages to reflect more contributors.
-* Fix bug #1493573.  Correct option typo in man page.
-* Fix bug #1494228 CygWin: TypeError: basis_file must be a (true) file
+* Fixed bug #1493573.  Correct option typo in man page.
+* Fixed bug #1494228 CygWin: TypeError: basis_file must be a (true) file
   - The problem that caused the change to tempfile.TemporaryFile was due
     to the fact that os.tmpfile always creates its file in the system
     temp directory, not in the directory specified.  The fix applied was
@@ -1201,11 +1203,11 @@ New in v0.7.03 (2015/05/11)
     subfolders, if this is intended.
   - Mark --include-filelist-stdin and --exclude-fielist-stdin for
     deprecation and hide from --help output.
-* Fix bug 1432999 with hint from Antoine Afalo.
+* Fixed bug 1432999 with hint from Antoine Afalo.
   - '/'s at end of destination cause problems with onedrivebackend.
-* Fix bug 1434702 with help from Robin Nehls
+* Fixed bug 1434702 with help from Robin Nehls
   - incorrect response BackendException while downloading signatures file.
-* Fix bug 1437789 with patch from pdf
+* Fixed bug 1437789 with patch from pdf
   - par2backend.py incorrect syntax in get()
 * Merge in lp:~stynor/duplicity/multi-backend
   - A new backend that allows use of more than one backend stores (e.g. to
@@ -1213,7 +1215,7 @@ New in v0.7.03 (2015/05/11)
     a larger store available to duplicity).
 * Move requirements section lower in manpage.
 * Merge in lp:~cemsbr/duplicity/duplicity
-  - Fix bug 1432229 in Copy.com backend:
+  - Fixed bug 1432229 in Copy.com backend:
     Reply header has no content-type for JSON detection. Now, we also check
     whether the content starts with '{'.
 * Fixed bug 1444404 with patch from Samu Nuutamo
@@ -1263,7 +1265,7 @@ New in v0.7.02 (2015/03/10)
   - Aligned commandline.py options and manpage contents.
 * Changed --s3_multipart_max_timeout to --s3-multipart-max-timeout to be
   consistent with commandline option naming conventions.
-* Applied patch from Adam Reichold to fix bug # 1413792.
+* Applied patch from Adam Reichold to Fixed bug # 1413792.
 * Merged in lp:~angusgr/duplicity/exclude-older-than
   - Add "--exclude-older-than" commandline option, that allows you to only
     back up files with a modification date newer than a particular threshold.
@@ -1285,7 +1287,7 @@ New in v0.7.02 (2015/03/10)
 * Fixes for 2to3 issues
 * Fix spelling error in manpage, bug 1419314.
 * Fix _librsyncmodule.c compilation, bug 1416344, thanks to Kari Hautio.
-* Really fix bug 1416344 based on comment #5 by Roman Tereshonkov.
+* Really Fixed bug 1416344 based on comment #5 by Roman Tereshonkov.
 * Fix for --pydevd debug environment and location under Eclipse.
 * Fix for bug where scp was actually working as scp and not working with
   rsync.net because of using extraneous test command in restricted shell.
@@ -1394,7 +1396,7 @@ Enhancements:
     test. The subfolders also have clearer names than in the "select" folder
     (eg "1sub2sub3") which makes it easier to keep track of issues in tests.
 * Merged in lp:~9-sa/duplicity/FixBug1408289
-  - Fix bug #1408289
+  - Fixed bug #1408289
   - Wrong attribute name prevented raise of client exception, working now
 * Merged in lp:~noizyland/duplicity/azurebackend
   - Add backend for Azure Blob Storage Service
@@ -1720,7 +1722,7 @@ Enhancements:
 * Merged in lp:~mterry/duplicity/argv
   - Fix use of argv when calling os.execve
 * Merged in lp:~verb/duplicity/bucket_root_fix
-  - Fix bug that prevents backing up to the root of a bucket with boto backend.
+  - Fixed bug that prevents backing up to the root of a bucket with boto backend.
 * Merged in lp:~gliptak/duplicity/415619
   - Better error message when chown fails
 * Merged in lp:~mterry/duplicity/log-path-type
@@ -2396,7 +2398,7 @@ Fix to warning message in sshbackend.
 
 New in v0.6.08b (2010/03/11)
 ----------------------------
-Fix bug where encrypted backup without --gpg-options crashes.
+Fixed bug where encrypted backup without --gpg-options crashes.
 This was a followup issue to bug 490619 released in 0.6.07.
 This is attempt #2 -- not sure what happened to the patch,
 but it did not show up in 0.6-series like it should have.
@@ -2404,7 +2406,7 @@ but it did not show up in 0.6-series like it should have.
 
 New in v0.6.08a (2010/03/11)
 ----------------------------
-Fix bug where encrypted backup without --gpg-options crashes.
+Fixed bug where encrypted backup without --gpg-options crashes.
 This was a followup issue to bug 490619 released in 0.6.07.
 
 

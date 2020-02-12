@@ -1,3 +1,8 @@
+2020-02-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1236248 - --extra-clean clobbers old backups
+      - Removed --extra-clean, code, and docs
+
 2020-02-10  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1860405 - Auth mechanism not supported
@@ -18,7 +23,7 @@
 2020-01-29  Kenneth Loafman  <kenneth@loafman.com>
 
     * Adjust Dockerfiles to new requirements.
-    * Fix bug #1861287 - Removing old backup chains
+    * Fixed bug #1861287 - Removing old backup chains
       fails using pexpect+sftp
 
 2020-01-27  Kenneth Loafman  <kenneth@loafman.com>
@@ -330,9 +335,9 @@
 
 2019-10-05  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug #1843995 - B2 fails on string concatenation.
+    * Fixed bug #1843995 - B2 fails on string concatenation.
       - use util.fsdecode() to get a string not bytes.
-    * Fix bug #1844750 - RsyncBackend fails if used with multi-backend.
+    * Fixed bug #1844750 - RsyncBackend fails if used with multi-backend.
       - used patch provided by KDM to fix.
     * Fixed bug reported on maillist - Python error in Webdav backend.  See:
       https://lists.nongnu.org/archive/html/duplicity-talk/2019-09/msg00026.html
@@ -355,7 +360,7 @@
 
 2019-09-26  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Sort of fix bugs #1836887 and #1836888 by skipping the
+    * Sort of Fixed bugs #1836887 and #1836888 by skipping the
       tests under question when running on ppc64el machines.
 
 2019-09-22  Kenneth Loafman  <kenneth@loafman.com>
@@ -620,7 +625,7 @@
 
     * Merged in lp:~mgorse/duplicity/0.8-series
       - Python 3 fixes to imapbackend.py
-      - Fix bug 1828869: refresh CollectionsStatus after sync
+      - Fixed bug 1828869: refresh CollectionsStatus after sync
     * Fixed bug #1828662 with patch from Bas Hulsken
       - string.split() had been deprecated in 2, removed in 3.7
 
@@ -652,7 +657,7 @@
       - Removed "pylint: disable=bad-string-format-type" comment, which was throwing
         an error and does not seem to be needed.
     * Removed last mention of copy.com from man page with help from edso.
-    * Fix bug #1811114 with revised onedrivebackend.py from David Martin
+    * Fixed bug #1811114 with revised onedrivebackend.py from David Martin
       - Adapt to new Microsoft Graph API
 
 2019-02-25  Kenneth Loafman  <kenneth@loafman.com>
@@ -1051,7 +1056,7 @@
 
 2017-06-02  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug #1672540 with patch from Benoit Nadeau
+    * Fixed bug #1672540 with patch from Benoit Nadeau
       - Rename would fail to move par files when moving across filesystems.
       - Patch uses shutil.move() to do the rename instead.
 
@@ -1265,7 +1270,7 @@
 
 2016-12-29  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix Bug #1642813 with patch from Ravi
+    * Fixed bug #1642813 with patch from Ravi
       - If stat() returns None, don't attempt to set perms.
     * Merged in lp:~breunigs/duplicity/amazondrive3
       - As reported on the mailinglist, if a space is entered while duplicity asks for the URL, it fails.
@@ -1291,7 +1296,7 @@
 
 2016-11-21  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug using 40-char sign keys, from Richard McGraw on mail list
+    * Fixed bug using 40-char sign keys, from Richard McGraw on mail list
       - Remove truncation of argument and adjust comments
     * Merged in lp:~dernils/duplicity/robust-dropbox-backend
       - Added new command line option --backend-retry-delay
@@ -1483,7 +1488,7 @@
 
 2016-03-07  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug reported on the mailing list from Mark Grandi (assertion error
+    * Fixed bug reported on the mailing list from Mark Grandi (assertion error
       while backing up).  In file_naming.parse() the filename was being lower
       cased prior to parsing.  If you had used a prefix with mixed case, we
       were writing the file properly, but could not find it in the backend.
@@ -1562,7 +1567,7 @@
 
 2016-02-02  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug #1540279 - mistake in --help
+    * Fixed bug #1540279 - mistake in --help
 
 2016-01-29  Kenneth Loafman  <kenneth@loafman.com>
 
@@ -1594,16 +1599,16 @@
       - skips Boto's Exception processing for this check
       - dupe of bug #1507109 and bug #1537185
     * Merged in lp:~mifchip/duplicity/duplicity
-      - fix bug #1313964, absolute path doesn't work for FTP
+      - Fixed bug #1313964, absolute path doesn't work for FTP
 
 2016-01-11  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Applied changes from ralle-ubuntu to fix bug 1072130.
+    * Applied changes from ralle-ubuntu to Fixed bug 1072130.
       - duplicity does not support ftpes://
 
 2016-01-10  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Applied patch from abeverly to fix bug #1475890
+    * Applied patch from abeverly to Fixed bug #1475890
       - allow port to be specified along with hostname on S3
       - adjusted help text and man page to reflect the change
     * Undo changes to test_restart.py.  GNU tar is needed.
@@ -1611,7 +1616,7 @@
 
 2016-01-07  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Applied patch from shaochun to fix bug #1531154,
+    * Applied patch from shaochun to Fixed bug #1531154,
       - --file-changed failed when file contains spaces
 
 2016-01-06  Kenneth Loafman  <kenneth@loafman.com>
@@ -1669,13 +1674,13 @@
 
 2015-11-30  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug #1520691 - Shell Code Injection in hsi backend (2)
+    * Fixed bug #1520691 - Shell Code Injection in hsi backend (2)
       - Added code to expand relative program path to full path.
       - Fix hisbackend where it expected a list not a string.
 
 2015-11-28  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug #1520691 - Shell Code Injection in hsi backend
+    * Fixed bug #1520691 - Shell Code Injection in hsi backend
       - Replace use of os.popen3() with subprocess equivalent.
 
 2015-11-25  Kenneth Loafman  <kenneth@loafman.com>
@@ -1763,8 +1768,8 @@
 
 2015-09-06  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug #1493573.  Correct option name in man page.
-    * Fix bug #1494228 CygWin: TypeError: basis_file must be a (true) file
+    * Fixed bug #1493573.  Correct option name in man page.
+    * Fixed bug #1494228 CygWin: TypeError: basis_file must be a (true) file
       - The problem that caused the change to tempfile.TemporaryFile was due
         to the fact that os.tmpfile always creates its file in the system
         temp directory, not in the directory specified.  The fix applied was
@@ -1948,7 +1953,7 @@
 2015-04-20  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merge in lp:~cemsbr/duplicity/duplicity
-      - Fix bug 1432229 in Copy.com backend:
+      - Fixed bug 1432229 in Copy.com backend:
         Reply header has no content-type for JSON detection. Now, we also check
         whether the content starts with '{'.
     * Fixed bug 1444404 with patch from Samu Nuutamo
@@ -1965,17 +1970,17 @@
 
 2015-03-29  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug 1437789 with patch from pdf
+    * Fixed bug 1437789 with patch from pdf
       - par2backend.py incorrect syntax in get()
 
 2015-03-22  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug 1434702 with help from Robin Nehls
+    * Fixed bug 1434702 with help from Robin Nehls
       - incorrect response BackendException while downloading signatures file.
 
 2015-03-18  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Fix bug 1432999 with hint from Antoine Afalo.
+    * Fixed bug 1432999 with hint from Antoine Afalo.
       - '/'s at end of destination cause problems with onedrivebackend.
 
 2015-03-13  Kenneth Loafman  <kenneth@loafman.com>
@@ -2014,7 +2019,7 @@
 
 2015-02-12  Kenneth Loafman  <kenneth@loafman.com>
 
-    * Really fix bug 1416344 based on comment #5 by Roman Tereshonkov.
+    * Really Fixed bug 1416344 based on comment #5 by Roman Tereshonkov.
 
 2015-02-09  Kenneth Loafman  <kenneth@loafman.com>
 
@@ -2061,7 +2066,7 @@
       - Aligned commandline.py options and manpage contents.
     * Changed --s3_multipart_max_timeout to --s3-multipart-max-timeout to be
       consistent with commandline option naming conventions.
-    * Applied patch from Adam Reichold to fix bug # 1413792.
+    * Applied patch from Adam Reichold to Fixed bug # 1413792.
 
 2015-01-22  Kenneth Loafman  <kenneth@loafman.com>
 
@@ -2120,7 +2125,7 @@
 2015-01-11  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~9-sa/duplicity/FixBug1408289
-      - Fix bug #1408289
+      - Fixed bug #1408289
       - Wrong attribute name prevented raise of client exception, working now
     * Merged in lp:~noizyland/duplicity/azurebackend
       - Add backend for Azure Blob Storage Service
@@ -2675,7 +2680,7 @@
 2013-11-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~verb/duplicity/bucket_root_fix
-      - Fix bug that prevents backing up to the root of a bucket with boto backend.
+      - Fixed bug that prevents backing up to the root of a bucket with boto backend.
     * Merged in lp:~gliptak/duplicity/415619
       - Better error message when chown fails
     * Merged in lp:~mterry/duplicity/log-path-type
@@ -5821,7 +5826,7 @@
 
 2009-07-28  Kenneth Loafman  <kenneth@loafman.com>
 
-    Fix bug 405646 Small i18n error.
+    Fixed bug 405646 Small i18n error.
 
 2009-07-25  Larry Gilbert  <from-launchpad@l2g.to>
 
@@ -5968,7 +5973,7 @@
 
 2009-07-07  Kenneth Loafman  <kenneth@loafman.com>
 
-    Fix Bug #395826 "No such file or directory" when backing up second time
+    Fixed bug #395826 "No such file or directory" when backing up second time
 
 2009-07-06  Kenneth Loafman  <kenneth@loafman.com>
 
@@ -5991,7 +5996,7 @@
 
 2009-07-05  Kenneth Loafman  <kenneth@loafman.com>
 
-    Fix bug #394629 Hang on first collection-status
+    Fixed bug #394629 Hang on first collection-status
 
 2009-07-04  Kenneth Loafman  <kenneth@loafman.com>
 

@@ -1047,7 +1047,7 @@ class CollectionsStatus(object):
                          dup_time.timetostring(oldest.start_time))
             return oldest
 
-    def get_extraneous(self, extra_clean):
+    def get_extraneous(self):
         u"""
         Return list of the names of extraneous duplicity files
 
@@ -1059,15 +1059,6 @@ class CollectionsStatus(object):
         local_filenames = []
         remote_filenames = []
         ext_containers = self.orphaned_backup_sets + self.incomplete_backup_sets
-        if extra_clean:
-            old_sig_chains = self.all_sig_chains[:]
-            if self.matched_chain_pair:
-                matched_sig_chain = self.matched_chain_pair[0]
-                for sig_chain in self.all_sig_chains:
-                    if (sig_chain.start_time == matched_sig_chain.start_time and
-                            sig_chain.end_time == matched_sig_chain.end_time):
-                        old_sig_chains.remove(sig_chain)
-            ext_containers += old_sig_chains
         for set_or_chain in ext_containers:
             if set_or_chain.backend:
                 remote_filenames.extend(set_or_chain.get_filenames())

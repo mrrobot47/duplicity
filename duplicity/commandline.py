@@ -331,9 +331,6 @@ def parse_cmdline_options(arglist):
     parser.add_option(u"--exclude-older-than", type=u"time", metavar=_(u"time"),
                       dest=u"", action=u"callback", callback=add_selection)
 
-    # Whether we should be particularly aggressive when cleaning up
-    parser.add_option(u"--extra-clean", action=u"store_true")
-
     # used in testing only - raises exception after volume
     parser.add_option(u"--fail-on-volume", type=u"int",
                       help=optparse.SUPPRESS_HELP)
