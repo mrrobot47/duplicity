@@ -44,6 +44,7 @@ parts:
             - python3-swiftclient   # swiftbackend.py
             - python3-urllib3
             - rsync                 # rsyncbackend.py
+            - rclone                # rclonebackend.py
             - tahoe-lafs            # tahoebackend.py
             - sx                    # sxbackend.py
         python-packages:

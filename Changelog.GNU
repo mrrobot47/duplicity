@@ -2,6 +2,7 @@
 
     * Fixed bug #1236248 - --extra-clean clobbers old backups
       - Removed --extra-clean, code, and docs
+    * Add rclone requirement to snapcraft.yaml
 
 2020-02-10  Kenneth Loafman  <kenneth@loafman.com>
 

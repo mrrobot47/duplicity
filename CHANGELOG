@@ -20,6 +20,7 @@ New in v0.8.11 (2020/02/??)
   - Patch supplied by Jan Tojnar.
 * Fixed bug #1236248 - --extra-clean clobbers old backups
   - Removed --extra-clean, code, and docs
+* Add rclone requirement to snapcraft.yaml
 
 
 New in v0.8.10 (2020/01/23)
