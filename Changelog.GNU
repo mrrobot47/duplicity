@@ -1,3 +1,8 @@
+2020-02-13  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1863018 - mediafire backend fails on py3
+      - Fixed handling of bytes filename in url.
+
 2020-02-12  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1236248 - --extra-clean clobbers old backups

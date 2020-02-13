@@ -21,10 +21,11 @@
 u"""MediaFire Duplicity Backend"""
 
 from builtins import str
+
 import os
 
 import duplicity.backend
-
+from duplicity import util
 from duplicity.errors import BackendException
 
 DUPLICITY_APP_ID = u'45593'
@@ -129,11 +130,11 @@ Exception: %s""" % str(e))
 
         return {u'size': size}
 
-    def _build_uri(self, filename=None):
+    def _build_uri(self, filename=u''):
         u"""Build relative URI"""
         return (
             u'mf:' + self.folder[u"folderkey"] +
-            (u'/' + filename if filename else u'')
+            (u'/' + util.fsdecode(filename))
         )
 
 

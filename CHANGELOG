@@ -21,6 +21,8 @@ New in v0.8.11 (2020/02/??)
 * Fixed bug #1236248 - --extra-clean clobbers old backups
   - Removed --extra-clean, code, and docs
 * Add rclone requirement to snapcraft.yaml
+* Fixed bug #1863018 - mediafire backend fails on py3
+  - Fixed handling of bytes filename in url.
 
 
 New in v0.8.10 (2020/01/23)
