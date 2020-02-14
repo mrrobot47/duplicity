@@ -219,7 +219,7 @@ class MultiBackend(duplicity.backend.Backend):
 
     def _eligible_stores(self, filename):
         if self.__affinities:
-            matching_prefixes = [k for k in list(self.__affinities.keys()) if filename.startswith(k)]
+            matching_prefixes = [k for k in list(self.__affinities.keys()) if util.fsdecode(filename).startswith(k)]
             matching_stores = {store for prefix in matching_prefixes for store in self.__affinities[prefix]}
             if matching_stores:
                 # Distinct stores with matching prefix

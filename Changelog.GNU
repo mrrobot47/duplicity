@@ -1,3 +1,8 @@
+2020-02-14  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1857818 - startswith first arg must be bytes
+      - use util.fsdecode on filename
+
 2020-02-13  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1863018 - mediafire backend fails on py3

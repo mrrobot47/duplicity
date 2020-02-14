@@ -23,6 +23,8 @@ New in v0.8.11 (2020/02/??)
 * Add rclone requirement to snapcraft.yaml
 * Fixed bug #1863018 - mediafire backend fails on py3
   - Fixed handling of bytes filename in url.
+* Fixed bug #1857818 - startswith first arg must be bytes
+  - use util.fsdecode on filename
 
 
 New in v0.8.10 (2020/01/23)
