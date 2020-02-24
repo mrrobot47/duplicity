@@ -2,6 +2,7 @@
 
     * Fixed to work around par2 0.8.1 core dump on short name
       - https://github.com/Parchive/par2cmdline/issues/145
+    * Merged in translation updates
 
 2020-02-14  Kenneth Loafman  <kenneth@loafman.com>
 
