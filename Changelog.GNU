@@ -1,5 +1,10 @@
 2020-02-14  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Fixed to work around par2 0.8.1 core dump on short name
+      - https://github.com/Parchive/par2cmdline/issues/145
+
+2020-02-14  Kenneth Loafman  <kenneth@loafman.com>
+
     * Fixed bug #1857818 - startswith first arg must be bytes
       - use util.fsdecode on filename
 

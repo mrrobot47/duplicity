@@ -25,6 +25,8 @@ New in v0.8.11 (2020/02/??)
   - Fixed handling of bytes filename in url.
 * Fixed bug #1857818 - startswith first arg must be bytes
   - use util.fsdecode on filename
+* Fixed to work around par2 0.8.1 core dump on short name
+  - https://github.com/Parchive/par2cmdline/issues/145
 
 
 New in v0.8.10 (2020/01/23)
