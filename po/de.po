@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-02-14 20:01+0000\n"
+"POT-Creation-Date: 2020-02-24 19:01+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-02-15 06:03+0000\n"
+"X-Launchpad-Export-Date: 2020-02-25 06:28+0000\n"
 "X-Generator: Launchpad (build 19413b719a8df7423ab1390528edadce9e0e4aca)\n"
 "Language: de\n"
 
@@ -183,7 +183,7 @@ msgstr "MehrfachHintergrundprogramm: env %s = %s einstellen"
 #: ../duplicity/backends/multibackend.py:208
 #, python-format
 msgid "Multibackend: register affinity for prefix %s"
-msgstr ""
+msgstr "Multibackend: Registeraffinität für Präfix %s"
 
 #: ../duplicity/backends/multibackend.py:249
 #, python-format
@@ -285,6 +285,13 @@ msgid ""
 "Consult the man page, chapter 'SSL Certificate Verification'.\n"
 "Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
 msgstr ""
+"Für die Zertifikatsprüfung mit Python 2.7.8 oder früher wird eine cacert "
+"Datenbank\n"
+"Datei an einem der folgenden Orte benötigt: %s\n"
+"Hinweise:\n"
+"Konsultieren Sie die Hilfeseiten, Kapitel 'SSL-Zertifikatsverifizierung'.\n"
+"Erwägen Sie die Verwendung der Optionen --ssl-cacert-file, --ssl-no-check-"
+"certificate ."
 
 #: ../duplicity/backends/webdavbackend.py:155
 #, python-format
@@ -541,11 +548,11 @@ msgstr "Sicherungsname"
 
 #: ../duplicity/commandline.py:556
 msgid "policy"
-msgstr ""
+msgstr "Richtlinie"
 
 #: ../duplicity/commandline.py:574
 msgid "Hot|Cool|Archive"
-msgstr ""
+msgstr "Hot|Cool|Archiv"
 
 #. TRANSL: noun
 #: ../duplicity/commandline.py:577 ../duplicity/commandline.py:580
@@ -1660,6 +1667,8 @@ msgstr "%s Volumen in Manifest gefunden"
 msgid ""
 "Manifest file '%s' is corrupt: File count says %d, File list contains %d"
 msgstr ""
+"Die Manifestdatei '%s' ist beschädigt: Dateianzahl ist %d, Dateiliste "
+"enthält %d"
 
 #: ../duplicity/manifest.py:258
 msgid "Manifests not equal because different volume numbers"
