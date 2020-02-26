@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Duplicity Team <duplicity-team@lists.launchpad.net>
 Build-Depends: debhelper (>= 9),
-               dh-python3 | python3 (>= 3.6),
+               dh-python | python3 (>= 3.6),
                gnupg,
                librsync-dev (>= 0.9.6),
                par2,
