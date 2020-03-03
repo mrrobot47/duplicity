@@ -1,3 +1,10 @@
+2020-03-03  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1865648 - module 'multiprocessing.dummy' has
+      no attribute 'cpu_count'.
+      - replaced with module psutil for cpu_count() only
+      - appears Arch Linux does not support multiprocessing
+
 2020-02-14  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed to work around par2 0.8.1 core dump on short name

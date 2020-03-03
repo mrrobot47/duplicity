@@ -24,19 +24,21 @@ from __future__ import division
 from future import standard_library
 standard_library.install_aliases()
 from builtins import range
-import socket
+
 import os
+import psutil
+import queue
+import socket
 import sys
 import threading
-import queue
 import time
 import traceback
 
 from duplicity import globals
 from duplicity import log
+from duplicity import progress
 from duplicity.errors import *  # @UnusedWildImport
 from duplicity.filechunkio import FileChunkIO
-from duplicity import progress
 
 from ._boto_single import BotoBackend as BotoSingleBackend
 from ._boto_single import get_connection
@@ -101,7 +103,7 @@ class BotoBackend(BotoSingleBackend):
     def _setup_pool(self):
         number_of_procs = globals.s3_multipart_max_procs
         if not number_of_procs:
-            number_of_procs = multiprocessing.cpu_count()
+            number_of_procs = psutil.cpu_count(logical=False)
 
         if getattr(self, u'_pool', False):
             log.Debug(u"A process pool already exists. Destroying previous pool.")
