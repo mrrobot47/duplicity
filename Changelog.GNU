@@ -4,6 +4,11 @@
       no attribute 'cpu_count'.
       - replaced with module psutil for cpu_count() only
       - appears Arch Linux does not support multiprocessing
+    * Fixed a couple of file history bugs:
+      - #1044715 Provide a file history feature
+        + removed neutering done between series
+      - #1526557 --file-changed does not work
+        + fixed str/bytes issue finding filename
 
 2020-02-14  Kenneth Loafman  <kenneth@loafman.com>
 

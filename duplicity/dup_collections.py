@@ -152,7 +152,7 @@ class BackupSet(object):
                                                remote_filename)
         self.remote_manifest_name = remote_filename
 
-        if self.action not in [u"collection-status", u"replicate"]:
+        if self.action != u"replicate":
             local_filename_list = globals.archive_dir_path.listdir()
         else:
             local_filename_list = []
@@ -179,7 +179,7 @@ class BackupSet(object):
         except Exception:
             log.Debug(_(u"BackupSet.delete: missing %s") % [util.fsdecode(f) for f in rfn])
             pass
-        if self.action not in [u"collection-status", u"replicate"]:
+        if self.action != u"replicate":
             local_filename_list = globals.archive_dir_path.listdir()
         else:
             local_filename_list = []
@@ -722,7 +722,7 @@ class CollectionsStatus(object):
                   len(backend_filename_list))
 
         # get local filename list
-        if self.action not in [u"collection-status", u"replicate"]:
+        if self.action != u"replicate":
             local_filename_list = self.archive_dir_path.listdir()
         else:
             local_filename_list = []
@@ -923,7 +923,7 @@ class CollectionsStatus(object):
             if filelist is not None:
                 return filelist
             elif local:
-                if self.action not in [u"collection-status", u"replicate"]:
+                if self.action != u"replicate":
                     return self.archive_dir_path.listdir()
                 else:
                     return []
@@ -1207,6 +1207,7 @@ class CollectionsStatus(object):
         specified_file_backup_set = []
         specified_file_backup_type = []
 
+        modified_filepath = util.fsencode(modified_filepath)
         for bs in all_backup_set:
             filelist = [fileinfo[1] for fileinfo in bs.get_files_changed()]
             if modified_filepath in filelist:
