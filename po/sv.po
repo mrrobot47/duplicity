@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-02 17:15+0000\n"
+"POT-Creation-Date: 2020-03-03 16:36+0000\n"
 "PO-Revision-Date: 2019-05-26 09:31+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-03-03 06:08+0000\n"
+"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: sv\n"
 
@@ -876,11 +876,11 @@ msgstr "Antal inneslutna säkerhetskopieringsuppsättningar: %d"
 msgid "Total number of contained volumes: %d"
 msgstr "Totalt antal inneslutna volymer: %d"
 
-#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Type of backup set:"
 msgstr "Typ av säkerhetskopieringsuppsättning:"
 
-#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Time:"
 msgstr "Tid:"
 
@@ -888,11 +888,11 @@ msgstr "Tid:"
 msgid "Num volumes:"
 msgstr "Num volymer:"
 
-#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1236
+#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1237
 msgid "Full"
 msgstr "Fullständig"
 
-#: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1238
+#: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1239
 msgid "Incremental"
 msgstr "Inkrementell"
 
@@ -1064,17 +1064,17 @@ msgstr ""
 "Ingen signaturkedja för den begärda tiden. Använda äldsta tillgängliga "
 "kedjan, börjar vid tiden %s."
 
-#: ../duplicity/dup_collections.py:1228
+#: ../duplicity/dup_collections.py:1229
 #, python-format
 msgid "File: %s"
 msgstr "Fil: %s"
 
-#: ../duplicity/dup_collections.py:1229
+#: ../duplicity/dup_collections.py:1230
 #, python-format
 msgid "Total number of backup: %d"
 msgstr "Totalt antal säkerhetskopior: %d"
 
-#: ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:1231
 msgid "Type of file change:"
 msgstr "Typ av filändring:"
 

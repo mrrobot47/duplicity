@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-02 17:15+0000\n"
+"POT-Creation-Date: 2020-03-03 16:36+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2020-03-03 06:08+0000\n"
+"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: sl\n"
 
@@ -872,11 +872,11 @@ msgstr "Število vsebovanih zbirk varnostnih kopij: %d"
 msgid "Total number of contained volumes: %d"
 msgstr "Skupno število vsebovanih nosilcev: %d"
 
-#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Type of backup set:"
 msgstr "Vrsta zbirke varnostne kopije"
 
-#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Time:"
 msgstr "Čas:"
 
@@ -884,11 +884,11 @@ msgstr "Čas:"
 msgid "Num volumes:"
 msgstr "Število nosilcev:"
 
-#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1236
+#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1237
 msgid "Full"
 msgstr "Polno"
 
-#: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1238
+#: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1239
 msgid "Incremental"
 msgstr "Koračna"
 
@@ -1094,17 +1094,17 @@ msgid ""
 "starting at time %s."
 msgstr ""
 
-#: ../duplicity/dup_collections.py:1228
+#: ../duplicity/dup_collections.py:1229
 #, python-format
 msgid "File: %s"
 msgstr "Datoteka: %s"
 
-#: ../duplicity/dup_collections.py:1229
+#: ../duplicity/dup_collections.py:1230
 #, python-format
 msgid "Total number of backup: %d"
 msgstr "Skupno število varnostne kopije: %d"
 
-#: ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:1231
 msgid "Type of file change:"
 msgstr "Tip spremembe datoteke:"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-02 17:15+0000\n"
+"POT-Creation-Date: 2020-03-03 16:36+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Careone <zzbusagain@yahoo.com.cn>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2020-03-03 06:08+0000\n"
+"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: \n"
 
@@ -867,11 +867,11 @@ msgstr "包含的备份集数量：%d"
 msgid "Total number of contained volumes: %d"
 msgstr "包含的卷数量：%d"
 
-#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Type of backup set:"
 msgstr "备份集类型："
 
-#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Time:"
 msgstr "时间："
 
@@ -879,11 +879,11 @@ msgstr "时间："
 msgid "Num volumes:"
 msgstr "卷数量："
 
-#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1236
+#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1237
 msgid "Full"
 msgstr "完全"
 
-#: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1238
+#: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1239
 msgid "Incremental"
 msgstr "增量"
 
@@ -1033,17 +1033,17 @@ msgid ""
 "starting at time %s."
 msgstr ""
 
-#: ../duplicity/dup_collections.py:1228
+#: ../duplicity/dup_collections.py:1229
 #, python-format
 msgid "File: %s"
 msgstr "文件：%s"
 
-#: ../duplicity/dup_collections.py:1229
+#: ../duplicity/dup_collections.py:1230
 #, python-format
 msgid "Total number of backup: %d"
 msgstr "备份总数：%d"
 
-#: ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:1231
 msgid "Type of file change:"
 msgstr "文件修改的类型："
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-02 17:15+0000\n"
+"POT-Creation-Date: 2020-03-03 16:36+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-03-03 06:08+0000\n"
+"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: es\n"
 
@@ -899,11 +899,11 @@ msgstr "Número de conjuntos de respaldo contenidos: %d"
 msgid "Total number of contained volumes: %d"
 msgstr "Número total de volúmenes contenidos: %d"
 
-#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Type of backup set:"
 msgstr "Tipo de conjunto de respaldo"
 
-#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Time:"
 msgstr "Hora:"
 
@@ -911,11 +911,11 @@ msgstr "Hora:"
 msgid "Num volumes:"
 msgstr "Número de volúmenes:"
 
-#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1236
+#: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1237
 msgid "Full"
 msgstr "Completo"
 
-#: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1238
+#: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1239
 msgid "Incremental"
 msgstr "Incremental"
 
@@ -1091,17 +1091,17 @@ msgstr ""
 "No hay cadena de firmas disponibles para la hora solicitada. Se está usando "
 "la cadena más antigua disponible, que comienza en %s."
 
-#: ../duplicity/dup_collections.py:1228
+#: ../duplicity/dup_collections.py:1229
 #, python-format
 msgid "File: %s"
 msgstr "Archivo: %s"
 
-#: ../duplicity/dup_collections.py:1229
+#: ../duplicity/dup_collections.py:1230
 #, python-format
 msgid "Total number of backup: %d"
 msgstr "Número total de copias de seguridad: %d"
 
-#: ../duplicity/dup_collections.py:1230
+#: ../duplicity/dup_collections.py:1231
 msgid "Type of file change:"
 msgstr "Tipo de cambio de archivo:"
 
