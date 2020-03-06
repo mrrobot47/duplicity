@@ -1,3 +1,13 @@
+2020-03-06  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1755955 - best order is unclear,
+      of exclude-if-present and exclude-device-files
+      - Removed warning and will now allow these two to
+        be in any order.  If encountered outside of the
+        first two slots, duplicity will silently move
+        them to be in the first two slots.  Within those
+        two slots the order does not matter.
+
 2020-03-03  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1865648 - module 'multiprocessing.dummy' has

@@ -251,9 +251,9 @@ class Select(object):
                 if opt == u"--exclude":
                     self.add_selection_func(self.glob_get_sf(arg, 0))
                 elif opt == u"--exclude-if-present":
-                    self.add_selection_func(self.present_get_sf(arg, 0))
+                    self.add_selection_func(self.present_get_sf(arg, 0), add_to_start=True)
                 elif opt == u"--exclude-device-files":
-                    self.add_selection_func(self.devfiles_get_sf())
+                    self.add_selection_func(self.devfiles_get_sf(), add_to_start=True)
                 elif (opt == u"--exclude-filelist") or (opt == u"--exclude-globbing-filelist"):
                     # --exclude-globbing-filelist is now deprecated, as all filelists are globbing
                     # but keep this here for the short term for backwards-compatibility
@@ -410,10 +410,6 @@ probably isn't what you meant.""") %
     def devfiles_get_sf(self):
         u"""Return a selection function to exclude all dev files"""
         # Internal. Used by ParseArgs.
-        if self.selection_functions:
-            log.Warn(_(u"Warning: exclude-device-files is not the first "
-                       u"selector.\nThis may not be what you intended"))
-
         def sel_func(path):
             if path.isdev():
                 return 0

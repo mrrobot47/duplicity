@@ -9,6 +9,13 @@ New in v0.8.12 (2020/03/??)
     + removed neutering done between series
   - #1526557 --file-changed does not work
     + fixed str/bytes issue finding filename
+* Fixed bug #1755955 - best order is unclear,
+  of exclude-if-present and exclude-device-files
+  - Removed warning and will now allow these two to
+    be in any order.  If encountered outside of the
+    first two slots, duplicity will silently move
+    them to be in the first two slots.  Within those
+    two slots the order does not matter.
 
 
 New in v0.8.11 (2020/02/24)
