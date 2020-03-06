@@ -7,6 +7,8 @@
         first two slots, duplicity will silently move
         them to be in the first two slots.  Within those
         two slots the order does not matter.
+    * Fixed bug #1769267 - [enhancement] please consider
+      using rclone as backend.
 
 2020-03-03  Kenneth Loafman  <kenneth@loafman.com>
 

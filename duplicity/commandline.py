@@ -920,6 +920,10 @@ def usage():
         # TRANSL: application_key for b2.
         # Example: b2://account_id:application_key@bucket/
         u'application_key': _(u"application_key"),
+
+        # TRANSL: remote name for rclone.
+        # Example: rclone://remote:/some_dir
+        u'remote': _(u"remote"),
     }
 
     # TRANSL: Header in usage help
@@ -939,34 +943,34 @@ def usage():
 
     # TRANSL: Header in usage help
     msg = msg + _(u"Backends and their URL formats:") + u"""
+  azure://%(container_name)s
+  b2://%(account_id)s[:%(application_key)s]@%(bucket_name)s/[%(some_dir)s/]
+  boto3+s3://%(bucket_name)s[/%(prefix)s]
   cf+http://%(container_name)s
+  dpbx:///%(some_dir)s
   file:///%(some_dir)s
   ftp://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   ftps://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
+  gdocs://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
   hsi://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   imap://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
-  rsync://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]::/%(module)s/%(some_dir)s
+  mega://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
+  mf://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
+  onedrive://%(some_dir)s
+  pca://%(container_name)s
+  pydrive://%(user)s@%(other_host)s/%(some_dir)s
+  rclone://%(remote)s:/%(some_dir)s
   rsync://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(relative_path)s
   rsync://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]//%(absolute_path)s
-  s3://%(other_host)s[:%(port)s]/%(bucket_name)s[/%(prefix)s]
+  rsync://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]::/%(module)s/%(some_dir)s
   s3+http://%(bucket_name)s[/%(prefix)s]
-  boto3+s3://%(bucket_name)s[/%(prefix)s]
+  s3://%(other_host)s[:%(port)s]/%(bucket_name)s[/%(prefix)s]
   scp://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   ssh://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   swift://%(container_name)s
-  pca://%(container_name)s
   tahoe://%(alias)s/%(directory)s
   webdav://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
   webdavs://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
-  gdocs://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
-  pydrive://%(user)s@%(other_host)s/%(some_dir)s
-  mega://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
-  copy://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
-  dpbx:///%(some_dir)s
-  onedrive://%(some_dir)s
-  azure://%(container_name)s
-  b2://%(account_id)s[:%(application_key)s]@%(bucket_name)s/[%(some_dir)s/]
-  mf://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
 
 """ % dict
 

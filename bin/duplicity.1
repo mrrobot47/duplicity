@@ -1279,6 +1279,16 @@ See also
 .B "A NOTE ON PAR2 WRAPPER BACKEND"
 .RE
 .PP
+.B "Rclone Backend"
+.PP
+.RS
+rclone://remote:/some_dir
+.RE
+.PP
+See also
+.B "A NOTE ON RCLONE BACKEND"
+.RE
+.PP
 .B "Rsync via daemon"
 .PP
 .RS
@@ -2066,6 +2076,32 @@ granted, you will receive a verification code to paste back into
 Duplicity. The credentials are then cached in the file references above
 for future use.
 
+.SH A NOTE ON RCLONE BACKEND
+Rclone is a powerful command line program to sync files and directories to and from various cloud storage providers.
+.PP
+Once you have configured an rclone remote via
+.PP
+.RS
+rclone config
+.PP
+.RE
+and successfully set up a remote (e.g. gdrive for Google Drive), assuming you can
+list your remote files with
+.PP
+.RS
+rclone ls gdrive:mydocuments
+.PP
+.RE
+you can start your backup with
+.PP
+.RS
+duplicity /mydocuments rclone://gdrive:/mydocuments
+.PP
+.RE
+Please note the slash after the second colon. Some storage provider will work with or without slash
+after colon, but some other will not. Since duplicity will complain about malformed URL if a slash
+is not present, always put it after the colon, and the backend will handle it for you.
+
 .SH A NOTE ON SSH BACKENDS
 The
 .I ssh backends
@@ -2417,6 +2453,10 @@ see pydrive backend
 (also see
 .BR "A NOTE ON PYDRIVE BACKEND"
 ) below.
+.TP
+.B "rclone backend"
+.B rclone
+- https://rclone.org/
 .TP
 .B "rsync backend"
 .B rsync client binary
