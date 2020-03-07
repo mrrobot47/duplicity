@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-03 16:36+0000\n"
+"POT-Creation-Date: 2020-03-06 21:26+0000\n"
 "PO-Revision-Date: 2019-08-12 16:30+0000\n"
 "Last-Translator: Pavel Borecki <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
+"X-Launchpad-Export-Date: 2020-03-07 06:02+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: cs\n"
 
@@ -721,23 +721,29 @@ msgstr "identifikator_uctu"
 msgid "application_key"
 msgstr "aplikacni_klic"
 
+#. TRANSL: remote name for rclone.
+#. Example: rclone://remote:/some_dir
+#: ../duplicity/commandline.py:926 ../duplicity/dup_collections.py:511
+msgid "remote"
+msgstr "vzdálená"
+
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:941
+#: ../duplicity/commandline.py:945
 msgid "Backends and their URL formats:"
 msgstr "Podpůrné vrstvy (backend) a formáty jejich URL adres:"
 
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:974
+#: ../duplicity/commandline.py:978
 msgid "Commands:"
 msgstr "Příkazy:"
 
-#: ../duplicity/commandline.py:999
+#: ../duplicity/commandline.py:1003
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr "Zadaná složka archivu „%s“ neexistuje, nebo se nejedná o složku"
 
-#: ../duplicity/commandline.py:1008
+#: ../duplicity/commandline.py:1012
 #, python-format
 msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
@@ -747,7 +753,7 @@ msgstr ""
 "např. „AA0E73D2“.\n"
 "Namísto toho obdrženo „%s“."
 
-#: ../duplicity/commandline.py:1068
+#: ../duplicity/commandline.py:1072
 #, python-format
 msgid ""
 "Restore destination directory %s already exists.\n"
@@ -756,22 +762,22 @@ msgstr ""
 "Složka %s do které se má obnovit už existuje.\n"
 "Nebude přepsána."
 
-#: ../duplicity/commandline.py:1073
+#: ../duplicity/commandline.py:1077
 #, python-format
 msgid "Verify directory %s does not exist"
 msgstr "Ověřovací složka %s neexistuje"
 
-#: ../duplicity/commandline.py:1079
+#: ../duplicity/commandline.py:1083
 #, python-format
 msgid "Backup source directory %s does not exist."
 msgstr "Zdrojová složka zálohy %s neexistuje."
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 #, python-format
 msgid "Command line warning: %s"
 msgstr "Varování příkazového řádku: %s"
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 msgid ""
 "Selection options --exclude/--include\n"
 "currently work only when backing up,not restoring."
@@ -779,12 +785,12 @@ msgstr ""
 "Volby výběru --exclude/--include\n"
 "v tuto chvíli fungují pouze pro zálohování, ne při obnovování."
 
-#: ../duplicity/commandline.py:1146
+#: ../duplicity/commandline.py:1150
 #, python-format
 msgid "GPG binary is %s, version %s"
 msgstr "Spustitelný soubor GPG je %s, verze %s"
 
-#: ../duplicity/commandline.py:1173
+#: ../duplicity/commandline.py:1177
 #, python-format
 msgid ""
 "Bad URL '%s'.\n"
@@ -795,7 +801,7 @@ msgstr ""
 "Příklady URL řetězců jsou „scp://uzivatel@stroj.net:1234/popis_umisteni“ a\n"
 "\"file:///usr/local“. Další informace viz manuálová stránka."
 
-#: ../duplicity/commandline.py:1203
+#: ../duplicity/commandline.py:1207
 msgid "Main action: "
 msgstr "Hlavní akce: "
 
@@ -920,10 +926,6 @@ msgstr "Přírůstková"
 #: ../duplicity/dup_collections.py:509
 msgid "local"
 msgstr "místní"
-
-#: ../duplicity/dup_collections.py:511
-msgid "remote"
-msgstr "vzdálená"
 
 #: ../duplicity/dup_collections.py:666
 msgid "Collection Status"
@@ -1764,7 +1766,7 @@ msgid "Error initializing file %s"
 msgstr "Chyba při inicializaci souboru %s"
 
 #: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:458
+#: ../duplicity/selection.py:454
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Chyba při přístupu k nejspíš zamčenému souboru %s"
@@ -1830,14 +1832,6 @@ msgstr "Čtení seznamu souborů %s, určeného zástupnými znaky"
 #, python-format
 msgid "Error compiling regular expression %s"
 msgstr "Chyba při kompilaci regulárního výrazu %s"
-
-#: ../duplicity/selection.py:414
-msgid ""
-"Warning: exclude-device-files is not the first selector.\n"
-"This may not be what you intended"
-msgstr ""
-"Varování: vynechání souborů zařízení není první výběr.\n"
-"To nemusí být to, co chcete"
 
 #: ../duplicity/tempdir.py:160
 #, python-format
@@ -1905,6 +1899,13 @@ msgstr "Uvolňování souboru zámku %s"
 #~ "Rady:\n"
 #~ "  Konzultujte manuálovou stránku, kapitolu „Ověřování SSL certifikátů“.\n"
 #~ "  Zvažte použití voleb --ssl-cacert-file, --ssl-no-check-certificate ."
+
+#~ msgid ""
+#~ "Warning: exclude-device-files is not the first selector.\n"
+#~ "This may not be what you intended"
+#~ msgstr ""
+#~ "Varování: vynechání souborů zařízení není první výběr.\n"
+#~ "To nemusí být to, co chcete"
 
 #, python-format
 #~ msgid "MultiBackend: list from %s: %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-03 16:36+0000\n"
+"POT-Creation-Date: 2020-03-06 21:26+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
+"X-Launchpad-Export-Date: 2020-03-07 06:03+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: nb\n"
 
@@ -706,23 +706,29 @@ msgstr "konto-id"
 msgid "application_key"
 msgstr "programnøkkel"
 
+#. TRANSL: remote name for rclone.
+#. Example: rclone://remote:/some_dir
+#: ../duplicity/commandline.py:926 ../duplicity/dup_collections.py:511
+msgid "remote"
+msgstr "ekstern"
+
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:941
+#: ../duplicity/commandline.py:945
 msgid "Backends and their URL formats:"
 msgstr "Bakstykker og nettadresse-formater:"
 
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:974
+#: ../duplicity/commandline.py:978
 msgid "Commands:"
 msgstr "Kommandoer:"
 
-#: ../duplicity/commandline.py:999
+#: ../duplicity/commandline.py:1003
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr "Valgt arkivmappe «%s» finnes ikke, eller er ikke en mappe"
 
-#: ../duplicity/commandline.py:1008
+#: ../duplicity/commandline.py:1012
 #, python-format
 msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
@@ -732,7 +738,7 @@ msgstr ""
 "«AA0E73D2».\n"
 "Mottok «%s»."
 
-#: ../duplicity/commandline.py:1068
+#: ../duplicity/commandline.py:1072
 #, python-format
 msgid ""
 "Restore destination directory %s already exists.\n"
@@ -741,22 +747,22 @@ msgstr ""
 "Målmappa for gjenoppretting (%s) finnes allerede,\n"
 "og blir ikke overskrevet."
 
-#: ../duplicity/commandline.py:1073
+#: ../duplicity/commandline.py:1077
 #, python-format
 msgid "Verify directory %s does not exist"
 msgstr "Bekreftelsesmappe %s finnes ikke"
 
-#: ../duplicity/commandline.py:1079
+#: ../duplicity/commandline.py:1083
 #, python-format
 msgid "Backup source directory %s does not exist."
 msgstr "Kildemappe %s finnes ikke."
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 #, python-format
 msgid "Command line warning: %s"
 msgstr "Kommandolinje-advarsel: %s"
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 msgid ""
 "Selection options --exclude/--include\n"
 "currently work only when backing up,not restoring."
@@ -764,12 +770,12 @@ msgstr ""
 "Valgene «--exclude» og «--include»\n"
 "fungerer bare ved sikkerhetskopiering, ikke gjenoppretting."
 
-#: ../duplicity/commandline.py:1146
+#: ../duplicity/commandline.py:1150
 #, python-format
 msgid "GPG binary is %s, version %s"
 msgstr ""
 
-#: ../duplicity/commandline.py:1173
+#: ../duplicity/commandline.py:1177
 #, python-format
 msgid ""
 "Bad URL '%s'.\n"
@@ -780,7 +786,7 @@ msgstr ""
 "Adressestrenger skal se ut som f.eks. «scp://bruker@vert.no:1234/sti» og\n"
 "«file:///usr/local».  Se brukermanualen (manpage) for mer informasjon."
 
-#: ../duplicity/commandline.py:1203
+#: ../duplicity/commandline.py:1207
 msgid "Main action: "
 msgstr "Hovedhandling: "
 
@@ -907,10 +913,6 @@ msgstr "Inkrementell"
 #: ../duplicity/dup_collections.py:509
 msgid "local"
 msgstr "lokal"
-
-#: ../duplicity/dup_collections.py:511
-msgid "remote"
-msgstr "ekstern"
 
 #: ../duplicity/dup_collections.py:666
 msgid "Collection Status"
@@ -1730,7 +1732,7 @@ msgid "Error initializing file %s"
 msgstr "Feil under klargjøring av fila %s"
 
 #: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:458
+#: ../duplicity/selection.py:454
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Feil under åpning av fila %s. Den kan være låst"
@@ -1797,14 +1799,6 @@ msgstr "Leser filliste %s"
 msgid "Error compiling regular expression %s"
 msgstr "Feil under kompilering av regulært uttrykk %s"
 
-#: ../duplicity/selection.py:414
-msgid ""
-"Warning: exclude-device-files is not the first selector.\n"
-"This may not be what you intended"
-msgstr ""
-"Advarsel: «exclude-device-files» er ikke første valg.\n"
-"Du kan ha ment å gjøre noe annet"
-
 #: ../duplicity/tempdir.py:160
 #, python-format
 msgid "Using temporary directory %s"
@@ -1858,6 +1852,13 @@ msgstr "IGNORED_ERROR: Advarsel: ignorerer feil som forespurt: %s. %s"
 #, python-format
 msgid "Releasing lockfile %s"
 msgstr "Slipper låsefil %s"
+
+#~ msgid ""
+#~ "Warning: exclude-device-files is not the first selector.\n"
+#~ "This may not be what you intended"
+#~ msgstr ""
+#~ "Advarsel: «exclude-device-files» er ikke første valg.\n"
+#~ "Du kan ha ment å gjøre noe annet"
 
 #, python-format
 #~ msgid "MultiBackend: list from %s: %s"

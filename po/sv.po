@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-03 16:36+0000\n"
+"POT-Creation-Date: 2020-03-06 21:26+0000\n"
 "PO-Revision-Date: 2019-05-26 09:31+0000\n"
 "Last-Translator: Jonatan Nyberg <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
+"X-Launchpad-Export-Date: 2020-03-07 06:03+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: sv\n"
 
@@ -703,24 +703,30 @@ msgstr ""
 msgid "application_key"
 msgstr ""
 
+#. TRANSL: remote name for rclone.
+#. Example: rclone://remote:/some_dir
+#: ../duplicity/commandline.py:926 ../duplicity/dup_collections.py:511
+msgid "remote"
+msgstr "fjärr"
+
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:941
+#: ../duplicity/commandline.py:945
 msgid "Backends and their URL formats:"
 msgstr ""
 
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:974
+#: ../duplicity/commandline.py:978
 msgid "Commands:"
 msgstr "Kommandon:"
 
-#: ../duplicity/commandline.py:999
+#: ../duplicity/commandline.py:1003
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr ""
 "Den angivna arkivkatalogen \"%s\" finns inte, eller är inte en katalog"
 
-#: ../duplicity/commandline.py:1008
+#: ../duplicity/commandline.py:1012
 #, python-format
 msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
@@ -730,7 +736,7 @@ msgstr ""
 "\"AA0E73D2\".\n"
 "Mottog \"%s\" istället."
 
-#: ../duplicity/commandline.py:1068
+#: ../duplicity/commandline.py:1072
 #, python-format
 msgid ""
 "Restore destination directory %s already exists.\n"
@@ -739,33 +745,33 @@ msgstr ""
 "Återställnings destinationskatalog %s finns redan.\n"
 "Skriver inte över."
 
-#: ../duplicity/commandline.py:1073
+#: ../duplicity/commandline.py:1077
 #, python-format
 msgid "Verify directory %s does not exist"
 msgstr "Verifiera att katalogen %s inte finns"
 
-#: ../duplicity/commandline.py:1079
+#: ../duplicity/commandline.py:1083
 #, python-format
 msgid "Backup source directory %s does not exist."
 msgstr "Säkerhetskopiakatalogen %s finns inte."
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 #, python-format
 msgid "Command line warning: %s"
 msgstr "Kommandoradvarning: %s"
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 msgid ""
 "Selection options --exclude/--include\n"
 "currently work only when backing up,not restoring."
 msgstr ""
 
-#: ../duplicity/commandline.py:1146
+#: ../duplicity/commandline.py:1150
 #, python-format
 msgid "GPG binary is %s, version %s"
 msgstr "GPG-binär är %s, version %s"
 
-#: ../duplicity/commandline.py:1173
+#: ../duplicity/commandline.py:1177
 #, python-format
 msgid ""
 "Bad URL '%s'.\n"
@@ -776,7 +782,7 @@ msgstr ""
 "Exempel på URL-strängar är \"scp://user@host.net:1234/path\" och\n"
 "\"file:///usr/local\".  Se man-sida för mer information."
 
-#: ../duplicity/commandline.py:1203
+#: ../duplicity/commandline.py:1207
 msgid "Main action: "
 msgstr "Huvudåtgärd: "
 
@@ -899,10 +905,6 @@ msgstr "Inkrementell"
 #: ../duplicity/dup_collections.py:509
 msgid "local"
 msgstr "lokal"
-
-#: ../duplicity/dup_collections.py:511
-msgid "remote"
-msgstr "fjärr"
 
 #: ../duplicity/dup_collections.py:666
 msgid "Collection Status"
@@ -1723,7 +1725,7 @@ msgid "Error initializing file %s"
 msgstr "Fel vid initiering av filen %s"
 
 #: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:458
+#: ../duplicity/selection.py:454
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Problem med att få åtkomst till möjligen låst fil %s"
@@ -1790,14 +1792,6 @@ msgstr "Läser globbing-fillista %s"
 msgid "Error compiling regular expression %s"
 msgstr "Fel vid kompilering av reguljärt uttryck %s"
 
-#: ../duplicity/selection.py:414
-msgid ""
-"Warning: exclude-device-files is not the first selector.\n"
-"This may not be what you intended"
-msgstr ""
-"Varning: exclude-device-files är inte den första selektorn.\n"
-"Detta kanske inte är vad du avsåg"
-
 #: ../duplicity/tempdir.py:160
 #, python-format
 msgid "Using temporary directory %s"
@@ -1851,3 +1845,10 @@ msgstr "IGNORED_ERROR: Warning: ignoring error as requested: %s: %s"
 #, python-format
 msgid "Releasing lockfile %s"
 msgstr ""
+
+#~ msgid ""
+#~ "Warning: exclude-device-files is not the first selector.\n"
+#~ "This may not be what you intended"
+#~ msgstr ""
+#~ "Varning: exclude-device-files är inte den första selektorn.\n"
+#~ "Detta kanske inte är vad du avsåg"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-03 16:36+0000\n"
+"POT-Creation-Date: 2020-03-06 21:26+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Tobias Bannert <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
+"X-Launchpad-Export-Date: 2020-03-07 06:02+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: de\n"
 
@@ -736,24 +736,30 @@ msgstr "Kontokennung"
 msgid "application_key"
 msgstr "Anwendungsschlüssel"
 
+#. TRANSL: remote name for rclone.
+#. Example: rclone://remote:/some_dir
+#: ../duplicity/commandline.py:926 ../duplicity/dup_collections.py:511
+msgid "remote"
+msgstr "Entfernt"
+
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:941
+#: ../duplicity/commandline.py:945
 msgid "Backends and their URL formats:"
 msgstr "Hintergrundprogramme und deren Adressformate:"
 
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:974
+#: ../duplicity/commandline.py:978
 msgid "Commands:"
 msgstr "Befehle:"
 
-#: ../duplicity/commandline.py:999
+#: ../duplicity/commandline.py:1003
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr ""
 "Das angegebene Archivverzeichnis »%s« besteht nicht oder ist kein Verzeichnis"
 
-#: ../duplicity/commandline.py:1008
+#: ../duplicity/commandline.py:1012
 #, python-format
 msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
@@ -763,7 +769,7 @@ msgstr ""
 "Stellen, wie »AA0E73D2« sein.\n"
 "Stattdessen wurde »%s« empfangen."
 
-#: ../duplicity/commandline.py:1068
+#: ../duplicity/commandline.py:1072
 #, python-format
 msgid ""
 "Restore destination directory %s already exists.\n"
@@ -772,22 +778,22 @@ msgstr ""
 "Wiederherstellungszielverzeichnis %s besteht bereits.\n"
 "Wird nicht überschrieben."
 
-#: ../duplicity/commandline.py:1073
+#: ../duplicity/commandline.py:1077
 #, python-format
 msgid "Verify directory %s does not exist"
 msgstr "Prüfverzeichnis %s besteht nicht"
 
-#: ../duplicity/commandline.py:1079
+#: ../duplicity/commandline.py:1083
 #, python-format
 msgid "Backup source directory %s does not exist."
 msgstr "Sicherungsquellverzeichnis %s existiert nicht."
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 #, python-format
 msgid "Command line warning: %s"
 msgstr "Befehlszeilenwarnung: %s"
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 msgid ""
 "Selection options --exclude/--include\n"
 "currently work only when backing up,not restoring."
@@ -795,12 +801,12 @@ msgstr ""
 "Die Optionen --exclude/--include funktionieren\n"
 "im Moment nur bei der Sicherung, nicht bei der Wiederherstellung."
 
-#: ../duplicity/commandline.py:1146
+#: ../duplicity/commandline.py:1150
 #, python-format
 msgid "GPG binary is %s, version %s"
 msgstr "Die GPG Programmdatei ist %s, Version %s"
 
-#: ../duplicity/commandline.py:1173
+#: ../duplicity/commandline.py:1177
 #, python-format
 msgid ""
 "Bad URL '%s'.\n"
@@ -812,7 +818,7 @@ msgstr ""
 "und\n"
 "»file:///usr/local«. Für mehr Informationen bitte die man-Seite aufrufen."
 
-#: ../duplicity/commandline.py:1203
+#: ../duplicity/commandline.py:1207
 msgid "Main action: "
 msgstr "Hauptaufgabe: "
 
@@ -942,10 +948,6 @@ msgstr "Schrittweise"
 #: ../duplicity/dup_collections.py:509
 msgid "local"
 msgstr "Lokal"
-
-#: ../duplicity/dup_collections.py:511
-msgid "remote"
-msgstr "Entfernt"
 
 #: ../duplicity/dup_collections.py:666
 msgid "Collection Status"
@@ -1814,7 +1816,7 @@ msgid "Error initializing file %s"
 msgstr "Fehler beim Initialisieren der Datei %s"
 
 #: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:458
+#: ../duplicity/selection.py:454
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "Fehler beim Zugriff auf möglicherweise gesperrte Datei %s"
@@ -1882,14 +1884,6 @@ msgstr "Ausdruckbasierte Dateiliste wird gelesen %s"
 msgid "Error compiling regular expression %s"
 msgstr "Fehler beim Auswerten des regulären Ausdrucks %s"
 
-#: ../duplicity/selection.py:414
-msgid ""
-"Warning: exclude-device-files is not the first selector.\n"
-"This may not be what you intended"
-msgstr ""
-"Achtung: »exclude-device-files« ist nicht die erste Auswahl.\n"
-"Das ist möglicherweise nicht, was Sie beabsichtigen."
-
 #: ../duplicity/tempdir.py:160
 #, python-format
 msgid "Using temporary directory %s"
@@ -1949,6 +1943,13 @@ msgstr "Sperrdatei »%s« wird freigegeben"
 #, python-format
 #~ msgid "MultiBackend: list from %s: %s"
 #~ msgstr "MehrfachHintergrundprogramm: Liste von %s: %s"
+
+#~ msgid ""
+#~ "Warning: exclude-device-files is not the first selector.\n"
+#~ "This may not be what you intended"
+#~ msgstr ""
+#~ "Achtung: »exclude-device-files« ist nicht die erste Auswahl.\n"
+#~ "Das ist möglicherweise nicht, was Sie beabsichtigen."
 
 #, python-format
 #~ msgid ""

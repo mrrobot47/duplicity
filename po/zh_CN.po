@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
-"POT-Creation-Date: 2020-03-03 16:36+0000\n"
+"POT-Creation-Date: 2020-03-06 21:26+0000\n"
 "PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: Careone <zzbusagain@yahoo.com.cn>\n"
 "Language-Team: Simplified Chinese <zh_CN@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2020-03-04 06:27+0000\n"
+"X-Launchpad-Export-Date: 2020-03-07 06:03+0000\n"
 "X-Generator: Launchpad (build e0878392dc799b267dea80578fa65500a5d74155)\n"
 "Language: \n"
 
@@ -694,23 +694,29 @@ msgstr "账户ID"
 msgid "application_key"
 msgstr "Backblaze_B2的application_key"
 
+#. TRANSL: remote name for rclone.
+#. Example: rclone://remote:/some_dir
+#: ../duplicity/commandline.py:926 ../duplicity/dup_collections.py:511
+msgid "remote"
+msgstr "远程"
+
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:941
+#: ../duplicity/commandline.py:945
 msgid "Backends and their URL formats:"
 msgstr "后台及其 URL 格式："
 
 #. TRANSL: Header in usage help
-#: ../duplicity/commandline.py:974
+#: ../duplicity/commandline.py:978
 msgid "Commands:"
 msgstr "命令："
 
-#: ../duplicity/commandline.py:999
+#: ../duplicity/commandline.py:1003
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
 msgstr "指定的存档目录“%s”不存在，或者不是一个文件夹。"
 
-#: ../duplicity/commandline.py:1008
+#: ../duplicity/commandline.py:1012
 #, python-format
 msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
@@ -719,7 +725,7 @@ msgstr ""
 "签名密钥应当为形如\"AA0E73D2\"的 8, 16 或 40 位的 16 进制字符串。\n"
 "然而接收的字符串为“%s”。"
 
-#: ../duplicity/commandline.py:1068
+#: ../duplicity/commandline.py:1072
 #, python-format
 msgid ""
 "Restore destination directory %s already exists.\n"
@@ -728,22 +734,22 @@ msgstr ""
 "回复目标文件夹 %s 已存在。\n"
 "不进行覆盖。"
 
-#: ../duplicity/commandline.py:1073
+#: ../duplicity/commandline.py:1077
 #, python-format
 msgid "Verify directory %s does not exist"
 msgstr "校验目录 %s 不存在。"
 
-#: ../duplicity/commandline.py:1079
+#: ../duplicity/commandline.py:1083
 #, python-format
 msgid "Backup source directory %s does not exist."
 msgstr "备份源目录 %s 不存在。"
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 #, python-format
 msgid "Command line warning: %s"
 msgstr "命令行警告：%s"
 
-#: ../duplicity/commandline.py:1110
+#: ../duplicity/commandline.py:1114
 msgid ""
 "Selection options --exclude/--include\n"
 "currently work only when backing up,not restoring."
@@ -751,12 +757,12 @@ msgstr ""
 "选择参数 --exclude/--include\n"
 "仅适用于备份操作，不适用于还原操作。"
 
-#: ../duplicity/commandline.py:1146
+#: ../duplicity/commandline.py:1150
 #, python-format
 msgid "GPG binary is %s, version %s"
 msgstr ""
 
-#: ../duplicity/commandline.py:1173
+#: ../duplicity/commandline.py:1177
 #, python-format
 msgid ""
 "Bad URL '%s'.\n"
@@ -767,7 +773,7 @@ msgstr ""
 "有效 URL 形如 “scp://user@host.net:1234/path” 和\n"
 "“file:///usr/local”，更多详情请查阅 man 手册。"
 
-#: ../duplicity/commandline.py:1203
+#: ../duplicity/commandline.py:1207
 msgid "Main action: "
 msgstr "主要操作： "
 
@@ -890,10 +896,6 @@ msgstr "增量"
 #: ../duplicity/dup_collections.py:509
 msgid "local"
 msgstr "本地"
-
-#: ../duplicity/dup_collections.py:511
-msgid "remote"
-msgstr "远程"
 
 #: ../duplicity/dup_collections.py:666
 msgid "Collection Status"
@@ -1671,7 +1673,7 @@ msgid "Error initializing file %s"
 msgstr "初始化文件 %s 时出错"
 
 #: ../duplicity/selection.py:129 ../duplicity/selection.py:154
-#: ../duplicity/selection.py:458
+#: ../duplicity/selection.py:454
 #, python-format
 msgid "Error accessing possibly locked file %s"
 msgstr "访问可能被锁定的文件 %s 时出错"
@@ -1738,14 +1740,6 @@ msgstr "读取通配符文件列表 %s"
 msgid "Error compiling regular expression %s"
 msgstr "解析正则表达式 %s 时出错"
 
-#: ../duplicity/selection.py:414
-msgid ""
-"Warning: exclude-device-files is not the first selector.\n"
-"This may not be what you intended"
-msgstr ""
-"警告：exclude-device-files 不是第一个选择器。\n"
-"这可能不是您的意图"
-
 #: ../duplicity/tempdir.py:160
 #, python-format
 msgid "Using temporary directory %s"
@@ -1795,6 +1789,13 @@ msgstr "忽略的错误：警告：根据设置忽略错误：%s: %s"
 #, python-format
 msgid "Releasing lockfile %s"
 msgstr "释放锁文件 %s"
+
+#~ msgid ""
+#~ "Warning: exclude-device-files is not the first selector.\n"
+#~ "This may not be what you intended"
+#~ msgstr ""
+#~ "警告：exclude-device-files 不是第一个选择器。\n"
+#~ "这可能不是您的意图"
 
 #, python-format
 #~ msgid "MultiBackend: list from %s: %s"
