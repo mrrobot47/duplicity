@@ -18,6 +18,8 @@ New in v0.8.12 (2020/03/??)
     two slots the order does not matter.
 * Fixed bug #1769267 - [enhancement] please consider
   using rclone as backend.
+* Cleaned up some setup issues where the man pages
+  and snapcraft.yaml were not getting versioned.
 
 
 New in v0.8.11 (2020/02/24)

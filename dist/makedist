@@ -42,6 +42,25 @@ revno = bzr.communicate()[0].split()[0].strip()
 Version = __version__ + u'.' + revno
 
 
+def VersionedCopy(source, dest):
+    u"""
+    Copy source to dest, substituting $version with version
+    $reldate with today's date, i.e. December 28, 2008.
+    """
+    fin = open(source, u"rt")
+    inbuf = fin.read()
+    assert not fin.close()
+
+    (outbuf, cnt) = re.subn(u"\$version", Version, inbuf)
+
+    inbuf = outbuf
+    (outbuf, cnt) = re.subn(u"\$reldate", Reldate, inbuf)
+
+    fout = open(dest, u"wt")
+    fout.write(outbuf)
+    assert not fout.close()
+
+
 def MakeTar():
     u"""Create duplicity tar file"""
     tardir = u"duplicity-%s" % Version
@@ -53,23 +72,23 @@ def MakeTar():
 
     # tarball contains the entire versioned release
     os.mkdir(tardir)
-    testfiles = list()
+    sourcefiles = list()
 
     # use bzr to get files list
-    if len(testfiles) == 0:
+    if len(sourcefiles) == 0:
         bzr = Popen([u"bzr", u"ls", u"-RV", u"."], stdout=PIPE, universal_newlines=True)
-        testfiles = bzr.communicate()[0].split()
+        sourcefiles = bzr.communicate()[0].split()
 
     # or use git to get files list
-    if len(testfiles) == 0:
+    if len(sourcefiles) == 0:
         git = Popen([u"git", u"ls-files"], stdout=PIPE, universal_newlines=True)
-        testfiles = git.communicate()[0].split()
+        sourcefiles = git.communicate()[0].split()
 
-    assert len(testfiles) > 0, u"No files list returned from any source."
+    assert len(sourcefiles) > 0, u"No files list returned from any source."
 
-    testfiles = [fn.strip() for fn in testfiles]
+    sourcefiles = [fn.strip() for fn in sourcefiles]
 
-    for filename in testfiles:
+    for filename in sourcefiles:
         pname, fname = os.path.split(filename)
         pathname = os.path.join(tardir, pname)
         if not os.path.exists(pathname):
@@ -92,6 +111,16 @@ def MakeTar():
     os.chmod(os.path.join(tardir, u"bin", u"duplicity"), 0o755)
     os.chmod(os.path.join(tardir, u"bin", u"rdiffdir"), 0o755)
 
+    # recopy the unversioned files and add correct version
+    VersionedCopy(os.path.join(u"bin", u"duplicity.1"),
+                  os.path.join(tardir, u"bin", u"duplicity.1"))
+    VersionedCopy(os.path.join(u"bin", u"rdiffdir.1"),
+                  os.path.join(tardir, u"bin", u"rdiffdir.1"))
+    VersionedCopy(os.path.join(u"snap", u"snapcraft.yaml"),
+                  os.path.join(tardir, u"snap", u"snapcraft.yaml"))
+    VersionedCopy(u"setup.py",
+                  os.path.join(tardir, u"setup.py"))
+
     # set COPYFILE_DISABLE to disable appledouble file creation
     os.environ[u'COPYFILE_DISABLE'] = u'true'
 
@@ -109,4 +138,5 @@ if __name__ == u"__main__" and u'__no_execute__' not in globals():
     if len(sys.argv) != 1:
         print(u"Syntax: makedist")
         sys.exit(1)
+    Reldate = time.strftime(u"%B %d, %Y", time.localtime())
     Main()

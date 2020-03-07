@@ -1,5 +1,5 @@
 name: duplicity
-version: $VERSION
+version: $version
 summary: Efficient, encrypted backup to local or remote hosts
 description: |
   Duplicity backs directories by producing encrypted tar-format volumes and uploading

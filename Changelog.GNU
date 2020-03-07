@@ -1,3 +1,8 @@
+2020-03-07  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Cleaned up some setup issues where the man pages
+      and snapcraft.yaml were not getting versioned.
+
 2020-03-06  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1755955 - best order is unclear,

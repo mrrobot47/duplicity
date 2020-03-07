@@ -26,12 +26,6 @@ if [ "$#" -ne 0 ]; then
     exit 2
 fi
 
-if [ `uname` == 'Darwin' ]; then
-    SED=gsed
-else
-    SED=sed
-fi
-
 BASE=`python3 -c "from duplicity import __version__; print(__version__, end='')"`
 REVNO=`bzr revno`
 MYVERSION=${BASE}.${REVNO}
@@ -46,8 +40,7 @@ mkdir -p build
 tar xf duplicity-${MYVERSION}.tar.gz -C build
 cd build/duplicity-${MYVERSION}
 
-# set version in build copy of snapcraft.yaml
-${SED} -i s/\$VERSION/${MYVERSION}/g snap/snapcraft.yaml
+# print version in build copy of snapcraft.yaml
 head -2 snap/snapcraft.yaml | tail -1
 
 # make sure we're logged in
