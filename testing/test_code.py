@@ -78,21 +78,9 @@ class CodeTest(DuplicityTestCase):
         u"""Pylint test (requires pylint to be installed to pass)"""
         self.run_checker([
             u"pylint",
-            u"-E",
-            u"--msg-template={msg_id}: {line}: {msg}",
-            u"--disable=E0203",  # Access to member before its definition line
-            u"--disable=E0602",  # Undefined variable
-            u"--disable=E0611",  # No name in module
-            u"--disable=E1101",  # Has no member
-            u"--disable=E1102",  # is not callable (_)
-            u"--ignore=_librsync.so",
-            u"--msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'",
             os.path.join(_top_dir, u'duplicity'),
             os.path.join(_top_dir, u'bin/duplicity'),
-            os.path.join(_top_dir, u'bin/rdiffdir')],
-            # Allow usage errors, older versions don't have
-            # --msg-template
-            [0, 32])
+            os.path.join(_top_dir, u'bin/rdiffdir')])
 
     @skipCodeTest
     def test_pep8(self):

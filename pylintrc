@@ -1,0 +1,11 @@
+[pylint]
+jobs=4
+errors-only=yes
+ignore=_librsync.so
+msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'
+
+disable=access-member-before-definition,
+        undefined-variable,
+        no-name-in-module,
+        no-member,
+        not-callable
