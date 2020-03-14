@@ -144,17 +144,17 @@ Exception: %s""" % str(e))
             log.FatalError(u"Container '%s' exists but its storage policy is '%s' not '%s'."
                            % (self.container, container_metadata[policy_header.lower()], policy))
 
-    def _error_code(self, operation, e):
+    def _error_code(self, operation, e):  # pylint: disable: unused-argument
         if isinstance(e, self.resp_exc):
             if e.http_status == 404:
                 return log.ErrorCode.backend_not_found
 
     def _put(self, source_path, remote_filename):
-        self.conn.put_object(self.container, self.prefix + remote_filename,
+        self.conn.put_object(self.container, self.prefix + util.fsdecode(remote_filename),
                              open(source_path.name))
 
     def _get(self, remote_filename, local_path):
-        body = self.preprocess_download(remote_filename, 60)
+        body = self.preprocess_download(util.fsdecode(remote_filename), 60)
         if body:
             with open(local_path.name, u'wb') as f:
                 for chunk in body:
@@ -163,13 +163,13 @@ Exception: %s""" % str(e))
     def _list(self):
         headers, objs = self.conn.get_container(self.container, full_listing=True, path=self.prefix)
         # removes prefix from return values. should check for the prefix ?
-        return [o[u'name'][len(self.prefix):] for o in objs]
+        return [util.fsencode(o[u'name'][len(self.prefix):]) for o in objs]
 
     def _delete(self, filename):
-        self.conn.delete_object(self.container, self.prefix + filename)
+        self.conn.delete_object(self.container, self.prefix + util.fsdecode(filename))
 
     def _query(self, filename):
-        sobject = self.conn.head_object(self.container, self.prefix + filename)
+        sobject = self.conn.head_object(self.container, self.prefix + util.fsdecode(filename))
         return {u'size': int(sobject[u'content-length'])}
 
     def preprocess_download(self, remote_filename, retry_period, wait=True):

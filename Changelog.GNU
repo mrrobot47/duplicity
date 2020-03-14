@@ -1,3 +1,8 @@
+2020-03-14  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1867435 - TypeError: must be str,
+      not bytes using PCA backend
+
 2020-03-07  Kenneth Loafman  <kenneth@loafman.com>
 
     * Cleaned up some setup issues where the man pages
