@@ -2,6 +2,9 @@
 
     * Fixed bug #1867435 - TypeError: must be str,
       not bytes using PCA backend
+    * Fixed bug #1867444 - UnicodeDecodeError: 'ascii'
+      codec can't decode byte 0x85 in position 0:
+      ordinal not in range(128) using PCA backend
 
 2020-03-07  Kenneth Loafman  <kenneth@loafman.com>
 
