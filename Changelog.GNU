@@ -1,3 +1,9 @@
+2020-03-15  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1867468 - UnboundLocalError (local
+      variable 'ch_err' referenced before assignment)
+      in ssh_paramiko_backend.py
+
 2020-03-14  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1867435 - TypeError: must be str,

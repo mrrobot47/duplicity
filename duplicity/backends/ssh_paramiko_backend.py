@@ -33,7 +33,6 @@ import getpass
 import logging
 import os
 import re
-import string
 import sys
 import warnings
 
@@ -41,7 +40,7 @@ from binascii import hexlify
 
 import duplicity.backend
 from duplicity import globals
-from duplicity import log
+from duplicity import util
 from duplicity.errors import BackendException
 
 global paramiko
@@ -405,7 +404,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
         except Exception as e:
             if not ignoreexitcode:
                 raise BackendException(u"%sfailed: %s \n %s" % (
-                    errorprefix, ch_err.read(-1), e))
+                    errorprefix, cmd, uti))
 
     def gethostconfig(self, file, host):
         file = os.path.expanduser(file)
