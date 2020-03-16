@@ -28,6 +28,9 @@ New in v0.8.12 (2020/03/??)
 * Fixed bug #1867468 - UnboundLocalError (local
   variable 'ch_err' referenced before assignment)
   in ssh_paramiko_backend.py
+* Fixed bug #1867529 - UnicodeDecodeError: 'ascii'
+  codec can't decode byte 0x85 in position 0:
+  ordinal not in range(128) with PCA
 
 
 New in v0.8.11 (2020/02/24)

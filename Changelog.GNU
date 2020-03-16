@@ -1,5 +1,11 @@
 2020-03-15  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Fixed bug #1867529 - UnicodeDecodeError: 'ascii'
+      codec can't decode byte 0x85 in position 0:
+      ordinal not in range(128) with PCA
+
+2020-03-15  Kenneth Loafman  <kenneth@loafman.com>
+
     * Fixed bug #1867468 - UnboundLocalError (local
       variable 'ch_err' referenced before assignment)
       in ssh_paramiko_backend.py
