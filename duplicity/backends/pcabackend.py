@@ -151,7 +151,7 @@ Exception: %s""" % str(e))
 
     def _put(self, source_path, remote_filename):
         self.conn.put_object(self.container, self.prefix + util.fsdecode(remote_filename),
-                             open(util.fsdecode(source_path.name, u'rb')))
+                             open(util.fsdecode(source_path.name), u'rb'))
 
     def _get(self, remote_filename, local_path):
         body = self.preprocess_download(util.fsdecode(remote_filename), 60)
