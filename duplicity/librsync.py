@@ -26,13 +26,14 @@ which is written in C.  The goal was to use C as little as possible...
 
 """
 
-from builtins import str
 from builtins import object
+from builtins import str
+
+import array
 import os
 import sys
+
 from . import _librsync
-import types
-import array
 
 if os.environ.get(u'READTHEDOCS') == u'True':
     import mock  # pylint: disable=import-error

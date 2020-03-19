@@ -26,7 +26,7 @@ from builtins import range
 from builtins import object
 import re
 from duplicity import dup_time
-from duplicity import globals
+from duplicity import config
 import sys
 
 full_vol_re = None
@@ -61,47 +61,47 @@ def prepare_regex(force=False):
     if full_vol_re and not force:
         return
 
-    full_vol_re = re.compile(b"^" + globals.file_prefix + globals.file_prefix_archive + b"duplicity-full"
+    full_vol_re = re.compile(b"^" + config.file_prefix + config.file_prefix_archive + b"duplicity-full"
                              b"\\.(?P<time>.*?)"
                              b"\\.vol(?P<num>[0-9]+)"
                              b"\\.difftar"
                              b"(?P<partial>(\\.part))?"
                              b"($|\\.)")
 
-    full_vol_re_short = re.compile(b"^" + globals.file_prefix + globals.file_prefix_archive + b"df"
+    full_vol_re_short = re.compile(b"^" + config.file_prefix + config.file_prefix_archive + b"df"
                                    b"\\.(?P<time>[0-9a-z]+?)"
                                    b"\\.(?P<num>[0-9a-z]+)"
                                    b"\\.dt"
                                    b"(?P<partial>(\\.p))?"
                                    b"($|\\.)")
 
-    full_manifest_re = re.compile(b"^" + globals.file_prefix + globals.file_prefix_manifest + b"duplicity-full"
+    full_manifest_re = re.compile(b"^" + config.file_prefix + config.file_prefix_manifest + b"duplicity-full"
                                   b"\\.(?P<time>.*?)"
                                   b"\\.manifest"
                                   b"(?P<partial>(\\.part))?"
                                   b"($|\\.)")
 
-    full_manifest_re_short = re.compile(b"^" + globals.file_prefix + globals.file_prefix_manifest + b"df"
+    full_manifest_re_short = re.compile(b"^" + config.file_prefix + config.file_prefix_manifest + b"df"
                                         b"\\.(?P<time>[0-9a-z]+?)"
                                         b"\\.m"
                                         b"(?P<partial>(\\.p))?"
                                         b"($|\\.)")
 
-    inc_vol_re = re.compile(b"^" + globals.file_prefix + globals.file_prefix_archive + b"duplicity-inc"
+    inc_vol_re = re.compile(b"^" + config.file_prefix + config.file_prefix_archive + b"duplicity-inc"
                             b"\\.(?P<start_time>.*?)"
                             b"\\.to\\.(?P<end_time>.*?)"
                             b"\\.vol(?P<num>[0-9]+)"
                             b"\\.difftar"
                             b"($|\\.)")
 
-    inc_vol_re_short = re.compile(b"^" + globals.file_prefix + globals.file_prefix_archive + b"di"
+    inc_vol_re_short = re.compile(b"^" + config.file_prefix + config.file_prefix_archive + b"di"
                                   b"\\.(?P<start_time>[0-9a-z]+?)"
                                   b"\\.(?P<end_time>[0-9a-z]+?)"
                                   b"\\.(?P<num>[0-9a-z]+)"
                                   b"\\.dt"
                                   b"($|\\.)")
 
-    inc_manifest_re = re.compile(b"^" + globals.file_prefix + globals.file_prefix_manifest + b"duplicity-inc"
+    inc_manifest_re = re.compile(b"^" + config.file_prefix + config.file_prefix_manifest + b"duplicity-inc"
                                  b"\\.(?P<start_time>.*?)"
                                  b"\\.to"
                                  b"\\.(?P<end_time>.*?)"
@@ -109,26 +109,26 @@ def prepare_regex(force=False):
                                  b"(?P<partial>(\\.part))?"
                                  b"(\\.|$)")
 
-    inc_manifest_re_short = re.compile(b"^" + globals.file_prefix + globals.file_prefix_manifest + b"di"
+    inc_manifest_re_short = re.compile(b"^" + config.file_prefix + config.file_prefix_manifest + b"di"
                                        b"\\.(?P<start_time>[0-9a-z]+?)"
                                        b"\\.(?P<end_time>[0-9a-z]+?)"
                                        b"\\.m"
                                        b"(?P<partial>(\\.p))?"
                                        b"(\\.|$)")
 
-    full_sig_re = re.compile(b"^" + globals.file_prefix + globals.file_prefix_signature + b"duplicity-full-signatures"
+    full_sig_re = re.compile(b"^" + config.file_prefix + config.file_prefix_signature + b"duplicity-full-signatures"
                              b"\\.(?P<time>.*?)"
                              b"\\.sigtar"
                              b"(?P<partial>(\\.part))?"
                              b"(\\.|$)")
 
-    full_sig_re_short = re.compile(b"^" + globals.file_prefix + globals.file_prefix_signature + b"dfs"
+    full_sig_re_short = re.compile(b"^" + config.file_prefix + config.file_prefix_signature + b"dfs"
                                    b"\\.(?P<time>[0-9a-z]+?)"
                                    b"\\.st"
                                    b"(?P<partial>(\\.p))?"
                                    b"(\\.|$)")
 
-    new_sig_re = re.compile(b"^" + globals.file_prefix + globals.file_prefix_signature + b"duplicity-new-signatures"
+    new_sig_re = re.compile(b"^" + config.file_prefix + config.file_prefix_signature + b"duplicity-new-signatures"
                             b"\\.(?P<start_time>.*?)"
                             b"\\.to"
                             b"\\.(?P<end_time>.*?)"
@@ -136,7 +136,7 @@ def prepare_regex(force=False):
                             b"(?P<partial>(\\.part))?"
                             b"(\\.|$)")
 
-    new_sig_re_short = re.compile(b"^" + globals.file_prefix + globals.file_prefix_signature + b"dns"
+    new_sig_re_short = re.compile(b"^" + config.file_prefix + config.file_prefix_signature + b"dns"
                                   b"\\.(?P<start_time>[0-9a-z]+?)"
                                   b"\\.(?P<end_time>[0-9a-z]+?)"
                                   b"\\.st"
@@ -189,12 +189,12 @@ def get_suffix(encrypted, gzipped):
     if encrypted:
         gzipped = False
     if encrypted:
-        if globals.short_filenames:
+        if config.short_filenames:
             suffix = b'.g'
         else:
             suffix = b".gpg"
     elif gzipped:
-        if globals.short_filenames:
+        if config.short_filenames:
             suffix = b".z"
         else:
             suffix = b'.gz'
@@ -203,7 +203,7 @@ def get_suffix(encrypted, gzipped):
     return suffix
 
 
-def get(type, volume_number=None, manifest=False,
+def get(type, volume_number=None, manifest=False,  # pylint: disable=redefined-builtin
         encrypted=False, gzipped=False, partial=False):
     u"""
     Return duplicity filename of specified type
@@ -217,7 +217,7 @@ def get(type, volume_number=None, manifest=False,
         gzipped = False
     suffix = get_suffix(encrypted, gzipped)
     part_string = b""
-    if globals.short_filenames:
+    if config.short_filenames:
         if partial:
             part_string = b".p"
     else:
@@ -228,23 +228,23 @@ def get(type, volume_number=None, manifest=False,
         assert not volume_number and not manifest
         assert not (volume_number and part_string)
         if type == u"full-sig":
-            if globals.short_filenames:
-                return (globals.file_prefix + globals.file_prefix_signature +
+            if config.short_filenames:
+                return (config.file_prefix + config.file_prefix_signature +
                         b"dfs.%s.st%s%s" %
                         (to_base36(dup_time.curtime), part_string, suffix))
             else:
-                return (globals.file_prefix + globals.file_prefix_signature +
+                return (config.file_prefix + config.file_prefix_signature +
                         b"duplicity-full-signatures.%s.sigtar%s%s" %
                         (dup_time.curtimestr.encode(), part_string, suffix))
         elif type == u"new-sig":
-            if globals.short_filenames:
-                return (globals.file_prefix + globals.file_prefix_signature +
+            if config.short_filenames:
+                return (config.file_prefix + config.file_prefix_signature +
                         b"dns.%s.%s.st%s%s" %
                         (to_base36(dup_time.prevtime),
                          to_base36(dup_time.curtime),
                          part_string, suffix))
             else:
-                return (globals.file_prefix + globals.file_prefix_signature +
+                return (config.file_prefix + config.file_prefix_signature +
                         b"duplicity-new-signatures.%s.to.%s.sigtar%s%s" %
                         (dup_time.prevtimestr.encode(), dup_time.curtimestr.encode(),
                          part_string, suffix))
@@ -252,30 +252,30 @@ def get(type, volume_number=None, manifest=False,
         assert volume_number or manifest
         assert not (volume_number and manifest)
 
-        prefix = globals.file_prefix
+        prefix = config.file_prefix
 
         if volume_number:
-            if globals.short_filenames:
+            if config.short_filenames:
                 vol_string = b"%s.dt" % to_base36(volume_number)
             else:
                 vol_string = b"vol%d.difftar" % volume_number
-            prefix += globals.file_prefix_archive
+            prefix += config.file_prefix_archive
         else:
-            if globals.short_filenames:
+            if config.short_filenames:
                 vol_string = b"m"
             else:
                 vol_string = b"manifest"
-            prefix += globals.file_prefix_manifest
+            prefix += config.file_prefix_manifest
 
         if type == u"full":
-            if globals.short_filenames:
+            if config.short_filenames:
                 return (b"%sdf.%s.%s%s%s" % (prefix, to_base36(dup_time.curtime),
                                              vol_string, part_string, suffix))
             else:
                 return (b"%sduplicity-full.%s.%s%s%s" % (prefix, dup_time.curtimestr.encode(),
                                                          vol_string, part_string, suffix))
         elif type == u"inc":
-            if globals.short_filenames:
+            if config.short_filenames:
                 return (b"%sdi.%s.%s.%s%s%s" % (prefix, to_base36(dup_time.prevtime),
                                                 to_base36(dup_time.curtime),
                                                 vol_string, part_string, suffix))
@@ -324,7 +324,7 @@ def parse(filename):
         short = True
         m1 = full_vol_re_short.search(filename)
         m2 = full_manifest_re_short.search(filename)
-        if not m1 and not m2 and not globals.short_filenames:
+        if not m1 and not m2 and not config.short_filenames:
             short = False
             m1 = full_vol_re.search(filename)
             m2 = full_manifest_re.search(filename)
@@ -347,7 +347,7 @@ def parse(filename):
         short = True
         m1 = inc_vol_re_short.search(filename)
         m2 = inc_manifest_re_short.search(filename)
-        if not m1 and not m2 and not globals.short_filenames:
+        if not m1 and not m2 and not config.short_filenames:
             short = False
             m1 = inc_vol_re.search(filename)
             m2 = inc_manifest_re.search(filename)
@@ -370,7 +370,7 @@ def parse(filename):
         prepare_regex()
         short = True
         m = full_sig_re_short.search(filename)
-        if not m and not globals.short_filenames:
+        if not m and not config.short_filenames:
             short = False
             m = full_sig_re.search(filename)
         if m:
@@ -383,7 +383,7 @@ def parse(filename):
 
         short = True
         m = new_sig_re_short.search(filename)
-        if not m and not globals.short_filenames:
+        if not m and not config.short_filenames:
             short = False
             m = new_sig_re.search(filename)
         if m:
@@ -399,13 +399,13 @@ def parse(filename):
         Set encryption and compression flags in ParseResults pr
         """
         if (filename.endswith(b'.z') or
-                not globals.short_filenames and filename.endswith(b'gz')):
+                not config.short_filenames and filename.endswith(b'gz')):
             pr.compressed = 1
         else:
             pr.compressed = None
 
         if (filename.endswith(b'.g') or
-                not globals.short_filenames and filename.endswith(b'.gpg')):
+                not config.short_filenames and filename.endswith(b'.gpg')):
             pr.encrypted = 1
         else:
             pr.encrypted = None
@@ -425,7 +425,7 @@ class ParseResults(object):
     u"""
     Hold information taken from a duplicity filename
     """
-    def __init__(self, type, manifest=None, volume_number=None,
+    def __init__(self, type, manifest=None, volume_number=None,  # pylint: disable=redefined-builtin
                  time=None, start_time=None, end_time=None,
                  encrypted=None, compressed=None, partial=False):
 

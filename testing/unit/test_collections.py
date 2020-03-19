@@ -24,19 +24,17 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
-import os
-import sys
-import random
 import pytest
+import random
 import unittest
 
-from duplicity import dup_collections
-from duplicity import backend
-from duplicity import globals
-from duplicity import path
-from duplicity import gpg
-from duplicity import dup_time
 from . import UnitTestCase
+from duplicity import backend
+from duplicity import config
+from duplicity import dup_collections
+from duplicity import dup_time
+from duplicity import gpg
+from duplicity import path
 
 filename_list1 = [b"duplicity-full.2002-08-17T16:17:01-07:00.manifest.gpg",
                   b"duplicity-full.2002-08-17T16:17:01-07:00.vol1.difftar.gpg",
@@ -103,8 +101,8 @@ class CollectionTest(UnitTestCase):
     def test_backup_chains(self):
         u"""Test basic backup chain construction"""
         random.shuffle(filename_list1)
-        cs = dup_collections.CollectionsStatus(None, globals.archive_dir_path, u"full")
-        chains, orphaned, incomplete = cs.get_backup_chains(filename_list1)  # @UnusedVariable
+        cs = dup_collections.CollectionsStatus(None, config.archive_dir_path, u"full")
+        chains, orphaned, incomplete = cs.get_backup_chains(filename_list1)          
         if len(chains) != 1 or len(orphaned) != 0:
             print(chains)
             print(orphaned)
@@ -124,26 +122,26 @@ class CollectionTest(UnitTestCase):
             assert cs.matched_chain_pair[0].end_time == 1029826800
             assert len(cs.all_backup_chains) == 1, cs.all_backup_chains
 
-        cs = dup_collections.CollectionsStatus(self.real_backend, globals.archive_dir_path, u"full").set_values()
+        cs = dup_collections.CollectionsStatus(self.real_backend, config.archive_dir_path, u"full").set_values()
         check_cs(cs)
         assert cs.matched_chain_pair[0].islocal()
 
     def test_sig_chain(self):
         u"""Test a single signature chain"""
-        chain = dup_collections.SignatureChain(1, globals.archive_dir_path)
+        chain = dup_collections.SignatureChain(1, config.archive_dir_path)
         for filename in local_sigchain_filename_list:
             assert chain.add_filename(filename)
         assert not chain.add_filename(b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg")
 
     def test_sig_chains(self):
         u"""Test making signature chains from filename list"""
-        cs = dup_collections.CollectionsStatus(None, globals.archive_dir_path, u"full")
+        cs = dup_collections.CollectionsStatus(None, config.archive_dir_path, u"full")
         chains, orphaned_paths = cs.get_signature_chains(local=1)
         self.sig_chains_helper(chains, orphaned_paths)
 
     def test_sig_chains2(self):
         u"""Test making signature chains from filename list on backend"""
-        cs = dup_collections.CollectionsStatus(self.archive_dir_backend, globals.archive_dir_path, u"full")
+        cs = dup_collections.CollectionsStatus(self.archive_dir_backend, config.archive_dir_path, u"full")
         chains, orphaned_paths = cs.get_signature_chains(local=None)
         self.sig_chains_helper(chains, orphaned_paths)
 
@@ -159,7 +157,7 @@ class CollectionTest(UnitTestCase):
     def sigchain_fileobj_get(self, local):
         u"""Return chain, local if local is true with filenames added"""
         if local:
-            chain = dup_collections.SignatureChain(1, globals.archive_dir_path)
+            chain = dup_collections.SignatureChain(1, config.archive_dir_path)
             for filename in local_sigchain_filename_list:
                 assert chain.add_filename(filename)
         else:
@@ -201,7 +199,7 @@ class CollectionTest(UnitTestCase):
             p = self.output_dir.append(filename)
             p.touch()
 
-        cs = dup_collections.CollectionsStatus(self.output_dir_backend, globals.archive_dir_path, u"full")
+        cs = dup_collections.CollectionsStatus(self.output_dir_backend, config.archive_dir_path, u"full")
         cs.set_values()
         return cs
 
@@ -217,7 +215,7 @@ class CollectionTest(UnitTestCase):
                       b"duplicity-full.2002-08-15T01:01:01-07:00.vol1.difftar.gpg",
                       b"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.manifest.gpg",
                       b"duplicity-inc.2000-08-17T16:17:01-07:00.to.2000-08-18T00:04:30-07:00.vol1.difftar.gpg"]
-        local_received_list, remote_received_list = cs.get_extraneous()  # @UnusedVariable
+        local_received_list, remote_received_list = cs.get_extraneous()          
         errors = []
         for filename in remote_received_list:
             if filename not in right_list:

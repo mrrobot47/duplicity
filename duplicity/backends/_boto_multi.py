@@ -34,10 +34,10 @@ import threading
 import time
 import traceback
 
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import progress
-from duplicity.errors import *  # @UnusedWildImport
+from duplicity.errors import *  # pylint: disable=unused-wildcard-import
 from duplicity.filechunkio import FileChunkIO
 
 from ._boto_single import BotoBackend as BotoSingleBackend
@@ -101,7 +101,7 @@ class BotoBackend(BotoSingleBackend):
         self._setup_pool()
 
     def _setup_pool(self):
-        number_of_procs = globals.s3_multipart_max_procs
+        number_of_procs = config.s3_multipart_max_procs
         if not number_of_procs:
             number_of_procs = psutil.cpu_count(logical=False)
 
@@ -124,16 +124,16 @@ class BotoBackend(BotoSingleBackend):
     def upload(self, filename, key, headers=None):
         import boto  # pylint: disable=import-error
 
-        chunk_size = globals.s3_multipart_chunk_size
+        chunk_size = config.s3_multipart_chunk_size
 
         # Check minimum chunk size for S3
-        if chunk_size < globals.s3_multipart_minimum_chunk_size:
+        if chunk_size < config.s3_multipart_minimum_chunk_size:
             log.Warn(u"Minimum chunk size is %d, but %d specified." % (
-                globals.s3_multipart_minimum_chunk_size, chunk_size))
-            chunk_size = globals.s3_multipart_minimum_chunk_size
+                config.s3_multipart_minimum_chunk_size, chunk_size))
+            chunk_size = config.s3_multipart_minimum_chunk_size
 
         # Decide in how many chunks to upload
-        bytes = os.path.getsize(filename)
+        bytes = os.path.getsize(filename)  # pylint: disable=redefined-builtin
         if bytes < chunk_size:
             chunks = 1
         else:
@@ -143,12 +143,12 @@ class BotoBackend(BotoSingleBackend):
 
         log.Debug(u"Uploading %d bytes in %d chunks" % (bytes, chunks))
 
-        mp = self.bucket.initiate_multipart_upload(key.key, headers, encrypt_key=globals.s3_use_sse)
+        mp = self.bucket.initiate_multipart_upload(key.key, headers, encrypt_key=config.s3_use_sse)
 
         # Initiate a queue to share progress data between the pool
         # workers and a consumer thread, that will collect and report
         queue = None
-        if globals.progress:
+        if config.progress:
             manager = multiprocessing.Manager()
             queue = manager.Queue()
             consumer = ConsumerThread(queue, bytes)
@@ -157,14 +157,14 @@ class BotoBackend(BotoSingleBackend):
         for n in range(chunks):
             storage_uri = boto.storage_uri(self.boto_uri_str)
             params = [self.scheme, self.parsed_url, storage_uri, self.bucket_name,
-                      mp.id, filename, n, chunk_size, globals.num_retries,
+                      mp.id, filename, n, chunk_size, config.num_retries,
                       queue]
             tasks.append(self._pool.apply_async(multipart_upload_worker, params))
 
         log.Debug(u"Waiting for the pool to finish processing %s tasks" % len(tasks))
         while tasks:
             try:
-                tasks[0].wait(timeout=globals.s3_multipart_max_timeout)
+                tasks[0].wait(timeout=config.s3_multipart_max_timeout)
                 if tasks[0].ready():
                     if tasks[0].successful():
                         del tasks[0]
@@ -183,7 +183,7 @@ class BotoBackend(BotoSingleBackend):
         log.Debug(u"Done waiting for the pool to finish processing")
 
         # Terminate the consumer thread, if any
-        if globals.progress:
+        if config.progress:
             consumer.finish = True
             consumer.join()
 
@@ -195,7 +195,7 @@ class BotoBackend(BotoSingleBackend):
 
 
 def multipart_upload_worker(scheme, parsed_url, storage_uri, bucket_name, multipart_id,
-                            filename, offset, bytes, num_retries, queue):
+                            filename, offset, bytes, num_retries, queue):  # pylint: disable=redefined-builtin
     u"""
     Worker method for uploading a file chunk to S3 using multipart upload.
     Note that the file chunk is read into memory, so it's important to keep

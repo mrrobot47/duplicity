@@ -28,7 +28,7 @@ import time
 import unittest
 
 from duplicity import backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 
 _testing_dir = os.path.dirname(os.path.abspath(__file__))
@@ -81,7 +81,7 @@ class DuplicityTestCase(unittest.TestCase):
         for key in self.savedEnviron:
             self._update_env(key, self.savedEnviron[key])
         for key in self.savedGlobals:
-            setattr(globals, key, self.savedGlobals[key])
+            setattr(config, key, self.savedGlobals[key])
         assert not os.system(u"rm -rf testfiles")
         super(DuplicityTestCase, self).tearDown()
 
@@ -102,7 +102,7 @@ class DuplicityTestCase(unittest.TestCase):
         self._update_env(key, value)
 
     def set_global(self, key, value):
-        assert hasattr(globals, key)
+        assert hasattr(config, key)
         if key not in self.savedGlobals:
-            self.savedGlobals[key] = getattr(globals, key)
-        setattr(globals, key, value)
+            self.savedGlobals[key] = getattr(config, key)
+        setattr(config, key, value)

@@ -30,16 +30,13 @@ from builtins import str
 from builtins import object
 import os
 import sys
-import types
 import tempfile
 import re
 import gzip
 import locale
-import platform
 
-from duplicity import globals
+from duplicity import config
 from duplicity import gpginterface
-from duplicity import log
 from duplicity import tempdir
 from duplicity import util
 
@@ -92,7 +89,7 @@ class GPGProfile(object):
         else:
             self.hidden_recipients = []
 
-        self.gpg_version = self.get_gpg_version(globals.gpg_binary)
+        self.gpg_version = self.get_gpg_version(config.gpg_binary)
 
     rc = re.compile
     _version_re = rc(b'^gpg.*\\(GnuPG(?:/MacGPG2)?\\) (?P<maj>[0-9]+)\\.(?P<min>[0-9]+)\\.(?P<bug>[0-9]+)(-.+)?$')
@@ -103,8 +100,8 @@ class GPGProfile(object):
             gnupg.call = binary
 
         # user supplied options
-        if globals.gpg_options:
-            for opt in globals.gpg_options.split():
+        if config.gpg_options:
+            for opt in config.gpg_options.split():
                 gnupg.options.extra_args.append(opt)
 
         # get gpg version
@@ -143,15 +140,15 @@ class GPGFile(object):
         # Start GPG process - copied from GnuPGInterface docstring.
         gnupg = gpginterface.GnuPG()
         # overrides default gpg binary 'gpg'
-        if globals.gpg_binary is not None:
-            gnupg.call = globals.gpg_binary
+        if config.gpg_binary is not None:
+            gnupg.call = config.gpg_binary
         gnupg.options.meta_interactive = 0
         gnupg.options.extra_args.append(u'--no-secmem-warning')
         gnupg.options.extra_args.append(u'--ignore-mdc-error')
 
         # Support three versions of gpg present 1.x, 2.0.x, 2.1.x
         if profile.gpg_version[:1] == (1,):
-            if globals.use_agent:
+            if config.use_agent:
                 # gpg1 agent use is optional
                 gnupg.options.extra_args.append(u'--use-agent')
 
@@ -159,7 +156,7 @@ class GPGFile(object):
             pass
 
         elif profile.gpg_version[:2] >= (2, 1):
-            if not globals.use_agent:
+            if not config.use_agent:
                 # This forces gpg2 to ignore the agent.
                 # Necessary to enforce truly non-interactive operation.
                 gnupg.options.extra_args.append(u'--pinentry-mode=loopback')
@@ -168,8 +165,8 @@ class GPGFile(object):
             raise GPGError(u"Unsupported GNUPG version, %s" % profile.gpg_version)
 
         # user supplied options
-        if globals.gpg_options:
-            for opt in globals.gpg_options.split():
+        if config.gpg_options:
+            for opt in config.gpg_options.split():
                 gnupg.options.extra_args.append(opt)
 
         cmdlist = []
@@ -200,7 +197,7 @@ class GPGFile(object):
                 # use integrity protection
                 gnupg.options.extra_args.append(u'--force-mdc')
             # Skip the passphrase if using the agent
-            if globals.use_agent:
+            if config.use_agent:
                 gnupg_fhs = [u'stdin', ]
             else:
                 gnupg_fhs = [u'stdin', u'passphrase']
@@ -208,7 +205,7 @@ class GPGFile(object):
                            attach_fhs={u'stdout': encrypt_path.open(u"wb"),
                                        u'stderr': self.stderr_fp,
                                        u'logger': self.logger_fp})
-            if not globals.use_agent:
+            if not config.use_agent:
                 p1.handles[u'passphrase'].write(passphrase)
                 p1.handles[u'passphrase'].close()
             self.gpg_input = p1.handles[u'stdin']
@@ -218,7 +215,7 @@ class GPGFile(object):
                 cmdlist.append(profile.encrypt_secring)
             self.status_fp = tempfile.TemporaryFile(dir=tempdir.default().dir())
             # Skip the passphrase if using the agent
-            if globals.use_agent:
+            if config.use_agent:
                 gnupg_fhs = [u'stdout', ]
             else:
                 gnupg_fhs = [u'stdout', u'passphrase']
@@ -227,7 +224,7 @@ class GPGFile(object):
                                        u'status': self.status_fp,
                                        u'stderr': self.stderr_fp,
                                        u'logger': self.logger_fp})
-            if not(globals.use_agent):
+            if not(config.use_agent):
                 p1.handles[u'passphrase'].write(passphrase)
                 p1.handles[u'passphrase'].close()
             self.gpg_output = p1.handles[u'stdout']
@@ -365,16 +362,16 @@ def GPGWriteFile(block_iter, filename, profile,
     # workaround for circular module imports
     from duplicity import path
 
-    def top_off(bytes, file):
+    def top_off(bytelen, file):
         u"""
-        Add bytes of incompressible data to to_gpg_fp
+        Add bytelen of incompressible data to to_gpg_fp
 
         In this case we take the incompressible data from the
         beginning of filename (it should contain enough because size
         >> largest block size).
         """
         incompressible_fp = open(filename, u"rb")
-        assert util.copyfileobj(incompressible_fp, file.gpg_input, bytes) == bytes
+        assert util.copyfileobj(incompressible_fp, file.gpg_input, bytelen) == bytelen
         incompressible_fp.close()
 
     def get_current_size():
@@ -476,7 +473,7 @@ def PlainWriteFile(block_iter, filename, size=200 * 1024 * 1024, gzipped=False):
     return GzipWriteFile(block_iter, filename, size, gzipped)
 
 
-def get_hash(hash, path, hex=1):
+def get_hash(hash, path, hex=1):  # pylint: disable=redefined-builtin
     u"""
     Return hash of path
 

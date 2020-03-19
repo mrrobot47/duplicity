@@ -23,11 +23,10 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
-import sys
+import os
 import unittest
 
-from duplicity import log  # @UnusedImport
-from duplicity.path import *  # @UnusedWildImport
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from . import UnitTestCase
 
 

@@ -31,7 +31,6 @@ import os
 import platform
 import pytest
 import random
-import sys
 import unittest
 
 from duplicity import gpg
@@ -146,7 +145,7 @@ class GPGTest(UnitTestCase):
         size = 400 * 1000
         gwfh = GPGWriteFile_Helper()
         profile = gpg.GPGProfile(passphrase=u"foobar")
-        for i in range(10):  # @UnusedVariable
+        for i in range(10):
             gpg.GPGWriteFile(gwfh, u"testfiles/output/gpgwrite.gpg",
                              profile, size=size)
             # print os.stat("testfiles/output/gpgwrite.gpg").st_size-size
@@ -160,7 +159,7 @@ class GPGTest(UnitTestCase):
         u"""Test GzipWriteFile"""
         size = 400 * 1000
         gwfh = GPGWriteFile_Helper()
-        for i in range(10):  # @UnusedVariable
+        for i in range(10):
             gpg.GzipWriteFile(gwfh, u"testfiles/output/gzwrite.gz",
                               size=size)
             # print os.stat("testfiles/output/gzwrite.gz").st_size-size
@@ -215,8 +214,8 @@ class SHATest(UnitTestCase):
         self.unpack_testfiles()
 
     def test_sha(self):
-        hash = gpg.get_hash(u"SHA1", path.Path(u"testfiles/various_file_types/regular_file"))
-        assert hash == u"886d722999862724e1e62d0ac51c468ee336ef8e", hash
+        testhash = gpg.get_hash(u"SHA1", path.Path(u"testfiles/various_file_types/regular_file"))
+        assert testhash == u"886d722999862724e1e62d0ac51c468ee336ef8e", testhash
 
 
 if __name__ == u"__main__":

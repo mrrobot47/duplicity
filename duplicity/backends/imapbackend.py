@@ -20,20 +20,21 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-import sys
 from future import standard_library
 standard_library.install_aliases()
 from builtins import input
-import imaplib
-import re
-import os
-import time
-import socket
-import io
-import getpass
+
 import email
 import email.encoders
 import email.mime.multipart
+import getpass
+import imaplib
+import os
+import re
+import socket
+import sys
+import time
+
 from email.parser import Parser
 try:
     from email.policy import default  # pylint: disable=import-error
@@ -45,10 +46,10 @@ if sys.version_info.major >= 3:
     import ssl
     socket.sslerror = ssl.SSLError
 
-import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
-from duplicity.errors import *  # @UnusedWildImport
+from duplicity.errors import *  # pylint: disable=unused-wildcard-import
+import duplicity.backend
 
 
 class ImapBackend(duplicity.backend.Backend):
@@ -104,13 +105,13 @@ class ImapBackend(duplicity.backend.Backend):
         self.remote_dir = re.sub(r'^/', r'', parsed_url.path, 1)
 
         #  Login
-        if (not(globals.imap_full_address)):
+        if (not(config.imap_full_address)):
             self.conn.login(self.username, self.password)
-            self.conn.select(globals.imap_mailbox)
+            self.conn.select(config.imap_mailbox)
             log.Info(u"IMAP connected")
         else:
             self.conn.login(self.username + u"@" + parsed_url.hostname, self.password)
-            self.conn.select(globals.imap_mailbox)
+            self.conn.select(config.imap_mailbox)
             log.Info(u"IMAP connected")
 
     def prepareBody(self, f, rname):
@@ -133,7 +134,7 @@ class ImapBackend(duplicity.backend.Backend):
 
     def _put(self, source_path, remote_filename):
         f = source_path.open(u"rb")
-        allowedTimeout = globals.timeout
+        allowedTimeout = config.timeout
         if (allowedTimeout == 0):
             # Allow a total timeout of 1 day
             allowedTimeout = 2880
@@ -143,8 +144,8 @@ class ImapBackend(duplicity.backend.Backend):
                 body = self.prepareBody(f, remote_filename)
                 # If we don't select the IMAP folder before
                 # append, the message goes into the INBOX.
-                self.conn.select(globals.imap_mailbox)
-                self.conn.append(globals.imap_mailbox, None, None, body.encode())
+                self.conn.select(config.imap_mailbox)
+                self.conn.append(config.imap_mailbox, None, None, body.encode())
                 break
             except (imaplib.IMAP4.abort, socket.error, socket.sslerror):
                 allowedTimeout -= 1
@@ -162,26 +163,26 @@ class ImapBackend(duplicity.backend.Backend):
         log.Info(u"IMAP mail with '%s' subject stored" % remote_filename)
 
     def _get(self, remote_filename, local_path):
-        allowedTimeout = globals.timeout
+        allowedTimeout = config.timeout
         if (allowedTimeout == 0):
             # Allow a total timeout of 1 day
             allowedTimeout = 2880
         while allowedTimeout > 0:
             try:
-                self.conn.select(globals.imap_mailbox)
-                (result, list) = self.conn.search(None, u'Subject', remote_filename)
+                self.conn.select(config.imap_mailbox)
+                (result, flist) = self.conn.search(None, u'Subject', remote_filename)
                 if result != u"OK":
-                    raise Exception(list[0])
+                    raise Exception(flist[0])
 
                 # check if there is any result
-                if list[0] == u'':
+                if flist[0] == u'':
                     raise Exception(u"no mail with subject %s")
 
-                (result, list) = self.conn.fetch(list[0], u"(RFC822)")
+                (result, flist) = self.conn.fetch(flist[0], u"(RFC822)")
 
                 if result != u"OK":
-                    raise Exception(list[0])
-                rawbody = list[0][1]
+                    raise Exception(flist[0])
+                rawbody = flist[0][1]
 
                 p = Parser()
 
@@ -212,26 +213,26 @@ class ImapBackend(duplicity.backend.Backend):
 
     def _list(self):
         ret = []
-        (result, list) = self.conn.select(globals.imap_mailbox)
+        (result, flist) = self.conn.select(config.imap_mailbox)
         if result != u"OK":
-            raise BackendException(list[0])
+            raise BackendException(flist[0])
 
         # Going to find all the archives which have remote_dir in the From
         # address
 
         # Search returns an error if you haven't selected an IMAP folder.
-        (result, list) = self.conn.search(None, u'FROM', self.remote_dir)
+        (result, flist) = self.conn.search(None, u'FROM', self.remote_dir)
         if result != u"OK":
-            raise Exception(list[0])
-        if list[0] == b'':
+            raise Exception(flist[0])
+        if flist[0] == b'':
             return ret
-        nums = list[0].strip().split(b" ")
-        set = b"%s:%s" % (nums[0], nums[-1])
-        (result, list) = self.conn.fetch(set, u"(BODY[HEADER])")
+        nums = flist[0].strip().split(b" ")
+        set = b"%s:%s" % (nums[0], nums[-1])  # pylint: disable=redefined-builtin
+        (result, flist) = self.conn.fetch(set, u"(BODY[HEADER])")
         if result != u"OK":
-            raise Exception(list[0])
+            raise Exception(flist[0])
 
-        for msg in list:
+        for msg in flist:
             if (len(msg) == 1):
                 continue
             if sys.version_info.major >= 3:
@@ -245,33 +246,33 @@ class ImapBackend(duplicity.backend.Backend):
             if (not (header_from is None)):
                 if (re.compile(u"^" + self.remote_dir + u"$").match(header_from)):
                     ret.append(subj)
-                    log.Info(u"IMAP LIST: %s %s" % (subj, header_from))
+                    log.Info(u"IMAP flist: %s %s" % (subj, header_from))
         return ret
 
     def imapf(self, fun, *args):
-        (ret, list) = fun(*args)
+        (ret, flist) = fun(*args)
         if ret != u"OK":
-            raise Exception(list[0])
-        return list
+            raise Exception(flist[0])
+        return flist
 
     def delete_single_mail(self, i):
         self.imapf(self.conn.store, i, u"+FLAGS", u'\\DELETED')
 
     def expunge(self):
-        list = self.imapf(self.conn.expunge)
+        flist = self.imapf(self.conn.expunge)
 
     def _delete_list(self, filename_list):
         for filename in filename_list:
-            list = self.imapf(self.conn.search, None, u"(SUBJECT %s)" % filename)
-            list = list[0].split()
-            if len(list) > 0 and list[0] != u"":
-                self.delete_single_mail(list[0])
+            flist = self.imapf(self.conn.search, None, u"(SUBJECT %s)" % filename)
+            flist = flist[0].split()
+            if len(flist) > 0 and flist[0] != u"":
+                self.delete_single_mail(flist[0])
                 log.Notice(u"marked %s to be deleted" % filename)
         self.expunge()
         log.Notice(u"IMAP expunged %s files" % len(filename_list))
 
     def _close(self):
-        self.conn.select(globals.imap_mailbox)
+        self.conn.select(config.imap_mailbox)
         self.conn.close()
         self.conn.logout()
 

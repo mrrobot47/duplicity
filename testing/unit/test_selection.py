@@ -25,13 +25,11 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
-import types
 import io
 import unittest
-import duplicity.path
 
-from duplicity.selection import *  # @UnusedWildImport
-from duplicity.lazy import *  # @UnusedWildImport
+from duplicity.selection import *  # pylint: disable=unused-wildcard-import,redefined-builtin
+from duplicity.lazy import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from . import UnitTestCase
 from mock import patch
 

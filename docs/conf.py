@@ -9,7 +9,6 @@
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-import os
 import sys
 sys.path.insert(0, '/Users/ken/workspace/duplicity-src8/testing')
 sys.path.insert(0, '/Users/ken/workspace/duplicity-src8/duplicity')
@@ -20,7 +19,7 @@ sys.path.insert(0, '/Users/ken/workspace/duplicity-src8')
 # -- Project information -----------------------------------------------------
 
 project = 'duplicity'
-copyright = '2020, Kenneth Loafman'
+copyright = '2020, Kenneth Loafman'  # pylint: disable=redefined-builtin
 author = 'Kenneth Loafman'
 
 

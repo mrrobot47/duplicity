@@ -39,8 +39,7 @@ import warnings
 from binascii import hexlify
 
 import duplicity.backend
-from duplicity import globals
-from duplicity import util
+from duplicity import config
 from duplicity.errors import BackendException
 
 global paramiko
@@ -204,7 +203,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             self.config.update({u'port': 22})
         # parse ssh options for alternative ssh private key, identity file
         m = re.search(r"^(?:.+\s+)?(?:-oIdentityFile=|-i\s+)(([\"'])([^\\2]+)\\2|[\S]+).*",
-                      globals.ssh_options)
+                      config.ssh_options)
         if (m is not None):
             keyfilename = m.group(3) if m.group(3) else m.group(1)
             self.config[u'identityfile'] = keyfilename
@@ -227,7 +226,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             self.config[u'identityfile'] = None
 
         # get password, enable prompt if askpass is set
-        self.use_getpass = globals.ssh_askpass
+        self.use_getpass = config.ssh_askpass
         # set url values for beautiful login prompt
         parsed_url.username = self.config[u'user']
         parsed_url.hostname = self.config[u'hostname']
@@ -246,7 +245,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                 self.config[u'user'],
                 self.config[u'hostname'],
                 self.config[u'port'], e))
-        self.client.get_transport().set_keepalive((int)(globals.timeout / 2))
+        self.client.get_transport().set_keepalive((int)(config.timeout / 2))
 
         self.scheme = duplicity.backend.strip_prefix(parsed_url.scheme,
                                                      u'paramiko')
@@ -300,7 +299,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             f = open(source_path.name, u'rb')
             try:
                 chan = self.client.get_transport().open_session()
-                chan.settimeout(globals.timeout)
+                chan.settimeout(config.timeout)
                 # scp in sink mode uses the arg as base directory
                 chan.exec_command(u"scp -t '%s'" % self.remote_dir)
             except Exception as e:
@@ -332,7 +331,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
         if self.use_scp:
             try:
                 chan = self.client.get_transport().open_session()
-                chan.settimeout(globals.timeout)
+                chan.settimeout(config.timeout)
                 chan.exec_command(u"scp -f '%s/%s'" % (self.remote_dir,
                                                        remote_filename))
             except Exception as e:
@@ -398,7 +397,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
         command and returns stdout of command. throws an exception if exit
         code!=0 and not ignored"""
         try:
-            ch_in, ch_out, ch_err = self.client.exec_command(cmd, -1, globals.timeout)
+            ch_in, ch_out, ch_err = self.client.exec_command(cmd, -1, config.timeout)
             output = ch_out.read(-1)
             return output
         except Exception as e:

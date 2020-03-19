@@ -50,7 +50,6 @@ class HSIBackend(duplicity.backend.Backend):
         self.subprocess_popen(commandline)
 
     def _list(self):
-        import sys
         commandline = u'%s "ls -l %s"' % (hsi_command, self.remote_dir)
         l = self.subprocess_popen(commandline)[2]
         l = l.split(os.linesep.encode())[3:]

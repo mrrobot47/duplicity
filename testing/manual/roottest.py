@@ -26,7 +26,7 @@ sys.path.insert(0, "../")
 from duplicity import diffdir
 from duplicity import patchdir
 from duplicity import selection
-from duplicity.path import * #@UnusedWildImport
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 
 config.setup()
 

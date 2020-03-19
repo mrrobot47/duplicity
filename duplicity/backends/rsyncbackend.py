@@ -27,7 +27,7 @@ import tempfile
 
 import duplicity.backend
 from duplicity.errors import InvalidBackendURL
-from duplicity import globals, tempdir, util
+from duplicity import config, tempdir, util
 
 
 class RsyncBackend(duplicity.backend.Backend):
@@ -88,8 +88,8 @@ class RsyncBackend(duplicity.backend.Backend):
         if self.over_rsyncd():
             portOption = port
         else:
-            portOption = u"-e 'ssh %s -oBatchMode=yes %s'" % (port, globals.ssh_options)
-        rsyncOptions = globals.rsync_options
+            portOption = u"-e 'ssh %s -oBatchMode=yes %s'" % (port, config.ssh_options)
+        rsyncOptions = config.rsync_options
         # build cmd
         self.cmd = u"rsync %s %s" % (portOption, rsyncOptions)
 
@@ -121,7 +121,7 @@ class RsyncBackend(duplicity.backend.Backend):
         self.subprocess_popen(commandline)
 
     def _list(self):
-        def split(str):
+        def split(str):  # pylint: disable=redefined-builtin
             line = str.split()
             if len(line) > 4 and line[4] != u'.':
                 return line[4]
@@ -140,7 +140,7 @@ class RsyncBackend(duplicity.backend.Backend):
             else:
                 dont_delete_list.append(file)
 
-        dir = tempfile.mkdtemp()
+        dir = tempfile.mkdtemp()  # pylint: disable=redefined-builtin
         exclude, exclude_name = tempdir.default().mkstemp_file()
         to_delete = [exclude_name]
         for file in dont_delete_list:

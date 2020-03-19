@@ -186,7 +186,7 @@ def async_split(fn):
     # not care about hash lookup overhead since this is intended to be
     # used for significant amounts of work.
 
-    cv = threading.Condition()  # @UndefinedVariable
+    cv = threading.Condition()
     state = {u'done': False,
              u'error': None,
              u'trace': None,
@@ -259,8 +259,7 @@ class Value(object):
         """
         self.__value = value
 
-        self.__cv = threading.Condition()  # @UndefinedVariable
-
+        self.__cv = threading.Condition()
     def get(self):
         u"""
         Returns the value protected by this Value.

@@ -19,10 +19,10 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 
-if (globals.cf_backend and
-        globals.cf_backend.lower().strip() == u'pyrax'):
+if (config.cf_backend and
+        config.cf_backend.lower().strip() == u'pyrax'):
     from ._cf_pyrax import PyraxBackend as CFBackend
 else:
     from ._cf_cloudfiles import CloudFilesBackend as CFBackend

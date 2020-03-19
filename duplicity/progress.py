@@ -34,17 +34,17 @@ This is a forecast based on gathered evidence.
 
 from __future__ import absolute_import
 from __future__ import division
-
 from builtins import object
+
+from datetime import datetime, timedelta
 import collections as sys_collections
 import math
+import pickle
 import threading
 import time
-from datetime import datetime, timedelta
-from duplicity import globals
+
+from duplicity import config
 from duplicity import log
-import pickle
-import os
 
 tracker = None
 progress_thread = None
@@ -63,9 +63,9 @@ class Snapshot(sys_collections.deque):
         """
         snapshot = Snapshot()
         # If restarting Full, discard marshalled data and start over
-        if globals.restart is not None and globals.restart.start_vol >= 1:
+        if config.restart is not None and config.restart.start_vol >= 1:
             try:
-                progressfd = open(u'%s/progress' % globals.archive_dir_path.name, u'r')
+                progressfd = open(u'%s/progress' % config.archive_dir_path.name, u'r')
                 snapshot = pickle.load(progressfd)
                 progressfd.close()
             except:
@@ -79,7 +79,7 @@ class Snapshot(sys_collections.deque):
         u"""
         Serializes object to cache
         """
-        progressfd = open(b'%s/progress' % globals.archive_dir_path.name, u'wb+')
+        progressfd = open(b'%s/progress' % config.archive_dir_path.name, u'wb+')
         pickle.dump(self, progressfd)
         progressfd.close()
 
@@ -149,7 +149,7 @@ class ProgressTracker(object):
         u"""
         Aproximative and evolving method of computing the progress of upload
         """
-        if not globals.progress or not self.has_collected_evidence():
+        if not config.progress or not self.has_collected_evidence():
             return
 
         current_time = datetime.now()
@@ -164,7 +164,7 @@ class ProgressTracker(object):
         # Detect (and report) a stallment if no changing data for more than 5 seconds
         if self.stall_last_time is None:
             self.stall_last_time = current_time
-        if (current_time - self.stall_last_time).seconds > max(5, 2 * globals.progress_rate):
+        if (current_time - self.stall_last_time).seconds > max(5, 2 * config.progress_rate):
             log.TransferProgress(100.0 * self.progress_estimation,
                                  self.time_estimation, self.total_bytecount,
                                  (current_time - self.start_time).seconds,
@@ -312,7 +312,7 @@ class ProgressTracker(object):
         return (datetime.now() - self.start_time).seconds
 
 
-def report_transfer(bytecount, totalbytes):
+def report_transfer(bytecount, totalbytes):  # pylint: disable=unused-argument
     u"""
     Method to call tracker.annotate_written_bytes from outside
     the class, and to offer the "function(long, long)" signature
@@ -336,7 +336,7 @@ class LogProgressThread(threading.Thread):
 
     def run(self):
         global tracker
-        if not globals.dry_run and globals.progress and tracker.has_collected_evidence():
+        if not config.dry_run and config.progress and tracker.has_collected_evidence():
             while not self.finished:
                 tracker.log_upload_progress()
-                time.sleep(globals.progress_rate)
+                time.sleep(config.progress_rate)

@@ -39,7 +39,7 @@ class TempDirTest(UnitTestCase):
         self.assertTrue(td.mktemp() != td.mktemp())
 
         # create and remove a temp dir
-        dir = td.mktemp()
+        dir = td.mktemp()  # pylint: disable=redefined-builtin
         os.mkdir(dir)
         os.rmdir(dir)
 

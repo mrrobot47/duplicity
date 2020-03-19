@@ -71,7 +71,7 @@ class FinalTest(FunctionalTestCase):
                      restore_options=restore_options)
 
         # Test restoring various sub files
-        for filename, time, dir in [(u'symbolic_link', 99999, u'dir1'),
+        for filename, time, dir in [(u'symbolic_link', 99999, u'dir1'),  # pylint: disable=redefined-builtin
                                     (u'directory_to_file', 100100, u'dir1'),
                                     (u'directory_to_file', 200100, u'dir2'),
                                     (u'largefile', 300000, u'dir3')]:

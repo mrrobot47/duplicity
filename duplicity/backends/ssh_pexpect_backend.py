@@ -29,15 +29,14 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import map
 
-import re
-import string
 import os
+import re
 
-import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import util
 from duplicity.errors import BackendException
+import duplicity.backend
 
 
 class SSHPExpectBackend(duplicity.backend.Backend):
@@ -57,12 +56,12 @@ class SSHPExpectBackend(duplicity.backend.Backend):
         self.retry_delay = 10
 
         self.scp_command = u"scp"
-        if globals.scp_command:
-            self.scp_command = globals.scp_command
+        if config.scp_command:
+            self.scp_command = config.scp_command
 
         self.sftp_command = u"sftp"
-        if globals.sftp_command:
-            self.sftp_command = globals.sftp_command
+        if config.sftp_command:
+            self.sftp_command = config.sftp_command
 
         self.scheme = duplicity.backend.strip_prefix(parsed_url.scheme, u'pexpect')
         self.use_scp = (self.scheme == u'scp')
@@ -81,22 +80,22 @@ class SSHPExpectBackend(duplicity.backend.Backend):
         self.remote_prefix = self.remote_dir + u'/'
         # maybe use different ssh port
         if parsed_url.port:
-            globals.ssh_options = globals.ssh_options + u" -oPort=%s" % parsed_url.port
+            config.ssh_options = config.ssh_options + u" -oPort=%s" % parsed_url.port
         # set some defaults if user has not specified already.
-        if u"ServerAliveInterval" not in globals.ssh_options:
-            globals.ssh_options += u" -oServerAliveInterval=%d" % ((int)(globals.timeout / 2))
-        if u"ServerAliveCountMax" not in globals.ssh_options:
-            globals.ssh_options += u" -oServerAliveCountMax=2"
+        if u"ServerAliveInterval" not in config.ssh_options:
+            config.ssh_options += u" -oServerAliveInterval=%d" % ((int)(config.timeout / 2))
+        if u"ServerAliveCountMax" not in config.ssh_options:
+            config.ssh_options += u" -oServerAliveCountMax=2"
 
         # set up password
-        self.use_getpass = globals.ssh_askpass
+        self.use_getpass = config.ssh_askpass
         self.password = self.get_password()
 
     def run_scp_command(self, commandline):
         u""" Run an scp command, responding to password prompts """
         log.Info(u"Running '%s'" % commandline)
         child = pexpect.spawn(commandline, timeout=None)
-        if globals.ssh_askpass:
+        if config.ssh_askpass:
             state = u"authorizing"
         else:
             state = u"copying"
@@ -171,7 +170,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
                      u"open(.*): Failure"]
         max_response_len = max([len(p) for p in responses[1:]])
         log.Info(u"Running '%s'" % (commandline))
-        child = pexpect.spawn(commandline, timeout=None, maxread=maxread, encoding=globals.fsencoding)
+        child = pexpect.spawn(commandline, timeout=None, maxread=maxread, encoding=config.fsencoding)
         cmdloc = 0
         passprompt = 0
         while 1:
@@ -239,13 +238,13 @@ class SSHPExpectBackend(duplicity.backend.Backend):
                     u"rename \"%s.%s.part\" \"%s%s\"" %
                     (self.remote_prefix, remote_filename, self.remote_prefix, remote_filename)]
         commandline = (u"%s %s %s" % (self.sftp_command,
-                                      globals.ssh_options,
+                                      config.ssh_options,
                                       self.host_string))
         self.run_sftp_command(commandline, commands)
 
     def put_scp(self, source_path, remote_filename):
         commandline = u"%s %s %s %s:%s%s" % \
-            (self.scp_command, globals.ssh_options, source_path.uc_name, self.host_string,
+            (self.scp_command, config.ssh_options, source_path.uc_name, self.host_string,
              self.remote_prefix, remote_filename)
         self.run_scp_command(commandline)
 
@@ -260,13 +259,13 @@ class SSHPExpectBackend(duplicity.backend.Backend):
         commands = [u"get \"%s%s\" \"%s\"" %
                     (self.remote_prefix, remote_filename, local_path.uc_name)]
         commandline = (u"%s %s %s" % (self.sftp_command,
-                                      globals.ssh_options,
+                                      config.ssh_options,
                                       self.host_string))
         self.run_sftp_command(commandline, commands)
 
     def get_scp(self, remote_filename, local_path):
         commandline = u"%s %s %s:%s%s %s" % \
-            (self.scp_command, globals.ssh_options, self.host_string, self.remote_prefix,
+            (self.scp_command, config.ssh_options, self.host_string, self.remote_prefix,
              remote_filename, local_path.uc_name)
         self.run_scp_command(commandline)
 
@@ -285,7 +284,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
 
         commands = mkdir_commands + [u"ls -1"]
         commandline = (u"%s %s %s" % (self.sftp_command,
-                                      globals.ssh_options,
+                                      config.ssh_options,
                                       self.host_string))
 
         l = self.run_sftp_command(commandline, commands).split(u'\n')[1:]
@@ -295,7 +294,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
     def _delete(self, filename):
         commands = [u"cd \"%s\"" % (self.remote_dir,)]
         commands.append(u"rm \"%s\"" % util.fsdecode(filename))
-        commandline = (u"%s %s %s" % (self.sftp_command, globals.ssh_options, self.host_string))
+        commandline = (u"%s %s %s" % (self.sftp_command, config.ssh_options, self.host_string))
         self.run_sftp_command(commandline, commands)
 
 

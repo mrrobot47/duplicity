@@ -26,11 +26,10 @@ from future import standard_library
 standard_library.install_aliases()
 
 import sys
-import unittest
 
-from duplicity.globmatch import *
-from duplicity.path import *
 from . import UnitTestCase
+from duplicity.globmatch import *  # pylint: disable=unused-wildcard-import,redefined-builtin
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from mock import patch
 
 

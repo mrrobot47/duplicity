@@ -29,11 +29,10 @@ import re
 import shutil
 import time
 import sys
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import Popen, PIPE
 
 sys.path.insert(0, os.path.abspath(u"./"))
 
-from duplicity import util
 from duplicity import __version__
 
 bzr = Popen([u"bzr", u"revno"], stdout=PIPE, universal_newlines=True)

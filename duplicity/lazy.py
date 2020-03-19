@@ -20,13 +20,16 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 u"""Define some lazy data structures and functions acting on them"""
+
 from __future__ import print_function
 
 from builtins import map
 from builtins import next
 from builtins import range
 from builtins import object
+
 import os
+
 from duplicity import log
 from duplicity import robust
 from duplicity import util
@@ -36,47 +39,46 @@ class Iter(object):
     u"""Hold static methods for the manipulation of lazy iterators"""
 
     @staticmethod
-    def filter(predicate, iterator):  # @NoSelf
+    def filter(predicate, iterator):
         u"""Like filter in a lazy functional programming language"""
         for i in iterator:
             if predicate(i):
                 yield i
 
     @staticmethod
-    def map(function, iterator):  # @NoSelf
+    def map(function, iterator):
         u"""Like map in a lazy functional programming language"""
         for i in iterator:
             yield function(i)
 
     @staticmethod
-    def foreach(function, iterator):  # @NoSelf
+    def foreach(function, iterator):
         u"""Run function on each element in iterator"""
         for i in iterator:
             function(i)
 
     @staticmethod
-    def cat(*iters):  # @NoSelf
+    def cat(*iters):
         u"""Lazily concatenate iterators"""
-        for iter in iters:
+        for iter in iters:  # pylint: disable=redefined-builtin
             for i in iter:
                 yield i
 
     @staticmethod
-    def cat2(iter_of_iters):  # @NoSelf
+    def cat2(iter_of_iters):
         u"""Lazily concatenate iterators, iterated by big iterator"""
-        for iter in iter_of_iters:
+        for iter in iter_of_iters:  # pylint: disable=redefined-builtin
             for i in iter:
                 yield i
 
     @staticmethod
-    def empty(iter):  # @NoSelf
+    def empty(iter):  # pylint: disable=redefined-builtin
         u"""True if iterator has length 0"""
-        for i in iter:  # @UnusedVariable
-            return None
+        for i in iter:              return None
         return 1
 
     @staticmethod
-    def equal(iter1, iter2, verbose=None, operator=lambda x, y: x == y):  # @NoSelf
+    def equal(iter1, iter2, verbose=None, operator=lambda x, y: x == y):
         u"""True if iterator 1 has same elements as iterator 2
 
         Use equality operator, or == if it is unspecified.
@@ -102,7 +104,7 @@ class Iter(object):
         return None
 
     @staticmethod
-    def Or(iter):  # @NoSelf
+    def Or(iter):  # pylint: disable=redefined-builtin
         u"""True if any element in iterator is true.  Short circuiting"""
         i = None
         for i in iter:
@@ -111,7 +113,7 @@ class Iter(object):
         return i
 
     @staticmethod
-    def And(iter):  # @NoSelf
+    def And(iter):  # pylint: disable=redefined-builtin
         u"""True if all elements in iterator are true.  Short circuiting"""
         i = 1
         for i in iter:
@@ -120,7 +122,7 @@ class Iter(object):
         return i
 
     @staticmethod
-    def len(iter):  # @NoSelf
+    def len(iter):  # pylint: disable=redefined-builtin
         u"""Return length of iterator"""
         i = 0
         while 1:
@@ -131,7 +133,7 @@ class Iter(object):
             i = i + 1
 
     @staticmethod
-    def foldr(f, default, iter):  # @NoSelf
+    def foldr(f, default, iter):  # pylint: disable=redefined-builtin
         u"""foldr the "fundamental list recursion operator"?"""
         try:
             next_item = next(iter)
@@ -140,7 +142,7 @@ class Iter(object):
         return f(next_item, Iter.foldr(f, default, iter))
 
     @staticmethod
-    def foldl(f, default, iter):  # @NoSelf
+    def foldl(f, default, iter):  # pylint: disable=redefined-builtin
         u"""the fundamental list iteration operator.."""
         while 1:
             try:
@@ -150,7 +152,7 @@ class Iter(object):
             default = f(default, next_item)
 
     @staticmethod
-    def multiplex(iter, num_of_forks, final_func=None, closing_func=None):  # @NoSelf
+    def multiplex(iter, num_of_forks, final_func=None, closing_func=None):  # pylint: disable=redefined-builtin
         u"""Split a single iterater into a number of streams
 
         The return val will be a list with length num_of_forks, each
@@ -223,14 +225,14 @@ class IterMultiplex2(object):
     to split it into 2.  By profiling, this is a time sensitive class.
 
     """
-    def __init__(self, iter):
+    def __init__(self, iter):  # pylint: disable=redefined-builtin
         self.a_leading_by = 0  # How many places a is ahead of b
         self.buffer = []
         self.iter = iter
 
     def yielda(self):
         u"""Return first iterator"""
-        buf, iter = self.buffer, self.iter
+        buf, iter = self.buffer, self.iter  # pylint: disable=redefined-builtin
         while(1):
             if self.a_leading_by >= 0:
                 # a is in front, add new element
@@ -247,7 +249,7 @@ class IterMultiplex2(object):
 
     def yieldb(self):
         u"""Return second iterator"""
-        buf, iter = self.buffer, self.iter
+        buf, iter = self.buffer, self.iter  # pylint: disable=redefined-builtin
         while(1):
             if self.a_leading_by <= 0:
                 # b is in front, add new element
@@ -407,7 +409,7 @@ class ITRBranch(object):
         assert branch.finished
         pass
 
-    def can_fast_process(self, *args):
+    def can_fast_process(self, *args):  # pylint: disable=unused-argument
         u"""True if object can be processed without new branch (stub)"""
         return None
 

@@ -22,7 +22,6 @@
 import os
 
 import duplicity.backend
-from duplicity import log
 from duplicity import path
 from duplicity.errors import BackendException
 

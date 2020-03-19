@@ -34,7 +34,7 @@ import sys
 
 import duplicity.backend
 from duplicity.errors import BackendException
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 
 # For documentation on the API, see
@@ -98,7 +98,7 @@ class OneDriveBackend(duplicity.backend.Backend):
                 u'You did not specify a path. '
                 u'Please specify a path, e.g. onedrive://duplicity_backups'))
 
-        if globals.volsize > (10 * 1024 * 1024 * 1024):
+        if config.volsize > (10 * 1024 * 1024 * 1024):
             raise BackendException((
                 u'Your --volsize is bigger than 10 GiB, which is the maximum '
                 u'file size on OneDrive.'))

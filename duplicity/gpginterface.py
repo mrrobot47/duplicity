@@ -234,7 +234,7 @@ from duplicity import log
 try:
     import threading
 except ImportError:
-    import dummy_threading  # @UnusedImport
+    import dummy_threading as threading
     log.Warn(_(u"Threading not available -- zombie processes may appear"))
 
 __author__ = u"Frank J. Tobin, ftobin@neverending.org"
@@ -708,7 +708,6 @@ def threaded_waitpid(process):
 
 def _run_doctests():
     import doctest
-    from . import gpginterface
     return doctest.testmod(GnuPGInterface)
 
 

@@ -155,7 +155,7 @@ Exception: %s""" % str(e))
                 u'http://www.google.com/support/accounts/bin/static.py?page=guide.cs&guide=1056283&topic=1056286 '
                 u'and create your application-specific password to run duplicity backups.')
 
-    def _fetch_entries(self, folder_id, type, title=None):
+    def _fetch_entries(self, folder_id, type, title=None):  # pylint: disable=redefined-builtin
         # Build URI.
         uri = u'/feeds/default/private/full/%s/contents' % folder_id
         if type == u'folder':

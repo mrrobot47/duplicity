@@ -19,6 +19,8 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
+# pylint: disable=no-value-for-parameter
+
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
@@ -30,7 +32,7 @@ import pickle
 import sys
 from functools import reduce
 
-from duplicity.lazy import *  # @UnusedWildImport
+from duplicity.lazy import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from . import UnitTestCase
 
 
@@ -250,7 +252,7 @@ class MultiplexTest(Iterators):
         u"""Test splitting iterator into three"""
         counter = [0]
 
-        def ff(x):
+        def ff(x):  # pylint: disable=unused-argument
             counter[0] += 1
 
         i_orig = self.one_to_100()
@@ -268,12 +270,12 @@ class MultiplexTest(Iterators):
 
 
 class ITRBadder(ITRBranch):
-    def start_process(self, index):
+    def start_process(self, index):  # pylint: disable=unused-argument
         self.total = 0
 
     def end_process(self):
         if self.base_index:
-            summand = self.base_index[-1]
+            summand = self.base_index[-1]  # pylint: disable=unsubscriptable-object
             # print "Adding ", summand
             self.total += summand
 
@@ -283,7 +285,7 @@ class ITRBadder(ITRBranch):
 
 
 class ITRBadder2(ITRBranch):
-    def start_process(self, index):
+    def start_process(self, index):  # pylint: disable=unused-argument
         self.total = 0
 
     def end_process(self):

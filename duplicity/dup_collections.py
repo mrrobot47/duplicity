@@ -21,15 +21,12 @@
 
 u"""Classes and functions on collections of backup volumes"""
 
-from past.builtins import cmp
-from builtins import filter
 from builtins import str
 from builtins import zip
 from builtins import map
 from builtins import range
 from builtins import object
 
-import types
 import sys
 
 from duplicity import log
@@ -37,7 +34,7 @@ from duplicity import file_naming
 from duplicity import path
 from duplicity import util
 from duplicity import dup_time
-from duplicity import globals
+from duplicity import config
 from duplicity import manifest
 from duplicity import util
 from duplicity.gpg import GPGError
@@ -153,7 +150,7 @@ class BackupSet(object):
         self.remote_manifest_name = remote_filename
 
         if self.action != u"replicate":
-            local_filename_list = globals.archive_dir_path.listdir()
+            local_filename_list = config.archive_dir_path.listdir()
         else:
             local_filename_list = []
         for local_filename in local_filename_list:
@@ -163,7 +160,7 @@ class BackupSet(object):
                     pr.start_time == self.start_time and
                     pr.end_time == self.end_time):
                 self.local_manifest_path = \
-                    globals.archive_dir_path.append(local_filename)
+                    config.archive_dir_path.append(local_filename)
 
                 self.set_files_changed()
                 break
@@ -180,7 +177,7 @@ class BackupSet(object):
             log.Debug(_(u"BackupSet.delete: missing %s") % [util.fsdecode(f) for f in rfn])
             pass
         if self.action != u"replicate":
-            local_filename_list = globals.archive_dir_path.listdir()
+            local_filename_list = config.archive_dir_path.listdir()
         else:
             local_filename_list = []
         for lfn in local_filename_list:
@@ -189,7 +186,7 @@ class BackupSet(object):
                     pr.start_time == self.start_time and
                     pr.end_time == self.end_time):
                 try:
-                    globals.archive_dir_path.append(lfn).delete()
+                    config.archive_dir_path.append(lfn).delete()
                 except Exception:
                     log.Debug(_(u"BackupSet.delete: missing %s") % [util.fsdecode(f) for f in lfn])
                     pass
@@ -415,16 +412,16 @@ class BackupChain(object):
         l = []
         for s in self.get_all_sets():
             if s.time:
-                type = u"full"
+                btype = u"full"
                 time = s.time
             else:
-                type = u"inc"
+                btype = u"inc"
                 time = s.end_time
             if s.encrypted:
                 enc = u"enc"
             else:
                 enc = u"noenc"
-            l.append(u"%s%s %s %d %s" % (prefix, type, dup_time.timetostring(time), (len(s)), enc))
+            l.append(u"%s%s %s %d %s" % (prefix, btype, dup_time.timetostring(time), (len(s)), enc))
         return l
 
     def __str__(self):
@@ -443,12 +440,12 @@ class BackupChain(object):
 
         for s in self.get_all_sets():
             if s.time:
-                type = _(u"Full")
+                btype = _(u"Full")
                 time = s.time
             else:
-                type = _(u"Incremental")
+                btype = _(u"Incremental")
                 time = s.end_time
-            l.append(set_schema % (type, dup_time.timetopretty(time), len(s)))
+            l.append(set_schema % (btype, dup_time.timetopretty(time), len(s)))
 
         l.append(u"-------------------------")
         return u"\n".join(l)
@@ -484,14 +481,14 @@ class SignatureChain(object):
         Return new SignatureChain.
 
         local should be true iff the signature chain resides in
-        globals.archive_dir_path and false if the chain is in
-        globals.backend.
+        config.archive_dir_path and false if the chain is in
+        config.backend.
 
-        @param local: True if sig chain in globals.archive_dir_path
+        @param local: True if sig chain in config.archive_dir_path
         @type local: Boolean
 
         @param location: Where the sig chain is located
-        @type location: globals.archive_dir_path or globals.backend
+        @type location: config.archive_dir_path or config.backend
         """
         if local:
             self.archive_dir_path, self.backend = location, None
@@ -855,7 +852,7 @@ class CollectionsStatus(object):
             Try adding filename to existing sets, or make new one
             """
             pr = file_naming.parse(filename)
-            for set in sets:
+            for set in sets:  # pylint: disable=redefined-builtin
                 if set.add_filename(filename, pr):
                     log.Debug(_(u"File %s is part of known set") % (util.fsdecode(filename),))
                     break
@@ -873,7 +870,7 @@ class CollectionsStatus(object):
 
         chains, orphaned_sets = [], []
 
-        def add_to_chains(set):
+        def add_to_chains(set):  # pylint: disable=redefined-builtin
             u"""
             Try adding set to existing chains, or make new one
             """
@@ -901,7 +898,7 @@ class CollectionsStatus(object):
         Sort set list by end time, return (sorted list, incomplete)
         """
         time_set_pairs, incomplete_sets = [], []
-        for set in set_list:
+        for set in set_list:  # pylint: disable=redefined-builtin
             if not set.is_complete():
                 incomplete_sets.append(set)
             elif set.type == u"full":
@@ -1154,7 +1151,7 @@ class CollectionsStatus(object):
         if len(self.all_backup_chains) < n:
             return None
 
-        sorted = self.all_backup_chains[:]
+        sorted = self.all_backup_chains[:]  # pylint: disable=redefined-builtin
         sorted.sort(key=lambda x: x.get_first().time)
 
         sorted.reverse()
@@ -1234,7 +1231,7 @@ class FileChangedStatus(object):
             backup_type = s[0]
             backup_set = s[1]
             if backup_set.time:
-                type = _(u"Full")
+                type = _(u"Full")  # pylint: disable=redefined-builtin
             else:
                 type = _(u"Incremental")
             l.append(set_schema % (type, dup_time.timetopretty(backup_set.get_time()), backup_type.title()))

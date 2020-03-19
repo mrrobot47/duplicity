@@ -21,7 +21,7 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity.errors import FatalBackendException, BackendException
 from duplicity import util
@@ -108,31 +108,31 @@ class S3Boto3Backend(duplicity.backend.Backend):
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename
 
-        if globals.s3_use_rrs:
+        if config.s3_use_rrs:
             storage_class = u'REDUCED_REDUNDANCY'
-        elif globals.s3_use_ia:
+        elif config.s3_use_ia:
             storage_class = u'STANDARD_IA'
-        elif globals.s3_use_onezone_ia:
+        elif config.s3_use_onezone_ia:
             storage_class = u'ONEZONE_IA'
-        elif globals.s3_use_glacier and u"manifest" not in remote_filename:
+        elif config.s3_use_glacier and u"manifest" not in remote_filename:
             storage_class = u'GLACIER'
-        elif globals.s3_use_deep_archive and u"manifest" not in remote_filename:
+        elif config.s3_use_deep_archive and u"manifest" not in remote_filename:
             storage_class = u'DEEP_ARCHIVE'
         else:
             storage_class = u'STANDARD'
         extra_args = {u'StorageClass': storage_class}
 
-        if globals.s3_use_sse:
+        if config.s3_use_sse:
             extra_args[u'ServerSideEncryption'] = u'AES256'
-        elif globals.s3_use_sse_kms:
-            if globals.s3_kms_key_id is None:
+        elif config.s3_use_sse_kms:
+            if config.s3_kms_key_id is None:
                 raise FatalBackendException(u"S3 USE SSE KMS was requested, but key id not provided "
                                             u"require (--s3-kms-key-id)",
                                             code=log.ErrorCode.s3_kms_no_id)
             extra_args[u'ServerSideEncryption'] = u'aws:kms'
-            extra_args[u'SSEKMSKeyId'] = globals.s3_kms_key_id
-            if globals.s3_kms_grant:
-                extra_args[u'GrantFullControl'] = globals.s3_kms_grant
+            extra_args[u'SSEKMSKeyId'] = config.s3_kms_key_id
+            if config.s3_kms_grant:
+                extra_args[u'GrantFullControl'] = config.s3_kms_grant
 
         # Should the tracker be scoped to the put or the backend?
         # The put seems right to me, but the results look a little more correct
@@ -169,7 +169,6 @@ class S3Boto3Backend(duplicity.backend.Backend):
 
     def _query(self, remote_filename):
         import botocore  # pylint: disable=import-error
-        from botocore.exceptions import ClientError  # pylint: disable=import-error
 
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename

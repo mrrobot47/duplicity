@@ -24,16 +24,14 @@ standard_library.install_aliases()
 
 import os
 import io
-import sys
 import unittest
 
-import duplicity.backend
+from . import UnitTestCase
 from duplicity import log
-from duplicity import globals
 from duplicity import path
 from duplicity import util
 from duplicity.errors import BackendException
-from . import UnitTestCase
+import duplicity.backend
 
 
 class BackendInstanceBase(UnitTestCase):

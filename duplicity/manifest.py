@@ -21,7 +21,6 @@
 
 u"""Create and edit manifest for session contents"""
 
-from builtins import filter
 from builtins import map
 from builtins import range
 from builtins import object
@@ -29,9 +28,9 @@ from builtins import object
 import re
 import sys
 
-from duplicity import globals
+from duplicity import config
 from duplicity import log
-from duplicity import globals
+from duplicity import config
 from duplicity import util
 
 
@@ -64,14 +63,14 @@ class Manifest(object):
 
     def set_dirinfo(self):
         u"""
-        Set information about directory from globals,
+        Set information about directory from config,
         and write to manifest file.
 
         @rtype: Manifest
         @return: manifest
         """
-        self.hostname = globals.hostname
-        self.local_dirname = globals.local_path.name  # @UndefinedVariable
+        self.hostname = config.hostname
+        self.local_dirname = config.local_path.name
         if self.fh:
             if self.hostname:
                 self.fh.write(b"Hostname %s\n" % self.hostname.encode())
@@ -89,23 +88,23 @@ class Manifest(object):
         @rtype: string
         @return: None or error message
         """
-        if globals.allow_source_mismatch:
+        if config.allow_source_mismatch:
             return
 
-        if self.hostname and self.hostname != globals.hostname:
+        if self.hostname and self.hostname != config.hostname:
             errmsg = _(u"Fatal Error: Backup source host has changed.\n"
                        u"Current hostname: %s\n"
-                       u"Previous hostname: %s") % (globals.hostname, self.hostname)
+                       u"Previous hostname: %s") % (config.hostname, self.hostname)
             code = log.ErrorCode.hostname_mismatch
-            code_extra = u"%s %s" % (util.escape(globals.hostname), util.escape(self.hostname))
+            code_extra = u"%s %s" % (util.escape(config.hostname), util.escape(self.hostname))
 
-        elif (self.local_dirname and self.local_dirname != globals.local_path.name):  # @UndefinedVariable
+        elif (self.local_dirname and self.local_dirname != config.local_path.name):
             errmsg = _(u"Fatal Error: Backup source directory has changed.\n"
                        u"Current directory: %s\n"
-                       u"Previous directory: %s") % (globals.local_path.name, self.local_dirname)  # @UndefinedVariable
+                       u"Previous directory: %s") % (config.local_path.name, self.local_dirname)
             code = log.ErrorCode.source_dir_mismatch
-            code_extra = u"%s %s" % (util.escape(globals.local_path.name),
-                                     util.escape(self.local_dirname))  # @UndefinedVariable
+            code_extra = u"%s %s" % (util.escape(config.local_path.name),
+                                     util.escape(self.local_dirname))
         else:
             return
 
@@ -223,7 +222,7 @@ class Manifest(object):
 
         # Get file changed list - not needed if --file-changed not present
         filecount = 0
-        if globals.file_changed is not None:
+        if config.file_changed is not None:
             filelist_regexp = re.compile(b"(^|\\n)filelist\\s([0-9]+)\\n(.*?)(\\nvolume\\s|$)", re.I | re.S)
             match = filelist_regexp.search(s)
             if match:

@@ -22,7 +22,7 @@ from builtins import str
 import os
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import util
 from duplicity.errors import BackendException
@@ -112,7 +112,7 @@ Exception: %s""" % str(e))
         else:
             self.prefix = u''
 
-        policy = globals.swift_storage_policy
+        policy = config.swift_storage_policy
         policy_header = u'X-Storage-Policy'
 
         container_metadata = None
@@ -139,7 +139,7 @@ Exception: %s""" % str(e))
             log.FatalError(u"Container '%s' exists but its storage policy is '%s' not '%s'."
                            % (self.container, container_metadata[policy_header.lower()], policy))
 
-    def _error_code(self, operation, e):
+    def _error_code(self, operation, e):  # pylint: disable=unused-argument
         if isinstance(e, self.resp_exc):
             if e.http_status == 404:
                 return log.ErrorCode.backend_not_found

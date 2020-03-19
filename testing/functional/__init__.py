@@ -170,7 +170,7 @@ class FunctionalTestCase(DuplicityTestCase):
             print(u"...return_val:", return_val, file=sys.stderr)
             raise CmdError(return_val)
 
-    def backup(self, type, input_dir, options=[], **kwargs):
+    def backup(self, type, input_dir, options=[], **kwargs):  # pylint: disable=redefined-builtin
         u"""Run duplicity backup to default directory"""
         options = [type, input_dir, self.backend_url, u"--volsize", u"1"] + options
         before_files = self.get_backend_files()
@@ -182,7 +182,7 @@ class FunctionalTestCase(DuplicityTestCase):
         if self.last_backup == int(now):
             time.sleep(1)
 
-        result = self.run_duplicity(options=options, **kwargs)
+        self.run_duplicity(options=options, **kwargs)
         self.last_backup = int(time.time())
 
         after_files = self.get_backend_files()

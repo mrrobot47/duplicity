@@ -28,7 +28,7 @@ import urllib.error  # pylint: disable=import-error
 import re
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import tempdir
 from duplicity import util
@@ -82,7 +82,7 @@ class NCFTPBackend(duplicity.backend.Backend):
 
         self.password = self.get_password()
 
-        if globals.ftp_connection == u'regular':
+        if config.ftp_connection == u'regular':
             self.conn_opt = u'-E'
         else:
             self.conn_opt = u'-F'
@@ -94,7 +94,7 @@ class NCFTPBackend(duplicity.backend.Backend):
         self.tempfile.write(u"pass %s\n" % self.password)
         self.tempfile.close()
         self.flags = u"-f %s %s -t %s -o useCLNT=0,useHELP_SITE=0 " % \
-            (self.tempname, self.conn_opt, globals.timeout)
+            (self.tempname, self.conn_opt, config.timeout)
         if parsed_url.port is not None and parsed_url.port != 21:
             self.flags += u" -P '%s'" % (parsed_url.port)
 

@@ -23,13 +23,10 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
-from io import StringIO
 import re
-import sys
-import types
 import unittest
 
-from duplicity import globals
+from duplicity import config
 from duplicity import manifest
 from duplicity import path
 
@@ -88,11 +85,11 @@ class ManifestTest(UnitTestCase):
 
     def setUp(self):
         UnitTestCase.setUp(self)
-        self.old_files_changed = globals.file_changed
-        globals.file_changed = u'testing'
+        self.old_files_changed = config.file_changed
+        config.file_changed = u'testing'
 
     def tearDown(self):
-        globals.file_changed = self.old_files_changed
+        config.file_changed = self.old_files_changed
 
     def test_basic(self):
         vi1 = manifest.VolumeInfo()

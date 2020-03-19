@@ -27,7 +27,6 @@ from future import standard_library
 standard_library.install_aliases()
 import os
 import os.path
-import string
 import sys
 import urllib.request  # pylint: disable=import-error
 import urllib.parse  # pylint: disable=import-error
@@ -36,7 +35,7 @@ import json
 
 import duplicity.backend
 from duplicity.errors import BackendException
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import util
 
@@ -243,7 +242,7 @@ class MultiBackend(duplicity.backend.Backend):
         while True:
             store = stores[self.__write_cursor]
             try:
-                next = self.__write_cursor + 1
+                next = self.__write_cursor + 1  # pylint: disable=redefined-builtin
                 if (next > len(stores) - 1):
                     next = 0
                 log.Log(_(u"MultiBackend: _put: write to store #%s (%s)")
@@ -288,8 +287,8 @@ class MultiBackend(duplicity.backend.Backend):
         stores = self._eligible_stores(remote_filename)
 
         for s in stores:
-            list = s.list()
-            if remote_filename in list:
+            flist = s.list()
+            if remote_filename in flist:
                 s.get(remote_filename, local_path)
                 return
             log.Log(_(u"MultiBackend: failed to get %s to %s from %s")
@@ -303,7 +302,7 @@ class MultiBackend(duplicity.backend.Backend):
     def _list(self):
         lists = []
         for s in self.__stores:
-            globals.are_errors_fatal[u'list'] = (False, [])
+            config.are_errors_fatal[u'list'] = (False, [])
             l = s.list()
             log.Notice(_(u"MultiBackend: %s: %d files")
                        % (s.backend.parsed_url.url_string, len(l)))
@@ -333,8 +332,8 @@ class MultiBackend(duplicity.backend.Backend):
         # before we try to delete
         # ENHANCEME: maintain a cached list for each store
         for s in stores:
-            list = s.list()
-            if filename in list:
+            flist = s.list()
+            if filename in flist:
                 if hasattr(s, u'_delete_list'):
                     s._do_delete_list([filename, ])
                 elif hasattr(s, u'_delete'):
@@ -350,7 +349,6 @@ class MultiBackend(duplicity.backend.Backend):
             log.Log(_(u"MultiBackend: failed to delete %s. Tried all backing stores and none succeeded")
                     % (filename),
                     log.ERROR)
-#           raise BackendException("failed to delete")
 
 
 duplicity.backend.register_backend(u'multi', MultiBackend)

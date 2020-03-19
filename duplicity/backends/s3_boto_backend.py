@@ -21,9 +21,9 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 
-if globals.s3_use_multiprocessing:
+if config.s3_use_multiprocessing:
     from ._boto_multi import BotoBackend
 else:
     from ._boto_single import BotoBackend

@@ -65,7 +65,7 @@ class LogTest(FunctionalTestCase):
             linecount += 1
             if linecount == 1:
                 assert(line == u"ERROR 2\n")
-            elif line != u"\n":
+            elif line[0] != u"\n":
                 assert(line.startswith(r". "))
             else:
                 lastline = True

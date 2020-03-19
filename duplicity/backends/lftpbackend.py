@@ -39,7 +39,7 @@ except ImportError:
     from pipes import quote as cmd_quote
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import tempdir
 from duplicity import util
@@ -90,14 +90,14 @@ class LFTPBackend(duplicity.backend.Backend):
             self.password = self.get_password()
             self.authflag = u"-u '%s,%s'" % (self.username, self.password)
 
-        if globals.ftp_connection == u'regular':
+        if config.ftp_connection == u'regular':
             self.conn_opt = u'off'
         else:
             self.conn_opt = u'on'
 
         # check for cacert file if https
-        self.cacert_file = globals.ssl_cacert_file
-        if self.scheme == u'https' and not globals.ssl_no_check_certificate:
+        self.cacert_file = config.ssl_cacert_file
+        if self.scheme == u'https' and not config.ssl_no_check_certificate:
             cacert_candidates = [u"~/.duplicity/cacert.pem",
                                  u"~/duplicity_cacert.pem",
                                  u"/etc/duplicity/cacert.pem"]
@@ -113,11 +113,11 @@ class LFTPBackend(duplicity.backend.Backend):
         self.tempfd, self.tempname = tempdir.default().mkstemp()
         self.tempfile = os.fdopen(self.tempfd, u"w")
         self.tempfile.write(u"set ssl:verify-certificate " +
-                            (u"false" if globals.ssl_no_check_certificate else u"true") + u"\n")
+                            (u"false" if config.ssl_no_check_certificate else u"true") + u"\n")
         if self.cacert_file:
             self.tempfile.write(u"set ssl:ca-file " + cmd_quote(self.cacert_file) + u"\n")
-        if globals.ssl_cacert_path:
-            self.tempfile.write(u"set ssl:ca-path " + cmd_quote(globals.ssl_cacert_path) + u"\n")
+        if config.ssl_cacert_path:
+            self.tempfile.write(u"set ssl:ca-path " + cmd_quote(config.ssl_cacert_path) + u"\n")
         if self.parsed_url.scheme == u'ftps':
             self.tempfile.write(u"set ftp:ssl-allow true\n")
             self.tempfile.write(u"set ftp:ssl-protect-data true\n")
@@ -129,8 +129,8 @@ class LFTPBackend(duplicity.backend.Backend):
         else:
             self.tempfile.write(u"set ftp:ssl-allow false\n")
         self.tempfile.write(u"set http:use-propfind true\n")
-        self.tempfile.write(u"set net:timeout %s\n" % globals.timeout)
-        self.tempfile.write(u"set net:max-retries %s\n" % globals.num_retries)
+        self.tempfile.write(u"set net:timeout %s\n" % config.timeout)
+        self.tempfile.write(u"set net:max-retries %s\n" % config.num_retries)
         self.tempfile.write(u"set ftp:passive-mode %s\n" % self.conn_opt)
         if log.getverbosity() >= log.DEBUG:
             self.tempfile.write(u"debug\n")

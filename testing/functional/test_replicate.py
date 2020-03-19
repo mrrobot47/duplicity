@@ -24,11 +24,8 @@ from builtins import range
 from future import standard_library
 standard_library.install_aliases()
 
-import os
-import unittest
-
 from duplicity import path
-from . import CmdError, FunctionalTestCase
+from . import FunctionalTestCase
 
 
 class ReplicateTest(FunctionalTestCase):

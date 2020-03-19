@@ -23,7 +23,7 @@ from builtins import str
 import os
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity.errors import BackendException
 from duplicity.util import fsdecode
@@ -86,23 +86,23 @@ Exception: %s""" % str(e))
             raise BackendException(
                 u'Neither AZURE_ACCOUNT_KEY nor AZURE_SHARED_ACCESS_SIGNATURE environment variable not set.')
 
-        if globals.azure_max_single_put_size:
+        if config.azure_max_single_put_size:
             # check if we use azure-storage>=0.30.0
             try:
                 _ = self.blob_service.MAX_SINGLE_PUT_SIZE
-                self.blob_service.MAX_SINGLE_PUT_SIZE = globals.azure_max_single_put_size
+                self.blob_service.MAX_SINGLE_PUT_SIZE = config.azure_max_single_put_size
             # fallback for azure-storage<0.30.0
             except AttributeError:
-                self.blob_service._BLOB_MAX_DATA_SIZE = globals.azure_max_single_put_size
+                self.blob_service._BLOB_MAX_DATA_SIZE = config.azure_max_single_put_size
 
-        if globals.azure_max_block_size:
+        if config.azure_max_block_size:
             # check if we use azure-storage>=0.30.0
             try:
                 _ = self.blob_service.MAX_BLOCK_SIZE
-                self.blob_service.MAX_BLOCK_SIZE = globals.azure_max_block_size
+                self.blob_service.MAX_BLOCK_SIZE = config.azure_max_block_size
             # fallback for azure-storage<0.30.0
             except AttributeError:
-                self.blob_service._BLOB_MAX_CHUNK_DATA_SIZE = globals.azure_max_block_size
+                self.blob_service._BLOB_MAX_CHUNK_DATA_SIZE = config.azure_max_block_size
 
     def _create_container(self):
         try:
@@ -118,8 +118,8 @@ Exception: %s""" % str(e))
     def _put(self, source_path, remote_filename):
         remote_filename = fsdecode(remote_filename)
         kwargs = {}
-        if globals.azure_max_connections:
-            kwargs[u'max_connections'] = globals.azure_max_connections
+        if config.azure_max_connections:
+            kwargs[u'max_connections'] = config.azure_max_connections
 
         # https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#upload-a-blob-into-a-container
         try:
@@ -130,9 +130,9 @@ Exception: %s""" % str(e))
         self._set_tier(remote_filename)
 
     def _set_tier(self, remote_filename):
-        if globals.azure_blob_tier is not None:
+        if config.azure_blob_tier is not None:
             try:
-                self.blob_service.set_standard_blob_tier(self.container, remote_filename, globals.azure_blob_tier)
+                self.blob_service.set_standard_blob_tier(self.container, remote_filename, config.azure_blob_tier)
             except AttributeError:  # might not be available in old API
                 pass
 
@@ -165,7 +165,7 @@ Exception: %s""" % str(e))
             info = {u'size': int(prop[u'content-length'])}
         return info
 
-    def _error_code(self, operation, e):
+    def _error_code(self, operation, e):  # pylint: disable=unused-argument
         if isinstance(e, self.AzureMissingResourceError):
             return log.ErrorCode.backend_not_found
 
