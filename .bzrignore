@@ -4,6 +4,7 @@
 ._.DS_Store
 .cache
 .coverage*
+.dbeaver
 .eggs
 .idea
 .project
@@ -15,14 +16,14 @@ __pycache__
 build
 config.py
 docs/_build
+duplicity-venv
 duplicity.egg-info
 duplicity.spec
-htmlcov
 filters.txt
+htmlcov
 po/duplicity.pot-e
 random_seed
 testfiles
 testing/gnupg/.gpg-v21-migrated
 testing/gnupg/S.*
 testing/gnupg/private-keys-v1.d
-duplicity-venv

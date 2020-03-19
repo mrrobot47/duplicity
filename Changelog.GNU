@@ -1,10 +1,15 @@
-2020-03-15  Kenneth Loafman  <kenneth@loafman.com>
+2020-03-19  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in translation updates
+    * Prep for 0.8.12
+
+2020-03-17  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1867742 - TypeError: fsdecode()
       takes 1 positional argument but 2 were given
       with PCA backend
 
-2020-03-15  Kenneth Loafman  <kenneth@loafman.com>
+2020-03-16  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1867529 - UnicodeDecodeError: 'ascii'
       codec can't decode byte 0x85 in position 0:
