@@ -102,7 +102,7 @@ def DirDelta(path_iter, dirsig_fileobj_list):
         return DeltaTarBlockIter(delta_iter)
 
 
-def delta_iter_error_handler(exc, new_path, sig_path, sig_tar=None):  # pylint: disable:unused-argument
+def delta_iter_error_handler(exc, new_path, sig_path, sig_tar=None):  # pylint: disable=unused-argument
     u"""
     Called by get_delta_iter, report error in getting delta
     """
@@ -510,7 +510,7 @@ class TarBlockIter(object):
             filler_data = b""
         return TarBlock(index, b"%s%s%s" % (headers, file_data, filler_data))
 
-    def process(self, val):  # pylint: disable:unused-argument
+    def process(self, val):  # pylint: disable=unused-argument
         u"""
         Turn next value of input_iter into a TarBlock
         """

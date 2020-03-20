@@ -74,7 +74,7 @@ class ROPath(object):
     have a name.  They are required to be indexed though.
 
     """
-    def __init__(self, index, stat=None):  # pylint: disable:unused-argument
+    def __init__(self, index, stat=None):  # pylint: disable=unused-argument
         u"""ROPath initializer"""
         self.opened, self.fileobj = None, None
         self.index = index
@@ -807,14 +807,14 @@ class DupPath(Path):
 
 class PathDeleter(ITRBranch):
     u"""Delete a directory.  Called by Path.deltree"""
-    def start_process(self, index, path):  # pylint: disable:unused-argument
+    def start_process(self, index, path):  # pylint: disable=unused-argument
         self.path = path
 
     def end_process(self):
         self.path.delete()
 
-    def can_fast_process(self, index, path):  # pylint: disable:unused-argument
+    def can_fast_process(self, index, path):  # pylint: disable=unused-argument
         return not path.isdir()
 
-    def fast_process(self, index, path):  # pylint: disable:unused-argument
+    def fast_process(self, index, path):  # pylint: disable=unused-argument
         path.delete()

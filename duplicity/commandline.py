@@ -134,18 +134,18 @@ def generate_default_backup_name(backend_url):
     return burlhash.hexdigest()
 
 
-def check_file(option, opt, value):  # pylint: disable:unused-argument
+def check_file(option, opt, value):  # pylint: disable=unused-argument
     return expand_fn(value)
 
 
-def check_time(option, opt, value):  # pylint: disable:unused-argument
+def check_time(option, opt, value):  # pylint: disable=unused-argument
     try:
         return dup_time.genstrtotime(value)
     except dup_time.TimeException as e:
         raise optparse.OptionValueError(str(e))
 
 
-def check_verbosity(option, opt, value):  # pylint: disable:unused-argument
+def check_verbosity(option, opt, value):  # pylint: disable=unused-argument
     fail = False
 
     value = value.lower()
@@ -220,14 +220,14 @@ def parse_cmdline_options(arglist):
         config.time_separator = sep
         old_fn_deprecation(opt)
 
-    def add_selection(o, option, additional_arg, p):  # pylint: disable:unused-argument
+    def add_selection(o, option, additional_arg, p):  # pylint: disable=unused-argument
         if o.type in (u"string", u"file"):
             addarg = util.fsdecode(additional_arg)
         else:
             addarg = additional_arg
         select_opts.append((util.fsdecode(option), addarg))
 
-    def add_filelist(o, s, filename, p):  # pylint: disable:unused-argument
+    def add_filelist(o, s, filename, p):  # pylint: disable=unused-argument
         select_opts.append((util.fsdecode(s), util.fsdecode(filename)))
         try:
             select_files.append(io.open(filename, u"rt", encoding=u"UTF-8"))
@@ -235,11 +235,11 @@ def parse_cmdline_options(arglist):
             log.FatalError(_(u"Error opening file %s") % filename,
                            log.ErrorCode.cant_open_filelist)
 
-    def print_ver(o, s, v, p):  # pylint: disable:unused-argument
+    def print_ver(o, s, v, p):  # pylint: disable=unused-argument
         print(u"duplicity %s" % (config.version))
         sys.exit(0)
 
-    def add_rename(o, s, v, p):  # pylint: disable:unused-argument
+    def add_rename(o, s, v, p):  # pylint: disable=unused-argument
         config.rename[os.path.normcase(os.path.normpath(v[0]))] = v[1]
 
     parser = optparse.OptionParser(option_class=DupOption, usage=usage())
