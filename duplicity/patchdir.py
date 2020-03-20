@@ -234,7 +234,7 @@ class Multivol_Filelike(object):
         u"""Add next chunk to buffer"""
         if self.at_end:
             return None
-        index, difftype, multivol = get_index_from_tarinfo(              self.tarinfo_list[0])
+        index, difftype, multivol = get_index_from_tarinfo(self.tarinfo_list[0])
         if not multivol or index != self.index:
             # we've moved on
             # the following communicates next tarinfo to difftar2path_iter

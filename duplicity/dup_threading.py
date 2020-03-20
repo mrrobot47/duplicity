@@ -260,6 +260,7 @@ class Value(object):
         self.__value = value
 
         self.__cv = threading.Condition()
+
     def get(self):
         u"""
         Returns the value protected by this Value.

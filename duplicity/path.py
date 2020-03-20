@@ -42,9 +42,9 @@ import stat
 import time
 
 from duplicity import cached_ops
+from duplicity import config
 from duplicity import dup_time
 from duplicity import file_naming
-from duplicity import config
 from duplicity import gpg
 from duplicity import librsync
 from duplicity import log

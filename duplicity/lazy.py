@@ -74,7 +74,8 @@ class Iter(object):
     @staticmethod
     def empty(iter):  # pylint: disable=redefined-builtin
         u"""True if iterator has length 0"""
-        for i in iter:              return None
+        for i in iter:
+            return None
         return 1
 
     @staticmethod

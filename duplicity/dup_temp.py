@@ -190,7 +190,8 @@ class FileobjHooked(object):
             gpg.GPGWriteFile(src_iter, tgt.name, config.gpg_profile, size=sys.maxsize)
         else:
             shutil.copyfile(src.name, tgt.name)
-        config.backend.move(tgt)  
+        config.backend.move(tgt)
+
     def to_final(self):
         u"""
         We are finished, rename to final, gzip if needed.
