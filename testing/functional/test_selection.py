@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2014 Aaron Whitehouse <aaron@whitehouse.kiwi.nz>
 #

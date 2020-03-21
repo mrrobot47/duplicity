@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2015 Steve Tynor <steve.tynor@gmail.com>
 # Copyright 2016 Thomas Harning Jr <harningt@gmail.com>

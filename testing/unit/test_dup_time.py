@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -51,7 +51,7 @@ class TimeTest(object):
 
     def testConversion_separator(self):
         u"""Same as testConversion, but change time Separator"""
-        self.set_global(u'time_separator', u"_")
+        self.set_config(u'time_separator', u"_")
         self.testConversion()
 
     def testCmp(self):
@@ -70,7 +70,7 @@ class TimeTest(object):
 
     def testCmp_separator(self):
         u"""Like testCmp but with new separator"""
-        self.set_global(u'time_separator', u"_")
+        self.set_config(u'time_separator', u"_")
         cmp = dup_time.cmp
         assert cmp(1, 2) == -1
         assert cmp(2, 2) == 0
@@ -154,14 +154,14 @@ class TimeTest1(TimeTest, UnitTestCase):
 
     def setUp(self):
         super(TimeTest1, self).setUp()
-        self.set_global(u'old_filenames', False)
+        self.set_config(u'old_filenames', False)
 
 
 class TimeTest2(TimeTest, UnitTestCase):
 
     def setUp(self):
         super(TimeTest2, self).setUp()
-        self.set_global(u'old_filenames', True)
+        self.set_config(u'old_filenames', True)
 
 if __name__ == u'__main__':
     unittest.main()

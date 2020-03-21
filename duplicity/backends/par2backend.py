@@ -1,3 +1,5 @@
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
+#
 # Copyright 2013 Germar Reitze <germar.reitze@gmail.com>
 #
 # This file is part of duplicity.

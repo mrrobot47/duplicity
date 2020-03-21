@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -578,7 +578,7 @@ class ParseArgsTest(UnitTestCase):
 
     def test_filelist_null_separator(self):
         u"""test_filelist, but with null_separator set"""
-        self.set_global(u"null_separator", 1)
+        self.set_config(u"null_separator", 1)
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],

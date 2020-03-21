@@ -1,3 +1,4 @@
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright (c) 2015 Matthew Bentley
 #

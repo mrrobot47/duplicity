@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2017 Tomas Vondra (Launchpad id: tomas-v)
 # Copyright 2017 Kenneth Loafman <kenneth@loafman.com>

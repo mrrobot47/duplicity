@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -149,7 +149,7 @@ class BackendWrapperTest(UnitTestCase):
 
     @mock.patch(u'sys.exit')
     def test_default_error_exit(self, exit_mock):
-        self.set_global(u'num_retries', 1)
+        self.set_config(u'num_retries', 1)
         try:
             del self.mock._error_code
         except:
@@ -162,7 +162,7 @@ class BackendWrapperTest(UnitTestCase):
 
     @mock.patch(u'sys.exit')
     def test_translates_code(self, exit_mock):
-        self.set_global(u'num_retries', 1)
+        self.set_config(u'num_retries', 1)
         self.mock._error_code.return_value = 12345
         self.mock._put.side_effect = Exception
         self.backend.put(self.local, self.remote)
@@ -170,7 +170,7 @@ class BackendWrapperTest(UnitTestCase):
 
     @mock.patch(u'sys.exit')
     def test_uses_exception_code(self, exit_mock):
-        self.set_global(u'num_retries', 1)
+        self.set_config(u'num_retries', 1)
         self.mock._error_code.return_value = 12345
         self.mock._put.side_effect = BackendException(u'error', code=54321)
         self.backend.put(self.local, self.remote)
@@ -179,7 +179,7 @@ class BackendWrapperTest(UnitTestCase):
     @mock.patch(u'sys.exit')
     @mock.patch(u'time.sleep')  # so no waiting
     def test_cleans_up(self, exit_mock, time_mock):  # pylint: disable=unused-argument
-        self.set_global(u'num_retries', 2)
+        self.set_config(u'num_retries', 2)
         self.mock._retry_cleanup.return_value = None
         self.mock._put.side_effect = Exception
         self.backend.put(self.local, self.remote)
@@ -213,7 +213,7 @@ class BackendWrapperTest(UnitTestCase):
     @mock.patch(u'sys.exit')
     @mock.patch(u'time.sleep')  # so no waiting
     def test_retries(self, exit_mock, time_mock):  # pylint: disable=unused-argument
-        self.set_global(u'num_retries', 2)
+        self.set_config(u'num_retries', 2)
 
         self.mock._get.side_effect = Exception
         self.backend.get(self.remote, self.local)

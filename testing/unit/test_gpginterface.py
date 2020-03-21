@@ -1,3 +1,5 @@
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
+#
 u"""py-unit tests for GnuPG
 
 COPYRIGHT:

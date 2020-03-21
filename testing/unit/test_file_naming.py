@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -134,24 +134,24 @@ class FileNamingLong(UnitTestCase, FileNamingBase):
     u"""Test long filename parsing and generation"""
     def setUp(self):
         super(FileNamingLong, self).setUp()
-        self.set_global(u'short_filenames', 0)
+        self.set_config(u'short_filenames', 0)
 
 
 class FileNamingShort(UnitTestCase, FileNamingBase):
     u"""Test short filename parsing and generation"""
     def setUp(self):
         super(FileNamingShort, self).setUp()
-        self.set_global(u'short_filenames', 1)
+        self.set_config(u'short_filenames', 1)
 
 
 class FileNamingPrefixes(UnitTestCase, FileNamingBase):
     u"""Test filename parsing and generation with prefixes"""
     def setUp(self):
         super(FileNamingPrefixes, self).setUp()
-        self.set_global(u'file_prefix', b"global-")
-        self.set_global(u'file_prefix_manifest', b"mani-")
-        self.set_global(u'file_prefix_signature', b"sign-")
-        self.set_global(u'file_prefix_archive', b"arch-")
+        self.set_config(u'file_prefix', b"global-")
+        self.set_config(u'file_prefix_manifest', b"mani-")
+        self.set_config(u'file_prefix_signature', b"sign-")
+        self.set_config(u'file_prefix_archive', b"arch-")
 
 
 if __name__ == u"__main__":

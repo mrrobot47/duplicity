@@ -1,3 +1,5 @@
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
+#
 u"""Interface to GNU Privacy Guard (GnuPG)
 
 !!! This was renamed to gpginterface.py.

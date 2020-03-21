@@ -1,5 +1,5 @@
 from __future__ import print_function
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -85,7 +85,7 @@ class CollectionTest(UnitTestCase):
 
         col_test_dir = path.Path(u"testfiles/collectionstest")
         archive_dir_path = col_test_dir.append(u"archive_dir")
-        self.set_global(u'archive_dir_path', archive_dir_path)
+        self.set_config(u'archive_dir_path', archive_dir_path)
         self.archive_dir_backend = backend.get_backend(u"file://testfiles/collectionstest"
                                                        u"/archive_dir")
 
@@ -96,7 +96,7 @@ class CollectionTest(UnitTestCase):
 
     def set_gpg_profile(self):
         u"""Set gpg profile to standard "foobar" sym"""
-        self.set_global(u'gpg_profile', gpg.GPGProfile(passphrase=u"foobar"))
+        self.set_config(u'gpg_profile', gpg.GPGProfile(passphrase=u"foobar"))
 
     def test_backup_chains(self):
         u"""Test basic backup chain construction"""
