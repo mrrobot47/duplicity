@@ -98,7 +98,7 @@ class ROPath(object):
         elif stat.S_ISSOCK(st_mode):
             raise PathException(util.fsdecode(self.get_relative_path()) +
                                 u"is a socket, unsupported by tar")
-            self.type = u"sock"
+            self.type = u"sock"  # pylint: disable=unreachable
         elif stat.S_ISCHR(st_mode):
             self.type = u"chr"
         elif stat.S_ISBLK(st_mode):
