@@ -1,3 +1,8 @@
+2020-03-22  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1868414 - timeout parameter not passed to
+      BlobService for Azure backend
+
 2020-03-19  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in translation updates

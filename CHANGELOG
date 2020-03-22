@@ -1,3 +1,9 @@
+New in v0.8.13 (2020/04/??)
+---------------------------
+* Fixed bug #1868414 - timeout parameter not passed to
+  BlobService for Azure backend
+
+
 New in v0.8.12 (2020/03/19)
 ---------------------------
 * Fixed bug #1865648 - module 'multiprocessing.dummy' has

@@ -86,6 +86,9 @@ Exception: %s""" % str(e))
             raise BackendException(
                 u'Neither AZURE_ACCOUNT_KEY nor AZURE_SHARED_ACCESS_SIGNATURE environment variable not set.')
 
+        if globals.timeout:
+            self.blob_service.SOCKET_TIMEOUT = globals.timeout
+
         if globals.azure_max_single_put_size:
             # check if we use azure-storage>=0.30.0
             try:
