@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2013 jno <jno@pisem.net>
 # Copyright 2016 Dmitry Nezhevenko <dion@dion.org.ua>
@@ -41,11 +41,10 @@ import urllib.request  # pylint: disable=import-error
 import urllib.parse  # pylint: disable=import-error
 import urllib.error  # pylint: disable=import-error
 
-from duplicity import log, globals
+from duplicity import log, config
 from duplicity import progress
 from duplicity.errors import BackendException
-from duplicity.globals import num_retries
-from requests.exceptions import ConnectionError
+from requests.exceptions import ConnectionError  # pylint: disable=redefined-builtin
 import duplicity.backend
 
 # This is chunk size for upload using Dpbx chumked API v2. It doesn't
@@ -71,7 +70,7 @@ def log_exception(e):
     f.close()
 
 
-def command(login_required=True):
+def command(login_required=True):  # pylint: disable=unused-argument
     u"""a decorator for handling authentication and exceptions"""
     def decorate(f):
         def wrapper(self, *args):
@@ -194,7 +193,7 @@ Exception: %s""" % str(e))
         log.Info(u"dpbx: Successfully authenticated as %s" %
                  self.api_account.name.display_name)
 
-    def _error_code(self, operation, e):
+    def _error_code(self, operation, e):  # pylint: disable=unused-argument
         if isinstance(e, ApiError):
             err = e.error
 
@@ -269,7 +268,7 @@ Exception: %s""" % str(e))
 
             requested_offset = None
             current_chunk_size = DPBX_UPLOAD_CHUNK_SIZE
-            retry_number = globals.num_retries
+            retry_number = config.num_retries
             is_eof = False
 
             # We're doing our own error handling and retrying logic because
@@ -291,7 +290,7 @@ Exception: %s""" % str(e))
                     # reset temporary status variables
                     requested_offset = None
                     current_chunk_size = DPBX_UPLOAD_CHUNK_SIZE
-                    retry_number = globals.num_retries
+                    retry_number = config.num_retries
 
                     if not is_eof:
                         assert len(buf) != 0

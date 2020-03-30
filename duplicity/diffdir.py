@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -37,13 +37,13 @@ from builtins import range
 from builtins import object
 
 import io
-import types
-import math
+import sys
+
 from duplicity import statistics
 from duplicity import util
-from duplicity import globals
-from duplicity.path import *  # @UnusedWildImport
-from duplicity.lazy import *  # @UnusedWildImport
+from duplicity import config
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
+from duplicity.lazy import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from duplicity import progress
 
 # A StatsObj will be written to this from DirDelta and DirDelta_WriteSig.
@@ -96,13 +96,13 @@ def DirDelta(path_iter, dirsig_fileobj_list):
     else:
         sig_iter = sigtar2path_iter(dirsig_fileobj_list)
     delta_iter = get_delta_iter(path_iter, sig_iter)
-    if globals.dry_run or (globals.progress and not progress.tracker.has_collected_evidence()):
+    if config.dry_run or (config.progress and not progress.tracker.has_collected_evidence()):
         return DummyBlockIter(delta_iter)
     else:
         return DeltaTarBlockIter(delta_iter)
 
 
-def delta_iter_error_handler(exc, new_path, sig_path, sig_tar=None):
+def delta_iter_error_handler(exc, new_path, sig_path, sig_tar=None):  # pylint: disable=unused-argument
     u"""
     Called by get_delta_iter, report error in getting delta
     """
@@ -389,7 +389,7 @@ def DirDelta_WriteSig(path_iter, sig_infp_list, newsig_outfp):
     else:
         sig_path_iter = sigtar2path_iter(sig_infp_list)
     delta_iter = get_delta_iter(path_iter, sig_path_iter, newsig_outfp)
-    if globals.dry_run or (globals.progress and not progress.tracker.has_collected_evidence()):
+    if config.dry_run or (config.progress and not progress.tracker.has_collected_evidence()):
         return DummyBlockIter(delta_iter)
     else:
         return DeltaTarBlockIter(delta_iter)
@@ -502,15 +502,15 @@ class TarBlockIter(object):
         Make tarblock out of tarinfo and file data
         """
         tarinfo.size = len(file_data)
-        headers = tarinfo.tobuf(errors=u'replace', encoding=globals.fsencoding)
-        blocks, remainder = divmod(tarinfo.size, tarfile.BLOCKSIZE)  # @UnusedVariable
+        headers = tarinfo.tobuf(errors=u'replace', encoding=config.fsencoding)
+        blocks, remainder = divmod(tarinfo.size, tarfile.BLOCKSIZE)
         if remainder > 0:
             filler_data = b"\0" * (tarfile.BLOCKSIZE - remainder)
         else:
             filler_data = b""
         return TarBlock(index, b"%s%s%s" % (headers, file_data, filler_data))
 
-    def process(self, val):
+    def process(self, val):  # pylint: disable=unused-argument
         u"""
         Turn next value of input_iter into a TarBlock
         """
@@ -589,7 +589,7 @@ class TarBlockIter(object):
         u"""
         Return closing string for tarfile, reset offset
         """
-        blocks, remainder = divmod(self.offset, tarfile.RECORDSIZE)  # @UnusedVariable
+        blocks, remainder = divmod(self.offset, tarfile.RECORDSIZE)
         self.offset = 0
         return b'\0' * (tarfile.RECORDSIZE - remainder)  # remainder can be 0
 
@@ -767,4 +767,4 @@ def get_block_size(file_len):
     else:
         # Split file into about 2000 pieces, rounding to 512
         file_blocksize = int((file_len / (2000 * 512))) * 512
-        return min(file_blocksize, globals.max_blocksize)
+        return min(file_blocksize, config.max_blocksize)

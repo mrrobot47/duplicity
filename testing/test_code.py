@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2014 Michael Terry <michael.terry@canonical.com>
 #
@@ -34,7 +34,7 @@ if os.getenv(u'RUN_CODE_TESTS', None) == u'1':
     # do not run the tests (e.g. the build servers)
     import pycodestyle
 
-from . import _top_dir, DuplicityTestCase  # @IgnorePep8
+from . import _top_dir, DuplicityTestCase
 from . import find_unadorned_strings
 
 skipCodeTest = pytest.mark.skipif(not os.getenv(u'RUN_CODE_TESTS', None) == u'1',

@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -37,7 +37,7 @@ import subprocess
 import tempfile
 import threading
 
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import util
 
@@ -66,7 +66,7 @@ def default():
     _defaultLock.acquire()
     try:
         if _defaultInstance is None or _defaultInstance.dir() is None:
-            _defaultInstance = TemporaryDirectory(temproot=globals.temproot)
+            _defaultInstance = TemporaryDirectory(temproot=config.temproot)
             # set the temp dir to be the default in tempfile module from now on
             tempfile.tempdir = _defaultInstance.dir()
         return _defaultInstance
@@ -142,8 +142,8 @@ class TemporaryDirectory(object):
             return False
 
         if temproot is None:
-            if globals.temproot:
-                temproot = globals.temproot
+            if config.temproot:
+                temproot = config.temproot
             else:
                 global _initialSystemTempRoot
                 temproot = _initialSystemTempRoot

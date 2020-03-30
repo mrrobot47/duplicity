@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -36,7 +36,7 @@ import urllib.error  # pylint: disable=import-error
 import xml.dom.minidom
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import util
 from duplicity.errors import BackendException, FatalBackendException
@@ -67,7 +67,7 @@ class VerifiedHTTPSConnection(http.client.HTTPSConnection):
 
         http.client.HTTPSConnection.__init__(self, *args, **kwargs)
 
-        self.cacert_file = globals.ssl_cacert_file
+        self.cacert_file = config.ssl_cacert_file
         self.cacert_candidates = [u"~/.duplicity/cacert.pem",
                                   u"~/duplicity_cacert.pem",
                                   u"/etc/duplicity/cacert.pem"]
@@ -96,11 +96,11 @@ class VerifiedHTTPSConnection(http.client.HTTPSConnection):
         if u"create_default_context" in dir(ssl):
             context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH,
                                                  cafile=self.cacert_file,
-                                                 capath=globals.ssl_cacert_path)
+                                                 capath=config.ssl_cacert_path)
             self.sock = context.wrap_socket(sock, server_hostname=self.host)
         # the legacy way needing a cert file
         else:
-            if globals.ssl_cacert_path:
+            if config.ssl_cacert_path:
                 raise FatalBackendException(
                     _(u"Option '--ssl-cacert-path' is not supported "
                       u"with python 2.7.8 and below."))
@@ -152,7 +152,7 @@ class WebDAVBackend(duplicity.backend.Backend):
         self.password = self.get_password()
         self.directory = self.sanitize_path(parsed_url.path)
 
-        log.Info(_(u"Using WebDAV protocol %s") % (globals.webdav_proto,))
+        log.Info(_(u"Using WebDAV protocol %s") % (config.webdav_proto,))
         log.Info(_(u"Using WebDAV host %s port %s") % (parsed_url.hostname,
                                                        parsed_url.port))
         log.Info(_(u"Using WebDAV directory %s") % (self.directory,))
@@ -192,7 +192,7 @@ class WebDAVBackend(duplicity.backend.Backend):
         if self.parsed_url.scheme in [u'webdav', u'http']:
             self.conn = http.client.HTTPConnection(self.parsed_url.hostname, self.parsed_url.port)
         elif self.parsed_url.scheme in [u'webdavs', u'https']:
-            if globals.ssl_no_check_certificate:
+            if config.ssl_no_check_certificate:
                 self.conn = http.client.HTTPSConnection(self.parsed_url.hostname, self.parsed_url.port)
             else:
                 self.conn = VerifiedHTTPSConnection(self.parsed_url.hostname, self.parsed_url.port)

@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2011 Fabian Topfstedt <topfstedt@schneevonmorgen.com>
 #
@@ -18,8 +18,8 @@ class FileChunkIO(io.FileIO):
     u"""
     A class that allows you reading only a chunk of a file.
     """
-    def __init__(self, name, mode=u'r', closefd=True, offset=0, bytes=None,
-                 *args, **kwargs):
+    def __init__(self, name, mode=u'r', closefd=True, offset=0, bytes=None,  # pylint: disable=redefined-builtin
+                 *args, **kwargs):  # pylint: disable=redefined-builtin
         u"""
         Open a file chunk. The mode can only be 'r' for reading. Offset
         is the amount of bytes that the chunks starts after the real file's

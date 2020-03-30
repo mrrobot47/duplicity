@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # duplicity -- Encrypted bandwidth efficient backup
 #
@@ -29,27 +29,9 @@
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
-from builtins import filter
-from builtins import map
-from builtins import next
-from builtins import object
-from builtins import range
 
-import copy
-import fasteners
-import gzip
 import os
-import platform
-import re
-import resource
 import sys
-import time
-import traceback
-import types
-
-
-from datetime import datetime
-from os import statvfs
 
 from duplicity.dup_main import main
 import duplicity.errors

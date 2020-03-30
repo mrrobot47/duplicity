@@ -603,9 +603,9 @@ For files over 1MB the size is given by:
 
 file_blocksize = int((file_len / (2000 * 512)) * 512)
 .br
-return min(file_blocksize, globals.max_blocksize)
+return min(file_blocksize, config.max_blocksize)
 
-where globals.max_blocksize defaults to 2048.
+where config.max_blocksize defaults to 2048.
 If you specify a larger max_blocksize, your difftar files will be larger, but your sigtar files will be smaller.
 If you specify a smaller max_blocksize, the reverse occurs.
 The --max-blocksize option should be in multiples of 512.

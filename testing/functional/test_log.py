@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2008 Michael Terry <mike@mterry.name>
 #
@@ -65,7 +65,7 @@ class LogTest(FunctionalTestCase):
             linecount += 1
             if linecount == 1:
                 assert(line == u"ERROR 2\n")
-            elif line != u"\n":
+            elif line[0] != u"\n":
                 assert(line.startswith(r". "))
             else:
                 lastline = True

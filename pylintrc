@@ -9,3 +9,10 @@ disable=access-member-before-definition,
         no-name-in-module,
         no-member,
         not-callable
+
+enable=unused-argument,
+       unused-wildcard-import,
+       redefined-builtin,
+       bad-indentation,
+       mixed-indentation,
+       unreachable

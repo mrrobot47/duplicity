@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -23,12 +23,11 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
-import sys
 import unittest
 
-from duplicity.statistics import *  # @UnusedWildImport
-from duplicity import path
 from . import UnitTestCase
+from duplicity import path
+from duplicity.statistics import *  # pylint: disable=redefined-builtin, unused-wildcard-import
 
 
 class StatsObjTest(UnitTestCase):

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # rdiffdir -- Extend rdiff functionality to directories
 #
@@ -36,7 +36,7 @@ import os
 from duplicity import diffdir
 from duplicity import patchdir
 from duplicity import log
-from duplicity import globals
+from duplicity import config
 from duplicity import selection
 from duplicity import path
 from duplicity import util
@@ -96,18 +96,18 @@ def parse_cmdline_options(arglist):
             select_opts.append((u"--include-filelist", u"standard input"))
             select_files.append(sys.stdin)
         elif opt == u"--max-blocksize":
-            globals.max_blocksize = int(arg)
+            config.max_blocksize = int(arg)
         elif opt == u"--null-separator":
-            globals.null_separator = 1
+            config.null_separator = 1
         elif opt == u"-V":
-            print(u"rdiffdir", str(globals.version))
+            print(u"rdiffdir", str(config.version))
             sys.exit(0)
         elif opt == u"-v" or opt == u"--verbosity":
             log.setverbosity(int(arg))
         elif opt == u"--write-sig-to" or opt == u"--write-signature-to":
             sig_fileobj = get_fileobj(arg, u"wb")
         elif opt == u"--ignore-errors":
-            globals.ignore_errors = 1
+            config.ignore_errors = 1
         else:
             command_line_error(u"Unknown option %s" % opt)
 

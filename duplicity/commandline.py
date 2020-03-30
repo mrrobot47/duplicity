@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -19,12 +19,11 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-u"""Parse command line, check for consistency, and set globals"""
+u"""Parse command line, check for consistency, and set config"""
 
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
-from builtins import filter
 from builtins import str
 from builtins import range
 
@@ -43,7 +42,7 @@ except ImportError:
 
 from duplicity import backend
 from duplicity import dup_time
-from duplicity import globals
+from duplicity import config
 from duplicity import gpg
 from duplicity import log
 from duplicity import path
@@ -108,8 +107,8 @@ def expand_archive_dir(archdir, backname):
     u"""
     Return expanded version of archdir joined with backname.
     """
-    assert globals.backup_name is not None, \
-        u"expand_archive_dir() called prior to globals.backup_name being set"
+    assert config.backup_name is not None, \
+        u"expand_archive_dir() called prior to config.backup_name being set"
 
     return expand_fn(os.path.join(archdir, backname))
 
@@ -135,18 +134,18 @@ def generate_default_backup_name(backend_url):
     return burlhash.hexdigest()
 
 
-def check_file(option, opt, value):
+def check_file(option, opt, value):  # pylint: disable=unused-argument
     return expand_fn(value)
 
 
-def check_time(option, opt, value):
+def check_time(option, opt, value):  # pylint: disable=unused-argument
     try:
         return dup_time.genstrtotime(value)
     except dup_time.TimeException as e:
         raise optparse.OptionValueError(str(e))
 
 
-def check_verbosity(option, opt, value):
+def check_verbosity(option, opt, value):  # pylint: disable=unused-argument
     fail = False
 
     value = value.lower()
@@ -218,17 +217,17 @@ def parse_cmdline_options(arglist):
     def set_time_sep(sep, opt):
         if sep == u'-':
             raise optparse.OptionValueError(u"Dash ('-') not valid for time-separator.")
-        globals.time_separator = sep
+        config.time_separator = sep
         old_fn_deprecation(opt)
 
-    def add_selection(o, option, additional_arg, p):
+    def add_selection(o, option, additional_arg, p):  # pylint: disable=unused-argument
         if o.type in (u"string", u"file"):
             addarg = util.fsdecode(additional_arg)
         else:
             addarg = additional_arg
         select_opts.append((util.fsdecode(option), addarg))
 
-    def add_filelist(o, s, filename, p):
+    def add_filelist(o, s, filename, p):  # pylint: disable=unused-argument
         select_opts.append((util.fsdecode(s), util.fsdecode(filename)))
         try:
             select_files.append(io.open(filename, u"rt", encoding=u"UTF-8"))
@@ -236,12 +235,12 @@ def parse_cmdline_options(arglist):
             log.FatalError(_(u"Error opening file %s") % filename,
                            log.ErrorCode.cant_open_filelist)
 
-    def print_ver(o, s, v, p):
-        print(u"duplicity %s" % (globals.version))
+    def print_ver(o, s, v, p):  # pylint: disable=unused-argument
+        print(u"duplicity %s" % (config.version))
         sys.exit(0)
 
-    def add_rename(o, s, v, p):
-        globals.rename[os.path.normcase(os.path.normpath(v[0]))] = v[1]
+    def add_rename(o, s, v, p):  # pylint: disable=unused-argument
+        config.rename[os.path.normcase(os.path.normpath(v[0]))] = v[1]
 
     parser = optparse.OptionParser(option_class=DupOption, usage=usage())
 
@@ -282,14 +281,14 @@ def parse_cmdline_options(arglist):
     # --encrypt-key <gpg_key_id>
     parser.add_option(u"--encrypt-key", type=u"string", metavar=_(u"gpg-key-id"),
                       dest=u"", action=u"callback",
-                      callback=lambda o, s, v, p: globals.gpg_profile.recipients.append(v))  # @UndefinedVariable
+                      callback=lambda o, s, v, p: config.gpg_profile.recipients.append(v))
 
     # secret keyring in which the private encrypt key can be found
     parser.add_option(u"--encrypt-secret-keyring", type=u"string", metavar=_(u"path"))
 
     parser.add_option(u"--encrypt-sign-key", type=u"string", metavar=_(u"gpg-key-id"),
                       dest=u"", action=u"callback",
-                      callback=lambda o, s, v, p: (globals.gpg_profile.recipients.append(v), set_sign_key(v)))
+                      callback=lambda o, s, v, p: (config.gpg_profile.recipients.append(v), set_sign_key(v)))
 
     # TRANSL: Used in usage help to represent a "glob" style pattern for
     # matching one or more files, as described in the documentation.
@@ -382,7 +381,7 @@ def parse_cmdline_options(arglist):
     # --hidden-encrypt-key <gpg_key_id>
     parser.add_option(u"--hidden-encrypt-key", type=u"string", metavar=_(u"gpg-key-id"),
                       dest=u"", action=u"callback",
-                      callback=lambda o, s, v, p: globals.gpg_profile.hidden_recipients.append(v))  # @UndefinedVariable
+                      callback=lambda o, s, v, p: config.gpg_profile.hidden_recipients.append(v))
 
     # ignore (some) errors during operations; supposed to make it more
     # likely that you are able to restore data under problematic
@@ -650,30 +649,30 @@ def parse_cmdline_options(arglist):
     # parse the options
     (options, args) = parser.parse_args(arglist)
 
-    # Copy all arguments and their values to the globals module.  Don't copy
+    # Copy all arguments and their values to the config module.  Don't copy
     # attributes that are 'hidden' (start with an underscore) or whose name is
     # the empty string (used for arguments that don't directly store a value
     # by using dest="")
     for f in [x for x in dir(options) if x and not x.startswith(u"_")]:
         v = getattr(options, f)
         # Only set if v is not None because None is the default for all the
-        # variables.  If user didn't set it, we'll use defaults in globals.py
+        # variables.  If user didn't set it, we'll use defaults in config.py
         if v is not None:
-            setattr(globals, f, v)
+            setattr(config, f, v)
 
     # convert file_prefix* string
     if sys.version_info.major >= 3:
-        if isinstance(globals.file_prefix, str):
-            globals.file_prefix = bytes(globals.file_prefix, u'utf-8')
-        if isinstance(globals.file_prefix_manifest, str):
-            globals.file_prefix_manifest = bytes(globals.file_prefix_manifest, u'utf-8')
-        if isinstance(globals.file_prefix_archive, str):
-            globals.file_prefix_archive = bytes(globals.file_prefix_archive, u'utf-8')
-        if isinstance(globals.file_prefix_signature, str):
-            globals.file_prefix_signature = bytes(globals.file_prefix_signature, u'utf-8')
+        if isinstance(config.file_prefix, str):
+            config.file_prefix = bytes(config.file_prefix, u'utf-8')
+        if isinstance(config.file_prefix_manifest, str):
+            config.file_prefix_manifest = bytes(config.file_prefix_manifest, u'utf-8')
+        if isinstance(config.file_prefix_archive, str):
+            config.file_prefix_archive = bytes(config.file_prefix_archive, u'utf-8')
+        if isinstance(config.file_prefix_signature, str):
+            config.file_prefix_signature = bytes(config.file_prefix_signature, u'utf-8')
 
     # todo: this should really NOT be done here
-    socket.setdefaulttimeout(globals.timeout)
+    socket.setdefaulttimeout(config.timeout)
 
     # expect no cmd and two positional args
     cmd = u""
@@ -703,7 +702,7 @@ def parse_cmdline_options(arglist):
         full_backup = True
         num_expect = 2
     elif cmd == u"incremental":
-        globals.incremental = True
+        config.incremental = True
         num_expect = 2
     elif cmd == u"list-current-files":
         list_current = True
@@ -713,19 +712,19 @@ def parse_cmdline_options(arglist):
             arg = args.pop(0)
         except Exception:
             command_line_error(u"Missing time string for remove-older-than")
-        globals.remove_time = dup_time.genstrtotime(arg)
+        config.remove_time = dup_time.genstrtotime(arg)
         num_expect = 1
     elif cmd == u"remove-all-but-n-full" or cmd == u"remove-all-inc-of-but-n-full":
         if cmd == u"remove-all-but-n-full":
-            globals.remove_all_but_n_full_mode = True
+            config.remove_all_but_n_full_mode = True
         if cmd == u"remove-all-inc-of-but-n-full":
-            globals.remove_all_inc_of_but_n_full_mode = True
+            config.remove_all_inc_of_but_n_full_mode = True
         try:
             arg = args.pop(0)
         except Exception:
             command_line_error(u"Missing count for " + cmd)
-        globals.keep_chains = int(arg)
-        if not globals.keep_chains > 0:
+        config.keep_chains = int(arg)
+        if not config.keep_chains > 0:
             command_line_error(cmd + u" count must be > 0")
         num_expect = 1
     elif cmd == u"verify":
@@ -758,19 +757,19 @@ def parse_cmdline_options(arglist):
                 command_line_error(u"Two URLs expected for replicate.")
             src_backend_url, backend_url = args[0], args[1]
         else:
-            lpath, backend_url = args_to_path_backend(args[0], args[1])  # @UnusedVariable
+            lpath, backend_url = args_to_path_backend(args[0], args[1])
     else:
         command_line_error(u"Too many arguments")
 
-    if globals.backup_name is None:
-        globals.backup_name = generate_default_backup_name(backend_url)
+    if config.backup_name is None:
+        config.backup_name = generate_default_backup_name(backend_url)
 
     # set and expand archive dir
-    set_archive_dir(expand_archive_dir(globals.archive_dir,
-                                       globals.backup_name))
+    set_archive_dir(expand_archive_dir(config.archive_dir,
+                                       config.backup_name))
 
-    log.Info(_(u"Using archive dir: %s") % (globals.archive_dir_path.uc_name,))
-    log.Info(_(u"Using backup name: %s") % (globals.backup_name,))
+    log.Info(_(u"Using archive dir: %s") % (config.archive_dir_path.uc_name,))
+    log.Info(_(u"Using backup name: %s") % (config.backup_name,))
 
     return args
 
@@ -788,7 +787,7 @@ def usage():
     be assumed to be for the benefit of translators, since they can get each string
     (paired with its preceding comment, if any) independently of the others."""
 
-    dict = {
+    trans = {
         # TRANSL: Used in usage help to represent a Unix-style path name. Example:
         # rsync://user[:password]@other_host[:port]//absolute_path
         u'absolute_path': _(u"absolute_path"),
@@ -939,7 +938,7 @@ def usage():
   duplicity remove-all-inc-of-but-n-full %(count)s [%(options)s] %(target_url)s
   duplicity replicate %(source_url)s %(target_url)s
 
-""" % dict
+""" % trans
 
     # TRANSL: Header in usage help
     msg = msg + _(u"Backends and their URL formats:") + u"""
@@ -972,7 +971,7 @@ def usage():
   webdav://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
   webdavs://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
 
-""" % dict
+""" % trans
 
     # TRANSL: Header in usage help
     msg = msg + _(u"Commands:") + u"""
@@ -986,7 +985,7 @@ def usage():
   remove-all-but-n-full <%(count)s> <%(target_url)s>
   remove-all-inc-of-but-n-full <%(count)s> <%(target_url)s>
   verify <%(target_url)s> <%(source_dir)s>
-  replicate <%(source_url)s> <%(target_url)s>""" % dict
+  replicate <%(source_url)s> <%(target_url)s>""" % trans
 
     return msg
 
@@ -1003,24 +1002,24 @@ def set_archive_dir(dirstring):
         log.FatalError(_(u"Specified archive directory '%s' does not exist, "
                          u"or is not a directory") % (archive_dir_path.uc_name,),
                        log.ErrorCode.bad_archive_dir)
-    globals.archive_dir_path = archive_dir_path
+    config.archive_dir_path = archive_dir_path
 
 
 def set_sign_key(sign_key):
-    u"""Set globals.sign_key assuming proper key given"""
+    u"""Set config.sign_key assuming proper key given"""
     if not re.search(u"^(0x)?([0-9A-Fa-f]{8}|[0-9A-Fa-f]{16}|[0-9A-Fa-f]{40})$", sign_key):
         log.FatalError(_(u"Sign key should be an 8, 16 alt. 40 character hex string, like "
                          u"'AA0E73D2'.\nReceived '%s' instead.") % (sign_key,),
                        log.ErrorCode.bad_sign_key)
-    globals.gpg_profile.sign_key = sign_key
+    config.gpg_profile.sign_key = sign_key
 
 
 def set_selection():
     u"""Return selection iter starting at filename with arguments applied"""
     global select_opts, select_files
-    sel = selection.Select(globals.local_path)
+    sel = selection.Select(config.local_path)
     sel.ParseArgs(select_opts, select_files)
-    globals.select = sel.set_iter()
+    config.select = sel.set_iter()
 
 
 def args_to_path_backend(arg1, arg2):
@@ -1056,7 +1055,7 @@ def set_backend(arg1, arg2):
     """
     path, bend = args_to_path_backend(arg1, arg2)
 
-    globals.backend = backend.get_backend(bend)
+    config.backend = backend.get_backend(bend)
 
     if path == arg2:
         return (None, arg2)  # False?
@@ -1065,10 +1064,10 @@ def set_backend(arg1, arg2):
 
 
 def process_local_dir(action, local_pathname):
-    u"""Check local directory, set globals.local_path"""
+    u"""Check local directory, set config.local_path"""
     local_path = path.Path(path.Path(local_pathname).get_canonical())
     if action == u"restore":
-        if (local_path.exists() and not local_path.isemptydir()) and not globals.force:
+        if (local_path.exists() and not local_path.isemptydir()) and not config.force:
             log.FatalError(_(u"Restore destination directory %s already "
                              u"exists.\nWill not overwrite.") % (local_path.uc_name,),
                            log.ErrorCode.restore_dir_exists)
@@ -1084,7 +1083,7 @@ def process_local_dir(action, local_pathname):
                            % (local_path.uc_name,),
                            log.ErrorCode.backup_dir_doesnt_exist)
 
-    globals.local_path = local_path
+    config.local_path = local_path
 
 
 def check_consistency(action):
@@ -1102,12 +1101,12 @@ def check_consistency(action):
     if action in [u"list-current", u"collection-status",
                   u"cleanup", u"remove-old", u"remove-all-but-n-full", u"remove-all-inc-of-but-n-full", u"replicate"]:
         assert_only_one([list_current, collection_status, cleanup, replicate,
-                         globals.remove_time is not None])
+                         config.remove_time is not None])
     elif action == u"restore" or action == u"verify":
         if full_backup:
             command_line_error(u"--full option cannot be used when "
                                u"restoring or verifying")
-        elif globals.incremental:
+        elif config.incremental:
             command_line_error(u"--incremental option cannot be used when "
                                u"restoring or verifying")
         if select_opts and action == u"restore":
@@ -1119,36 +1118,36 @@ def check_consistency(action):
         if verify:
             command_line_error(u"--verify option cannot be used "
                                u"when backing up")
-        if globals.restore_dir:
+        if config.restore_dir:
             command_line_error(u"restore option incompatible with %s backup"
                                % (action,))
-        if sum([globals.s3_use_rrs, globals.s3_use_ia, globals.s3_use_onezone_ia]) >= 2:
+        if sum([config.s3_use_rrs, config.s3_use_ia, config.s3_use_onezone_ia]) >= 2:
             command_line_error(u"only one of --s3-use-rrs, --s3-use-ia, and --s3-use-onezone-ia may be used")
 
 
 def ProcessCommandLine(cmdline_list):
-    u"""Process command line, set globals, return action
+    u"""Process command line, set config, return action
 
     action will be "list-current", "collection-status", "cleanup",
     "remove-old", "restore", "verify", "full", or "inc".
 
     """
     # build initial gpg_profile
-    globals.gpg_profile = gpg.GPGProfile()
+    config.gpg_profile = gpg.GPGProfile()
 
     # parse command line
     args = parse_cmdline_options(cmdline_list)
 
     # if we get a different gpg-binary from the commandline then redo gpg_profile
-    if globals.gpg_binary is not None:
-        src = globals.gpg_profile
-        globals.gpg_profile = gpg.GPGProfile(
+    if config.gpg_binary is not None:
+        src = config.gpg_profile
+        config.gpg_profile = gpg.GPGProfile(
             passphrase=src.passphrase,
             sign_key=src.sign_key,
             recipients=src.recipients,
             hidden_recipients=src.hidden_recipients)
     log.Debug(_(u"GPG binary is %s, version %s") %
-              ((globals.gpg_binary or u'gpg'), globals.gpg_profile.gpg_version))
+              ((config.gpg_binary or u'gpg'), config.gpg_profile.gpg_version))
 
     # we can now try to import all the backends
     backend.import_backends()
@@ -1164,24 +1163,24 @@ def ProcessCommandLine(cmdline_list):
             action = u"collection-status"
         elif cleanup:
             action = u"cleanup"
-        elif globals.remove_time is not None:
+        elif config.remove_time is not None:
             action = u"remove-old"
-        elif globals.remove_all_but_n_full_mode:
+        elif config.remove_all_but_n_full_mode:
             action = u"remove-all-but-n-full"
-        elif globals.remove_all_inc_of_but_n_full_mode:
+        elif config.remove_all_inc_of_but_n_full_mode:
             action = u"remove-all-inc-of-but-n-full"
         else:
             command_line_error(u"Too few arguments")
-        globals.backend = backend.get_backend(args[0])
-        if not globals.backend:
+        config.backend = backend.get_backend(args[0])
+        if not config.backend:
             log.FatalError(_(u"""Bad URL '%s'.
 Examples of URL strings are "scp://user@host.net:1234/path" and
 "file:///usr/local".  See the man page for more information.""") % (args[0],),
                            log.ErrorCode.bad_url)
     elif len(args) == 2:
         if replicate:
-            globals.src_backend = backend.get_backend(args[0])
-            globals.backend = backend.get_backend(args[1])
+            config.src_backend = backend.get_backend(args[0])
+            config.backend = backend.get_backend(args[1])
             action = u"replicate"
         else:
             # Figure out whether backup or restore

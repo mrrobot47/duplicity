@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -26,11 +26,10 @@ from future import standard_library
 standard_library.install_aliases()
 
 import sys
-import unittest
 
-from duplicity.globmatch import *
-from duplicity.path import *
 from . import UnitTestCase
+from duplicity.globmatch import *  # pylint: disable=unused-wildcard-import,redefined-builtin
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from mock import patch
 
 

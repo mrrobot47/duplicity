@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2016 Stefan Breunig <stefan-duplicity@breunig.xyz>
 # Based on the backend onedrivebackend.py
@@ -31,7 +31,7 @@ from io import DEFAULT_BUFFER_SIZE
 
 import duplicity.backend
 from duplicity.errors import BackendException
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 
 
@@ -67,7 +67,7 @@ class ADBackend(duplicity.backend.Backend):
         self.backup_target_id = None
         self.backup_target = parsed_url.path.lstrip(u'/')
 
-        if globals.volsize > (10 * 1024 * 1024 * 1024):
+        if config.volsize > (10 * 1024 * 1024 * 1024):
             # https://forums.developer.amazon.com/questions/22713/file-size-limits.html
             # https://forums.developer.amazon.com/questions/22038/support-for-chunked-transfer-encoding.html
             log.FatalError(
@@ -320,8 +320,8 @@ class ADBackend(duplicity.backend.Backend):
             log.Info(u'%s upload failed with timeout status code=%d. Speculatively '
                      u'waiting for %d seconds to see if Amazon Drive finished the '
                      u'upload anyway' % (remote_filename, response.status_code,
-                                         globals.timeout))
-            tries = globals.timeout / 15
+                                         config.timeout))
+            tries = config.timeout / 15
             while tries >= 0:
                 tries -= 1
                 time.sleep(15)

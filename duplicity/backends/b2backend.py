@@ -1,3 +1,4 @@
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright (c) 2015 Matthew Bentley
 #
@@ -22,19 +23,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from builtins import object
 from future import standard_library
 standard_library.install_aliases()
+from builtins import object
 
-import os
-import hashlib
 from urllib.parse import quote_plus  # pylint: disable=import-error
 
-import duplicity.backend
-from duplicity.errors import BackendException, FatalBackendException
 from duplicity import log
 from duplicity import progress
 from duplicity import util
+from duplicity.errors import BackendException, FatalBackendException
+import duplicity.backend
 
 
 class B2ProgressListener(object):

@@ -1,5 +1,5 @@
 from __future__ import print_function
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -21,17 +21,18 @@ from __future__ import print_function
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
-from builtins import object
 from future import standard_library
 standard_library.install_aliases()
+from builtins import object
 
+import os
 import unittest
 
-from duplicity.path import *  # @UnusedWildImport
 from duplicity import diffdir
 from duplicity import selection
+from duplicity import tarfile
 from duplicity import util
-from duplicity import tarfile  # @Reimport
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from . import UnitTestCase
 
 
@@ -60,8 +61,7 @@ class DDTest(UnitTestCase):
         diffdir.write_block_iter(sigtar, u"testfiles/output/sigtar")
 
         i = 0
-        for tarinfo in tarfile.TarFile(u"testfiles/output/sigtar", u"r"):  # @UnusedVariable
-            i += 1
+        for tarinfo in tarfile.TarFile(u"testfiles/output/sigtar", u"r"):              i += 1
         assert i >= 5, u"There should be at least 5 files in sigtar"
 
     def empty_diff_schema(self, dirname):
@@ -100,8 +100,7 @@ class DDTest(UnitTestCase):
         diffdir.write_block_iter(diffdir.DirDelta(select2, sigtar_fp),
                                  u"testfiles/output/difftar")
 
-        size = os.stat(u"testfiles/output/difftar").st_size  # @UnusedVariable
-
+        size = os.stat(u"testfiles/output/difftar").st_size
     def test_empty_diff2(self):
         u"""Test producing diff against directories of special files"""
         self.empty_diff_schema(u"testfiles/special_cases/neg_mtime")
@@ -169,8 +168,8 @@ class DDTest(UnitTestCase):
         those produced by DirDelta_WriteSig and other methods.
 
         """
-        deltadir1 = Path(u"testfiles/output/dir.deltatar1")  # @UnusedVariable
-        deltadir2 = Path(u"testfiles/output/dir.deltatar2")  # @UnusedVariable
+        deltadir1 = Path(u"testfiles/output/dir.deltatar1")
+        deltadir2 = Path(u"testfiles/output/dir.deltatar2")
         cur_full_sigs = Path(u"testfiles/output/fullsig.dir1")
 
         cur_dir = Path(u"testfiles/dir1")
@@ -181,7 +180,7 @@ class DDTest(UnitTestCase):
         sigstack = [cur_full_sigs]
         for dirname in [u'dir2', u'dir3', u'dir4']:
             # print "Processing ", dirname
-            old_dir = cur_dir  # @UnusedVariable
+            old_dir = cur_dir
             cur_dir = Path(u"testfiles/" + dirname)
 
             old_full_sigs = cur_full_sigs

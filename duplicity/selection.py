@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -23,20 +23,18 @@
 from builtins import next
 from builtins import str
 from builtins import object
-from builtins import filter, map
 
-import os  # @UnusedImport
-import stat  # @UnusedImport
+import os
+import stat
 import sys
 import re
 
-from duplicity.path import *  # @UnusedWildImport
-from duplicity import log  # @Reimport
-from duplicity import globals  # @Reimport
+from duplicity import config
 from duplicity import diffdir
-from duplicity import util  # @Reimport
-from duplicity.globmatch import GlobbingError, FilePrefixError, \
-    select_fn_from_glob
+from duplicity import log
+from duplicity import util
+from duplicity.globmatch import GlobbingError, FilePrefixError, select_fn_from_glob
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 
 u"""Iterate exactly the requested files in a directory
 
@@ -113,7 +111,7 @@ class Select(object):
 
         """
         # Only called by set_iter. Internal.
-        def error_handler(exc, path, filename):
+        def error_handler(exc, path, filename):  # pylint: disable=unused-argument
             fullpath = os.path.join(path.name, filename)
             try:
                 mode = os.stat(fullpath)[stat.ST_MODE]
@@ -140,7 +138,7 @@ class Select(object):
             """
             # Only called by Iterate. Internal.
             # todo: get around circular dependency issue by importing here
-            from duplicity import robust  # @Reimport
+            from duplicity import robust
             for filename in robust.listpath(path):
                 new_path = robust.check_common_error(
                     error_handler, Path.append, (path, filename))
@@ -362,7 +360,7 @@ probably isn't what you meant.""") %
         """
         # Internal. Used by ParseArgs.
         log.Notice(_(u"Reading globbing filelist %s") % list_name)
-        separator = globals.null_separator and u"\0" or u"\n"
+        separator = config.null_separator and u"\0" or u"\n"
         filelist_fp.seek(0)
         for line in filelist_fp.read().split(separator):
             line, include = self.filelist_sanitise_line(line, inc_default)

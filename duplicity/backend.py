@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -37,17 +37,15 @@ import time
 import re
 import getpass
 import re
-import types
 import urllib.request  # pylint: disable=import-error
 import urllib.parse  # pylint: disable=import-error
 import urllib.error  # pylint: disable=import-error
 
 from duplicity import dup_temp
 from duplicity import file_naming
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity import path
-from duplicity import progress
 from duplicity import util
 
 from duplicity.util import exception_traceback
@@ -220,7 +218,7 @@ def get_backend(url_string):
 
     Raise InvalidBackendURL if the URL is not a valid URL.
     """
-    if globals.use_gio:
+    if config.use_gio:
         url_string = u'gio+' + url_string
     obj = get_backend_object(url_string)
     if obj:
@@ -370,8 +368,8 @@ def retry(operation, fatal=True):
     def outer_retry(fn):
         def inner_retry(self, *args):
             global _last_exception
-            errors_fatal, errors_default = globals.are_errors_fatal.get(operation, (True, None))
-            for n in range(1, globals.num_retries + 1):
+            errors_fatal, errors_default = config.are_errors_fatal.get(operation, (True, None))
+            for n in range(1, config.num_retries + 1):
                 try:
                     return fn(self, *args)
                 except FatalBackendException as e:
@@ -391,7 +389,7 @@ def retry(operation, fatal=True):
                         # retry on anything else
                         log.Debug(_(u"Backtrace of previous error: %s")
                                   % exception_traceback())
-                        at_end = n == globals.num_retries
+                        at_end = n == config.num_retries
                         code = _get_code_from_exception(self.backend, operation, e)
                         if code == log.ErrorCode.backend_not_found:
                             # If we tried to do something, but the file just isn't there,
@@ -413,9 +411,9 @@ def retry(operation, fatal=True):
                                      % (n, e.__class__.__name__, util.uexc(e)))
                         if not at_end:
                             if isinstance(e, TemporaryLoadException):
-                                time.sleep(3 * globals.backend_retry_delay)  # wait longer before trying again
+                                time.sleep(3 * config.backend_retry_delay)  # wait longer before trying again
                             else:
-                                time.sleep(globals.backend_retry_delay)  # wait a bit before trying again
+                                time.sleep(config.backend_retry_delay)  # wait a bit before trying again
                             if hasattr(self.backend, u'_retry_cleanup'):
                                 self.backend._retry_cleanup()
 

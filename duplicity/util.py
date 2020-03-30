@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -39,12 +39,12 @@ import traceback
 import atexit
 
 from duplicity import tarfile
-import duplicity.globals as globals
+import duplicity.config as config
 import duplicity.log as log
 
 try:
     # For paths, just use path.name/uname rather than converting with these
-    from os import fsencode, fsdecode
+    from os import fsencode, fsdecode  # pylint: disable=unused-import
 except ImportError:
     # Most likely Python version < 3.2, so define our own fsencode/fsdecode.
     # These are functions that encode/decode unicode paths to filesystem encoding,
@@ -71,7 +71,7 @@ except ImportError:
         # If we are not doing any cleverness with non-unicode filename bytes,
         # decoding using system encoding is good enough. Use "ignore" as
         # Linux paths can contain non-Unicode characters
-        return bytes_filename.decode(globals.fsencoding, u"replace")
+        return bytes_filename.decode(config.fsencoding, u"replace")
 
 
 def exception_traceback(limit=50):
@@ -79,7 +79,7 @@ def exception_traceback(limit=50):
     @return A string representation in typical Python format of the
             currently active/raised exception.
     """
-    type, value, tb = sys.exc_info()
+    type, value, tb = sys.exc_info()  # pylint: disable=redefined-builtin
 
     lines = traceback.format_tb(tb, limit)
     lines.extend(traceback.format_exception_only(type, value))
@@ -140,7 +140,7 @@ def maybe_ignore_errors(fn):
     try:
         return fn()
     except Exception as e:
-        if globals.ignore_errors:
+        if config.ignore_errors:
             log.Warn(_(u"IGNORED_ERROR: Warning: ignoring error as requested: %s: %s")
                      % (e.__class__.__name__, uexc(e)))
             return None
@@ -207,10 +207,10 @@ def ignore_missing(fn, filename):
 
 @atexit.register
 def release_lockfile():
-    if globals.lockfile:
-        log.Debug(_(u"Releasing lockfile %s") % globals.lockpath)
+    if config.lockfile:
+        log.Debug(_(u"Releasing lockfile %s") % config.lockpath)
         try:
-            globals.lockfile.release()
+            config.lockfile.release()
         except Exception:
             pass
 
@@ -253,7 +253,7 @@ def which(program):
     def is_exe(fpath):
         return os.path.isfile(fpath) and os.path.isabs(fpath) and os.access(fpath, os.X_OK)
 
-    fpath, fname = os.path.split(program)  # @UnusedVariable
+    fpath, fname = os.path.split(program)
     if fpath:
         if is_exe(program):
             return program

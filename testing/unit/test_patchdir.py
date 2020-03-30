@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -20,22 +20,23 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 from builtins import map
 from builtins import object
 from builtins import range
-from future import standard_library
-standard_library.install_aliases()
 
 import io
+import os
 import unittest
 
 from duplicity import diffdir
 from duplicity import patchdir
-from duplicity import log  # @UnusedImport
 from duplicity import selection
-from duplicity import tarfile  # @UnusedImport
-from duplicity import librsync  # @UnusedImport
-from duplicity.path import *  # @UnusedWildImport
+from duplicity import tarfile
+from duplicity import librsync
+from duplicity.lazy import *  # pylint: disable=unused-wildcard-import,redefined-builtin
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from . import UnitTestCase
 
 

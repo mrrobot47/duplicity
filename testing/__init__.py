@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2012 Canonical Ltd
 #
@@ -28,7 +28,7 @@ import time
 import unittest
 
 from duplicity import backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 
 _testing_dir = os.path.dirname(os.path.abspath(__file__))
@@ -67,11 +67,11 @@ class DuplicityTestCase(unittest.TestCase):
     def setUp(self):
         super(DuplicityTestCase, self).setUp()
         self.savedEnviron = {}
-        self.savedGlobals = {}
+        self.savedConfig = {}
 
         log.setup()
         log.setverbosity(log.WARNING)
-        self.set_global(u'print_statistics', 0)
+        self.set_config(u'print_statistics', 0)
         backend.import_backends()
 
         # Have all file references in tests relative to our testing dir
@@ -80,8 +80,8 @@ class DuplicityTestCase(unittest.TestCase):
     def tearDown(self):
         for key in self.savedEnviron:
             self._update_env(key, self.savedEnviron[key])
-        for key in self.savedGlobals:
-            setattr(globals, key, self.savedGlobals[key])
+        for key in self.savedConfig:
+            setattr(config, key, self.savedConfig[key])
         assert not os.system(u"rm -rf testfiles")
         super(DuplicityTestCase, self).tearDown()
 
@@ -101,8 +101,8 @@ class DuplicityTestCase(unittest.TestCase):
             self.savedEnviron[key] = os.environ.get(key)
         self._update_env(key, value)
 
-    def set_global(self, key, value):
-        assert hasattr(globals, key)
-        if key not in self.savedGlobals:
-            self.savedGlobals[key] = getattr(globals, key)
-        setattr(globals, key, value)
+    def set_config(self, key, value):
+        assert hasattr(config, key)
+        if key not in self.savedConfig:
+            self.savedConfig[key] = getattr(config, key)
+        setattr(config, key, value)

@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2008 Francois Deppierraz
 #
@@ -18,10 +18,9 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-import duplicity.backend
 from duplicity import log
 from duplicity import util
-from duplicity.errors import BackendException
+import duplicity.backend
 
 
 class TAHOEBackend(duplicity.backend.Backend):

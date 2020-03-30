@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -26,13 +26,14 @@ which is written in C.  The goal was to use C as little as possible...
 
 """
 
-from builtins import str
 from builtins import object
+from builtins import str
+
+import array
 import os
 import sys
+
 from . import _librsync
-import types
-import array
 
 if os.environ.get(u'READTHEDOCS') == u'True':
     import mock  # pylint: disable=import-error

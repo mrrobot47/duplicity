@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -20,9 +20,9 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 import errno
+
 from duplicity import librsync
 from duplicity import log
-from duplicity import util
 
 tmp_file_index = 1
 
@@ -60,7 +60,7 @@ def check_common_error(error_handler, function, args=()):
 
 def listpath(path):
     u"""Like path.listdir() but return [] if error, and sort results"""
-    def error_handler(exc):
+    def error_handler(exc):  # pylint: disable=unused-argument
         log.Warn(_(u"Error listing directory %s") % path.uc_name)
         return []
     dir_listing = check_common_error(error_handler, path.listdir)

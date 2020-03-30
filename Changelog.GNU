@@ -1,3 +1,17 @@
+2020-03-30  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lp:~kenneth-loafman/duplicity/duplicity-pylint
+      - Enable additional pylint warnings. Make 1st pass at correction.
+          unused-argument,
+          unused-wildcard-import,
+          redefined-builtin,
+          bad-indentation,
+          mixed-indentation,
+         unreachable
+      - Renamed globals to config to fix conflict with __builtin__.glogals()
+      - Resolved conflict between duplicity.config and testing.manual.config
+      - Normalized emacs mode line to have encoding:utf8 on all *.py files
+
 2020-03-22  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1868414 - timeout parameter not passed to

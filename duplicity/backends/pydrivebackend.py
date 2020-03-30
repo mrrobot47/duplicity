@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2015 Yigal Asnis
 #
@@ -18,13 +18,13 @@
 
 from builtins import next
 from builtins import str
-import string
+
 import os
 
-import duplicity.backend
 from duplicity import log
 from duplicity import util
 from duplicity.errors import BackendException
+import duplicity.backend
 
 
 class PyDriveBackend(duplicity.backend.Backend):
@@ -214,7 +214,7 @@ Exception: %s""" % str(e))
             size = int(drive_file[u'fileSize'])
         return {u'size': size}
 
-    def _error_code(self, operation, error):
+    def _error_code(self, operation, error):  # pylint: disable=unused-argument
         from pydrive.files import ApiRequestError, FileNotUploadedError  # pylint: disable=import-error
         if isinstance(error, FileNotUploadedError):
             return log.ErrorCode.backend_not_found

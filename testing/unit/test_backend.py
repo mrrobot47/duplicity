@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -27,10 +27,9 @@ import mock
 import unittest
 
 import duplicity.backend
-import duplicity.backends  # @UnusedImport
-from duplicity.errors import *  # @UnusedWildImport
-from duplicity import globals
-from duplicity import path
+import duplicity.backends
+from duplicity.errors import *  # pylint: disable=unused-wildcard-import
+from duplicity import config
 from . import UnitTestCase
 
 
@@ -150,7 +149,7 @@ class BackendWrapperTest(UnitTestCase):
 
     @mock.patch(u'sys.exit')
     def test_default_error_exit(self, exit_mock):
-        self.set_global(u'num_retries', 1)
+        self.set_config(u'num_retries', 1)
         try:
             del self.mock._error_code
         except:
@@ -163,7 +162,7 @@ class BackendWrapperTest(UnitTestCase):
 
     @mock.patch(u'sys.exit')
     def test_translates_code(self, exit_mock):
-        self.set_global(u'num_retries', 1)
+        self.set_config(u'num_retries', 1)
         self.mock._error_code.return_value = 12345
         self.mock._put.side_effect = Exception
         self.backend.put(self.local, self.remote)
@@ -171,7 +170,7 @@ class BackendWrapperTest(UnitTestCase):
 
     @mock.patch(u'sys.exit')
     def test_uses_exception_code(self, exit_mock):
-        self.set_global(u'num_retries', 1)
+        self.set_config(u'num_retries', 1)
         self.mock._error_code.return_value = 12345
         self.mock._put.side_effect = BackendException(u'error', code=54321)
         self.backend.put(self.local, self.remote)
@@ -179,8 +178,8 @@ class BackendWrapperTest(UnitTestCase):
 
     @mock.patch(u'sys.exit')
     @mock.patch(u'time.sleep')  # so no waiting
-    def test_cleans_up(self, exit_mock, time_mock):
-        self.set_global(u'num_retries', 2)
+    def test_cleans_up(self, exit_mock, time_mock):  # pylint: disable=unused-argument
+        self.set_config(u'num_retries', 2)
         self.mock._retry_cleanup.return_value = None
         self.mock._put.side_effect = Exception
         self.backend.put(self.local, self.remote)
@@ -213,28 +212,28 @@ class BackendWrapperTest(UnitTestCase):
 
     @mock.patch(u'sys.exit')
     @mock.patch(u'time.sleep')  # so no waiting
-    def test_retries(self, exit_mock, time_mock):
-        self.set_global(u'num_retries', 2)
+    def test_retries(self, exit_mock, time_mock):  # pylint: disable=unused-argument
+        self.set_config(u'num_retries', 2)
 
         self.mock._get.side_effect = Exception
         self.backend.get(self.remote, self.local)
-        self.assertEqual(self.mock._get.call_count, globals.num_retries)
+        self.assertEqual(self.mock._get.call_count, config.num_retries)
 
         self.mock._put.side_effect = Exception
         self.backend.put(self.local, self.remote)
-        self.assertEqual(self.mock._put.call_count, globals.num_retries)
+        self.assertEqual(self.mock._put.call_count, config.num_retries)
 
         self.mock._list.side_effect = Exception
         self.backend.list()
-        self.assertEqual(self.mock._list.call_count, globals.num_retries)
+        self.assertEqual(self.mock._list.call_count, config.num_retries)
 
         self.mock._delete_list.side_effect = Exception
         self.backend.delete([self.remote])
-        self.assertEqual(self.mock._delete_list.call_count, globals.num_retries)
+        self.assertEqual(self.mock._delete_list.call_count, config.num_retries)
 
         self.mock._query_list.side_effect = Exception
         self.backend.query_info([self.remote])
-        self.assertEqual(self.mock._query_list.call_count, globals.num_retries)
+        self.assertEqual(self.mock._query_list.call_count, config.num_retries)
 
         try:
             del self.mock._delete_list
@@ -242,7 +241,7 @@ class BackendWrapperTest(UnitTestCase):
             return
         self.mock._delete.side_effect = Exception
         self.backend.delete([self.remote])
-        self.assertEqual(self.mock._delete.call_count, globals.num_retries)
+        self.assertEqual(self.mock._delete.call_count, config.num_retries)
 
         try:
             del self.mock._query_list
@@ -250,11 +249,11 @@ class BackendWrapperTest(UnitTestCase):
             return
         self.mock._query.side_effect = Exception
         self.backend.query_info([self.remote])
-        self.assertEqual(self.mock._query.call_count, globals.num_retries)
+        self.assertEqual(self.mock._query.call_count, config.num_retries)
 
         self.mock._move.side_effect = Exception
         self.backend.move(self.local, self.remote)
-        self.assertEqual(self.mock._move.call_count, globals.num_retries)
+        self.assertEqual(self.mock._move.call_count, config.num_retries)
 
     def test_move(self):
         self.mock._move.return_value = True

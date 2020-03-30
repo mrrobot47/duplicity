@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -25,13 +25,11 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
-import types
 import io
 import unittest
-import duplicity.path
 
-from duplicity.selection import *  # @UnusedWildImport
-from duplicity.lazy import *  # @UnusedWildImport
+from duplicity.selection import *  # pylint: disable=unused-wildcard-import,redefined-builtin
+from duplicity.lazy import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from . import UnitTestCase
 from mock import patch
 
@@ -580,7 +578,7 @@ class ParseArgsTest(UnitTestCase):
 
     def test_filelist_null_separator(self):
         u"""test_filelist, but with null_separator set"""
-        self.set_global(u"null_separator", 1)
+        self.set_config(u"null_separator", 1)
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],

@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -31,11 +31,10 @@ import sys
 import shutil
 
 from duplicity import log
-from duplicity import util
 from duplicity import path
 from duplicity import file_naming
 from duplicity import tempdir
-from duplicity import globals
+from duplicity import config
 from duplicity import gpg
 
 
@@ -75,7 +74,7 @@ def get_fileobj_duppath(dirpath, partname, permname, remname, overwrite=False):
     return fileobject is closed, rename to final position.  filename
     must be a recognizable duplicity data file.
     """
-    if not globals.restart:
+    if not config.restart:
         td = tempdir.TemporaryDirectory(dirpath.name)
         tdpname = td.mktemp()
         tdp = TempDupPath(tdpname, parseresults=file_naming.parse(partname))
@@ -93,7 +92,7 @@ def get_fileobj_duppath(dirpath, partname, permname, remname, overwrite=False):
         tdp.rename(dirpath.append(partname))
         td.forget(tdpname)
 
-    if not globals.restart:
+    if not config.restart:
         fh.addhook(rename_and_forget)
 
     return fh
@@ -171,7 +170,7 @@ class FileobjHooked(object):
         u"""
         We have achieved the first checkpoint, make file visible and permanent.
         """
-        assert not globals.restart
+        assert not config.restart
         self.tdp.rename(self.dirpath.append(self.partname))
         self.fileobj.flush()
         del self.hooklist[0]
@@ -188,10 +187,10 @@ class FileobjHooked(object):
         if pr.compressed:
             gpg.GzipWriteFile(src_iter, tgt.name, size=sys.maxsize)
         elif pr.encrypted:
-            gpg.GPGWriteFile(src_iter, tgt.name, globals.gpg_profile, size=sys.maxsize)
+            gpg.GPGWriteFile(src_iter, tgt.name, config.gpg_profile, size=sys.maxsize)
         else:
             shutil.copyfile(src.name, tgt.name)
-        globals.backend.move(tgt)  # @UndefinedVariable
+        config.backend.move(tgt)
 
     def to_final(self):
         u"""

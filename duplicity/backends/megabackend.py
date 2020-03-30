@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2017 Tomas Vondra (Launchpad id: tomas-v)
 # Copyright 2017 Kenneth Loafman <kenneth@loafman.com>
@@ -22,11 +22,7 @@
 from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
-from builtins import str
-from builtins import range
-from builtins import object
 
-from duplicity import log
 from duplicity import util
 from duplicity.errors import BackendException
 import duplicity.backend

@@ -22,14 +22,13 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 # stdlib
-import posixpath
-import locale
 import logging
+import posixpath
 
-# import duplicity stuff # version 0.6
-import duplicity.backend
+# import duplicity stuff
 from duplicity import log
 from duplicity.errors import BackendException
+import duplicity.backend
 
 
 def get_jotta_device(jfs):

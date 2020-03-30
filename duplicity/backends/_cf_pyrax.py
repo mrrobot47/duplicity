@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2013 J.P. Krauss <jkrauss@asymworks.com>
 #
@@ -91,7 +91,7 @@ Exception: %s""" % str(e))
                                u"Please check your credentials and permissions.",
                                log.ErrorCode.backend_permission_denied)
 
-    def _error_code(self, operation, e):
+    def _error_code(self, operation, e):  # pylint: disable=unused-argument
         if isinstance(e, self.nso_exc):
             return log.ErrorCode.backend_not_found
         elif isinstance(e, self.client_exc):

@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -30,7 +30,7 @@ import types
 import re
 import calendar
 import sys
-from duplicity import globals
+from duplicity import config
 from duplicity import util
 
 # For type testing against both int and long types that works in python 2/3
@@ -94,13 +94,13 @@ def setprevtime(time_in_secs):
 def timetostring(timeinseconds):
     u"""Return w3 or duplicity datetime compliant listing of timeinseconds"""
 
-    if globals.old_filenames:
+    if config.old_filenames:
         # We need to know if DST applies to append the correct offset. So
         #    1. Save the tuple returned by localtime.
         #    2. Pass the DST flag into gettzd
         lcltime = time.localtime(timeinseconds)
-        return time.strftime(u"%Y-%m-%dT%H" + globals.time_separator +
-                             u"%M" + globals.time_separator + u"%S",
+        return time.strftime(u"%Y-%m-%dT%H" + config.time_separator +
+                             u"%M" + config.time_separator + u"%S",
                              lcltime) + gettzd(lcltime[-1])
     else:
         # DST never applies to UTC
@@ -126,7 +126,7 @@ def stringtotime(timestring):
             # old format for filename time
             year, month, day = list(map(int, date.split(u"-")))
             hour, minute, second = list(map(int,
-                                        daytime.split(globals.time_separator)))
+                                        daytime.split(config.time_separator)))
         assert 1900 < year < 2100, year
         assert 1 <= month <= 12
         assert 1 <= day <= 31
@@ -247,7 +247,7 @@ def gettzd(dstflag):
     hours, minutes = list(map(abs, divmod(offset, 60)))
     assert 0 <= hours <= 23
     assert 0 <= minutes <= 59
-    return u"%s%02d%s%02d" % (prefix, hours, globals.time_separator, minutes)
+    return u"%s%02d%s%02d" % (prefix, hours, config.time_separator, minutes)
 
 
 def tzdtoseconds(tzd):
@@ -256,7 +256,7 @@ def tzdtoseconds(tzd):
         return 0
     assert len(tzd) == 6  # only accept forms like +08:00 for now
     assert (tzd[0] == u"-" or tzd[0] == u"+") and \
-        tzd[3] == globals.time_separator
+        tzd[3] == config.time_separator
     return -60 * (60 * int(tzd[:3]) + int(tzd[4:]))
 
 

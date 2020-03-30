@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -20,26 +20,24 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 from builtins import map
-from builtins import filter
 from builtins import next
-from builtins import range
 from builtins import object
+from builtins import range
 
-import re  # @UnusedImport
-import types
-import os
+import re
 import sys
 import tempfile
 
-from duplicity import tarfile  # @UnusedImport
-from duplicity import librsync  # @UnusedImport
-from duplicity import log  # @UnusedImport
 from duplicity import diffdir
+from duplicity import config
+from duplicity import librsync
+from duplicity import log
 from duplicity import selection
+from duplicity import tarfile
 from duplicity import tempdir
-from duplicity import util  # @UnusedImport
-from duplicity.path import *  # @UnusedWildImport
-from duplicity.lazy import *  # @UnusedWildImport
+from duplicity import util
+from duplicity.lazy import *  # pylint: disable=unused-wildcard-import,redefined-builtin
+from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 
 u"""Functions for patching of directories"""
 
@@ -236,8 +234,7 @@ class Multivol_Filelike(object):
         u"""Add next chunk to buffer"""
         if self.at_end:
             return None
-        index, difftype, multivol = get_index_from_tarinfo(  # @UnusedVariable
-            self.tarinfo_list[0])
+        index, difftype, multivol = get_index_from_tarinfo(self.tarinfo_list[0])
         if not multivol or index != self.index:
             # we've moved on
             # the following communicates next tarinfo to difftar2path_iter
@@ -295,7 +292,7 @@ class PathPatcher(ITRBranch):
         if self.dir_diff_ropath:
             self.dir_diff_ropath.copy_attribs(self.dir_basis_path)
 
-    def can_fast_process(self, index, basis_path, diff_ropath):
+    def can_fast_process(self, index, basis_path, diff_ropath):  # pylint: disable=unused-argument
         u"""No need to recurse if diff_ropath isn't a directory"""
         return not (diff_ropath and diff_ropath.isdir())
 
@@ -608,7 +605,7 @@ class ROPath_IterWriter(ITRBranch):
                 ropath.copy(new_path)
 
         self.dir_new_path = self.base_path.new_index(index)
-        if self.dir_new_path.exists() and not globals.force:
+        if self.dir_new_path.exists() and not config.force:
             # base may exist, but nothing else
             assert index == (), index
         else:
@@ -620,7 +617,7 @@ class ROPath_IterWriter(ITRBranch):
         if self.dir_diff_ropath:
             self.dir_diff_ropath.copy_attribs(self.dir_new_path)
 
-    def can_fast_process(self, index, ropath):
+    def can_fast_process(self, index, ropath):  # pylint: disable=unused-argument
         u"""Can fast process (no recursion) if ropath isn't a directory"""
         log.Info(_(u"Writing %s of type %s") %
                  (util.fsdecode(ropath.get_relative_path()), ropath.type),

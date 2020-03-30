@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2009 Eric EJ Johnson <ej.johnson@rackspace.com>
 #
@@ -70,7 +70,7 @@ Exception: %s""" % str(e))
                            log.ErrorCode.connection_failed)
         self.container = conn.create_container(container)
 
-    def _error_code(self, operation, e):
+    def _error_code(self, operation, e):  # pylint: disable=unused-argument
         if isinstance(e, NoSuchObject):
             return log.ErrorCode.backend_not_found
         elif isinstance(e, self.resp_exc):

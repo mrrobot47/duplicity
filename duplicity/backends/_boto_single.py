@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -25,7 +25,7 @@ import os
 import time
 
 import duplicity.backend
-from duplicity import globals
+from duplicity import config
 from duplicity import log
 from duplicity.errors import FatalBackendException, BackendException
 from duplicity import progress
@@ -72,7 +72,7 @@ def get_connection(scheme, parsed_url, storage_uri):
             cfs_supported = False
             calling_format = None
 
-        if globals.s3_use_new_style:
+        if config.s3_use_new_style:
             if cfs_supported:
                 calling_format = SubdomainCallingFormat()
             else:
@@ -95,11 +95,11 @@ def get_connection(scheme, parsed_url, storage_uri):
 
     if not parsed_url.hostname:
         # Use the default host.
-        conn = storage_uri.connect(is_secure=(not globals.s3_unencrypted_connection))
+        conn = storage_uri.connect(is_secure=(not config.s3_unencrypted_connection))
     else:
         assert scheme == u's3'
         conn = storage_uri.connect(host=parsed_url.hostname, port=parsed_url.port,
-                                   is_secure=(not globals.s3_unencrypted_connection))
+                                   is_secure=(not config.s3_unencrypted_connection))
 
     if hasattr(conn, u'calling_format'):
         if calling_format is None:
@@ -166,7 +166,7 @@ class BotoBackend(duplicity.backend.Backend):
         # boto uses scheme://bucket[/name] and specifies hostname on connect()
         self.boto_uri_str = u'://'.join((parsed_url.scheme[:2],
                                          parsed_url.path.lstrip(u'/')))
-        if globals.s3_european_buckets:
+        if config.s3_european_buckets:
             self.my_location = Location.EU
         else:
             self.my_location = u''
@@ -206,8 +206,8 @@ class BotoBackend(duplicity.backend.Backend):
     def _put(self, source_path, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
 
-        if globals.s3_european_buckets:
-            if not globals.s3_use_new_style:
+        if config.s3_european_buckets:
+            if not config.s3_use_new_style:
                 raise FatalBackendException(u"European bucket creation was requested, but not new-style "
                                             u"bucket addressing (--s3-use-new-style)",
                                             code=log.ErrorCode.s3_bucket_not_style)
@@ -224,25 +224,25 @@ class BotoBackend(duplicity.backend.Backend):
 
         key = self.bucket.new_key(self.key_prefix + remote_filename)
 
-        if globals.s3_use_rrs:
+        if config.s3_use_rrs:
             storage_class = u'REDUCED_REDUNDANCY'
-        elif globals.s3_use_ia:
+        elif config.s3_use_ia:
             storage_class = u'STANDARD_IA'
-        elif globals.s3_use_onezone_ia:
+        elif config.s3_use_onezone_ia:
             storage_class = u'ONEZONE_IA'
-        elif globals.s3_use_glacier and u"manifest" not in remote_filename:
+        elif config.s3_use_glacier and u"manifest" not in remote_filename:
             storage_class = u'GLACIER'
         else:
             storage_class = u'STANDARD'
         log.Info(u"Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))
-        if globals.s3_use_sse:
+        if config.s3_use_sse:
             headers = {
                 u'Content-Type': u'application/octet-stream',
                 u'x-amz-storage-class': storage_class,
                 u'x-amz-server-side-encryption': u'AES256'
             }
-        elif globals.s3_use_sse_kms:
-            if globals.s3_kms_key_id is None:
+        elif config.s3_use_sse_kms:
+            if config.s3_kms_key_id is None:
                 raise FatalBackendException(u"S3 USE SSE KMS was requested, but key id not provided "
                                             u"require (--s3-kms-key-id)",
                                             code=log.ErrorCode.s3_kms_no_id)
@@ -250,10 +250,10 @@ class BotoBackend(duplicity.backend.Backend):
                 u'Content-Type': u'application/octet-stream',
                 u'x-amz-storage-class': storage_class,
                 u'x-amz-server-side-encryption': u'aws:kms',
-                u'x-amz-server-side-encryption-aws-kms-key-id': globals.s3_kms_key_id
+                u'x-amz-server-side-encryption-aws-kms-key-id': config.s3_kms_key_id
             }
-            if globals.s3_kms_grant is not None:
-                headers[u'x-amz-grant-full-control'] = globals.s3_kms_grant
+            if config.s3_kms_grant is not None:
+                headers[u'x-amz-grant-full-control'] = config.s3_kms_grant
         else:
             headers = {
                 u'Content-Type': u'application/octet-stream',
@@ -317,7 +317,7 @@ class BotoBackend(duplicity.backend.Backend):
     def upload(self, filename, key, headers):
         key.set_contents_from_filename(filename, headers,
                                        cb=progress.report_transfer,
-                                       num_cb=(max(2, 8 * globals.volsize / (1024 * 1024)))
+                                       num_cb=(max(2, 8 * config.volsize / (1024 * 1024)))
                                        )  # Max num of callbacks = 8 times x megabyte
         key.close()
 

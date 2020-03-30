@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2019 Francesco Magno
 # Copyright 2019 Kenneth Loafman <kenneth@loafman.com>
@@ -21,18 +21,14 @@
 
 from future import standard_library
 standard_library.install_aliases()
-from builtins import str
-from builtins import range
-from builtins import object
 
 import os
 import os.path
 
-import duplicity.backend
-from duplicity import path
 from duplicity import log
-from duplicity.errors import BackendException
 from duplicity import util
+from duplicity.errors import BackendException
+import duplicity.backend
 
 
 class RcloneBackend(duplicity.backend.Backend):

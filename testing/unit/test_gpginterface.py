@@ -1,3 +1,5 @@
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
+#
 u"""py-unit tests for GnuPG
 
 COPYRIGHT:
@@ -29,7 +31,6 @@ standard_library.install_aliases()
 import unittest
 
 import tempfile
-import sys
 
 from duplicity import gpginterface
 
@@ -57,8 +58,7 @@ class GnuPGTests(BasicTest):
         self.gnupg.options.meta_interactive = 0
         self.gnupg.options.extra_args.append(u'--no-secmem-warning')
 
-    def do_create_fh_operation(self, args, input,
-                               passphrase=None):
+    def do_create_fh_operation(self, args, input, passphrase=None):  # pylint: disable=redefined-builtin
         creations = [u'stdin', u'stdout']
 
         # Make sure we're getting the passphrase to GnuPG
@@ -96,14 +96,14 @@ class GnuPGTests(BasicTest):
             u"No way to send the passphrase to GnuPG!"
 
         creations = []
-        # We'll handle the passphrase manually
-        if passphrase is not None:
-            proc.handles.append(u'passphrase')  # @UndefinedVariable
-
         attachments = {u'stdin': stdin, u'stdout': stdout}
 
         proc = self.gnupg.run(args, create_fhs=creations,
                               attach_fhs=attachments)
+
+        # We'll handle the passphrase manually
+        if passphrase is not None:
+            proc.handles.append(u'passphrase')
 
         if passphrase is not None:
             proc.handles[u'passphrase'].write(passphrase)

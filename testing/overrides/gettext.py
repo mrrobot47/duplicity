@@ -23,14 +23,14 @@
 # if we ever get a unicode->ascii translation by accident.
 
 
-def install(*args, **kwargs):
+def install(*args, **kwargs):  # pylint: disable=unused-argument
     ZWSP = u"​"  # ZERO WIDTH SPACE, basically an invisible space separator
     import sys
     if sys.version_info.major >= 3:
         import builtins
         b = builtins
     else:
-        import __builtin__
+        import __builtin__  # pylint: disable=import-error
         b = __builtin__
     b.__dict__[u'_'] = lambda x: x + ZWSP
     b.__dict__[u'ngettext'] = lambda one, more, n: one + ZWSP if n == 1 else more + ZWSP

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -29,7 +29,6 @@ import shutil
 from setuptools import setup, Extension
 from setuptools.command.test import test
 from setuptools.command.install import install
-from setuptools.command.sdist import sdist
 from distutils.command.build_scripts import build_scripts
 from subprocess import Popen, PIPE
 

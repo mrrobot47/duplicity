@@ -39,6 +39,7 @@ duplicity/backends/tahoebackend.py
 duplicity/backends/webdavbackend.py
 duplicity/cached_ops.py
 duplicity/commandline.py
+duplicity/config.py
 duplicity/diffdir.py
 duplicity/dup_collections.py
 duplicity/dup_main.py
@@ -48,7 +49,6 @@ duplicity/dup_time.py
 duplicity/errors.py
 duplicity/file_naming.py
 duplicity/filechunkio.py
-duplicity/globals.py
 duplicity/gpg.py
 duplicity/gpginterface.py
 duplicity/lazy.py

@@ -1,7 +1,7 @@
-duplicity.globals module
+duplicity.config module
 ========================
 
-.. automodule:: duplicity.globals
+.. automodule:: duplicity.config
    :members:
    :undoc-members:
    :show-inheritance:

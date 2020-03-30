@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -29,7 +29,7 @@ import unittest
 from duplicity import dup_time
 from duplicity import file_naming
 from duplicity import log
-from duplicity import globals
+from duplicity import config
 from duplicity import util
 from . import UnitTestCase
 
@@ -91,18 +91,18 @@ class FileNamingBase(object):
     def test_more(self):
         u"""More file_parsing tests"""
         file_naming.prepare_regex(force=True)
-        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"dns.h112bi.h14rg0.st.g")
+        pr = file_naming.parse(config.file_prefix + config.file_prefix_signature + b"dns.h112bi.h14rg0.st.g")
         assert pr, pr
         assert pr.type == u"new-sig"
         assert pr.end_time == 1029826800
 
-        if not globals.short_filenames:
-            pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg")
+        if not config.short_filenames:
+            pr = file_naming.parse(config.file_prefix + config.file_prefix_signature + b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.gpg")
             assert pr, pr
             assert pr.type == u"new-sig"
             assert pr.end_time == 1029826800
 
-        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"dfs.h5dixs.st.g")
+        pr = file_naming.parse(config.file_prefix + config.file_prefix_signature + b"dfs.h5dixs.st.g")
         assert pr, pr
         assert pr.type == u"full-sig"
         assert pr.time == 1036954144, repr(pr.time)
@@ -110,20 +110,20 @@ class FileNamingBase(object):
     def test_partial(self):
         u"""Test addition of partial flag"""
         file_naming.prepare_regex(force=True)
-        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"dns.h112bi.h14rg0.st.p.g")
+        pr = file_naming.parse(config.file_prefix + config.file_prefix_signature + b"dns.h112bi.h14rg0.st.p.g")
         assert pr, pr
         assert pr.partial
         assert pr.type == u"new-sig"
         assert pr.end_time == 1029826800
 
-        if not globals.short_filenames:
-            pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.part.gpg")
+        if not config.short_filenames:
+            pr = file_naming.parse(config.file_prefix + config.file_prefix_signature + b"duplicity-new-signatures.2002-08-18T00:04:30-07:00.to.2002-08-20T00:00:00-07:00.sigtar.part.gpg")
             assert pr, pr
             assert pr.partial
             assert pr.type == u"new-sig"
             assert pr.end_time == 1029826800
 
-        pr = file_naming.parse(globals.file_prefix + globals.file_prefix_signature + b"dfs.h5dixs.st.p.g")
+        pr = file_naming.parse(config.file_prefix + config.file_prefix_signature + b"dfs.h5dixs.st.p.g")
         assert pr, pr
         assert pr.partial
         assert pr.type == u"full-sig"
@@ -134,24 +134,24 @@ class FileNamingLong(UnitTestCase, FileNamingBase):
     u"""Test long filename parsing and generation"""
     def setUp(self):
         super(FileNamingLong, self).setUp()
-        self.set_global(u'short_filenames', 0)
+        self.set_config(u'short_filenames', 0)
 
 
 class FileNamingShort(UnitTestCase, FileNamingBase):
     u"""Test short filename parsing and generation"""
     def setUp(self):
         super(FileNamingShort, self).setUp()
-        self.set_global(u'short_filenames', 1)
+        self.set_config(u'short_filenames', 1)
 
 
 class FileNamingPrefixes(UnitTestCase, FileNamingBase):
     u"""Test filename parsing and generation with prefixes"""
     def setUp(self):
         super(FileNamingPrefixes, self).setUp()
-        self.set_global(u'file_prefix', b"global-")
-        self.set_global(u'file_prefix_manifest', b"mani-")
-        self.set_global(u'file_prefix_signature', b"sign-")
-        self.set_global(u'file_prefix_archive', b"arch-")
+        self.set_config(u'file_prefix', b"global-")
+        self.set_config(u'file_prefix_manifest', b"mani-")
+        self.set_config(u'file_prefix_signature', b"sign-")
+        self.set_config(u'file_prefix_archive', b"arch-")
 
 
 if __name__ == u"__main__":

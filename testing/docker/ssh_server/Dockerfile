@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2017 Nils Tekampe <nils@tekampe.org>
 # Thanks to Aleksandar Diklic "https://github.com/rastasheep"

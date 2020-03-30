@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2002 Ben Escoto <ben@emerose.org>
 # Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
@@ -23,13 +23,10 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
-from io import StringIO
 import re
-import sys
-import types
 import unittest
 
-from duplicity import globals
+from duplicity import config
 from duplicity import manifest
 from duplicity import path
 
@@ -88,11 +85,11 @@ class ManifestTest(UnitTestCase):
 
     def setUp(self):
         UnitTestCase.setUp(self)
-        self.old_files_changed = globals.file_changed
-        globals.file_changed = u'testing'
+        self.old_files_changed = config.file_changed
+        config.file_changed = u'testing'
 
     def tearDown(self):
-        globals.file_changed = self.old_files_changed
+        config.file_changed = self.old_files_changed
 
     def test_basic(self):
         vi1 = manifest.VolumeInfo()
@@ -105,7 +102,7 @@ class ManifestTest(UnitTestCase):
         for vi in [vi1, vi2, vi3]:
             m.add_volume_info(vi)
 
-        self.set_global(u'local_path', path.Path(u"Foobar"))
+        self.set_config(u'local_path', path.Path(u"Foobar"))
         m.set_dirinfo()
         m.set_files_changed_info([])
 
@@ -127,7 +124,7 @@ class ManifestTest(UnitTestCase):
         for vi in [vi1, vi2, vi3]:
             m.add_volume_info(vi)
 
-        self.set_global(u'local_path', path.Path(u"Foobar"))
+        self.set_config(u'local_path', path.Path(u"Foobar"))
         m.set_dirinfo()
         m.set_files_changed_info([
             (b'one', b'new'),

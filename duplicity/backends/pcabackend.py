@@ -1,4 +1,4 @@
-# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4 -*-
+# -*- Mode:Python; indent-tabs-mode:nil; tab-width:4; encoding:utf8 -*-
 #
 # Copyright 2013 Matthieu Huin <mhu@enovance.com>
 # Copyright 2017 Xavier Lucas <xavier.lucas@corp.ovh.com>
@@ -144,7 +144,7 @@ Exception: %s""" % str(e))
             log.FatalError(u"Container '%s' exists but its storage policy is '%s' not '%s'."
                            % (self.container, container_metadata[policy_header.lower()], policy))
 
-    def _error_code(self, operation, e):  # pylint: disable: unused-argument
+    def _error_code(self, operation, e):  # pylint: disable= unused-argument
         if isinstance(e, self.resp_exc):
             if e.http_status == 404:
                 return log.ErrorCode.backend_not_found
