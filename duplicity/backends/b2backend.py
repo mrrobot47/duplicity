@@ -118,7 +118,7 @@ class B2Backend(duplicity.backend.Backend):
                                     util.fsdecode(local_path.name)),
                 log.INFO)
         self.bucket.download_file_by_name(quote_plus(self.path + util.fsdecode(remote_filename), u'/'),
-                                          DownloadDestLocalFile(util.fsdecode(local_path.name)))
+                                          DownloadDestLocalFile(local_path.name))
 
     def _put(self, source_path, remote_filename):
         u"""

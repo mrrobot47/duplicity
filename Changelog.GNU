@@ -1,3 +1,7 @@
+2020-03-31  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1869921 - B2 backup resume fails for TypeError
+
 2020-03-30  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lp:~kenneth-loafman/duplicity/duplicity-pylint
