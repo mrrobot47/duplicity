@@ -12,7 +12,7 @@
           bad-indentation,
           mixed-indentation,
          unreachable
-      - Renamed globals to config to fix conflict with __builtin__.glogals()
+      - Renamed globals to config to fix conflict with __builtin__.globals()
       - Resolved conflict between duplicity.config and testing.manual.config
       - Normalized emacs mode line to have encoding:utf8 on all *.py files
 
