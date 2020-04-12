@@ -14,6 +14,7 @@ New in v0.8.13 (2020/04/??)
   - Resolved conflict between duplicity.config and testing.manual.config
   - Normalized emacs mode line to have encoding:utf8 on all *.py files
 * Fixed bug #1869921 - B2 backup resume fails for TypeError
+* Fixed bug #1872332 - NameError in ssh_paramiko_backend.py
 
 
 New in v0.8.12 (2020/03/19)

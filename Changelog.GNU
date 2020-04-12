@@ -1,3 +1,7 @@
+2020-04-12  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1872332 - NameError in ssh_paramiko_backend.py
+
 2020-03-31  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1869921 - B2 backup resume fails for TypeError
