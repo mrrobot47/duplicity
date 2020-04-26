@@ -50,11 +50,11 @@ snapcraft snap --output duplicity_${VERSION}_amd64.snap --destructive-mode
 # run snap review tools before pushing to store
 review-tools.snap-review --allow-classic duplicity_${VERSION}_amd64.snap
 
-# # push to edge
-# snapcraft push duplicity_${VERSION}_amd64.snap --release edge
+# push to edge
+snapcraft push duplicity_${VERSION}_amd64.snap --release edge
 
-# # sign snap
-# snapcraft sign-build duplicity_${VERSION}*.snap --key-name firstprime
+# sign snap
+snapcraft sign-build duplicity_${VERSION}*.snap --key-name firstprime
 
 # mv into working source tree
 mv duplicity_${VERSION}_amd64.snap* ../..
