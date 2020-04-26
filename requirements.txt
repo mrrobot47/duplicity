@@ -5,6 +5,7 @@ future
 mock
 python-gettext
 requests
+setuptools_scm
 urllib3
 
 

@@ -26,19 +26,17 @@ if [ "$#" -ne 0 ]; then
     exit 2
 fi
 
-BASE=`python3 -c "from duplicity import __version__; print(__version__, end='')"`
-REVNO=`bzr revno`
-MYVERSION=${BASE}.${REVNO}
-echo "makesnap of ${MYVERSION}"
+VERSION=`./setup.py --version`
+echo "makesnap of ${VERSION}"
 
-# run makedist
-dist/makedist
+# make distribution
+./setup.py sdist
 
 # make clean source dir
 rm -rf build
 mkdir -p build
-tar xf duplicity-${MYVERSION}.tar.gz -C build
-cd build/duplicity-${MYVERSION}
+tar xf duplicity-${VERSION}.tar.gz -C build
+cd build/duplicity-${VERSION}
 
 # print version in build copy of snapcraft.yaml
 head -2 snap/snapcraft.yaml | tail -1
@@ -47,19 +45,19 @@ head -2 snap/snapcraft.yaml | tail -1
 snapcraft login --with ~/.snaplogin
 
 # build snap on Ubuntu 18.04 VM.  Multipass does not work well on MacOS.
-snapcraft snap --output duplicity_${MYVERSION}_amd64.snap --destructive-mode
+snapcraft snap --output duplicity_${VERSION}_amd64.snap --destructive-mode
 
 # run snap review tools before pushing to store
-review-tools.snap-review --allow-classic duplicity_${MYVERSION}_amd64.snap
+review-tools.snap-review --allow-classic duplicity_${VERSION}_amd64.snap
 
-# push to edge
-snapcraft push duplicity_${MYVERSION}_amd64.snap --release edge
+# # push to edge
+# snapcraft push duplicity_${VERSION}_amd64.snap --release edge
 
-# sign snap
-snapcraft sign-build duplicity_${MYVERSION}*.snap --key-name firstprime
+# # sign snap
+# snapcraft sign-build duplicity_${VERSION}*.snap --key-name firstprime
 
 # mv into working source tree
-mv duplicity_${MYVERSION}_amd64.snap* ../..
+mv duplicity_${VERSION}_amd64.snap* ../..
 cd ../..
 
 # clean up

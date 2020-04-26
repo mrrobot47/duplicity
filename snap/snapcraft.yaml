@@ -55,4 +55,5 @@ parts:
             - mediafire             # mediafirebackend.py
             - pydrive               # pydrivebackend.py
             - pyrax                 # hubicbackend, _cf_pyrax.py
+            - setuptools_scm        # scm version
         source: .

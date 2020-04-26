@@ -23,16 +23,18 @@
 from __future__ import print_function
 
 import os
-import sys
+import re
 import shutil
+import sys
+import time
 
-from setuptools import setup, Extension
-from setuptools.command.test import test
-from setuptools.command.install import install
 from distutils.command.build_scripts import build_scripts
+from setuptools import setup, Extension
+from setuptools.command.install import install
+from setuptools.command.sdist import sdist
+from setuptools.command.test import test
+from setuptools_scm import get_version
 from subprocess import Popen, PIPE
-
-from duplicity import __version__
 
 
 # check that we can function here
@@ -41,14 +43,14 @@ if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.vers
     sys.exit(1)
 
 
-# get version string, major.minor.bug.revno
-try:
-    bzr = Popen([u"bzr", u"revno"], stdout=PIPE, universal_newlines=True)
-    revno = bzr.communicate()[0].split()[0].strip()
-except Exception:
-    revno = u'0'
+scm_version_args = {
+    'tag_regex': r'^(?P<prefix>rel.)?(?P<version>[^\+]+)(?P<suffix>.*)?$',
+    'local_scheme': 'no-local-version',
+    }
 
-version_string = __version__ + u'.' + revno
+
+Version = get_version(**scm_version_args)
+Reldate = time.strftime(u"%B %d, %Y", time.localtime())
 
 
 # READTHEDOCS uses setup.py sdist but can't handle extensions
@@ -87,7 +89,7 @@ def get_data_files():
                 u'bin/rdiffdir.1'
                 ]
             ),
-            (u'share/doc/duplicity-%s' % version_string,
+            (u'share/doc/duplicity-%s' % Version,
                 [
                 u'AUTHORS',
                 u'CHANGELOG',
@@ -127,6 +129,54 @@ def get_data_files():
                          [u"po/%s/duplicity.mo" % lang]))
 
     return data_files
+
+
+class SdistCommand(sdist):
+
+    def VersionedCopy(self, source, dest):
+        u"""
+        Copy source to dest, substituting $version with version
+        $reldate with today's date, i.e. December 28, 2008.
+        """
+        buffer = open(source, u"rt").read()
+
+        buffer = re.sub(u"\$version", Version, buffer)
+        buffer = re.sub(u"\$reldate", Reldate, buffer)
+
+        open(dest, u"wt").write(buffer)
+
+    def run(self):
+
+        sdist.run(self)
+
+        orig = "dist/duplicity-" + Version + ".tar.gz"
+        tardir = "duplicity-" + Version
+        tarfile = "duplicity-" + Version + ".tar.gz"
+
+        assert not os.system("tar xf %s" % orig)
+        assert not os.remove(orig)
+
+        # make sure executables are
+        assert not os.chmod(os.path.join(tardir, u"setup.py"), 0o755)
+        assert not os.chmod(os.path.join(tardir, u"bin", u"duplicity"), 0o755)
+        assert not os.chmod(os.path.join(tardir, u"bin", u"rdiffdir"), 0o755)
+
+        # recopy the unversioned files and add correct version
+        self.VersionedCopy(os.path.join(u"bin", u"duplicity.1"),
+                           os.path.join(tardir, u"bin", u"duplicity.1"))
+        self.VersionedCopy(os.path.join(u"bin", u"rdiffdir.1"),
+                           os.path.join(tardir, u"bin", u"rdiffdir.1"))
+        self.VersionedCopy(os.path.join(u"duplicity", u"__init__.py"),
+                           os.path.join(tardir, u"duplicity", u"__init__.py"))
+        self.VersionedCopy(os.path.join(u"snap", u"snapcraft.yaml"),
+                           os.path.join(tardir, u"snap", u"snapcraft.yaml"))
+
+        # set COPYFILE_DISABLE to disable appledouble file creation
+        os.environ[u'COPYFILE_DISABLE'] = u'true'
+
+        # make the new tarfile and remove tardir
+        assert not os.system("tar czf %s %s" % (tarfile, tardir))
+        assert not shutil.rmtree(tardir)
 
 
 class TestCommand(test):
@@ -174,7 +224,7 @@ class InstallCommand(install):
         install.run(self)
 
 
-class BSCommand (build_scripts):
+class BSCommand(build_scripts):
     u'''Build but don't touch my shebang!'''
 
     def run(self):
@@ -220,7 +270,7 @@ with open(u"README") as fh:
 
 
 setup(name=u"duplicity",
-    version=version_string,
+    version=Version,
     description=u"Encrypted backup using rsync algorithm",
     long_description=long_description,
     long_description_content_type=u"text/plain",
@@ -250,6 +300,11 @@ setup(name=u"duplicity",
         u"bin/duplicity"
         ],
     data_files=get_data_files(),
+    include_package_data=True,
+    setup_requires=[
+        'setuptools_scm',
+        ],
+    use_scm_version=scm_version_args,
     install_requires=[
         u"fasteners",
         u"future"
@@ -266,6 +321,7 @@ setup(name=u"duplicity",
     cmdclass={
         u"build_scripts": BSCommand,
         u"install": InstallCommand,
+        u"sdist": SdistCommand,
         u"test": TestCommand,
         },
     classifiers=[
