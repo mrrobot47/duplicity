@@ -348,6 +348,11 @@ Alternatively you might choose
 .BR cloudfiles .
 
 .TP
+.BI --b2-hide-files
+Causes Duplicity to hide files in B2 instead of deleting them. Useful in
+combination with B2's lifecycle rules.
+
+.TP
 .BI --compare-data
 Enable data comparison of regular files on action verify. This conducts a
 verify as described above to verify the integrity of the backup archives,

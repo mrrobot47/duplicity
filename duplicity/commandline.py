@@ -581,6 +581,9 @@ def parse_cmdline_options(arglist):
     # allow the user to switch cloudfiles backend
     parser.add_option(u"--cf-backend", metavar=_(u"pyrax|cloudfiles"))
 
+    # Option that causes the B2 backend to hide files instead of deleting them
+    parser.add_option(u"--b2-hide-files", action=u"store_true")
+
     # If set, use short (< 30 char) filenames for all the remote files.
     parser.add_option(u"--short-filenames", action=u"callback",
                       dest=u"short_filenames",

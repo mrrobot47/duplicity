@@ -1,3 +1,7 @@
+2020-05-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1875529 - Support hiding instead of deletin on B2
+
 2020-04-12  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1872332 - NameError in ssh_paramiko_backend.py

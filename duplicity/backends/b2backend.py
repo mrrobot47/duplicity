@@ -32,6 +32,7 @@ from urllib.parse import quote_plus  # pylint: disable=import-error
 from duplicity import log
 from duplicity import progress
 from duplicity import util
+from duplicity import config
 from duplicity.errors import BackendException, FatalBackendException
 import duplicity.backend
 
@@ -143,9 +144,14 @@ class B2Backend(duplicity.backend.Backend):
         u"""
         Delete filename from remote server
         """
-        log.Log(u"Delete: %s" % self.path + util.fsdecode(filename), log.INFO)
-        file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename), u'/'))
-        self.bucket.delete_file_version(file_version_info.id_, file_version_info.file_name)
+        full_filename = self.path + util.fsdecode(filename)
+        log.Log(u"Delete: %s" % full_filename, log.INFO)
+
+        if config.b2_hide_files:
+            self.bucket.hide_file(full_filename)
+        else:
+            file_version_info = self.file_info(quote_plus(full_filename, u'/'))
+            self.bucket.delete_file_version(file_version_info.id_, file_version_info.file_name)
 
     def _query(self, filename):
         u"""

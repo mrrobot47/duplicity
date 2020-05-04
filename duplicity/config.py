@@ -291,6 +291,9 @@ ssh_options = u""
 # default cf backend is pyrax
 cf_backend = u"pyrax"
 
+# default to fully deleting files in b2
+b2_hide_files = False
+
 # HTTPS ssl options (currently only webdav, lftp)
 ssl_cacert_file = None
 ssl_cacert_path = None
