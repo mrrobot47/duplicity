@@ -30,7 +30,7 @@ VERSION=`./setup.py --version`
 echo "makesnap of ${VERSION}"
 
 # make distribution
-./setup.py sdist
+./setup.py sdist --dist-dir=.
 
 # make clean source dir
 rm -rf build
