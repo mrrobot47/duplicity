@@ -44,8 +44,8 @@ if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.vers
 
 
 scm_version_args = {
-    'tag_regex': r'^(?P<prefix>rel.)?(?P<version>[^\+]+)(?P<suffix>.*)?$',
-    'local_scheme': 'no-local-version',
+    u'tag_regex': r'^(?P<prefix>rel.)?(?P<version>[^\+]+)(?P<suffix>.*)?$',
+    u'local_scheme': u'no-local-version',
     }
 
 
@@ -149,11 +149,11 @@ class SdistCommand(sdist):
 
         sdist.run(self)
 
-        orig = "dist/duplicity-" + Version + ".tar.gz"
-        tardir = "duplicity-" + Version
-        tarfile = "duplicity-" + Version + ".tar.gz"
+        orig = u"%s/duplicity-%s.tar.gz" % (self.dist_dir, Version)
+        tardir = u"duplicity-%s" % (Version)
+        tarfile = u"%s/duplicity-%s.tar.gz" % (self.dist_dir, Version)
 
-        assert not os.system("tar xf %s" % orig)
+        assert not os.system(u"tar xf %s" % orig)
         assert not os.remove(orig)
 
         # make sure executables are
@@ -175,7 +175,7 @@ class SdistCommand(sdist):
         os.environ[u'COPYFILE_DISABLE'] = u'true'
 
         # make the new tarfile and remove tardir
-        assert not os.system("tar czf %s %s" % (tarfile, tardir))
+        assert not os.system(u"tar czf %s %s" % (tarfile, tardir))
         assert not shutil.rmtree(tardir)
 
 
@@ -302,7 +302,7 @@ setup(name=u"duplicity",
     data_files=get_data_files(),
     include_package_data=True,
     setup_requires=[
-        'setuptools_scm',
+        u"setuptools_scm",
         ],
     use_scm_version=scm_version_args,
     install_requires=[
