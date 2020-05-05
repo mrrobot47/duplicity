@@ -16,6 +16,7 @@ New in v0.8.13 (2020/05/??)
 * Fixed bug #1869921 - B2 backup resume fails for TypeError
 * Fixed bug #1872332 - NameError in ssh_paramiko_backend.py
 * Fixed bug #1875529 - Support hiding instead of deletin on B2
+* Fixed bug #1876778 - byte/str issues in megabackend.py
 
 
 New in v0.8.12 (2020/03/19)

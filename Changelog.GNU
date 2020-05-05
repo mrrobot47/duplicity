@@ -1,3 +1,7 @@
+2020-05-05  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1876778 - byte/str issues in megabackend.py
+
 2020-05-04  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1875529 - Support hiding instead of deletin on B2
