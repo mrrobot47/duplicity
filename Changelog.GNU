@@ -2,6 +2,7 @@
 
     * Fixed bug #1876778 - byte/str issues in megabackend.py
     * Fixed bug #1876446 - WebDAV backend creates only tiny or 0 Byte files
+    * Prep for 0.8.13
 
 2020-05-04  Kenneth Loafman  <kenneth@loafman.com>
 
