@@ -437,7 +437,7 @@ class WebDAVBackend(duplicity.backend.Backend):
         response = None
         try:
             source_file = source_path.open(u"rb")
-            response = self.request(u"PUT", url, source_file)
+            response = self.request(u"PUT", url, source_file.read())
             # 200 is returned if a file is overwritten during restarting
             if response.status in [200, 201, 204]:
                 response.read()
