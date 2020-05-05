@@ -1,4 +1,4 @@
-New in v0.8.13 (2020/05/??)
+New in v0.8.13 (2020/05/05)
 ---------------------------
 * Fixed bug #1868414 - timeout parameter not passed to
   BlobService for Azure backend
