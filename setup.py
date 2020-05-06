@@ -302,13 +302,13 @@ setup(name=u"duplicity",
     data_files=get_data_files(),
     include_package_data=True,
     setup_requires=[
-        u"python3_setuptools_scm",
+        u"python3-setuptools-scm",
         ],
     use_scm_version=scm_version_args,
     install_requires=[
         u"fasteners",
         u"future",
-        u"python3_setuptools_scm",
+        u"python3-setuptools-scm",
         ],
     tests_require=[
         u"fasteners",
