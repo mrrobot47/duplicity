@@ -307,7 +307,8 @@ setup(name=u"duplicity",
     use_scm_version=scm_version_args,
     install_requires=[
         u"fasteners",
-        u"future"
+        u"future",
+        u"setuptools_scm",
         ],
     tests_require=[
         u"fasteners",
