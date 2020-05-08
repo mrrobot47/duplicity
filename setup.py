@@ -46,6 +46,7 @@ if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.vers
 scm_version_args = {
     u'tag_regex': r'^(?P<prefix>rel.)?(?P<version>[^\+]+)(?P<suffix>.*)?$',
     u'local_scheme': u'no-local-version',
+    u'fallback_version': u'0.8.13',
     }
 
 
