@@ -56,4 +56,5 @@ parts:
             - pydrive               # pydrivebackend.py
             - pyrax                 # hubicbackend, _cf_pyrax.py
             - setuptools_scm        # scm version
+            - six                   # dropbox
         source: .
