@@ -306,6 +306,8 @@ setup(name=u"duplicity",
     install_requires=[
         u"fasteners",
         u"future",
+        u"setuptools>=45.2.0",
+        u"setuptools_scm>=3.4.3",
         ],
     tests_require=[
         u"fasteners",

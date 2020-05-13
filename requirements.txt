@@ -5,7 +5,8 @@ future
 mock
 python-gettext
 requests
-setuptools_scm
+setuptools>=45.2.0
+setuptools_scm>=3.4.3
 urllib3
 
 
@@ -31,7 +32,7 @@ tox
 # b2sdk
 # boto
 # boto3
-# dropbox==6.9.0
+# dropbox
 # gdata
 # jottalib
 # mediafire
