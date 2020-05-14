@@ -46,7 +46,6 @@ if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.vers
 scm_version_args = {
     u'tag_regex': r'^(?P<prefix>rel.)?(?P<version>[^\+]+)(?P<suffix>.*)?$',
     u'local_scheme': u'no-local-version',
-    u'fallback_version': u'0.8.13',
     }
 
 
@@ -306,8 +305,8 @@ setup(name=u"duplicity",
     install_requires=[
         u"fasteners",
         u"future",
-        u"setuptools>=45.2.0",
-        u"setuptools_scm>=3.4.3",
+        u"setuptools",
+        u"setuptools_scm>",
         ],
     tests_require=[
         u"fasteners",
