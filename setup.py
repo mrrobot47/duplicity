@@ -305,7 +305,6 @@ setup(name=u"duplicity",
         ],
     data_files=get_data_files(),
     include_package_data=True,
-    use_scm_version=scm_version_args,
     setup_requires=[
         u"setuptools",
         u"setuptools_scm>",
