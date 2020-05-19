@@ -48,8 +48,10 @@ scm_version_args = {
     u'local_scheme': u'no-local-version',
     }
 
-
-Version = get_version(**scm_version_args)
+try:
+    Version = get_version(**scm_version_args)
+except LookupError as e:
+    Version = u"0.8.14dev"
 Reldate = time.strftime(u"%B %d, %Y", time.localtime())
 
 
@@ -131,22 +133,24 @@ def get_data_files():
     return data_files
 
 
+def VersionedCopy(source, dest):
+    u"""
+    Copy source to dest, substituting $version with version
+    $reldate with today's date, i.e. December 28, 2008.
+    """
+    with open(source, u"rt") as fd:
+        buffer = fd.read()
+
+    buffer = re.sub(u"\$version", Version, buffer)
+    buffer = re.sub(u"\$reldate", Reldate, buffer)
+
+    with open(dest, u"wt") as fd:
+        fd.write(buffer)
+
+
 class SdistCommand(sdist):
 
-    def VersionedCopy(self, source, dest):
-        u"""
-        Copy source to dest, substituting $version with version
-        $reldate with today's date, i.e. December 28, 2008.
-        """
-        buffer = open(source, u"rt").read()
-
-        buffer = re.sub(u"\$version", Version, buffer)
-        buffer = re.sub(u"\$reldate", Reldate, buffer)
-
-        open(dest, u"wt").write(buffer)
-
     def run(self):
-
         sdist.run(self)
 
         orig = u"%s/duplicity-%s.tar.gz" % (self.dist_dir, Version)
@@ -162,14 +166,14 @@ class SdistCommand(sdist):
         assert not os.chmod(os.path.join(tardir, u"bin", u"rdiffdir"), 0o755)
 
         # recopy the unversioned files and add correct version
-        self.VersionedCopy(os.path.join(u"bin", u"duplicity.1"),
-                           os.path.join(tardir, u"bin", u"duplicity.1"))
-        self.VersionedCopy(os.path.join(u"bin", u"rdiffdir.1"),
-                           os.path.join(tardir, u"bin", u"rdiffdir.1"))
-        self.VersionedCopy(os.path.join(u"duplicity", u"__init__.py"),
-                           os.path.join(tardir, u"duplicity", u"__init__.py"))
-        self.VersionedCopy(os.path.join(u"snap", u"snapcraft.yaml"),
-                           os.path.join(tardir, u"snap", u"snapcraft.yaml"))
+        VersionedCopy(os.path.join(u"bin", u"duplicity.1"),
+                      os.path.join(tardir, u"bin", u"duplicity.1"))
+        VersionedCopy(os.path.join(u"bin", u"rdiffdir.1"),
+                      os.path.join(tardir, u"bin", u"rdiffdir.1"))
+        VersionedCopy(os.path.join(u"duplicity", u"__init__.py"),
+                      os.path.join(tardir, u"duplicity", u"__init__.py"))
+        VersionedCopy(os.path.join(u"snap", u"snapcraft.yaml"),
+                      os.path.join(tardir, u"snap", u"snapcraft.yaml"))
 
         # set COPYFILE_DISABLE to disable appledouble file creation
         os.environ[u'COPYFILE_DISABLE'] = u'true'
@@ -215,7 +219,7 @@ class InstallCommand(install):
         self.run_command(u'build')
         self.skip_build = True
 
-        # This should always be true, but just to make sure!
+        # remove testing dir
         top_dir = os.path.dirname(os.path.abspath(__file__))
         if self.build_lib != top_dir:
             testing_dir = os.path.join(self.build_lib, u'testing')
@@ -303,12 +307,12 @@ setup(name=u"duplicity",
     include_package_data=True,
     use_scm_version=scm_version_args,
     setup_requires=[
+        u"setuptools",
         u"setuptools_scm>",
         ],
     install_requires=[
         u"fasteners",
         u"future",
-        u"setuptools",
         ],
     tests_require=[
         u"fasteners",
