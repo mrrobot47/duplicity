@@ -53,51 +53,51 @@ class RcloneBackend(duplicity.backend.Backend):
     def _get(self, remote_filename, local_path):
         remote_filename = util.fsdecode(remote_filename)
         local_pathname = util.fsdecode(local_path.name)
-        temp_dir = os.path.dirname(local_pathname)
-        commandline = u"%s copy %s/%s %s" % (
-            self.rclone_cmd, self.remote_path, remote_filename, temp_dir)
+        commandline = u"%s copyto %s/%s %s" % (
+            self.rclone_cmd, self.remote_path, remote_filename, local_pathname)
         rc, o, e = self.subprocess_popen(commandline)
         if rc != 0:
-            if os.path.isfile(os.path.join(temp_dir, remote_filename)):
-                os.remove(os.path.join(temp_dir, remote_filename))
+            if os.path.isfile(local_pathname):
+                os.remove(local_pathname)
             raise BackendException(e.split(u'\n')[0])
-        os.rename(os.path.join(temp_dir, remote_filename), local_pathname)
 
     def _put(self, source_path, remote_filename):
         source_pathname = util.fsdecode(source_path.name)
         remote_filename = util.fsdecode(remote_filename)
-        temp_dir = util.fsdecode(os.path.dirname(source_pathname))
-        temp_filename = os.path.basename(source_pathname)
-        os.rename(source_pathname, os.path.join(temp_dir, remote_filename))
-        commandline = u"%s copy --include %s %s %s" % (
-            self.rclone_cmd, remote_filename, temp_dir, self.remote_path)
+        commandline = u"%s copyto %s %s/%s" % (
+            self.rclone_cmd, source_pathname, self.remote_path, remote_filename)
         rc, o, e = self.subprocess_popen(commandline)
         if rc != 0:
-            os.rename(os.path.join(temp_dir, remote_filename), source_pathname)
             raise BackendException(e.split(u'\n')[0])
-        os.rename(os.path.join(temp_dir, remote_filename), source_pathname)
 
     def _list(self):
         filelist = []
-        commandline = u"%s ls %s" % (
+        commandline = u"%s lsf %s" % (
             self.rclone_cmd, self.remote_path)
-        rc, o, e = self.subprocess_popen(commandline)
+        rc, o, e = self._subprocess_safe_popen(commandline)
+        if rc == 3:
+            return filelist
         if rc != 0:
-            if e.endswith(u"not found\n"):
-                return filelist
-            else:
-                raise BackendException(e.split(u'\n')[0])
+            raise BackendException(e.split(u'\n')[0])
         if not o:
             return filelist
-        return [util.fsencode(x.split()[-1]) for x in o.split(u'\n') if x]
+        return [util.fsencode(x) for x in o.split(u'\n') if x]
 
     def _delete(self, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
-        commandline = u"%s delete --drive-use-trash=false --include %s %s" % (
-            self.rclone_cmd, remote_filename, self.remote_path)
+        commandline = u"%s deletefile --drive-use-trash=false %s/%s" % (
+            self.rclone_cmd, self.remote_path, remote_filename)
         rc, o, e = self.subprocess_popen(commandline)
         if rc != 0:
             raise BackendException(e.split(u'\n')[0])
+
+    def _subprocess_safe_popen(self, commandline):
+        import shlex
+        from subprocess import Popen, PIPE
+        args = shlex.split(commandline)
+        p = Popen(args, stdout=PIPE, stderr=PIPE, universal_newlines=True)
+        stdout, stderr = p.communicate()
+        return p.returncode, stdout, stderr
 
 
 duplicity.backend.register_backend(u"rclone", RcloneBackend)

@@ -1,3 +1,28 @@
+2020-05-20  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixes for rclonebackend from Francesco Magno (original author)
+      - copy command has been replaced with copyto, that is a specialized
+        version for single file operation. Performance-wise, we don't have
+        to include a single file in the local side directory, and we don't
+        have to list all the files in the remote to check what to syncronize.
+        Additionally, we don't have to mess up with renaming because the
+        copy command didn't support changing filename during transfer
+        (because was oriented to transfer whole directories).
+      - delete command has been replaced with deletefile. Same here, we
+        have a specialized command for single file operation. Much more efficient.
+      - ls command has been replaced with lsf, that is a specialized version
+        that returns only filenames. Since duplicity needs only those, less
+        bytes to transfer, and less parsing to do.
+      - lastly, I have reintroduced a custom subprocess function because the one
+        inherithed from base class is checked, and throws an exception in case of
+        non zero return code. The ls command family returns a non zero value if
+        the directory does not exist in the remote, so starting a new backup
+        in a non existent directory is impossible at the moment because ls fails
+        repeatedly until duplicity gives up. This is a bug in the current implementation.
+        There is the same problem (but less severe) in _get method, using the default
+        self.subprocess_popen a non zero return code will throw an exception before we
+        can cleanup the partially downloaded file, if any.
+
 2020-05-05  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1876778 - byte/str issues in megabackend.py
