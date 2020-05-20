@@ -29,6 +29,7 @@ import sys
 import time
 
 from distutils.command.build_scripts import build_scripts
+from distutils.command.install_data import install_data
 from setuptools import setup, Extension
 from setuptools.command.install import install
 from setuptools.command.sdist import sdist
@@ -223,12 +224,27 @@ class InstallCommand(install):
         top_dir = os.path.dirname(os.path.abspath(__file__))
         if self.build_lib != top_dir:
             testing_dir = os.path.join(self.build_lib, u'testing')
-            os.system(u"rm -rf %s" % testing_dir)
+            shutil.rmtree(testing_dir)
 
         install.run(self)
 
 
-class BSCommand(build_scripts):
+class InstallDataCommand(install_data):
+
+    def run(self):
+        install_data.run(self)
+
+        # version the man pages
+        for tup in self.data_files:
+            base, filenames = tup
+            if base == u'share/man/man1':
+                for fn in filenames:
+                    fn = os.path.split(fn)[-1]
+                    path = os.path.join(self.install_dir, base, fn)
+                    VersionedCopy(path, path)
+
+
+class BuildScriptsCommand(build_scripts):
     u'''Build but don't touch my shebang!'''
 
     def run(self):
@@ -323,8 +339,9 @@ setup(name=u"duplicity",
         ],
     test_suite=u"testing",
     cmdclass={
-        u"build_scripts": BSCommand,
+        u"build_scripts": BuildScriptsCommand,
         u"install": InstallCommand,
+        u"install_data": InstallDataCommand,
         u"sdist": SdistCommand,
         u"test": TestCommand,
         },
