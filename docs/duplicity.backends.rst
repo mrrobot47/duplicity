@@ -28,6 +28,7 @@ Submodules
    duplicity.backends.localbackend
    duplicity.backends.mediafirebackend
    duplicity.backends.megabackend
+   duplicity.backends.megav2backend
    duplicity.backends.multibackend
    duplicity.backends.ncftpbackend
    duplicity.backends.onedrivebackend

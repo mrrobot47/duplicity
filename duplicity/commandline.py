@@ -957,6 +957,7 @@ def usage():
   hsi://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   imap://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   mega://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
+  megav2://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
   mf://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
   onedrive://%(some_dir)s
   pca://%(container_name)s

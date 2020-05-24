@@ -2,6 +2,9 @@
 
     * Fixed bug #1875937 - validate_encryption_settings() fails w/S3 glacier
       - Skip validation with a warning if S3 glacier or deep storage specified
+    * Patched in a megav2backend.py to update to MEGAcmd tools.
+      - Author: Jose L. Domingo Lopez <github@24x7linux.com>
+      - Man pages, docs, etc. were included.
 
 2020-05-20  Kenneth Loafman  <kenneth@loafman.com>
 

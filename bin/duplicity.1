@@ -1263,10 +1263,25 @@ See also
 .B "A NOTE ON IMAP"
 .RE
 .PP
-.B "Mega cloud storage"
+.B "MEGA.nz cloud storage (only works for accounts created prior to November 2018, uses ""megatools"")"
 .PP
 .RS
-mega://user[:password]@mega.co.nz/some_dir
+mega://user[:password]@mega.nz/some_dir
+.PP
+.B NOTE:
+if not given in the URL, relies on password being stored within $HOME/.megarc (as used by the "megatools" utilities)
+.RE
+.PP
+.B "MEGA.nz cloud storage (works for all MEGA accounts, uses ""MEGAcmd"" tools)"
+.PP
+.RS
+megav2://user[:password]@mega.nz/some_dir
+.PP
+.B NOTE:
+despite "MEGAcmd" no longer uses a configuration file, for convenience storing the user password this backend searches it in the $HOME/.megav2rc file (same syntax as the old $HOME/.megarc)
+    [Login]
+    Username = MEGA_USERNAME
+    Password = MEGA_PASSWORD
 .RE
 .PP
 .B "OneDrive Backend"
@@ -2425,9 +2440,13 @@ see pydrive backend
 .B LFTP Client
 - http://lftp.yar.ru/
 .TP
-.BR "mega backend" " (mega.co.nz)"
+.BR "MEGA backend (only works for accounts created prior to November 2018)" " (mega.nz)"
 .B megatools client
 - https://github.com/megous/megatools
+.TP
+.BR "MEGA v2 backend (works for all MEGA accounts)" " (mega.nz)"
+.B MEGAcmd client
+- https://mega.nz/cmd
 .TP
 .BR "multi backend"
 .B Multi -- store to more than one backend

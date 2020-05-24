@@ -24,6 +24,9 @@ New in v0.8.14 (2020/05/??)
     can cleanup the partially downloaded file, if any.
 * Fixed bug #1875937 - validate_encryption_settings() fails w/S3 glacier
   - Skip validation with a warning if S3 glacier or deep storage specified
+* Patched in a megav2backend.py to update to MEGAcmd tools.
+  - Author: Jose L. Domingo Lopez <github@24x7linux.com>
+  - Man pages, docs, etc. were included.
 
 
 New in v0.8.13 (2020/05/05)
