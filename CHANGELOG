@@ -22,6 +22,8 @@ New in v0.8.14 (2020/05/??)
     There is the same problem (but less severe) in _get method, using the default
     self.subprocess_popen a non zero return code will throw an exception before we
     can cleanup the partially downloaded file, if any.
+* Fixed bug #1875937 - validate_encryption_settings() fails w/S3 glacier
+  - Skip validation with a warning if S3 glacier or deep storage specified
 
 
 New in v0.8.13 (2020/05/05)

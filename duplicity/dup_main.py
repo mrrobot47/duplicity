@@ -366,7 +366,10 @@ def write_multivol(backup_type, tarblock_iter, man_outfp, sig_outfp, backend):
         mf = config.restart.last_backup.get_local_manifest()
         config.restart.checkManifest(mf)
         config.restart.setLastSaved(mf)
-        validate_encryption_settings(config.restart.last_backup, mf)
+        if not [config.s3_use_deep_archive or config.s3_use_glacier]:
+            validate_encryption_settings(config.restart.last_backup, mf)
+        else:
+            log.Warning(_(u"Skipping encryption validation due to glacier/deep storage"))
         mf.fh = man_outfp
         last_block = config.restart.last_block
         log.Notice(_(u"Restarting after volume %s, file %s, block %s") %

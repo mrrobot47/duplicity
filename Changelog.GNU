@@ -1,3 +1,8 @@
+2020-05-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixed bug #1875937 - validate_encryption_settings() fails w/S3 glacier
+      - Skip validation with a warning if S3 glacier or deep storage specified
+
 2020-05-20  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixes for rclonebackend from Francesco Magno (original author)
