@@ -67,6 +67,7 @@ rsync -a \
     --exclude=*.py[co] \
     --exclude=*.so \
     --exclude=.DS_Store \
+    --exclude=.git \
     --exclude=.tox \
     --exclude=S.* \
     --exclude=__pycache__ \
