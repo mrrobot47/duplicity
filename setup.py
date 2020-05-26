@@ -39,8 +39,8 @@ from subprocess import Popen, PIPE
 
 
 # check that we can function here
-if not (sys.version_info[:2] >= (3, 6) or (sys.version_info[0] == 2 and sys.version_info[:2] >= (2, 7))):
-    print(u"Sorry, duplicity requires version 2.7 or version 3.6 or later of Python.")
+if not (sys.version_info[:2] >= (3, 5) or (sys.version_info[0] == 2 and sys.version_info[:2] >= (2, 7))):
+    print(u"Sorry, duplicity requires version 2.7 or version 3.5 or later of Python.")
     sys.exit(1)
 
 
@@ -299,7 +299,7 @@ setup(name=u"duplicity",
     maintainer=u"Kenneth Loafman <kenneth@loafman.com>",
     maintainer_email=u"kenneth@loafman.com",
     url=u"http://duplicity.nongnu.org/index.html",
-    python_requires=u">2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, !=3.5.*, <4",
+    python_requires=u">2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4",
     platforms=[u"any"],
     packages=[
         u"duplicity",
