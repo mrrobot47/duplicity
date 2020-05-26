@@ -1,0 +1,67 @@
+# Copyright 2019 Nils Tekampe <nils@tekampe.org>,
+# Kenneth Loafman <kenneth@loafman.com> and 
+# Aaron Whitehouse <code@whitehouse.kiwi.nz>
+#
+# This file is part of duplicity.
+#
+# Duplicity is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# Duplicity is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with duplicity; if not, write to the Free Software Foundation,
+# Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+image: ubuntu:18.04
+
+# Change pip's cache directory to be inside the project directory since we can
+# only cache local items.
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  # Set to non-interactive so no tzdata prompt
+  DEBIAN_FRONTEND: "noninteractive"
+
+before_script:
+    # Set locale to prevent UTF-8 errors
+    - export LANG=C.UTF-8
+    - export LC_ALL=C.UTF-8
+    # Installing some pre-requisites and some
+    # packages needed for testing duplicity
+    - apt-get update
+    - apt-get install -y 2to3 build-essential bzr intltool lftp librsync-dev libffi-dev libssl-dev openssl par2 python-dev python-future python-pip python3-pip python3.6 python3.6-dev python3.7 python3.7-dev python3.8 python3.8-dev rdiff tzdata
+    - pip install --upgrade pip
+    - pip install --requirement requirements.txt
+
+test:ubuntu18-04_py27:
+  script:
+    - tox -e py27
+  artifacts:
+    reports:
+      junit: report.xml
+
+test:ubuntu18-04_py36:
+  script:
+    - tox -e py36
+  artifacts:
+    reports:
+      junit: report.xml
+    
+test:ubuntu18-04_py37:
+  script:
+    - tox -e py37
+  artifacts:
+    reports:
+      junit: report.xml
+    
+test:ubuntu18-04_py38:
+  script:
+    - tox -e py38
+  artifacts:
+    reports:
+      junit: report.xml
