@@ -34,7 +34,6 @@ from setuptools import setup, Extension
 from setuptools.command.install import install
 from setuptools.command.sdist import sdist
 from setuptools.command.test import test
-from setuptools_scm import get_version
 from subprocess import Popen, PIPE
 
 
@@ -50,8 +49,9 @@ scm_version_args = {
     }
 
 try:
+    from setuptools_scm import get_version
     Version = get_version(**scm_version_args)
-except LookupError as e:
+except (ImportError, LookupError) as e:
     Version = u"0.8.14dev"
 Reldate = time.strftime(u"%B %d, %Y", time.localtime())
 
@@ -355,6 +355,7 @@ setup(name=u"duplicity",
         u"Programming Language :: Python :: 2",
         u"Programming Language :: Python :: 2.7",
         u"Programming Language :: Python :: 3",
+        u"Programming Language :: Python :: 3.5",
         u"Programming Language :: Python :: 3.6",
         u"Programming Language :: Python :: 3.7",
         u"Programming Language :: Python :: 3.8",
