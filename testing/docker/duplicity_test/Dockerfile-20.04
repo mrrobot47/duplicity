@@ -34,7 +34,7 @@ RUN apt-get update \
     && apt-get install -y \
             2to3 \
             build-essential \
-            bzr \
+            git \
             intltool \
             lftp \
             librsync-dev \
