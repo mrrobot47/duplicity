@@ -47,30 +47,30 @@ test:ubuntu18-04_py27:
     reports:
       junit: report.xml
 
-test:ubuntu18-04_py35:
-  script:
-    - tox -e py35
-  artifacts:
-    reports:
-      junit: report.xml
-
-test:ubuntu18-04_py36:
-  script:
-    - tox -e py36
-  artifacts:
-    reports:
-      junit: report.xml
-
-test:ubuntu18-04_py37:
-  script:
-    - tox -e py37
-  artifacts:
-    reports:
-      junit: report.xml
-
-test:ubuntu18-04_py38:
-  script:
-    - tox -e py38
-  artifacts:
-    reports:
-      junit: report.xml
+# test:ubuntu18-04_py35:
+#   script:
+#     - tox -e py35
+#   artifacts:
+#     reports:
+#       junit: report.xml
+#
+# test:ubuntu18-04_py36:
+#   script:
+#     - tox -e py36
+#   artifacts:
+#     reports:
+#       junit: report.xml
+#
+# test:ubuntu18-04_py37:
+#   script:
+#     - tox -e py37
+#   artifacts:
+#     reports:
+#       junit: report.xml
+#
+# test:ubuntu18-04_py38:
+#   script:
+#     - tox -e py38
+#   artifacts:
+#     reports:
+#       junit: report.xml
