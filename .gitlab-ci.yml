@@ -42,35 +42,35 @@ before_script:
 
 test:ubuntu18-04_py27:
   script:
-    - tox -e py27
+    - python2.7 -m tox -e py27
   artifacts:
     reports:
       junit: report.xml
 
 test:ubuntu18-04_py35:
   script:
-    - tox -e py35
+    - python3.5 -m tox -e py35
   artifacts:
     reports:
       junit: report.xml
 
 test:ubuntu18-04_py36:
   script:
-    - tox -e py36
+    - python3.6 -m tox -e py36
   artifacts:
     reports:
       junit: report.xml
 
 test:ubuntu18-04_py37:
   script:
-    - tox -e py37
+    - python3.7 -m tox -e py37
   artifacts:
     reports:
       junit: report.xml
 
 test:ubuntu18-04_py38:
   script:
-    - tox -e py38
+    - python3.8 -m tox -e py38
   artifacts:
     reports:
       junit: report.xml
