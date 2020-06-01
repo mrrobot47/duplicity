@@ -191,7 +191,16 @@ class Megav2Backend(duplicity.backend.Backend):
 
         cmd = [u'mega-put', local_file, self._folder + u'/' + remote_file]
         self.mega_login()
-        self.subprocess_popen(cmd)
+        try:
+            self.subprocess_popen(cmd)
+        except Exception as e:
+            error_str = str(e)
+            if u"Reached storage quota" in error_str:
+                raise BackendException(u"MEGA account over quota, could not write file : '%s' . "
+                                       u"Upgrade your storage at https://mega.nz/pro or remove some data." %
+                                       (remote_file,))
+            else:
+                raise BackendException(u"Failed writing file '%s' to MEGA, reason : '%s'" % (remote_file, e))
 
     def delete(self, remote_file):
         u'Deletes a file from a remote MEGA path'
