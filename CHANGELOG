@@ -27,6 +27,7 @@ New in v0.8.14 (2020/05/??)
 * Patched in a megav2backend.py to update to MEGAcmd tools.
   - Author: Jose L. Domingo Lopez <github@24x7linux.com>
   - Man pages, docs, etc. were included.
+* More fixes for bug #1877885 - Catch quota overflow on Mega upload.
 
 
 New in v0.8.13 (2020/05/05)

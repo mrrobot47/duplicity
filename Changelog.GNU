@@ -1,3 +1,7 @@
+2020-05-31  Kenneth Loafman  <kenneth@loafman.com>
+
+    * More fixes for bug #1877885 - Catch quota overflow on Mega upload.
+
 2020-05-24  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixed bug #1875937 - validate_encryption_settings() fails w/S3 glacier
