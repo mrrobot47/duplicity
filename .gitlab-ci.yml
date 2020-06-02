@@ -40,9 +40,9 @@ before_script:
     - python3 -m pip install --upgrade pip
     - python3 -m pip install --requirement requirements.txt
 
-test:ubuntu18-04_py27:
+test:ubuntu18-04_code:
   script:
-    - tox -e py27
+    - tox -e code
   artifacts:
     reports:
       junit: report.xml
