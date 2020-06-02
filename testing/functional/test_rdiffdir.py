@@ -38,7 +38,14 @@ class RdiffdirTest(FunctionalTestCase):
 
     def run_rdiffdir(self, argstring):
         u"""Run rdiffdir with given arguments"""
-        self.run_cmd(u"../bin/rdiffdir " + argstring)
+        cmd_list = list()
+        basepython = os.environ.get(u'TOXPYTHON', None)
+        if basepython is not None:
+            cmd_list.extend([basepython])
+        cmd_list.extend([u"../bin/rdiffdir"])
+        cmd_list.extend(argstring.split())
+        cmdline = u" ".join([u'"%s"' % x for x in cmd_list])
+        self.run_cmd(cmdline)
 
     def run_cycle(self, dirname_list):
         u"""Run diff/patch cycle on directories in dirname_list"""
