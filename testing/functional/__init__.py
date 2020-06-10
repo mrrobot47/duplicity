@@ -106,6 +106,8 @@ class FunctionalTestCase(DuplicityTestCase):
         basepython = os.environ.get(u'TOXPYTHON', None)
         if basepython is not None:
             cmd_list.extend([basepython])
+        run_coverage = os.environ.get(u'RUN_COVERAGE', None)
+        if run_coverage is not None:
             cmd_list.extend([u"-m", u"coverage", u"run", u"--source=duplicity", u"-p"])
         cmd_list.extend([u"../bin/duplicity"])
         cmd_list.extend(options)
