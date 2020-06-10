@@ -38,8 +38,8 @@ default:
         # Installing some pre-requisites and some
         # packages needed for testing duplicity
         - apt-get update
-        - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev 
-          libffi-dev libssl-dev openssl par2 python-dev python-pip python3-dev 
+        - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev
+          libffi-dev libssl-dev openssl par2 python-dev python-pip python3-dev
           python3-pip rdiff tzdata
         - python3 -m pip install --upgrade pip
         - python3 -m pip install --requirement requirements.txt
@@ -55,17 +55,6 @@ code_ub18-04:
 
 py27_ub18-04:
     stage: test
-    before_script:
-        # Set locale to prevent UTF-8 errors
-        - export LANG=C.UTF-8
-        - export LC_ALL=C.UTF-8
-        # Installing some pre-requisites and some
-        # packages needed for testing duplicity
-        - apt-get update
-        - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev 
-          libffi-dev libssl-dev openssl par2 python-dev python-pip rdiff tzdata
-        - python2 -m pip install --upgrade pip
-        - python2 -m pip install --requirement requirements.txt
     script:
         - tox -e py27
     allow_failure: true
@@ -81,8 +70,8 @@ py35_ub16-04:
         - export LANG=C.UTF-8
         - export LC_ALL=C.UTF-8
         - apt-get update
-        - apt-get install -y build-essential git intltool lftp librsync-dev 
-          libffi-dev libssl-dev openssl par2 python-dev python-pip python3-dev 
+        - apt-get install -y build-essential git intltool lftp librsync-dev
+          libffi-dev libssl-dev openssl par2 python-dev python-pip python3-dev
           python3-pip rdiff tzdata python3.5 python3.5-dev
         - python3 -m pip install --upgrade pip
         - python3 -m pip install --requirement requirements.txt
@@ -95,7 +84,7 @@ py35_ub16-04:
 py36_ub18-04:
     stage: test
     script:
-        - apt-get install -y python3.6 python3.6-dev 
+        - apt-get install -y python3.6 python3.6-dev
         - tox -e py36
     artifacts:
         reports:
