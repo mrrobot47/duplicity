@@ -56,6 +56,15 @@ os.system(u"chmod 700 %s" % os.path.join(_testing_dir, u'gnupg'))
 os.environ[u'TZ'] = u'US/Central'
 time.tzset()
 
+# TODO: find place in setup.py to do this
+# fix shebangs in _bin_dir to be current python
+if sys.version_info.major == 2:
+    files = os.listdir(_bin_dir)
+    for file in files:
+        if file.endswith(u'.py'):
+            with open(file) as f:
+                print("converting %s to python2" % file, file=sys.stderr)
+                f.write(f.read().replace(u"python3", u"python"))
 
 class DuplicityTestCase(unittest.TestCase):
 
