@@ -63,7 +63,7 @@ if sys.version_info.major == 2:
     for file in files:
         if file.endswith(u'.py'):
             with open(file) as f:
-                print("converting %s to python2" % file, file=sys.stderr)
+                print(u"converting %s to python2" % file, file=sys.stderr)
                 f.write(f.read().replace(u"python3", u"python"))
 
 class DuplicityTestCase(unittest.TestCase):
