@@ -33,14 +33,25 @@ class PyDriveBackend(duplicity.backend.Backend):
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
         try:
-            global pydrive
             import httplib2
             from apiclient.discovery import build
-            from pydrive.auth import GoogleAuth
-            from pydrive.drive import GoogleDrive
-            from pydrive.files import ApiRequestError, FileNotUploadedError
         except ImportError as e:
             raise BackendException(u"""\
+PyDrive backend requires PyDrive and Google API client installation.
+Please read the manpage for setup details.
+Exception: %s""" % str(e))
+
+        try:
+            from pydrive2.auth import GoogleAuth
+            from pydrive2.drive import GoogleDrive
+            from pydrive2.files import ApiRequestError, FileNotUploadedError
+        except ImportError as e:
+            try:
+                from pydrive.auth import GoogleAuth
+                from pydrive.drive import GoogleDrive
+                from pydrive.files import ApiRequestError, FileNotUploadedError
+            except ImportError as e:
+                raise BackendException(u"""\
 PyDrive backend requires PyDrive installation.  Please read the manpage for setup details.
 Exception: %s""" % str(e))
 
@@ -116,7 +127,10 @@ Exception: %s""" % str(e))
         self.id_cache = {}
 
     def file_by_name(self, filename):
-        from pydrive.files import ApiRequestError  # pylint: disable=import-error
+        try:
+            from pydrive2.files import ApiRequestError  # pylint: disable=import-error
+        except ImportError:
+            from pydrive.files import ApiRequestError  # pylint: disable=import-error
 
         filename = util.fsdecode(filename)  # PyDrive deals with unicode filenames
 
@@ -215,7 +229,10 @@ Exception: %s""" % str(e))
         return {u'size': size}
 
     def _error_code(self, operation, error):  # pylint: disable=unused-argument
-        from pydrive.files import ApiRequestError, FileNotUploadedError  # pylint: disable=import-error
+        try:
+            from pydrive2.files import ApiRequestError  # pylint: disable=import-error
+        except ImportError:
+            from pydrive.files import ApiRequestError  # pylint: disable=import-error
         if isinstance(error, FileNotUploadedError):
             return log.ErrorCode.backend_not_found
         elif isinstance(error, ApiRequestError):
