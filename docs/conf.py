@@ -53,7 +53,6 @@ exclude_patterns = [
     '_build',
     'Thumbs.db',
     '.DS_Store',
-    'compilec.py',
     'setup.py',
 ]
 

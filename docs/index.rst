@@ -10,7 +10,6 @@ Welcome to duplicity-src8's documentation!
    :maxdepth: 4
    :caption: Contents:
 
-   compilec
    duplicity
    setup
    testing
