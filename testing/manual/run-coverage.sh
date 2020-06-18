@@ -25,7 +25,7 @@ cd `dirname $0`
 pwd
 
 cd ../duplicity
-./compilec.py
+./setup.py build_ext
 cd -
 
 #${SUDO} tar xzf testfiles.tar.gz
