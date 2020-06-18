@@ -59,7 +59,7 @@ if u'--pydevd' in sys.argv or os.getenv(u'PYDEVD', None):
         u'testing',
         u'testing/functional',
         u'testing/unit',
-        ]
+    ]
     pathlist = [(os.path.normpath(os.path.join(client, p)),
                  os.path.normpath(os.path.join(server, p))) for p in duppaths]
     os.environ[u'PATHS_FROM_ECLIPSE_TO_PYTHON'] = json.dumps(pathlist)
