@@ -240,7 +240,8 @@ def parse_cmdline_options(arglist):
         sys.exit(0)
 
     def add_rename(o, s, v, p):  # pylint: disable=unused-argument
-        config.rename[os.path.normcase(os.path.normpath(v[0]))] = v[1]
+        key = util.fsencode(os.path.normcase(os.path.normpath(v[0])))
+        globals.rename[key] = util.fsencode(v[1])
 
     parser = optparse.OptionParser(option_class=DupOption, usage=usage())
 
