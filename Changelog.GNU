@@ -1,3 +1,15 @@
+2020-06-19  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in mikix:mikix/rename-fix - Fix --rename encoding
+      - The --rename argument wasn't working because its arguments were coming in and
+        being saved as unicode. But then compared against bytestring index path parts.
+      - This MR fixes that by saving the rename pieces as bytestrings up front.
+
+2020-06-13  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in jmakovicka:master - Support PyDrive2 library in the pydrive backend
+      - Unlike PyDrive, the PyDrive2 fork is actively maintained.
+
 2020-05-31  Kenneth Loafman  <kenneth@loafman.com>
 
     * More fixes for bug #1877885 - Catch quota overflow on Mega upload.

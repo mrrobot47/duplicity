@@ -28,6 +28,12 @@ New in v0.8.14 (2020/05/??)
   - Author: Jose L. Domingo Lopez <github@24x7linux.com>
   - Man pages, docs, etc. were included.
 * More fixes for bug #1877885 - Catch quota overflow on Mega upload.
+* Merged in jmakovicka:master - Support PyDrive2 library in the pydrive backend
+  - Unlike PyDrive, the PyDrive2 fork is actively maintained.
+* Merged in mikix:mikix/rename-fix - Fix --rename encoding
+  - The --rename argument wasn't working because its arguments were coming in and
+    being saved as unicode. But then compared against bytestring index path parts.
+  - This MR fixes that by saving the rename pieces as bytestrings up front.
 
 
 New in v0.8.13 (2020/05/05)
