@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    testing.functional
    testing.manual
@@ -15,6 +16,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    testing.conftest
    testing.find_unadorned_strings

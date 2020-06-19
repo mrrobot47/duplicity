@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    duplicity.backends.pyrax_identity
 
@@ -12,6 +13,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    duplicity.backends.adbackend
    duplicity.backends.azurebackend

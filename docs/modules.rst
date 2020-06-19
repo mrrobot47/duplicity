@@ -1,5 +1,5 @@
-duplicity-src8
-==============
+duplicity-git
+=============
 
 .. toctree::
    :maxdepth: 4

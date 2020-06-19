@@ -1,5 +1,5 @@
 duplicity.config module
-========================
+=======================
 
 .. automodule:: duplicity.config
    :members:

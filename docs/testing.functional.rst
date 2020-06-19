@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    testing.functional.test_badupload
    testing.functional.test_cleanup
