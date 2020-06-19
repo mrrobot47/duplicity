@@ -511,7 +511,7 @@ class Path(ROPath):
             path, extra = os.path.split(path)
             tail.insert(0, extra)
         if path:
-            return config.rename[path].split(os.sep) + tail
+            return config.rename[path].split(util.fsencode(os.sep)) + tail
         else:
             return index  # no rename found
 
