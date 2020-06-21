@@ -1,6 +1,7 @@
 *.egg
 *.log
 *.pyc
+*.so
 .DS_Store
 ._.DS_Store
 .cache
