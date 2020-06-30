@@ -1,4 +1,4 @@
-New in v0.8.14 (2020/05/??)
+New in v0.8.14 (2020/07/??)
 ---------------------------
 * Fixes for rclonebackend from Francesco Magno (original author)
   - copy command has been replaced with copyto, that is a specialized
@@ -34,6 +34,7 @@ New in v0.8.14 (2020/05/??)
   - The --rename argument wasn't working because its arguments were coming in and
     being saved as unicode. But then compared against bytestring index path parts.
   - This MR fixes that by saving the rename pieces as bytestrings up front.
+* Fixes for issue #7, par2backend produces badly encoded filenames.
 
 
 New in v0.8.13 (2020/05/05)

@@ -1,3 +1,7 @@
+2020-06-30  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fixes for issue #7, par2backend produces badly encoded filenames.
+
 2020-06-19  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in mikix:mikix/rename-fix - Fix --rename encoding
