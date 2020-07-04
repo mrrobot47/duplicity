@@ -76,7 +76,7 @@ commands = [u"cleanup",
 
 def old_fn_deprecation(opt):
     log.Log(_(u"Warning: Option %s is pending deprecation "
-              u"and will be removed in a future release.\n"
+              u"and will be removed in version 0.9.0.\n"
               u"Use of default filenames is strongly suggested.") % opt,
             log.ERROR, force_print=True)
 
