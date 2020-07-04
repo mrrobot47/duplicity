@@ -1,3 +1,7 @@
+2020-07-04  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Prep for 0.8.14
+
 2020-06-30  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fixes for issue #7, par2backend produces badly encoded filenames.
