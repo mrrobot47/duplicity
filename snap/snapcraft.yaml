@@ -57,5 +57,5 @@ parts:
             - pyrax                 # hubicbackend, _cf_pyrax.py
             - setuptools            # setup.py
             - setuptools_scm        # scm version
-            - six                   # dpbxbackend.py
+            - six>=1.12.0           # dpbxbackend.py
         source: .
