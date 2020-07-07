@@ -51,7 +51,7 @@ snapcraft snap --output duplicity_${VERSION}_amd64.snap --destructive-mode
 review-tools.snap-review --allow-classic duplicity_${VERSION}_amd64.snap
 
 # push to edge
-snapcraft push duplicity_${VERSION}_amd64.snap --release edge
+snapcraft upload duplicity_${VERSION}_amd64.snap --release edge
 
 # sign snap
 snapcraft sign-build duplicity_${VERSION}*.snap --key-name firstprime
