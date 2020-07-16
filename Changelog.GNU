@@ -1,3 +1,9 @@
+2020-07-16  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1887689 with patch from Matthew Barry
+      - Cleanup with Paramiko backend does not remove files due to missing
+        filename byte decoding
+
 2020-07-04  Kenneth Loafman  <kenneth@loafman.com>
 
     * Prep for 0.8.14
