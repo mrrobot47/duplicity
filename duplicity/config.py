@@ -201,6 +201,10 @@ s3_european_buckets = False
 # File owner uid keeps number from tar file. Like same option in GNU tar.
 numeric_owner = False
 
+# Do no restore the uid/gid when finished, useful if you're restoring
+# data without having root privileges or Unix users support
+do_not_restore_ownership = False
+
 # Whether to use plain HTTP (without SSL) to send data to S3
 # See <https://bugs.launchpad.net/duplicity/+bug/433970>.
 s3_unencrypted_connection = False
