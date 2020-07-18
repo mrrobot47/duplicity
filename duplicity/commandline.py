@@ -459,6 +459,10 @@ def parse_cmdline_options(arglist):
     # File owner uid keeps number from tar file. Like same option in GNU tar.
     parser.add_option(u"--numeric-owner", action=u"store_true")
 
+    # Do no restore the uid/gid when finished, useful if you're restoring
+    # data without having root privileges or Unix users support
+    parser.add_option(u"--do-not-restore-ownership", action=u"store_true")
+
     # Whether the old filename format is in effect.
     parser.add_option(u"--old-filenames", action=u"callback",
                       dest=u"old_filenames",

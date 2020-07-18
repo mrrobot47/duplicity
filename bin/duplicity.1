@@ -658,6 +658,12 @@ Recommended for restoring from live cds which might have the users with
 identical names but different uids/gids.
 
 .TP
+.BI --do-not-restore-ownership
+Ignores the uid/gid from the archive and keeps the current user's one.
+Recommended for restoring data to mounted filesystem which do not
+support Unix ownership or when root privileges are not available.
+
+.TP
 .BI "--num-retries " number
 Number of retries to make on errors before giving up.
 
