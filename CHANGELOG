@@ -3,6 +3,10 @@ New in v0.8.15 (2020/08/??)
 * Fix bug #1887689 with patch from Matthew Barry
   - Cleanup with Paramiko backend does not remove files due to missing
     filename byte decoding
+* Fix bug #1211481 with merge from Raffaele Di Campli
+  - Ignores the uid/gid from the archive and keeps the current user's one.
+  - Recommended for restoring data to mounted filesystem which do not
+    support Unix ownership or when root privileges are not available.
 
 
 New in v0.8.14 (2020/07/04)

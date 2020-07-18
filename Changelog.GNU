@@ -1,3 +1,10 @@
+2020-07-18  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Fix bug #1211481 with merge from Raffaele Di Campli
+      - Ignores the uid/gid from the archive and keeps the current user's one.
+      - Recommended for restoring data to mounted filesystem which do not
+        support Unix ownership or when root privileges are not available.
+
 2020-07-16  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix bug #1887689 with patch from Matthew Barry
