@@ -38,6 +38,5 @@ tox
 # mediafire
 # pydrive
 # pyrax
-# python-cloudfiles
 # python-swiftclient
 # requests_oauthlib
