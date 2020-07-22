@@ -22,6 +22,7 @@
 from __future__ import division
 from builtins import str
 import os
+import threading
 import time
 
 import duplicity.backend
@@ -339,3 +340,12 @@ class BotoBackend(duplicity.backend.Backend):
                     time.sleep(60)
                     self.resetConnection()
                 log.Info(u"File %s was successfully restored from Glacier" % remote_filename)
+
+    def pre_process_download_batch(self, remote_filenames):
+        log.Info(u"Starting batch unfreezing from Glacier")
+        # Used primarily to move all necessary files in Glacier to S3 at once
+        for remote_filename in remote_filenames:
+            remote_filename = util.fsdecode(remote_filename)
+            t= threading.Thread(target=self.pre_process_download,
+                    kwargs={'remote_filename':remote_filename, 'wait':False})
+            t.start()
