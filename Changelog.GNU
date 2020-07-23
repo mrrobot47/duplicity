@@ -1,5 +1,10 @@
 2020-07-18  Kenneth Loafman  <kenneth@loafman.com>
 
+    * Fix issue #10 - ppa:duplicity-release-git fails to install on Focal Fossa
+      - Set correct version requirements in debian/control.
+
+2020-07-18  Kenneth Loafman  <kenneth@loafman.com>
+
     * Fix bug #1211481 with merge from Raffaele Di Campli
       - Ignores the uid/gid from the archive and keeps the current user's one.
       - Recommended for restoring data to mounted filesystem which do not
