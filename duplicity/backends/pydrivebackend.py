@@ -263,9 +263,9 @@ Exception: %s""" % str(e))
 
     def _error_code(self, operation, error):  # pylint: disable=unused-argument
         try:
-            from pydrive2.files import ApiRequestError  # pylint: disable=import-error
+            from pydrive2.files import ApiRequestError, FileNotUploadedError  # pylint: disable=import-error
         except ImportError:
-            from pydrive.files import ApiRequestError  # pylint: disable=import-error
+            from pydrive.files import ApiRequestError, FileNotUploadedError  # pylint: disable=import-error
         if isinstance(error, FileNotUploadedError):
             return log.ErrorCode.backend_not_found
         elif isinstance(error, ApiRequestError):
