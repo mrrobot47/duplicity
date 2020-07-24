@@ -1,4 +1,18 @@
-2020-07-18  Kenneth Loafman  <kenneth@loafman.com>
+2020-07-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in joshAppdev:pydriveshared - Backend for Shared Drives on Google
+      - pydrive://developer.gserviceaccount.com/target-folder/?driveID=<SHARED DRIVE ID>
+    * Merged in martin-sucha:pydrive-notfound - Fix missing FileNotUploadedError in pydrive
+      - Since dadbe2d2, FileNotUploadedError is not imported anymore, resulting in an
+        exception in case some of the files failed to upload. Adding the import back.
+    * Merged in hupfdule:s3-boto3-region-and-endpoint - Allow setting s3 region and endpoint
+      - This commit introduces the new commandline options --s3-region-name, --s3-endpoint-url
+        to specify these parameters. This allows using s3 compatible providers like Scaleway
+        or OVH.
+      - It is probably useful for Amazon accounts, too, to have more fine grained influence
+        on the region to use.
+
+2020-07-23  Kenneth Loafman  <kenneth@loafman.com>
 
     * Fix issue #10 - ppa:duplicity-release-git fails to install on Focal Fossa
       - Set correct version requirements in debian/control.
