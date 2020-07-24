@@ -46,11 +46,11 @@ Exception: %s""" % str(e))
         self.api_params = {}
         self.shared_drive_id = None
         if u'driveID' in parsed_url.query_args:
-                self.shared_drive_id = parsed_url.query_args[u'driveID'][0]
-                self.api_params = {u'corpora': u'teamDrive',
-                                   u'teamDriveId': self.shared_drive_id,
-                                   u'includeTeamDriveItems': True,
-                                   u'supportsTeamDrives': True}
+            self.shared_drive_id = parsed_url.query_args[u'driveID'][0]
+            self.api_params = {u'corpora': u'teamDrive',
+                               u'teamDriveId': self.shared_drive_id,
+                               u'includeTeamDriveItems': True,
+                               u'supportsTeamDrives': True}
 
         try:
             from pydrive2.auth import GoogleAuth
