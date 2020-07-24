@@ -298,6 +298,11 @@ class ParsedUrl(object):
             self.query = pu.query
         except Exception:
             raise InvalidBackendURL(u"Syntax error (query) in: %s" % url_string)
+        if self.query:
+            self.query_args = urllib.parse.parse_qs(self.query)
+        else:
+            self.query = None
+            self.query_args = {}
 
         # init to None, overwrite with actual value on success
         self.port = None

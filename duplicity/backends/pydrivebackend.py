@@ -41,6 +41,17 @@ PyDrive backend requires PyDrive and Google API client installation.
 Please read the manpage for setup details.
 Exception: %s""" % str(e))
 
+        # Shared Drive ID specified as a query parameter in the backend URL.
+        # Example: pydrive://developer.gserviceaccount.com/target-folder/?driveID=<SHARED DRIVE ID>
+        self.api_params = {}
+        self.shared_drive_id = None
+        if u'driveID' in parsed_url.query_args:
+                self.shared_drive_id = parsed_url.query_args[u'driveID'][0]
+                self.api_params = {u'corpora': u'teamDrive',
+                                   u'teamDriveId': self.shared_drive_id,
+                                   u'includeTeamDriveItems': True,
+                                   u'supportsTeamDrives': True}
+
         try:
             from pydrive2.auth import GoogleAuth
             from pydrive2.drive import GoogleDrive
@@ -98,30 +109,41 @@ Exception: %s""" % str(e))
                 u'variable not set. Please read the manpage to fix.')
         self.drive = GoogleDrive(gauth)
 
-        # Dirty way to find root folder id
-        file_list = self.drive.ListFile({u'q': u"'Root' in parents and trashed=false"}).GetList()
-        if file_list:
-            parent_folder_id = file_list[0][u'parents'][0][u'id']
+        if self.shared_drive_id:
+            parent_folder_id = self.shared_drive_id
         else:
-            file_in_root = self.drive.CreateFile({u'title': u'i_am_in_root'})
-            file_in_root.Upload()
-            parent_folder_id = file_in_root[u'parents'][0][u'id']
-            file_in_root.Delete()
+            # Dirty way to find root folder id
+            file_list = self.drive.ListFile({u'q': u"'Root' in parents and trashed=false"}).GetList()
+            if file_list:
+                parent_folder_id = file_list[0][u'parents'][0][u'id']
+            else:
+                file_in_root = self.drive.CreateFile({u'title': u'i_am_in_root'})
+                file_in_root.Upload()
+                parent_folder_id = file_in_root[u'parents'][0][u'id']
+                file_in_root.Delete()
 
         # Fetch destination folder entry and create hierarchy if required.
         folder_names = parsed_url.path.split(u'/')
         for folder_name in folder_names:
             if not folder_name:
                 continue
-            file_list = self.drive.ListFile({u'q': u"'" + parent_folder_id +
-                                             u"' in parents and trashed=false"}).GetList()
+            list_file_args = {u'q': u"'" + parent_folder_id +
+                              u"' in parents and trashed=false"}
+            list_file_args.update(self.api_params)
+            file_list = self.drive.ListFile(list_file_args).GetList()
             folder = next((item for item in file_list if item[u'title'] == folder_name and
                            item[u'mimeType'] == u'application/vnd.google-apps.folder'), None)
             if folder is None:
-                folder = self.drive.CreateFile({u'title': folder_name,
-                                                u'mimeType': u"application/vnd.google-apps.folder",
-                                                u'parents': [{u'id': parent_folder_id}]})
-                folder.Upload()
+                create_file_args = {u'title': folder_name,
+                                    u'mimeType': u"application/vnd.google-apps.folder",
+                                    u'parents': [{u'id': parent_folder_id}]}
+                create_file_args[u'parents'][0].update(self.api_params)
+                create_file_args.update(self.api_params)
+                folder = self.drive.CreateFile(create_file_args)
+                if self.shared_drive_id:
+                    folder.Upload(param={u'supportsTeamDrives': True})
+                else:
+                    folder.Upload()
             parent_folder_id = folder[u'id']
         self.folder = parent_folder_id
         self.id_cache = {}
@@ -159,7 +181,9 @@ Exception: %s""" % str(e))
         # reliable because there is no strong consistency.
         q = u"title='%s' and '%s' in parents and trashed=false" % (filename, self.folder)
         fields = u'items(title,id,fileSize,downloadUrl,exportLinks),nextPageToken'
-        flist = self.drive.ListFile({u'q': q, u'fields': fields}).GetList()
+        list_file_args = {u'q': q, u'fields': fields}
+        list_file_args.update(self.api_params)
+        flist = self.drive.ListFile(list_file_args).GetList()
         if len(flist) > 1:
             log.FatalError(_(u"PyDrive backend: multiple files called '%s'.") % (filename,))
         elif flist:
@@ -184,15 +208,20 @@ Exception: %s""" % str(e))
         drive_file = self.file_by_name(remote_filename)
         if drive_file is None:
             # No existing file, make a new one
-            drive_file = self.drive.CreateFile({u'title': remote_filename,
-                                                u'parents': [{u"kind": u"drive#fileLink",
-                                                             u"id": self.folder}]})
+            create_file_args = {u'title': remote_filename,
+                                u'parents': [{u"kind": u"drive#fileLink",
+                                             u"id": self.folder}]}
+            create_file_args[u'parents'][0].update(self.api_params)
+            drive_file = self.drive.CreateFile(create_file_args)
             log.Info(u"PyDrive backend: creating new file '%s'" % (remote_filename,))
         else:
             log.Info(u"PyDrive backend: replacing existing file '%s' with id '%s'" % (
                 remote_filename, drive_file[u'id']))
         drive_file.SetContentFile(util.fsdecode(source_path.name))
-        drive_file.Upload()
+        if self.shared_drive_id:
+            drive_file.Upload(param={u'supportsTeamDrives': True})
+        else:
+            drive_file.Upload()
         self.id_cache[remote_filename] = drive_file[u'id']
 
     def _get(self, remote_filename, local_path):
@@ -200,9 +229,11 @@ Exception: %s""" % str(e))
         drive_file.GetContentFile(util.fsdecode(local_path.name))
 
     def _list(self):
-        drive_files = self.drive.ListFile({
+        list_file_args = {
             u'q': u"'" + self.folder + u"' in parents and trashed=false",
-            u'fields': u'items(title,id),nextPageToken'}).GetList()
+            u'fields': u'items(title,id),nextPageToken'}
+        list_file_args.update(self.api_params)
+        drive_files = self.drive.ListFile(list_file_args).GetList()
         filenames = set(item[u'title'] for item in drive_files)
         # Check the cache as well. A file might have just been uploaded but
         # not yet appear in the listing.
@@ -215,10 +246,12 @@ Exception: %s""" % str(e))
 
     def _delete(self, filename):
         file_id = self.id_by_name(filename)
-        if file_id != u'':
-            self.drive.auth.service.files().delete(fileId=file_id).execute()
-        else:
+        if file_id == u'':
             log.Warn(u"File '%s' does not exist while trying to delete it" % (util.fsdecode(filename),))
+        elif self.shared_drive_id:
+            self.drive.auth.service.files().delete(fileId=file_id, param={u'supportsTeamDrives': True}).execute()
+        else:
+            self.drive.auth.service.files().delete(fileId=file_id).execute()
 
     def _query(self, filename):
         drive_file = self.file_by_name(filename)
