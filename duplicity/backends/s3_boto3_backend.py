@@ -90,7 +90,7 @@ class S3Boto3Backend(duplicity.backend.Backend):
         from botocore.exceptions import ClientError  # pylint: disable=import-error
 
         self.bucket = None
-        self.s3 = boto3.resource(u's3')
+        self.s3 = boto3.resource(u's3', region_name=config.s3_region_name, endpoint_url=config.s3_endpoint_url)
 
         try:
             self.s3.meta.client.head_bucket(Bucket=self.bucket_name)

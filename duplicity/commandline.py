@@ -556,6 +556,10 @@ def parse_cmdline_options(arglist):
     parser.add_option(u"--s3-kms-key-id", action=u"store", dest=u"s3_kms_key_id")
     parser.add_option(u"--s3-kms-grant", action=u"store", dest=u"s3_kms_grant")
 
+    # Options for specifying region and endpoint of s3
+    parser.add_option(u"--s3-region-name", type=u"string", dest=u"s3_region_name", action=u"store")
+    parser.add_option(u"--s3-endpoint-url", type=u"string", dest=u"s3_endpoint_url", action=u"store")
+
     # Option to specify a Swift container storage policy.
     parser.add_option(u"--swift-storage-policy", type=u"string", metavar=_(u"policy"))
 
