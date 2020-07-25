@@ -346,6 +346,6 @@ class BotoBackend(duplicity.backend.Backend):
         # Used primarily to move all necessary files in Glacier to S3 at once
         for remote_filename in remote_filenames:
             remote_filename = util.fsdecode(remote_filename)
-            t= threading.Thread(target=self.pre_process_download,
-                    kwargs={u'remote_filename':remote_filename, u'wait':False})
+            t = threading.Thread(target=self.pre_process_download,
+                                 kwargs={u'remote_filename': remote_filename, u'wait': False})
             t.start()
