@@ -347,5 +347,5 @@ class BotoBackend(duplicity.backend.Backend):
         for remote_filename in remote_filenames:
             remote_filename = util.fsdecode(remote_filename)
             t= threading.Thread(target=self.pre_process_download,
-                    kwargs={'remote_filename':remote_filename, 'wait':False})
+                    kwargs={u'remote_filename':remote_filename, u'wait':False})
             t.start()
