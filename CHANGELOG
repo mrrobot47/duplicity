@@ -1,4 +1,4 @@
-New in v0.8.15 (2020/08/??)
+New in v0.8.15 (2020/07/27)
 ---------------------------
 * Fix bug #1887689 with patch from Matthew Barry
   - Cleanup with Paramiko backend does not remove files due to missing

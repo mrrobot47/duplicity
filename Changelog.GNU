@@ -1,3 +1,7 @@
+2020-07-27  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Prep for 0.8.15
+
 2020-07-24  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in joshAppdev:pydriveshared - Backend for Shared Drives on Google

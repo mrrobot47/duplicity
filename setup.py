@@ -52,7 +52,7 @@ try:
     from setuptools_scm import get_version
     Version = get_version(**scm_version_args)
 except Exception as e:
-    Version = u"0.8.15.dev"
+    Version = u"0.8.15"
     print(u"Unable to get SCM version: defaulting to %s" % (Version,))
 Reldate = time.strftime(u"%B %d, %Y", time.localtime())
 
