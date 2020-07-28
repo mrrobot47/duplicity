@@ -1,3 +1,9 @@
+New in v0.8.16 (2020/08/??)
+---------------------------
+* Revert "Merge branch 's3-boto3-region-and-endpoint' into 'master'"
+  - It broke existing setups since defaults were not supplied.
+
+
 New in v0.8.15 (2020/07/27)
 ---------------------------
 * Fix bug #1887689 with patch from Matthew Barry

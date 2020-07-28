@@ -1,3 +1,8 @@
+2020-07-28  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Revert "Merge branch 's3-boto3-region-and-endpoint' into 'master'"
+      - It broke existing setups since defaults were not supplied.
+
 2020-07-27  Kenneth Loafman  <kenneth@loafman.com>
 
     * Prep for 0.8.15
