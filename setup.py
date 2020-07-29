@@ -286,7 +286,7 @@ class BuildScriptsCommand(build_scripts):
                         os.chmod(file, newmode)
 
 
-with open(u"README") as fh:
+with open(u"README.md") as fh:
     long_description = fh.read()
 
 
