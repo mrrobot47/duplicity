@@ -344,7 +344,8 @@ class BotoBackend(duplicity.backend.Backend):
     def pre_process_download_batch(self, remote_filenames):
         log.Info(u"Starting batch unfreezing from Glacier")
         # Used primarily to move all necessary files in Glacier to S3 at once
-        executor = ThreadPoolExecutor(thread_name_prefix=u's3-unfreeze-glacier')
-        for remote_filename in remote_filenames:
-            remote_filename = util.fsdecode(remote_filename)
-            executor.submit(self.pre_process_download, remote_filename, False)
+        with ThreadPoolExecutor(thread_name_prefix=u's3-unfreeze-glacier') as executor:
+            for remote_filename in remote_filenames:
+                remote_filename = util.fsdecode(remote_filename)
+                executor.submit(self.pre_process_download, remote_filename, False)
+        log.Info(u"Batch unfreezing from Glacier finished")
