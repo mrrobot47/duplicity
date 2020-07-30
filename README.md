@@ -2,11 +2,15 @@
 
 Thank you for trying duplicity.  To install, run:
 
-`python setup.py install`
+```
+python setup.py install
+```
 
 The build process can be also be run separately:
 
-`python setup.py build`
+```
+python setup.py build
+```
 
 The default prefix is /usr, so files are put in /usr/bin,
 /usr/share/man/, etc.  An alternate prefix can be specified using the
