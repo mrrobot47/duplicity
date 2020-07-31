@@ -1,3 +1,8 @@
+2020-07-31  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in convert2md - Convert README's to markdown
+    * Merged in s3-boto3-region-and-endpoint - after fixes.
+
 2020-07-28  Kenneth Loafman  <kenneth@loafman.com>
 
     * Revert "Merge branch 's3-boto3-region-and-endpoint' into 'master'"
