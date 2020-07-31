@@ -22,4 +22,4 @@ override_dh_auto_install:
 	grep -Rl "\$$version" debian/duplicity | xargs sed -i "s/\$$version/$(UPSTREAM_VERSION)/g"
 
 override_dh_installdocs:
-	dh_installdocs README README-LOG
+	dh_installdocs README.md README-LOG.md README-REPO.md README-TESTING.md
