@@ -249,6 +249,10 @@ s3_use_sse_kms = False
 s3_kms_key_id = None
 s3_kms_grant = None
 
+# region and endpoint of s3
+s3_region_name = None
+s3_endpoint_url = None
+
 # Which storage policy to use for Swift containers
 swift_storage_policy = u""
 
