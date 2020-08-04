@@ -453,7 +453,7 @@ probably isn't what you meant.""") %
                         log.WarningCode.cannot_read, util.escape(path.uc_name))
                     if diffdir.stats:
                         diffdir.stats.Errors += 1
-                elif path.append(filename).exists():
+                elif path.contains(filename):
                     return 0
                 else:
                     return None

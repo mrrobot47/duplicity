@@ -578,6 +578,14 @@ class Path(ROPath):
         u"""Return true if path is a directory and is empty"""
         return self.isdir() and not self.listdir()
 
+    def contains(self, child):
+        u"""Return true if path is a directory and contains child"""
+        if isinstance(child, u"".__class__):
+            child = util.fsencode(child)
+        # We don't use append(child).exists() here because that requires exec
+        # permissions as well as read. listdir() just needs read permissions.
+        return self.isdir() and child in self.listdir()
+
     def open(self, mode=u"rb"):
         u"""
         Return fileobj associated with self
