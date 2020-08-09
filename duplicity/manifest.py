@@ -91,7 +91,11 @@ class Manifest(object):
         if config.allow_source_mismatch:
             return
 
-        if self.hostname and self.hostname != config.hostname:
+        # Check both hostname and fqdn (we used to write the fqdn into the
+        # manifest, so we want to keep comparing against that)
+        if (self.hostname and
+                self.hostname != config.hostname and
+                self.hostname != config.fqdn):
             errmsg = _(u"Fatal Error: Backup source host has changed.\n"
                        u"Current hostname: %s\n"
                        u"Previous hostname: %s") % (config.hostname, self.hostname)

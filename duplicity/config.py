@@ -43,8 +43,12 @@ file_prefix_archive = b""
 # Prefix for sig files only
 file_prefix_signature = b""
 
-# The name of the current host, or None if it cannot be set
-hostname = socket.getfqdn()
+# The name of the current host
+hostname = socket.gethostname()
+
+# For historical reasons also save the FQDN for comparing manifests, but
+# we tend to prefer the hostname going forward.
+fqdn = socket.getfqdn()
 
 # The main local path.  For backing up the is the path to be backed
 # up.  For restoring, this is the destination of the restored files.

@@ -25,6 +25,7 @@ standard_library.install_aliases()
 
 import re
 import unittest
+from mock import patch
 
 from duplicity import config
 from duplicity import manifest
@@ -139,6 +140,28 @@ class ManifestTest(UnitTestCase):
         s2 = re.sub(b'Filelist 3', b'Filelist 5', s)
         m2 = manifest.Manifest().from_string(s2)
         assert hasattr(m2, u'corrupt_filelist')
+
+    def test_hostname_checks(self):
+        self.set_config(u'hostname', u'hostname')
+        self.set_config(u'fqdn', u'fqdn')
+        m = manifest.Manifest()
+
+        # Matching hostname should work
+        m.hostname = u'hostname'
+        m.check_dirinfo()
+
+        # Matching fqdn should also work for backwards compatibility
+        m.hostname = u'fqdn'
+        m.check_dirinfo()
+
+        # Bad match should throw a fatal error and quit
+        m.hostname = u'foobar'
+        self.assertRaises(SystemExit, m.check_dirinfo)
+
+        # But not if we tell the system to ignore it
+        self.set_config(u'allow_source_mismatch', True)
+        m.check_dirinfo()
+
 
 if __name__ == u"__main__":
     unittest.main()
