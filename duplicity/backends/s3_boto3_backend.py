@@ -82,7 +82,6 @@ class S3Boto3Backend(duplicity.backend.Backend):
         self.s3 = None
         self.bucket = None
         self.tracker = UploadProgressTracker()
-        self.reset_connection()
 
     def reset_connection(self):
         import boto3  # pylint: disable=import-error
@@ -105,6 +104,9 @@ class S3Boto3Backend(duplicity.backend.Backend):
         self.bucket = self.s3.Bucket(self.bucket_name)  # only set if bucket is thought to exist.
 
     def _put(self, local_source_path, remote_filename):
+        if not self.s3:
+            self.reset_connection()
+
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename
 
@@ -147,11 +149,17 @@ class S3Boto3Backend(duplicity.backend.Backend):
                                                           ExtraArgs=extra_args)
 
     def _get(self, remote_filename, local_path):
+        if not self.s3:
+            self.reset_connection()
+
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename
         self.s3.Object(self.bucket.name, key).download_file(local_path.uc_name)
 
     def _list(self):
+        if not self.s3:
+            self.reset_connection()
+
         filename_list = []
         for obj in self.bucket.objects.filter(Prefix=self.key_prefix):
             try:
@@ -163,11 +171,17 @@ class S3Boto3Backend(duplicity.backend.Backend):
         return filename_list
 
     def _delete(self, remote_filename):
+        if not self.s3:
+            self.reset_connection()
+
         remote_filename = util.fsdecode(remote_filename)
         key = self.key_prefix + remote_filename
         self.s3.Object(self.bucket.name, key).delete()
 
     def _query(self, remote_filename):
+        if not self.s3:
+            self.reset_connection()
+
         import botocore  # pylint: disable=import-error
 
         remote_filename = util.fsdecode(remote_filename)
