@@ -1,3 +1,7 @@
+2020-09-24  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in lazy init for Boto3 network connections
+
 2020-07-31  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in convert2md - Convert README's to markdown

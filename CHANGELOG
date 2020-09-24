@@ -4,6 +4,7 @@ New in v0.8.16 (2020/08/??)
   - It broke existing setups since defaults were not supplied.
 * Merged in convert2md - Convert README's to markdown
 * Merged in s3-boto3-region-and-endpoint - after fixes.
+* Merged in lazy init for Boto3 network connections
 
 
 New in v0.8.15 (2020/07/27)
