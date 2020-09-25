@@ -1,3 +1,7 @@
+2020-09-25  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Merged in OutlawPlz:paramiko-progress
+
 2020-09-24  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in lazy init for Boto3 network connections
