@@ -39,6 +39,7 @@ import warnings
 from binascii import hexlify
 
 import duplicity.backend
+from duplicity import progress
 from duplicity import config
 from duplicity import util
 from duplicity.errors import BackendException
@@ -317,14 +318,20 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             response = chan.recv(1)
             if (response != b"\0"):
                 raise BackendException(b"scp remote error: %b" % chan.recv(-1))
-            chan.sendall(f.read() + b'\0')
+            file_pos = 0
+            file_size = fstat.st_size
+            while file_pos < file_size:
+                chan.sendall(f.read(16384))
+                file_pos = f.tell()
+                progress.report_transfer(file_pos, file_size)
+            chan.sendall(b'\0')
             f.close()
             response = chan.recv(1)
             if (response != b"\0"):
                 raise BackendException(u"scp remote error: %s" % chan.recv(-1))
             chan.close()
         else:
-            self.sftp.put(source_path.name, remote_filename)
+            self.sftp.put(source_path.name, remote_filename, callback=progress.report_transfer)
 
     def _get(self, remote_filename, local_path):
         # remote_filename is a byte object, not str or unicode
