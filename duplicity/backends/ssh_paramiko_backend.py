@@ -5,8 +5,6 @@
 # Copyright 2011 Alexander Zangerl <az@snafu.priv.at>
 # Copyright 2012 edso (ssh_config added)
 #
-# $Id: sshbackend.py,v 1.2 2011/12/31 04:44:12 az Exp $
-#
 # This file is part of duplicity.
 #
 # Duplicity is free software; you can redistribute it and/or modify it
