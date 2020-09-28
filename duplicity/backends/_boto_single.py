@@ -21,6 +21,7 @@
 
 from __future__ import division
 from builtins import str
+from concurrent.futures import ThreadPoolExecutor
 import os
 import time
 
@@ -339,3 +340,12 @@ class BotoBackend(duplicity.backend.Backend):
                     time.sleep(60)
                     self.resetConnection()
                 log.Info(u"File %s was successfully restored from Glacier" % remote_filename)
+
+    def pre_process_download_batch(self, remote_filenames):
+        log.Info(u"Starting batch unfreezing from Glacier")
+        # Used primarily to move all necessary files in Glacier to S3 at once
+        with ThreadPoolExecutor(thread_name_prefix=u's3-unfreeze-glacier') as executor:
+            for remote_filename in remote_filenames:
+                remote_filename = util.fsdecode(remote_filename)
+                executor.submit(self.pre_process_download, remote_filename, False)
+        log.Info(u"Batch unfreezing from Glacier finished")
