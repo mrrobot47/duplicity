@@ -1,3 +1,7 @@
+2020-09-29  Kenneth Loafman  <kenneth@loafman.com>
+
+    * Prep for 0.8.16
+
 2020-09-27  Kenneth Loafman  <kenneth@loafman.com>
 
     * Merged in s3-unfreeze-all
