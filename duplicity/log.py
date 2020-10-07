@@ -44,13 +44,13 @@ _logger = None
 
 def DupToLoggerLevel(verb):
     u"""Convert duplicity level to the logging module's system, where higher is
-       more severe"""
+        more severe"""
     return MAX - verb + 1
 
 
 def LoggerToDupLevel(verb):
-    u"""Convert logging module level to duplicity's system, where lowere is
-       more severe"""
+    u"""Convert logging module level to duplicity's system, where lower is
+        more severe"""
     return DupToLoggerLevel(verb)
 
 
@@ -103,8 +103,8 @@ def Debug(s):
 
 class InfoCode(object):
     u"""Enumeration class to hold info code values.
-       These values should never change, as frontends rely upon them.
-       Don't use 0 or negative numbers."""
+        These values should never change, as frontends rely upon them.
+        Don't use 0 or negative numbers."""
     generic = 1
     progress = 2
     collection_status = 3
@@ -235,8 +235,8 @@ def Notice(s):
 
 class WarningCode(object):
     u"""Enumeration class to hold warning code values.
-       These values should never change, as frontends rely upon them.
-       Don't use 0 or negative numbers."""
+        These values should never change, as frontends rely upon them.
+        Don't use 0 or negative numbers."""
     generic = 1
     orphaned_sig = 2
     unnecessary_sig = 3
@@ -259,9 +259,9 @@ def Warn(s, code=WarningCode.generic, extra=None):
 
 class ErrorCode(object):
     u"""Enumeration class to hold error code values.
-       These values should never change, as frontends rely upon them.
-       Don't use 0 or negative numbers.  This code is returned by duplicity
-       to indicate which error occurred via both exit code and log."""
+        These values should never change, as frontends rely upon them.
+        Don't use 0 or negative numbers.  This code is returned by duplicity
+        to indicate which error occurred via both exit code and log."""
     generic = 1  # Don't use if possible, please create a new code and use it
     command_line = 2
     hostname_mismatch = 3
@@ -372,8 +372,7 @@ def setup():
 
 
 class MachineFormatter(logging.Formatter):
-    u"""Formatter that creates messages in a syntax easily consumable by other
-       processes."""
+    u"""Formatter that creates messages in a syntax easily consumable by other processes."""
     def __init__(self):
         # 'message' will be appended by format()
         # Note that we use our own, custom-created 'levelName' instead of the

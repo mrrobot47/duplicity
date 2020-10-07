@@ -43,6 +43,18 @@ from duplicity import tempdir
 from duplicity import util
 
 
+if sys.version_info[:2] > (3, 7):
+    sys.stdout.reconfigure(errors=u'surrogateescape')
+    sys.stderr.reconfigure(errors=u'surrogateescape')
+elif sys.version_info.major == 3:
+    import codecs
+    sys.stdout = codecs.getwriter(u'utf-8')(sys.stdout.buffer, u'surrogateescape')
+    sys.stderr = codecs.getwriter(u'utf-8')(sys.stderr.buffer, u'surrogateescape')
+elif sys.version_info.major == 2:
+    sys.stdout = codecs.getwriter(u'utf-8')(sys.stdout.buffer, u'replace')
+    sys.stderr = codecs.getwriter(u'utf-8')(sys.stderr.buffer, u'replace')
+
+
 if u'--pydevd' in sys.argv or os.getenv(u'PYDEVD', None):
     # modify this for your configuration.
     # client = base path in machine that Liclipse is on
