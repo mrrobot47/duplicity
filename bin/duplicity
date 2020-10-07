@@ -51,8 +51,9 @@ elif sys.version_info.major == 3:
     sys.stdout = codecs.getwriter(u'utf-8')(sys.stdout.buffer, u'surrogateescape')
     sys.stderr = codecs.getwriter(u'utf-8')(sys.stderr.buffer, u'surrogateescape')
 elif sys.version_info.major == 2:
-    sys.stdout = codecs.getwriter(u'utf-8')(sys.stdout.buffer, u'replace')
-    sys.stderr = codecs.getwriter(u'utf-8')(sys.stderr.buffer, u'replace')
+    import codecs
+    sys.stdout = codecs.getwriter(u'utf-8')(sys.stdout, u'replace')
+    sys.stderr = codecs.getwriter(u'utf-8')(sys.stderr, u'replace')
 
 
 if u'--pydevd' in sys.argv or os.getenv(u'PYDEVD', None):
