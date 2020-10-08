@@ -118,7 +118,7 @@ py39_ub20-04:
         - apt-get update
         - apt-get install -y build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 python-dev python-pip python3-dev
-          python3-pip rdiff tzdata python3.5 python3.5-dev
+          python3-pip rdiff tzdata python3.9 python3.9-dev
         - python3 -m pip install --upgrade pip
         - python3 -m pip install --requirement requirements.txt
     script:
