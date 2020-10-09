@@ -45,7 +45,7 @@ from duplicity.errors import BackendException, FatalBackendException
 class CustomMethodRequest(urllib.request.Request):
     u"""
     This request subclass allows explicit specification of
-    the HTTP request method. Basic urllib2.Request class
+    the HTTP request method. Basic urllib.request.Request class
     chooses GET or POST depending on self.has_data()
     """
     def __init__(self, method, *args, **kwargs):
@@ -274,7 +274,7 @@ class WebDAVBackend(duplicity.backend.Backend):
             return self.get_digest_authorization(path)
 
     def parse_digest_challenge(self, challenge_string):
-        return urllib2.parse_keqv_list(urllib2.parse_http_list(challenge_string))
+        return urllib.request.parse_keqv_list(urllib.request.parse_http_list(challenge_string))
 
     def get_kerberos_authorization(self):
         import kerberos  # pylint: disable=import-error
