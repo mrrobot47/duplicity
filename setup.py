@@ -49,7 +49,7 @@ scm_version_args = {
     }
 
 try:
-    from setuptools_scm import get_version
+    from setuptools_scm import get_version  # pylint: disable=import-error
     Version = get_version(**scm_version_args)
 except Exception as e:
     Version = u"0.8.17.dev"
@@ -159,7 +159,7 @@ class SdistCommand(sdist):
         tardir = u"duplicity-%s" % (Version)
         tarfile = u"%s/duplicity-%s.tar.gz" % (self.dist_dir, Version)
 
-        assert not os.system(u"tar xf %s" % orig)
+        assert not os.system(u"tar -xf %s" % orig)
         assert not os.remove(orig)
 
         # make sure executables are
