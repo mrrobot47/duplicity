@@ -20,12 +20,16 @@ parts:
     duplicity:
         plugin: python
         python-version: python3
+        build-packages:
+            - build-essential
+            - intltool
+            - librsync-dev
+            - python3-dev
         stage-packages:
             - gnupg
             - lftp                  # lftpbackend.py
             - libatm1
             - librsync1
-            - librsync-dev
             - megatools             # megabackend.py
             - ncftp                 # ncftpbackend.py
             - openssh-client        # ssh_pexpect_backend.py
