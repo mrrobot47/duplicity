@@ -61,7 +61,7 @@ snapcraft sign-build duplicity_${VERSION}*.snap --key-name firstprime
 
 # mv into working source tree
 mv duplicity_*.txt ../..
-mv duplicity_*_.snap* ../..
+mv duplicity_*_*.snap* ../..
 cd ../..
 
 # clean up
