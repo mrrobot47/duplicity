@@ -60,8 +60,8 @@ snapcraft upload duplicity_${VERSION}_amd64.snap --release edge
 snapcraft sign-build duplicity_${VERSION}*.snap --key-name firstprime
 
 # mv into working source tree
-mv duplicity_${VERSION}_amd64.snap* ../..
-mv duplicity_amd64.txt ../..
+mv duplicity_*.txt ../..
+mv duplicity_*_.snap* ../..
 cd ../..
 
 # clean up

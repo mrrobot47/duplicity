@@ -22,6 +22,7 @@ parts:
         python-version: python3
         build-packages:
             - build-essential
+            - ieee-data
             - intltool
             - librsync-dev
             - python3-dev
