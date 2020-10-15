@@ -47,11 +47,11 @@ snapcraft login --with ~/.snaplogin
 # build snap via remote build on LP
 snapcraft remote-build --launchpad-accept-public-upload
 
-# build snap on Ubuntu 18.04 VM.  Multipass does not work well on MacOS.
+# build snap on Ubuntu 18.04 VM.  (multipass is twitchy on MacOS).
 # snapcraft snap --output duplicity_${VERSION}_amd64.snap --destructive-mode
 
 # run snap review tools before pushing to store (not avail on MacOS).
-# review-tools.snap-review --allow-classic duplicity_${VERSION}_amd64.snap
+review-tools.snap-review --allow-classic duplicity_${VERSION}_amd64.snap
 
 # push to edge
 snapcraft upload duplicity_${VERSION}_amd64.snap --release edge
