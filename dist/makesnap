@@ -57,7 +57,7 @@ review-tools.snap-review --allow-classic duplicity_${VERSION}_amd64.snap
 snapcraft upload duplicity_${VERSION}_amd64.snap --release edge
 
 # sign snap
-snapcraft sign-build duplicity_${VERSION}*.snap --key-name firstprime
+snapcraft sign-build duplicity_${VERSION}*.snap --key-name firstprime || true
 
 # mv into working source tree
 mv duplicity_*.txt ../.. || true
