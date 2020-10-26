@@ -406,7 +406,7 @@ class ROPath(object):
             else:
                 return 1
         elif self.issym():
-            if self.symtext == other.symtext or self.symtext + u"/" == other.symtext:
+            if self.symtext == other.symtext or self.symtext + util.fsencode(os.sep) == other.symtext:
                 return 1
             else:
                 log_diff(_(u"Symlink %%s points to %s, expected %s") %
