@@ -195,14 +195,13 @@ class Par2BackendTest(BackendInstanceBase):
         self.assertEqual(self.backend.__class__.__name__, u'Par2Backend')
 
 
-# TODO: Fix duplicity.errors.InvalidBackendURL: Missing hostname ...
-#  class RsyncBackendTest(BackendInstanceBase):
-#      def setUp(self):
-#          super(RsyncBackendTest, self).setUp()
-#          os.makedirs('testfiles/output')  # rsync needs it to exist first
-#          url = 'rsync://%s/testfiles/output' % os.getcwd()
-#          self.backend = duplicity.backend.get_backend_object(url)
-#          self.assertEqual(self.backend.__class__.__name__, 'RsyncBackend')
+class RsyncBackendTest(BackendInstanceBase):
+    def setUp(self):
+        super(RsyncBackendTest, self).setUp()
+        os.makedirs('testfiles/output')  # rsync needs it to exist first
+        url = 'rsync://localhost:2222//%s/testfiles/output' % os.getcwd()
+        self.backend = duplicity.backend.get_backend_object(url)
+        self.assertEqual(self.backend.__class__.__name__, 'RsyncBackend')
 
 
 class TahoeBackendTest(BackendInstanceBase):
