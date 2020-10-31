@@ -1606,8 +1606,6 @@ def do_backup(action):
         action = u"full"
     log.PrintCollectionStatus(col_stats)
 
-    os.umask(0o77)
-
     # get the passphrase if we need to based on action/options
     config.gpg_profile.passphrase = get_passphrase(1, action)
 
