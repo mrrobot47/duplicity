@@ -438,11 +438,13 @@ probably isn't what you meant.""") %
         # Internal. Used by ParseArgs.
         assert include == 0 or include == 1
 
+        # todo: get around circular dependency issue by importing here
+        from duplicity.robust import check_common_error
+
         def exclude_sel_func(path):
             # do not follow symbolic links when checking for file existence!
             if path.isdir():
-                # First check path is read accessible
-                if not (os.access(path.name, os.R_OK)):
+                def error_handler(_exc, _filename):
                     # Path is not read accessible
                     # ToDo: Ideally this error would only show if the folder
                     # was ultimately included by the full set of selection
@@ -453,7 +455,8 @@ probably isn't what you meant.""") %
                         log.WarningCode.cannot_read, util.escape(path.uc_name))
                     if diffdir.stats:
                         diffdir.stats.Errors += 1
-                elif path.contains(filename):
+                    return False
+                if check_common_error(error_handler, path.contains, [filename]):
                     return 0
                 else:
                     return None
