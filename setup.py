@@ -96,8 +96,7 @@ def get_data_files():
             (u'share/doc/duplicity-%s' % Version,
                 [
                 u'AUTHORS',
-                u'CHANGELOG',
-                u'Changelog.GNU',
+                u'CHANGELOG.md',
                 u'COPYING',
                 u'README.md',
                 u'README-LOG.md',
@@ -360,6 +359,7 @@ setup(name=u"duplicity",
         u"Programming Language :: Python :: 3.6",
         u"Programming Language :: Python :: 3.7",
         u"Programming Language :: Python :: 3.8",
+        u"Programming Language :: Python :: 3.9",
         u"Topic :: System :: Archiving :: Backup"
         ],
     )
