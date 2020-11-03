@@ -2,6 +2,12 @@
 
 ### Other
 
+* Adjust setup.py for changelog changes. [Kenneth Loafman]
+
+* Delete previous manual changelogs. [Kenneth Loafman]
+
+* Tools to make a CHANGELOG.md from git commits. [Kenneth Loafman]
+
 * Merge branch 'exc-if-present-robust' into 'master' [Kenneth Loafman]
 
 * Make exclude-if-present more robust. [Michael Terry]
