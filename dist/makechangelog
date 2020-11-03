@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+if [ "$#" -ne 0 ]; then
+    echo "usage: makepip"
+    exit 2
+fi
+
+gitchangelog > CHANGELOG.md
