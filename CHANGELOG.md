@@ -2,6 +2,10 @@
 
 ### Other
 
+* Fix issue #25 - Multibackend not deleting files. [Kenneth Loafman]
+
+* Update changelog. [Kenneth Loafman]
+
 * Adjust setup.py for changelog changes. [Kenneth Loafman]
 
 * Delete previous manual changelogs. [Kenneth Loafman]
