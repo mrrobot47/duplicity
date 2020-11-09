@@ -2,6 +2,10 @@
 
 ### Other
 
+* Fix issue #26 - duplicity does not clean up par2 files. [Kenneth Loafman]
+
+* Update changelog. [Kenneth Loafman]
+
 * Fix issue #25 - Multibackend not deleting files. [Kenneth Loafman]
 
 * Update changelog. [Kenneth Loafman]
