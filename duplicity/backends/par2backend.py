@@ -161,10 +161,10 @@ class Par2Backend(backend.Backend):
 
         remote_list = self.unfiltered_list()
 
-        c = re.compile(u'%s(?:\\.vol[\\d+]*)?\\.par2' % filename)
+        c = re.compile(u'%s(?:\\.vol[\\d+]*)?\\.par2' % util.fsdecode(filename))
         for remote_filename in remote_list:
-            if c.match(util.fsdecode(remote_filename)):
-                self.wrapped_backend._delete(remote_filename)
+            if c.match(remote_filename):
+                self.wrapped_backend._delete(util.fsencode(remote_filename))
 
     def delete_list(self, filename_list):
         u"""delete given filename_list and all .par2 files that belong to them
@@ -172,7 +172,7 @@ class Par2Backend(backend.Backend):
         remote_list = self.unfiltered_list()
 
         for filename in filename_list[:]:
-            c = re.compile(u'%s(?:\\.vol[\\d+]*)?\\.par2' % filename)
+            c = re.compile(u'%s(?:\\.vol[\\d+]*)?\\.par2' % util.fsdecode(filename))
             for remote_filename in remote_list:
                 if c.match(util.fsdecode(remote_filename)):
                     # insert here to make sure par2 files will be removed first
