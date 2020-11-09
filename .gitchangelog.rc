@@ -66,6 +66,7 @@ ignore_regexps = [
     r'^([cC]hg|[fF]ix|[nN]ew)\s*:\s*[d|D]ev:',
     r'^(.{3,3}\s*:)?\s*[fF]irst commit.?\s*$',
     r'^Launchpad automatic translations update..*$',
+    r'^Update changelog..*$',
     r'^\* Prep\s*for\s*\d+\.\d+\.\d+.*$',
     r'^$',  ## ignore commits with empty messages
 ]

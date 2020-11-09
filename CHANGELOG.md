@@ -2,13 +2,11 @@
 
 ### Other
 
+* Fix issue #26 (again) - duplicity does not clean up par2 files. [Kenneth Loafman]
+
 * Fix issue #26 - duplicity does not clean up par2 files. [Kenneth Loafman]
 
-* Update changelog. [Kenneth Loafman]
-
 * Fix issue #25 - Multibackend not deleting files. [Kenneth Loafman]
-
-* Update changelog. [Kenneth Loafman]
 
 * Adjust setup.py for changelog changes. [Kenneth Loafman]
 
