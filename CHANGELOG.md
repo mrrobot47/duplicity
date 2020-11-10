@@ -2,6 +2,8 @@
 
 ### Other
 
+* Fixup ignore\_regexps for optional text. [Kenneth Loafman]
+
 * Fix issue #26 (again) - duplicity does not clean up par2 files. [Kenneth Loafman]
 
 * Fix issue #26 - duplicity does not clean up par2 files. [Kenneth Loafman]
