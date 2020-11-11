@@ -464,8 +464,13 @@ moduleinit(void)
 {
   PyObject *m, *d;
 
+  #if PY_MAJOR_VERSION >= 3 && PY_MINOR_VERSION >= 10
+  Py_SET_TYPE(&_librsync_SigMakerType, &PyType_Type);
+  Py_SET_TYPE(&_librsync_DeltaMakerType, &PyType_Type);
+  #else 
   Py_TYPE(&_librsync_SigMakerType) = &PyType_Type;
   Py_TYPE(&_librsync_DeltaMakerType) = &PyType_Type;
+  #endif 
 
   MOD_DEF(m, "_librsync", "", _librsyncMethods)
   if (m == NULL)
