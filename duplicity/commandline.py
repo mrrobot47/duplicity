@@ -99,6 +99,11 @@ def stdin_deprecation(opt):
             log.ERROR, force_print=True)
 
 
+# log options handled in log.py.  Add noop to make optparse happy
+def noop():
+    pass
+
+
 def expand_fn(filename):
     return os.path.expanduser(os.path.expandvars(filename))
 
@@ -430,6 +435,10 @@ def parse_cmdline_options(arglist):
     parser.add_option(u"--log-file", type=u"file", metavar=_(u"filename"),
                       dest=u"", action=u"callback",
                       callback=lambda o, s, v, p: log.add_file(v))
+
+    # log option to add timestamp and level to log entries
+    parser.add_option(u"--log-timestamp", action=u"callback",
+                      callback=lambda o, s, v, p: noop())
 
     # Maximum block size for large files
     parser.add_option(u"--max-blocksize", type=u"int", metavar=_(u"number"))

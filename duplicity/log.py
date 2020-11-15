@@ -26,10 +26,10 @@ from __future__ import division
 
 from builtins import str
 from builtins import object
+import datetime
+import logging
 import os
 import sys
-import logging
-import datetime
 
 MIN = 0
 ERROR = 0
@@ -40,6 +40,7 @@ DEBUG = 9
 MAX = 9
 
 _logger = None
+_log_timestamp = False
 
 
 def DupToLoggerLevel(verb):
@@ -353,9 +354,16 @@ class ErrFilter(logging.Filter):
 def setup():
     u"""Initialize logging"""
     global _logger
+    global _log_timestamp
     if _logger:
         return
 
+    # have to get log options from commandline before initializing logger
+    # hackish? yes, but I see no other way other than external config
+    if u'--log-timestamp' in sys.argv[1:]:
+        _log_timestamp = True
+
+    # OK, now we can start setup
     _logger = logging.getLogger(u"duplicity")
 
     # Default verbosity allows notices and above
@@ -363,12 +371,31 @@ def setup():
 
     # stdout and stderr are for different logging levels
     outHandler = logging.StreamHandler(sys.stdout)
+    if _log_timestamp:
+        outHandler.setFormatter(DetailFormatter())
     outHandler.addFilter(OutFilter())
     _logger.addHandler(outHandler)
 
     errHandler = logging.StreamHandler(sys.stderr)
+    if _log_timestamp:
+        errHandler.setFormatter(DetailFormatter())
     errHandler.addFilter(ErrFilter())
     _logger.addHandler(errHandler)
+
+
+class DetailFormatter(logging.Formatter):
+    u"""Formatter that creates messages in a syntax somewhat like syslog."""
+    def __init__(self):
+        # 'message' will be appended by format()
+        # Note that we use our own, custom-created 'levelName' instead of the
+        # standard 'levelname'.  This is because the standard 'levelname' can
+        # be adjusted by any library anywhere in our stack without us knowing.
+        # But we control 'levelName'.
+        logging.Formatter.__init__(self, u"%(asctime)s %(levelName)s %(message)s")
+
+    def format(self, record):
+        s = logging.Formatter.format(self, record)
+        return s
 
 
 class MachineFormatter(logging.Formatter):
@@ -432,4 +459,6 @@ def getverbosity():
 
 def shutdown():
     u"""Cleanup and flush loggers"""
+    global _logger
     logging.shutdown()
+
