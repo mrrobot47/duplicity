@@ -461,4 +461,3 @@ def shutdown():
     u"""Cleanup and flush loggers"""
     global _logger
     logging.shutdown()
-

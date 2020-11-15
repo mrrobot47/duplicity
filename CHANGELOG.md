@@ -1,3 +1,26 @@
+## (unreleased)
+
+### Other
+
+* Added option --log-timestamp to prepend timestamp to log entry. [Kenneth Loafman]
+
+* Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+* Improve. [Gwyn Ciesla]
+
+* Change version for LP. [Kenneth Loafman]
+
+* Change version for LP. [Kenneth Loafman]
+
+* Improve patch for Python 3.10. [Gwyn Ciesla]
+
+* Conditionalize for Python version. [Gwyn Ciesla]
+
+* Patch for Python 3.10. [Gwyn Ciesla]
+
+
 ## rel.0.8.17 (2020-11-11)
 
 ### Other
