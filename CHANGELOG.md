@@ -2,6 +2,8 @@
 
 ### Other
 
+* Fix pep8 warning. [Kenneth Loafman]
+
 * Added option --log-timestamp to prepend timestamp to log entry. [Kenneth Loafman]
 
 * Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
