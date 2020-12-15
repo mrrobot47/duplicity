@@ -25,6 +25,7 @@ filters.txt
 htmlcov
 po/duplicity.pot-e
 random_seed
+report.xml
 testfiles
 testing/gnupg/.gpg-v21-migrated
 testing/gnupg/S.*
