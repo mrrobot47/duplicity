@@ -28,7 +28,7 @@ cd ../duplicity
 ./setup.py build_ext
 cd -
 
-#${SUDO} tar xzf testfiles.tar.gz
+#${SUDO} tar xzf testfiles.tar.gz -C /tmp
 
 ARGS=`python <<EOF
 import sys
@@ -46,7 +46,7 @@ for t in `cat alltests`; do
     ${CMD} 2>&1 | grep -v "unsafe ownership"
 done
 
-#${SUDO} rm -rf testfiles tempdir temp2.tar
+#${SUDO} rm -rf /tmp/testfiles tempdir temp2.tar
 
 # Gen the coverage maps by file
 python -m trace --report --missing --file=counts --coverdir=coverage

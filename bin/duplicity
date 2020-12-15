@@ -60,8 +60,8 @@ if u'--pydevd' in sys.argv or os.getenv(u'PYDEVD', None):
     # modify this for your configuration.
     # client = base path in machine that Liclipse is on
     # server = base path in machine that duplicity is on
-    client = u'/Users/ken/workspace/duplicity-git'
-    server = u'/home/ken/workspace/duplicity-git'
+    client = u'/Users/ken/workspace/duplicity-testfilestfiles'
+    server = u'/home/ken/workduplicity-testfilesty-testfiles'
 
     # relative paths under duplicity root
     duppaths = [

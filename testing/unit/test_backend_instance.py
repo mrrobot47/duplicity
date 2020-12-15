@@ -38,14 +38,14 @@ class BackendInstanceBase(UnitTestCase):
 
     def setUp(self):
         UnitTestCase.setUp(self)
-        assert not os.system(u"rm -rf testfiles")
-        os.makedirs(u'testfiles')
+        assert not os.system(u"rm -rf /tmp/testfiles")
+        os.makedirs(u'/tmp/testfiles')
         self.backend = None
-        self.local = path.Path(u'testfiles/local')
+        self.local = path.Path(u'/tmp/testfiles/local')
         self.local.writefileobj(io.BytesIO(b"hello"))
 
     def tearDown(self):
-        assert not os.system(u"rm -rf testfiles")
+        assert not os.system(u"rm -rf /tmp/testfiles")
         if self.backend is None:
             return
         if hasattr(self.backend, u'_close'):
@@ -55,7 +55,7 @@ class BackendInstanceBase(UnitTestCase):
         if self.backend is None:
             return
         self.backend._put(self.local, b'file-a')
-        getfile = path.Path(u'testfiles/getfile')
+        getfile = path.Path(u'/tmp/testfiles/getfile')
         self.backend._get(b'file-a', getfile)
         self.assertTrue(self.local.compare_data(getfile))
 
@@ -128,14 +128,14 @@ class BackendInstanceBase(UnitTestCase):
         if not hasattr(self.backend, u'_move'):
             return
 
-        copy = path.Path(u'testfiles/copy')
+        copy = path.Path(u'/tmp/testfiles/copy')
         self.local.copy(copy)
 
         self.backend._move(self.local, b'file-a')
         self.assertTrue(b'file-a' in self.backend._list())
         self.assertFalse(self.local.exists())
 
-        getfile = path.Path(u'testfiles/getfile')
+        getfile = path.Path(u'/tmp/testfiles/getfile')
         self.backend._get(b'file-a', getfile)
         self.assertTrue(copy.compare_data(getfile))
 
@@ -181,7 +181,7 @@ class BackendInstanceBase(UnitTestCase):
 class LocalBackendTest(BackendInstanceBase):
     def setUp(self):
         super(LocalBackendTest, self).setUp()
-        url = u'file://testfiles/output'
+        url = u'file:///tmp/testfiles/output'
         self.backend = duplicity.backend.get_backend_object(url)
         self.assertEqual(self.backend.__class__.__name__, u'LocalBackend')
 
@@ -190,7 +190,7 @@ class LocalBackendTest(BackendInstanceBase):
 class Par2BackendTest(BackendInstanceBase):
     def setUp(self):
         super(Par2BackendTest, self).setUp()
-        url = u'par2+file://testfiles/output'
+        url = u'par2+file:///tmp/testfiles/output'
         self.backend = duplicity.backend.get_backend_object(url)
         self.assertEqual(self.backend.__class__.__name__, u'Par2Backend')
 
@@ -199,8 +199,8 @@ class Par2BackendTest(BackendInstanceBase):
 # class RsyncBackendTest(BackendInstanceBase):
 #     def setUp(self):
 #         super(RsyncBackendTest, self).setUp()
-#         os.makedirs(u'testfiles/output')  # rsync needs it to exist first
-#         url = u'rsync://localhost:2222//%s/testfiles/output' % os.getcwd()
+#         os.makedirs(u'/tmp/testfiles/output')  # rsync needs it to exist first
+#         url = u'rsync://localhost:2222//%s//tmp/testfiles/output' % os.getcwd()
 #         self.backend = duplicity.backend.get_backend_object(url)
 #         self.assertEqual(self.backend.__class__.__name__, u'RsyncBackend')
 
@@ -208,8 +208,8 @@ class Par2BackendTest(BackendInstanceBase):
 class TahoeBackendTest(BackendInstanceBase):
     def setUp(self):
         super(TahoeBackendTest, self).setUp()
-        os.makedirs(u'testfiles/output')
-        url = u'tahoe://testfiles/output'
+        os.makedirs(u'/tmp/testfiles/output')
+        url = u'tahoe:///tmp/testfiles/output'
         self.backend = duplicity.backend.get_backend_object(url)
         self.assertEqual(self.backend.__class__.__name__, u'TAHOEBackend')
 
@@ -218,9 +218,9 @@ class TahoeBackendTest(BackendInstanceBase):
 #  class HSIBackendTest(BackendInstanceBase):
 #      def setUp(self):
 #          super(HSIBackendTest, self).setUp()
-#          os.makedirs(u'testfiles/output')
+#          os.makedirs(u'/tmp/testfiles/output')
 #          # hostname is ignored...  Seemingly on purpose
-#          url = u'hsi://hostname%s/testfiles/output' % os.getcwd()
+#          url = u'hsi://hostname%s//tmp/testfiles/output' % os.getcwd()
 #          self.backend = duplicity.backend.get_backend_object(url)
 #          self.assertEqual(self.backend.__class__.__name__, u'HSIBackend')
 
@@ -228,8 +228,8 @@ class TahoeBackendTest(BackendInstanceBase):
 class FTPBackendTest(BackendInstanceBase):
     def setUp(self):
         super(FTPBackendTest, self).setUp()
-        os.makedirs(u'testfiles/output')
-        url = u'ftp://user:pass@hostname/testfiles/output'
+        os.makedirs(u'/tmp/testfiles/output')
+        url = u'ftp://user:pass@hostname//tmp/testfiles/output'
         self.backend = duplicity.backend.get_backend_object(url)
         self.assertEqual(self.backend.__class__.__name__, u'LFTPBackend')
 
@@ -237,8 +237,8 @@ class FTPBackendTest(BackendInstanceBase):
 class FTPSBackendTest(BackendInstanceBase):
     def setUp(self):
         super(FTPSBackendTest, self).setUp()
-        os.makedirs(u'testfiles/output')
-        url = u'ftps://user:pass@hostname/testfiles/output'
+        os.makedirs(u'/tmp/testfiles/output')
+        url = u'ftps://user:pass@hostname//tmp/testfiles/output'
         self.backend = duplicity.backend.get_backend_object(url)
         self.assertEqual(self.backend.__class__.__name__, u'LFTPBackend')
 
@@ -247,7 +247,7 @@ class FTPSBackendTest(BackendInstanceBase):
 class RCloneBackendTest(BackendInstanceBase):
     def setUp(self):
         super(RCloneBackendTest, self).setUp()
-        os.makedirs(u'testfiles/output')
-        url = u'rclone://duptest:/%s/testfiles/output' % os.getcwd()
+        os.makedirs(u'/tmp/testfiles/output')
+        url = u'rclone://duptest:/%s//tmp/testfiles/output' % os.getcwd()
         self.backend = duplicity.backend.get_backend_object(url)
         self.assertEqual(self.backend.__class__.__name__, u'RcloneBackend')

@@ -59,9 +59,9 @@ class PatchingTest(UnitTestCase):
 
     def test_total(self):
         u"""Test cycle on dirx"""
-        self.total_sequence([u'testfiles/dir1',
-                             u'testfiles/dir2',
-                             u'testfiles/dir3'])
+        self.total_sequence([u'/tmp/testfiles/dir1',
+                             u'/tmp/testfiles/dir2',
+                             u'/tmp/testfiles/dir3'])
 
     def get_sel(self, path):
         u"""Get selection iter over the given directory"""
@@ -70,9 +70,9 @@ class PatchingTest(UnitTestCase):
     def total_sequence(self, filelist):
         u"""Test signatures, diffing, and patching on directory list"""
         assert len(filelist) >= 2
-        sig = Path(u"testfiles/output/sig.tar")
-        diff = Path(u"testfiles/output/diff.tar")
-        seq_path = Path(u"testfiles/output/sequence")
+        sig = Path(u"/tmp/testfiles/output/sig.tar")
+        diff = Path(u"/tmp/testfiles/output/diff.tar")
+        seq_path = Path(u"/tmp/testfiles/output/sequence")
         new_path, old_path = None, None  # set below in for loop
 
         # Write initial full backup to diff.tar
@@ -96,7 +96,7 @@ class PatchingTest(UnitTestCase):
         def get_fileobjs():
             u"""Return iterator yielding open fileobjs of tar files"""
             for i in range(1, 4):
-                p = Path(u"testfiles/blocktartest/test%d.tar" % i)
+                p = Path(u"/tmp/testfiles/blocktartest/test%d.tar" % i)
                 fp = p.open(u"rb")
                 yield fp
                 fp.close()
@@ -117,8 +117,8 @@ class PatchingTest(UnitTestCase):
 
             # file object will be empty, and tarinfo will have path
             # "snapshot/../warning-security-error"
-            assert not os.system(u"cat /dev/null >testfiles/output/file")
-            path = Path(b"testfiles/output/file")
+            assert not os.system(u"cat /dev/null >/tmp/testfiles/output/file")
+            path = Path(b"/tmp/testfiles/output/file")
             path.index = (b"diff", b"..", b"warning-security-error")
             ti = path.get_tarinfo()
             fp = io.StringIO(u"")
@@ -126,13 +126,13 @@ class PatchingTest(UnitTestCase):
 
             tf.close()
 
-        make_bad_tar(b"testfiles/output/bad.tar")
-        os.mkdir(u"testfiles/output/temp")
+        make_bad_tar(b"/tmp/testfiles/output/bad.tar")
+        os.mkdir(u"/tmp/testfiles/output/temp")
 
         self.assertRaises(patchdir.PatchDirException, patchdir.Patch,
-                          Path(u"testfiles/output/temp"),
-                          open(u"testfiles/output/bad.tar", u"rb"))
-        assert not Path(u"testfiles/output/warning-security-error").exists()
+                          Path(u"/tmp/testfiles/output/temp"),
+                          open(u"/tmp/testfiles/output/bad.tar", u"rb"))
+        assert not Path(u"/tmp/testfiles/output/warning-security-error").exists()
 
 
 class index(object):
@@ -201,8 +201,8 @@ class TestInnerFuncs(UnitTestCase):
         self.check_output()
 
     def check_output(self):
-        u"""Make sure testfiles/output exists"""
-        out = Path(u"testfiles/output")
+        u"""Make sure /tmp/testfiles/output exists"""
+        out = Path(u"/tmp/testfiles/output")
         if not (out.exists() and out.isdir()):
             out.mkdir()
         self.out = out

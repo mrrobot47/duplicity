@@ -9,6 +9,6 @@ import sys
 
 cmd = []
 for arg in sys.argv[1:]:
-    cmd.append(arg.replace('testfiles:', 'testfiles/'))
+    cmd.append(arg.replace('/tmp/testfiles:', '/tmp/testfiles/'))
 
 sys.exit(subprocess.call(cmd))

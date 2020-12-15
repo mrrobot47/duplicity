@@ -53,7 +53,7 @@ class FinalTest(FunctionalTestCase):
             dirname = dirlist[i]
             current_time = 100000 * (i + 1)
             self.restore(time=current_time, options=restore_options)
-            self.check_same(dirname, u"testfiles/restore_out")
+            self.check_same(dirname, u"/tmp/testfiles/restore_out")
             self.verify(dirname,
                         time=current_time, options=restore_options)
 
@@ -64,9 +64,9 @@ class FinalTest(FunctionalTestCase):
 
     def test_basic_cycle(self, backup_options=[], restore_options=[]):
         u"""Run backup/restore test on basic directories"""
-        self.runtest([u"testfiles/dir1",
-                      u"testfiles/dir2",
-                      u"testfiles/dir3"],
+        self.runtest([u"/tmp/testfiles/dir1",
+                      u"/tmp/testfiles/dir2",
+                      u"/tmp/testfiles/dir3"],
                      backup_options=backup_options,
                      restore_options=restore_options)
 
@@ -76,9 +76,9 @@ class FinalTest(FunctionalTestCase):
                                     (u'directory_to_file', 200100, u'dir2'),
                                     (u'largefile', 300000, u'dir3')]:
             self.restore(filename, time, options=restore_options)
-            self.check_same(u'testfiles/%s/%s' % (dir, filename),
-                            u'testfiles/restore_out')
-            self.verify(u'testfiles/%s/%s' % (dir, filename),
+            self.check_same(u'/tmp/testfiles/%s/%s' % (dir, filename),
+                            u'/tmp/testfiles/restore_out')
+            self.verify(u'/tmp/testfiles/%s/%s' % (dir, filename),
                         file_to_verify=filename, time=time,
                         options=restore_options)
 
@@ -102,19 +102,19 @@ class FinalTest(FunctionalTestCase):
 
     def test_single_regfile(self):
         u"""Test backing and restoring up a single regular file"""
-        self.runtest([u"testfiles/various_file_types/regular_file"])
+        self.runtest([u"/tmp/testfiles/various_file_types/regular_file"])
 
     def test_empty_backup(self):
         u"""Make sure backup works when no files change"""
-        self.backup(u"full", u"testfiles/empty_dir")
-        self.backup(u"inc", u"testfiles/empty_dir")
+        self.backup(u"full", u"/tmp/testfiles/empty_dir")
+        self.backup(u"inc", u"/tmp/testfiles/empty_dir")
 
     def test_long_filenames(self):
         u"""Test backing up a directory with long filenames in it"""
         # Note that some versions of ecryptfs (at least through Ubuntu 11.10)
         # have a bug where they treat the max path segment length as 143
         # instead of 255.  So make sure that these segments don't break that.
-        lf_dir = path.Path(u"testfiles/long_filenames")
+        lf_dir = path.Path(u"/tmp/testfiles/long_filenames")
         if lf_dir.exists():
             lf_dir.deltree()
         lf_dir.mkdir()
@@ -135,22 +135,22 @@ class FinalTest(FunctionalTestCase):
         fp.write(b"hello" * 1000)
         assert not fp.close()
 
-        self.runtest([u"testfiles/empty_dir", lf_dir.uc_name,
-                      u"testfiles/empty_dir", lf_dir.uc_name])
+        self.runtest([u"/tmp/testfiles/empty_dir", lf_dir.uc_name,
+                      u"/tmp/testfiles/empty_dir", lf_dir.uc_name])
 
     def test_empty_restore(self):
         u"""Make sure error raised when restore doesn't match anything"""
-        self.backup(u"full", u"testfiles/dir1")
+        self.backup(u"full", u"/tmp/testfiles/dir1")
         self.assertRaises(CmdError, self.restore, u"this_file_does_not_exist")
-        self.backup(u"inc", u"testfiles/empty_dir")
+        self.backup(u"inc", u"/tmp/testfiles/empty_dir")
         self.assertRaises(CmdError, self.restore, u"this_file_does_not_exist")
 
     def test_remove_older_than(self):
         u"""Test removing old backup chains"""
-        first_chain = self.backup(u"full", u"testfiles/dir1", current_time=10000)
-        first_chain |= self.backup(u"inc", u"testfiles/dir2", current_time=20000)
-        second_chain = self.backup(u"full", u"testfiles/dir1", current_time=30000)
-        second_chain |= self.backup(u"inc", u"testfiles/dir3", current_time=40000)
+        first_chain = self.backup(u"full", u"/tmp/testfiles/dir1", current_time=10000)
+        first_chain |= self.backup(u"inc", u"/tmp/testfiles/dir2", current_time=20000)
+        second_chain = self.backup(u"full", u"/tmp/testfiles/dir1", current_time=30000)
+        second_chain |= self.backup(u"inc", u"/tmp/testfiles/dir3", current_time=40000)
 
         self.assertEqual(self.get_backend_files(), first_chain | second_chain)
 
@@ -164,7 +164,7 @@ class FinalTest(FunctionalTestCase):
     def test_piped_password(self):
         u"""Make sure that prompting for a password works"""
         self.set_environ(u"PASSPHRASE", None)
-        self.backup(u"full", u"testfiles/empty_dir",
+        self.backup(u"full", u"/tmp/testfiles/empty_dir",
                     passphrase_input=[self.sign_passphrase, self.sign_passphrase])
         self.restore(passphrase_input=[self.sign_passphrase])
 
