@@ -167,7 +167,7 @@ class B2Backend(duplicity.backend.Backend):
                 if file_version_info is not None and file_version_info.size is not None else -1}
 
     def file_info(self, filename):
-        response = self.bucket.api.session.list_file_names(self.bucket.id_, filename, 1, None)
+        response = self.bucket.api.session.list_file_names(self.bucket.id_, filename, 1, self.path)
         for entry in response[u'files']:
             file_version_info = FileVersionInfoFactory.from_api_response(entry)
             if file_version_info.file_name == filename:
