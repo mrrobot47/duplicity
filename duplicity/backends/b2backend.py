@@ -73,7 +73,7 @@ class B2Backend(duplicity.backend.Backend):
             from b2sdk.exception import NonExistentBucket
             from b2sdk.file_version import FileVersionInfoFactory
         except ImportError as e:
-            if 'b2sdk' in getattr(e, u'name', 'b2sdk'):
+            if u'b2sdk' in getattr(e, u'name', u'b2sdk'):
                 raise
             try:  # fall back to import the old b2 client
                 from b2.api import B2Api
@@ -82,7 +82,7 @@ class B2Backend(duplicity.backend.Backend):
                 from b2.exception import NonExistentBucket
                 from b2.file_version import FileVersionInfoFactory
             except ImportError:
-                if 'b2' in getattr(e, u'name', 'b2'):
+                if u'b2' in getattr(e, u'name', u'b2'):
                     raise
                 raise BackendException(u'B2 backend requires B2 Python SDK (pip install b2sdk)')
 
