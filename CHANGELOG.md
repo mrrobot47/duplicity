@@ -2,6 +2,16 @@
 
 ### Other
 
+* Fix unadorned strings. [Kenneth Loafman]
+
+* Merge branch 'Rufflewind-master-patch-11811' into 'master' [Kenneth Loafman]
+
+* Report errors if B2 backend does exist but otherwise fails to import. [Phil Ruffwind]
+
+* Add report.xml. [Kenneth Loafman]
+
+* Remove basepython in code and coverage tests. [Kenneth Loafman]
+
 * Fix pep8 warning. [Kenneth Loafman]
 
 * Added option --log-timestamp to prepend timestamp to log entry. [Kenneth Loafman]
