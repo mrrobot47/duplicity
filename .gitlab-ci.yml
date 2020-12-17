@@ -26,6 +26,7 @@ variables:
     DEBIAN_FRONTEND: "noninteractive"
 
 stages:
+    - code
     - test
 
 default:
@@ -45,22 +46,23 @@ default:
         - python3 -m pip install --requirement requirements.txt
 
 code_ub18-04:
-    stage: test
+    stage: code
     script:
         - apt-get install -y python3.8 python3.8-dev
         - tox -e code
     artifacts:
         reports:
             junit: report.xml
+    needs: []
 
 py27_ub18-04:
     stage: test
     script:
         - tox -e py27
-    allow_failure: true
     artifacts:
         reports:
             junit: report.xml
+    needs: ["code_ub18-04"]
 
 py35_ub16-04:
     stage: test
@@ -80,6 +82,7 @@ py35_ub16-04:
     artifacts:
         reports:
             junit: report.xml
+    needs: ["code_ub18-04"]
 
 py36_ub18-04:
     stage: test
@@ -89,6 +92,7 @@ py36_ub18-04:
     artifacts:
         reports:
             junit: report.xml
+    needs: ["code_ub18-04"]
 
 py37_ub18-04:
     stage: test
@@ -98,6 +102,7 @@ py37_ub18-04:
     artifacts:
         reports:
             junit: report.xml
+    needs: ["code_ub18-04"]
 
 py38_ub18-04:
     stage: test
@@ -107,6 +112,7 @@ py38_ub18-04:
     artifacts:
         reports:
             junit: report.xml
+    needs: ["code_ub18-04"]
 
 py39_ub20-04:
     stage: test
@@ -126,3 +132,4 @@ py39_ub20-04:
     artifacts:
         reports:
             junit: report.xml
+    needs: ["code_ub18-04"]
