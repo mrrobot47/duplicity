@@ -2,6 +2,14 @@
 
 ### Other
 
+* Update .gitlab-ci.yml to need code test to pass. [Kenneth Loafman]
+
+* Merge branch 'master' of git@gitlab.com:duplicity/duplicity.git. [Kenneth Loafman]
+
+* Fix issue #26 Backend b2 backblaze fails with nameprefix restrictions. [Kenneth Loafman]
+
+* Fix issue #29 Backend b2 backblaze fails with nameprefix restrictions. [Kenneth Loafman]
+
 * Fix unadorned strings. [Kenneth Loafman]
 
 * Merge branch 'Rufflewind-master-patch-11811' into 'master' [Kenneth Loafman]
