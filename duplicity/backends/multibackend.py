@@ -206,10 +206,10 @@ class MultiBackend(duplicity.backend.Backend):
                 for prefix in config[u'prefixes']:
                     log.Log(_(u"Multibackend: register affinity for prefix %s")
                             % prefix, log.INFO)
-                if prefix in self.__affinities:
-                    self.__affinities[prefix].append(store)
-                else:
-                    self.__affinities[prefix] = [store]
+                    if prefix in self.__affinities:
+                        self.__affinities[prefix].append(store)
+                    else:
+                        self.__affinities[prefix] = [store]
 
             # store_list = store.list()
             # log.Log(_("MultiBackend: at init, store %s has %s files")
