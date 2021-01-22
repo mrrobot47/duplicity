@@ -68,7 +68,7 @@ class FunctionalTestCase(DuplicityTestCase):
         self.unpack_testfiles()
 
         self.class_args = []
-        self.backend_url = u"file://testfiles/output"
+        self.backend_url = u"file:///tmp/testfiles/output"
         self.last_backup = None
         self.set_environ(u'PASSPHRASE', self.sign_passphrase)
         self.set_environ(u"SIGN_PASSPHRASE", self.sign_passphrase)
@@ -114,7 +114,7 @@ class FunctionalTestCase(DuplicityTestCase):
         cmd_list.extend([u"-v0"])
         cmd_list.extend([u"--no-print-statistics"])
         cmd_list.extend([u"--allow-source-mismatch"])
-        cmd_list.extend([u"--archive-dir=testfiles/cache"])
+        cmd_list.extend([u"--archive-dir=/tmp/testfiles/cache"])
         if current_time:
             cmd_list.extend([u"--current-time", current_time])
         cmd_list.extend(self.class_args)
@@ -191,8 +191,8 @@ class FunctionalTestCase(DuplicityTestCase):
         return after_files - before_files
 
     def restore(self, file_to_restore=None, time=None, options=[], **kwargs):
-        assert not os.system(u"rm -rf testfiles/restore_out")
-        options = [self.backend_url, u"testfiles/restore_out"] + options
+        assert not os.system(u"rm -rf /tmp/testfiles/restore_out")
+        options = [self.backend_url, u"/tmp/testfiles/restore_out"] + options
         if file_to_restore:
             options.extend([u'--file-to-restore', file_to_restore])
         if time:
@@ -223,9 +223,9 @@ class FunctionalTestCase(DuplicityTestCase):
 
     def make_largefiles(self, count=3, size=2):
         u"""
-        Makes a number of large files in testfiles/largefiles that each are
+        Makes a number of large files in /tmp/testfiles/largefiles that each are
         the specified number of megabytes.
         """
-        assert not os.system(u"mkdir testfiles/largefiles")
+        assert not os.system(u"mkdir /tmp/testfiles/largefiles")
         for n in range(count):
-            assert not os.system(u"dd if=/dev/urandom of=testfiles/largefiles/file%d bs=1024 count=%d > /dev/null 2>&1" % (n + 1, size * 1024))
+            assert not os.system(u"dd if=/dev/urandom of=/tmp/testfiles/largefiles/file%d bs=1024 count=%d > /dev/null 2>&1" % (n + 1, size * 1024))

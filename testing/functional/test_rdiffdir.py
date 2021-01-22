@@ -51,10 +51,10 @@ class RdiffdirTest(FunctionalTestCase):
         u"""Run diff/patch cycle on directories in dirname_list"""
         assert len(dirname_list) >= 2
 
-        seq_path = path.Path(u"testfiles/output/sequence")
+        seq_path = path.Path(u"/tmp/testfiles/output/sequence")
         new_path = path.Path(dirname_list[0])
-        delta_path = path.Path(u"testfiles/output/delta.tar")
-        sig_path = path.Path(u"testfiles/output/sig.tar")
+        delta_path = path.Path(u"/tmp/testfiles/output/delta.tar")
+        sig_path = path.Path(u"/tmp/testfiles/output/sig.tar")
 
         self.run_cmd(u"cp -pR %s %s" % (new_path.uc_name, seq_path.uc_name))
         seq_path.setdata()
@@ -90,12 +90,12 @@ class RdiffdirTest(FunctionalTestCase):
             assert sig_path.isreg()
 
     def test_dirx(self):
-        u"""Test cycle on testfiles/dirx"""
-        self.run_cycle([u'testfiles/empty_dir',
-                        u'testfiles/dir1',
-                        u'testfiles/dir2',
-                        u'testfiles/dir3',
-                        u'testfiles/empty_dir'])
+        u"""Test cycle on /tmp/testfiles/dirx"""
+        self.run_cycle([u'/tmp/testfiles/empty_dir',
+                        u'/tmp/testfiles/dir1',
+                        u'/tmp/testfiles/dir2',
+                        u'/tmp/testfiles/dir3',
+                        u'/tmp/testfiles/empty_dir'])
 
 
 if __name__ == u"__main__":

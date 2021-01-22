@@ -1,4 +1,4 @@
-duplicity-git
+duplicity-testfiles
 =============
 
 .. toctree::

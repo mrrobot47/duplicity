@@ -42,7 +42,7 @@ class RootTest(unittest.TestCase):
         assert not os.system(u"tar xzf manual/rootfiles.tar.gz > /dev/null 2>&1")
 
     def tearDown(self):
-        assert not os.system(u"rm -rf testfiles tempdir temp2.tar")
+        assert not os.system(u"rm -rf /tmp/testfiles tempdir temp2.tar")
 
     def copyfileobj(self, infp, outfp):
         u"""Copy in fileobj to out, closing afterwards"""
@@ -56,8 +56,8 @@ class RootTest(unittest.TestCase):
 
     def deltmp(self):
         u"""Delete temporary directories"""
-        assert not os.system(u"rm -rf testfiles/output")
-        os.mkdir(u"testfiles/output")
+        assert not os.system(u"rm -rf /tmp/testfiles/output")
+        os.mkdir(u"/tmp/testfiles/output")
 
     def get_sel(self, path):
         u"""Get selection iter over the given directory"""
@@ -67,11 +67,11 @@ class RootTest(unittest.TestCase):
         u"""Test signatures, diffing, and patching on directory list"""
         assert len(filelist) >= 2
         self.deltmp()
-        assert not os.system(u"cp -pR %s testfiles/output/sequence" %
+        assert not os.system(u"cp -pR %s /tmp/testfiles/output/sequence" %
                              (filelist[0],))
-        seq_path = Path(u"testfiles/output/sequence")
-        sig = Path(u"testfiles/output/sig.tar")
-        diff = Path(u"testfiles/output/diff.tar")
+        seq_path = Path(u"/tmp/testfiles/output/sequence")
+        sig = Path(u"/tmp/testfiles/output/sig.tar")
+        diff = Path(u"/tmp/testfiles/output/diff.tar")
         for dirname in filelist[1:]:
             new_path = Path(dirname)
             diffdir.write_block_iter(
@@ -88,16 +88,16 @@ class RootTest(unittest.TestCase):
 
     def test_basic_cycle(self):
         u"""Test cycle on dir with devices, changing uid/gid, etc."""
-        self.total_sequence([u'testfiles/root1', u'testfiles/root2'])
+        self.total_sequence([u'/tmp/testfiles/root1', u'/tmp/testfiles/root2'])
 
     def test_patchdir(self):
         u"""Test changing uid/gid, devices"""
         self.deltmp()
-        os.system(u"cp -pR testfiles/root1 testfiles/output/sequence")
-        seq_path = Path(u"testfiles/output/sequence")
-        new_path = Path(u"testfiles/root2")
-        sig = Path(u"testfiles/output/sig.tar")
-        diff = Path(u"testfiles/output/diff.tar")
+        os.system(u"cp -pR /tmp/testfiles/root1 /tmp/testfiles/output/sequence")
+        seq_path = Path(u"/tmp/testfiles/output/sequence")
+        new_path = Path(u"/tmp/testfiles/root2")
+        sig = Path(u"/tmp/testfiles/output/sig.tar")
+        diff = Path(u"/tmp/testfiles/output/diff.tar")
 
         diffdir.write_block_iter(diffdir.DirSig(self.get_sel(seq_path)), sig)
         deltablock = diffdir.DirDelta(self.get_sel(new_path), sig.open(u"rb"))
@@ -115,9 +115,9 @@ class RootTest(unittest.TestCase):
     def test_patchdir2(self):
         u"""Again test files we don't have access to, this time Tar_WriteSig"""
         self.deltmp()
-        sig_path = Path(u"testfiles/output/sig.sigtar")
-        tar_path = Path(u"testfiles/output/tar.tar")
-        basis_path = Path(u"testfiles/root1")
+        sig_path = Path(u"/tmp/testfiles/output/sig.sigtar")
+        tar_path = Path(u"/tmp/testfiles/output/tar.tar")
+        basis_path = Path(u"/tmp/testfiles/root1")
 
         deltablock = diffdir.DirFull_WriteSig(self.get_sel(basis_path),
                                               sig_path.open(u"wb"))

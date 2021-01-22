@@ -83,16 +83,16 @@ class CollectionTest(UnitTestCase):
 
         self.unpack_testfiles()
 
-        col_test_dir = path.Path(u"testfiles/collectionstest")
+        col_test_dir = path.Path(u"/tmp/testfiles/collectionstest")
         archive_dir_path = col_test_dir.append(u"archive_dir")
         self.set_config(u'archive_dir_path', archive_dir_path)
-        self.archive_dir_backend = backend.get_backend(u"file://testfiles/collectionstest"
+        self.archive_dir_backend = backend.get_backend(u"file:///tmp/testfiles/collectionstest"
                                                        u"/archive_dir")
 
         self.real_backend = backend.get_backend(u"file://%s/%s" %
                                                 (col_test_dir.uc_name, u"remote_dir"))
-        self.output_dir = path.Path(u"testfiles/output")  # used as a temp directory
-        self.output_dir_backend = backend.get_backend(u"file://testfiles/output")
+        self.output_dir = path.Path(u"/tmp/testfiles/output")  # used as a temp directory
+        self.output_dir_backend = backend.get_backend(u"file:///tmp/testfiles/output")
 
     def set_gpg_profile(self):
         u"""Set gpg profile to standard "foobar" sym"""
@@ -169,7 +169,7 @@ class CollectionTest(UnitTestCase):
     def sigchain_fileobj_check_list(self, chain):
         u"""Make sure the list of file objects in chain has right contents
 
-        The contents of the testfiles/collectiontest/remote_dir have
+        The contents of the /tmp/testfiles/collectiontest/remote_dir have
         to be coordinated with this test.
 
         """
@@ -194,7 +194,7 @@ class CollectionTest(UnitTestCase):
 
     def get_filelist2_cs(self):
         u"""Return set CollectionsStatus object from filelist 2"""
-        # Set up testfiles/output with files from filename_list2
+        # Set up /tmp/testfiles/output with files from filename_list2
         for filename in filename_list2:
             p = self.output_dir.append(filename)
             p.touch()

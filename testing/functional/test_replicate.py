@@ -45,7 +45,7 @@ class ReplicateTest(FunctionalTestCase):
 
         # Replicate to other backend
         source_url = self.backend_url
-        target_url = u"file://testfiles/replicate_out"
+        target_url = u"file:///tmp/testfiles/replicate_out"
         self.run_duplicity(options=[u"replicate"] +
                            replicate_options + [source_url, target_url])
 
@@ -56,7 +56,7 @@ class ReplicateTest(FunctionalTestCase):
             dirname = dirlist[i]
             current_time = 100000 * (i + 1)
             self.restore(time=current_time, options=restore_options)
-            self.check_same(dirname, u"testfiles/restore_out")
+            self.check_same(dirname, u"/tmp/testfiles/restore_out")
             self.verify(dirname,
                         time=current_time, options=restore_options)
 
@@ -67,15 +67,15 @@ class ReplicateTest(FunctionalTestCase):
 
     def test_replicate(self):
         u"""Test replication"""
-        self.runtest([u"testfiles/dir1", u"testfiles/dir2"])
+        self.runtest([u"/tmp/testfiles/dir1", u"/tmp/testfiles/dir2"])
 
     def test_replicate_noencryption(self):
         u"""Test replication with decryption"""
-        self.runtest([u"testfiles/dir1", u"testfiles/dir2"],
+        self.runtest([u"/tmp/testfiles/dir1", u"/tmp/testfiles/dir2"],
                      replicate_options=[u"--no-encryption"])
 
     def test_replicate_asym(self):
         u"""Test replication with reencryption"""
         asym_options = [u"--encrypt-key", self.encrypt_key1]
-        self.runtest([u"testfiles/dir1", u"testfiles/dir2"],
+        self.runtest([u"/tmp/testfiles/dir1", u"/tmp/testfiles/dir2"],
                      replicate_options=asym_options, restore_options=asym_options)

@@ -40,7 +40,7 @@ class MatchingTest(UnitTestCase):
     def setUp(self):
         super(MatchingTest, self).setUp()
         self.unpack_testfiles()
-        self.root = Path(u"testfiles/select")
+        self.root = Path(u"/tmp/testfiles/select")
         self.Select = Select(self.root)
 
     def makeext(self, path):
@@ -63,7 +63,7 @@ class MatchingTest(UnitTestCase):
         self.assertRaises(FilePrefixError, self.Select.glob_get_normal_sf,
                           u"foo", 1)
 
-        sf2 = self.Select.glob_get_sf(u"testfiles/select/usr/local/bin/", 1)
+        sf2 = self.Select.glob_get_sf(u"/tmp/testfiles/select/usr/local/bin/", 1)
 
         with patch(u"duplicity.path.ROPath.isdir") as mock_isdir:
             mock_isdir.return_value = True
@@ -83,7 +83,7 @@ class MatchingTest(UnitTestCase):
         self.assertRaises(FilePrefixError, self.Select.glob_get_normal_sf,
                           u"foo", 0)
 
-        sf2 = self.Select.glob_get_sf(u"testfiles/select/usr/local/bin/", 0)
+        sf2 = self.Select.glob_get_sf(u"/tmp/testfiles/select/usr/local/bin/", 0)
 
         with patch(u"duplicity.path.ROPath.isdir") as mock_isdir:
             mock_isdir.return_value = True
@@ -125,15 +125,15 @@ class MatchingTest(UnitTestCase):
     def test_glob_sf_exception(self):
         u"""test_glob_sf_exception - see if globbing errors returned"""
         self.assertRaises(GlobbingError, self.Select.glob_get_normal_sf,
-                          u"testfiles/select/hello//there", 1)
+                          u"/tmp/testfiles/select/hello//there", 1)
 
     def test_file_prefix_sf_exception(self):
         u"""test_file_prefix_sf_exception - see if FilePrefix error is returned"""
-        # These should raise a FilePrefixError because the root directory for the selection is "testfiles/select"
+        # These should raise a FilePrefixError because the root directory for the selection is "/tmp/testfiles/select"
         self.assertRaises(FilePrefixError,
-                          self.Select.glob_get_sf, u"testfiles/whatever", 1)
+                          self.Select.glob_get_sf, u"/tmp/testfiles/whatever", 1)
         self.assertRaises(FilePrefixError,
-                          self.Select.glob_get_sf, u"testfiles/?hello", 0)
+                          self.Select.glob_get_sf, u"/tmp/testfiles/?hello", 0)
 
     def test_scan(self):
         u"""Tests what is returned for selection tests regarding directory scanning"""
@@ -142,16 +142,16 @@ class MatchingTest(UnitTestCase):
         assert select.glob_get_sf(u"**.py", 1)(Path(u"/")) == 2
         assert select.glob_get_sf(u"**.py", 1)(Path(u"foo")) == 2
         assert select.glob_get_sf(u"**.py", 1)(Path(u"usr/local/bin")) == 2
-        assert select.glob_get_sf(u"/testfiles/select/**.py", 1)(Path(u"/testfiles/select")) == 2
-        assert select.glob_get_sf(u"/testfiles/select/test.py", 1)(Path(u"/testfiles/select")) == 2
-        assert select.glob_get_normal_sf(u"/testfiles/se?ect/test.py", 1)(Path(u"/testfiles/select")) == 2
-        assert select.glob_get_sf(u"/testfiles/select/test.py", 0)(Path(u"/testfiles/select")) is None
-        assert select.glob_get_normal_sf(u"/testfiles/select/test.py", 0)(Path(u"/testfiles/select")) is None
+        assert select.glob_get_sf(u"//tmp/testfiles/select/**.py", 1)(Path(u"//tmp/testfiles/select")) == 2
+        assert select.glob_get_sf(u"//tmp/testfiles/select/test.py", 1)(Path(u"//tmp/testfiles/select")) == 2
+        assert select.glob_get_normal_sf(u"//tmp/testfiles/se?ect/test.py", 1)(Path(u"//tmp/testfiles/select")) == 2
+        assert select.glob_get_sf(u"//tmp/testfiles/select/test.py", 0)(Path(u"//tmp/testfiles/select")) is None
+        assert select.glob_get_normal_sf(u"//tmp/testfiles/select/test.py", 0)(Path(u"//tmp/testfiles/select")) is None
 
     def test_ignore_case(self):
         u"""test_ignore_case - try a few expressions with ignorecase:"""
 
-        sf = self.Select.glob_get_sf(u"ignorecase:testfiles/SeLect/foo/bar", 1)
+        sf = self.Select.glob_get_sf(u"ignorecase:/tmp/testfiles/SeLect/foo/bar", 1)
         assert sf(self.makeext(u"FOO/BAR")) == 1
         assert sf(self.makeext(u"foo/bar")) == 1
         assert sf(self.makeext(u"fOo/BaR")) == 1
@@ -227,7 +227,7 @@ class ParseArgsTest(UnitTestCase):
     def ParseTest(self, tuplelist, indicies, filelists=[]):
         u"""No error if running select on tuple goes over indicies"""
         if not self.root:
-            self.root = Path(u"testfiles/select")
+            self.root = Path(u"/tmp/testfiles/select")
         self.Select = Select(self.root)
         self.Select.ParseArgs(tuplelist, self.remake_filelists(filelists))
         self.Select.set_iter()
@@ -250,16 +250,16 @@ class ParseArgsTest(UnitTestCase):
 
     def test_parse(self):
         u"""Test just one include, all exclude"""
-        self.ParseTest([(u"--include", u"testfiles/select/1/1"),
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select/1/1"),
                         (u"--exclude", u"**")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"1"),
                         (u"1", u"1", u"2"), (u"1", u"1", u"3")])
 
     def test_parse2(self):
         u"""Test three level include/exclude"""
-        self.ParseTest([(u"--exclude", u"testfiles/select/1/1/1"),
-                        (u"--include", u"testfiles/select/1/1"),
-                        (u"--exclude", u"testfiles/select/1"),
+        self.ParseTest([(u"--exclude", u"/tmp/testfiles/select/1/1/1"),
+                        (u"--include", u"/tmp/testfiles/select/1/1"),
+                        (u"--exclude", u"/tmp/testfiles/select/1"),
                         (u"--exclude", u"**")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")])
@@ -269,9 +269,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_1_trailing_whitespace(self):
@@ -279,9 +279,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
-                        u"testfiles/select/1/1 \n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
+                        u"/tmp/testfiles/select/1/1 \n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_2_trailing_whitespaces(self):
@@ -289,9 +289,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
-                        u"testfiles/select/1/1  \n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
+                        u"/tmp/testfiles/select/1/1  \n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_1_leading_whitespace(self):
@@ -299,9 +299,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
-                        u" testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
+                        u" /tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_2_leading_whitespaces(self):
@@ -309,9 +309,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
-                        u"  testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
+                        u"  /tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_1_trailing_whitespace_exclude(self):
@@ -319,9 +319,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1 \n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1 \n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_2_trailing_whitespace_exclude(self):
@@ -329,9 +329,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1  \n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1  \n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_1_leading_whitespace_exclude(self):
@@ -339,9 +339,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u" - testfiles/select/1/1/1\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u" - /tmp/testfiles/select/1/1/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_2_leading_whitespaces_exclude(self):
@@ -349,9 +349,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"  - testfiles/select/1/1/1\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"  - /tmp/testfiles/select/1/1/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_check_excluded_folder_included_for_contents(self):
@@ -360,9 +360,9 @@ class ParseArgsTest(UnitTestCase):
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3"), (u"1", u"2"), (u"1", u"2", u"1"), (u"1", u"3"), (u"1", u"3", u"1"),
                         (u"1", u"3", u"2"), (u"1", u"3", u"3")],
-                       [u"+ testfiles/select/1/2/1\n"
-                        u"- testfiles/select/1/2\n"
-                        u"testfiles/select/1\n"
+                       [u"+ /tmp/testfiles/select/1/2/1\n"
+                        u"- /tmp/testfiles/select/1/2\n"
+                        u"/tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_with_unnecessary_quotes(self):
@@ -370,9 +370,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- 'testfiles/select/1/1/1'\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- '/tmp/testfiles/select/1/1/1'\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_with_unnecessary_double_quotes(self):
@@ -380,9 +380,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u'- "testfiles/select/1/1/1"\n'
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u'- "/tmp/testfiles/select/1/1/1"\n'
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_with_full_line_comment(self):
@@ -390,10 +390,10 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
                         u"# This is a test\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_with_blank_line(self):
@@ -401,10 +401,10 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
                         u"\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_with_blank_line_and_whitespace(self):
@@ -412,14 +412,14 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
                         u"  \n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_asterisk(self):
-        u"""Filelist glob test with * instead of 'testfiles'"""
+        u"""Filelist glob test with * instead of '/tmp/testfiles'"""
         # Thank you to Elifarley Cruz for this test case
         # (https://bugs.launchpad.net/duplicity/+bug/884371).
         self.ParseTest([(u"--include-filelist", u"file")],
@@ -433,9 +433,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/*/1/1/1\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/*/1/1/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_asterisk_3(self):
@@ -444,9 +444,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
-                        u"testfiles/*/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
+                        u"/tmp/testfiles/*/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_asterisk_4(self):
@@ -455,9 +455,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
-                        u"+ testfiles/*/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
+                        u"+ /tmp/testfiles/*/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_asterisk_5(self):
@@ -466,9 +466,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/*/1/1/1\n"
-                        u"+ testfiles/*/1/1\n"
-                        u"- testfiles/*/1\n"
+                       [u"- /tmp/testfiles/*/1/1/1\n"
+                        u"+ /tmp/testfiles/*/1/1\n"
+                        u"- /tmp/testfiles/*/1\n"
                         u"- **"])
 
     def test_include_filelist_asterisk_6(self):
@@ -477,7 +477,7 @@ class ParseArgsTest(UnitTestCase):
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
                        [u"- */*/1/1/1\n"
-                        u"+ testfiles/select/1/1\n"
+                        u"+ /tmp/testfiles/select/1/1\n"
                         u"- */*/1\n"
                         u"- **"])
 
@@ -497,9 +497,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/**/1/1/1\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                       [u"- /tmp/testfiles/**/1/1/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_double_asterisk_2(self):
@@ -508,34 +508,34 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
                         u"**ct/1/1\n"
-                        u"- testfiles/select/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_double_asterisk_3(self):
-        u"""Identical to test_filelist, but with the exclude 'testfiles/select' replaced with '**'"""
+        u"""Identical to test_filelist, but with the exclude '/tmp/testfiles/select' replaced with '**'"""
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
                        [u"- **/1/1/1\n"
-                        u"testfiles/select/1/1\n"
-                        u"- testfiles/select/1\n"
+                        u"/tmp/testfiles/select/1/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_double_asterisk_4(self):
-        u"""Identical to test_filelist, but with the include 'testfiles/select' replaced with '**'"""
+        u"""Identical to test_filelist, but with the include '/tmp/testfiles/select' replaced with '**'"""
         # Regression test for Bug #884371 (https://bugs.launchpad.net/duplicity/+bug/884371)
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1\n"
+                       [u"- /tmp/testfiles/select/1/1/1\n"
                         u"**t/1/1\n"
-                        u"- testfiles/select/1\n"
+                        u"- /tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_include_filelist_double_asterisk_5(self):
-        u"""Identical to test_filelist, but with all 'testfiles/select's replaced with '**'"""
+        u"""Identical to test_filelist, but with all '/tmp/testfiles/select's replaced with '**'"""
         # Regression test for Bug #884371 (https://bugs.launchpad.net/duplicity/+bug/884371)
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
@@ -550,9 +550,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"- testfiles/select/1/1/1/\n"
-                        u"testfiles/select/1/1/\n"
-                        u"- testfiles/select/1/\n"
+                       [u"- /tmp/testfiles/select/1/1/1/\n"
+                        u"/tmp/testfiles/select/1/1/\n"
+                        u"- /tmp/testfiles/select/1/\n"
                         u"- **"])
 
     def test_include_filelist_trailing_slashes_and_single_asterisks(self):
@@ -562,8 +562,8 @@ class ParseArgsTest(UnitTestCase):
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
                        [u"- */select/1/1/1/\n"
-                        u"testfiles/select/1/1/\n"
-                        u"- testfiles/*/1/\n"
+                        u"/tmp/testfiles/select/1/1/\n"
+                        u"- /tmp/testfiles/*/1/\n"
                         u"- **"])
 
     def test_include_filelist_trailing_slashes_and_double_asterisks(self):
@@ -573,7 +573,7 @@ class ParseArgsTest(UnitTestCase):
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
                        [u"- **/1/1/1/\n"
-                        u"testfiles/select/1/1/\n"
+                        u"/tmp/testfiles/select/1/1/\n"
                         u"- **t/1/\n"
                         u"- **"])
 
@@ -583,16 +583,16 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--include-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"\0- testfiles/select/1/1/1\0testfiles/select/1/1\0- testfiles/select/1\0- **\0"])
+                       [u"\0- /tmp/testfiles/select/1/1/1\0/tmp/testfiles/select/1/1\0- /tmp/testfiles/select/1\0- **\0"])
 
     def test_exclude_filelist(self):
         u"""Exclude version of test_filelist"""
         self.ParseTest([(u"--exclude-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"testfiles/select/1/1/1\n"
-                        u"+ testfiles/select/1/1\n"
-                        u"testfiles/select/1\n"
+                       [u"/tmp/testfiles/select/1/1/1\n"
+                        u"+ /tmp/testfiles/select/1/1\n"
+                        u"/tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_exclude_filelist_asterisk_1(self):
@@ -608,9 +608,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--exclude-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"testfiles/*/1/1/1\n"
-                        u"+ testfiles/select/1/1\n"
-                        u"testfiles/select/1\n"
+                       [u"/tmp/testfiles/*/1/1/1\n"
+                        u"+ /tmp/testfiles/select/1/1\n"
+                        u"/tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_exclude_filelist_asterisk_3(self):
@@ -619,9 +619,9 @@ class ParseArgsTest(UnitTestCase):
         self.ParseTest([(u"--exclude-filelist", u"file")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
-                       [u"testfiles/select/1/1/1\n"
-                        u"+ testfiles/*/1/1\n"
-                        u"testfiles/select/1\n"
+                       [u"/tmp/testfiles/select/1/1/1\n"
+                        u"+ /tmp/testfiles/*/1/1\n"
+                        u"/tmp/testfiles/select/1\n"
                         u"- **"])
 
     def test_exclude_filelist_asterisk_4(self):
@@ -630,7 +630,7 @@ class ParseArgsTest(UnitTestCase):
                        [(), (u"1",), (u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"1", u"3")],
                        [u"*/select/1/1/1\n"
-                        u"+ testfiles/select/1/1\n"
+                        u"+ /tmp/testfiles/select/1/1\n"
                         u"*/*/1\n"
                         u"- **"])
 
@@ -659,17 +659,17 @@ class ParseArgsTest(UnitTestCase):
     def test_exclude_filelist_single_asterisk_at_beginning(self):
         u"""Exclude filelist testing limited functionality of functional test"""
         # Regression test for Bug #884371 (https://bugs.launchpad.net/duplicity/+bug/884371)
-        self.root = Path(u"testfiles/select/1")
+        self.root = Path(u"/tmp/testfiles/select/1")
         self.ParseTest([(u"--exclude-filelist", u"file")],
                        [(), (u"2",), (u"2", u"1")],
                        [u"+ */select/1/2/1\n"
-                        u"- testfiles/select/1/2\n"
-                        u"- testfiles/*/1/1\n"
-                        u"- testfiles/select/1/3"])
+                        u"- /tmp/testfiles/select/1/2\n"
+                        u"- /tmp/testfiles/*/1/1\n"
+                        u"- /tmp/testfiles/select/1/3"])
 
     def test_commandline_asterisks_double_both(self):
         u"""Unit test the functional test TestAsterisks.test_commandline_asterisks_double_both"""
-        self.root = Path(u"testfiles/select/1")
+        self.root = Path(u"/tmp/testfiles/select/1")
         self.ParseTest([(u"--include", u"**/1/2/1"),
                         (u"--exclude", u"**t/1/2"),
                         (u"--exclude", u"**t/1/1"),
@@ -680,8 +680,8 @@ class ParseArgsTest(UnitTestCase):
         u"""Unit test the functional test test_includes_files"""
         # Test for Bug 1624725
         # https://bugs.launchpad.net/duplicity/+bug/1624725
-        self.root = Path(u"testfiles/select2/1/1sub1")
-        self.ParseTest([(u"--include", u"testfiles/select2/1/1sub1/1sub1sub1"),
+        self.root = Path(u"/tmp/testfiles/select2/1/1sub1")
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select2/1/1sub1/1sub1sub1"),
                         (u"--exclude", u"**")],
                        [(), (u"1sub1sub1",), (u"1sub1sub1",
                                              u"1sub1sub1_file.txt")])
@@ -690,8 +690,8 @@ class ParseArgsTest(UnitTestCase):
         u"""Unit test the functional test test_includes_files_trailing_slash"""
         # Test for Bug 1624725
         # https://bugs.launchpad.net/duplicity/+bug/1624725
-        self.root = Path(u"testfiles/select2/1/1sub1")
-        self.ParseTest([(u"--include", u"testfiles/select2/1/1sub1/1sub1sub1/"),
+        self.root = Path(u"/tmp/testfiles/select2/1/1sub1")
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select2/1/1sub1/1sub1sub1/"),
                         (u"--exclude", u"**")],
                        [(), (u"1sub1sub1",), (u"1sub1sub1",
                                              u"1sub1sub1_file.txt")])
@@ -700,8 +700,8 @@ class ParseArgsTest(UnitTestCase):
         u"""Unit test functional test_includes_files_trailing_slash_globbing_chars"""
         # Test for Bug 1624725
         # https://bugs.launchpad.net/duplicity/+bug/1624725
-        self.root = Path(u"testfiles/select2/1/1sub1")
-        self.ParseTest([(u"--include", u"testfiles/s?lect2/1/1sub1/1sub1sub1/"),
+        self.root = Path(u"/tmp/testfiles/select2/1/1sub1")
+        self.ParseTest([(u"--include", u"/tmp/testfiles/s?lect2/1/1sub1/1sub1sub1/"),
                         (u"--exclude", u"**")],
                        [(), (u"1sub1sub1",), (u"1sub1sub1",
                                              u"1sub1sub1_file.txt")])
@@ -709,12 +709,12 @@ class ParseArgsTest(UnitTestCase):
     def test_glob(self):
         u"""Test globbing expression"""
         self.ParseTest([(u"--exclude", u"**[3-5]"),
-                        (u"--include", u"testfiles/select/1"),
+                        (u"--include", u"/tmp/testfiles/select/1"),
                         (u"--exclude", u"**")],
                        [(), (u"1",), (u"1", u"1"),
                         (u"1", u"1", u"1"), (u"1", u"1", u"2"),
                         (u"1", u"2"), (u"1", u"2", u"1"), (u"1", u"2", u"2")])
-        self.ParseTest([(u"--include", u"testfiles/select**/2"),
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select**/2"),
                         (u"--exclude", u"**")],
                        [(), (u"1",), (u"1", u"1"),
                         (u"1", u"1", u"2"),
@@ -743,7 +743,7 @@ class ParseArgsTest(UnitTestCase):
                         (u"1", u"2"), (u"1", u"2", u"1"), (u"1", u"2", u"2")],
                        [u"""
 **[3-5]
-+ testfiles/select/1
++ /tmp/testfiles/select/1
 **
 """])
         self.ParseTest([(u"--include-filelist", u"file")],
@@ -766,27 +766,27 @@ class ParseArgsTest(UnitTestCase):
                         (u"3", u"3"),
                         (u"3", u"3", u"2")],
                        [u"""
-testfiles/select**/2
+/tmp/testfiles/select**/2
 - **
 """])
 
     def test_glob2(self):
         u"""Test more globbing functions"""
-        self.ParseTest([(u"--include", u"testfiles/select/*foo*/p*"),
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select/*foo*/p*"),
                         (u"--exclude", u"**")],
                        [(), (u"efools",), (u"efools", u"ping"),
                         (u"foobar",), (u"foobar", u"pong")])
-        self.ParseTest([(u"--exclude", u"testfiles/select/1/1/*"),
-                        (u"--exclude", u"testfiles/select/1/2/**"),
-                        (u"--exclude", u"testfiles/select/1/3**"),
-                        (u"--include", u"testfiles/select/1"),
+        self.ParseTest([(u"--exclude", u"/tmp/testfiles/select/1/1/*"),
+                        (u"--exclude", u"/tmp/testfiles/select/1/2/**"),
+                        (u"--exclude", u"/tmp/testfiles/select/1/3**"),
+                        (u"--include", u"/tmp/testfiles/select/1"),
                         (u"--exclude", u"**")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"2")])
 
     def test_glob3(self):
         u""" regression test for bug 25230 """
-        self.ParseTest([(u"--include", u"testfiles/select/**1"),
-                        (u"--include", u"testfiles/select/**2"),
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select/**1"),
+                        (u"--include", u"/tmp/testfiles/select/**2"),
                         (u"--exclude", u"**")],
                        [(), (u"1",), (u"1", u"1"),
                         (u"1", u"1", u"1"), (u"1", u"1", u"2"), (u"1", u"1", u"3"),
@@ -809,8 +809,8 @@ testfiles/select**/2
 
     def test_alternate_root(self):
         u"""Test select with different root"""
-        self.root = Path(u"testfiles/select/1")
-        self.ParseTest([(u"--exclude", u"testfiles/select/1/[23]")],
+        self.root = Path(u"/tmp/testfiles/select/1")
+        self.ParseTest([(u"--exclude", u"/tmp/testfiles/select/1/[23]")],
                        [(), (u"1",), (u"1", u"1"), (u"1", u"2"), (u"1", u"3")])
 
         self.root = Path(u"/")
@@ -821,70 +821,70 @@ testfiles/select**/2
 
     def test_exclude_after_scan(self):
         u"""Test select with an exclude after a pattern that would return a scan for that file"""
-        self.root = Path(u"testfiles/select2/3")
-        self.ParseTest([(u"--include", u"testfiles/select2/3/**file.txt"),
-                        (u"--exclude", u"testfiles/select2/3/3sub2"),
-                        (u"--include", u"testfiles/select2/3/3sub1"),
+        self.root = Path(u"/tmp/testfiles/select2/3")
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select2/3/**file.txt"),
+                        (u"--exclude", u"/tmp/testfiles/select2/3/3sub2"),
+                        (u"--include", u"/tmp/testfiles/select2/3/3sub1"),
                         (u"--exclude", u"**")],
                        [(), (u"3sub1",), (u"3sub1", u"3sub1sub1"), (u"3sub1", u"3sub1sub2"), (u"3sub1", u"3sub1sub3"),
                         (u"3sub3",), (u"3sub3", u"3sub3sub2"), (u"3sub3", u"3sub3sub2", u"3sub3sub2_file.txt")])
 
     def test_include_exclude_basic(self):
         u"""Test functional test test_include_exclude_basic as a unittest"""
-        self.root = Path(u"testfiles/select2")
-        self.ParseTest([(u"--include", u"testfiles/select2/3/3sub3/3sub3sub2/3sub3sub2_file.txt"),
-                        (u"--exclude", u"testfiles/select2/3/3sub3/3sub3sub2"),
-                        (u"--include", u"testfiles/select2/3/3sub2/3sub2sub2"),
-                        (u"--include", u"testfiles/select2/3/3sub3"),
-                        (u"--exclude", u"testfiles/select2/3/3sub1"),
-                        (u"--exclude", u"testfiles/select2/2/2sub1/2sub1sub3"),
-                        (u"--exclude", u"testfiles/select2/2/2sub1/2sub1sub2"),
-                        (u"--include", u"testfiles/select2/2/2sub1"),
-                        (u"--exclude", u"testfiles/select2/1/1sub3/1sub3sub2"),
-                        (u"--exclude", u"testfiles/select2/1/1sub3/1sub3sub1"),
-                        (u"--exclude", u"testfiles/select2/1/1sub2/1sub2sub3"),
-                        (u"--include", u"testfiles/select2/1/1sub2/1sub2sub1"),
-                        (u"--exclude", u"testfiles/select2/1/1sub1/1sub1sub3/1sub1sub3_file.txt"),
-                        (u"--exclude", u"testfiles/select2/1/1sub1/1sub1sub2"),
-                        (u"--exclude", u"testfiles/select2/1/1sub2"),
-                        (u"--include", u"testfiles/select2/1.py"),
-                        (u"--include", u"testfiles/select2/3"),
-                        (u"--include", u"testfiles/select2/1"),
-                        (u"--exclude", u"testfiles/select2/**")],
+        self.root = Path(u"/tmp/testfiles/select2")
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select2/3/3sub3/3sub3sub2/3sub3sub2_file.txt"),
+                        (u"--exclude", u"/tmp/testfiles/select2/3/3sub3/3sub3sub2"),
+                        (u"--include", u"/tmp/testfiles/select2/3/3sub2/3sub2sub2"),
+                        (u"--include", u"/tmp/testfiles/select2/3/3sub3"),
+                        (u"--exclude", u"/tmp/testfiles/select2/3/3sub1"),
+                        (u"--exclude", u"/tmp/testfiles/select2/2/2sub1/2sub1sub3"),
+                        (u"--exclude", u"/tmp/testfiles/select2/2/2sub1/2sub1sub2"),
+                        (u"--include", u"/tmp/testfiles/select2/2/2sub1"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub3/1sub3sub2"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub3/1sub3sub1"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub2/1sub2sub3"),
+                        (u"--include", u"/tmp/testfiles/select2/1/1sub2/1sub2sub1"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub1/1sub1sub3/1sub1sub3_file.txt"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub1/1sub1sub2"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub2"),
+                        (u"--include", u"/tmp/testfiles/select2/1.py"),
+                        (u"--include", u"/tmp/testfiles/select2/3"),
+                        (u"--include", u"/tmp/testfiles/select2/1"),
+                        (u"--exclude", u"/tmp/testfiles/select2/**")],
                        self.expected_restored_tree)
 
     def test_globbing_replacement(self):
         u"""Test functional test test_globbing_replacement as a unittest"""
-        self.root = Path(u"testfiles/select2")
-        self.ParseTest([(u"--include", u"testfiles/select2/**/3sub3sub2/3sub3su?2_file.txt"),
-                        (u"--exclude", u"testfiles/select2/*/3s*1"),
-                        (u"--exclude", u"testfiles/select2/**/2sub1sub3"),
-                        (u"--exclude", u"ignorecase:testfiles/select2/2/2sub1/2Sub1Sub2"),
-                        (u"--include", u"ignorecase:testfiles/sel[w,u,e,q]ct2/2/2S?b1"),
-                        (u"--exclude", u"testfiles/select2/1/1sub3/1s[w,u,p,q]b3sub2"),
-                        (u"--exclude", u"testfiles/select2/1/1sub[1-4]/1sub3sub1"),
-                        (u"--include", u"testfiles/select2/1/1sub2/1sub2sub1"),
-                        (u"--exclude", u"testfiles/select2/1/1sub1/1sub1sub3/1su?1sub3_file.txt"),
-                        (u"--exclude", u"testfiles/select2/1/1*1/1sub1sub2"),
-                        (u"--exclude", u"testfiles/select2/1/1sub2"),
-                        (u"--include", u"testfiles/select[2-4]/*.py"),
-                        (u"--include", u"testfiles/*2/3"),
+        self.root = Path(u"/tmp/testfiles/select2")
+        self.ParseTest([(u"--include", u"/tmp/testfiles/select2/**/3sub3sub2/3sub3su?2_file.txt"),
+                        (u"--exclude", u"/tmp/testfiles/select2/*/3s*1"),
+                        (u"--exclude", u"/tmp/testfiles/select2/**/2sub1sub3"),
+                        (u"--exclude", u"ignorecase:/tmp/testfiles/select2/2/2sub1/2Sub1Sub2"),
+                        (u"--include", u"ignorecase:/tmp/testfiles/sel[w,u,e,q]ct2/2/2S?b1"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub3/1s[w,u,p,q]b3sub2"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub[1-4]/1sub3sub1"),
+                        (u"--include", u"/tmp/testfiles/select2/1/1sub2/1sub2sub1"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub1/1sub1sub3/1su?1sub3_file.txt"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1*1/1sub1sub2"),
+                        (u"--exclude", u"/tmp/testfiles/select2/1/1sub2"),
+                        (u"--include", u"/tmp/testfiles/select[2-4]/*.py"),
+                        (u"--include", u"/tmp/testfiles/*2/3"),
                         (u"--include", u"**/select2/1"),
-                        (u"--exclude", u"testfiles/select2/**")],
+                        (u"--exclude", u"/tmp/testfiles/select2/**")],
                        self.expected_restored_tree)
 
     @unittest.skipUnless(platform.platform().startswith(u"Linux"), u"Skip on non-Linux systems")
     def test_unicode_paths_non_globbing(self):
         u"""Test functional test test_unicode_paths_non_globbing as a unittest"""
-        self.root = Path(u"testfiles/select-unicode")
-        self.ParseTest([(u"--exclude", u"testfiles/select-unicode/прыклад/пример/例/Παράδειγμα/उदाहरण.txt"),
-                        (u"--exclude", u"testfiles/select-unicode/прыклад/пример/例/Παράδειγμα/דוגמא.txt"),
-                        (u"--exclude", u"testfiles/select-unicode/прыклад/пример/例/მაგალითი/"),
-                        (u"--include", u"testfiles/select-unicode/прыклад/пример/例/"),
-                        (u"--exclude", u"testfiles/select-unicode/прыклад/пример/"),
-                        (u"--include", u"testfiles/select-unicode/прыклад/"),
-                        (u"--include", u"testfiles/select-unicode/օրինակ.txt"),
-                        (u"--exclude", u"testfiles/select-unicode/**")],
+        self.root = Path(u"/tmp/testfiles/select-unicode")
+        self.ParseTest([(u"--exclude", u"/tmp/testfiles/select-unicode/прыклад/пример/例/Παράδειγμα/उदाहरण.txt"),
+                        (u"--exclude", u"/tmp/testfiles/select-unicode/прыклад/пример/例/Παράδειγμα/דוגמא.txt"),
+                        (u"--exclude", u"/tmp/testfiles/select-unicode/прыклад/пример/例/მაგალითი/"),
+                        (u"--include", u"/tmp/testfiles/select-unicode/прыклад/пример/例/"),
+                        (u"--exclude", u"/tmp/testfiles/select-unicode/прыклад/пример/"),
+                        (u"--include", u"/tmp/testfiles/select-unicode/прыклад/"),
+                        (u"--include", u"/tmp/testfiles/select-unicode/օրինակ.txt"),
+                        (u"--exclude", u"/tmp/testfiles/select-unicode/**")],
                        [(), (u"прыклад",), (u"прыклад", u"пример"), (u"прыклад", u"пример", u"例"),
                         (u"прыклад", u"пример", u"例", u"Παράδειγμα"),
                         (u"прыклад", u"пример", u"例", u"Παράδειγμα", u"ઉદાહરણ.log"),
@@ -916,8 +916,8 @@ class TestGlobGetNormalSf(UnitTestCase):
 
     def test_glob_get_normal_sf_exclude(self):
         u"""Test simple exclude."""
-        self.assertEqual(self.exclude_glob_tester(u"/testfiles/select2/3", u"/testfiles/select2"), 0)
-        self.assertEqual(self.exclude_glob_tester(u"/testfiles/.git", u"/testfiles"), 0)
+        self.assertEqual(self.exclude_glob_tester(u"//tmp/testfiles/select2/3", u"//tmp/testfiles/select2"), 0)
+        self.assertEqual(self.exclude_glob_tester(u"//tmp/testfiles/.git", u"//tmp/testfiles"), 0)
 
     def test_glob_get_normal_sf_exclude_root(self):
         u"""Test simple exclude with / as the glob."""
@@ -926,27 +926,27 @@ class TestGlobGetNormalSf(UnitTestCase):
 
     def test_glob_get_normal_sf_2(self):
         u"""Test same behaviour as the functional test test_globbing_replacement."""
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/3/3sub3/3sub3sub2/3sub3sub2_file.txt",
-                                                  u"/testfiles/select2/**/3sub3sub2/3sub3su?2_file.txt"), 1)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/3/3sub1", u"/testfiles/select2/*/3s*1"), 1)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/2/2sub1/2sub1sub3",
-                                                  u"/testfiles/select2/**/2sub1sub3"), 1)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/2/2sub1",
-                                                  u"/testfiles/sel[w,u,e,q]ct2/2/2s?b1"), 1)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/1/1sub3/1sub3sub2",
-                                                  u"/testfiles/select2/1/1sub3/1s[w,u,p,q]b3sub2"), 1)
-        self.assertEqual(self.exclude_glob_tester(u"/testfiles/select2/1/1sub3/1sub3sub1",
-                                                  u"/testfiles/select2/1/1sub[1-4]/1sub3sub1"), 0)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/1/1sub2/1sub2sub1",
-                                                  u"/testfiles/select2/*/1sub2/1s[w,u,p,q]b2sub1"), 1)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/1/1sub1/1sub1sub3/1sub1sub3_file.txt",
-                                                  u"/testfiles/select2/1/1sub1/1sub1sub3/1su?1sub3_file.txt"), 1)
-        self.assertEqual(self.exclude_glob_tester(u"/testfiles/select2/1/1sub1/1sub1sub2",
-                                                  u"/testfiles/select2/1/1*1/1sub1sub2"), 0)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/1/1sub2", u"/testfiles/select2/1/1sub2"), 1)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/1.py", u"/testfiles/select[2-4]/*.py"), 1)
-        self.assertEqual(self.exclude_glob_tester(u"/testfiles/select2/3", u"/testfiles/*2/3"), 0)
-        self.assertEqual(self.include_glob_tester(u"/testfiles/select2/1", u"**/select2/1"), 1)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/3/3sub3/3sub3sub2/3sub3sub2_file.txt",
+                                                  u"//tmp/testfiles/select2/**/3sub3sub2/3sub3su?2_file.txt"), 1)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/3/3sub1", u"//tmp/testfiles/select2/*/3s*1"), 1)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/2/2sub1/2sub1sub3",
+                                                  u"//tmp/testfiles/select2/**/2sub1sub3"), 1)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/2/2sub1",
+                                                  u"//tmp/testfiles/sel[w,u,e,q]ct2/2/2s?b1"), 1)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/1/1sub3/1sub3sub2",
+                                                  u"//tmp/testfiles/select2/1/1sub3/1s[w,u,p,q]b3sub2"), 1)
+        self.assertEqual(self.exclude_glob_tester(u"//tmp/testfiles/select2/1/1sub3/1sub3sub1",
+                                                  u"//tmp/testfiles/select2/1/1sub[1-4]/1sub3sub1"), 0)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/1/1sub2/1sub2sub1",
+                                                  u"//tmp/testfiles/select2/*/1sub2/1s[w,u,p,q]b2sub1"), 1)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/1/1sub1/1sub1sub3/1sub1sub3_file.txt",
+                                                  u"//tmp/testfiles/select2/1/1sub1/1sub1sub3/1su?1sub3_file.txt"), 1)
+        self.assertEqual(self.exclude_glob_tester(u"//tmp/testfiles/select2/1/1sub1/1sub1sub2",
+                                                  u"//tmp/testfiles/select2/1/1*1/1sub1sub2"), 0)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/1/1sub2", u"//tmp/testfiles/select2/1/1sub2"), 1)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/1.py", u"//tmp/testfiles/select[2-4]/*.py"), 1)
+        self.assertEqual(self.exclude_glob_tester(u"//tmp/testfiles/select2/3", u"//tmp/testfiles/*2/3"), 0)
+        self.assertEqual(self.include_glob_tester(u"//tmp/testfiles/select2/1", u"**/select2/1"), 1)
 
     def test_glob_get_normal_sf_negative_square_brackets_specified(self):
         u"""Test negative square bracket (specified) [!a,b,c] replacement in get_normal_sf."""
@@ -974,12 +974,12 @@ class TestGlobGetNormalSf(UnitTestCase):
 
     def test_glob_get_normal_sf_2_ignorecase(self):
         u"""Test same behaviour as the functional test test_globbing_replacement, ignorecase tests."""
-        self.assertEqual(self.include_glob_tester(u"testfiles/select2/2/2sub1",
-                                                  u"ignorecase:testfiles/sel[w,u,e,q]ct2/2/2S?b1",
-                                                  u"testfiles/select2"), 1)
-        self.assertEqual(self.include_glob_tester(u"testfiles/select2/2/2sub1/2sub1sub2",
-                                                  u"ignorecase:testfiles/select2/2/2sub1/2Sub1Sub2",
-                                                  u"testfiles/select2"), 1)
+        self.assertEqual(self.include_glob_tester(u"/tmp/testfiles/select2/2/2sub1",
+                                                  u"ignorecase:/tmp/testfiles/sel[w,u,e,q]ct2/2/2S?b1",
+                                                  u"/tmp/testfiles/select2"), 1)
+        self.assertEqual(self.include_glob_tester(u"/tmp/testfiles/select2/2/2sub1/2sub1sub2",
+                                                  u"ignorecase:/tmp/testfiles/select2/2/2sub1/2Sub1Sub2",
+                                                  u"/tmp/testfiles/select2"), 1)
 
     def test_glob_get_normal_sf_3_double_asterisks_dirs_to_scan(self):
         u"""Test double asterisk (**) replacement in glob_get_normal_sf with directories that should be scanned"""
@@ -990,20 +990,20 @@ class TestGlobGetNormalSf(UnitTestCase):
         u"""Test ignorecase in glob_get_normal_sf"""
         # If the pattern starts with "ignorecase:" (case insensitive), then this prefix will be removed and any
         # character in the string can be replaced with an upper- or lowercase version of itself.
-        self.assertEqual(self.include_glob_tester(u"testfiles/select2/2", u"ignorecase:testfiles/select2/2",
-                                                  u"testfiles/select2"), 1)
-        self.assertEqual(self.include_glob_tester(u"testfiles/select2/2", u"ignorecase:testFiles/Select2/2",
-                                                  u"testfiles/select2"), 1)
+        self.assertEqual(self.include_glob_tester(u"/tmp/testfiles/select2/2", u"ignorecase:/tmp/testfiles/select2/2",
+                                                  u"/tmp/testfiles/select2"), 1)
+        self.assertEqual(self.include_glob_tester(u"/tmp/testfiles/select2/2", u"ignorecase:testFiles/Select2/2",
+                                                  u"/tmp/testfiles/select2"), 1)
         self.assertEqual(self.include_glob_tester(u"tEstfiles/seLect2/2", u"ignorecase:testFiles/Select2/2",
-                                                  u"testfiles/select2"), 1)
+                                                  u"/tmp/testfiles/select2"), 1)
         self.assertEqual(self.include_glob_tester(u"TEstfiles/SeLect2/2", u"ignorecase:t?stFiles/S*ect2/2",
-                                                  u"testfiles/select2"), 1)
+                                                  u"/tmp/testfiles/select2"), 1)
         self.assertEqual(self.include_glob_tester(u"TEstfiles/SeLect2/2", u"ignorecase:t?stFil**ect2/2",
-                                                  u"testfiles/select2"), 1)
+                                                  u"/tmp/testfiles/select2"), 1)
         self.assertEqual(self.exclude_glob_tester(u"TEstfiles/SeLect2/2", u"ignorecase:t?stFiles/S*ect2/2",
-                                                  u"testfiles/select2"), 0)
+                                                  u"/tmp/testfiles/select2"), 0)
         self.assertEqual(self.exclude_glob_tester(u"TEstFiles/SeLect2/2", u"ignorecase:t?stFile**ect2/2",
-                                                  u"testfiles/select2"), 0)
+                                                  u"/tmp/testfiles/select2"), 0)
 
     def test_glob_dirs_to_scan(self):
         u"""Test parent directories are marked as needing to be scanned"""
@@ -1017,43 +1017,43 @@ class TestGlobGetNormalSf(UnitTestCase):
         with patch(u"duplicity.path.Path.isdir") as mock_isdir:
             mock_isdir.return_value = True
             self.assertEqual(
-                self.glob_tester(u"testfiles/select/1", u"*/select/1/1", 1,
-                                 u"testfiles/select"), 2)
+                self.glob_tester(u"/tmp/testfiles/select/1", u"*/select/1/1", 1,
+                                 u"/tmp/testfiles/select"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select/1/2",
-                                 u"*/select/1/2/1", 1, u"testfiles/select"), 2)
+                self.glob_tester(u"/tmp/testfiles/select/1/2",
+                                 u"*/select/1/2/1", 1, u"/tmp/testfiles/select"), 2)
             self.assertEqual(
                 self.glob_tester(u"parent", u"parent/hel?o.txt", 1, u"parent"), 2)
             self.assertEqual(
                 self.glob_tester(u"test/parent/folder",
                                  u"test/par*t/folder/hello.txt", 1, u"test"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select/1/1",
-                                 u"**/1/2/1", 1, u"testfiles"), 2)
+                self.glob_tester(u"/tmp/testfiles/select/1/1",
+                                 u"**/1/2/1", 1, u"/tmp/testfiles"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select2/3/3sub2",
-                                 u"testfiles/select2/3/**file.txt", 1,
-                                 u"testfiles"), 2)
+                self.glob_tester(u"/tmp/testfiles/select2/3/3sub2",
+                                 u"/tmp/testfiles/select2/3/**file.txt", 1,
+                                 u"/tmp/testfiles"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select/1/2",
-                                 u"*/select/1/2/1", 1, u"testfiles"), 2)
+                self.glob_tester(u"/tmp/testfiles/select/1/2",
+                                 u"*/select/1/2/1", 1, u"/tmp/testfiles"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select/1",
-                                 u"testfiles/select**/2", 1, u"testfiles"), 2)
+                self.glob_tester(u"/tmp/testfiles/select/1",
+                                 u"/tmp/testfiles/select**/2", 1, u"/tmp/testfiles"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select/efools",
-                                 u"testfiles/select/*foo*/p*", 1,
-                                 u"testfiles"), 2)
+                self.glob_tester(u"/tmp/testfiles/select/efools",
+                                 u"/tmp/testfiles/select/*foo*/p*", 1,
+                                 u"/tmp/testfiles"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select/3",
-                                 u"testfiles/select/**2", 1, u"testfiles"), 2)
+                self.glob_tester(u"/tmp/testfiles/select/3",
+                                 u"/tmp/testfiles/select/**2", 1, u"/tmp/testfiles"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select2/1/1sub1/1sub1sub2",
-                                 u"testfiles/select2/**/3sub3sub2/3sub3su?2_file.txt",
-                                 1, u"testfiles"), 2)
+                self.glob_tester(u"/tmp/testfiles/select2/1/1sub1/1sub1sub2",
+                                 u"/tmp/testfiles/select2/**/3sub3sub2/3sub3su?2_file.txt",
+                                 1, u"/tmp/testfiles"), 2)
             self.assertEqual(
-                self.glob_tester(u"testfiles/select/1",
-                                 u"*/select/1/1", 1, u"testfiles"), 2)
+                self.glob_tester(u"/tmp/testfiles/select/1",
+                                 u"*/select/1/1", 1, u"/tmp/testfiles"), 2)
 
 if __name__ == u"__main__":
     unittest.main()

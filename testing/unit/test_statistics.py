@@ -134,7 +134,7 @@ TotalDestinationSizeChange 12 (12 bytes)
 
     def test_write_path(self):
         u"""Test reading and writing of statistics object"""
-        p = path.Path(u"testfiles/statstest")
+        p = path.Path(u"/tmp/testfiles/statstest")
         if p.exists():
             p.delete()
         s = StatsObj()

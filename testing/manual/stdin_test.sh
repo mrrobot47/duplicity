@@ -15,7 +15,7 @@ mkdir $TARGETDIR
 RESTOREDIR=$TESTDIR/dup_restore
 mkdir $RESTOREDIR
 
-tar -C $SOURCEDIR -xvf testfiles.tar.gz testfiles/select 
+tar -C $SOURCEDIR -xvf testfiles.tar.gz /tmp/testfiles/select 
 
 DUPLICITY_CMD="../bin/duplicity"
 export PYTHONPATH=../
@@ -27,10 +27,10 @@ echo "FIRST TEST."
 echo "==========="
 TEST1="Test with exclude-globbing"
 echo "${TEST1}"
-echo "+ $SOURCEDIR/testfiles/select/1/1" > $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/1/2" >> $TESTDIR/exclude.txt
-echo "+ $SOURCEDIR/testfiles/select/1/3" >> $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/3" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/1" > $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/1/2" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/3" >> $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/3" >> $TESTDIR/exclude.txt
 echo "- $SOURCEDIR/**" >> $TESTDIR/exclude.txt
 
 $DUPLICITY_CMD --exclude-globbing-filelist $TESTDIR/exclude.txt $SOURCEDIR file://$TARGETDIR
@@ -51,12 +51,12 @@ mkdir $TESTDIR
 mkdir $SOURCEDIR
 mkdir $TARGETDIR
 mkdir $RESTOREDIR
-tar -C $SOURCEDIR -xvf testfiles.tar.gz testfiles/select 
+tar -C $SOURCEDIR -xvf testfiles.tar.gz /tmp/testfiles/select 
 
-echo "+ $SOURCEDIR/testfiles/select/1/1" > $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/1/2" >> $TESTDIR/exclude.txt
-echo "+ $SOURCEDIR/testfiles/select/1/3" >> $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/3" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/1" > $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/1/2" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/3" >> $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/3" >> $TESTDIR/exclude.txt
 echo "- $SOURCEDIR/**" >> $TESTDIR/exclude.txt
 
 $DUPLICITY_CMD --exclude-filelist $TESTDIR/exclude.txt $SOURCEDIR file://$TARGETDIR
@@ -77,12 +77,12 @@ mkdir $TESTDIR
 mkdir $SOURCEDIR
 mkdir $TARGETDIR
 mkdir $RESTOREDIR
-tar -C $SOURCEDIR -xvf testfiles.tar.gz testfiles/select 
+tar -C $SOURCEDIR -xvf testfiles.tar.gz /tmp/testfiles/select 
 
-echo "+ $SOURCEDIR/testfiles/select/1/1" > $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/1/2" >> $TESTDIR/exclude.txt
-echo "+ $SOURCEDIR/testfiles/select/1/3" >> $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/3" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/1" > $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/1/2" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/3" >> $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/3" >> $TESTDIR/exclude.txt
 echo "- $SOURCEDIR/**" >> $TESTDIR/exclude.txt
 
 cat $TESTDIR/exclude.txt | $DUPLICITY_CMD --exclude-filelist-stdin $SOURCEDIR file://$TARGETDIR
@@ -102,12 +102,12 @@ mkdir $TESTDIR
 mkdir $SOURCEDIR
 mkdir $TARGETDIR
 mkdir $RESTOREDIR
-tar -C $SOURCEDIR -xvf testfiles.tar.gz testfiles/select 
+tar -C $SOURCEDIR -xvf testfiles.tar.gz /tmp/testfiles/select 
 
-echo "+ $SOURCEDIR/testfiles/select/1/1" > $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/1/2" >> $TESTDIR/exclude.txt
-echo "+ $SOURCEDIR/testfiles/select/1/3" >> $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/3" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/1" > $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/1/2" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/3" >> $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/3" >> $TESTDIR/exclude.txt
 echo "- $SOURCEDIR/**" >> $TESTDIR/exclude.txt
 
 $DUPLICITY_CMD $SOURCEDIR file://$TARGETDIR
@@ -127,12 +127,12 @@ mkdir $TESTDIR
 mkdir $SOURCEDIR
 mkdir $TARGETDIR
 mkdir $RESTOREDIR
-tar -C $SOURCEDIR -xvf testfiles.tar.gz testfiles/select 
+tar -C $SOURCEDIR -xvf testfiles.tar.gz /tmp/testfiles/select 
 
-echo "+ $SOURCEDIR/testfiles/select/1/1" > $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/1/2" >> $TESTDIR/exclude.txt
-echo "+ $SOURCEDIR/testfiles/select/1/3" >> $TESTDIR/exclude.txt
-echo "- $SOURCEDIR/testfiles/select/3" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/1" > $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/1/2" >> $TESTDIR/exclude.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/3" >> $TESTDIR/exclude.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/3" >> $TESTDIR/exclude.txt
 echo "- $SOURCEDIR/**" >> $TESTDIR/exclude.txt
 
 cat $TESTDIR/exclude.txt | $DUPLICITY_CMD --exclude-filelist /dev/stdin $SOURCEDIR file://$TARGETDIR
@@ -152,12 +152,12 @@ mkdir $TESTDIR
 mkdir $SOURCEDIR
 mkdir $TARGETDIR
 mkdir $RESTOREDIR
-tar -C $SOURCEDIR -xvf testfiles.tar.gz testfiles/select 
+tar -C $SOURCEDIR -xvf testfiles.tar.gz /tmp/testfiles/select 
 
-echo "+ $SOURCEDIR/testfiles/select/1/1" > $TESTDIR/include.txt
-echo "- $SOURCEDIR/testfiles/select/1/2" >> $TESTDIR/include.txt
-echo "+ $SOURCEDIR/testfiles/select/1/3" >> $TESTDIR/include.txt
-echo "- $SOURCEDIR/testfiles/select/3" >> $TESTDIR/include.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/1" > $TESTDIR/include.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/1/2" >> $TESTDIR/include.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/3" >> $TESTDIR/include.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/3" >> $TESTDIR/include.txt
 echo "- $SOURCEDIR/**" >> $TESTDIR/include.txt
 
 cat $TESTDIR/include.txt | $DUPLICITY_CMD --include-filelist-stdin $SOURCEDIR file://$TARGETDIR
@@ -177,12 +177,12 @@ mkdir $TESTDIR
 mkdir $SOURCEDIR
 mkdir $TARGETDIR
 mkdir $RESTOREDIR
-tar -C $SOURCEDIR -xvf testfiles.tar.gz testfiles/select 
+tar -C $SOURCEDIR -xvf testfiles.tar.gz /tmp/testfiles/select 
 
-echo "+ $SOURCEDIR/testfiles/select/1/1" > $TESTDIR/include.txt
-echo "- $SOURCEDIR/testfiles/select/1/2" >> $TESTDIR/include.txt
-echo "+ $SOURCEDIR/testfiles/select/1/3" >> $TESTDIR/include.txt
-echo "- $SOURCEDIR/testfiles/select/3" >> $TESTDIR/include.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/1" > $TESTDIR/include.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/1/2" >> $TESTDIR/include.txt
+echo "+ $SOURCEDIR//tmp/testfiles/select/1/3" >> $TESTDIR/include.txt
+echo "- $SOURCEDIR//tmp/testfiles/select/3" >> $TESTDIR/include.txt
 echo "- $SOURCEDIR/**" >> $TESTDIR/include.txt
 
 cat $TESTDIR/include.txt | $DUPLICITY_CMD --include-filelist /dev/stdin $SOURCEDIR file://$TARGETDIR
