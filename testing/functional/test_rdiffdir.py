@@ -27,6 +27,8 @@ import unittest
 import os
 
 from duplicity import path
+from testing import _top_dir
+from testing import _runtest_dir
 from . import FunctionalTestCase
 
 
@@ -42,7 +44,7 @@ class RdiffdirTest(FunctionalTestCase):
         basepython = os.environ.get(u'TOXPYTHON', None)
         if basepython is not None:
             cmd_list.extend([basepython])
-        cmd_list.extend([u"../bin/rdiffdir"])
+        cmd_list.extend([u"{0}/bin/rdiffdir".format(_top_dir)])
         cmd_list.extend(argstring.split())
         cmdline = u" ".join([u'"%s"' % x for x in cmd_list])
         self.run_cmd(cmdline)
@@ -51,10 +53,10 @@ class RdiffdirTest(FunctionalTestCase):
         u"""Run diff/patch cycle on directories in dirname_list"""
         assert len(dirname_list) >= 2
 
-        seq_path = path.Path(u"/tmp/testfiles/output/sequence")
+        seq_path = path.Path(u"{0}/testfiles/output/sequence".format(_runtest_dir))
         new_path = path.Path(dirname_list[0])
-        delta_path = path.Path(u"/tmp/testfiles/output/delta.tar")
-        sig_path = path.Path(u"/tmp/testfiles/output/sig.tar")
+        delta_path = path.Path(u"{0}/testfiles/output/delta.tar".format(_runtest_dir))
+        sig_path = path.Path(u"{0}/testfiles/output/sig.tar".format(_runtest_dir))
 
         self.run_cmd(u"cp -pR %s %s" % (new_path.uc_name, seq_path.uc_name))
         seq_path.setdata()
@@ -90,12 +92,12 @@ class RdiffdirTest(FunctionalTestCase):
             assert sig_path.isreg()
 
     def test_dirx(self):
-        u"""Test cycle on /tmp/testfiles/dirx"""
-        self.run_cycle([u'/tmp/testfiles/empty_dir',
-                        u'/tmp/testfiles/dir1',
-                        u'/tmp/testfiles/dir2',
-                        u'/tmp/testfiles/dir3',
-                        u'/tmp/testfiles/empty_dir'])
+        u"""Test cycle on {0}/testfiles/dirx"""
+        self.run_cycle([u'{0}/testfiles/empty_dir'.format(_runtest_dir),
+                        u'{0}/testfiles/dir1'.format(_runtest_dir),
+                        u'{0}/testfiles/dir2'.format(_runtest_dir),
+                        u'{0}/testfiles/dir3'.format(_runtest_dir),
+                        u'{0}/testfiles/empty_dir'.format(_runtest_dir)])
 
 
 if __name__ == u"__main__":

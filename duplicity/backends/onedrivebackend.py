@@ -48,16 +48,51 @@ from duplicity import log
 class OneDriveBackend(duplicity.backend.Backend):
     u"""Uses Microsoft OneDrive (formerly SkyDrive) for backups."""
 
+    OAUTH_TOKEN_PATH = os.path.expanduser(
+        u'~/.duplicity_onedrive_oauthtoken.json')
+
     API_URI = u'https://graph.microsoft.com/v1.0/'
     # The large file upload API says that uploaded chunks (except the last) must be multiples of 327680 bytes.
     REQUIRED_FRAGMENT_SIZE_MULTIPLE = 327680
+    CLIENT_ID = u'000000004C12E85D'
+    OAUTH_TOKEN_URI = u'https://login.live.com/oauth20_token.srf'
+    OAUTH_AUTHORIZE_URI = u'https://login.live.com/oauth20_authorize.srf'
+    OAUTH_REDIRECT_URI = u'https://login.live.com/oauth20_desktop.srf'
+    # Files.Read is for reading files,
+    # Files.ReadWrite  is for creating/writing files,
+    # User.Read is needed for the /me request to see if the token works.
+    # offline_access is necessary for duplicity to access onedrive without
+    # the user being logged in right now.
+    OAUTH_SCOPE = [u'Files.Read', u'Files.ReadWrite', u'User.Read', u'offline_access']
+
+    # OAUTHLIB_RELAX_TOKEN_SCOPE prevents the oauthlib from complaining about a mismatch between
+    # the requested scope and the delivered scope. We need this because we don't get a refresh
+    # token without asking for offline_access, but Microsoft Graph doesn't include offline_access
+    # in its response (even though it does send a refresh_token).
+
+    os.environ[u'OAUTHLIB_RELAX_TOKEN_SCOPE'] = u'TRUE'
 
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
+        # Import requests and requests-oauthlib
+        try:
+            # On debian (and derivatives), get these dependencies using:
+            # apt-get install python-requests python-requests-oauthlib
+            # On fedora (and derivatives), get these dependencies using:
+            # yum install python-requests python-requests-oauthlib
+            global requests
+            global OAuth2Session
+            import requests
+            from requests_oauthlib import OAuth2Session
+        except ImportError as e:
+            raise BackendException((
+                u'OneDrive backend requires python-requests and '
+                u'python-requests-oauthlib to be installed. Please install '
+                u'them and try again.\n' + str(e)))
+
         self.directory = parsed_url.path.lstrip(u'/')
-        onedrive_root = os.environ.get(u'ONEDRIVE_ROOT', u'me/drive/root')
-        self.directory_onedrive_path = u'%s:/%s/' % (onedrive_root, self.directory)
+        self.directory_onedrive_path = u'me/drive/root:/%s/' % self.directory
         if self.directory == u"":
             raise BackendException((
                 u'You did not specify a path. '
@@ -71,17 +106,85 @@ class OneDriveBackend(duplicity.backend.Backend):
         self.initialize_oauth2_session()
 
     def initialize_oauth2_session(self):
-        client_id = os.environ.get(u'OAUTH2_CLIENT_ID')
-        refresh_token = os.environ.get(u'OAUTH2_REFRESH_TOKEN')
-        if client_id and refresh_token:
-            self.http_client = ExternalOAuth2Session(client_id, refresh_token)
-        else:
-            self.http_client = DefaultOAuth2Session(self.API_URI)
+        def token_updater(token):
+            try:
+                with open(self.OAUTH_TOKEN_PATH, u'w') as f:
+                    json.dump(token, f)
+            except Exception as e:
+                log.Error((u'Could not save the OAuth2 token to %s. '
+                           u'This means you may need to do the OAuth2 '
+                           u'authorization process again soon. '
+                           u'Original error: %s' % (
+                               self.OAUTH_TOKEN_PATH, e)))
+
+        token = None
+        try:
+            with open(self.OAUTH_TOKEN_PATH) as f:
+                token = json.load(f)
+        except IOError as e:
+            log.Error((u'Could not load OAuth2 token. '
+                       u'Trying to create a new one. (original error: %s)' % e))
+
+        self.http_client = OAuth2Session(
+            self.CLIENT_ID,
+            scope=self.OAUTH_SCOPE,
+            redirect_uri=self.OAUTH_REDIRECT_URI,
+            token=token,
+            auto_refresh_kwargs={
+                u'client_id': self.CLIENT_ID,
+            },
+            auto_refresh_url=self.OAUTH_TOKEN_URI,
+            token_updater=token_updater)
+
+        # We have to refresh token manually because it's not working "under the covers"
+        if token is not None:
+            self.http_client.refresh_token(self.OAUTH_TOKEN_URI)
+
+        # Send a request to make sure the token is valid (or could at least be
+        # refreshed successfully, which will happen under the covers). In case
+        # this request fails, the provided token was too old (i.e. expired),
+        # and we need to get a new token.
+        user_info_response = self.http_client.get(self.API_URI + u'me')
+        if user_info_response.status_code != requests.codes.ok:
+            token = None
+
+        if token is None:
+            if not sys.stdout.isatty() or not sys.stdin.isatty():
+                log.FatalError((u'The OAuth2 token could not be loaded from %s '
+                                u'and you are not running duplicity '
+                                u'interactively, so duplicity cannot possibly '
+                                u'access OneDrive.' % self.OAUTH_TOKEN_PATH))
+            authorization_url, state = self.http_client.authorization_url(
+                self.OAUTH_AUTHORIZE_URI, display=u'touch')
+
+            print()
+            print(u'In order to authorize duplicity to access your OneDrive, '
+                  u'please open %s in a browser and copy the URL of the blank '
+                  u'page the dialog leads to.' % authorization_url)
+            print()
+
+            redirected_to = input(u'URL of the blank page: ').strip()
+
+            token = self.http_client.fetch_token(
+                self.OAUTH_TOKEN_URI,
+                authorization_response=redirected_to)
+
+            user_info_response = self.http_client.get(self.API_URI + u'me')
+            user_info_response.raise_for_status()
+
+            try:
+                with open(self.OAUTH_TOKEN_PATH, u'w') as f:
+                    json.dump(token, f)
+            except Exception as e:
+                log.Error((u'Could not save the OAuth2 token to %s. '
+                           u'This means you need to do the OAuth2 authorization '
+                           u'process on every start of duplicity. '
+                           u'Original error: %s' % (
+                               self.OAUTH_TOKEN_PATH, e)))
 
     def _list(self):
         accum = []
-        # Strip last slash, because graph can give a 404 in some cases with it
-        next_url = self.API_URI + self.directory_onedrive_path.rstrip(u'/') + u':/children'
+        next_url = self.API_URI + self.directory_onedrive_path + u':/children'
         while True:
             response = self.http_client.get(next_url)
             if response.status_code == 404:
@@ -191,165 +294,6 @@ class OneDriveBackend(duplicity.backend.Backend):
 
     def _retry_cleanup(self):
         self.initialize_oauth2_session()
-
-
-class OneDriveOAuth2Session(object):
-    u"""A tiny wrapper for OAuth2Session that handles some OneDrive details."""
-
-    OAUTH_TOKEN_URI = u'https://login.live.com/oauth20_token.srf'
-
-    def __init__(self):
-        # OAUTHLIB_RELAX_TOKEN_SCOPE prevents the oauthlib from complaining
-        # about a mismatch between the requested scope and the delivered scope.
-        # We need this because we don't get a refresh token without asking for
-        # offline_access, but Microsoft Graph doesn't include offline_access
-        # in its response (even though it does send a refresh_token).
-        os.environ[u'OAUTHLIB_RELAX_TOKEN_SCOPE'] = u'TRUE'
-
-        # Import requests-oauthlib
-        try:
-            # On debian (and derivatives), get these dependencies using:
-            # apt-get install python-requests-oauthlib
-            # On fedora (and derivatives), get these dependencies using:
-            # yum install python-requests-oauthlib
-            from requests_oauthlib import OAuth2Session
-            self.session_class = OAuth2Session
-        except ImportError as e:
-            raise BackendException((
-                u'OneDrive backend requires python-requests-oauthlib to be '
-                u'installed. Please install it and try again.\n' + str(e)))
-
-        # Should be filled by a subclass
-        self.session = None
-
-    def get(self, *args, **kwargs):
-        return self.session.get(*args, **kwargs)
-
-    def put(self, *args, **kwargs):
-        return self.session.put(*args, **kwargs)
-
-    def post(self, *args, **kwargs):
-        return self.session.post(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        return self.session.delete(*args, **kwargs)
-
-
-class DefaultOAuth2Session(OneDriveOAuth2Session):
-    u"""A possibly-interactive console session using a built-in API key"""
-
-    OAUTH_TOKEN_PATH = os.path.expanduser(
-        u'~/.duplicity_onedrive_oauthtoken.json')
-    CLIENT_ID = u'000000004C12E85D'
-    OAUTH_AUTHORIZE_URI = u'https://login.live.com/oauth20_authorize.srf'
-    OAUTH_REDIRECT_URI = u'https://login.live.com/oauth20_desktop.srf'
-    # Files.Read is for reading files,
-    # Files.ReadWrite  is for creating/writing files,
-    # User.Read is needed for the /me request to see if the token works.
-    # offline_access is necessary for duplicity to access onedrive without
-    # the user being logged in right now.
-    OAUTH_SCOPE = [u'Files.Read', u'Files.ReadWrite', u'User.Read', u'offline_access']
-
-    def __init__(self, api_uri):
-        super(DefaultOAuth2Session, self).__init__()
-
-        token = None
-        try:
-            with open(self.OAUTH_TOKEN_PATH) as f:
-                token = json.load(f)
-        except IOError as e:
-            log.Error((u'Could not load OAuth2 token. '
-                       u'Trying to create a new one. (original error: %s)' % e))
-
-        self.session = self.session_class(
-            self.CLIENT_ID,
-            scope=self.OAUTH_SCOPE,
-            redirect_uri=self.OAUTH_REDIRECT_URI,
-            token=token,
-            auto_refresh_kwargs={
-                u'client_id': self.CLIENT_ID,
-            },
-            auto_refresh_url=self.OAUTH_TOKEN_URI,
-            token_updater=self.token_updater)
-
-        # We have to refresh token manually because it's not working "under the covers"
-        if token is not None:
-            self.session.refresh_token(self.OAUTH_TOKEN_URI)
-
-        # Send a request to make sure the token is valid (or could at least be
-        # refreshed successfully, which will happen under the covers). In case
-        # this request fails, the provided token was too old (i.e. expired),
-        # and we need to get a new token.
-        user_info_response = self.session.get(api_uri + u'me')
-        if user_info_response.status_code != 200:
-            token = None
-
-        if token is None:
-            if not sys.stdout.isatty() or not sys.stdin.isatty():
-                log.FatalError((u'The OAuth2 token could not be loaded from %s '
-                                u'and you are not running duplicity '
-                                u'interactively, so duplicity cannot possibly '
-                                u'access OneDrive.' % self.OAUTH_TOKEN_PATH))
-            authorization_url, state = self.session.authorization_url(
-                self.OAUTH_AUTHORIZE_URI, display=u'touch')
-
-            print()
-            print(u'In order to authorize duplicity to access your OneDrive, '
-                  u'please open %s in a browser and copy the URL of the blank '
-                  u'page the dialog leads to.' % authorization_url)
-            print()
-
-            redirected_to = input(u'URL of the blank page: ').strip()
-
-            token = self.session.fetch_token(
-                self.OAUTH_TOKEN_URI,
-                authorization_response=redirected_to)
-
-            user_info_response = self.session.get(api_uri + u'me')
-            user_info_response.raise_for_status()
-
-            try:
-                with open(self.OAUTH_TOKEN_PATH, u'w') as f:
-                    json.dump(token, f)
-            except Exception as e:
-                log.Error((u'Could not save the OAuth2 token to %s. '
-                           u'This means you need to do the OAuth2 authorization '
-                           u'process on every start of duplicity. '
-                           u'Original error: %s' % (
-                               self.OAUTH_TOKEN_PATH, e)))
-
-    def token_updater(self, token):
-        try:
-            with open(self.OAUTH_TOKEN_PATH, u'w') as f:
-                json.dump(token, f)
-        except Exception as e:
-            log.Error((u'Could not save the OAuth2 token to %s. '
-                       u'This means you may need to do the OAuth2 '
-                       u'authorization process again soon. '
-                       u'Original error: %s' % (
-                           self.OAUTH_TOKEN_PATH, e)))
-
-
-class ExternalOAuth2Session(OneDriveOAuth2Session):
-    u"""Caller is managing tokens and provides an active refresh token."""
-    def __init__(self, client_id, refresh_token):
-        super(ExternalOAuth2Session, self).__init__()
-
-        token = {
-            u'refresh_token': refresh_token,
-        }
-
-        self.session = self.session_class(
-            client_id,
-            token=token,
-            auto_refresh_kwargs={
-                u'client_id': client_id,
-            },
-            auto_refresh_url=self.OAUTH_TOKEN_URI)
-
-        # Get an initial refresh under our belts, since we don't have an access
-        # token to start with.
-        self.session.refresh_token(self.OAUTH_TOKEN_URI)
 
 
 duplicity.backend.register_backend(u'onedrive', OneDriveBackend)

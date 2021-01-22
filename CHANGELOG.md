@@ -1,18 +1,6 @@
-## rel.0.8.18 (2021-01-09)
+## (unreleased)
 
 ### Other
-
-* Merge branch 'onedrive-token' into 'master' [Kenneth Loafman]
-
-* Onedrive: Support using an external client id / refresh token. [Michael Terry]
-
-* Update .gitlab-ci.yml to need code test to pass. [Kenneth Loafman]
-
-* Merge branch 'master' of git@gitlab.com:duplicity/duplicity.git. [Kenneth Loafman]
-
-* Fix issue #26 Backend b2 backblaze fails with nameprefix restrictions. [Kenneth Loafman]
-
-* Fix issue #29 Backend b2 backblaze fails with nameprefix restrictions. [Kenneth Loafman]
 
 * Fix unadorned strings. [Kenneth Loafman]
 

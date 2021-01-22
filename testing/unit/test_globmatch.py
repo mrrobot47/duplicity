@@ -30,6 +30,7 @@ import sys
 from . import UnitTestCase
 from duplicity.globmatch import *  # pylint: disable=unused-wildcard-import,redefined-builtin
 from duplicity.path import *  # pylint: disable=unused-wildcard-import,redefined-builtin
+from testing import _runtest_dir
 from mock import patch
 
 
@@ -107,9 +108,9 @@ class TestSelectValuesFromGlobs(UnitTestCase):
     def test_glob_scans_parent_directories(self):
         u"""Test glob scans parent"""
         self.assertEqual(
-            inc_sel_dir(u"/tmp/testfiles/parent/sub", u"/tmp/testfiles/parent"), 2)
+            inc_sel_dir(u"{0}/testfiles/parent/sub".format(_runtest_dir), u"{0}/testfiles/parent".format(_runtest_dir)), 2)
         self.assertEqual(
-            inc_sel_dir(u"/tmp/testfiles/select2/3/3sub2", u"/tmp/testfiles/select2/3"), 2)
+            inc_sel_dir(u"{0}/testfiles/select2/3/3sub2".format(_runtest_dir), u"{0}/testfiles/select2/3".format(_runtest_dir)), 2)
 
     def test_double_asterisk_include(self):
         u"""Test a few globbing patterns, including **"""
@@ -162,19 +163,19 @@ class TestTrailingSlash(UnitTestCase):
         # Bug #1624725
         # https://bugs.launchpad.net/duplicity/+bug/1624725
         self.assertEqual(inc_sel_file(
-            u"/tmp/testfiles/select2/1/1sub1/1sub1sub1/",
-            u"/tmp/testfiles/select2/1/1sub1/1sub1sub1/1sub1sub1_file.txt"), 1)
+            u"{0}/testfiles/select2/1/1sub1/1sub1sub1/".format(_runtest_dir),
+            u"{0}/testfiles/select2/1/1sub1/1sub1sub1/1sub1sub1_file.txt".format(_runtest_dir)), 1)
 
     def test_included_files_are_matched_slash_2_parents(self):
         u"""Test that duplicity will scan parent of glob/"""
         # Bug #1624725
         # https://bugs.launchpad.net/duplicity/+bug/1624725
         self.assertEqual(inc_sel_dir(
-            u"/tmp/testfiles/select2/1/1sub1/1sub1sub1/",
-            u"/tmp/testfiles/select2/1/1sub1/1sub1sub1"), 1)
+            u"{0}/testfiles/select2/1/1sub1/1sub1sub1/".format(_runtest_dir),
+            u"{0}/testfiles/select2/1/1sub1/1sub1sub1".format(_runtest_dir)), 1)
         self.assertEqual(inc_sel_dir(
-            u"/tmp/testfiles/select2/1/1sub1/1sub1sub1/",
-            u"/tmp/testfiles/select2/1/1sub1"), 2)
+            u"{0}/testfiles/select2/1/1sub1/1sub1sub1/".format(_runtest_dir),
+            u"{0}/testfiles/select2/1/1sub1".format(_runtest_dir)), 2)
 
     def test_included_files_are_matched_slash_wildcard(self):
         u"""Test that files within an included folder are matched with /"""
@@ -184,7 +185,7 @@ class TestTrailingSlash(UnitTestCase):
 
     def test_slash_matches_everything(self):
         u"""Test / matches everything"""
-        self.assertEqual(inc_sel_dir(u"/", u"/tmp//tmp/testfiles/select/1/2"), 1)
+        self.assertEqual(inc_sel_dir(u"/", u"/tmp/{0}/testfiles/select/1/2".format(_runtest_dir)), 1)
         self.assertEqual(inc_sel_dir(u"/", u"/test/random/path"), 1)
         self.assertEqual(exc_sel_dir(u"/", u"/test/random/path"), 0)
         self.assertEqual(inc_sel_dir(u"/", u"/"), 1)
@@ -209,17 +210,17 @@ class TestTrailingSlash(UnitTestCase):
 
     def test_simple_trailing_slash_match(self):
         u"""Test that a normal folder string ending in / matches that path"""
-        self.assertEqual(inc_sel_dir(u"/tmp/testfiles/select/1/2/1/",
-                                     u"/tmp/testfiles/select/1/2/1"), 1)
+        self.assertEqual(inc_sel_dir(u"{0}/testfiles/select/1/2/1/".format(_runtest_dir),
+                                     u"{0}/testfiles/select/1/2/1".format(_runtest_dir)), 1)
 
     def test_double_asterisk_string_slash(self):
         u"""Test string starting with ** and ending in /"""
-        self.assertEqual(inc_sel_dir(u"**/1/2/", u"/tmp/testfiles/select/1/2"), 1)
+        self.assertEqual(inc_sel_dir(u"**/1/2/", u"{0}/testfiles/select/1/2".format(_runtest_dir)), 1)
 
     def test_string_double_asterisk_string_slash(self):
         u"""Test string ** string /"""
-        self.assertEqual(inc_sel_dir(u"/tmp/testfiles**/2/",
-                                     u"/tmp/testfiles/select/1/2"), 1)
+        self.assertEqual(inc_sel_dir(u"{0}/testfiles**/2/".format(_runtest_dir),
+                                     u"{0}/testfiles/select/1/2".format(_runtest_dir)), 1)
 
 
 class TestDoubleAsterisk(UnitTestCase):

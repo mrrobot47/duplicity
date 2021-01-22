@@ -26,20 +26,22 @@ import unittest
 import os
 
 from . import FunctionalTestCase
+from testing import _top_dir
+from testing import _runtest_dir
 
 
 class LogTest(FunctionalTestCase):
     u"""Test machine-readable functions/classes in log.py"""
 
-    logfile = os.environ.get(u'TMPDIR', u'/tmp') + u'/duplicity.log'
+    logfile = u"{0}/duplicity.log".format(_runtest_dir)
 
     def setUp(self):
         super(LogTest, self).setUp()
-        assert not os.system(u"rm -f {}".format(self.logfile))
+        assert not os.system(u"rm -f {0}".format(self.logfile))
 
     def tearDown(self):
         super(LogTest, self).tearDown()
-        assert not os.system(u"rm -f {}".format(self.logfile))
+        assert not os.system(u"rm -f {0}".format(self.logfile))
 
     def test_command_line_error(self):
         u"""Check notification of a simple error code"""
@@ -47,9 +49,9 @@ class LogTest(FunctionalTestCase):
         # Run actual duplicity command (will fail, because no arguments passed)
         basepython = os.environ.get(u'TOXPYTHON', None)
         if basepython is not None:
-            os.system(u"{} ../bin/duplicity --log-file={} >/dev/null 2>&1".format(basepython, self.logfile))
+            os.system(u"{0} {1}/bin/duplicity --log-file={2} >/dev/null 2>&1".format(basepython, _top_dir, self.logfile))
         else:
-            os.system(u"../bin/duplicity --log-file={} >/dev/null 2>&1".format(self.logfile))
+            os.system(u"{0}/bin/duplicity --log-file={1} >/dev/null 2>&1".format(_top_dir, self.logfile))
 
         # The format of the file should be:
         # """ERROR 2

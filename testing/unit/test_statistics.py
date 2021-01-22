@@ -28,6 +28,7 @@ import unittest
 from . import UnitTestCase
 from duplicity import path
 from duplicity.statistics import *  # pylint: disable=redefined-builtin, unused-wildcard-import
+from testing import _runtest_dir
 
 
 class StatsObjTest(UnitTestCase):
@@ -134,7 +135,7 @@ TotalDestinationSizeChange 12 (12 bytes)
 
     def test_write_path(self):
         u"""Test reading and writing of statistics object"""
-        p = path.Path(u"/tmp/testfiles/statstest")
+        p = path.Path(u"{0}/testfiles/statstest".format(_runtest_dir))
         if p.exists():
             p.delete()
         s = StatsObj()

@@ -22,7 +22,10 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
+import gettext
 import os
+import platform
+import subprocess
 import sys
 import time
 import unittest
@@ -30,11 +33,26 @@ import unittest
 from duplicity import backend
 from duplicity import config
 from duplicity import log
+from duplicity import util
+
+util.start_debugger()
+
+if sys.version_info.major >= 3:
+    gettext.install(u'duplicity', names=[u'ngettext'])
+else:
+    gettext.install(u'duplicity', names=[u'ngettext'], unicode=True)  # pylint: disable=unexpected-keyword-arg
 
 _testing_dir = os.path.dirname(os.path.abspath(__file__))
 _top_dir = os.path.dirname(_testing_dir)
 _overrides_dir = os.path.join(_testing_dir, u'overrides')
 _bin_dir = os.path.join(_testing_dir, u'overrides', u'bin')
+
+if platform.system().startswith(u'Darwin'):
+    # Use temp space from getconf, never /tmp
+    _runtest_dir = subprocess.check_output([u'getconf', u'DARWIN_USER_TEMP_DIR'])
+    _runtest_dir = util.fsdecode(_runtest_dir).rstrip().rstrip(u'/')
+else:
+    _runtest_dir = os.getenv(u'TMPDIR', False) or os.getenv(u'TEMP', False) or u'/tmp'
 
 # Adjust python path for duplicity and override modules
 sys.path = [_overrides_dir, _top_dir, _bin_dir] + sys.path
@@ -61,10 +79,11 @@ time.tzset()
 if sys.version_info.major == 2:
     files = os.listdir(_bin_dir)
     for file in files:
-        if file.endswith(u'.py'):
-            with open(file) as f:
-                print(u"converting %s to python2" % file, file=sys.stderr)
-                f.write(f.read().replace(u"python3", u"python"))
+        print(u"converting %s to python2" % file, file=sys.stderr)
+        with open(os.path.join(_bin_dir, file), u"r") as f:
+            p2 = f.read().replace(u"python3", u"python")
+        with open(os.path.join(_bin_dir, file), u"w") as f:
+            p2 = f.write(p2)
 
 class DuplicityTestCase(unittest.TestCase):
 
@@ -83,21 +102,31 @@ class DuplicityTestCase(unittest.TestCase):
         self.set_config(u'print_statistics', 0)
         backend.import_backends()
 
-        # Have all file references in tests relative to our testing dir
-        os.chdir(_testing_dir)
+        self.remove_testfiles()
+        self.unpack_testfiles()
+
+        # Have all file references in tests relative to our runtest dir
+        os.chdir(_runtest_dir)
 
     def tearDown(self):
         for key in self.savedEnviron:
             self._update_env(key, self.savedEnviron[key])
+
         for key in self.savedConfig:
             setattr(config, key, self.savedConfig[key])
-        assert not os.system(u"rm -rf /tmp/testfiles")
+
+        self.remove_testfiles()
+
+        os.chdir(_testing_dir)
         super(DuplicityTestCase, self).tearDown()
 
     def unpack_testfiles(self):
-        assert not os.system(u"rm -rf /tmp/testfiles")
-        assert not os.system(u"tar xzf testfiles.tar.gz -C /tmp > /dev/null 2>&1")
-        assert not os.system(u"mkdir /tmp/testfiles/output /tmp/testfiles/cache")
+        assert not os.system(u"rm -rf {0}/testfiles".format(_runtest_dir))
+        assert not os.system(u"tar xzf {0}/testfiles.tar.gz -C {1} > /dev/null 2>&1".format(_testing_dir, _runtest_dir))
+        assert not os.system(u"mkdir {0}/testfiles/output {0}/testfiles/cache".format(_runtest_dir))
+
+    def remove_testfiles(self):
+        assert not os.system(u"rm -rf {0}/testfiles".format(_runtest_dir))
 
     def _update_env(self, key, value):
         if value is not None:

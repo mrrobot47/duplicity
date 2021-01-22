@@ -4,11 +4,18 @@ from __future__ import print_function
 from future import standard_library
 standard_library.install_aliases()
 
+import os
 import subprocess
 import sys
 
+from testing import _runtest_dir
+
+our_path = u'{0}/testfiles'.format(_runtest_dir)
+nodes = [n for n in our_path.split(os.path.sep) if n]
+tahoe_path = nodes[0] + u':' + os.path.sep.join(nodes[1:])
+
 cmd = []
 for arg in sys.argv[1:]:
-    cmd.append(arg.replace('/tmp/testfiles:', '/tmp/testfiles/'))
+    cmd.append(arg.replace(tahoe_path, our_path))
 
 sys.exit(subprocess.call(cmd))

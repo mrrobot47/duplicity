@@ -32,6 +32,7 @@ from builtins import object
 from builtins import str
 
 import errno
+import json
 import os
 import string
 import sys
@@ -265,3 +266,38 @@ def which(program):
                 return exe_file
 
     return None
+
+
+def start_debugger(remote=False):
+    if (not os.getenv(u'DEBUG_RUNNING', None) and (u'--pydevd' in sys.argv or os.getenv(u'PYDEVD', None))):
+        if remote:
+            # modify this for your configuration.
+            # client = base path in machine that Liclipse is on
+            # server = base path in machine that duplicity is on
+            client = u'/Users/ken/workspace/duplicity-testfiles'
+            server = u'/home/ken/workspace/duplicity-testfiles'
+
+            # relative paths under duplicity root
+            duppaths = [
+                u'',
+                u'bin',
+                u'duplicity',
+                u'duplicity/backends',
+                u'testing',
+                u'testing/functional',
+                u'testing/unit',
+            ]
+            pathlist = [(os.path.normpath(os.path.join(client, p)),
+                         os.path.normpath(os.path.join(server, p))) for p in duppaths]
+            os.environ[u'PATHS_FROM_ECLIPSE_TO_PYTHON'] = json.dumps(pathlist)
+
+        import pydevd  # pylint: disable=import-error
+        pydevd.settrace(u'dione.local', port=5678, stdoutToServer=True, stderrToServer=True)
+
+        # In a dev environment the path is screwed so fix it.
+        base = sys.path.pop(0)
+        base = base.split(os.path.sep)[:-1]
+        base = os.path.sep.join(base)
+        sys.path.insert(0, base)
+
+        os.environ[u'DEBUG_RUNNING'] = u'yes'

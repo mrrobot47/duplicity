@@ -56,39 +56,6 @@ elif sys.version_info.major == 2:
     sys.stderr = codecs.getwriter(u'utf-8')(sys.stderr, u'replace')
 
 
-if u'--pydevd' in sys.argv or os.getenv(u'PYDEVD', None):
-    # modify this for your configuration.
-    # client = base path in machine that Liclipse is on
-    # server = base path in machine that duplicity is on
-    client = u'/Users/ken/workspace/duplicity-testfilestfiles'
-    server = u'/home/ken/workduplicity-testfilesty-testfiles'
-
-    # relative paths under duplicity root
-    duppaths = [
-        u'',
-        u'bin',
-        u'duplicity',
-        u'duplicity/backends',
-        u'testing',
-        u'testing/functional',
-        u'testing/unit',
-    ]
-    pathlist = [(os.path.normpath(os.path.join(client, p)),
-                 os.path.normpath(os.path.join(server, p))) for p in duppaths]
-    os.environ[u'PATHS_FROM_ECLIPSE_TO_PYTHON'] = json.dumps(pathlist)
-
-    import pydevd  # pylint: disable=import-error
-    pydevd.settrace(u'dione.local', port=5678, stdoutToServer=True, stderrToServer=True)
-
-    # In a dev environment the path is screwed so fix it.
-    base = sys.path.pop(0)
-    base = base.split(os.path.sep)[:-1]
-    base = os.path.sep.join(base)
-    sys.path.insert(0, base)
-
-log.setup()
-
-
 def with_tempdir(fn):
     u"""
     Execute function and guarantee cleanup of tempdir is called
@@ -108,12 +75,15 @@ def with_tempdir(fn):
 if __name__ == u"__main__":
     try:
 
+        util.start_debugger()
+
         #         import cProfile
         #         import pstats
         #         import StringIO
         #         prof = cProfile.Profile()
         #         prof.enable(subcalls=True, builtins=True)
 
+        log.setup()
         with_tempdir(main)
 
         #         prof.disable()
