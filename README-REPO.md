@@ -7,10 +7,9 @@ By the numbers:
    - `git clone git@gitlab.com:duplicity/duplicity.git $DUP_ROOT` or
    - `git clone https://gitlab.com/duplicity/duplicity.git $DUP_ROOT`
 2. Build the extension module
-   - `cd $DUP_ROOT/duplicity`
-   - `setup.py build_ext --inplace`
-   - `cd ..`
-5. Run `PYTHONPATH=$DUP_ROOT bin/duplicity -V`. You will see
+   - `cd $DUP_ROOT`
+   - `setup.py build_ext`
+3. Run `PYTHONPATH=$DUP_ROOT bin/duplicity -V`. You will see
    "duplicity $version" instead of the normal version number.
    Versioning comes during the release.
 
