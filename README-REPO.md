@@ -8,7 +8,7 @@ By the numbers:
    - `git clone https://gitlab.com/duplicity/duplicity.git $DUP_ROOT`
 2. Build the extension module
    - `cd $DUP_ROOT/duplicity`
-   - `setup.py build_ext`
+   - `setup.py build_ext --inplace`
    - `cd ..`
 5. Run `PYTHONPATH=$DUP_ROOT bin/duplicity -V`. You will see
    "duplicity $version" instead of the normal version number.
