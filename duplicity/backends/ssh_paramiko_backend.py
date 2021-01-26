@@ -206,7 +206,7 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
                       config.ssh_options)
         if (m is not None):
             keyfilename = m.group(3) if m.group(3) else m.group(1)
-            self.config[u'identityfile'] = keyfilename
+            self.config[u'identityfile'] = keyfilename.strip(u'\'\"')
         # ensure ~ is expanded and identity exists in dictionary
         if u'identityfile' in self.config:
             if not isinstance(self.config[u'identityfile'], list):
