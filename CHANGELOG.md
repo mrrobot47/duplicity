@@ -2,6 +2,51 @@
 
 ### Other
 
+* Fixes #33, remove quotes from identity filename option. [Kenneth Loafman]
+
+* Fix to correctly build \_librsync.so. [Kenneth Loafman]
+
+* Fix to add --inplace option to build\_ext. [Kenneth Loafman]
+
+* Rename pylintrc to .pylintrc. [Kenneth Loafman]
+
+* Merge branch 'fix-prefix-affinity-registration' into 'master' [Kenneth Loafman]
+
+* Multibackend: fix indentation error that was preventing from registering more than one affinity prefix per backend. [KheOps]
+
+* Move testfiles dir to a temp location. [Kenneth Loafman]
+
+* Merge remote-tracking branch 'alpha/testfiles' [Kenneth Loafman]
+
+* Update .gitlab-ci.yml to need code test to pass. [Kenneth Loafman]
+
+* Remove basepython in code and coverage tests. [Kenneth Loafman]
+
+* Add report.xml. [Kenneth Loafman]
+
+* Bulk replace testfiles with /tmp/testfiles. [Kenneth Loafman]
+
+* Skip unicode tests that fail on non-Linux systems like macOS. [Kenneth Loafman]
+
+* Change version for LP. [Kenneth Loafman]
+
+
+## rel.0.8.18 (2021-01-09)
+
+### Other
+
+* Merge branch 'onedrive-token' into 'master' [Kenneth Loafman]
+
+* Onedrive: Support using an external client id / refresh token. [Michael Terry]
+
+* Update .gitlab-ci.yml to need code test to pass. [Kenneth Loafman]
+
+* Merge branch 'master' of git@gitlab.com:duplicity/duplicity.git. [Kenneth Loafman]
+
+* Fix issue #26 Backend b2 backblaze fails with nameprefix restrictions. [Kenneth Loafman]
+
+* Fix issue #29 Backend b2 backblaze fails with nameprefix restrictions. [Kenneth Loafman]
+
 * Fix unadorned strings. [Kenneth Loafman]
 
 * Merge branch 'Rufflewind-master-patch-11811' into 'master' [Kenneth Loafman]
