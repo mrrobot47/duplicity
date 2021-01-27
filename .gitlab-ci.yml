@@ -36,8 +36,6 @@ default:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
         - export LC_ALL=C.UTF-8
-        # Installing some pre-requisites and some
-        # packages needed for testing duplicity
         - apt-get update
         - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 python-dev python-pip python3-dev
@@ -78,6 +76,7 @@ py27_ub16-04:
 
 py35_ub16-04:
     stage: test
+    image: ubuntu:16.04
     before_script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
