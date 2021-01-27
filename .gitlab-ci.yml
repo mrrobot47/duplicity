@@ -69,14 +69,25 @@ py27_ub16-04:
         - python -m pip install --upgrade pip
         - python -m pip install --requirement requirements.txt
     script:
+        - apt-get install -y python2.7 python2.7-dev
         - tox -e py27
     artifacts:
         reports:
             junit: report.xml
     needs: ["code_ub18-04"]
 
-py35_ub18-04:
+py35_ub16-04:
     stage: test
+    before_script:
+        # Set locale to prevent UTF-8 errors
+        - export LANG=C.UTF-8
+        - export LC_ALL=C.UTF-8
+        - apt-get update
+        - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev
+          libffi-dev libssl-dev openssl par2 python-dev python-pip python3-dev
+          python3-pip rdiff tzdata
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install --requirement requirements.txt
     script:
         - apt-get install -y python3.5 python3.5-dev
         - tox -e py35
