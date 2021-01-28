@@ -33,7 +33,7 @@ export PYTHONPATH='/usr/local/lib/python.x/site-packages/'
  * Boto 2.0 or later for single-processing S3 or GCS access (default)
  * Boto 2.1.1 or later for multi-processing S3 access
  * Boto 2.7.0 or later for Glacier S3 access
- * Boto3 0.3.1 or later
+ * Boto3 1.15 or later for S3
 
 If you install from the source package, you will also need:
 
