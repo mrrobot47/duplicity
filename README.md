@@ -54,4 +54,4 @@ For more information see the duplicity home page at:
 
 or post to the mailing list at
 
-  http://mail.nongnu.org/mailman/listinfo/duplicity-talk/
+  https://lists.nongnu.org/mailman/listinfo/duplicity-talk
