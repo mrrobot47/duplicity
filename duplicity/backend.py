@@ -313,9 +313,9 @@ class ParsedUrl(object):
             if self.scheme in [u'rclone']:
                 pass
             # old style rsync://host::[/]dest, are still valid, though they contain no port
-            elif not (self.scheme in [u'rsync'] and re.search(u'::[^:]*$', self.url_string)):
+            elif not (u'rsync' in self.scheme and re.search(u'::[^:]*$', self.url_string)):
                 raise InvalidBackendURL(u"Syntax error (port) in: %s A%s B%s C%s" %
-                                        (url_string, (self.scheme in [u'rsync']),
+                                        (url_string, (u'rsync' in self.scheme),
                                          re.search(u'::[^:]+$', self.netloc), self.netloc))
 
         # Our URL system uses two slashes more than urlparse's does when using
