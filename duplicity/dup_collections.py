@@ -905,7 +905,7 @@ class CollectionsStatus(object):
                 time_set_pairs.append((set.time, set))
             else:
                 time_set_pairs.append((set.end_time, set))
-        time_set_pairs.sort()
+        time_set_pairs.sort(key=lambda x: x[0])
         return ([p[1] for p in time_set_pairs], incomplete_sets)
 
     def get_signature_chains(self, local, filelist=None):
