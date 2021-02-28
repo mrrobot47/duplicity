@@ -73,7 +73,7 @@ py35_ub16-04:
         - apt-get install -y build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 rdiff tzdata
           python3-pip python3.5 python3.5-dev
-        - python3 -m pip install --upgrade pip
+        - python3 -m pip install --upgrade pip==20.3.4
         - python3 -m pip install --requirement requirements.txt
     script:
         - apt-get install -y python3.5 python3.5-dev
