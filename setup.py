@@ -244,47 +244,6 @@ class InstallDataCommand(install_data):
                     VersionedCopy(path, path)
 
 
-class BuildScriptsCommand(build_scripts):
-    u'''Build but don't touch my shebang!'''
-
-    def run(self):
-        u"""
-        Copy, chmod each script listed in 'self.scripts'
-        essentially this is the stripped
-         distutils.command.build_scripts.copy_scripts()
-        routine
-        """
-        from stat import ST_MODE
-        from distutils.dep_util import newer
-        from distutils import log
-
-        self.mkpath(self.build_dir)
-        outfiles = []
-        for script in self.scripts:
-            outfile = os.path.join(self.build_dir, os.path.basename(script))
-            outfiles.append(outfile)
-
-            if not self.force and not newer(script, outfile):
-                log.debug(u"not copying %s (up-to-date)", script)
-                continue
-
-            log.info(u"copying and NOT adjusting %s -> %s", script,
-                     self.build_dir)
-            self.copy_file(script, outfile)
-
-        if os.name == u'posix':
-            for file in outfiles:
-                if self.dry_run:
-                    log.info(u"changing mode of %s", file)
-                else:
-                    oldmode = os.stat(file)[ST_MODE] & 0o7777
-                    newmode = (oldmode | 0o555) & 0o7777
-                    if newmode != oldmode:
-                        log.info(u"changing mode of %s from %o to %o",
-                                 file, oldmode, newmode)
-                        os.chmod(file, newmode)
-
-
 with open(u"README.md") as fh:
     long_description = fh.read()
 
@@ -339,7 +298,6 @@ setup(name=u"duplicity",
         ],
     test_suite=u"testing",
     cmdclass={
-        u"build_scripts": BuildScriptsCommand,
         u"install": InstallCommand,
         u"install_data": InstallDataCommand,
         u"sdist": SdistCommand,
