@@ -52,6 +52,37 @@ code_ub18-04:
             junit: report.xml
     needs: []
 
+py27_ub18-04:
+    stage: test
+    script:
+        - apt-get install -y python2.7 python2.7-dev
+        - tox -e py27
+    artifacts:
+        reports:
+            junit: report.xml
+    needs: ["code_ub18-04"]
+
+py35_ub16-04:
+    stage: test
+    image: ubuntu:16.04
+    before_script:
+        # Set locale to prevent UTF-8 errors
+        - export LANG=C.UTF-8
+        - export LC_ALL=C.UTF-8
+        - apt-get update
+        - apt-get install -y build-essential git intltool lftp librsync-dev
+          libffi-dev libssl-dev openssl par2 rdiff tzdata
+          python3-pip python3.5 python3.5-dev
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install --requirement requirements.txt
+    script:
+        - apt-get install -y python3.5 python3.5-dev
+        - tox -e py35
+    artifacts:
+        reports:
+            junit: report.xml
+    needs: ["code_ub18-04"]
+
 py36_ub18-04:
     stage: test
     script:
