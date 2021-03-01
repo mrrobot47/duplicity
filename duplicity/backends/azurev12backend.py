@@ -64,7 +64,8 @@ Exception: %s""" % str(e))
         if config.azure_max_block_size:
             kwargs[u'max_block_size'] = config.azure_max_single_put_size
 
-        self.blob_service = BlobServiceClient.from_connection_string(os.environ[u'AZURE_CONNECTION_STRING'], None, **kwargs)
+        conn_str = os.environ[u'AZURE_CONNECTION_STRING']
+        self.blob_service = BlobServiceClient.from_connection_string(conn_str, None, **kwargs)
         self._get_or_create_container()
 
     def _get_or_create_container(self):
@@ -87,7 +88,7 @@ Exception: %s""" % str(e))
         if config.azure_max_connections:
             kwargs[u'max_concurrency'] = config.azure_max_connections
 
-        with source_path.open("rb") as data:
+        with source_path.open(u"rb") as data:
             self.container.upload_blob(remote_filename, data, **kwargs)
 
         self._set_tier(remote_filename)
@@ -99,7 +100,7 @@ Exception: %s""" % str(e))
     def _get(self, remote_filename, local_path):
         # https://docs.microsoft.com/en-us/python/api/azure-storage-blob/azure.storage.blob.containerclient?view=azure-python#download-blob-blob--offset-none--length-none----kwargs-
         blob = self.container.download_blob(remote_filename)
-        with local_path.open("wb") as download_file:
+        with local_path.open(u"wb") as download_file:
             download_file.write(blob.readall())
 
     def _list(self):
