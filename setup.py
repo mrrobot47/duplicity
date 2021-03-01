@@ -294,7 +294,6 @@ setup(name=u"duplicity",
         u"mock",
         u"pexpect",
         u"pytest",
-        u"pytest-runner",
         ],
     test_suite=u"testing",
     cmdclass={
