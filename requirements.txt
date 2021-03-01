@@ -21,6 +21,7 @@ pydevd
 pylint
 pytest
 pytest-cov
+pytest-runner
 sphinx
 tox
 
