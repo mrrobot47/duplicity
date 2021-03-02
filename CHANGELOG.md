@@ -1,6 +1,60 @@
 ## (unreleased)
 
+### Changes
+
+* Remove installs common between before\_script: and script: [Kenneth Loafman]
+
+* Remove installs common between before\_script: and script: [Kenneth Loafman]
+
+### Fix
+
+* Fixes #41 - par2+rsync (non-ssh) fails. [Kenneth Loafman]
+
 ### Other
+
+* Merge branch 'azurev12' into 'master' [Kenneth Loafman]
+
+* Replaced original azure implementation. [Erwin Bovendeur]
+
+* Fixed code smells. [Erwin Bovendeur]
+
+* Azure v12 support. [Erwin Bovendeur]
+
+* Revert "fix:pkg:Remove requirement for python3-pytest-runner.  Not used." [Kenneth Loafman]
+
+* Merge branch 'feature/list-required-volumes-on-restore-dry-run' into 'master' [Kenneth Loafman]
+
+* List required volumes when called with 'restore --dry-run' [Matthias Blankertz]
+
+* Merge branch 'swrmr-master-patch-23969' into 'master' [Kenneth Loafman]
+
+* Fix sorting of BackupSets by avoiding direct comparison. [Stefan Wehrmeyer]
+
+* Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+* Update mailing list link. [Chris Coutinho]
+
+* Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
+
+* Fixes #16 - Move from boto to boto3. [Kenneth Loafman]
+
+* Py27 EOL 01/2020, py35 EOL 01/2021, remove tests. [Kenneth Loafman]
+
+* Remove 2to3 from ub16 builds. [Kenneth Loafman]
+
+* Move py35 back to ub16, try 2. [Kenneth Loafman]
+
+* Move py35 back to ub16. [Kenneth Loafman]
+
+* Move py27 tests to ub16 and py35 tests to ub18. [Kenneth Loafman]
+
+* Fixes #16 - Move from boto to boto3. [Kenneth Loafman]
+
+* Py27 EOL 01/2020, py35 EOL 01/2021, remove tests. [Kenneth Loafman]
+
+* Move py27 tests to ub16 and py35 tests to ub18. [Kenneth Loafman]
 
 * Fixes #33, remove quotes from identity filename option. [Kenneth Loafman]
 
