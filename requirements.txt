@@ -28,15 +28,15 @@ tox
 
 ##### backend libraries #####
 
-# azure-mgmt-storage
-# b2sdk
-# boto
-# boto3
-# dropbox
-# gdata
-# jottalib
-# mediafire
-# pydrive
-# pyrax
-# python-swiftclient
-# requests_oauthlib
+azure-storage
+b2sdk
+boto
+boto3
+dropbox
+gdata
+jottalib
+mediafire
+pydrive
+pyrax
+python-swiftclient
+requests_oauthlib
