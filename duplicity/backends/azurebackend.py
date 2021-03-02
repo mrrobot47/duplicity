@@ -40,78 +40,41 @@ class AzureBackend(duplicity.backend.Backend):
         try:
             import azure
             import azure.storage
-            if hasattr(azure.storage, u'BlobService'):
-                # v0.11.1 and below
-                from azure.storage import BlobService
-                self.AzureMissingResourceError = azure.WindowsAzureMissingResourceError
-                self.AzureConflictError = azure.WindowsAzureConflictError
-            else:
-                # v1.0.0 and above
-                import azure.storage.blob
-                if hasattr(azure.storage.blob, u'BlobService'):
-                    from azure.storage.blob import BlobService
-                else:
-                    from azure.storage.blob.blockblobservice import BlockBlobService as BlobService
-                self.AzureMissingResourceError = azure.common.AzureMissingResourceHttpError
-                self.AzureConflictError = azure.common.AzureConflictHttpError
+            import azure.storage.blob
+            from azure.storage.blob import BlobServiceClient
         except ImportError as e:
             raise BackendException(u"""\
 Azure backend requires Microsoft Azure Storage SDK for Python (https://pypi.python.org/pypi/azure-storage/).
 Exception: %s""" % str(e))
 
         # TODO: validate container name
-        self.container = parsed_url.path.lstrip(u'/')
+        self.container_name = parsed_url.path.lstrip(u'/')
 
-        if u'AZURE_ACCOUNT_NAME' not in os.environ:
-            raise BackendException(u'AZURE_ACCOUNT_NAME environment variable not set.')
+        if u'AZURE_CONNECTION_STRING' not in os.environ:
+            raise BackendException(u'AZURE_CONNECTION_STRING environment variable not set.')
 
-        if u'AZURE_ACCOUNT_KEY' in os.environ:
-            if u'AZURE_ENDPOINT_SUFFIX' in os.environ:
-                self.blob_service = BlobService(account_name=os.environ[u'AZURE_ACCOUNT_NAME'],
-                                                account_key=os.environ[u'AZURE_ACCOUNT_KEY'],
-                                                endpoint_suffix=os.environ[u'AZURE_ENDPOINT_SUFFIX'])
-            else:
-                self.blob_service = BlobService(account_name=os.environ[u'AZURE_ACCOUNT_NAME'],
-                                                account_key=os.environ[u'AZURE_ACCOUNT_KEY'])
-            self._create_container()
-        elif u'AZURE_SHARED_ACCESS_SIGNATURE' in os.environ:
-            if u'AZURE_ENDPOINT_SUFFIX' in os.environ:
-                self.blob_service = BlobService(account_name=os.environ[u'AZURE_ACCOUNT_NAME'],
-                                                sas_token=os.environ[u'AZURE_SHARED_ACCESS_SIGNATURE'],
-                                                endpoint_suffix=os.environ[u'AZURE_ENDPOINT_SUFFIX'])
-            else:
-                self.blob_service = BlobService(account_name=os.environ[u'AZURE_ACCOUNT_NAME'],
-                                                sas_token=os.environ[u'AZURE_SHARED_ACCESS_SIGNATURE'])
-        else:
-            raise BackendException(
-                u'Neither AZURE_ACCOUNT_KEY nor AZURE_SHARED_ACCESS_SIGNATURE environment variable not set.')
+        kwargs = {}
 
         if config.timeout:
-            self.blob_service.SOCKET_TIMEOUT = config.timeout
+            kwargs[u'timeout'] = config.timeout
 
         if config.azure_max_single_put_size:
-            # check if we use azure-storage>=0.30.0
-            try:
-                _ = self.blob_service.MAX_SINGLE_PUT_SIZE
-                self.blob_service.MAX_SINGLE_PUT_SIZE = config.azure_max_single_put_size
-            # fallback for azure-storage<0.30.0
-            except AttributeError:
-                self.blob_service._BLOB_MAX_DATA_SIZE = config.azure_max_single_put_size
+            kwargs[u'max_single_put_size'] = config.azure_max_single_put_size
 
         if config.azure_max_block_size:
-            # check if we use azure-storage>=0.30.0
-            try:
-                _ = self.blob_service.MAX_BLOCK_SIZE
-                self.blob_service.MAX_BLOCK_SIZE = config.azure_max_block_size
-            # fallback for azure-storage<0.30.0
-            except AttributeError:
-                self.blob_service._BLOB_MAX_CHUNK_DATA_SIZE = config.azure_max_block_size
+            kwargs[u'max_block_size'] = config.azure_max_single_put_size
 
-    def _create_container(self):
+        conn_str = os.environ[u'AZURE_CONNECTION_STRING']
+        self.blob_service = BlobServiceClient.from_connection_string(conn_str, None, **kwargs)
+        self._get_or_create_container()
+
+    def _get_or_create_container(self):
+        from azure.core.exceptions import ResourceExistsError
+
         try:
-            self.blob_service.create_container(self.container, fail_on_exist=True)
-        except self.AzureConflictError:
-            # Indicates that the resource could not be created because it already exists.
+            self.container = self.blob_service.get_container_client(self.container_name)
+            self.container.create_container()
+        except ResourceExistsError:
             pass
         except Exception as e:
             log.FatalError(u"Could not create Azure container: %s"
@@ -121,56 +84,45 @@ Exception: %s""" % str(e))
     def _put(self, source_path, remote_filename):
         remote_filename = fsdecode(remote_filename)
         kwargs = {}
-        if config.azure_max_connections:
-            kwargs[u'max_connections'] = config.azure_max_connections
 
-        # https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#upload-a-blob-into-a-container
-        try:
-            self.blob_service.create_blob_from_path(self.container, remote_filename, source_path.name, **kwargs)
-        except AttributeError:  # Old versions use a different method name
-            self.blob_service.put_block_blob_from_path(self.container, remote_filename, source_path.name, **kwargs)
+        if config.azure_max_connections:
+            kwargs[u'max_concurrency'] = config.azure_max_connections
+
+        with source_path.open(u"rb") as data:
+            self.container.upload_blob(remote_filename, data, **kwargs)
 
         self._set_tier(remote_filename)
 
     def _set_tier(self, remote_filename):
         if config.azure_blob_tier is not None:
-            try:
-                self.blob_service.set_standard_blob_tier(self.container, remote_filename, config.azure_blob_tier)
-            except AttributeError:  # might not be available in old API
-                pass
+            self.container.set_standard_blob_tier_blobs(config.azure_blob_tier, remote_filename)
 
     def _get(self, remote_filename, local_path):
-        # https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#download-blobs
-        self.blob_service.get_blob_to_path(self.container, fsdecode(remote_filename), local_path.name)
+        # https://docs.microsoft.com/en-us/python/api/azure-storage-blob/azure.storage.blob.containerclient?view=azure-python#download-blob-blob--offset-none--length-none----kwargs-
+        blob = self.container.download_blob(remote_filename)
+        with local_path.open(u"wb") as download_file:
+            download_file.write(blob.readall())
 
     def _list(self):
-        # https://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#list-the-blobs-in-a-container
+        # https://docs.microsoft.com/en-us/python/api/azure-storage-blob/azure.storage.blob.containerclient?view=azure-python#list-blobs-name-starts-with-none--include-none----kwargs-
         blobs = []
-        marker = None
-        while True:
-            batch = self.blob_service.list_blobs(self.container, marker=marker)
-            blobs.extend(batch)
-            if not batch.next_marker:
-                break
-            marker = batch.next_marker
+        blob_list = self.container.list_blobs()
+        for blob in blob_list:
+            blobs.append(blob)
+
         return [blob.name for blob in blobs]
 
     def _delete(self, filename):
-        # http://azure.microsoft.com/en-us/documentation/articles/storage-python-how-to-use-blob-storage/#delete-blobs
-        self.blob_service.delete_blob(self.container, fsdecode(filename))
+        # https://docs.microsoft.com/en-us/python/api/azure-storage-blob/azure.storage.blob.containerclient?view=azure-python#delete-blob-blob--delete-snapshots-none----kwargs-
+        self.container.delete_blob(fsdecode(filename))
 
     def _query(self, filename):
-        prop = self.blob_service.get_blob_properties(self.container, fsdecode(filename))
-        try:
-            info = {u'size': int(prop.properties.content_length)}
-        except AttributeError:
-            # old versions directly returned the properties
-            info = {u'size': int(prop[u'content-length'])}
-        return info
+        client = self.container.get_blob_client(fsdecode(filename))
+        prop = client.get_blob_properties()
+        return {u'size': int(prop.size)}
 
     def _error_code(self, operation, e):  # pylint: disable=unused-argument
-        if isinstance(e, self.AzureMissingResourceError):
-            return log.ErrorCode.backend_not_found
+        return log.ErrorCode.backend_not_found
 
 
 duplicity.backend.register_backend(u'azure', AzureBackend)
