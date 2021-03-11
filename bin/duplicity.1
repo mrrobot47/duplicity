@@ -1418,6 +1418,16 @@ See also
 below.
 .RE
 .PP
+.BR "gdrive"
+.PP
+.RS
+gdrive://<service account' email address>@developer.gserviceaccount.com/some_dir
+.PP
+See also
+.B "A NOTE ON GDRIVE BACKEND"
+below.
+.RE
+.PP
 .BR "multi"
 .PP
 .RS
@@ -2113,6 +2123,46 @@ visit an URL in your browser to grant access to your drive. Once
 granted, you will receive a verification code to paste back into
 Duplicity. The credentials are then cached in the file references above
 for future use.
+
+.SH A NOTE ON GDRIVE BACKEND
+GDrive: is a rewritten PyDrive: backend with less dependencies, and a
+simpler setup - it uses the JSON keys downloaded directly from Google
+Cloud Console.
+
+There are two ways to use GDrive: with a regular account or with a
+"service account". With a service account, a separate account is
+created, that is only accessible with Google APIs and not a web login.
+With a regular account, you can store backups in your normal Google
+Drive.
+
+To use a service account, go to the Google developers console at
+https://console.developers.google.com. Create a project, and make sure
+Drive API is enabled for the project. In the "Credentials" section,
+click "Create credentials", then select Service Account with JSON key.
+
+The GOOGLE_SERVICE_JSON_FILE environment variable needs to contain the
+path to the JSON file on duplicity invocation.
+
+The alternative is to use a regular account. To do this, start as
+above, but when creating a new Client ID, select "Create OAuth client
+ID", with application type of "Desktop app". Download the
+client_secret.json file for the new client, and set the
+GOOGLE_CLIENT_SECRET_JSON_FILE environment variable to the path to
+this file, and GOOGLE_CREDENTIALS_FILE to a path to a file where
+duplicity will keep the authentication token - this location must be
+writable.
+
+During the first run, you will be prompted to visit an URL in your
+browser to grant access to your drive. Once granted, you will receive
+a verification code to paste back into Duplicity. The credentials are
+then cached in the file references above for future use.
+
+As a sanity check, GDrive checks the host and username from the URL
+against the JSON key, and refuses to proceed if the addresses do not
+match. Either the email (for the service accounts) or Client ID (for
+regular OAuth accounts) must be present in the URL. See
+.B URL FORMAT
+above.
 
 .SH A NOTE ON RCLONE BACKEND
 Rclone is a powerful command line program to sync files and directories to and from various cloud storage providers.
