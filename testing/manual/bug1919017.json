@@ -1,0 +1,10 @@
+[
+    {
+        "description": "first drive",
+        "url": "file:///tmp/first_drive"
+    },
+    {
+        "description": "second drive",
+        "url": "file:///tmp/second_drive"
+    }
+]

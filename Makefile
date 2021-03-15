@@ -1,12 +1,12 @@
 .PHONY: clean docs
 
 clean:
-	for i in '*.pyc' '*.pyo' '*~' '*.o' '*.so' '*.dll' '*.pyd' '*.gcov' '*.gcda' '*.gcno' '*.orig' '*.tmp' 'testdb*' 'testextension.sqlext' ; do \
-		find . -type f -name "$$i" -print0 | xargs -0t -r rm -f ; \
+	for i in '.tox' 'build' 'work' 'megatestresults' '.eggs' '*.egg-info' '__pycache__'; do \
+		find . -type d -name "$$i" | xargs -t -r rm -rf ; \
 	done
 
-	for i in 'build' 'work' 'megatestresults' '.eggs' '*.egg-info' '__pycache__' '.tox'; do \
-		find . -type d -name "$$i" -print0 | xargs -0t -r rm -rf ; \
+	for i in '*.pyc' '*.pyo' '*~' '*.o' '*.so' '*.dll' '*.pyd' '*.gcov' '*.gcda' '*.gcno' '*.orig' '*.tmp' 'testdb*' 'testextension.sqlext' ; do \
+		find . -type f -name "$$i" | xargs -t -r rm -f ; \
 	done
 
 docs:
