@@ -1564,7 +1564,12 @@ def do_backup(action):
                                                   action).set_values()
 
     # check archive synch with remote, fix if needed
-    if action not in [u"collection-status", u"replicate"]:
+    if action not in [u"collection-status",
+                      u"remove-all-but-n-full",
+                      u"remove-all-inc-of-but-n-full",
+                      u"remove-old",
+                      u"replicate",
+                      ]:
         sync_archive(col_stats)
 
     while True:
