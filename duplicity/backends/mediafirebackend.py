@@ -111,7 +111,7 @@ Exception: %s""" % str(e))
     def _delete(self, filename):
         u"""Delete single file"""
         uri = self._build_uri(filename)
-        self.client.delete_file(uri)
+        self.client.delete_file(uri, purge=config.mf_purge)
 
     def _delete_list(self, filename_list):
         u"""Delete list of files"""

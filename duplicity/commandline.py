@@ -650,6 +650,9 @@ def parse_cmdline_options(arglist):
 
     parser.add_option(u"-V", u"--version", action=u"callback", callback=print_ver)
 
+    # option for mediafire to purge files on delete instead of sending to trash
+    parser.add_option(u"--mf-purge", action=u"store_true")
+
     # volume size
     # TRANSL: Used in usage help to represent a desired number of
     # something. Example:
@@ -1002,12 +1005,14 @@ def usage():
   full <%(source_dir)s> <%(target_url)s>
   incr <%(source_dir)s> <%(target_url)s>
   list-current-files <%(target_url)s>
-  restore <%(source_url)s> <%(target_dir)s>
-  remove-older-than <%(time)s> <%(target_url)s>
   remove-all-but-n-full <%(count)s> <%(target_url)s>
   remove-all-inc-of-but-n-full <%(count)s> <%(target_url)s>
+  remove-older-than <%(time)s> <%(target_url)s>
+  replicate <%(source_url)s> <%(target_url)s>
+  restore <%(source_url)s> <%(target_dir)s>
   verify <%(target_url)s> <%(source_dir)s>
-  replicate <%(source_url)s> <%(target_url)s>""" % trans
+
+""" % trans
 
     return msg
 
