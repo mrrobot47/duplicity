@@ -43,7 +43,7 @@ class SXBackend(duplicity.backend.Backend):
 
     def _list(self):
         # Do a long listing to avoid connection reset
-        commandline = u"sxls {0}".format(self.url_string)
+        commandline = u"sxls {0}/".format(self.url_string)
         _, l, _ = self.subprocess_popen(commandline)
         # Look for our files as the last element of a long list line
         return [util.fsencode(x[x.rindex(u'/') + 1:].split()[-1]) for x in l.split(u'\n')

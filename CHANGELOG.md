@@ -1,5 +1,9 @@
 ## (unreleased)
 
+### New
+
+* Merge branch 'google-drive-v3' into 'master' [Kenneth Loafman]
+
 ### Changes
 
 * Remove installs common between before\_script: and script: [Kenneth Loafman]
@@ -8,9 +12,15 @@
 
 ### Fix
 
+* Fixes bug 1918981 - option to skip trash on delete on mediafire. [Kenneth Loafman]
+
+* Fix bug 1919017 - MultiBackend reports failure on file deletion. [Kenneth Loafman]
+
 * Fixes #41 - par2+rsync (non-ssh) fails. [Kenneth Loafman]
 
 ### Other
+
+* Add a new Google Drive backend (gdrive:) [Jindřich Makovička]
 
 * Merge branch 'azurev12' into 'master' [Kenneth Loafman]
 
@@ -82,8 +92,6 @@
 
 * Skip unicode tests that fail on non-Linux systems like macOS. [Kenneth Loafman]
 
-* Change version for LP. [Kenneth Loafman]
-
 
 ## rel.0.8.18 (2021-01-09)
 
@@ -120,10 +128,6 @@
 * Merge branch 'master' into 'master' [Kenneth Loafman]
 
 * Improve. [Gwyn Ciesla]
-
-* Change version for LP. [Kenneth Loafman]
-
-* Change version for LP. [Kenneth Loafman]
 
 * Improve patch for Python 3.10. [Gwyn Ciesla]
 
@@ -205,8 +209,6 @@
 * Fix bug #1893481 again for Python2.  Missed include. [Kenneth Loafman]
 
 * Fix bug #1893481 Error when logging improperly encoded filenames. [Kenneth Loafman]
-
-* Change version for LP. [Kenneth Loafman]
 
 
 ## rel.0.8.16 (2020-09-29)
