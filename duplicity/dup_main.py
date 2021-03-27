@@ -174,14 +174,14 @@ def get_passphrase(n, action, for_signing=False):
                     if use_cache and config.gpg_profile.passphrase:
                         pass1 = config.gpg_profile.passphrase
                     else:
-                        pass1 = getpass_safe(_(u"GnuPG passphrase:") + u" ")
+                        pass1 = getpass_safe(_(u"GnuPG passphrase for decryption:") + u" ")
 
             if n == 1:
                 pass2 = pass1
             elif for_signing:
                 pass2 = getpass_safe(_(u"Retype passphrase for signing key to confirm: "))
             else:
-                pass2 = getpass_safe(_(u"Retype passphrase to confirm: "))
+                pass2 = getpass_safe(_(u"Retype passphrase for decryption to confirm: "))
 
             if not pass1 == pass2:
                 log.Log(_(u"First and second passphrases do not match!  Please try again."),
