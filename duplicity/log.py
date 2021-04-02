@@ -68,7 +68,7 @@ def LevelName(level):
         return u"ERROR"
 
 
-def Log(s, verb_level, code=1, extra=None, force_print=False):
+def Log(s, verb_level, code=1, extra=None, force_print=False, transfer_progress=False):
     u"""Write s to stderr if verbosity level low enough"""
     global _logger
     if extra:
@@ -91,7 +91,8 @@ def Log(s, verb_level, code=1, extra=None, force_print=False):
 
     _logger.log(DupToLoggerLevel(verb_level), s,
                 extra={u'levelName': LevelName(verb_level),
-                       u'controlLine': controlLine})
+                       u'controlLine': controlLine,
+                       u'transferProgress': transfer_progress})
 
     if force_print:
         _logger.setLevel(initial_level)
@@ -215,7 +216,7 @@ def TransferProgress(progress, eta, changed_bytes, elapsed, speed, stalled):
                                                        )
 
     controlLine = u"%d %d %d %d %d %d" % (changed_bytes, elapsed, progress, eta, speed, stalled)
-    Log(s, NOTICE, InfoCode.upload_progress, controlLine)
+    Log(s, NOTICE, InfoCode.upload_progress, controlLine, transfer_progress=True)
 
 
 def PrintCollectionStatus(col_stats, force_print=False):
@@ -373,14 +374,43 @@ def setup():
     outHandler = logging.StreamHandler(sys.stdout)
     if _log_timestamp:
         outHandler.setFormatter(DetailFormatter())
+    else:
+        outHandler.setFormatter(PrettyProgressFormatter())
     outHandler.addFilter(OutFilter())
     _logger.addHandler(outHandler)
 
     errHandler = logging.StreamHandler(sys.stderr)
     if _log_timestamp:
         errHandler.setFormatter(DetailFormatter())
+    else:
+        outHandler.setFormatter(PrettyProgressFormatter())
     errHandler.addFilter(ErrFilter())
     _logger.addHandler(errHandler)
+
+
+class PrettyProgressFormatter(logging.Formatter):
+    u"""Formatter that overwrites previous progress lines on ANSI terminals"""
+    last_record_was_progress = False
+
+    def __init__(self):
+        # 'message' will be appended by format()
+        # Note that we use our own, custom-created 'levelName' instead of the
+        # standard 'levelname'.  This is because the standard 'levelname' can
+        # be adjusted by any library anywhere in our stack without us knowing.
+        # But we control 'levelName'.
+        logging.Formatter.__init__(self, u"%(message)s")
+
+    def format(self, record):
+        s = logging.Formatter.format(self, record)
+
+        # So we don't overwrite actual log lines
+        if self.last_record_was_progress and record.transferProgress:
+            # Go up one line, then erase it
+            s = u"\033[F\033[2K" + s
+
+        self.last_record_was_progress = record.transferProgress
+
+        return s
 
 
 class DetailFormatter(logging.Formatter):
