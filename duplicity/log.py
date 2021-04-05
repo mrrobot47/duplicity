@@ -383,7 +383,7 @@ def setup():
     if _log_timestamp:
         errHandler.setFormatter(DetailFormatter())
     else:
-        outHandler.setFormatter(PrettyProgressFormatter())
+        errHandler.setFormatter(PrettyProgressFormatter())
     errHandler.addFilter(ErrFilter())
     _logger.addHandler(errHandler)
 
