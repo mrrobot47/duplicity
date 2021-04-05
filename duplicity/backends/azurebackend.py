@@ -21,12 +21,26 @@
 
 from builtins import str
 import os
+import re
 
 import duplicity.backend
 from duplicity import config
 from duplicity import log
 from duplicity.errors import BackendException
 from duplicity.util import fsdecode
+
+
+_VALID_CONTAINER_NAME_RE = re.compile(r"^[a-z0-9](?!.*--)[a-z0-9-]{1,61}[a-z0-9]$")
+
+
+def _is_valid_container_name(name):
+    u"""
+    Check, whether the given name conforms to the rules as defined in
+    https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata
+    for valid names.
+    """
+    match = _VALID_CONTAINER_NAME_RE.match(name)
+    return match is not None
 
 
 class AzureBackend(duplicity.backend.Backend):
@@ -44,11 +58,13 @@ class AzureBackend(duplicity.backend.Backend):
             from azure.storage.blob import BlobServiceClient
         except ImportError as e:
             raise BackendException(u"""\
-Azure backend requires Microsoft Azure Storage SDK for Python (https://pypi.python.org/pypi/azure-storage/).
+Azure backend requires Microsoft Azure Storage SDK for Python (https://pypi.org/project/azure-storage-blob/).
 Exception: %s""" % str(e))
 
-        # TODO: validate container name
         self.container_name = parsed_url.path.lstrip(u'/')
+
+        if not _is_valid_container_name(self.container_name):
+            raise BackendException(u'Invalid Azure Storage Blob container name.')
 
         if u'AZURE_CONNECTION_STRING' not in os.environ:
             raise BackendException(u'AZURE_CONNECTION_STRING environment variable not set.')

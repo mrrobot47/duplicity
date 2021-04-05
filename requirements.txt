@@ -28,7 +28,7 @@ tox
 
 ##### backend libraries #####
 
-# azure-storage
+# azure-storage-blob
 # b2sdk
 # boto
 # boto3
