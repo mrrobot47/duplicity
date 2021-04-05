@@ -5,8 +5,8 @@ future
 mock==3.0.5
 python-gettext
 requests
-setuptools
-setuptools_scm
+setuptools==44.1.1
+setuptools_scm==5.0.2
 urllib3
 
 
