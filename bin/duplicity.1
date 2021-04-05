@@ -1146,6 +1146,9 @@ sign key is also one of the keys to encrypt against
 will be reused instead.
 Otherwise, if passphrase is needed but not set the user will be prompted for it.
 
+Other environment variables may be used to configure specific backends.
+See the notes for the particular backend.
+
 .SH URL FORMAT
 Duplicity uses the URL format (as standard as possible) to define data locations.
 The generic format for a URL is:
@@ -1768,22 +1771,22 @@ backups from cold storage, which vary in both cost and speed.
 See Amazon's documentation for details.
 
 .SH A NOTE ON AZURE ACCESS
-The Azure backend requires the Microsoft Azure Storage SDK for Python to be
-installed on the system.
+The Azure backend requires the Microsoft Azure Storage Blobs client library
+for Python to be installed on the system.
 See
-.B REQUIREMENTS
-above.
+.BR REQUIREMENTS .
 
-It uses environment variables for authentification:
-.BR AZURE_ACCOUNT_NAME " (required),"
-.BR AZURE_ACCOUNT_KEY " (optional),
-.BR AZURE_SHARED_ACCESS_SIGNATURE " (optional)."
-One of
-.BR AZURE_ACCOUNT_KEY " or"
-.BR AZURE_SHARED_ACCESS_SIGNATURE " is required."
+It uses the environment variable
+.BR AZURE_CONNECTION_STRING " (required)."
+This string contains all necessary information such as Storage Account name
+and the key for authentication.
+You can find it under Access Keys for the storage account.
 
-A container name must be a valid DNS name, conforming to the following naming
-rules:
+Duplicity will take care to create the container when performing the backup.
+Do not create it manually before.
+
+A container name (as given as the backup url) must be a valid DNS name,
+conforming to the following naming rules:
 
 .RS
 .IP 1.
@@ -1802,13 +1805,15 @@ Container names must be from 3 through 63 characters long.
 .IR
 .RE
 
+These rules come from Azure; see
+https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata
+
 .SH A NOTE ON CLOUD FILES ACCESS
 Pyrax is Rackspace's next-generation Cloud management API, including
 Cloud Files access.  The cfpyrax backend requires the pyrax library to
 be installed on the system.
 See
-.B REQUIREMENTS
-above.
+.BR REQUIREMENTS .
 
 Cloudfiles is Rackspace's now deprecated implementation of OpenStack
 Object Storage protocol.  Users wishing to use Duplicity with Rackspace
@@ -1816,8 +1821,7 @@ Cloud Files should migrate to the new Pyrax plugin to ensure support.
 
 The backend requires python-cloudfiles to be installed on the system.
 See
-.B REQUIREMENTS
-above.
+.BR REQUIREMENTS .
 
 It uses three environment variables for authentification:
 .BR CLOUDFILES_USERNAME " (required),"
@@ -1947,7 +1951,8 @@ Create Access Keys:
 https://code.google.com/apis/console#:storage:legacy
 
 .SH A NOTE ON HUBIC
-The hubic backend requires the pyrax library to be installed on the system. See REQUIREMENTS above.
+The hubic backend requires the pyrax library to be installed on the system. See
+.BR REQUIREMENTS .
 You will need to set your credentials for hubiC in a file called ~/.hubic_credentials, following this
 pattern:
 .PP
@@ -2070,8 +2075,7 @@ to adjust the size (and redundancy) of recovery files in
 
 .SH A NOTE ON PYDRIVE BACKEND
 The pydrive backend requires Python PyDrive package to be installed on the system. See
-.B REQUIREMENTS
-above.
+.BR REQUIREMENTS .
 
 There are two ways to use PyDrive: with a regular account or with a
 "service account". With a service account, a separate account is
@@ -2221,8 +2225,8 @@ backend allows to define
 is a complete reimplementation of ssh protocols natively in python. Advantages
 are speed and maintainability. Minor disadvantage is that extra packages are
 needed as listed in
-.B REQUIREMENTS
-above. In
+.BR REQUIREMENTS .
+In
 .I sftp
 (default) mode all operations are done via the according sftp commands. In
 .I scp
@@ -2302,8 +2306,7 @@ Swift is the OpenStack Object Storage service.
 The backend requires python-switclient to be installed on the system.
 python-keystoneclient is also needed to use OpenStack's Keystone Identity service.
 See
-.B REQUIREMENTS
-above.
+.BR REQUIREMENTS .
 
 It uses following environment variables for authentification:
 .BR SWIFT_USERNAME " (required),"
@@ -2336,8 +2339,7 @@ The backend requires python-switclient to be installed on the system.
 python-keystoneclient is also needed to interact with OpenStack's Keystone
 Identity service.
 See
-.B REQUIREMENTS
-above.
+.BR REQUIREMENTS .
 
 It uses following environment variables for authentification:
 .BR PCA_USERNAME " (required),"
@@ -2474,9 +2476,9 @@ Some backends also require additional components (probably available as packages
 .B python-requests-oauthlib
 - https://github.com/requests/requests-oauthlib
 .TP
-.BR "azure backend" " (Azure Blob Storage Service)"
-.B Microsoft Azure Storage SDK for Python
-- https://pypi.python.org/pypi/azure-storage/
+.BR "azure backend" " (Azure Storage Blob Service)"
+.B Microsoft Azure Storage Blobs client library for Python
+- https://pypi.org/project/azure-storage-blob/
 .TP
 .BR "boto backend" " (S3 Amazon Web Services, Google Cloud Storage)"
 .B boto version 2.0+
