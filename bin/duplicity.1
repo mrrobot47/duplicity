@@ -1206,6 +1206,15 @@ See also
 b2://account_id[:application_key]@bucket_name/[folder/]
 .RE
 .PP
+.BR "Box"
+.PP
+.RS
+box:///some_dir[?config=path_to_config]
+.PP
+See also
+.B "A NOTE ON BOX ACCESS"
+.RE
+.PP
 .BR "Cloud Files" " (Rackspace)"
 .PP
 .RS
@@ -1807,6 +1816,40 @@ Container names must be from 3 through 63 characters long.
 
 These rules come from Azure; see
 https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata
+
+.SH A NOTE ON BOX ACCESS
+The box backend requires boxsdk with jwt support to be installed on the system.
+See
+.BR REQUIREMENTS .
+
+It uses the environment variable
+.BR BOX_CONFIG_PATH " (optional)."
+This string contains the path to box custom app's config.json. Either this environment variable or
+the
+.BR config
+query parameter in the url need to be specified, if both are specified, query paramter takes precedence.
+
+.SS Create a Box custom app
+In order to use box backend, user need to create a box custom app in the box developer console (https://app.box.com/developers/console).
+
+After create a new custom app, please make sure it is configured as follow:
+
+.RS
+.IP 1.
+Choose "App Access Only" for "App Access Level"
+.IR
+.IP 2.
+Check "Write all files and folders stored in Box"
+.IR
+.IP 3.
+Generate a Public/Private Keypair
+.IR
+.RE
+
+The user also need to grant the created custom app permission in the
+admin console (https://app.box.com/master/custom-apps) by clicking
+the "+" button and enter the client_id which can be found on the custom
+app's configuration page.
 
 .SH A NOTE ON CLOUD FILES ACCESS
 Pyrax is Rackspace's next-generation Cloud management API, including
@@ -2483,6 +2526,10 @@ Some backends also require additional components (probably available as packages
 .BR "boto backend" " (S3 Amazon Web Services, Google Cloud Storage)"
 .B boto version 2.0+
 - http://github.com/boto/boto
+.TP
+.BR "box backend" " (box.com)"
+.B boxsdk
+- https://github.com/box/box-python-sdk
 .TP
 .BR "cfpyrax backend" " (Rackspace Cloud) and " "hubic backend" " (hubic.com)"
 .B Rackspace CloudFiles Pyrax API

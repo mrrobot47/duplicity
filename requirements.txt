@@ -32,6 +32,7 @@ tox
 # b2sdk
 # boto
 # boto3
+# boxsdk[jwt]
 # dropbox
 # gdata
 # jottalib
