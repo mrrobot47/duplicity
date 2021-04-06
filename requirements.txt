@@ -28,16 +28,18 @@ tox
 
 ##### backend libraries #####
 
+# some libs no longer support py27
+
 # azure-storage-blob
-# b2sdk
-# boto
-# boto3
-# boxsdk[jwt]
-# dropbox
-# gdata
-# jottalib
-# mediafire
-# pydrive
-# pyrax
-# python-swiftclient
-# requests_oauthlib
+b2sdk
+boto
+boto3
+boxsdk[jwt] ; python_version > '3.6'
+dropbox
+gdata
+jottalib
+mediafire
+pydrive ; python_version > '3.6'
+pyrax
+python-swiftclient
+requests_oauthlib
