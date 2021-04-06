@@ -1297,6 +1297,7 @@ if not given in the URL, relies on password being stored within $HOME/.megarc (a
 .PP
 .RS
 megav2://user[:password]@mega.nz/some_dir
+megav3://user[:password]@mega.nz/some_dir[?no_logout=1] (For latest MEGAcmd)
 .PP
 .B NOTE:
 despite "MEGAcmd" no longer uses a configuration file, for convenience storing the user password this backend searches it in the $HOME/.megav2rc file (same syntax as the old $HOME/.megarc)
@@ -2514,7 +2515,7 @@ see pydrive backend
 .B megatools client
 - https://github.com/megous/megatools
 .TP
-.BR "MEGA v2 backend (works for all MEGA accounts)" " (mega.nz)"
+.BR "MEGA v2 and v3 backend (works for all MEGA accounts)" " (mega.nz)"
 .B MEGAcmd client
 - https://mega.nz/cmd
 .TP
