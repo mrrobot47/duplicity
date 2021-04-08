@@ -116,7 +116,7 @@ def uexc(e):
     # non-ascii will cause a UnicodeDecodeError when implicitly decoding to
     # unicode.  So we decode manually, using the filesystem encoding.
     # 99.99% of the time, this will be a fine encoding to use.
-    if e.args:
+    if e and e.args:
         # Find arg that is a string
         for m in e.args:
             if isinstance(m, str):
