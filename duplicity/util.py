@@ -125,8 +125,7 @@ def uexc(e):
             elif isinstance(m, bytes):
                 # Encoded, likely in filesystem encoding
                 return fsdecode(m)
-    else:
-        return u''
+    return u''
 
 
 def maybe_ignore_errors(fn):
