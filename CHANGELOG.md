@@ -12,6 +12,14 @@
 
 ### Fix
 
+* Util.uexec() will return u'' if no err msg in e.args. [Kenneth Loafman]
+
+* Util.uexec() should check for e==None on entry. [Kenneth Loafman]
+
+* Fix bug #1547458 - more consistent passphrase prompt. [Kenneth Loafman]
+
+* Fixes bug #1454136 - SX backend issues. [Kenneth Loafman]
+
 * Fixes bug 1918981 - option to skip trash on delete on mediafire. [Kenneth Loafman]
 
 * Fix bug 1919017 - MultiBackend reports failure on file deletion. [Kenneth Loafman]
@@ -19,6 +27,34 @@
 * Fixes #41 - par2+rsync (non-ssh) fails. [Kenneth Loafman]
 
 ### Other
+
+* Merge branch 'boxbackend' into 'master' [Kenneth Loafman]
+
+* Implement Box backend. [Jason Wu]
+
+* Merge branch 'megav3' into 'master' [Kenneth Loafman]
+
+* Implement megav3 backend to to cater for change in MEGACmd. [Jason Wu]
+
+* Merge branch 'master' of git@gitlab.com:duplicity/duplicity.git. [Kenneth Loafman]
+
+* Merge branch 'use-new-azure-python-packages' into 'master' [Kenneth Loafman]
+
+* Fix documentation for azure backend. [Michael Kopp]
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+* Fix typo. [Moses Miller]
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+* Add IDrive backend. [SmilingM]
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+* Progress bar improvements. [Moses Miller]
+
+* Fix;usr:Fixes bug #1652953 - seek(0) on /dev/stdin crashes. [Kenneth Loafman]
 
 * Add a new Google Drive backend (gdrive:) [Jindřich Makovička]
 
