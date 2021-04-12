@@ -145,8 +145,11 @@ class BackupSet(object):
         u"""
         Add local and remote manifest filenames to backup set
         """
-        assert not self.remote_manifest_name, (self.remote_manifest_name,
-                                               remote_filename)
+        assert not self.remote_manifest_name, \
+            u"Cannot set filename of remote manifest to %s; already set to %s." % (
+                remote_filename,
+                self.remote_manifest_name,
+            )
         self.remote_manifest_name = remote_filename
 
         if self.action != u"replicate":

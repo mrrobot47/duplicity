@@ -125,7 +125,16 @@ def uexc(e):
             elif isinstance(m, bytes):
                 # Encoded, likely in filesystem encoding
                 return fsdecode(m)
-    return u''
+        # If the function did not return yet, we did not
+        # succeed in finding a string; return the whole message.
+        # This fails for Python 2, so only do this in Python 3.
+        if sys.version_info[0] > 2:
+            return str(e)
+        # For Python 2, fall back to returning an empty string.
+        else:
+            return u''
+    else:
+        return u''
 
 
 def maybe_ignore_errors(fn):
