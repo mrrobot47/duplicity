@@ -12,12 +12,14 @@ urllib3
 
 ##### testing libraries #####
 
+# some libs no longer support py27
+
 coverage
 paramiko
 pexpect
 psutil
 pycodestyle
-pydevd
+pydevd ; python_version >= '3.6'
 pylint
 pytest
 pytest-cov
@@ -31,7 +33,7 @@ tox
 # some libs no longer support py27
 
 azure-storage-blob ; python_version >= '3.6'
-b2sdk
+b2sdk ; python_version >= '3.6'
 boto
 boto3
 boxsdk[jwt] ; python_version >= '3.6'
@@ -40,6 +42,6 @@ gdata
 jottalib
 mediafire
 pydrive ; python_version >= '3.6'
-pyrax
+pyrax ; python_version >= '3.6'
 python-swiftclient
 requests_oauthlib
