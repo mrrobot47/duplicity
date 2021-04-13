@@ -77,14 +77,15 @@ class CodeTest(DuplicityTestCase):
             u"--nofix=map",
             _top_dir])
 
-#     @skipCodeTest
-#     def test_pylint(self):
-#         u"""Pylint test (requires pylint to be installed to pass)"""
-#         self.run_checker([
-#             u"pylint",
-#             os.path.join(_top_dir, u'duplicity'),
-#             os.path.join(_top_dir, u'bin/duplicity'),
-#             os.path.join(_top_dir, u'bin/rdiffdir')])
+    @skipCodeTest
+    def test_pylint(self):
+        u"""Pylint test (requires pylint to be installed to pass)"""
+        self.run_checker([
+            u"pylint",
+            u"--rcfile=" + os.path.join(_top_dir, "pylintrc"),
+            os.path.join(_top_dir, u'duplicity'),
+            os.path.join(_top_dir, u'bin/duplicity'),
+            os.path.join(_top_dir, u'bin/rdiffdir')])
 
     @skipCodeTest
     def test_pep8(self):

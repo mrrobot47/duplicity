@@ -191,8 +191,6 @@ class IDriveBackend(duplicity.backend.Backend):
                     log.Warn(u"This might interfere with incremental backups")
                     log.Warn(u"-" * 72)
                     raise BackendException(u"Creation of the directory {0} failed".format(self.fakeroot))
-                    # reset fakeroot
-                    self.fakeroot = u''
             else:
                 log.Debug(u"Directory {0} created as fake-root (Will clean-up afterwards!)".format(self.fakeroot))
                 self.cleanup = True

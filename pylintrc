@@ -4,18 +4,7 @@ errors-only=yes
 ignore=_librsync.so
 msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'
 
-disable=access-member-before-definition,
-        invalid-name,
-        line-too-long,
-        missing-function-docstring,
-        missing-module-docstring,
-        no-member,
-        no-name-in-module,
-        not-callable,
-        raise-missing-from,
-        undefined-variable,
-        wrong-import-order,
-        wrong-import-position
+disable=all
 
 enable=unused-argument,
        unused-wildcard-import,
