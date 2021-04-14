@@ -39,6 +39,7 @@ boto3
 boxsdk[jwt] ; python_version >= '3.6'
 dropbox
 gdata
+google_auth_oauthlib
 jottalib
 mediafire
 pydrive ; python_version >= '3.6'
