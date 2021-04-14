@@ -38,7 +38,7 @@ boto
 boto3
 boxsdk[jwt] ; python_version >= '3.6'
 dropbox
-gdata
+gdata ; python_version == '2.7'
 google_auth_oauthlib
 jottalib
 mediafire
