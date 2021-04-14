@@ -82,7 +82,7 @@ class CodeTest(DuplicityTestCase):
         u"""Pylint test (requires pylint to be installed to pass)"""
         self.run_checker([
             u"pylint",
-            u"--rcfile=" + os.path.join(_top_dir, "pylintrc"),
+            u"--rcfile=" + os.path.join(_top_dir, u"pylintrc"),
             os.path.join(_top_dir, u'duplicity'),
             os.path.join(_top_dir, u'bin/duplicity'),
             os.path.join(_top_dir, u'bin/rdiffdir')])
