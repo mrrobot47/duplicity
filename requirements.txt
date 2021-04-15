@@ -5,8 +5,8 @@ future
 mock==3.0.5
 python-gettext
 requests
-setuptools==44.1.1
-setuptools_scm==5.0.2
+setuptools>=44.1.1
+setuptools_scm>=5.0.2
 urllib3
 
 
@@ -19,11 +19,11 @@ paramiko
 pexpect
 psutil
 pycodestyle
-pydevd ; python_version >= '3.6'
+pydevd                  ; python_version >= '3.6'
 pylint
 pytest
 pytest-cov
-pytest-runner
+pytest-runner           ; python_version >= '3.6'
 sphinx
 tox
 
@@ -31,18 +31,19 @@ tox
 ##### backend libraries #####
 
 # some libs no longer support py27
+# some libs never supported py36+
 
-azure-storage-blob ; python_version >= '3.6'
-b2sdk ; python_version >= '3.6'
+azure-storage-blob      ; python_version >= '3.6'
+b2sdk                   ; python_version >= '3.6'
 boto
 boto3
-boxsdk[jwt] ; python_version >= '3.6'
+boxsdk[jwt]             ; python_version >= '3.6'
 dropbox
-gdata ; python_version == '2.7'
+gdata                   ; python_version == '2.7'
 google_auth_oauthlib
 jottalib
 mediafire
-pydrive ; python_version >= '3.6'
-pyrax ; python_version >= '3.6'
+pydrive                 ; python_version >= '3.6'
+pyrax                   ; python_version >= '3.6'
 python-swiftclient
 requests_oauthlib
