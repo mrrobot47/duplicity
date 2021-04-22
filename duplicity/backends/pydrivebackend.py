@@ -87,13 +87,13 @@ Exception: %s""" % str(e))
                 credentials = ServiceAccountCredentials(parsed_url.username + u'@' + parsed_url.hostname, signer,
                                                         scopes=u'https://www.googleapis.com/auth/drive')
             credentials.authorize(httplib2.Http())
-            gauth = GoogleAuth()
+            gauth = GoogleAuth(http_timeout=60)
             gauth.credentials = credentials
         elif u'GOOGLE_DRIVE_SETTINGS' in os.environ:
-            gauth = GoogleAuth(settings_file=os.environ[u'GOOGLE_DRIVE_SETTINGS'])
+            gauth = GoogleAuth(settings_file=os.environ[u'GOOGLE_DRIVE_SETTINGS'], http_timeout=60)
             gauth.CommandLineAuth()
         elif (u'GOOGLE_SECRETS_FILE' in os.environ and u'GOOGLE_CREDENTIALS_FILE' in os.environ):
-            gauth = GoogleAuth()
+            gauth = GoogleAuth(http_timeout=60)
             gauth.LoadClientConfigFile(os.environ[u'GOOGLE_SECRETS_FILE'])
             gauth.LoadCredentialsFile(os.environ[u'GOOGLE_CREDENTIALS_FILE'])
             if gauth.credentials is None:
