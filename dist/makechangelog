@@ -3,8 +3,9 @@
 set -e
 
 if [ "$#" -ne 0 ]; then
-    echo "usage: makepip"
+    echo "usage: makechangelog"
     exit 2
 fi
 
 gitchangelog > CHANGELOG.md
+git commit -m"Update changelog." CHANGELOG.md
