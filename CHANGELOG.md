@@ -12,6 +12,8 @@
 
 ### Fix
 
+* Gdata module passes on py27 only. [Kenneth Loafman]
+
 * Util.uexec() will return u'' if no err msg in e.args. [Kenneth Loafman]
 
 * Util.uexec() should check for e==None on entry. [Kenneth Loafman]
@@ -27,6 +29,18 @@
 * Fixes #41 - par2+rsync (non-ssh) fails. [Kenneth Loafman]
 
 ### Other
+
+* Merge branch 'develop' into 'master' [Kenneth Loafman]
+
+* Fix "Giving up after 5 attempts. timeout: The read operation timed out" [Christian Perreault]
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+* Don't sync when removing old backups. [Matthew Marting]
+
+* Merge branch 'fix-uexec-returns-None' into 'master' [Kenneth Loafman]
+
+* Fix util.uexc: do not return None. [Michael Kopp]
 
 * Merge branch 'boxbackend' into 'master' [Kenneth Loafman]
 
