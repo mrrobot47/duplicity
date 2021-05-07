@@ -1,3 +1,16 @@
+## (unreleased)
+
+### Other
+
+* Merge branch 'PR-backend-gdrive-mydrive' into 'master' [Kenneth Loafman]
+
+    backend gdrive, added Google MyDrive support
+
+    See merge request duplicity/duplicity!52
+
+* Added Google MyDrive support updated man pages and --help text. [Anthony Uphof]
+
+
 ## rel.0.8.19 (2021-04-29)
 
 ### New
