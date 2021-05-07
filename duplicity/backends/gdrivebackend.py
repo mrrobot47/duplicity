@@ -45,18 +45,44 @@ GDrive backend requires Google API client installation.
 Please read the manpage for setup details.
 Exception: %s""" % str(e))
 
-        # Shared Drive ID specified as a query parameter in the backend URL.
-        # Example: gdrive://developer.gserviceaccount.com/target-folder/?driveID=<SHARED DRIVE ID>
+        # Note Google has 2 drive methods, `Shared(previously Team) Drives` and `My Drive`
+        #   both can be shared but require different addressing
+        # For a Google Shared Drives folder
+        # ---------------------------------
+        # Share Drive ID specified as a query parameter in the backend URL.
+        # Example:
+        #  gdrive://developer.gserviceaccount.com/target-folder/?driveID=<SHARED DRIVE ID>
+        #
+        # For a Google My Drive based shared folder
+        # -----------------------------------------
+        # MyDrive folder ID specified as a query parameter in the backend URL
+        #
+        # Example
+        #  export GOOGLE_SERVICE_ACCOUNT_URL=<serviceaccount-name>@<serviceaccount-name>.iam.gserviceaccount.com
+        #  gdrive://${GOOGLE_SERVICE_ACCOUNT_URL}/<target-folder-name/>?myDriveFolderID=<google-myDrive-folder-id>
+        #
+        # both methods use a Google Services Account
+        # export GOOGLE_SERVICE_JSON_FILE=<serviceaccount-credentials.json>
+        # export GOOGLE_SERVICE_ACCOUNT_URL=<serviceaccount-name>@<serviceaccount-name>.iam.gserviceaccount.com
+
         self.shared_drive_corpora = {}
         self.shared_drive_id = {}
         self.shared_drive_flags_include = {}
         self.shared_drive_flags_support = {}
+        self.shared_root_folder_id = None
         if u'driveID' in parsed_url.query_args:
             self.shared_drive_corpora = {u'corpora': u'drive'}
             self.shared_drive_id = {u'driveId': parsed_url.query_args[u'driveID'][0]}
             self.shared_drive_flags_include = {u'includeItemsFromAllDrives': True}
             self.shared_drive_flags_support = {u'supportsAllDrives': True}
-
+        elif u'myDriveFolderID' in parsed_url.query_args:
+            self.shared_drive_corpora = {u'corpora': u'user'}
+            self.shared_drive_flags_include = {u'includeItemsFromAllDrives': True}
+            self.shared_drive_flags_support = {u'supportsAllDrives': True}
+            self.shared_root_folder_id = parsed_url.query_args[u'myDriveFolderID'][0]
+        else:
+            raise BackendException(
+                u"gdrive: backend requires a query paramater should either be driveID or myDriveFolderID")
         if parsed_url.username is not None:
             client_id = parsed_url.username + u'@' + parsed_url.hostname
         else:
@@ -111,12 +137,15 @@ Exception: %s""" % str(e))
 
         if self.shared_drive_id:
             parent_folder_id = self.shared_drive_id[u'driveId']
+        elif self.shared_root_folder_id:
+            parent_folder_id = self.shared_root_folder_id
         else:
             parent_folder_id = u'root'
 
         # Fetch destination folder entry and create hierarchy if required.
         folder_names = parsed_url.path.split(u'/')
         for folder_name in folder_names:
+
             if not folder_name:
                 continue
             q = (u"name = '" + folder_name + u"' and '" + parent_folder_id +
@@ -129,7 +158,6 @@ Exception: %s""" % str(e))
                                               **self.shared_drive_flags_include,
                                               **self.shared_drive_flags_support).execute()
             file_list = results.get(u'files', [])
-
             if len(file_list) == 0:
                 file_metadata = {u'name': folder_name,
                                  u'mimeType': u"application/vnd.google-apps.folder",

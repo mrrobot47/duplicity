@@ -2177,7 +2177,23 @@ GDrive: is a rewritten PyDrive: backend with less dependencies, and a
 simpler setup - it uses the JSON keys downloaded directly from Google
 Cloud Console.
 
-There are two ways to use GDrive: with a regular account or with a
+Note Google has 2 drive methods, `Shared(previously Team) Drives` and `My Drive`,
+both can be shared but require different addressing
+For a Google Shared Drives folder
+---------------------------------
+Share Drive ID specified as a query parameter, driveID,  in the backend URL.
+Example: 
+      gdrive://developer.gserviceaccount.com/target-folder/?driveID=<SHARED DRIVE ID>
+
+For a Google My Drive based shared folder
+-----------------------------------------
+MyDrive folder ID specified as a query parameter, myDriveFolderID, in the backend URL
+Example 
+      export GOOGLE_SERVICE_ACCOUNT_URL=<serviceaccount-name>@<serviceaccount-name>.iam.gserviceaccount.com
+      gdrive://${GOOGLE_SERVICE_ACCOUNT_URL}/<target-folder-name-in-myDriveFolder>?myDriveFolderID=<google-myDrive-folder-id>
+
+
+There are also two ways to authenticate to use GDrive: with a regular account or with a
 "service account". With a service account, a separate account is
 created, that is only accessible with Google APIs and not a web login.
 With a regular account, you can store backups in your normal Google
@@ -2190,6 +2206,9 @@ click "Create credentials", then select Service Account with JSON key.
 
 The GOOGLE_SERVICE_JSON_FILE environment variable needs to contain the
 path to the JSON file on duplicity invocation.
+
+export GOOGLE_SERVICE_JSON_FILE=<path-to-serviceaccount-credentials.json>
+
 
 The alternative is to use a regular account. To do this, start as
 above, but when creating a new Client ID, select "Create OAuth client

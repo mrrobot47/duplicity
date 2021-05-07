@@ -978,6 +978,10 @@ def usage():
   ftp://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   ftps://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   gdocs://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
+  for gdrive:// a <service-account-url> like the following is required
+        <serviceaccount-name>@<serviceaccount-name>.iam.gserviceaccount.com
+  gdrive://<service-account-url>/target-folder/?driveID=<SHARED DRIVE ID> (for GOOGLE Shared Drive)
+  gdrive://<service-account-url>/target-folder/?myDriveFolderID=<google-myDrive-folder-id> (for GOOGLE MyDrive)
   hsi://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   imap://%(user)s[:%(password)s]@%(other_host)s[:%(port)s]/%(some_dir)s
   mega://%(user)s[:%(password)s]@%(other_host)s/%(some_dir)s
