@@ -45,7 +45,7 @@ parts:
             - python3-oauthlib
             - python3-paramiko      # ssh_paramiko_backend.py
             - python3-requests      # adbackend.py, onedrivebackend.py
-            - python3-requests-oauthlib # as above
+            - python3-requests-oauthlib  # as above
             - python3-swiftclient   # swiftbackend.py
             - python3-urllib3
             - rsync                 # rsyncbackend.py
@@ -56,7 +56,10 @@ parts:
             - b2sdk                 # b2backend.py
             - dropbox               # dpbxbackend.py
             - gdata-python3         # gdocsbackend.py
+            - google-auth-oauthlib      # gdrivebackend.py
+            - google-api-python-client  # gdrivebackend.py
             - jottalib              # jottalib backend (new in 0.8 series)
+            - keyring               # gdrivebackend.py
             - mediafire             # mediafirebackend.py
             - pydrive               # pydrivebackend.py
             - pyrax                 # hubicbackend, _cf_pyrax.py

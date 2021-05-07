@@ -39,9 +39,11 @@ boto
 boto3
 boxsdk[jwt]             ; python_version >= '3.6'
 dropbox
-gdata                   ; python_version == '2.7'
-google_auth_oauthlib
+gdata
+google-api-python-client
+google-auth-oauthlib
 jottalib
+keyring
 mediafire
 pydrive                 ; python_version >= '3.6'
 pyrax                   ; python_version >= '3.6'
