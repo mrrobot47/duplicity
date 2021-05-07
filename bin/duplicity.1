@@ -2179,16 +2179,17 @@ Cloud Console.
 
 Note Google has 2 drive methods, `Shared(previously Team) Drives` and `My Drive`,
 both can be shared but require different addressing
-For a Google Shared Drives folder
----------------------------------
+
+.B For a Google Shared Drives folder
+
 Share Drive ID specified as a query parameter, driveID,  in the backend URL.
-Example: 
+Example:
       gdrive://developer.gserviceaccount.com/target-folder/?driveID=<SHARED DRIVE ID>
 
-For a Google My Drive based shared folder
------------------------------------------
+.B For a Google My Drive based shared folder
+
 MyDrive folder ID specified as a query parameter, myDriveFolderID, in the backend URL
-Example 
+Example
       export GOOGLE_SERVICE_ACCOUNT_URL=<serviceaccount-name>@<serviceaccount-name>.iam.gserviceaccount.com
       gdrive://${GOOGLE_SERVICE_ACCOUNT_URL}/<target-folder-name-in-myDriveFolder>?myDriveFolderID=<google-myDrive-folder-id>
 
