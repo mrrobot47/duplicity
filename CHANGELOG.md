@@ -1,5 +1,13 @@
 ## (unreleased)
 
+### Changes
+
+* Fix formatting in A NOTE ON GDRIVE BACKEND.  Minor. [Kenneth Loafman]
+
+### Fix
+
+* Fix issue #57 SSH backends - IndexError: list index out of range. [Kenneth Loafman]
+
 ### Other
 
 * Merge branch 'PR-backend-gdrive-mydrive' into 'master' [Kenneth Loafman]
