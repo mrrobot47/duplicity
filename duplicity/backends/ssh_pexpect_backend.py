@@ -275,8 +275,8 @@ class SSHPExpectBackend(duplicity.backend.Backend):
         # be distinguished from the file boundaries.
         dirs = self.remote_dir.split(os.sep)
         if len(dirs) > 0:
-                if dirs[0] == u'':
-                    dirs[0] = u'/'
+            if dirs[0] == u'':
+                dirs[0] = u'/'
         mkdir_commands = []
         for d in dirs:
             mkdir_commands += [u"mkdir \"%s\"" % (d)] + [u"cd \"%s\"" % (d)]
