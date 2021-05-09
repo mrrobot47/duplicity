@@ -268,9 +268,8 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             # move to the appropriate directory, possibly after creating it and its parents
             dirs = self.remote_dir.split(os.sep)
             if len(dirs) > 0:
-                if not dirs[0]:
-                    dirs = dirs[1:]
-                    dirs[0] = u'/' + dirs[0]
+                if dirs[0] == u'':
+                    dirs[0] = u'/'
                 for d in dirs:
                     if (d == u''):
                         continue
