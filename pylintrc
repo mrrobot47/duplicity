@@ -7,7 +7,6 @@ msg-template='{path}:{line}: [{msg_id}({symbol}), {obj}] {msg}'
 disable=
         C,
         R,
-        access-member-before-definition,
         invalid-name,
         line-too-long,
         missing-function-docstring,
@@ -21,9 +20,10 @@ disable=
         wrong-import-position
 
 enable=
-       unused-argument,
-       unused-wildcard-import,
-       redefined-builtin,
-       bad-indentation,
-       mixed-indentation,
-       unreachable
+        unused-argument,
+        access-member-before-definition,
+        unused-wildcard-import,
+        redefined-builtin,
+        bad-indentation,
+        mixed-indentation,
+        unreachable

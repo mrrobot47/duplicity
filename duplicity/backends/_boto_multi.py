@@ -107,8 +107,8 @@ class BotoBackend(BotoSingleBackend):
 
         if getattr(self, u'_pool', False):
             log.Debug(u"A process pool already exists. Destroying previous pool.")
-            self._pool.terminate()
-            self._pool.join()
+            self._pool.terminate() # pylint:disable=access-member-before-definition
+            self._pool.join() # pylint:disable=access-member-before-definition
             self._pool = None
 
         log.Debug(u"Setting multipart boto backend process pool to %d processes" % number_of_procs)

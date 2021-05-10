@@ -159,9 +159,9 @@ class StatsObj(object):
         if self.EndTime is not None:
             timelist.append(u"EndTime %.2f (%s)\n" %  # pylint: disable=bad-string-format-type
                             (self.EndTime, dup_time.timetopretty(self.EndTime)))
-        if self.ElapsedTime or (self.StartTime is not None and
+        if self.ElapsedTime or (self.StartTime is not None and  # pylint:disable=access-member-before-definition
                                 self.EndTime is not None):
-            if self.ElapsedTime is None:
+            if self.ElapsedTime is None:  # pylint:disable=access-member-before-definition
                 self.ElapsedTime = self.EndTime - self.StartTime
             timelist.append(u"ElapsedTime %.2f (%s)\n" %
                             (self.ElapsedTime, dup_time.inttopretty(self.ElapsedTime)))
