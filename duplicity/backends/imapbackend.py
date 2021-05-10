@@ -90,7 +90,7 @@ class ImapBackend(duplicity.backend.Backend):
 
         #  Try to close the connection cleanly
         try:
-            self.conn.close() # pylint:disable=access-member-before-definition
+            self.conn.close()  # pylint:disable=access-member-before-definition
         except Exception:
             pass
 
