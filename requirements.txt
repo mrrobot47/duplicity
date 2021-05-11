@@ -15,8 +15,6 @@ urllib3
 # some libs no longer support py27
 
 coverage
-paramiko
-pexpect
 psutil
 pycodestyle
 pydevd                  ; python_version >= '3.6'
@@ -40,12 +38,16 @@ boto3
 boxsdk[jwt]             ; python_version >= '3.6'
 dropbox
 gdata                   ; python_version == '2.7'
+gdata-python3           ; python_version >= '3.6'
 google-api-python-client
 google-auth-oauthlib
 jottalib
 keyring
 mediafire
+megatools
+paramiko
+pexpect
 pydrive                 ; python_version >= '3.6'
 pyrax                   ; python_version >= '3.6'
 python-swiftclient
-requests_oauthlib
+requests-oauthlib

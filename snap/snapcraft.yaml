@@ -31,39 +31,38 @@ parts:
             - lftp                  # lftpbackend.py
             - libatm1
             - librsync1
-            - megatools             # megabackend.py
             - ncftp                 # ncftpbackend.py
             - openssh-client        # ssh_pexpect_backend.py
-            - python3-azure         # azurebackend.py
-            - python3-boto          # s3_boto_backend.py
-            - python3-boto3         # s3_boto3_backend.py
-            - python3-fasteners
-            - python3-future
             - python3-gi            # giobackend.py
-            - python3-googleapi     # pydrivebackend.py
-            - python3-httplib2      # pydrivebackend.py
-            - python3-oauthlib
-            - python3-paramiko      # ssh_paramiko_backend.py
-            - python3-requests      # adbackend.py, onedrivebackend.py
-            - python3-requests-oauthlib  # as above
-            - python3-swiftclient   # swiftbackend.py
-            - python3-urllib3
             - rsync                 # rsyncbackend.py
             - rclone                # rclonebackend.py
-            - tahoe-lafs            # tahoebackend.py
-            - sx                    # sxbackend.py
         python-packages:
+            - azure-storage-blob
             - b2sdk                 # b2backend.py
+            - boto
+            - boto3
+            - boxsdk[jwt]
             - dropbox               # dpbxbackend.py
+            - fasteners
+            - future                # everywhere
             - gdata-python3         # gdocsbackend.py
-            - google-auth-oauthlib      # gdrivebackend.py
             - google-api-python-client  # gdrivebackend.py
-            - jottalib              # jottalib backend (new in 0.8 series)
+            - google-auth-oauthlib      # gdrivebackend.py
+            - httplib2              # pydrivebackend.py
+            - jottalib              # jottalib backend
             - keyring               # gdrivebackend.py
             - mediafire             # mediafirebackend.py
+            - megatools             # megabackend.py
+            - paramiko              # ssh_paramiko_backend.py
+            - pexpect               # ssh_pexpect_backend.py
             - pydrive               # pydrivebackend.py
-            - pyrax                 # hubicbackend, _cf_pyrax.py
+            - pyrax                 # hubicbackend
+            - python-swiftclient    # swiftbackend.py
+            - requests              # adbackend.py
+            - requests-oauthlib     # onedrivebackend
             - setuptools            # setup.py
-            - setuptools_scm        # scm version
-            - six>=1.12.0           # dpbxbackend.py
+            - setuptools-scm        # scm version
+            - sx                    # sxbackend.py
+            - tahoe-lafs            # tahoebackend.py
+            - urllib3
         source: .
