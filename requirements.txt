@@ -44,7 +44,7 @@ google-auth-oauthlib
 jottalib
 keyring
 mediafire
-megatools
+megatools               ; python_version >= '3.6'
 paramiko
 pexpect
 pydrive                 ; python_version >= '3.6'

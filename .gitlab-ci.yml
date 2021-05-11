@@ -82,6 +82,7 @@ py35_ub16-04:
     artifacts:
         reports:
             junit: report.xml
+    allow_failure: true
     needs: ["code_ub18-04"]
 
 py36_ub18-04:
