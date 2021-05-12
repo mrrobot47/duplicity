@@ -116,7 +116,7 @@ Exception: %s""" % str(e))
                     if flow.client_config[u'client_id'] != client_id:
                         raise BackendException(
                             u'Client ID in the JSON file (%s) does not match the URL (%s)' %
-                            (flow.client_config.client_id, client_id))
+                            (flow.client_config[u'client_id'], client_id))
 
                     credentials = flow.run_console()
                 # Save the credentials for the next run
