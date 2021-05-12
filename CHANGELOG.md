@@ -6,6 +6,8 @@
 
 ### Fix
 
+* Fix error message on gdrivebackend. [Kenneth Loafman]
+
 * Fix issue #57 SSH backends - IndexError: list index out of range. [Kenneth Loafman]
 
 ### Other
