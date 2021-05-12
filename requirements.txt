@@ -2,19 +2,16 @@
 
 fasteners
 future
-mock==3.0.5
 python-gettext
-requests
 setuptools>=44.1.1
 setuptools_scm>=5.0.2
-urllib3
 
 
 ##### testing libraries #####
 
-# some libs no longer support py27
 
 coverage
+mock>=3.0.5
 psutil
 pycodestyle
 pydevd                  ; python_version >= '3.6'
@@ -28,8 +25,6 @@ tox
 
 ##### backend libraries #####
 
-# some libs no longer support py27
-# some libs never supported py36+
 
 azure-storage-blob      ; python_version >= '3.6'
 b2sdk                   ; python_version >= '3.6'
@@ -50,4 +45,5 @@ pexpect
 pydrive                 ; python_version >= '3.6'
 pyrax                   ; python_version >= '3.6'
 python-swiftclient
+requests
 requests-oauthlib
