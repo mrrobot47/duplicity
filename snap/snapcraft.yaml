@@ -16,6 +16,9 @@ apps:
     duplicity:
         command: bin/duplicity
 
+architectures:
+    - build-on: [amd64, armhf]
+
 parts:
     duplicity:
         plugin: python
