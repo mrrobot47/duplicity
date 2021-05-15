@@ -45,16 +45,16 @@ head -2 snap/snapcraft.yaml | tail -1
 snapcraft login --with ~/.snaplogin
 
 # build snap via remote build on LP
-snapcraft remote-build --launchpad-accept-public-upload
+snapcraft remote-build --build-on=amd64,arm64 --launchpad-accept-public-upload
 
 # # build snap on Ubuntu 18.04 VM.  (multipass is twitchy on MacOS).
 # snapcraft snap --output duplicity_${VERSION}_amd64.snap --destructive-mode
 
-# push to edge
-snapcraft upload duplicity_*.snap --release edge
-
-# sign snap
-snapcraft sign-build duplicity_*.snap --key-name firstprime || true
+# push to edge and sign
+for f in duplicity_*.snap; do
+    snapcraft upload $f --release edge
+    snapcraft sign-build $f --key-name firstprime
+done
 
 # mv into working source tree
 mv duplicity_*.txt ../..
@@ -62,4 +62,4 @@ mv duplicity_*_*.snap* ../..
 cd ../..
 
 # clean up
-rm -rf build
+# rm -rf build
