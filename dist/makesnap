@@ -21,13 +21,19 @@
 
 set -e
 
-if [ "$#" -ne 0 ]; then
-    echo "usage: makesnap"
+if [ "$#" -gt 1 ]; then
+    echo "usage: makesnap <comma-sep-list-of-architectures>"
+    echo "      - default is amd64 only"
+    echo "      - working arch: arm64, amd64"
     exit 2
+elif [ "$#" -eq 1 ]; then
+    BUILD="$1"
+else
+    BUILD="amd64"
 fi
 
 VERSION=`./setup.py --version`
-echo "makesnap of ${VERSION}"
+echo "makesnap of ${VERSION} on ${BUILD}"
 
 # make distribution
 ./setup.py sdist --dist-dir=.
@@ -36,6 +42,7 @@ echo "makesnap of ${VERSION}"
 rm -rf build
 mkdir -p build
 tar xf duplicity-${VERSION}.tar.gz -C build
+rm -f duplicity-${VERSION}.tar.gz
 cd build/duplicity-${VERSION}
 
 # print version in build copy of snapcraft.yaml
@@ -45,21 +52,20 @@ head -2 snap/snapcraft.yaml | tail -1
 snapcraft login --with ~/.snaplogin
 
 # build snap via remote build on LP
-snapcraft remote-build --build-on=amd64,arm64 --launchpad-accept-public-upload
-
-# # build snap on Ubuntu 18.04 VM.  (multipass is twitchy on MacOS).
-# snapcraft snap --output duplicity_${VERSION}_amd64.snap --destructive-mode
+snapcraft remote-build --build-on=${BUILD} --launchpad-accept-public-upload
 
 # push to edge and sign
 for f in duplicity_*.snap; do
-    snapcraft upload $f --release edge
-    snapcraft sign-build $f --key-name firstprime
+    if [ -e $f ]; then
+        snapcraft upload $f --release edge
+        snapcraft sign-build $f --key-name firstprime
+    fi
 done
 
 # mv into working source tree
 mv duplicity_*.txt ../..
-mv duplicity_*_*.snap* ../..
+mv duplicity_*.snap* ../..
 cd ../..
 
 # clean up
-# rm -rf build
+rm -rf build

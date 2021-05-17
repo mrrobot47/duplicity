@@ -4,7 +4,7 @@ fasteners
 future
 python-gettext
 setuptools>=44.1.1
-setuptools_scm>=5.0.2
+setuptools-scm>=5.0.2
 
 
 ##### testing libraries #####
@@ -12,7 +12,6 @@ setuptools_scm>=5.0.2
 
 coverage
 mock>=3.0.5
-psutil
 pycodestyle
 pydevd                  ; python_version >= '3.6'
 pylint
@@ -42,6 +41,7 @@ mediafire
 megatools               ; python_version >= '3.6'
 paramiko
 pexpect
+psutil
 pydrive                 ; python_version >= '3.6'
 pyrax                   ; python_version >= '3.6'
 python-swiftclient

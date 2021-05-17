@@ -55,6 +55,7 @@ parts:
             - megatools             # megabackend.py
             - paramiko              # ssh_paramiko_backend.py
             - pexpect               # ssh_pexpect_backend.py
+            - psutil                # botobackend.py
             - pydrive               # pydrivebackend.py
             - pyrax                 # hubicbackend
             - python-swiftclient    # swiftbackend.py
