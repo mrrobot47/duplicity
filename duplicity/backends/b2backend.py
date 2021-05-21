@@ -109,7 +109,7 @@ class B2Backend(duplicity.backend.Backend):
         except AttributeError:
             log.Log(u"B2 Backend (path= %s, bucket= %s, minimum_part_size= %s)" %
                     (self.path, bucket_name, self.service.account_info.get_minimum_part_size()), log.INFO)
-        
+
         try:
             self.bucket = self.service.get_bucket_by_name(bucket_name)
             log.Log(u"Bucket found", log.INFO)
