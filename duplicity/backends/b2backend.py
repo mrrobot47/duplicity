@@ -103,8 +103,13 @@ class B2Backend(duplicity.backend.Backend):
         self.path = u"".join([url_part + u"/" for url_part in self.url_parts])
         self.service.authorize_account(u'production', account_id, account_key)
 
-        log.Log(u"B2 Backend (path= %s, bucket= %s, minimum_part_size= %s)" %
-                (self.path, bucket_name, self.service.account_info.get_minimum_part_size()), log.INFO)
+        try:
+            log.Log(u"B2 Backend (path= %s, bucket= %s, recommended_part_size= %s)" %
+                    (self.path, bucket_name, self.service.account_info.get_recommended_part_size()), log.INFO)
+        except AttributeError:
+            log.Log(u"B2 Backend (path= %s, bucket= %s, minimum_part_size= %s)" %
+                    (self.path, bucket_name, self.service.account_info.get_minimum_part_size()), log.INFO)
+        
         try:
             self.bucket = self.service.get_bucket_by_name(bucket_name)
             log.Log(u"Bucket found", log.INFO)
