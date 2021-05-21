@@ -12,6 +12,14 @@
 
 ### Other
 
+* Merge branch 'bullfrogalj/duplicity-master' [Kenneth Loafman]
+
+* B2sdk 1.8.0 refactored minimum\_part\_size to recommended\_part\_size (the value used stays the same) [Adam Jacobs]
+
+    It's a breaking change that makes duplicity fail with the new SDK.
+
+    This fix makes duplicity compatible with both pre- and post- 1.8.0 SDKs.
+
 * Merge branch 'PR-backend-gdrive-mydrive' into 'master' [Kenneth Loafman]
 
     backend gdrive, added Google MyDrive support
