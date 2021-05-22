@@ -12,6 +12,14 @@
 
 ### Other
 
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+    Update b2 backend to use *public* b2sdk API.
+
+    See merge request duplicity/duplicity!55
+
+* Update b2 backend to use *public* b2sdk API. [Adam Jacobs]
+
 * Merge branch 'bullfrogalj/duplicity-master' [Kenneth Loafman]
 
 * B2sdk 1.8.0 refactored minimum\_part\_size to recommended\_part\_size (the value used stays the same) [Adam Jacobs]
