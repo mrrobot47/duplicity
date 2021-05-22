@@ -66,25 +66,32 @@ class B2Backend(duplicity.backend.Backend):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
         global DownloadDestLocalFile, FileVersionInfoFactory
-        try:  # try to import the new b2sdk if available
-            from b2sdk.api import B2Api
-            from b2sdk.account_info import InMemoryAccountInfo
-            from b2sdk.download_dest import DownloadDestLocalFile
-            from b2sdk.exception import NonExistentBucket
-            from b2sdk.file_version import FileVersionInfoFactory
-        except ImportError as e:
-            if u'b2sdk' in getattr(e, u'name', u'b2sdk'):
-                raise
-            try:  # fall back to import the old b2 client
-                from b2.api import B2Api
-                from b2.account_info import InMemoryAccountInfo
-                from b2.download_dest import DownloadDestLocalFile
-                from b2.exception import NonExistentBucket
-                from b2.file_version import FileVersionInfoFactory
-            except ImportError:
-                if u'b2' in getattr(e, u'name', u'b2'):
+        try:  # prefer to use public API methods
+            from b2sdk.v1.api import B2Api
+            from b2sdk.v1.account_info import InMemoryAccountInfo
+            from b2sdk.v1.download_dest import DownloadDestLocalFile
+            from b2sdk.v1.exception import NonExistentBucket
+            from b2sdk.v1.file_version import FileVersionInfoFactory
+        except ImportError:
+            try:  # try to import the new b2sdk internal API if available (and public API isn't)
+                from b2sdk.api import B2Api
+                from b2sdk.account_info import InMemoryAccountInfo
+                from b2sdk.download_dest import DownloadDestLocalFile
+                from b2sdk.exception import NonExistentBucket
+                from b2sdk.file_version import FileVersionInfoFactory
+            except ImportError as e:
+                if u'b2sdk' in getattr(e, u'name', u'b2sdk'):
                     raise
-                raise BackendException(u'B2 backend requires B2 Python SDK (pip install b2sdk)')
+                try:  # fall back to import the old b2 client
+                    from b2.api import B2Api
+                    from b2.account_info import InMemoryAccountInfo
+                    from b2.download_dest import DownloadDestLocalFile
+                    from b2.exception import NonExistentBucket
+                    from b2.file_version import FileVersionInfoFactory
+                except ImportError:
+                    if u'b2' in getattr(e, u'name', u'b2'):
+                        raise
+                    raise BackendException(u'B2 backend requires B2 Python SDK (pip install b2sdk)')
 
         self.service = B2Api(InMemoryAccountInfo())
         self.parsed_url.hostname = u'B2'
