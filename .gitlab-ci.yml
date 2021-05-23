@@ -28,6 +28,7 @@ variables:
 stages:
     - code
     - test
+    - release
 
 default:
     image: ubuntu:18.04
@@ -134,3 +135,16 @@ py39_ub20-04:
         reports:
             junit: report.xml
     needs: ["code_ub18-04"]
+
+build_pip:
+    stage: release
+    script:
+        - VERSION=`./setup.py --version`
+        - echo "makepip of ${VERSION}"
+        - python setup.py sdist bdist_wheel
+    artifacts:
+        paths:
+            - dist/*.tar.gz
+            - dist/*.whl
+    needs: ["py39_ub20-04"]
+
