@@ -156,6 +156,8 @@ build_snap:
         - rm -f duplicity-${VERSION}.tar.gz
         - cd build/duplicity-${VERSION}
         - head -2 snap/snapcraft.yaml | tail -1
-        - snapcraft login --with ~/.snaplogin
+        - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > snaplogin
+        - snapcraft login --with snaplogin
+        - rm snaplogin
         - snapcraft build
         - snapcraft upload duplicity_*.snap --release edge
