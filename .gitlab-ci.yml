@@ -159,5 +159,5 @@ build_snap:
         - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > snaplogin
         - snapcraft login --with snaplogin
         - rm snaplogin
-        - snapcraft build
-        - snapcraft upload duplicity_*.snap --release edge
+        - snapcraft snap
+        - snapcraft push duplicity_*.snap --release edge
