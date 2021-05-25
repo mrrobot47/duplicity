@@ -19,20 +19,21 @@
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 variables:
-    # Change pip's cache directory to be inside the project directory since we can
-    # only cache local items.
+    # cache local items
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     # Set to non-interactive so no tzdata prompt
     DEBIAN_FRONTEND: "noninteractive"
+    # for upload to pypi.org
+    TWINE_USERNAME: $TWINE_USERNAME
+    TWINE_PASSWORD: $TWINE_PASSWORD
 
 stages:
-    - code
+    - qual
     - test
-    - release
+    - deploy
 
 default:
     image: ubuntu:18.04
-
     before_script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
@@ -44,14 +45,13 @@ default:
         - python3 -m pip install --requirement requirements.txt
 
 code_ub18-04:
-    stage: code
+    stage: qual
     script:
         - apt-get install -y python3.8 python3.8-dev
         - tox -e code
     artifacts:
         reports:
             junit: report.xml
-    needs: []
 
 py27_ub18-04:
     stage: test
@@ -62,7 +62,6 @@ py27_ub18-04:
         reports:
             junit: report.xml
     allow_failure: true
-    needs: ["code_ub18-04"]
 
 py35_ub16-04:
     stage: test
@@ -84,7 +83,6 @@ py35_ub16-04:
         reports:
             junit: report.xml
     allow_failure: true
-    needs: ["code_ub18-04"]
 
 py36_ub18-04:
     stage: test
@@ -94,7 +92,6 @@ py36_ub18-04:
     artifacts:
         reports:
             junit: report.xml
-    needs: ["code_ub18-04"]
 
 py37_ub18-04:
     stage: test
@@ -104,7 +101,6 @@ py37_ub18-04:
     artifacts:
         reports:
             junit: report.xml
-    needs: ["code_ub18-04"]
 
 py38_ub18-04:
     stage: test
@@ -114,7 +110,6 @@ py38_ub18-04:
     artifacts:
         reports:
             junit: report.xml
-    needs: ["code_ub18-04"]
 
 py39_ub20-04:
     stage: test
@@ -134,17 +129,33 @@ py39_ub20-04:
     artifacts:
         reports:
             junit: report.xml
-    needs: ["code_ub18-04"]
 
 build_pip:
-    stage: release
+    stage: deploy
+    when: manual
+    only: [master]
     script:
+        - pip install twine
         - VERSION=`./setup.py --version`
         - echo "makepip of ${VERSION}"
-        - python setup.py sdist bdist_wheel
-    artifacts:
-        paths:
-            - dist/*.tar.gz
-            - dist/*.whl
-    needs: ["py39_ub20-04"]
+        - ./setup.py sdist --dist-dir=.
+        - python3 -m twine upload duplicity-${VERSION}.tar.gz
 
+build_snap:
+    stage: deploy
+    when: manual
+    only: [master]
+    script:
+        - apt-get install -y snapcraft 
+        - VERSION=`./setup.py --version`
+        - echo "makesnap of ${VERSION}"
+        - ./setup.py sdist --dist-dir=.
+        - rm -rf build
+        - mkdir -p build
+        - tar xf duplicity-${VERSION}.tar.gz -C build
+        - rm -f duplicity-${VERSION}.tar.gz
+        - cd build/duplicity-${VERSION}
+        - head -2 snap/snapcraft.yaml | tail -1
+        - snapcraft login --with ~/.snaplogin
+        - snapcraft build
+        - snapcraft upload duplicity_*.snap --release edge
