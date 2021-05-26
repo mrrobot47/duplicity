@@ -43,6 +43,7 @@ default:
           libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
         - python3 -m pip install --upgrade pip
         - python3 -m pip install --requirement requirements.txt
+    interruptible: true
 
 code_ub18-04:
     stage: qual
