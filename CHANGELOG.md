@@ -2,6 +2,10 @@
 
 ### Changes
 
+* Add support for --s3-multipart-chunk-size, default 25MB. [Kenneth Loafman]
+
+    Fixes issue #61
+
 * Fix formatting in A NOTE ON GDRIVE BACKEND.  Minor. [Kenneth Loafman]
 
 ### Fix
