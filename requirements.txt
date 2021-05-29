@@ -43,6 +43,7 @@ paramiko
 pexpect
 psutil
 pydrive                 ; python_version >= '3.6'
+pydrive2                ; python_version >= '3.6'
 pyrax                   ; python_version >= '3.6'
 python-swiftclient
 requests
