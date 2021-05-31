@@ -10,6 +10,15 @@
 
 ### Fix
 
+* Support -o{Global,User}KnownHostsFile in --ssh-options. [Kenneth Loafman]
+
+    Fixes issue #60
+
+* Add pydrive2 to requirements.txt. [Kenneth Loafman]
+
+    Fixes #62.  pydrivebackend was updated to pydrive 2 over a year ago, but
+    the requirements.txt file was not updated to reflect this.
+
 * Fix error message on gdrivebackend. [Kenneth Loafman]
 
 * Fix issue #57 SSH backends - IndexError: list index out of range. [Kenneth Loafman]
