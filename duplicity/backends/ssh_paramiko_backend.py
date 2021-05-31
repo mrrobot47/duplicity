@@ -157,17 +157,17 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
         # paramiko is very picky wrt format and bails out on any problem...
         global_known_hosts = u"/etc/ssh/ssh_known_hosts"
         m = re.search(r"""
-                        ^(?:.+\s+)?
-                        (?:-oGlobalKnownHostsFile=)
-                        (
-                            ([\"'])
-                            ([^\\2]+)
-                            \\2
-                            |
-                            [\S]+
-                        )
-                        """,
-                        config.ssh_options, re.VERBOSE)
+                      ^(?:.+\s+)?
+                      (?:-oGlobalKnownHostsFile=)
+                      (
+                          ([\"'])
+                          ([^\\2]+)
+                          \\2
+                          |
+                          [\S]+
+                      )
+                      """,
+                      config.ssh_options, re.VERBOSE)
         if (m is not None):
             global_known_hosts = m.group(3) if m.group(3) else m.group(1)
         try:
@@ -178,17 +178,17 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
 
         user_known_hosts = os.path.expanduser(u"~/.ssh/known_hosts")
         m = re.search(r"""
-                        ^(?:.+\s+)?
-                        (?:-oUserKnownHostsFile=)
-                        (
-                            ([\"'])
-                            ([^\\2]+)
-                            \\2
-                            |
-                            [\S]+
-                        )
-                        """,
-                        config.ssh_options, re.VERBOSE)
+                      ^(?:.+\s+)?
+                      (?:-oUserKnownHostsFile=)
+                      (
+                          ([\"'])
+                          ([^\\2]+)
+                          \\2
+                          |
+                          [\S]+
+                      )
+                      """,
+                      config.ssh_options, re.VERBOSE)
         if (m is not None):
             user_known_hosts = m.group(3) if m.group(3) else m.group(1)
         try:
@@ -231,15 +231,15 @@ Are you sure you want to continue connecting (yes/no)? """ % (hostname,
             self.config.update({u'port': 22})
         # parse ssh options for alternative ssh private key, identity file
         m = re.search(r"""
-                        ^(?:.+\s+)?
-                        (?:-oIdentityFile=|-i\s+)
-                        (([\"'])
-                        (
-                            [^\\2]+)\\2
-                            |
-                            [\S]+
-                        )
-                        """,
+                      ^(?:.+\s+)?
+                      (?:-oIdentityFile=|-i\s+)
+                      (([\"'])
+                      (
+                          [^\\2]+)\\2
+                          |
+                          [\S]+
+                      )
+                      """,
                       config.ssh_options, re.VERBOSE)
         if (m is not None):
             keyfilename = m.group(3) if m.group(3) else m.group(1)
