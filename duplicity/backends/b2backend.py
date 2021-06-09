@@ -67,11 +67,17 @@ class B2Backend(duplicity.backend.Backend):
 
         global DownloadDestLocalFile, FileVersionInfoFactory
         try:  # prefer to use public API methods
-            from b2sdk.v1.api import B2Api
-            from b2sdk.v1.account_info import InMemoryAccountInfo
-            from b2sdk.v1.download_dest import DownloadDestLocalFile
+            from b2sdk.v1 import B2Api
+            from b2sdk.v1 import InMemoryAccountInfo
+            from b2sdk.v1 import DownloadDestLocalFile
             from b2sdk.v1.exception import NonExistentBucket
-            from b2sdk.v1.file_version import FileVersionInfoFactory
+
+            from b2sdk import __version__ as VERSION
+            v_split = VERSION.split(u'.')
+            self.v_num = [int(x) for x in v_split]
+
+            if self.v_num < [1, 9, 0]:
+                from b2sdk.v1.file_version import FileVersionInfoFactory
         except ImportError:
             try:  # try to import the new b2sdk internal API if available (and public API isn't)
                 from b2sdk.api import B2Api
@@ -79,6 +85,7 @@ class B2Backend(duplicity.backend.Backend):
                 from b2sdk.download_dest import DownloadDestLocalFile
                 from b2sdk.exception import NonExistentBucket
                 from b2sdk.file_version import FileVersionInfoFactory
+                self.v_num = [0, 0, 0]
             except ImportError as e:
                 if u'b2sdk' in getattr(e, u'name', u'b2sdk'):
                     raise
@@ -88,6 +95,7 @@ class B2Backend(duplicity.backend.Backend):
                     from b2.download_dest import DownloadDestLocalFile
                     from b2.exception import NonExistentBucket
                     from b2.file_version import FileVersionInfoFactory
+                    self.v_num = [0, 0, 0]
                 except ImportError:
                     if u'b2' in getattr(e, u'name', u'b2'):
                         raise
@@ -175,16 +183,19 @@ class B2Backend(duplicity.backend.Backend):
         """
         log.Log(u"Query: %s" % self.path + util.fsdecode(filename), log.INFO)
         file_version_info = self.file_info(quote_plus(self.path + util.fsdecode(filename), u'/'))
-        return {u'size': file_version_info.size
+        return {u'size': int(file_version_info.size)
                 if file_version_info is not None and file_version_info.size is not None else -1}
 
     def file_info(self, filename):
-        response = self.bucket.api.session.list_file_names(self.bucket.id_, filename, 1, self.path)
-        for entry in response[u'files']:
-            file_version_info = FileVersionInfoFactory.from_api_response(entry)
-            if file_version_info.file_name == filename:
-                return file_version_info
-        raise BackendException(u'File not found')
+        if self.v_num >= [1, 9, 0]:
+            return self.bucket.get_file_info_by_name(filename)
+        else:
+            response = self.bucket.api.session.list_file_names(self.bucket.id_, filename, 1, self.path)
+            for entry in response[u'files']:
+                file_version_info = FileVersionInfoFactory.from_api_response(entry)
+                if file_version_info.file_name == filename:
+                    return file_version_info
+            raise BackendException(u'File not found')
 
 
 duplicity.backend.register_backend(u"b2", B2Backend)
