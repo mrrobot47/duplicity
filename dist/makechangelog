@@ -8,9 +8,9 @@ if [ "$#" -ne 0 ]; then
 fi
 
 gitchangelog > CHANGELOG.md
-CNT=`git status --porcelain | tee | grep -v " M CHANGELOG.md" | wc -l`
-if [ "$CNT" != "0" ]; then
-    echo "r*** REPO DIRTY, REFUSING TO COMMIT ***"
+CNT=`git status --porcelain | tee /dev/stderr | grep -v " M CHANGELOG.md" | wc -l`
+if [ $CNT -ne 0 ]; then
+    echo "*** REPO DIRTY, REFUSING TO COMMIT ***"
     exit 1
 fi
 

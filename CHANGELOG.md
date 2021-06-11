@@ -27,6 +27,14 @@
 
 * Merge branch 'master' into 'master' [Kenneth Loafman]
 
+    Replace b2sdk private API references in b2backend with public API
+
+    See merge request duplicity/duplicity!57
+
+* Replace b2sdk private API references in b2backend with public API. [Adam Jacobs]
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
     Update b2 backend to use *public* b2sdk API.
 
     See merge request duplicity/duplicity!55
