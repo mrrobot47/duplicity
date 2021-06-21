@@ -8,8 +8,6 @@
 
 * Fix formatting in A NOTE ON GDRIVE BACKEND.  Minor. [Kenneth Loafman]
 
-* Support DynamicLargeObjects inside swift backend [kiorky]
-
 ### Fix
 
 * Support -o{Global,User}KnownHostsFile in --ssh-options. [Kenneth Loafman]
@@ -26,6 +24,20 @@
 * Fix issue #57 SSH backends - IndexError: list index out of range. [Kenneth Loafman]
 
 ### Other
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+    chg:dev:Fix Support DynamicLargeObjects inside swift backend
+
+    See merge request duplicity/duplicity!59
+
+* Merge branch 'issue#68' into 'master' [Kenneth Loafman]
+
+    have duplicity retry validate_block so object storage can report correct size
+
+    See merge request duplicity/duplicity!58
+
+* Have duplicity retry validate\_block so object storage can report correct size. [Doug Thompson]
 
 * Merge branch 'master' into 'master' [Kenneth Loafman]
 
