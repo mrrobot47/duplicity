@@ -59,6 +59,7 @@ from duplicity import progress
 from duplicity import tempdir
 from duplicity import util
 
+from datetime import datetime
 
 # If exit_val is not None, exit with given value at end.
 exit_val = None
@@ -304,6 +305,16 @@ def write_multivol(backup_type, tarblock_iter, man_outfp, sig_outfp, backend):
         size = info[u'size']
         if size is None:
             return  # error querying file
+        for attempt in range(1, config.num_retries + 1):
+            info = backend.query_info([dest_filename])[dest_filename]
+            size = info[u'size']
+            if size == orig_size:
+                break
+            if size is None:
+                return
+            log.Notice(_(u"%s Remote filesize %d for %s does not match local size %d, retrying.") % (datetime.now(),
+                       size, util.escape(dest_filename), orig_size))
+            time.sleep(2**attempt)
         if size != orig_size:
             code_extra = u"%s %d %d" % (util.escape(dest_filename), orig_size, size)
             log.FatalError(_(u"File %s was corrupted during upload.") % util.fsdecode(dest_filename),
