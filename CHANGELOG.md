@@ -8,6 +8,8 @@
 
 * Fix formatting in A NOTE ON GDRIVE BACKEND.  Minor. [Kenneth Loafman]
 
+* Support DynamicLargeObjects inside swift backend [kiorky]
+
 ### Fix
 
 * Support -o{Global,User}KnownHostsFile in --ssh-options. [Kenneth Loafman]

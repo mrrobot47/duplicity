@@ -656,12 +656,24 @@ def parse_cmdline_options(arglist):
     # option for mediafire to purge files on delete instead of sending to trash
     parser.add_option(u"--mf-purge", action=u"store_true")
 
+    def set_mpsize(o, s, v, p):  # pylint: disable=unused-argument
+        setattr(p.values, u"mp_segment_size", v * 1024 * 1024)
+        setattr(p.values, u"mp_set", True)
+    parser.add_option(u"--mp-segment-size", type=u"int", action=u"callback", metavar=_(u"number"),
+                      callback=set_mpsize)
     # volume size
     # TRANSL: Used in usage help to represent a desired number of
     # something. Example:
     # --num-retries <number>
+
+    def set_volsize(o, s, v, p):  # pylint: disable=unused-argument
+        setattr(p.values, u"volsize", v * 1024 * 1024)
+        # if mp_size was not explicity given, default it to volsize
+        if not getattr(p.values, u'mp_set', False):
+            setattr(p.values, u"mp_segment_size", int(config.mp_factor * p.values.volsize))
+
     parser.add_option(u"--volsize", type=u"int", action=u"callback", metavar=_(u"number"),
-                      callback=lambda o, s, v, p: setattr(p.values, u"volsize", v * 1024 * 1024))
+                      callback=set_volsize)
 
     # If set, collect only the file status, not the whole root.
     parser.add_option(u"--file-changed", action=u"callback", type=u"file",
