@@ -20,6 +20,7 @@
 
 from builtins import str
 import os
+import copy
 
 import duplicity.backend
 from duplicity import config
@@ -36,6 +37,7 @@ class SwiftBackend(duplicity.backend.Backend):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
         try:
+            from swiftclient.service import SwiftService
             from swiftclient import Connection
             from swiftclient import ClientException
         except ImportError as e:
@@ -99,6 +101,11 @@ Exception: %s""" % str(e))
         if u'SWIFT_REGIONNAME' in os.environ:
             os_options.update({u'region_name': os.environ[u'SWIFT_REGIONNAME']})
 
+        svc_options = copy.deepcopy(os_options)
+        svc_options[u'os_username'] = conn_kwargs[u'user']
+        svc_options[u'os_password'] = conn_kwargs[u'key']
+        svc_options[u'os_auth_url'] = conn_kwargs[u'authurl']
+
         conn_kwargs[u'os_options'] = os_options
 
         # This folds the null prefix and all null parts, which means that:
@@ -118,6 +125,7 @@ Exception: %s""" % str(e))
         container_metadata = None
         try:
             self.conn = Connection(**conn_kwargs)
+            self.svc = SwiftService(options=svc_options)
             container_metadata = self.conn.head_container(self.container)
         except ClientException:
             pass
@@ -145,9 +153,26 @@ Exception: %s""" % str(e))
                 return log.ErrorCode.backend_not_found
 
     def _put(self, source_path, remote_filename):
+        lp = util.fsdecode(source_path.name)
+        if config.mp_segment_size > 0:
+            from swiftclient.service import SwiftUploadObject
+            st = os.stat(lp)
+            # only upload using Dynamic Large Object if mpvolsize is triggered
+            if st.st_size >= config.mp_segment_size:
+                mp = self.svc.upload(
+                    self.container,
+                    [SwiftUploadObject(lp,
+                                       object_name=self.prefix + util.fsdecode(remote_filename))],
+                    options={u'segment_size': config.mp_segment_size}
+                )
+                uploads = [a for a in mp if u'container' not in a[u'action']]
+                for upload in uploads:
+                    if not upload[u'success']:
+                        raise BackendException(upload[u'traceback'])
+                return
         self.conn.put_object(self.container,
                              self.prefix + util.fsdecode(remote_filename),
-                             open(util.fsdecode(source_path.name), u'rb'))
+                             open(lp, u'rb'))
 
     def _get(self, remote_filename, local_path):
         headers, body = self.conn.get_object(self.container,
@@ -163,11 +188,13 @@ Exception: %s""" % str(e))
         return [o[u'name'][len(self.prefix):] for o in objs]
 
     def _delete(self, filename):
-        self.conn.delete_object(self.container, self.prefix + util.fsdecode(filename))
+        # use swiftservice to correctly delete all segments in case of multipart uploads
+        deleted = [a for a in self.svc.delete(self.container, [self.prefix + util.fsdecode(filename)])]
 
     def _query(self, filename):
-        sobject = self.conn.head_object(self.container, self.prefix + util.fsdecode(filename))
-        return {u'size': int(sobject[u'content-length'])}
+        # use swiftservice to correctly report filesize in case of multipart uploads
+        sobject = [a for a in self.svc.stat(self.container, [self.prefix + util.fsdecode(filename)])][0]
+        return {u'size': int(sobject[u'headers'][u'content-length'])}
 
 
 duplicity.backend.register_backend(u"swift", SwiftBackend)
