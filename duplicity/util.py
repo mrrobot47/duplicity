@@ -220,6 +220,7 @@ def release_lockfile():
         log.Debug(_(u"Releasing lockfile %s") % config.lockpath)
         try:
             config.lockfile.release()
+            config.lockfile = None
         except Exception:
             pass
 
