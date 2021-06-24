@@ -1,14 +1,18 @@
 #!/bin/sh
 set -x -e
 
+SOURCE=/usr/bin
+TARGET=/Volumes/home/testdup
+OPTS="--no-encr --no-comp -v0 --no-print --volsize=2 --name=foo"
+
 for ((x=0 ; x<100 ; x++)); do
     echo "\nLoop $x\n"
 
     # ----- cleanup -----
-    rm -r /Volumes/home/testdup
+    rm -r ${TARGET}
 
     # ----- making initial backup -----
-    PYTHONPATH=. bin/duplicity --no-encr --no-print -v0 --name=foo /usr/bin file:///Volumes/home/testdup --volsize=2 &
+    PYTHONPATH=. bin/duplicity full ${OPTS} ${SOURCE} file://${TARGET} &
     pid=$!
     sleep 10
 
@@ -17,10 +21,10 @@ for ((x=0 ; x<100 ; x++)); do
     sleep 1
 
     # ----- restarting first backup -----
-    PYTHONPATH=. bin/duplicity --no-encr --no-print -v0 --name=foo /usr/bin file:///Volumes/home/testdup --volsize=2
+    PYTHONPATH=. bin/duplicity full ${OPTS} --name=foo ${SOURCE} file://${TARGET}
 
     # ----- verifying backup -----
-    PYTHONPATH=. bin/duplicity verify --no-encr --name=foo file:///Volumes/home/testdup /usr/bin --volsize=2
+    PYTHONPATH=. bin/duplicity verify ${OPTS} file://${TARGET} ${SOURCE}
 
     if [ $# != 0 ] ; then
     echo "----- Guh!  We hit the bug! -----"
