@@ -19,6 +19,7 @@ for ((x=0 ; x<100 ; x++)); do
     # ----- kill after 10 seconds ------
     kill -9 $pid
     sleep 1
+    echo "killed while writing: $(ls -rt /Volumes/home/testdup/ | tail -1)"
 
     # ----- restarting first backup -----
     PYTHONPATH=. bin/duplicity full ${OPTS} --name=foo ${SOURCE} file://${TARGET}
@@ -27,9 +28,9 @@ for ((x=0 ; x<100 ; x++)); do
     PYTHONPATH=. bin/duplicity verify ${OPTS} file://${TARGET} ${SOURCE}
 
     if [ $# != 0 ] ; then
-    echo "----- Guh!  We hit the bug! -----"
-    exit $#
+        echo "----- Guh!  We hit the bug! -----"
+        exit $#
     else
-    echo "----- Yay!  We didn't hit the bug! -----"
+        echo "----- Yay!  ALL OK! -----"
     fi
 done
