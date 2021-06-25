@@ -1,6 +1,18 @@
 ## (unreleased)
 
+### New
+
+* Better looping.  Increase to 100 loops. [Kenneth Loafman]
+
+* Repeating test for LP bug 487720. [Kenneth Loafman]
+
+    Restore fails with "Invalid data - SHA1 hash mismatch"
+
 ### Changes
+
+* Log difftar filename where kill happened. [Kenneth Loafman]
+
+* Allow customization. [Kenneth Loafman]
 
 * Add support for --s3-multipart-chunk-size, default 25MB. [Kenneth Loafman]
 
@@ -9,6 +21,8 @@
 * Fix formatting in A NOTE ON GDRIVE BACKEND.  Minor. [Kenneth Loafman]
 
 ### Fix
+
+* Fix test file count after deleting lockfile. [Kenneth Loafman]
 
 * Support -o{Global,User}KnownHostsFile in --ssh-options. [Kenneth Loafman]
 
@@ -24,6 +38,14 @@
 * Fix issue #57 SSH backends - IndexError: list index out of range. [Kenneth Loafman]
 
 ### Other
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+    Add support for new b2sdk V2 API
+
+    See merge request duplicity/duplicity!60
+
+* Add support for new b2sdk V2 API. [Adam Jacobs]
 
 * Merge branch 'master' into 'master' [Kenneth Loafman]
 
