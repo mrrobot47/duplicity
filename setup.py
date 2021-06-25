@@ -25,16 +25,17 @@ from __future__ import print_function
 import os
 import re
 import shutil
+import subprocess
 import sys
 import time
 
 from distutils.command.build_scripts import build_scripts
 from distutils.command.install_data import install_data
 from setuptools import setup, Extension
+from setuptools.command.build_ext import build_ext
 from setuptools.command.install import install
 from setuptools.command.sdist import sdist
 from setuptools.command.test import test
-from subprocess import Popen, PIPE
 
 
 # check that we can function here
@@ -244,6 +245,16 @@ class InstallDataCommand(install_data):
                     VersionedCopy(path, path)
 
 
+class BuildExtCommand(build_ext):
+    u'''Build extension modules.'''
+
+    def run(self):
+        # build the _librsync.so module
+        print(u"Building extension for librsync...")
+        self.inplace = True
+        build_ext.run(self)
+
+
 with open(u"README.md") as fh:
     long_description = fh.read()
 
@@ -298,6 +309,7 @@ setup(name=u"duplicity",
         ],
     test_suite=u"testing",
     cmdclass={
+        u"build_ext": BuildExtCommand,
         u"install": InstallCommand,
         u"install_data": InstallDataCommand,
         u"sdist": SdistCommand,
@@ -323,7 +335,7 @@ setup(name=u"duplicity",
     )
 
 
-# TODO: is this the best way to clean up afterwards?
+# TODO: Find best way to clean up afterwards.
 if os.path.exists(u'po/LINGUAS'):
     linguas = open(u'po/LINGUAS').readlines()
     for line in linguas:
