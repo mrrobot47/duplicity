@@ -154,16 +154,33 @@ Exception: %s""" % str(e))
                              open(util.fsdecode(source_path.name), u'rb'))
 
     def _get(self, remote_filename, local_path):
-        body = self.preprocess_download(util.fsdecode(remote_filename), 60)
+        body = self.unseal(util.fsdecode(remote_filename))
         if body:
             with open(util.fsdecode(local_path.name), u'wb') as f:
                 for chunk in body:
                     f.write(chunk)
 
+    def __list_objs(self, ffilter=None):
+        # full_listing should be set to True but a bug in python-swiftclient
+        # doesn't forward query_string in this case...
+        # bypass here using a patched copy (with query_string) from swiftclient code
+        rv = self.conn.get_container(self.container, full_listing=False,
+                                     path=self.prefix, query_string=u'policy_extra=true')
+        listing = rv[1]
+        while listing:
+            marker = listing[-1][u'name']
+            version_marker = listing[-1].get(u'version_id')
+            listing = self.conn.get_container(self.container, marker=marker, version_marker=version_marker,
+                                              full_listing=False, path=self.prefix,
+                                              query_string=u'policy_extra=true')[1]
+            if listing:
+                rv[1].extend(listing)
+        if ffilter is not None:
+            return filter(ffilter, rv[1])
+        return rv[1]
+
     def _list(self):
-        headers, objs = self.conn.get_container(self.container, full_listing=True, path=self.prefix)
-        # removes prefix from return values. should check for the prefix ?
-        return [util.fsencode(o[u'name'][len(self.prefix):]) for o in objs]
+        return [util.fsencode(o[u'name'][len(self.prefix):]) for o in self.__list_objs()]
 
     def _delete(self, filename):
         self.conn.delete_object(self.container, self.prefix + util.fsdecode(filename))
@@ -171,20 +188,6 @@ Exception: %s""" % str(e))
     def _query(self, filename):
         sobject = self.conn.head_object(self.container, self.prefix + util.fsdecode(filename))
         return {u'size': int(sobject[u'content-length'])}
-
-    def preprocess_download(self, remote_filename, retry_period, wait=True):
-        body = self.unseal(remote_filename)
-        try:
-            if wait:
-                while not body:
-                    time.sleep(retry_period)
-                    self.conn = self.conn_cls(**self.conn_kwargs)
-                    body = self.unseal(remote_filename)
-                    self.conn.close()
-        except Exception as e:
-            log.FatalError(u"Connection failed: %s %s" % (e.__class__.__name__, str(e)),
-                           log.ErrorCode.connection_failed)
-        return body
 
     def unseal(self, remote_filename):
         try:
@@ -204,7 +207,70 @@ Exception: %s""" % str(e))
                 log.Info(u"File %s is being unsealed, operation ETA is %s." %
                          (remote_filename, eta))
             else:
-                raise
+                log.FatalError(u"Connection failed: %s %s" % (e.__class__.__name__, str(e)),
+                               log.ErrorCode.connection_failed)
+        return None
+
+    def pre_process_download(self, remote_filenames):
+        u"""
+        This is called before downloading volumes from this backend
+        by main engine. For PCA, volumes passed as argument need to be unsealed.
+        This method is blocking, showing a status at regular interval
+        """
+        retry_interval = 60  # status will be shown every 60s
+        # remote_filenames are bytes string
+        u_remote_filenames = list(map(util.fsdecode, remote_filenames))
+        objs = self.__list_objs(ffilter=lambda x: util.fsdecode(x[u'name']) in u_remote_filenames)
+        # first step: retrieve pca seal status for all required volumes
+        # and launch unseal for all sealed files
+        one_object_not_unsealed = False
+        for o in objs:
+            filename = util.fsdecode(o[u'name'])
+            # see ovh documentation for policy_retrieval_state definition
+            policy_retrieval_state = o[u'policy_retrieval_state']
+            log.Info(u"Volume %s. State : %s. " % (filename, policy_retrieval_state))
+            if policy_retrieval_state == u'sealed':
+                log.Notice(u"Launching unseal of volume %s." % (filename))
+                self.unseal(o[u'name'])
+                one_object_not_unsealed = True
+            elif policy_retrieval_state == u"unsealing":
+                one_object_not_unsealed = True
+        # second step: display estimated time for last volume unseal
+        # and loop until all volumes are unsealed
+        while one_object_not_unsealed:
+            one_object_not_unsealed = self.unseal_status(u_remote_filenames)
+            time.sleep(retry_interval)
+            # might be a good idea to show a progress bar here...
+        else:
+            log.Notice(u"All volumes to download are unsealed.")
+
+    def unseal_status(self, u_remote_filenames):
+        u"""
+        Shows unsealing status for input volumes
+        """
+        one_object_not_unsealed = False
+        objs = self.__list_objs(ffilter=lambda x: util.fsdecode(x[u'name']) in u_remote_filenames)
+        max_duration = 0
+        for o in objs:
+            policy_retrieval_state = o[u'policy_retrieval_state']
+            filename = util.fsdecode(o[u'name'])
+            if policy_retrieval_state == u'sealed':
+                log.Notice(u"Error: volume is still in sealed state : %s." % (filename))
+                log.Notice(u"Launching unseal of volume %s." % (filename))
+                self.unseal(o[u'name'])
+                one_object_not_unsealed = True
+            elif policy_retrieval_state == u"unsealing":
+                duration = int(o[u'policy_retrieval_delay'])
+                log.Info(u"%s available in %d seconds." % (filename, duration))
+                if duration > max_duration:
+                    max_duration = duration
+                one_object_not_unsealed = True
+
+        m, s = divmod(max_duration, 60)
+        h, m = divmod(m, 60)
+        max_duration_eta = u"%dh%02dm%02ds" % (h, m, s)
+        log.Notice(u"Need to wait %s before all volumes are unsealed." % (max_duration_eta))
+        return one_object_not_unsealed
 
 
 duplicity.backend.register_backend(u"pca", PCABackend)

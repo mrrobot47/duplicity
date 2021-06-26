@@ -605,6 +605,14 @@ class BackendWrapper(object):
         else:
             raise NotImplementedError()
 
+    def pre_process_download(self, remote_filenames):
+        u"""
+        Manages remote access before downloading files
+        (unseal data in cold storage for instance)
+        """
+        if hasattr(self.backend, u'pre_process_download'):
+            return self.backend.pre_process_download(remote_filenames)
+
     def delete(self, filename_list):
         u"""
         Delete each filename in filename_list, in order if possible.
