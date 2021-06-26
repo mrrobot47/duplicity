@@ -15,4 +15,4 @@ if [ $CNT -ne 0 ]; then
 fi
 
 git commit -m"Update changelog." CHANGELOG.md
-git push -o ci.skip
+git push
