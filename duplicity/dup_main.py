@@ -773,7 +773,7 @@ def restore_get_patched_rop_iter(col_stats):
             log.Progress(_(u'Processed volume %d of %d') % (cur_vol[0], num_vols),
                          cur_vol[0], num_vols)
 
-    if hasattr(config.backend, u'pre_process_download') or config.dry_run:
+    if hasattr(config.backend, u'pre_process_download_batch') or config.dry_run:
         file_names = []
         for backup_set in backup_setlist:
             manifest = backup_set.get_manifest()
@@ -785,7 +785,7 @@ def restore_get_patched_rop_iter(col_stats):
                        u'\n\t'.join(file_name.decode() for file_name in file_names))
             return None
         else:
-            config.backend.pre_process_download(file_names)
+            config.backend.pre_process_download_batch(file_names)
 
     fileobj_iters = list(map(get_fileobj_iter, backup_setlist))
     tarfiles = list(map(patchdir.TarFile_FromFileobjs, fileobj_iters))
@@ -1355,8 +1355,8 @@ def sync_archive(col_stats):
                 config.gpg_profile.passphrase = get_passphrase(1, u"sync")
             for fn in local_spurious:
                 remove_local(fn)
-            if hasattr(config.backend, u'pre_process_download'):
-                config.backend.pre_process_download(local_missing)
+            if hasattr(config.backend, u'pre_process_download_batch'):
+                config.backend.pre_process_download_batch(local_missing)
             for fn in local_missing:
                 copy_to_local(fn)
             col_stats.set_values()

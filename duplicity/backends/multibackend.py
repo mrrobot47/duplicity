@@ -347,13 +347,18 @@ class MultiBackend(duplicity.backend.Backend):
                     % (filename),
                     log.ERROR)
 
-    def pre_process_download(self, filenames):
-        set_files = set(filenames)
+    def pre_process_download(self, filename):
         for store in self.__stores:
             if hasattr(store.backend, u'pre_process_download'):
+                store.backend.pre_process_download(filename)
+
+    def pre_process_download_batch(self, filenames):
+        set_files = set(filenames)
+        for store in self.__stores:
+            if hasattr(store.backend, u'pre_process_download_batch'):
                 store_files_to_download = set_files.intersection(store.list())
                 if len(store_files_to_download) > 0:
-                    store.backend.pre_process_download(store_files_to_download)
+                    store.backend.pre_process_download_batch(store_files_to_download)
 
 
 duplicity.backend.register_backend(u'multi', MultiBackend)

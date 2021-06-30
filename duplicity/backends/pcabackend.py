@@ -211,7 +211,7 @@ Exception: %s""" % str(e))
                                log.ErrorCode.connection_failed)
         return None
 
-    def pre_process_download(self, remote_filenames):
+    def pre_process_download_batch(self, remote_filenames):
         u"""
         This is called before downloading volumes from this backend
         by main engine. For PCA, volumes passed as argument need to be unsealed.
@@ -220,7 +220,7 @@ Exception: %s""" % str(e))
         retry_interval = 60  # status will be shown every 60s
         # remote_filenames are bytes string
         u_remote_filenames = list(map(util.fsdecode, remote_filenames))
-        objs = self.__list_objs(ffilter=lambda x: util.fsdecode(x[u'name']) in u_remote_filenames)
+        objs = self.__list_objs(ffilter=lambda x: x[u'name'] in u_remote_filenames)
         # first step: retrieve pca seal status for all required volumes
         # and launch unseal for all sealed files
         one_object_not_unsealed = False
