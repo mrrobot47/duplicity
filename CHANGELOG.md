@@ -39,6 +39,10 @@
 
 ### Other
 
+* Remove backup file. [kenneth@loafman.com]
+
+* Don't skip CI. [Kenneth Loafman]
+
 * Merge branch 'master' into 'master' [Kenneth Loafman]
 
     Add support for new b2sdk V2 API
