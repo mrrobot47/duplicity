@@ -194,7 +194,7 @@ class RestartTest(FunctionalTestCase):
         assert not os.system(u"""echo 'Volume 2:
     StartingPath   foo
     EndingPath     bar
-    Hash SHA1 sha1' >> /tmp/testfiles/cache/%s/*.manifest.part""" % name)
+    Hash SHA1 sha1' >> {0}/testfiles/cache/{1}/*.manifest.part""".format(_runtest_dir, name))
 
     def test_split_after_small(self):
         u"""
