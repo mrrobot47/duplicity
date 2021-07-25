@@ -121,7 +121,7 @@ class JottaCloudBackend(duplicity.backend.Backend):
         # - List all files in the backend
         # - Return a list of filenames
         # - Retried if an exception is thrown
-        return list([f.name for f in self.folder.files()
+        return list([f.name for f in self.folder.files()  # pylint: disable=no-value-for-parameter
                      if not f.is_deleted() and f.state != u'INCOMPLETE'])
 
     def _delete(self, filename):
