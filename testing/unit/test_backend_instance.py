@@ -189,7 +189,7 @@ class LocalBackendTest(BackendInstanceBase):
 
 
 # TODO: Add par2-specific tests here, to confirm that we can recover
-@unittest.skipIf(not util.which(u'lftp'), u"lftp not installed")
+@unittest.skipIf(not util.which(u'par2'), u"par2 not installed")
 class Par2BackendTest(BackendInstanceBase):
     def setUp(self):
         super(Par2BackendTest, self).setUp()
