@@ -174,7 +174,7 @@ class MultiBackend(duplicity.backend.Backend):
                 configs = json.load(f)
         except IOError as e:
             log.Log(_(u"MultiBackend: Url %s")
-                    % (parsed_url.geturl()),
+                    % (parsed_url.strip_auth()),
                     log.ERROR)
 
             log.Log(_(u"MultiBackend: Could not load config file %s: %s ")
@@ -246,7 +246,7 @@ class MultiBackend(duplicity.backend.Backend):
                 if (next > len(stores) - 1):
                     next = 0
                 log.Log(_(u"MultiBackend: _put: write to store #%s (%s)")
-                        % (self.__write_cursor, store.backend.parsed_url.url_string),
+                        % (self.__write_cursor, store.backend.parsed_url.strip_auth()),
                         log.DEBUG)
                 store.put(source_path, remote_filename)
                 passed = True
@@ -259,7 +259,7 @@ class MultiBackend(duplicity.backend.Backend):
                     break
             except Exception as e:
                 log.Log(_(u"MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s")
-                        % (self.__write_cursor, store.backend.parsed_url.url_string, next, e),
+                        % (self.__write_cursor, store.backend.parsed_url.strip_auth(), next, e),
                         log.INFO)
                 self.__write_cursor = next
 
@@ -292,7 +292,7 @@ class MultiBackend(duplicity.backend.Backend):
                 s.get(remote_filename, local_path)
                 return
             log.Log(_(u"MultiBackend: failed to get %s to %s from %s")
-                    % (remote_filename, local_path, s.backend.parsed_url.url_string),
+                    % (remote_filename, local_path, s.backend.parsed_url.strip_auth()),
                     log.INFO)
         log.Log(_(u"MultiBackend: failed to get %s. Tried all backing stores and none succeeded")
                 % (remote_filename),
@@ -305,10 +305,10 @@ class MultiBackend(duplicity.backend.Backend):
             config.are_errors_fatal[u'list'] = (False, [])
             l = s.list()
             log.Notice(_(u"MultiBackend: %s: %d files")
-                       % (s.backend.parsed_url.url_string, len(l)))
+                       % (s.backend.parsed_url.strip_auth(), len(l)))
             if len(l) == 0 and duplicity.backend._last_exception:
                 log.Warn(_(u"Exception during list of %s: %s"
-                           % (s.backend.parsed_url.url_string,
+                           % (s.backend.parsed_url.strip_auth(),
                               util.uexc(duplicity.backend._last_exception))))
                 duplicity.backend._last_exception = None
             lists.append(l)
