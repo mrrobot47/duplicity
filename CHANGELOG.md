@@ -1,3 +1,59 @@
+## (unreleased)
+
+### Other
+
+* Merge branch 'mr3' into 'master' [Kenneth Loafman]
+
+* SSHPExpectBackend: Implement \_delete\_list method. [Clemens Fuchslocher]
+
+* Merge branch 'mr2' into 'master' [Kenneth Loafman]
+
+* MultiBackend: Don't log username and password. [Clemens Fuchslocher]
+
+* Merge branch 'mr1' into 'master' [Kenneth Loafman]
+
+    Fix NameError.
+
+    See merge request duplicity/duplicity!66
+
+* Fix NameError. [Clemens Fuchslocher]
+
+* Merge branch 'onedrive-token-take2' into 'master' [Kenneth Loafman]
+
+    onedrive: Support using an external client id / refresh token
+
+    See merge request duplicity/duplicity!65
+
+* Onedrive: Support using an external client id / refresh token. [Michael Terry]
+
+* Merge branch 'fix-tmdir' into 'master' [Kenneth Loafman]
+
+    fix functional tests when _runtest_dir is not /tmp
+
+    See merge request duplicity/duplicity!64
+
+* Fix functional tests when \_runtestdir is not /tmp. [Guillaume Girol]
+
+* Merge branch 'date' into 'master' [Kenneth Loafman]
+
+    Allow to override manpage date with SOURCE_DATE_EPOCH
+
+    See merge request duplicity/duplicity!63
+
+* Allow to override manpage date with SOURCE\_DATE\_EPOCH. [Bernhard M. Wiedemann]
+
+    in order to make builds reproducible.
+    See https://reproducible-builds.org/ for why this is good
+    and https://reproducible-builds.org/specs/source-date-epoch/
+    for the definition of this variable.
+
+    Also use UTC/gmtime to be independent of timezone.
+
+* Merge branch 'origin/merge-requests/61' [Kenneth Loafman]
+
+* Improved management of volumes unsealing for PCA backend For PCA backend, unseal all volumes at once when restoring them instead of unsealing once at a time. Use pre\_process\_download method already available in dup\_main. Need to implement it on BackendWrapper and Multibackend as well. [Erwan B]
+
+
 ## rel.0.8.20 (2021-06-26)
 
 ### New
