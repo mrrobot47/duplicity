@@ -348,6 +348,9 @@ class ParsedUrl(object):
     def geturl(self):
         return self.url_string
 
+    def strip_auth(self):
+        return duplicity.backend.strip_auth_from_url(self)
+
 
 def strip_auth_from_url(parsed_url):
     u"""Return a URL from a urlparse object without a username or password."""
