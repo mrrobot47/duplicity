@@ -70,6 +70,10 @@ class LocalBackend(duplicity.backend.Backend):
     def _delete(self, filename):
         self.remote_pathdir.append(filename).delete()
 
+    def _delete_list(self, filenames):
+        for filename in filenames:
+            self.remote_pathdir.append(filename).delete()
+
     def _query(self, filename):
         target_file = self.remote_pathdir.append(filename)
         target_file.setdata()

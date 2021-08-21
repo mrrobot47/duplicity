@@ -347,6 +347,35 @@ class MultiBackend(duplicity.backend.Backend):
                     % (filename),
                     log.ERROR)
 
+    def _delete_list(self, filenames):
+        # Store an indication on whether any passed
+        passed = False
+
+        stores = self.__stores
+
+        # since the backend operations will be retried, we can't
+        # simply try to get from the store, if not found, move to the
+        # next store (since each failure will be retried n times
+        # before finally giving up).  So we need to get the list first
+        # before we try to delete
+        # ENHANCEME: maintain a cached list for each store
+        for s in stores:
+            flist = s.list()
+            cleaned = [f for f in filenames if f in flist]
+            if hasattr(s.backend, u'_delete_list'):
+                s._do_delete_list(cleaned)
+            elif hasattr(s.backend, u'_delete'):
+                for filename in cleaned:
+                    s._do_delete(filename)
+            passed = True
+            # In stripe mode, only one item will have the file
+            if self.__mode == u'stripe':
+                return
+        if not passed:
+            log.Log(_(u"MultiBackend: failed to delete %s. Tried all backing stores and none succeeded")
+                    % (filenames),
+                    log.ERROR)
+
     def pre_process_download(self, filename):
         for store in self.__stores:
             if hasattr(store.backend, u'pre_process_download'):
