@@ -1,5 +1,11 @@
 ## (unreleased)
 
+### Fix
+
+* Fix issue #79 - Multibackend degradation. [Kenneth Loafman]
+
+* Add verbose exception on progress file failure. [Kenneth Loafman]
+
 ### Other
 
 * Merge branch 'mr3' into 'master' [Kenneth Loafman]
