@@ -45,6 +45,7 @@ import time
 
 from duplicity import config
 from duplicity import log
+from duplicity import util
 
 tracker = None
 progress_thread = None
@@ -68,8 +69,8 @@ class Snapshot(sys_collections.deque):
                 progressfd = open(u'%s/progress' % config.archive_dir_path.name, u'r')
                 snapshot = pickle.load(progressfd)
                 progressfd.close()
-            except:
-                log.Warn(u"Warning, cannot read stored progress information from previous backup",
+            except Exception as e:
+                log.Warn(u"Warning, cannot read stored progress info from previous backup: {}".format(util.uexc(e)),
                          log.WarningCode.cannot_stat)
                 snapshot = Snapshot()
         # Reached here no cached data found or wrong marshalling
