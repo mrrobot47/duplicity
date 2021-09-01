@@ -115,7 +115,13 @@ class BackupSet(object):
         else:
             assert pr.volume_number is not None
             assert pr.volume_number not in self.volume_name_dict, \
-                (self.volume_name_dict, filename)
+                u"""Volume %d is already in the volume list as "%s".
+                "%s" has the same volume number.
+                Please check your command line and retry.""" % (
+                    pr.volume_number,
+                    util.fsdecode(self.volume_name_dict[pr.volume_number]),
+                    util.fsdecode(filename)
+                )
             self.volume_name_dict[pr.volume_number] = filename
 
         return True
