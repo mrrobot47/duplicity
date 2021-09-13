@@ -1,6 +1,12 @@
 ## (unreleased)
 
+### Changes
+
+* Fixes to make API docs work right. [Kenneth Loafman]
+
 ### Fix
+
+* Fix issue #81 - Assertion fail when par2 prefix forgotten. [Kenneth Loafman]
 
 * Fix issue #79 - Multibackend degradation. [Kenneth Loafman]
 
