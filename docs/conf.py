@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('../tools'))
 # -- Project information -----------------------------------------------------
 
 project = 'duplicity'
-copyright = '2020, Kenneth Loafman'  # pylint: disable=redefined-builtin
+copyright = '2021, Kenneth Loafman'  # pylint: disable=redefined-builtin
 author = 'Kenneth Loafman'
 
 
