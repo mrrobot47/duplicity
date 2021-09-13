@@ -14,6 +14,16 @@
 
 ### Other
 
+* Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
+
+* Merge branch 'mr4' into 'master' [Kenneth Loafman]
+
+    Fix TypeError.
+
+    See merge request duplicity/duplicity!69
+
+* Fix TypeError. [Clemens Fuchslocher]
+
 * Merge branch 'mr3' into 'master' [Kenneth Loafman]
 
 * SSHPExpectBackend: Implement \_delete\_list method. [Clemens Fuchslocher]
