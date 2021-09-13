@@ -8,8 +8,6 @@ Subpackages
    :maxdepth: 4
 
    testing.functional
-   testing.manual
-   testing.overrides
    testing.unit
 
 Submodules

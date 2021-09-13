@@ -1,14 +1,6 @@
 duplicity.backends package
 ==========================
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   duplicity.backends.pyrax_identity
-
 Submodules
 ----------
 
@@ -18,12 +10,15 @@ Submodules
    duplicity.backends.adbackend
    duplicity.backends.azurebackend
    duplicity.backends.b2backend
+   duplicity.backends.boxbackend
    duplicity.backends.cfbackend
    duplicity.backends.dpbxbackend
    duplicity.backends.gdocsbackend
+   duplicity.backends.gdrivebackend
    duplicity.backends.giobackend
    duplicity.backends.hsibackend
    duplicity.backends.hubicbackend
+   duplicity.backends.idrivedbackend
    duplicity.backends.imapbackend
    duplicity.backends.jottacloudbackend
    duplicity.backends.lftpbackend
@@ -31,6 +26,7 @@ Submodules
    duplicity.backends.mediafirebackend
    duplicity.backends.megabackend
    duplicity.backends.megav2backend
+   duplicity.backends.megav3backend
    duplicity.backends.multibackend
    duplicity.backends.ncftpbackend
    duplicity.backends.onedrivebackend

@@ -1,7 +1,7 @@
-duplicity.backends.gdrivebackend module
+duplicity.backends.megav3backend module
 =======================================
 
-.. automodule:: duplicity.backends.gdrivebackend
+.. automodule:: duplicity.backends.megav3backend
    :members:
    :undoc-members:
    :show-inheritance:

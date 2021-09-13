@@ -7,6 +7,11 @@ SPHINXBUILD   = sphinx-build
 SOURCEDIR     = .
 BUILDDIR      = _build
 
+PYTHONPATH    = ../
+READTHEDOCS   = True
+
+.EXPORT_ALL_VARIABLES:
+
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
