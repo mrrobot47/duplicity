@@ -48,7 +48,7 @@ class S3Boto3Backend(duplicity.backend.Backend):
     the use of the boto3 module. (See
     https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
     for information on boto3.)
-.
+
     Pursuant to Amazon's announced deprecation of path style S3 access,
     this backend only supports virtual host style bucket URIs.
     See the man page for full details.

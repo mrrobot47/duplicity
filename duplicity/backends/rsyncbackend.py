@@ -35,8 +35,7 @@ class RsyncBackend(duplicity.backend.Backend):
 
     rsync backend contributed by Sebastian Wilhelmi <seppi@seppi.de>
     rsyncd auth, alternate port support
-        Copyright 2010 by Edgar Soldin <edgar.soldin@web.de>
-
+    Copyright 2010 by Edgar Soldin <edgar.soldin@web.de>
     """
     def __init__(self, parsed_url):
         u"""rsyncBackend initializer"""

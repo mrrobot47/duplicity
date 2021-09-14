@@ -148,7 +148,6 @@ def interruptably_wait(cv, waitFor):
       cv.acquire()
       interruptable_condwait(cv, lambda: thing_done)
       cv.release()
-
     """
     # We can either poll at some interval, or wait with a short enough
     # timeout to be practical (i.e., such that it interactively seems

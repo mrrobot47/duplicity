@@ -1385,8 +1385,8 @@ def check_last_manifest(col_stats):
 def check_resources(action):
     u"""
     Check for sufficient resources:
-      - temp space for volume build
-      - enough max open files
+    - temp space for volume build
+    - enough max open files
     Put out fatal error if not sufficient to run
 
     @type action: string
