@@ -25,4 +25,5 @@
 cd `dirname $0`
 
 docker-compose up -d
+docker-compose exec -u root duplicity_test python3 setup.py install
 docker-compose exec duplicity_test /bin/bash
