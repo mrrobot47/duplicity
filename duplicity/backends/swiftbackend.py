@@ -191,10 +191,10 @@ Exception: %s""" % str(e))
         # use swiftservice to correctly delete all segments in case of multipart uploads
         deleted = [a for a in self.svc.delete(self.container, [self.prefix + util.fsdecode(filename)])]
 
-    def _query(self, filename):
-        # use swiftservice to correctly report filesize in case of multipart uploads
-        sobject = [a for a in self.svc.stat(self.container, [self.prefix + util.fsdecode(filename)])][0]
-        return {u'size': int(sobject[u'headers'][u'content-length'])}
+#    def _query(self, filename):
+#        # use swiftservice to correctly report filesize in case of multipart uploads
+#        sobject = [a for a in self.svc.stat(self.container, [self.prefix + util.fsdecode(filename)])][0]
+#        return {u'size': int(sobject[u'headers'][u'content-length'])}
 
 
 duplicity.backend.register_backend(u"swift", SwiftBackend)
