@@ -37,7 +37,7 @@ class Megav2Backend(duplicity.backend.Backend):
 
          This MEGA backend resorts to official tools (MEGAcmd) as available at https://mega.nz/cmd
          MEGAcmd works through a single binary called "mega-cmd", which talks to a backend server
-         "mega-cmd-server", which keeps state (for example, persisting a session). Multiple "mega-\*"
+         "mega-cmd-server", which keeps state (for example, persisting a session). Multiple "mega-*"
          shell wrappers (ie. "mega-ls") exist as the user interface to "mega-cmd" and MEGA API
          The full MEGAcmd User Guide can be found in the software's GitHub page below :
          https://github.com/meganz/MEGAcmd/blob/master/UserGuide.md """
