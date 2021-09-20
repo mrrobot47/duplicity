@@ -2,6 +2,8 @@
 
 ### Changes
 
+* Fix some rst errors in docstrings.  Add doctest module. [Kenneth Loafman]
+
 * Fixes to make API docs work right. [Kenneth Loafman]
 
 ### Fix
@@ -13,6 +15,26 @@
 * Add verbose exception on progress file failure. [Kenneth Loafman]
 
 ### Other
+
+* Merge branch 'master' of git@gitlab.com:duplicity/duplicity.git. [Kenneth Loafman]
+
+* Merge branch 'y0va-master-patch-75623' into 'master' [Kenneth Loafman]
+
+    don't query for filesize.
+
+    See merge request duplicity/duplicity!71
+
+* Don't query for filesize. [Johannes Winter]
+
+* Merge branch 'issue85' into 'master' [Kenneth Loafman]
+
+    upgrade docker test environment
+
+    See merge request duplicity/duplicity!70
+
+* Upgrade docker test environment. [Johannes Winter]
+
+* Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
 
 * Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
 
