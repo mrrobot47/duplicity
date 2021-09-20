@@ -42,17 +42,11 @@ RUN apt-get update \
             libssl-dev \
             openssl \
             par2 \
-            python2 \
-            python2-dev \
-            python-future \
-            python-pip \
+            python3-pip \
             python3-dev \
             python3-future \
             python3-pip \
-            python3.7 \
-            python3.7-dev \
-            python3.8 \
-            python3.8-dev \
+            python3 \
             rdiff \
             tzdata  # required for testing/unit/test_statistics.py
 
@@ -83,14 +77,11 @@ WORKDIR /home/test
 
 # Copy a SSH key to the users folder that is used for some test cases
 USER root
-COPY id_rsa /home/test/.ssh/
-COPY id_rsa.pub /home/test/.ssh/
+COPY testing/docker/id_rsa /home/test/.ssh/
+COPY testing/docker/id_rsa.pub /home/test/.ssh/
 RUN chown -R test:test /home/test/.ssh
 RUN chmod 400 /home/test/.ssh/id_rsa
 
-# Copy the local duplicity folder into the container
-COPY dupcopy/ duplicity/
-RUN chown -R test:test duplicity
 USER test
 
 # Set final workdir to duplicity
