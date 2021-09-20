@@ -8,12 +8,10 @@ The recommended approach is to test duplicity using Docker, to ensure that you a
 environment. This also creates additional containers to test backends. You can run tests on your branch as follows:
 a. Install Docker
 b. cd [BRANCH FOLDER]/testing/docker/
-c. ./build-duplicity_test.sh to build the required Docker containers and copy your branch into
-   the duplicity_test container.
-d. ./setup.sh to start the containers and open a shell inside your branch folder in duplicity_test.
-e. cd testing/
-f. ./run-tests
-g. When you are finished, exit the Docker container and run ./teardown.sh to delete the containers.
+c. ./setup.sh to build and to start the containers and open a shell inside your branch folder in duplicity_test.
+d. cd testing/
+e. ./run-tests
+f. When you are finished, exit the Docker container and run ./teardown.sh to delete the containers.
 
 Please test your branch using this method and ensure all tests pass before submitting a merge request.
 
