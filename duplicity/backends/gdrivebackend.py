@@ -111,7 +111,7 @@ Exception: %s""" % str(e))
                 else:
                     flow = InstalledAppFlow.from_client_secrets_file(
                         os.environ[u'GOOGLE_CLIENT_SECRET_JSON_FILE'],
-                        u'https://www.googleapis.com/auth/drive.file')
+                        [u'https://www.googleapis.com/auth/drive.file'])
 
                     if flow.client_config[u'client_id'] != client_id:
                         raise BackendException(
