@@ -5,3 +5,4 @@ duplicity.backends.localbackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

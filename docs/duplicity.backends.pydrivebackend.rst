@@ -5,3 +5,4 @@ duplicity.backends.pydrivebackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

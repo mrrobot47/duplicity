@@ -5,3 +5,4 @@ duplicity.backends.gdrivebackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

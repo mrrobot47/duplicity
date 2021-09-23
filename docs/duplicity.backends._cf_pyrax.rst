@@ -1,7 +1,7 @@
-testing.unit.test\_collections module
+duplicity.backends.\_cf\_pyrax module
 =====================================
 
-.. automodule:: testing.unit.test_collections
+.. automodule:: duplicity.backends._cf_pyrax
    :members:
    :undoc-members:
    :show-inheritance:

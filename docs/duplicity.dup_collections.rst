@@ -5,3 +5,4 @@ duplicity.dup\_collections module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

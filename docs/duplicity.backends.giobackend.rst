@@ -5,3 +5,4 @@ duplicity.backends.giobackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

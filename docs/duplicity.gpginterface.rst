@@ -5,3 +5,4 @@ duplicity.gpginterface module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

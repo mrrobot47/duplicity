@@ -5,3 +5,4 @@ testing.unit.test\_backend\_instance module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

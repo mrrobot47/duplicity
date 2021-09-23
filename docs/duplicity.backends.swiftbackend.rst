@@ -5,3 +5,4 @@ duplicity.backends.swiftbackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

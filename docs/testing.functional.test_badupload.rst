@@ -5,3 +5,4 @@ testing.functional.test\_badupload module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

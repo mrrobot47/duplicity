@@ -5,3 +5,4 @@ duplicity.backend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

@@ -5,3 +5,4 @@ duplicity.backends.ssh\_pexpect\_backend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

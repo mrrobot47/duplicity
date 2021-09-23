@@ -1,7 +1,7 @@
-testing.functional.test\_restart module
+duplicity.backends.\_boto\_multi module
 =======================================
 
-.. automodule:: testing.functional.test_restart
+.. automodule:: duplicity.backends._boto_multi
    :members:
    :undoc-members:
    :show-inheritance:

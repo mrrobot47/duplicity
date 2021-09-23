@@ -5,3 +5,4 @@ testing.unit.test\_tarfile module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

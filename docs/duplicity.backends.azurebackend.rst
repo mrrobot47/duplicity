@@ -5,3 +5,4 @@ duplicity.backends.azurebackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

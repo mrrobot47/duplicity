@@ -5,3 +5,4 @@ testing.unit.test\_diffdir module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

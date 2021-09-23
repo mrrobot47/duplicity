@@ -7,6 +7,10 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   duplicity.backends._boto_multi
+   duplicity.backends._boto_single
+   duplicity.backends._cf_cloudfiles
+   duplicity.backends._cf_pyrax
    duplicity.backends.adbackend
    duplicity.backends.azurebackend
    duplicity.backends.b2backend
@@ -51,3 +55,4 @@ Module contents
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

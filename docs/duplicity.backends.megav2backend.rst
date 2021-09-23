@@ -5,3 +5,4 @@ duplicity.backends.megav2backend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

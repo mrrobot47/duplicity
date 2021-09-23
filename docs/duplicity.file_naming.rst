@@ -5,3 +5,4 @@ duplicity.file\_naming module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

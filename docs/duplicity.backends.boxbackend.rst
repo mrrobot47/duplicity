@@ -5,3 +5,4 @@ duplicity.backends.boxbackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

@@ -5,3 +5,4 @@ duplicity.backends.onedrivebackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

@@ -32,10 +32,11 @@ author = 'Kenneth Loafman'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'myst_parser',
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
-    'sphinx.ext.viewcode',
     'sphinx.ext.todo',
+    'sphinx.ext.viewcode',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -80,8 +81,23 @@ html_static_path = []
 
 # -- Extension configuration -------------------------------------------------
 autodoc_mock_imports = [
-    'duplicity.librsync',
+    'duplicity._librsync',
+    'duplicity.apsw',
 ]
+
+autodoc_default_options = {
+    'autofunction': True,
+    'members': True,
+    'member-order': 'alphabetical',
+    'special-members': '__init__',
+    'undoc-members': True,
+}
+
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.txt': 'markdown',
+    '.md': 'markdown',
+}
 
 
 # -- Options for todo extension ----------------------------------------------

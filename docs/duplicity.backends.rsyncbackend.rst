@@ -5,3 +5,4 @@ duplicity.backends.rsyncbackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

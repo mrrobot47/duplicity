@@ -5,3 +5,4 @@ testing.unit.test\_file\_naming module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

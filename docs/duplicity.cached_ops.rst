@@ -5,3 +5,4 @@ duplicity.cached\_ops module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

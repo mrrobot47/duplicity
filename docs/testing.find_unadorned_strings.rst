@@ -5,3 +5,4 @@ testing.find\_unadorned\_strings module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

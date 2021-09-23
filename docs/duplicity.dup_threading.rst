@@ -5,3 +5,4 @@ duplicity.dup\_threading module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

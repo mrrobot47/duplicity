@@ -5,3 +5,4 @@ duplicity.backends.rclonebackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

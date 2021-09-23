@@ -5,3 +5,4 @@ duplicity.backends.webdavbackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

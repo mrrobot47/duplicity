@@ -5,3 +5,4 @@ duplicity.backends.ssh\_paramiko\_backend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

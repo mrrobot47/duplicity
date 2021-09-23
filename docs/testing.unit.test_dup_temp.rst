@@ -5,3 +5,4 @@ testing.unit.test\_dup\_temp module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

@@ -5,3 +5,4 @@ duplicity.backends.s3\_boto3\_backend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

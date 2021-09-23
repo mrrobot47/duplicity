@@ -5,3 +5,4 @@ duplicity.backends.lftpbackend module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:
