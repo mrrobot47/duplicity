@@ -420,8 +420,8 @@ def retry(operation, fatal=True):
                                            % (n, e.__class__.__name__,
                                               util.uexc(e)), code=code, extra=extra)
                         else:
-                            log.Warn(_(u"Attempt %s failed. %s: %s")
-                                     % (n, e.__class__.__name__, util.uexc(e)))
+                            log.Warn(_(u"Attempt of %s Nr. %s failed. %s: %s")
+                                     % (fn.__name__, n, e.__class__.__name__, util.uexc(e)))
                         if not at_end:
                             if isinstance(e, TemporaryLoadException):
                                 time.sleep(3 * config.backend_retry_delay)  # wait longer before trying again
