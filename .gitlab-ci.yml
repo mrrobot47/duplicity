@@ -141,7 +141,7 @@ build_pip:
     script:
         - pip install twine
         - VERSION=`./setup.py --version`
-        - echo "makepip of ${VERSION}"
+        - echo "make pip of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
         - python3 -m twine upload duplicity-${VERSION}.tar.gz
 
@@ -152,7 +152,7 @@ build_snap:
     script:
         - apt-get install -y snapcraft
         - VERSION=`./setup.py --version`
-        - echo "makesnap of ${VERSION}"
+        - echo "make snap of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
         - rm -rf build
         - mkdir -p build
@@ -165,3 +165,18 @@ build_snap:
         - rm snaplogin
         - snapcraft snap
         - snapcraft push duplicity_*.snap --release edge
+
+pages:
+    stage: deploy
+    when: manual
+    only: [master]
+    script:
+    script:
+        - apt-get update
+        - apt-get install -y python3-pip wml rman make curl
+        - VERSION=`./setup.py --version`
+        - echo "make docs of ${VERSION}"
+        - make docs
+    artifacts:
+        paths:
+            - public
