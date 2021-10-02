@@ -18,6 +18,8 @@ __pycache__
 build
 config.py
 docs/_build
+docs/duplicity.*
+docs/testing.*
 duplicity-venv
 duplicity.egg-info
 duplicity.spec
