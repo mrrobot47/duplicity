@@ -18,8 +18,14 @@ pylint
 pytest
 pytest-cov
 pytest-runner           ; python_version >= '3.6'
-sphinx
 tox
+
+
+##### documrntation libraries #####
+
+
+myst-parser
+sphinx
 
 
 ##### backend libraries #####

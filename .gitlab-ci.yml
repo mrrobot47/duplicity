@@ -175,6 +175,7 @@ pages:
         - VERSION=`./setup.py --version`
         - echo "make docs of ${VERSION}"
         - make docs
+        - mv docs/_build/html public
     artifacts:
         paths:
             - public
