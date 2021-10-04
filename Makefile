@@ -9,8 +9,8 @@ clean:
 	for i in '.tox' '_build' 'build' 'apsw' 'work' 'megatestresults' '.eggs' '*.egg-info' \
 		'__pycache__' '*.pyc' '*.pyo' '*~' '*.o' '*.so' '*.pyd' '*.gcov' '*.gcda' \
 		'*.gcno' '*.orig' '*.tmp' 'testdb*' 'testextension.sqlext' \
-		'docs/_build' 'docs/duplicity.*' 'docs/testing.*'; do \
-		find . -type d -name "$$i" | xargs -t -r rm -rf ; \
+		'duplicity*.rst' 'testing*.rst'; do \
+		find . -name "$$i" | xargs -t -r rm -rf ; \
 	done
 
 docs:
