@@ -1,12 +1,36 @@
 ## (unreleased)
 
+### New
+
+* Add update of API docs to deploy step. [Kenneth Loafman]
+
 ### Changes
+
+* Switch over to sphinx-rtd-theme. [Kenneth Loafman]
+
+* Fix command line warning messages. [Kenneth Loafman]
+
+* Nuke generated .rst files. [Kenneth Loafman]
+
+* Nuke before\_script.  [ci skip] [Kenneth Loafman]
+
+* Move html to public dir. [Kenneth Loafman]
+
+* Back to alabaster theme.  Port changes from sqlite branch. [Kenneth Loafman]
+
+* Remove Dockerfiles for .10 versions. [Kenneth Loafman]
 
 * Fix some rst errors in docstrings.  Add doctest module. [Kenneth Loafman]
 
 * Fixes to make API docs work right. [Kenneth Loafman]
 
 ### Fix
+
+* Fix bug #87, Restore fails and stops on corrupted backup volume. [Kenneth Loafman]
+
+* Fix bug #86, PAR2 backend fails on restore, with patch supplied. [Kenneth Loafman]
+
+* Fix PEP8 style errors. [Kenneth Loafman]
 
 * Fix issue #81 - Assertion fail when par2 prefix forgotten. [Kenneth Loafman]
 
@@ -15,6 +39,24 @@
 * Add verbose exception on progress file failure. [Kenneth Loafman]
 
 ### Other
+
+* Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
+
+* Merge branch 'issue73' into 'master' [Kenneth Loafman]
+
+    resolve os option key naming mismatch
+
+    See merge request duplicity/duplicity!74
+
+* Resolve os option key naming mismatch. [Johannes Winter]
+
+* Merge branch 'master' into 'master' [Kenneth Loafman]
+
+    Set up gdrive client credentials scope correctly to allow refreshing token
+
+    See merge request duplicity/duplicity!72
+
+* Set up gdrive client credentials scope correctly. [Christopher Haglund]
 
 * Merge branch 'master' of git@gitlab.com:duplicity/duplicity.git. [Kenneth Loafman]
 
