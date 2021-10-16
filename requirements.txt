@@ -24,8 +24,9 @@ tox
 ##### documrntation libraries #####
 
 
-myst-parser
-sphinx
+myst-parser             ; python_version >= '3.6'
+sphinx                  ; python_version >= '3.6'
+sphinx-rtd-theme        ; python_version >= '3.6'
 
 
 ##### backend libraries #####
