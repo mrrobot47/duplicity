@@ -28,6 +28,7 @@ import re
 import sys
 import tempfile
 
+from duplicity import errors
 from duplicity import diffdir
 from duplicity import config
 from duplicity import librsync
@@ -342,7 +343,16 @@ class TarFile_FromFileobjs(object):
         u"""Set tarfile from next file object, or raise StopIteration"""
         if self.current_fp:
             assert not self.current_fp.close()
-        self.current_fp = next(self.fileobj_iter)
+
+        while True:
+            x = next(self.fileobj_iter)
+            if isinstance(x, errors.BadVolumeException):
+                # continue with the next volume
+                continue
+            else:
+                self.current_fp = x
+                break
+
         self.tarfile = util.make_tarfile(u"r", self.current_fp)
         self.tar_iter = iter(self.tarfile)
 

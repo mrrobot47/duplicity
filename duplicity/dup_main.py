@@ -58,6 +58,10 @@ from duplicity import path
 from duplicity import progress
 from duplicity import tempdir
 from duplicity import util
+import duplicity.errors
+from duplicity.errors import BadVolumeException
+
+import duplicity.config as config
 
 from datetime import datetime
 
@@ -762,9 +766,13 @@ def restore_get_patched_rop_iter(col_stats):
         manifest = backup_set.get_manifest()
         volumes = manifest.get_containing_volumes(index)
         for vol_num in volumes:
-            yield restore_get_enc_fileobj(backup_set.backend,
-                                          backup_set.volume_name_dict[vol_num],
-                                          manifest.volume_info_dict[vol_num])
+            try:
+                yield restore_get_enc_fileobj(backup_set.backend,
+                                              backup_set.volume_name_dict[vol_num],
+                                              manifest.volume_info_dict[vol_num])
+            except BadVolumeException as e:
+                yield e
+
             cur_vol[0] += 1
             log.Progress(_(u'Processed volume %d of %d') % (cur_vol[0], num_vols),
                          cur_vol[0], num_vols)
@@ -796,6 +804,8 @@ def restore_get_enc_fileobj(backend, filename, volume_info):
     assuming some hash is available.  Also, if config.sign_key is
     set, a fatal error will be raised if file not signed by sign_key.
 
+    with --ignore-errors set continue on hash mismatch
+
     """
     parseresults = file_naming.parse(filename)
     tdp = dup_temp.new_tempduppath(parseresults)
@@ -804,14 +814,21 @@ def restore_get_enc_fileobj(backend, filename, volume_info):
     u""" verify hash of the remote file """
     verified, hash_pair, calculated_hash = restore_check_hash(volume_info, tdp)
     if not verified:
-        log.FatalError(u"%s\n %s\n %s\n %s\n" %
-                       (_(u"Invalid data - %s hash mismatch for file:") %
-                        hash_pair[0],
-                        util.fsdecode(filename),
-                        _(u"Calculated hash: %s") % calculated_hash,
-                        _(u"Manifest hash: %s") % hash_pair[1]),
-                       log.ErrorCode.mismatched_hash)
-
+        error_msg = u"%s\n %s\n %s\n %s\n" % (
+            _(u"Invalid data - %s hash mismatch for file:") %
+            hash_pair[0],
+            util.fsdecode(filename),
+            _(u"Calculated hash: %s") % calculated_hash,
+            _(u"Manifest hash: %s") % hash_pair[1]
+        )
+        if config.ignore_errors:
+            exc = duplicity.errors.BadVolumeException(u"Hash mismatch for: %s" % util.fsdecode(filename))
+            log.Log(error_msg, log.ERROR, code=log.ErrorCode.mismatched_hash)
+            log.Warn(_(u"IGNORED_ERROR: Warning: ignoring error as requested: %s: %s")
+                     % (exc.__class__.__name__, util.uexc(exc)))
+            raise exc
+        else:
+            log.FatalError(error_msg, code=log.ErrorCode.mismatched_hash)
     fileobj = tdp.filtered_open_with_delete(u"rb")
     if parseresults.encrypted and config.gpg_profile.sign_key:
         restore_add_sig_check(fileobj)

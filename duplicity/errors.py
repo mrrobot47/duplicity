@@ -95,3 +95,7 @@ class TemporaryLoadException(BackendException):
     Duplicity should back off for a bit and try again.
     """
     pass
+
+
+class BadVolumeException(DuplicityError):
+    pass
