@@ -169,11 +169,8 @@ build_snap:
 pages:
     stage: deploy
     when: manual
-    only: [master]
     image: ubuntu:20.04
-    before_script: []
     script:
-        - pip install -U sphinx myst-parser
         - VERSION=`./setup.py --version`
         - echo "make docs of ${VERSION}"
         - make docs
