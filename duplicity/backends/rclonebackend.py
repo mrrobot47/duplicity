@@ -62,7 +62,7 @@ class RcloneBackend(duplicity.backend.Backend):
     def _get(self, remote_filename, local_path):
         remote_filename = util.fsdecode(remote_filename)
         local_pathname = util.fsdecode(local_path.name)
-        commandline = u"%s copyto %s/%s %s" % (
+        commandline = u"%s copyto '%s/%s' '%s'" % (
             self.rclone_cmd, self.remote_path, remote_filename, local_pathname)
         rc, o, e = self._subprocess_safe_popen(commandline)
         if rc != 0:
@@ -73,7 +73,7 @@ class RcloneBackend(duplicity.backend.Backend):
     def _put(self, source_path, remote_filename):
         source_pathname = util.fsdecode(source_path.name)
         remote_filename = util.fsdecode(remote_filename)
-        commandline = u"%s copyto %s %s/%s" % (
+        commandline = u"%s copyto '%s' '%s/%s'" % (
             self.rclone_cmd, source_pathname, self.remote_path, remote_filename)
         rc, o, e = self._subprocess_safe_popen(commandline)
         if rc != 0:
@@ -81,7 +81,7 @@ class RcloneBackend(duplicity.backend.Backend):
 
     def _list(self):
         filelist = []
-        commandline = u"%s lsf %s" % (
+        commandline = u"%s lsf '%s'" % (
             self.rclone_cmd, self.remote_path)
         rc, o, e = self._subprocess_safe_popen(commandline)
         if rc == 3:
@@ -94,7 +94,7 @@ class RcloneBackend(duplicity.backend.Backend):
 
     def _delete(self, remote_filename):
         remote_filename = util.fsdecode(remote_filename)
-        commandline = u"%s deletefile --drive-use-trash=false %s/%s" % (
+        commandline = u"%s deletefile --drive-use-trash=false '%s/%s'" % (
             self.rclone_cmd, self.remote_path, remote_filename)
         rc, o, e = self._subprocess_safe_popen(commandline)
         if rc != 0:
