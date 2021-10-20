@@ -89,7 +89,7 @@ class Par2Backend(backend.Backend):
 
         log.Info(u"Create Par2 recovery files")
         par2create = u'par2 c -r%d -n%d %s %s' % (self.redundancy, self.volumes,
-                                                  self.common_options,                                                 
+                                                  self.common_options,
                                                   util.fsdecode(source_symlink.get_canonical()))
         out, returncode = pexpect.run(par2create, None, True)
 
