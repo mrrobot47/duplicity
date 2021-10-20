@@ -6,6 +6,8 @@
 
 ### Changes
 
+* Fix build of pages. [Kenneth Loafman]
+
 * Switch over to sphinx-rtd-theme. [Kenneth Loafman]
 
 * Fix command line warning messages. [Kenneth Loafman]
@@ -25,6 +27,12 @@
 * Fixes to make API docs work right. [Kenneth Loafman]
 
 ### Fix
+
+* Fix #90 - rclone backend fails with spaces in pathnames. [Kenneth Loafman]
+
+* Fix #89 - Add PAR2 number volumes option. [Kenneth Loafman]
+
+* Fix #88 - Add PAR2 creation failure error message. [Kenneth Loafman]
 
 * Fix bug #87, Restore fails and stops on corrupted backup volume. [Kenneth Loafman]
 
