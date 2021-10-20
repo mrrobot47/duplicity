@@ -92,6 +92,8 @@ class Par2Backend(backend.Backend):
         if not returncode:
             for file in par2temp.listdir():
                 files_to_transfer.append(par2temp.append(file))
+        else:
+            log.Error(u"FAILED to create par2 file with returncode %d" % returncode)
 
         method(source_path, remote_filename)
         for file in files_to_transfer:
