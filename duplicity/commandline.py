@@ -492,6 +492,9 @@ def parse_cmdline_options(arglist):
     # Verbatim par2 options
     parser.add_option(u"--par2-options", action=u"extend", metavar=_(u"options"))
 
+    # Number of par2 volumes
+    parser.add_option(u"--par2-volumes", type=u"int", metavar=_(u"number"))
+
     # Used to display the progress for the full and incremental backup operations
     parser.add_option(u"--progress", action=u"store_true")
 

@@ -49,6 +49,11 @@ class Par2Backend(backend.Backend):
             self.redundancy = 10
 
         try:
+            self.volumes = config.par2_volumes
+        except AttributeError:
+            self.volumes = 1
+
+        try:
             self.common_options = config.par2_options + u" -q -q"
         except AttributeError:
             self.common_options = u"-q -q"
@@ -83,8 +88,9 @@ class Par2Backend(backend.Backend):
         source_symlink.setdata()
 
         log.Info(u"Create Par2 recovery files")
-        par2create = u'par2 c -r%d -n1 %s %s' % (self.redundancy, self.common_options,
-                                                 util.fsdecode(source_symlink.get_canonical()))
+        par2create = u'par2 c -r%d -n%d %s %s' % (self.redundancy, self.volumes,
+                                                  self.common_options,                                                 
+                                                  util.fsdecode(source_symlink.get_canonical()))
         out, returncode = pexpect.run(par2create, None, True)
 
         source_symlink.delete()

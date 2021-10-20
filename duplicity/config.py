@@ -357,6 +357,9 @@ par2_redundancy = 10
 # Verbatim par2 other options
 par2_options = u""
 
+# Number of par2 volumes
+par2_volumes = 1
+
 # Whether to enable gio backend
 use_gio = False
 
