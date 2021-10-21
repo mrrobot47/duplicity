@@ -93,6 +93,14 @@ class Par2Backend(backend.Backend):
                                                   util.fsdecode(source_symlink.get_canonical()))
         out, returncode = pexpect.run(par2create, None, True)
 
+        if returncode:
+            log.Warn(u"Failed to create par2 file with requested options, retrying with -n1")
+            par2create = u'par2 c -r%d -n1 %s %s' % (self.redundancy, self.common_options,
+                                                     util.fsdecode(source_symlink.get_canonical()))
+            out, returncode = pexpect.run(par2create, None, True)
+            if not returncode:
+                log.Warn(u"Successfully created par2 file with -n1")
+
         source_symlink.delete()
         files_to_transfer = []
         if not returncode:
