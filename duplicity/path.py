@@ -478,8 +478,9 @@ class ROPath(object):
         if isinstance(other, Path):
             if self.stat and not config.do_not_restore_ownership:
                 util.maybe_ignore_errors(lambda: os.chown(other.name, self.stat.st_uid, self.stat.st_gid))
-            util.maybe_ignore_errors(lambda: os.chmod(other.name, self.mode))
-            util.maybe_ignore_errors(lambda: os.utime(other.name, (time.time(), self.stat.st_mtime)))
+            if not self.issym():
+                util.maybe_ignore_errors(lambda: os.chmod(other.name, self.mode))
+                util.maybe_ignore_errors(lambda: os.utime(other.name, (time.time(), self.stat.st_mtime)))
             other.setdata()
         else:
             # write results to fake stat object
