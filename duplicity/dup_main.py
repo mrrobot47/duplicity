@@ -145,16 +145,18 @@ def get_passphrase(n, action, for_signing=False):
 
     # for a full backup, we don't need a password if
     # there is no sign_key and there are recipients
-    elif (action == u"full" and
-          (config.gpg_profile.recipients or config.gpg_profile.hidden_recipients) and not
-          config.gpg_profile.sign_key):
+    elif (action == u"full"
+          and (config.gpg_profile.recipients or config.gpg_profile.hidden_recipients)
+          and (not config.gpg_profile.sign_key
+               or (not config.restart and not for_signing))):
         return u""
 
     # for an inc backup, we don't need a password if
     # there is no sign_key and there are recipients
-    elif (action == u"inc" and
-          (config.gpg_profile.recipients or config.gpg_profile.hidden_recipients) and not
-          config.gpg_profile.sign_key):
+    elif (action == u"inc"
+          and (config.gpg_profile.recipients or config.gpg_profile.hidden_recipients)
+          and (not config.gpg_profile.sign_key
+               or (not config.restart and not for_signing))):
         return u""
 
     # Finally, ask the user for the passphrase
