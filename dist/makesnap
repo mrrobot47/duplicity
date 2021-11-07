@@ -51,8 +51,13 @@ head -2 snap/snapcraft.yaml | tail -1
 # make sure we're logged in
 snapcraft login --with ~/.snaplogin
 
-# build snap via remote build on LP
-snapcraft remote-build --build-on=${BUILD} --launchpad-accept-public-upload
+if [ ${BUILD} == "amd64" ]; then
+    # build snap locally w/o multipass
+    snapcraft snap --destructive-mode
+else
+    # # build snap via remote build on LP
+    snapcraft remote-build --build-on=${BUILD} --launchpad-accept-public-upload
+fi
 
 # push to edge and sign
 for f in duplicity_*.snap; do
