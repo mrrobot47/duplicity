@@ -34,7 +34,7 @@ git commit -a -m"Prep for ${REL}"
 
 # add release tag and push it
 git tag -f rel.${REL}
-git push --tags origin master -o ci.skip
+git push --tags -f origin master -o ci.skip
 
 # make changelog and move tag to include it
 dist/makechangelog
