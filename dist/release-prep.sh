@@ -33,13 +33,13 @@ ${SED} -i s/${REL}.dev/${REL}/g setup.py
 git commit -a -m"Prep for ${REL}"
 
 # add release tag and push it
-git tag rel.${REL}
+git tag -f rel.${REL}
 git push --tags origin master -o ci.skip
 
 # make changelog and move tag to include it
 dist/makechangelog
 git tag -f rel.${REL}
-git push --tags origin master
+git push --tags -f origin master
 
 # update all repos
 git push mirror master
