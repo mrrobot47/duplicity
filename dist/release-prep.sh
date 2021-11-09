@@ -26,9 +26,11 @@ else
     SED=sed
 fi
 
+set -v
+
 # put in correct version for Launchpad
 ${SED} -i s/${REL}.dev/${REL}/g setup.py
-git commit -m"Prep for ${REL}"
+git commit -a -m"Prep for ${REL}"
 
 # add release tag and push it
 git tag rel.${REL}
