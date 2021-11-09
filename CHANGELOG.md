@@ -1,4 +1,4 @@
-## (unreleased)
+## rel.0.8.21 (2021-11-09)
 
 ### New
 
@@ -27,6 +27,18 @@
 * Fixes to make API docs work right. [Kenneth Loafman]
 
 ### Fix
+
+* Fix #93 - dupliicity wants private encryption key. [Kenneth Loafman]
+
+* PAR2 backend failes to create par2 file with spaces in name. [Kenneth Loafman]
+
+* Fix bug 930151 - Restore symlink changes target attributes (2) [Kenneth Loafman]
+
+* Fix LP bug 930151 - Restore a symlink changes target attributes. [Kenneth Loafman]
+
+* Fix #89 part 2 - handle small input files where par2 fails. [Kenneth Loafman]
+
+* Fix theme name, sphinx\_rtd\_theme. [Kenneth Loafman]
 
 * Fix #90 - rclone backend fails with spaces in pathnames. [Kenneth Loafman]
 
