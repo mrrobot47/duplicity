@@ -137,7 +137,8 @@ section_regexps = [
 body_process = (strip |
     ReSub(r'^\* ([A-Za-z])', r'\1') |
     ReSub(r'((^|\n)[A-Z]\w+(-\w+)*: .*(\n\s+.*)*)+$', r'') |
-    Indent(chars="  "))
+    Indent(chars="  ") |
+    Wrap(regexp=r"\n\n"))
 
 
 ## ``subject_process`` is a callable
@@ -151,7 +152,11 @@ subject_process = (strip |
     ReSub(r'~', r'\~') |
     ReSub(r'_', r'\_') |
     ReSub(r'^([cC]hg|[fF]ix|[nN]ew)\s*:\s*((dev|use?r|pkg|test|doc)\s*:\s*)?([^\n@]*)(@[a-z]+\s+)*$', r'\4') |
-    SetIfEmpty("No commit message.") | ucfirst | final_dot)
+    SetIfEmpty("No commit message.") |
+    Indent(chars="  ") |
+    Wrap(regexp=r"\n\n") |
+    ucfirst |
+    final_dot)
 
 
 ## ``tag_filter_regexp`` is a regexp
