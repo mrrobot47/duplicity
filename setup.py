@@ -53,7 +53,7 @@ try:
     from setuptools_scm import get_version  # pylint: disable=import-error
     Version = get_version(**scm_version_args)
 except Exception as e:
-    Version = u"0.8.21.post"
+    Version = u"0.8.22.dev"
     print(u"Unable to get SCM version: defaulting to %s" % (Version,))
 Reldate = time.strftime(u"%B %d, %Y", time.gmtime(int(os.environ.get(u'SOURCE_DATE_EPOCH', time.time()))))
 
