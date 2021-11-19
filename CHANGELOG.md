@@ -1,3 +1,10 @@
+## (unreleased)
+
+### Changes
+
+* Add line wrap to changelog process, body and subject. [Kenneth Loafman]
+
+
 ## rel.0.8.21 (2021-11-09)
 
 ### New
