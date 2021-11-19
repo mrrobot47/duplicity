@@ -96,8 +96,8 @@ def get_data_files():
             ),
             (u'share/doc/duplicity-%s' % Version,
                 [
-                u'AUTHORS',
                 u'CHANGELOG.md',
+                u'CONTRIBUTING.md',
                 u'COPYING',
                 u'README.md',
                 u'README-LOG.md',
