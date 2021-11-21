@@ -1,8 +1,3 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 #, fuzzy
 msgid ""
 msgstr ""
@@ -12,11 +7,13 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Launchpad-Export-Date: 2021-11-21 16:40+0000\n"
+"X-Generator: Launchpad (build ad4ef5362dff26fb27989d006230bae6da62d38c)\n"
+"Language: \n"
 
 #: ../bin/duplicity:120
 msgid "INT intercepted...exiting."
@@ -181,7 +178,8 @@ msgstr ""
 
 #: ../duplicity/backends/multibackend.py:262
 #, python-format
-msgid "MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
+msgid ""
+"MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
 msgstr ""
 
 #: ../duplicity/backends/multibackend.py:269
@@ -702,7 +700,8 @@ msgstr ""
 
 #: ../duplicity/commandline.py:1003
 #, python-format
-msgid "Specified archive directory '%s' does not exist, or is not a directory"
+msgid ""
+"Specified archive directory '%s' does not exist, or is not a directory"
 msgstr ""
 
 #: ../duplicity/commandline.py:1012
@@ -927,7 +926,8 @@ msgstr[1] ""
 
 #. "cleanup" is a hard-coded command, so do not translate it
 #: ../duplicity/dup_collections.py:700
-msgid "These may be deleted by running duplicity with the \"cleanup\" command."
+msgid ""
+"These may be deleted by running duplicity with the \"cleanup\" command."
 msgstr ""
 
 #: ../duplicity/dup_collections.py:703
@@ -949,7 +949,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: ../duplicity/dup_collections.py:782
-msgid "Warning, discarding last backup set, because of missing signature file."
+msgid ""
+"Warning, discarding last backup set, because of missing signature file."
 msgstr ""
 
 #: ../duplicity/dup_collections.py:805
