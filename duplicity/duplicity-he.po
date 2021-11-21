@@ -1,19 +1,23 @@
-#, fuzzy
+# Hebrew translation for duplicity
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the duplicity package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
 "POT-Creation-Date: 2020-03-19 14:16-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Hebrew <he@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2021-11-21 16:40+0000\n"
 "X-Generator: Launchpad (build ad4ef5362dff26fb27989d006230bae6da62d38c)\n"
-"Language: \n"
+"Language: he\n"
 
 #: ../bin/duplicity:120
 msgid "INT intercepted...exiting."
@@ -1116,11 +1120,11 @@ msgstr ""
 
 #: ../duplicity/dup_main.py:606
 msgid "No signatures found, switching to full backup."
-msgstr ""
+msgstr "לא נמצאו חתימות, עובר לגיבוי מלא."
 
 #: ../duplicity/dup_main.py:620
 msgid "Backup Statistics"
-msgstr ""
+msgstr "סטטיסטיקת הגיבוי"
 
 #: ../duplicity/dup_main.py:726
 #, python-format
@@ -1129,7 +1133,7 @@ msgstr ""
 
 #: ../duplicity/dup_main.py:730
 msgid "No files found in archive - nothing restored."
-msgstr ""
+msgstr "לא נמצאו קבצים בארכיון - לא ניתן לשחזר."
 
 #: ../duplicity/dup_main.py:763
 #, python-format
@@ -1144,7 +1148,7 @@ msgstr ""
 #: ../duplicity/dup_main.py:800
 #, python-format
 msgid "Calculated hash: %s"
-msgstr ""
+msgstr "הגיבוב שחושב: %s"
 
 #: ../duplicity/dup_main.py:801
 #, python-format

@@ -1,19 +1,22 @@
-#, fuzzy
+# Korean translation for duplicity
+# Copyright (c) 2020 Rosetta Contributors and Canonical Ltd 2020
+# This file is distributed under the same license as the duplicity package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
+"Project-Id-Version: duplicity\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2020-03-19 14:16-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2020-08-31 14:26+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2021-11-21 16:40+0000\n"
 "X-Generator: Launchpad (build ad4ef5362dff26fb27989d006230bae6da62d38c)\n"
-"Language: \n"
 
 #: ../bin/duplicity:120
 msgid "INT intercepted...exiting."
@@ -22,27 +25,27 @@ msgstr ""
 #: ../bin/duplicity:128
 #, python-format
 msgid "GPG error detail: %s"
-msgstr ""
+msgstr "GPG 오류 세부 정보: %s"
 
 #: ../bin/duplicity:138
 #, python-format
 msgid "User error detail: %s"
-msgstr ""
+msgstr "사용자 오류 세부 정보: %s"
 
 #: ../bin/duplicity:148
 #, python-format
 msgid "Backend error detail: %s"
-msgstr ""
+msgstr "백엔드 오류 세부 정보: %s"
 
 #: ../bin/rdiffdir:64 ../duplicity/commandline.py:236
 #, python-format
 msgid "Error opening file %s"
-msgstr ""
+msgstr "%s 파일 열기 오류"
 
 #: ../bin/rdiffdir:131
 #, python-format
 msgid "File %s already exists, will not overwrite."
-msgstr ""
+msgstr "%s 파일이 이미 존재하므로, 덮어 쓰지 않습니다."
 
 #: ../duplicity/asyncscheduler.py:70
 #, python-format
@@ -59,11 +62,11 @@ msgstr ""
 
 #: ../duplicity/asyncscheduler.py:152
 msgid "scheduling task for asynchronous execution"
-msgstr ""
+msgstr "비동기 실행을 위한 작업 스케줄링"
 
 #: ../duplicity/asyncscheduler.py:181
 msgid "task completed successfully"
-msgstr ""
+msgstr "작업이 성공적으로 완료되었습니다"
 
 #: ../duplicity/asyncscheduler.py:192
 msgid ""
@@ -78,22 +81,22 @@ msgstr ""
 #: ../duplicity/asyncscheduler.py:256
 #, python-format
 msgid "task execution done (success: %s)"
-msgstr ""
+msgstr "작업 실행 완료 (성공: %s)"
 
 #: ../duplicity/backend.py:104
 #, python-format
 msgid "Import of %s %s"
-msgstr ""
+msgstr "%s %s 가져오기"
 
 #: ../duplicity/backend.py:213
 #, python-format
 msgid "Could not initialize backend: %s"
-msgstr ""
+msgstr "백엔드를 초기화할 수 없습니다: %s"
 
 #: ../duplicity/backend.py:392
 #, python-format
 msgid "Backtrace of previous error: %s"
-msgstr ""
+msgstr "이전 오류 역추적: %s"
 
 #: ../duplicity/backend.py:408
 #, python-format
@@ -103,32 +106,32 @@ msgstr ""
 #: ../duplicity/backend.py:412
 #, python-format
 msgid "Attempt %s failed. %s: %s"
-msgstr ""
+msgstr "%s 시도가 실패했습니다. %s: %s"
 
 #: ../duplicity/backend.py:506
 #, python-format
 msgid "Reading results of '%s'"
-msgstr ""
+msgstr "'%s' 결과 읽기"
 
 #: ../duplicity/backend.py:532
 #, python-format
 msgid "Writing %s"
-msgstr ""
+msgstr "%s 쓰기"
 
 #: ../duplicity/backend.py:573
 #, python-format
 msgid "File %s not found locally after get from backend"
-msgstr ""
+msgstr "백엔드에서 가져온 후 %s 파일을 로컬에서 찾을 수 없습니다"
 
 #: ../duplicity/backends/giobackend.py:109
 #, python-format
 msgid "Connection failed, please check your password: %s"
-msgstr ""
+msgstr "연결에 실패했습니다, 비밀번호를 확인하시오: %s"
 
 #: ../duplicity/backends/multibackend.py:97
 #, python-format
 msgid "MultiBackend: Could not parse query string %s: %s "
-msgstr ""
+msgstr "MultiBackend: 쿼리 문자열 %s을(를) 구문 분석할 수 없습니다: %s "
 
 #: ../duplicity/backends/multibackend.py:106
 #, python-format
@@ -138,28 +141,28 @@ msgstr ""
 #: ../duplicity/backends/multibackend.py:111
 #, python-format
 msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
-msgstr ""
+msgstr "MultiBackend: 잘못된 쿼리 문자열 %s: 알 수 없는 매개변수 %s"
 
 #: ../duplicity/backends/multibackend.py:161
 #: ../duplicity/backends/multibackend.py:166
 #, python-format
 msgid "MultiBackend: illegal value for %s: %s"
-msgstr ""
+msgstr "MultiBackend: %s에 대한 잘못된 값: %s"
 
 #: ../duplicity/backends/multibackend.py:177
 #, python-format
 msgid "MultiBackend: Url %s"
-msgstr ""
+msgstr "MultiBackend: Url %s"
 
 #: ../duplicity/backends/multibackend.py:181
 #, python-format
 msgid "MultiBackend: Could not load config file %s: %s "
-msgstr ""
+msgstr "MultiBackend: 구성 파일 %s을(를) 로드할 수 없습니다: %s "
 
 #: ../duplicity/backends/multibackend.py:190
 #, python-format
 msgid "MultiBackend: use store %s"
-msgstr ""
+msgstr "MultiBackend: %s 저장소 사용"
 
 #: ../duplicity/backends/multibackend.py:195
 #, python-format
@@ -185,7 +188,7 @@ msgstr ""
 #: ../duplicity/backends/multibackend.py:269
 #, python-format
 msgid "MultiBackend: failed to write %s. Aborting process."
-msgstr ""
+msgstr "MultiBackend: %s을(를) 쓰지 못했습니다. 프로세스를 중단합니다."
 
 #: ../duplicity/backends/multibackend.py:276
 #, python-format
@@ -207,22 +210,22 @@ msgstr ""
 #: ../duplicity/backends/multibackend.py:308
 #, python-format
 msgid "MultiBackend: %s: %d files"
-msgstr ""
+msgstr "MultiBackend: %s: %d개 파일"
 
 #: ../duplicity/backends/multibackend.py:311
 #, python-format
 msgid "Exception during list of %s: %s"
-msgstr ""
+msgstr "%s 목록 중 예외: %s"
 
 #: ../duplicity/backends/multibackend.py:318
 #, python-format
 msgid "MultiBackend: combined list: %s"
-msgstr ""
+msgstr "MultiBackend: 결합된 목록: %s"
 
 #: ../duplicity/backends/multibackend.py:346
 #, python-format
 msgid "MultiBackend: failed to delete %s from %s"
-msgstr ""
+msgstr "MultiBackend: %s에서 %s을(를) 삭제하지 못했습니다"
 
 #: ../duplicity/backends/multibackend.py:350
 #, python-format
@@ -238,17 +241,17 @@ msgstr ""
 
 #: ../duplicity/backends/webdavbackend.py:66
 msgid "Missing socket or ssl python modules."
-msgstr ""
+msgstr "소켓 또는 SSL Python 모듈이 없습니다."
 
 #: ../duplicity/backends/webdavbackend.py:84
 #, python-format
 msgid "Cacert database file '%s' is not readable."
-msgstr ""
+msgstr "Cacert 데이터베이스 파일 '%s'을(를) 읽을 수 없습니다."
 
 #: ../duplicity/backends/webdavbackend.py:105
 msgid ""
 "Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
-msgstr ""
+msgstr "'--ssl-cacert-path' 옵션은 python 2.7.8 이하에서 지원되지 않습니다."
 
 #: ../duplicity/backends/webdavbackend.py:109
 #, python-format
@@ -263,27 +266,27 @@ msgstr ""
 #: ../duplicity/backends/webdavbackend.py:155
 #, python-format
 msgid "Using WebDAV protocol %s"
-msgstr ""
+msgstr "WebDAV 프로토콜 %s 사용"
 
 #: ../duplicity/backends/webdavbackend.py:156
 #, python-format
 msgid "Using WebDAV host %s port %s"
-msgstr ""
+msgstr "WebDAV 호스트 %s 포트 %s 사용"
 
 #: ../duplicity/backends/webdavbackend.py:158
 #, python-format
 msgid "Using WebDAV directory %s"
-msgstr ""
+msgstr "WebDAV 디렉토리 %s 사용"
 
 #: ../duplicity/backends/webdavbackend.py:189
 #, python-format
 msgid "WebDAV create connection on '%s'"
-msgstr ""
+msgstr "WebDAV가 '%s'에 연결 생성"
 
 #: ../duplicity/backends/webdavbackend.py:200
 #, python-format
 msgid "WebDAV Unknown URI scheme: %s"
-msgstr ""
+msgstr "WebDAV 알 수 없는 URI 체계: %s"
 
 #: ../duplicity/backends/webdavbackend.py:219
 #, python-format
@@ -294,7 +297,7 @@ msgstr ""
 #: ../duplicity/backends/webdavbackend.py:243
 #, python-format
 msgid "WebDAV data length: %s "
-msgstr ""
+msgstr "WebDAV 데이터 길이: %s "
 
 #: ../duplicity/backends/webdavbackend.py:223
 #, python-format
@@ -339,22 +342,22 @@ msgstr ""
 msgid ""
 "Kerberos authorization failed: %s.                          Falling back to "
 "basic auth."
-msgstr ""
+msgstr "Kerberos 인증 실패: %s. 기본 인증으로 돌아가기."
 
 #: ../duplicity/backends/webdavbackend.py:365
 #, python-format
 msgid "Creating missing directory %s"
-msgstr ""
+msgstr "누락된 디렉토리 %s 생성"
 
 #: ../duplicity/backends/webdavbackend.py:369
 #, python-format
 msgid "WebDAV MKCOL %s failed: %s %s"
-msgstr ""
+msgstr "WebDAV MKCOL %s 실패: %s %s"
 
 #: ../duplicity/backends/webdavbackend.py:382
 #, python-format
 msgid "WebDAV path decoding and translation: %s -> %s"
-msgstr ""
+msgstr "WebDAV 경로 디코딩 및 변환: %s -> %s"
 
 #: ../duplicity/backends/webdavbackend.py:427
 #, python-format
@@ -490,11 +493,11 @@ msgstr ""
 #. Used in usage help (noun)
 #: ../duplicity/commandline.py:438
 msgid "backup name"
-msgstr ""
+msgstr "백업 이름"
 
 #: ../duplicity/commandline.py:556
 msgid "policy"
-msgstr ""
+msgstr "정책"
 
 #: ../duplicity/commandline.py:574
 msgid "Hot|Cool|Archive"
@@ -516,7 +519,7 @@ msgstr ""
 
 #: ../duplicity/commandline.py:605
 msgid "path to a folder with certificate authority files"
-msgstr ""
+msgstr "인증 기관 파일이 있는 폴더 경로"
 
 #. Used in usage help. Example:
 #. --timeout <seconds>
@@ -537,17 +540,17 @@ msgstr ""
 #: ../duplicity/commandline.py:772
 #, python-format
 msgid "Using archive dir: %s"
-msgstr ""
+msgstr "아카이브 디렉토리 사용: %s"
 
 #: ../duplicity/commandline.py:773
 #, python-format
 msgid "Using backup name: %s"
-msgstr ""
+msgstr "백업 이름 사용: %s"
 
 #: ../duplicity/commandline.py:780
 #, python-format
 msgid "Command line error: %s"
-msgstr ""
+msgstr "커맨드 라인 오류: %s"
 
 #: ../duplicity/commandline.py:781
 msgid "Enter 'duplicity --help' for help screen."
@@ -557,13 +560,13 @@ msgstr ""
 #. rsync://user[:password]@other_host[:port]//absolute_path
 #: ../duplicity/commandline.py:794
 msgid "absolute_path"
-msgstr ""
+msgstr "절대 경로(_p)"
 
 #. Used in usage help. Example:
 #. tahoe://alias/some_dir
 #: ../duplicity/commandline.py:798
 msgid "alias"
-msgstr ""
+msgstr "별칭"
 
 #. Used in help to represent a "bucket name" for Amazon Web
 #. Services' Simple Storage Service (S3). Example:
@@ -625,7 +628,7 @@ msgstr ""
 #. rsync://user[:password]@other.host[:port]/relative_path
 #: ../duplicity/commandline.py:868
 msgid "relative_path"
-msgstr ""
+msgstr "상대 경로(_p)"
 
 #. Used in usage help to represent the name of a single file
 #. directory or a Unix-style path to a directory. Example:
@@ -686,12 +689,12 @@ msgstr ""
 #. Example: rclone://remote:/some_dir
 #: ../duplicity/commandline.py:926 ../duplicity/dup_collections.py:511
 msgid "remote"
-msgstr ""
+msgstr "원격"
 
 #. Header in usage help
 #: ../duplicity/commandline.py:945
 msgid "Backends and their URL formats:"
-msgstr ""
+msgstr "백엔드 및 해당 URL 형식:"
 
 #. Header in usage help
 #: ../duplicity/commandline.py:978
@@ -702,7 +705,7 @@ msgstr ""
 #, python-format
 msgid ""
 "Specified archive directory '%s' does not exist, or is not a directory"
-msgstr ""
+msgstr "지정된 아카이브 디렉토리 '%s'(은)는 존재하지 않거나, 디렉토리가 아닙니다"
 
 #: ../duplicity/commandline.py:1012
 #, python-format
@@ -717,21 +720,23 @@ msgid ""
 "Restore destination directory %s already exists.\n"
 "Will not overwrite."
 msgstr ""
+"복원 대상 디렉토리 %s이(가) 이미 존재합니다.\n"
+"덮어쓰지 않습니다."
 
 #: ../duplicity/commandline.py:1077
 #, python-format
 msgid "Verify directory %s does not exist"
-msgstr ""
+msgstr "%s 디렉토리가 존재하지 않는지 확인하시오"
 
 #: ../duplicity/commandline.py:1083
 #, python-format
 msgid "Backup source directory %s does not exist."
-msgstr ""
+msgstr "백업 소스 디렉터리 %s이(가) 없습니다."
 
 #: ../duplicity/commandline.py:1114
 #, python-format
 msgid "Command line warning: %s"
-msgstr ""
+msgstr "커맨드 라인 경고: %s"
 
 #: ../duplicity/commandline.py:1114
 msgid ""
@@ -759,12 +764,12 @@ msgstr ""
 #: ../duplicity/diffdir.py:115 ../duplicity/diffdir.py:418
 #, python-format
 msgid "Error %s getting delta for %s"
-msgstr ""
+msgstr "%s에 대한 델타를 가져오는 동안  %s 오류 발생"
 
 #: ../duplicity/diffdir.py:130
 #, python-format
 msgid "Getting delta of %s and %s"
-msgstr ""
+msgstr "%s 및 %s의 델타 가져오기"
 
 #: ../duplicity/diffdir.py:181
 #, python-format
@@ -779,7 +784,7 @@ msgstr ""
 #: ../duplicity/diffdir.py:210
 #, python-format
 msgid "Comparing %s and %s"
-msgstr ""
+msgstr "%s 및 %s 비교"
 
 #: ../duplicity/diffdir.py:218
 #, python-format
@@ -793,7 +798,7 @@ msgstr ""
 
 #: ../duplicity/dup_collections.py:219
 msgid "Fatal Error: No manifests found for most recent backup"
-msgstr ""
+msgstr "치명적인 오류: 가장 최근 백업에 대한 매니페스트를 찾을 수 없습니다"
 
 #: ../duplicity/dup_collections.py:228
 msgid ""
@@ -803,7 +808,7 @@ msgstr ""
 
 #: ../duplicity/dup_collections.py:236
 msgid "Fatal Error: Neither remote nor local manifest is readable."
-msgstr ""
+msgstr "치명적인 오류: 원격 및 로컬 매니페스트를 읽을 수 없습니다."
 
 #: ../duplicity/dup_collections.py:247
 #, python-format
@@ -854,7 +859,7 @@ msgstr ""
 
 #: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Type of backup set:"
-msgstr ""
+msgstr "백업 세트 유형:"
 
 #: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Time:"
@@ -878,17 +883,17 @@ msgstr ""
 
 #: ../duplicity/dup_collections.py:666
 msgid "Collection Status"
-msgstr ""
+msgstr "수집 현황"
 
 #: ../duplicity/dup_collections.py:668
 #, python-format
 msgid "Connecting with backend: %s"
-msgstr ""
+msgstr "백엔드와 연결: %s"
 
 #: ../duplicity/dup_collections.py:670
 #, python-format
 msgid "Archive dir: %s"
-msgstr ""
+msgstr "아카이브 디렉토리: %s"
 
 #: ../duplicity/dup_collections.py:673
 #, python-format
@@ -1685,17 +1690,17 @@ msgstr ""
 #: ../duplicity/tempdir.py:160
 #, python-format
 msgid "Using temporary directory %s"
-msgstr ""
+msgstr "임시 디렉토리 %s 사용"
 
 #: ../duplicity/tempdir.py:204
 #, python-format
 msgid "Registering (mktemp) temporary file %s"
-msgstr ""
+msgstr "(mktemp) 임시 파일 %s 등록"
 
 #: ../duplicity/tempdir.py:226
 #, python-format
 msgid "Registering (mkstemp) temporary file %s"
-msgstr ""
+msgstr "(mkstemp) 임시 파일 %s 등록"
 
 #: ../duplicity/tempdir.py:258
 #, python-format
@@ -1715,12 +1720,12 @@ msgstr ""
 #: ../duplicity/tempdir.py:283
 #, python-format
 msgid "Cleanup of temporary file %s failed"
-msgstr ""
+msgstr "임시 파일 %s(을)를 정리하지 못함"
 
 #: ../duplicity/tempdir.py:288
 #, python-format
 msgid "Cleanup of temporary directory %s failed - this is probably a bug."
-msgstr ""
+msgstr "임시 디렉토리 %s을(를) 정리하지 못했습니다 - 버그일 수 있습니다."
 
 #: ../duplicity/util.py:144
 #, python-format
@@ -1730,4 +1735,4 @@ msgstr ""
 #: ../duplicity/util.py:211
 #, python-format
 msgid "Releasing lockfile %s"
-msgstr ""
+msgstr "잠금 파일 %s 해제"

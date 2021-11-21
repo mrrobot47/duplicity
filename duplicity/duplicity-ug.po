@@ -1,16 +1,20 @@
-#, fuzzy
+# Uyghur translation for duplicity
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the duplicity package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
 "POT-Creation-Date: 2020-03-19 14:16-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Uyghur <ug@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2021-11-21 16:40+0000\n"
 "X-Generator: Launchpad (build ad4ef5362dff26fb27989d006230bae6da62d38c)\n"
 "Language: \n"
@@ -37,7 +41,7 @@ msgstr ""
 #: ../bin/rdiffdir:64 ../duplicity/commandline.py:236
 #, python-format
 msgid "Error opening file %s"
-msgstr ""
+msgstr "%s ئاچقاندا خاتالىق كۆرۈلدى"
 
 #: ../bin/rdiffdir:131
 #, python-format
@@ -113,7 +117,7 @@ msgstr ""
 #: ../duplicity/backend.py:532
 #, python-format
 msgid "Writing %s"
-msgstr ""
+msgstr "%s  غا يېزىۋاتىدۇ"
 
 #: ../duplicity/backend.py:573
 #, python-format
@@ -405,7 +409,7 @@ msgstr ""
 #: ../duplicity/commandline.py:377 ../duplicity/commandline.py:609
 #: ../duplicity/commandline.py:642 ../duplicity/commandline.py:855
 msgid "path"
-msgstr ""
+msgstr "path"
 
 #. Used in usage help to represent an ID for a GnuPG key. Example:
 #. --encrypt-key <gpg_key_id>
@@ -417,7 +421,7 @@ msgstr ""
 #: ../duplicity/commandline.py:383 ../duplicity/commandline.py:593
 #: ../duplicity/commandline.py:828
 msgid "gpg-key-id"
-msgstr ""
+msgstr "gpg-key-id"
 
 #. Used in usage help to represent a "glob" style pattern for
 #. matching one or more files, as described in the documentation.
@@ -426,7 +430,7 @@ msgstr ""
 #: ../duplicity/commandline.py:298 ../duplicity/commandline.py:408
 #: ../duplicity/commandline.py:878
 msgid "shell_pattern"
-msgstr ""
+msgstr "shell_pattern"
 
 #. Used in usage help to represent the name of a file. Example:
 #. --log-file <filename>
@@ -435,12 +439,12 @@ msgstr ""
 #: ../duplicity/commandline.py:417 ../duplicity/commandline.py:430
 #: ../duplicity/commandline.py:824
 msgid "filename"
-msgstr ""
+msgstr "ھۆججەت ئاتى"
 
 #. Used in usage help to represent a regular expression (regexp).
 #: ../duplicity/commandline.py:327 ../duplicity/commandline.py:421
 msgid "regular_expression"
-msgstr ""
+msgstr "regular_expression"
 
 #. Used in usage help to represent a time spec for a previous
 #. point in time, as described in the documentation. Example:
@@ -448,7 +452,7 @@ msgstr ""
 #: ../duplicity/commandline.py:331 ../duplicity/commandline.py:371
 #: ../duplicity/commandline.py:497 ../duplicity/commandline.py:910
 msgid "time"
-msgstr ""
+msgstr "ۋاقىت"
 
 #. Used in usage help. (Should be consistent with the "Options:"
 #. header.) Example:
@@ -457,7 +461,7 @@ msgstr ""
 #: ../duplicity/commandline.py:500 ../duplicity/commandline.py:601
 #: ../duplicity/commandline.py:843
 msgid "options"
-msgstr ""
+msgstr "تاللانما"
 
 #: ../duplicity/commandline.py:394
 #, python-format
@@ -469,11 +473,11 @@ msgstr ""
 #. Used in usage help to represent an imap mailbox
 #: ../duplicity/commandline.py:406
 msgid "imap_mailbox"
-msgstr ""
+msgstr "imap_mailbox"
 
 #: ../duplicity/commandline.py:424
 msgid "file_descriptor"
-msgstr ""
+msgstr "file_descriptor"
 
 #. Used in usage help to represent a desired number of
 #. something. Example:
@@ -485,12 +489,12 @@ msgstr ""
 #: ../duplicity/commandline.py:567 ../duplicity/commandline.py:571
 #: ../duplicity/commandline.py:637 ../duplicity/commandline.py:838
 msgid "number"
-msgstr ""
+msgstr "نومۇر"
 
 #. Used in usage help (noun)
 #: ../duplicity/commandline.py:438
 msgid "backup name"
-msgstr ""
+msgstr "زاپاسلاش ئاتى"
 
 #: ../duplicity/commandline.py:556
 msgid "policy"
@@ -504,7 +508,7 @@ msgstr ""
 #: ../duplicity/commandline.py:577 ../duplicity/commandline.py:580
 #: ../duplicity/commandline.py:809
 msgid "command"
-msgstr ""
+msgstr "بۇيرۇق"
 
 #: ../duplicity/commandline.py:583
 msgid "pyrax|cloudfiles"
@@ -527,12 +531,12 @@ msgstr ""
 #: ../duplicity/commandline.py:614 ../duplicity/commandline.py:648
 #: ../duplicity/commandline.py:872
 msgid "seconds"
-msgstr ""
+msgstr "سېكۇنت"
 
 #. abbreviation for "character" (noun)
 #: ../duplicity/commandline.py:620 ../duplicity/commandline.py:806
 msgid "char"
-msgstr ""
+msgstr "ھەرپ"
 
 #: ../duplicity/commandline.py:772
 #, python-format
@@ -582,19 +586,19 @@ msgstr ""
 #. noun
 #: ../duplicity/commandline.py:817
 msgid "count"
-msgstr ""
+msgstr "سانى"
 
 #. Used in usage help to represent the name of a file directory
 #: ../duplicity/commandline.py:820
 msgid "directory"
-msgstr ""
+msgstr "مۇندەرىجە"
 
 #. Used in usage help, e.g. to represent the name of a code
 #. module. Example:
 #. rsync://user[:password]@other.host[:port]::/module/some_dir
 #: ../duplicity/commandline.py:833
 msgid "module"
-msgstr ""
+msgstr "بۆلەك"
 
 #. Used in usage help to represent an internet hostname. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
@@ -606,20 +610,20 @@ msgstr ""
 #. ftp://user[:password]@other.host[:port]/some_dir
 #: ../duplicity/commandline.py:851
 msgid "password"
-msgstr ""
+msgstr "ئىم"
 
 #. Used in usage help to represent a TCP port number. Example:
 #. ftp://user[:password]@other.host[:port]/some_dir
 #: ../duplicity/commandline.py:859
 msgid "port"
-msgstr ""
+msgstr "ئېغىز"
 
 #. Used in usage help. This represents a string to be used as a
 #. prefix to names for backup files created by Duplicity. Example:
 #. s3://other.host/bucket_name[/prefix]
 #: ../duplicity/commandline.py:864
 msgid "prefix"
-msgstr ""
+msgstr "ئالدى قوشۇلغۇچى"
 
 #. Used in usage help to represent a Unix-style path name. Example:
 #. rsync://user[:password]@other.host[:port]/relative_path
@@ -669,7 +673,7 @@ msgstr ""
 #. ftp://user[:password]@other.host[:port]/some_dir
 #: ../duplicity/commandline.py:915
 msgid "user"
-msgstr ""
+msgstr "ئىشلەتكۈچى"
 
 #. account id for b2. Example: b2://account_id@bucket/
 #: ../duplicity/commandline.py:918
@@ -686,7 +690,7 @@ msgstr ""
 #. Example: rclone://remote:/some_dir
 #: ../duplicity/commandline.py:926 ../duplicity/dup_collections.py:511
 msgid "remote"
-msgstr ""
+msgstr "يىراق"
 
 #. Header in usage help
 #: ../duplicity/commandline.py:945
@@ -696,7 +700,7 @@ msgstr ""
 #. Header in usage help
 #: ../duplicity/commandline.py:978
 msgid "Commands:"
-msgstr ""
+msgstr "بۇيرۇقلار:"
 
 #: ../duplicity/commandline.py:1003
 #, python-format
@@ -769,12 +773,12 @@ msgstr ""
 #: ../duplicity/diffdir.py:181
 #, python-format
 msgid "A %s"
-msgstr ""
+msgstr "A %s"
 
 #: ../duplicity/diffdir.py:188
 #, python-format
 msgid "M %s"
-msgstr ""
+msgstr "M %s"
 
 #: ../duplicity/diffdir.py:210
 #, python-format
@@ -784,7 +788,7 @@ msgstr ""
 #: ../duplicity/diffdir.py:218
 #, python-format
 msgid "D %s"
-msgstr ""
+msgstr "D %s"
 
 #: ../duplicity/dup_collections.py:180 ../duplicity/dup_collections.py:194
 #, python-format
@@ -858,7 +862,7 @@ msgstr ""
 
 #: ../duplicity/dup_collections.py:442 ../duplicity/dup_collections.py:1231
 msgid "Time:"
-msgstr ""
+msgstr "ۋاقتى:"
 
 #: ../duplicity/dup_collections.py:442
 msgid "Num volumes:"
@@ -866,7 +870,7 @@ msgstr ""
 
 #: ../duplicity/dup_collections.py:446 ../duplicity/dup_collections.py:1237
 msgid "Full"
-msgstr ""
+msgstr "تامامەن"
 
 #: ../duplicity/dup_collections.py:449 ../duplicity/dup_collections.py:1239
 msgid "Incremental"
@@ -874,11 +878,11 @@ msgstr ""
 
 #: ../duplicity/dup_collections.py:509
 msgid "local"
-msgstr ""
+msgstr "يەرلىك"
 
 #: ../duplicity/dup_collections.py:666
 msgid "Collection Status"
-msgstr ""
+msgstr "توپلام ھالىتى"
 
 #: ../duplicity/dup_collections.py:668
 #, python-format
@@ -1555,7 +1559,7 @@ msgstr ""
 #: ../duplicity/path.py:379
 #, python-format
 msgid "New file %s"
-msgstr ""
+msgstr "يېڭى ھۆججەت %s"
 
 #: ../duplicity/path.py:382
 #, python-format

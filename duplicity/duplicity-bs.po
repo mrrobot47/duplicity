@@ -1,19 +1,24 @@
-#, fuzzy
+# Bosnian translation for duplicity
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the duplicity package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: duplicity\n"
 "Report-Msgid-Bugs-To: Kenneth Loafman <kenneth@loafman.com>\n"
 "POT-Creation-Date: 2020-03-19 14:16-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-02-23 13:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: Bosnian <bs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Launchpad-Export-Date: 2021-11-21 16:40+0000\n"
 "X-Generator: Launchpad (build ad4ef5362dff26fb27989d006230bae6da62d38c)\n"
-"Language: \n"
+"Language: bs\n"
 
 #: ../bin/duplicity:120
 msgid "INT intercepted...exiting."
@@ -42,7 +47,7 @@ msgstr ""
 #: ../bin/rdiffdir:131
 #, python-format
 msgid "File %s already exists, will not overwrite."
-msgstr ""
+msgstr "Dadoteka %s već postoji, neće se pisati preko."
 
 #: ../duplicity/asyncscheduler.py:70
 #, python-format
@@ -83,27 +88,27 @@ msgstr ""
 #: ../duplicity/backend.py:104
 #, python-format
 msgid "Import of %s %s"
-msgstr ""
+msgstr "Uvoz od %s %s"
 
 #: ../duplicity/backend.py:213
 #, python-format
 msgid "Could not initialize backend: %s"
-msgstr ""
+msgstr "Ne mogu inicijalizirati pozadinu: %s"
 
 #: ../duplicity/backend.py:392
 #, python-format
 msgid "Backtrace of previous error: %s"
-msgstr ""
+msgstr "Povratno praćenje od prethodne greše: %s"
 
 #: ../duplicity/backend.py:408
 #, python-format
 msgid "Giving up after %s attempts. %s: %s"
-msgstr ""
+msgstr "Odustajanje poslije %s pokušaji. %s: %s"
 
 #: ../duplicity/backend.py:412
 #, python-format
 msgid "Attempt %s failed. %s: %s"
-msgstr ""
+msgstr "Pokušaj %s nije uspio. %s: %s"
 
 #: ../duplicity/backend.py:506
 #, python-format
@@ -118,7 +123,7 @@ msgstr ""
 #: ../duplicity/backend.py:573
 #, python-format
 msgid "File %s not found locally after get from backend"
-msgstr ""
+msgstr "Dadoteka %s nije pronađena lokalno nakon što je dobijena"
 
 #: ../duplicity/backends/giobackend.py:109
 #, python-format
@@ -128,43 +133,44 @@ msgstr ""
 #: ../duplicity/backends/multibackend.py:97
 #, python-format
 msgid "MultiBackend: Could not parse query string %s: %s "
-msgstr ""
+msgstr "MultiBackend: Ne mogu razmatrati string upita %s: %s "
 
 #: ../duplicity/backends/multibackend.py:106
 #, python-format
 msgid "MultiBackend: Invalid query string %s: more than one value for %s"
 msgstr ""
+"MultiBackend: Nevaljan string upita %s: više od jedne vrijednosti za %s"
 
 #: ../duplicity/backends/multibackend.py:111
 #, python-format
 msgid "MultiBackend: Invalid query string %s: unknown parameter %s"
-msgstr ""
+msgstr "MultiBackend: Nevaljan string upita %s: nepoznat parametar %s"
 
 #: ../duplicity/backends/multibackend.py:161
 #: ../duplicity/backends/multibackend.py:166
 #, python-format
 msgid "MultiBackend: illegal value for %s: %s"
-msgstr ""
+msgstr "MultiBackend: neodobrena vrijednost za %s: %s"
 
 #: ../duplicity/backends/multibackend.py:177
 #, python-format
 msgid "MultiBackend: Url %s"
-msgstr ""
+msgstr "MultiBackend: Url %s"
 
 #: ../duplicity/backends/multibackend.py:181
 #, python-format
 msgid "MultiBackend: Could not load config file %s: %s "
-msgstr ""
+msgstr "MultiBackend: Nije mogao učitati  config fajl %s: %s "
 
 #: ../duplicity/backends/multibackend.py:190
 #, python-format
 msgid "MultiBackend: use store %s"
-msgstr ""
+msgstr "MultiBackend: koristi u spremniku %s"
 
 #: ../duplicity/backends/multibackend.py:195
 #, python-format
 msgid "MultiBackend: set env %s = %s"
-msgstr ""
+msgstr "MultiBackend: postavi env %s = %s"
 
 #: ../duplicity/backends/multibackend.py:208
 #, python-format
@@ -174,35 +180,41 @@ msgstr ""
 #: ../duplicity/backends/multibackend.py:249
 #, python-format
 msgid "MultiBackend: _put: write to store #%s (%s)"
-msgstr ""
+msgstr "MultiBackend: _put:write to store #%s (%s)"
 
 #: ../duplicity/backends/multibackend.py:262
 #, python-format
 msgid ""
 "MultiBackend: failed to write to store #%s (%s), try #%s, Exception: %s"
 msgstr ""
+"MultiBackend: nije uspio napisati za spremanje $%s (%s), probaj #%s, "
+"Izuzetak: %s"
 
 #: ../duplicity/backends/multibackend.py:269
 #, python-format
 msgid "MultiBackend: failed to write %s. Aborting process."
-msgstr ""
+msgstr "MultiBackend: nije uspjelo unošenje %s. Prekidanje procesa."
 
 #: ../duplicity/backends/multibackend.py:276
 #, python-format
 msgid ""
 "MultiBackend: failed to write %s. Tried all backing stores and none succeeded"
 msgstr ""
+"MultiBackend: nije uspjelo pisanje %s. Pokušali se rezervni spremnici i "
+"nijedan nije uspio"
 
 #: ../duplicity/backends/multibackend.py:295
 #, python-format
 msgid "MultiBackend: failed to get %s to %s from %s"
-msgstr ""
+msgstr "MultiBackend: nije uspjelo uzimanje %s do %s od %s"
 
 #: ../duplicity/backends/multibackend.py:298
 #, python-format
 msgid ""
 "MultiBackend: failed to get %s. Tried all backing stores and none succeeded"
 msgstr ""
+"MultiBackend: nije uspjelo uzimanje %s. Pokušali se rezervni spremnici i "
+"nijedan nije uspio"
 
 #: ../duplicity/backends/multibackend.py:308
 #, python-format
@@ -217,12 +229,12 @@ msgstr ""
 #: ../duplicity/backends/multibackend.py:318
 #, python-format
 msgid "MultiBackend: combined list: %s"
-msgstr ""
+msgstr "MultiBackend: kombinirana lista: %s"
 
 #: ../duplicity/backends/multibackend.py:346
 #, python-format
 msgid "MultiBackend: failed to delete %s from %s"
-msgstr ""
+msgstr "MultiBackend: nije uspjelo brisanje %s od %s"
 
 #: ../duplicity/backends/multibackend.py:350
 #, python-format
@@ -230,25 +242,27 @@ msgid ""
 "MultiBackend: failed to delete %s. Tried all backing stores and none "
 "succeeded"
 msgstr ""
+"MultiBackend: nije uspjelo brisanje %s.  Pokušali se rezervni spremnici i "
+"nijedan nije uspio"
 
 #: ../duplicity/backends/pydrivebackend.py:150
 #, python-format
 msgid "PyDrive backend: multiple files called '%s'."
-msgstr ""
+msgstr "PyDrive backend: više fajlova se zovu '%s'."
 
 #: ../duplicity/backends/webdavbackend.py:66
 msgid "Missing socket or ssl python modules."
-msgstr ""
+msgstr "Fali soket ili ssl python moduli."
 
 #: ../duplicity/backends/webdavbackend.py:84
 #, python-format
 msgid "Cacert database file '%s' is not readable."
-msgstr ""
+msgstr "Datoteka baze podataka cacert '%s' nije čitljiva."
 
 #: ../duplicity/backends/webdavbackend.py:105
 msgid ""
 "Option '--ssl-cacert-path' is not supported with python 2.7.8 and below."
-msgstr ""
+msgstr "Opcija '--ssl-cacert-path' nije podržana sa python 2.7.8 i niže."
 
 #: ../duplicity/backends/webdavbackend.py:109
 #, python-format
@@ -263,76 +277,79 @@ msgstr ""
 #: ../duplicity/backends/webdavbackend.py:155
 #, python-format
 msgid "Using WebDAV protocol %s"
-msgstr ""
+msgstr "Korištenje WebDAV protokola %s"
 
 #: ../duplicity/backends/webdavbackend.py:156
 #, python-format
 msgid "Using WebDAV host %s port %s"
-msgstr ""
+msgstr "Korištenje WebDAV host %s port %s"
 
 #: ../duplicity/backends/webdavbackend.py:158
 #, python-format
 msgid "Using WebDAV directory %s"
-msgstr ""
+msgstr "Korištenje WebDAV direktorije %s"
 
 #: ../duplicity/backends/webdavbackend.py:189
 #, python-format
 msgid "WebDAV create connection on '%s'"
-msgstr ""
+msgstr "WebDAV napravi konekciju na '%s'"
 
 #: ../duplicity/backends/webdavbackend.py:200
 #, python-format
 msgid "WebDAV Unknown URI scheme: %s"
-msgstr ""
+msgstr "WebDAV Nepoznata URI šema: %s"
 
 #: ../duplicity/backends/webdavbackend.py:219
 #, python-format
 msgid "WebDAV %s %s request with headers: %s "
-msgstr ""
+msgstr "WebDAV %s %s zahtjev sa zaglavljima: %s "
 
 #: ../duplicity/backends/webdavbackend.py:220
 #: ../duplicity/backends/webdavbackend.py:243
 #, python-format
 msgid "WebDAV data length: %s "
-msgstr ""
+msgstr "WebDAV podatkovna dužina: %s "
 
 #: ../duplicity/backends/webdavbackend.py:223
 #, python-format
 msgid "WebDAV response status %s with reason '%s'."
-msgstr ""
+msgstr "WebDAV status odgovora %s sa razlogom '%s'."
 
 #: ../duplicity/backends/webdavbackend.py:229
 #, python-format
 msgid "WebDAV redirect to: %s "
-msgstr ""
+msgstr "WebDAV preusmjeri prema: %s "
 
 #: ../duplicity/backends/webdavbackend.py:231
 msgid "WebDAV redirected 10 times. Giving up."
-msgstr ""
+msgstr "WebDAV preusmjereno 10 puta. Odustajanje."
 
 #: ../duplicity/backends/webdavbackend.py:236
 msgid "WebDAV missing location header in redirect response."
-msgstr ""
+msgstr "WebDAV potrebno zaglavlje lokacije u odgovoru na preusmjerenje."
 
 #: ../duplicity/backends/webdavbackend.py:241
 msgid "WebDAV retry request with authentification headers."
 msgstr ""
+"WebDAV zahtjev za ponovnim pokušajem sa zaglavljima za autentifikaciju."
 
 #: ../duplicity/backends/webdavbackend.py:242
 #, python-format
 msgid "WebDAV %s %s request2 with headers: %s "
-msgstr ""
+msgstr "WebDAV %s %s zahtjev2 sa zaglavljima: %s "
 
 #: ../duplicity/backends/webdavbackend.py:246
 #, python-format
 msgid "WebDAV response2 status %s with reason '%s'."
-msgstr ""
+msgstr "WebDAV odgovor2 status %s sa razlogom '%s'."
 
 #: ../duplicity/backends/webdavbackend.py:263
 msgid ""
 "python-kerberos needed to use kerberos                           "
 "authorization, falling back to basic auth."
 msgstr ""
+"python-kerberos potreban za korištenje kerberos autorizacije, oslanjanje na "
+"osnovnu autorizaciju."
 
 #: ../duplicity/backends/webdavbackend.py:267
 #, python-format
@@ -340,36 +357,37 @@ msgid ""
 "Kerberos authorization failed: %s.                          Falling back to "
 "basic auth."
 msgstr ""
+"Kerberos autorizacija neuspjela: %s. Oslanjanje na osnovnu autorizaciju."
 
 #: ../duplicity/backends/webdavbackend.py:365
 #, python-format
 msgid "Creating missing directory %s"
-msgstr ""
+msgstr "Kreiranje potrebne direktorije %s"
 
 #: ../duplicity/backends/webdavbackend.py:369
 #, python-format
 msgid "WebDAV MKCOL %s failed: %s %s"
-msgstr ""
+msgstr "WebDAV MKCOL %s neuspjeo: %s %s"
 
 #: ../duplicity/backends/webdavbackend.py:382
 #, python-format
 msgid "WebDAV path decoding and translation: %s -> %s"
-msgstr ""
+msgstr "WebDAV dekodiranje i prevođenje putanje: %s-> %s"
 
 #: ../duplicity/backends/webdavbackend.py:427
 #, python-format
 msgid "WebDAV GET Bad status code %s reason %s."
-msgstr ""
+msgstr "WebDAV GET Loš statusni kod %s razlog %s."
 
 #: ../duplicity/backends/webdavbackend.py:449
 #, python-format
 msgid "WebDAV PUT Bad status code %s reason %s."
-msgstr ""
+msgstr "WebDAV PUT Loš statusni kod %s razlog %s."
 
 #: ../duplicity/backends/webdavbackend.py:469
 #, python-format
 msgid "WebDAV DEL Bad status code %s reason %s."
-msgstr ""
+msgstr "WebDAV DEL Loš statusni kod %s razlog %s."
 
 #: ../duplicity/commandline.py:79
 #, python-format
@@ -387,6 +405,10 @@ msgid ""
 "--include-filelist and --exclude-filelist now accept globbing characters and "
 "should be used instead."
 msgstr ""
+"Upozorenje: Opcija %s je proglašena zastarjelom i biti će uklonjena iz "
+"budućih distribucija.\n"
+"--include-filelist i --exclude-filelist sada primaju globbing karaktere i "
+"trebali bi se koristiti."
 
 #: ../duplicity/commandline.py:96
 #, python-format
@@ -397,6 +419,12 @@ msgid ""
 "--include-filelist=/dev/stdin or --exclude-filelist=/dev/stdin could\n"
 "be used as a substitute."
 msgstr ""
+"Upozorenje: Opcija %s  je proglašena zastarjelom biti će uklonjena iz "
+"budućih distribucija.\n"
+"Na mnogim GNU/Linux sistemima, stdin je reprezentovano sa /dev/stdin i \n"
+"--include-filelist=/dev/stdin ili --exclude-filelist=/dev/stdin bi se moglo "
+"\n"
+"koristiti kao zamjena."
 
 #. Used in usage help to represent a Unix-style path name. Example:
 #. --archive-dir <path>
@@ -508,15 +536,15 @@ msgstr ""
 
 #: ../duplicity/commandline.py:583
 msgid "pyrax|cloudfiles"
-msgstr ""
+msgstr "pyrax|cloudfiles"
 
 #: ../duplicity/commandline.py:604
 msgid "pem formatted bundle of certificate authorities"
-msgstr ""
+msgstr "pem formatiran snop od certificiranja"
 
 #: ../duplicity/commandline.py:605
 msgid "path to a folder with certificate authority files"
-msgstr ""
+msgstr "putanja do foldera sa datotekama autoriteta certifikata"
 
 #. Used in usage help. Example:
 #. --timeout <seconds>
@@ -674,13 +702,13 @@ msgstr ""
 #. account id for b2. Example: b2://account_id@bucket/
 #: ../duplicity/commandline.py:918
 msgid "account_id"
-msgstr ""
+msgstr "account_id"
 
 #. application_key for b2.
 #. Example: b2://account_id:application_key@bucket/
 #: ../duplicity/commandline.py:922
 msgid "application_key"
-msgstr ""
+msgstr "application_key"
 
 #. remote name for rclone.
 #. Example: rclone://remote:/some_dir
@@ -710,6 +738,9 @@ msgid ""
 "Sign key should be an 8, 16 alt. 40 character hex string, like 'AA0E73D2'.\n"
 "Received '%s' instead."
 msgstr ""
+"Prijava ključa bi trebala biti 8, 16 alt. 40 karaktera hex stringova, kao "
+"'AA0E73D2'.\n"
+"Primio '%s' umjesto."
 
 #: ../duplicity/commandline.py:1072
 #, python-format
@@ -742,7 +773,7 @@ msgstr ""
 #: ../duplicity/commandline.py:1150
 #, python-format
 msgid "GPG binary is %s, version %s"
-msgstr ""
+msgstr "GPG binarni je %s, verzija %s"
 
 #: ../duplicity/commandline.py:1177
 #, python-format
@@ -789,7 +820,7 @@ msgstr ""
 #: ../duplicity/dup_collections.py:180 ../duplicity/dup_collections.py:194
 #, python-format
 msgid "BackupSet.delete: missing %s"
-msgstr ""
+msgstr "BackupSet.delete: nedostaje %s"
 
 #: ../duplicity/dup_collections.py:219
 msgid "Fatal Error: No manifests found for most recent backup"
@@ -808,17 +839,17 @@ msgstr ""
 #: ../duplicity/dup_collections.py:247
 #, python-format
 msgid "Processing local manifest %s (%s)"
-msgstr ""
+msgstr "Obrada lokalnog manifesta %s (%s)"
 
 #: ../duplicity/dup_collections.py:259
 #, python-format
 msgid "Error processing remote manifest (%s): %s"
-msgstr ""
+msgstr "Pogreška u obradi spoljnjeg manifesta (%s): %s"
 
 #: ../duplicity/dup_collections.py:262
 #, python-format
 msgid "Processing remote manifest %s (%s)"
-msgstr ""
+msgstr "Obrada spoljnjeg manifesta %s (%s)"
 
 #: ../duplicity/dup_collections.py:358
 msgid "Preferring Backupset over previous one!"
@@ -1021,20 +1052,22 @@ msgid ""
 "No signature chain for the requested time. Using oldest available chain, "
 "starting at time %s."
 msgstr ""
+"Nema lanac potpisa za traženo vrijeme. Upotreba najstarijeg raspoloživog "
+"lanca, počevši od vremena %s."
 
 #: ../duplicity/dup_collections.py:1229
 #, python-format
 msgid "File: %s"
-msgstr ""
+msgstr "Datoteka: %s"
 
 #: ../duplicity/dup_collections.py:1230
 #, python-format
 msgid "Total number of backup: %d"
-msgstr ""
+msgstr "Totalni broj rezervnih kopija: %d"
 
 #: ../duplicity/dup_collections.py:1231
 msgid "Type of file change:"
-msgstr ""
+msgstr "Tip promjene fajla:"
 
 #: ../duplicity/dup_main.py:121
 msgid "Reuse configured PASSPHRASE as SIGN_PASSPHRASE"
@@ -1101,12 +1134,12 @@ msgstr ""
 #: ../duplicity/dup_main.py:382
 #, python-format
 msgid "Restarting after volume %s, file %s, block %s"
-msgstr ""
+msgstr "Ponovno pokretanje poslje volumena %s, dadoteke %s, blokirati %s"
 
 #: ../duplicity/dup_main.py:452
 #, python-format
 msgid "Processed volume %d"
-msgstr ""
+msgstr "Obrađen volumen %d"
 
 #: ../duplicity/dup_main.py:602
 msgid ""
@@ -1125,7 +1158,7 @@ msgstr ""
 #: ../duplicity/dup_main.py:726
 #, python-format
 msgid "%s not found in archive - no files restored."
-msgstr ""
+msgstr "%s. nije pronađen u arhivu - nijedan fajl nije povraćen."
 
 #: ../duplicity/dup_main.py:730
 msgid "No files found in archive - nothing restored."
@@ -1216,34 +1249,38 @@ msgstr ""
 #: ../duplicity/dup_main.py:982
 msgid "Deleting backup chain at time:"
 msgid_plural "Deleting backup chains at times:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Brišem lanac rezervnih kopija u vrijeme:"
+msgstr[1] "Brišem lance rezervnih kopija u vremenima:"
+msgstr[2] "Brišem lance rezervnih kopija u vremenima:"
 
 #: ../duplicity/dup_main.py:994
 #, python-format
 msgid "Deleting any incremental signature chain rooted at %s"
-msgstr ""
+msgstr "Brisanje svakog inkrementalnog lanca potpisa ukorijenjenog na %s"
 
 #: ../duplicity/dup_main.py:996
 #, python-format
 msgid "Deleting any incremental backup chain rooted at %s"
 msgstr ""
+"Brisanje svakog inkrementalnog lanca sigurnosnog kopiranja ukorijenjenog na "
+"%s"
 
 #: ../duplicity/dup_main.py:999
 #, python-format
 msgid "Deleting complete signature chain %s"
-msgstr ""
+msgstr "Brišem kompletni lanac potpisa %s"
 
 #: ../duplicity/dup_main.py:1001
 #, python-format
 msgid "Deleting complete backup chain %s"
-msgstr ""
+msgstr "Brišem kompletni lanac rezervnih kopija %s"
 
 #: ../duplicity/dup_main.py:1007
 msgid "Found old backup chain at the following time:"
 msgid_plural "Found old backup chains at the following times:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nađen stari lanac rezervnih kopija u vrijeme:"
+msgstr[1] "Nađeni stari lanci rezervnih kopija u vremenima:"
+msgstr[2] "Nađeni stari lanci rezervnih kopija u vremenima:"
 
 #: ../duplicity/dup_main.py:1011
 msgid "Rerun command with --force option to actually delete."
@@ -1360,11 +1397,16 @@ msgid ""
 "\n"
 "See https://bugs.launchpad.net/duplicity/+bug/931175\n"
 msgstr ""
+"\n"
+"PYTHONOPTIMIZE u okolini uzrokuje dvoličnost da ne \n"
+"prepoznaju vlastite kopije. Molim Vas uklonite PYTHONOPTIMIZEiz\n"
+"okoline i vratite kopije.\n"
+"Pogledajte https://bugs.launchpad.net/duplicity/+bug/931175\n"
 
 #: ../duplicity/dup_main.py:1529
 #, python-format
 msgid "Acquiring lockfile %s"
-msgstr ""
+msgstr "Stjecanje lockfilea %s"
 
 #: ../duplicity/dup_main.py:1587
 #, python-format
@@ -1393,6 +1435,8 @@ msgid ""
 "When using symmetric encryption, the signing passphrase must equal the "
 "encryption passphrase."
 msgstr ""
+"Kada koristite simetrično šifriranje, potpisivanje zaporuke mora biti "
+"jednaka enkripciji zaporuke."
 
 #: ../duplicity/dup_time.py:63
 #, python-format
@@ -1419,12 +1463,12 @@ msgstr ""
 
 #: ../duplicity/gpginterface.py:238
 msgid "Threading not available -- zombie processes may appear"
-msgstr ""
+msgstr "Niti nisu dostupne -- zombie proces se mozda pojavio"
 
 #: ../duplicity/gpginterface.py:705
 #, python-format
 msgid "GPG process %d terminated before wait()"
-msgstr ""
+msgstr "GPG proces %d prestaje prije wait()"
 
 #: ../duplicity/lazy.py:352
 #, python-format
@@ -1446,6 +1490,8 @@ msgid ""
 "basis_file must be a (true) file or an object whose file attribute is the "
 "underlying true file object"
 msgstr ""
+"basis_file mora biti (true) datoteka ili objekat čiji je atribut datoteke "
+"osnovni objekt iste datoteke."
 
 #: ../duplicity/manifest.py:96
 #, python-format
@@ -1474,12 +1520,12 @@ msgstr ""
 #: ../duplicity/manifest.py:215
 #, python-format
 msgid "Found manifest volume %s"
-msgstr ""
+msgstr "Pronađen manifest volumena %s"
 
 #: ../duplicity/manifest.py:222
 #, python-format
 msgid "Found %s volumes in manifest"
-msgstr ""
+msgstr "Pronađeno %s volumena u manifestu"
 
 #: ../duplicity/manifest.py:239
 #, python-format
@@ -1531,7 +1577,7 @@ msgstr ""
 #: ../duplicity/patchdir.py:550
 #, python-format
 msgid "Error '%s' patching %s"
-msgstr ""
+msgstr "Greška '%s' zakrpljela %s"
 
 #: ../duplicity/patchdir.py:625
 #, python-format
@@ -1541,7 +1587,7 @@ msgstr ""
 #: ../duplicity/path.py:116
 #, python-format
 msgid "Warning: %s invalid devnums (0x%X), treating as (0, 0)."
-msgstr ""
+msgstr "Upozorenje: %s je nevažeći devnums (0x%X) tretiranog kao (0, 0)."
 
 #: ../duplicity/path.py:245 ../duplicity/path.py:306
 #, python-format
@@ -1730,4 +1776,23 @@ msgstr ""
 #: ../duplicity/util.py:211
 #, python-format
 msgid "Releasing lockfile %s"
-msgstr ""
+msgstr "Otpuštanje zakljucane dadoteke %s"
+
+#, python-format
+#~ msgid "MultiBackend: list from %s: %s"
+#~ msgstr "MultiBackend: lista od %s: %s"
+
+#, python-format
+#~ msgid ""
+#~ "For certificate verification with python 2.7.8 or earlier a cacert database\n"
+#~ "file is needed in one of these locations: %s\n"
+#~ "Hints:\n"
+#~ "  Consult the man page, chapter 'SSL Certificate Verification'.\n"
+#~ "  Consider using the options --ssl-cacert-file, --ssl-no-check-certificate ."
+#~ msgstr ""
+#~ "Za potvrdu certifikata sa python 2.7.8 ili ranije cacert baza podataka\n"
+#~ "datateka je potrebna na jednoj od ovih lokacija: %s\n"
+#~ "Upute:\n"
+#~ "  Provjerite na glavnoj stranici, poglavlje 'SSL Certificate Verification'.\n"
+#~ "  Razmatrajte korištenje opcija --ssl-cacert-file, --ssl-no-check-"
+#~ "certificate ."
