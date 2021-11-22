@@ -24,17 +24,20 @@ ext:
 	./setup.py build_ext
 	
 xlate-export:
-	(cd po ; ./update-pot ; cd -)
-	rm -rf /tmp/duplicity /tmp/duplicity.tgz
-	mkdir -p /tmp/duplicity/
-	cp -rp po /tmp/duplicity/
-	(cd /tmp ; tar czf duplicity.tgz duplicity/po/duplicity.pot duplicity/po/*.po ; cd -)
+	(cd po ; ./update-pot)
+	rm -rf /tmp/duplicity ~/Downloads/duplicity.tgz
+	mkdir -p /tmp/duplicity/duplicity
+	cp -p po/duplicity.pot /tmp/duplicity
+	cp -p po/*.po /tmp/duplicity/duplicity
+	(cd /tmp ; tar czf ~/Downloads/duplicity.tgz duplicity/duplicity.pot duplicity/duplicity/*.po)
+	echo "Reminder: upload ~/Downloads/duplicity.tgz to https://translations.launchpad.net/duplicity"
 
 xlate-import:
+	echo "Reminder: download ~/Downloads/launchpad-export.tar.gz from https://translations.launchpad.net/duplicity"
 	rm -rf /tmp/duplicity /tmp/po
 	mkdir -p /tmp/duplicity/
-	(cd /tmp/duplicity ; tar xzf ~/Downloads/launchpad-export.tar.gz ; cd -)
-	(cd /tmp/duplicity/po ; rename s/duplicity-//g *.po ; cd -)
+	(cd /tmp/duplicity ; tar xzf ~/Downloads/launchpad-export.tar.gz)
+	(cd /tmp/duplicity/po ; rename s/duplicity-//g *.po)
 	cp /tmp/duplicity/po/* po
 
-.PHONY: clean docs ext help
+.PHONY: clean docs ext help xlate-export xlate-import
