@@ -138,7 +138,7 @@ class RestartTest(FunctionalTestCase):
         self.backup(u"full", u"{0}/testfiles/largefiles".format(_runtest_dir))
         self.verify(u"{0}/testfiles/largefiles".format(_runtest_dir))
 
-    @unittest.skipIf(u"ppc64el" in platform.machine(), u"Skip on ppc64el machines")
+    @unittest.skipIf(u"ppc64el" or u"ppc64le" in platform.machine(), u"Skip on ppc64el and ppc64le machines")
     def test_last_file_missing_at_end(self):
         u"""
         Test restart when the last file being backed up is missing on restart.
