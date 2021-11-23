@@ -149,6 +149,7 @@ build_snap:
     stage: deploy
     when: manual
     only: [master]
+    image: ubuntu:20.04
     script:
         - apt-get install -y snapcraft
         - VERSION=`./setup.py --version`
