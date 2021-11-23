@@ -151,6 +151,7 @@ build_snap:
     only: [master]
     image: ubuntu:20.04
     script:
+        - apt-get update
         - apt-get install -y snapcraft
         - VERSION=`./setup.py --version`
         - echo "make snap of ${VERSION}"
