@@ -21,6 +21,13 @@
 # include:
 #     - template: Dependency-Scanning.gitlab-ci.yml
 
+.test-template: &test-template
+    stage: tests
+    except:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i
+            - $SKIP_TESTS
+
 variables:
     # cache local items
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
@@ -49,6 +56,7 @@ default:
     interruptible: true
 
 code_ub18-04:
+    <<: *test-template
     stage: qual
     script:
         - apt-get install -y python3.8 python3.8-dev
@@ -58,6 +66,7 @@ code_ub18-04:
             junit: report.xml
 
 py27_ub18-04:
+    <<: *test-template
     stage: test
     script:
         - apt-get install -y python2.7 python2.7-dev
@@ -68,6 +77,7 @@ py27_ub18-04:
     allow_failure: true
 
 py35_ub16-04:
+    <<: *test-template
     stage: test
     image: ubuntu:16.04
     before_script:
@@ -89,6 +99,7 @@ py35_ub16-04:
     allow_failure: true
 
 py36_ub18-04:
+    <<: *test-template
     stage: test
     script:
         - apt-get install -y python3.6 python3.6-dev
@@ -98,6 +109,7 @@ py36_ub18-04:
             junit: report.xml
 
 py37_ub18-04:
+    <<: *test-template
     stage: test
     script:
         - apt-get install -y python3.7 python3.7-dev
@@ -107,6 +119,7 @@ py37_ub18-04:
             junit: report.xml
 
 py38_ub18-04:
+    <<: *test-template
     stage: test
     script:
         - apt-get install -y python3.8 python3.8-dev
@@ -116,6 +129,7 @@ py38_ub18-04:
             junit: report.xml
 
 py39_ub20-04:
+    <<: *test-template
     stage: test
     image: ubuntu:20.04
     before_script:
