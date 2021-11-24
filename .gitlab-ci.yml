@@ -163,7 +163,6 @@ build_snap:
     stage: deploy
     when: manual
     only: [master]
-    image: ubuntu:20.04
     script:
         - apt-get update
         - apt-get upgrade
