@@ -14,6 +14,7 @@ clean:
 		'duplicity*.rst' 'testing*.rst'; do \
 		find . -name "$$i" | xargs -t -r rm -rf ; \
 	done
+	find . -name 'S.*' -type s -delete
 
 docs:
 	sphinx-apidoc -o docs/ --separate --private . \
