@@ -224,9 +224,10 @@ class Manifest(object):
             self.del_volume_info(i)
         log.Info(_(u"Found %s volumes in manifest") % latest_vol)
 
-        # Get file changed list - not needed if --file-changed not present
+        # Get file changed list - not needed if --file-changed and
+        # --show-changes-in-set are not present
         filecount = 0
-        if config.file_changed is not None:
+        if config.file_changed is not None or config.show_changes_in_set is not None:
             filelist_regexp = re.compile(b"(^|\\n)filelist\\s([0-9]+)\\n(.*?)(\\nvolume\\s|$)", re.I | re.S)
             match = filelist_regexp.search(s)
             if match:

@@ -230,6 +230,11 @@ def PrintCollectionFileChangedStatus(col_stats, filepath, force_print=False):
     Log(str(col_stats.get_file_changed_record(filepath)), 8, InfoCode.collection_status, None, force_print)
 
 
+def PrintCollectionChangesInSet(col_stats, set_index, force_print=False):
+    u"""Prints changes in the specified set to the log"""
+    Log(str(col_stats.get_all_file_changed_records(set_index)), 8, InfoCode.collection_status, None, force_print)
+
+
 def Notice(s):
     u"""Shortcut used for notice messages (verbosity 3, the default)."""
     Log(s, NOTICE)

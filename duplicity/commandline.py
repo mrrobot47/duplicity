@@ -683,6 +683,10 @@ def parse_cmdline_options(arglist):
                       metavar=_(u"path"), dest=u"file_changed",
                       callback=lambda o, s, v, p: setattr(p.values, u"file_changed", v.rstrip(u'/')))
 
+    # If set, show file changes (new, deleted, changed) in the specified backup
+    #  set (0 specifies latest, 1 specifies next latest, etc.)
+    parser.add_option(u"--show-changes-in-set", type=u"int", metavar=_(u"number"))
+
     # delay time before next try after a failure of a backend operation
     # TRANSL: Used in usage help. Example:
     # --backend-retry-delay <seconds>

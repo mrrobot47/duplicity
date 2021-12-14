@@ -21,7 +21,7 @@ source_directory target_url
 source_url target_directory
 
 .B duplicity collection-status
-.I [options] [--file-changed <relpath>]
+.I [options] [--file-changed <relpath>] [--show-changes-in-set <index>]
 target_url
 
 .B duplicity list-current-files
@@ -189,9 +189,16 @@ The
 option enables data comparison (see below).
 
 .TP
-.BI "collection-status " "[--file-changed <relpath>]" "<url>"
+.BI "collection-status " "[--file-changed <relpath>] [--show-changes-in-set <index>] <url>"
 Summarize the status of the backup repository by printing the chains
 and sets found, and the number of volumes in each.
+.br
+The
+.I --file-changed
+option summarizes the changes to the file (in the most recent backup chain).
+The
+.I --show-changes-in-set
+option summarizes all the file changes in the index:th backup set (where index 0 means the latest set, 1 means the next to latest, etc.).
 
 .TP
 .BI "list-current-files " "[--time <time>] <url>"

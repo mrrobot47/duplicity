@@ -1223,6 +1223,16 @@ class CollectionsStatus(object):
 
         return FileChangedStatus(filepath, list(zip(specified_file_backup_type, specified_file_backup_set)))
 
+    def get_all_file_changed_records(self, set_index):
+        u"""
+        Returns file changes in the specific backup set
+        """
+        if not self.matched_chain_pair:
+            return u""
+
+        all_backup_set = list(reversed(self.matched_chain_pair[1].get_all_sets()))
+        return BackupSetChangesStatus(all_backup_set[set_index])
+
 
 class FileChangedStatus(object):
     def __init__(self, filepath, fileinfo_list):
@@ -1246,4 +1256,22 @@ class FileChangedStatus(object):
             l.append(set_schema % (type, dup_time.timetopretty(backup_set.get_time()), backup_type.title()))
 
         l.append(u"-------------------------")
+        return u"\n".join(l)
+
+
+class BackupSetChangesStatus(object):
+    def __init__(self, backup_set):
+        self.backup_set = backup_set
+
+    def __str__(self):
+        changed_files = self.backup_set.get_files_changed()
+        max_file_path_len = max([len(c[1]) for c in changed_files] + [5])
+        set_schema = u"%%-%ds  %%20s" % (max_file_path_len)
+        l = [u"-------------------------",
+             _(u" Backup set time: %s") % (self.backup_set.get_timestr()),
+             _(u"Total number of changes: %d") % len(changed_files),
+             set_schema % (_(u"File:"), _(u"Type of file change:"))] + \
+            [set_schema % (c[1].decode(u'utf-8'), c[0].decode(u'utf-8'))
+             for c in changed_files] + \
+            [u"-------------------------"]
         return u"\n".join(l)

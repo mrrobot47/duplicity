@@ -1654,7 +1654,9 @@ def do_backup(action):
     elif action == u"list-current":
         list_current(col_stats)
     elif action == u"collection-status":
-        if not config.file_changed:
+        if config.show_changes_in_set is not None:
+            log.PrintCollectionChangesInSet(col_stats, config.show_changes_in_set, True)
+        elif not config.file_changed:
             log.PrintCollectionStatus(col_stats, True)
         else:
             log.PrintCollectionFileChangedStatus(col_stats, config.file_changed, True)
