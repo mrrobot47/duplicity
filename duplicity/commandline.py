@@ -531,6 +531,9 @@ def parse_cmdline_options(arglist):
     # Whether to use S3 Glacier Storage
     parser.add_option(u"--s3-use-glacier", action=u"store_true")
 
+    # Whether to use S3 Glacier IR Storage
+    parser.add_option(u"--s3-use-glacier-ir", action=u"store_true")
+
     # Whether to use S3 Glacier Deep Archive Storage
     parser.add_option(u"--s3-use-deep-archive", action=u"store_true")
 

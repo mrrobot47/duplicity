@@ -226,6 +226,9 @@ s3_use_ia = False
 # Whether to use S3 Glacier Storage
 s3_use_glacier = False
 
+# Whether to use S3 Glacier IR Storage
+s3_use_glacier_ir = False
+
 # Whether to use S3 Glacier Deep Archive Storage
 s3_use_deep_archive = False
 
