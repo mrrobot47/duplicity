@@ -120,6 +120,8 @@ class S3Boto3Backend(duplicity.backend.Backend):
             storage_class = u'ONEZONE_IA'
         elif config.s3_use_glacier and u"manifest" not in remote_filename:
             storage_class = u'GLACIER'
+        elif config.s3_use_glacier_ir and u"manifest" not in remote_filename:
+            storage_class = u'GLACIER_IR'
         elif config.s3_use_deep_archive and u"manifest" not in remote_filename:
             storage_class = u'DEEP_ARCHIVE'
         else:
