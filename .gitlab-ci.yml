@@ -161,6 +161,7 @@ build_pip:
 
 build_snap:
     stage: deploy
+    image: ubuntu:20.04
     when: manual
     only: [master]
     script:
