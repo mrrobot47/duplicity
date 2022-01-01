@@ -1,0 +1,16 @@
+[
+    {
+        "description": "first drive",
+        "url": "file:///tmp/first_drive",
+        "prefixes": [
+            "data_"
+        ]
+    },
+    {
+        "description": "second drive",
+        "url": "file:///tmp/second_drive",
+        "prefixes": [
+            "meta_"
+        ]
+    }
+]
