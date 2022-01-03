@@ -10,7 +10,7 @@ description: |
 
 grade: stable
 confinement: classic
-base: core20
+base: core18
 
 apps:
     duplicity:
@@ -19,6 +19,7 @@ apps:
 parts:
     duplicity:
         plugin: python
+        python-version: python3
         build-packages:
             - build-essential
             - ieee-data
@@ -29,7 +30,7 @@ parts:
             - gnupg
             - lftp                  # lftpbackend.py
             - libatm1
-            - librsync2
+            - librsync1
             - ncftp                 # ncftpbackend.py
             - openssh-client        # ssh_pexpect_backend.py
             - python3-gi            # giobackend.py
