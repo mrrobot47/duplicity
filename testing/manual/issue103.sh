@@ -5,7 +5,7 @@ cd `dirname $0`/../..
 export PYTHONPATH=`pwd`
 export PASSPHRASE=foo
 
-alias python3=python3.9
+alias python3=python3.10
 
 #export PYDEVD=True
 
@@ -21,6 +21,7 @@ bin/duplicity \
     ../duplicity-web-git \
     multi:///`pwd`/testing/manual/issue103.json\?mode=mirror
 
+ls -lR ~/.cache/duplicity/issue103 /tmp/first_drive /tmp/second_drive
 sleep 2
 
 bin/duplicity \
@@ -37,7 +38,7 @@ ls -lR ~/.cache/duplicity/issue103 /tmp/first_drive /tmp/second_drive
 sleep 2
 
 bin/duplicity \
-    remove-older-than 1s \
+    remove-older-than 2s \
     --name issue103 \
     --file-prefix-manifest 'meta_' \
     --file-prefix-signature 'meta_' \
@@ -48,15 +49,16 @@ bin/duplicity \
     multi:///`pwd`/testing/manual/issue103.json\?mode=mirror
 
 ls -lR ~/.cache/duplicity/issue103 /tmp/first_drive /tmp/second_drive
+sleep 2
 
 bin/duplicity \
-    inc \
+    collection-status \
     --name issue103 \
     --file-prefix-manifest 'meta_' \
     --file-prefix-signature 'meta_' \
     --file-prefix-archive 'data_' \
     --no-encryption \
-    ../duplicity-web-git \
+    --verbosity 9 \
     multi:///`pwd`/testing/manual/issue103.json\?mode=mirror
 
 ls -lR ~/.cache/duplicity/issue103 /tmp/first_drive /tmp/second_drive
