@@ -20,3 +20,33 @@ Use PYTHONPATH to set the path each time that you use the binaries:
 or
 
 `PYTHONPATH=$DUP_ROOT bin/rdiffdir`
+
+
+## Getting a versioned copy of duplicity
+
+Duplicity source is versioned by **git tags** and **setuptools-scm** with help from `./setup.py sdist --dist-dir=.`.
+The following should suffice to give you versioned source.
+
+So, for version 0.8.21:
+```
+git clone --branch rel.0.8.21 git@gitlab.com:duplicity/duplicity.git
+```
+will produce a working git directory **duplicity** in the current directory.
+```
+cd duplicity
+./setup.py sdist --dist-dir=.
+tar xf duplicity-0.8.21.tar.gz
+```
+will produce a versioned source in **duplicity-0.8.21**
+
+Then just run
+```
+cd duplicity-8.8,21
+./setup.py build
+```
+or
+```
+cd duplicity-0.8.21
+./setup.py install
+```
+as needed.
