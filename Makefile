@@ -8,7 +8,7 @@ help:
 	@echo   "xlate-import -- process LP tranlator's export file into duplicity"
 
 clean:
-	for i in '.tox' '_build' 'build' 'apsw' 'work' 'megatestresults' '.eggs' '*.egg-info' \
+	for i in '.tox' '_build' 'build' 'dist' 'apsw' 'work' 'megatestresults' '.eggs' '*.egg-info' \
 		'__pycache__' '*.pyc' '*.pyo' '*~' '*.o' '*.so' '*.pyd' '*.gcov' '*.gcda' \
 		'*.gcno' '*.orig' '*.tmp' 'testdb*' 'testextension.sqlext' \
 		'duplicity*.rst' 'testing*.rst'; do \

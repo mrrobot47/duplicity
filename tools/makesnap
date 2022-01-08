@@ -55,7 +55,7 @@ if [ ${BUILD} == "amd64" ]; then
     # build snap locally w/o multipass
     snapcraft snap --destructive-mode
 else
-    # # build snap via remote build on LP
+    # build snap via remote build on LP
     snapcraft remote-build --build-on=${BUILD} --launchpad-accept-public-upload
 fi
 
