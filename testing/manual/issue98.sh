@@ -27,36 +27,12 @@ bin/duplicity \
     file:///tmp/first_drive
 
 bin/duplicity \
-    verify \
-    --name issue98 \
-    --volsize 5 \
-    --no-encryption \
-    file:///tmp/first_drive \
-    ../duplicity-web-git
-
-ls -lR ~/.cache/duplicity/issue98 /tmp/first_drive
-
-bin/duplicity \
     replicate \
     --name issue98 \
     --volsize 5 \
     --no-encryption \
     --verbosity 9 \
     file:///tmp/first_drive \
-    file:///tmp/second_drive
-
-bin/duplicity \
-    collection-status \
-    --name issue98 \
-    --volsize 5 \
-    --no-encryption \
-    file:///tmp/first_drive
-
-bin/duplicity \
-    collection-status \
-    --name issue98 \
-    --volsize 5 \
-    --no-encryption \
     file:///tmp/second_drive
 
 bin/duplicity \
@@ -74,5 +50,3 @@ bin/duplicity \
     --no-encryption \
     file:///tmp/second_drive \
     ../duplicity-web-git
-
-ls -lR ~/.cache/duplicity/issue98 /tmp/first_drive /tmp/second_drive
