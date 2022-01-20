@@ -1,10 +1,10 @@
-#!/bin/bash -v -e
+#!/bin/bash -v
 
 cd `dirname $0`/../..
 
 export PYTHONPATH=`pwd`
 
-alias python3=python3.10
+alias python3=python3.9
 
 #export PYDEVD=True
 
@@ -50,3 +50,5 @@ bin/duplicity \
     --no-encryption \
     file:///tmp/second_drive \
     ../duplicity-web-git
+
+ls -l ~/.cache/duplicity/issue98 /tmp/first_drive /tmp/second_drive
