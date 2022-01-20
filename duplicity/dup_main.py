@@ -1059,8 +1059,8 @@ def replicate():
 
     src_chainlist = src_stats.get_signature_chains(local=False, filelist=src_list)[0]
     tgt_chainlist = tgt_stats.get_signature_chains(local=False, filelist=tgt_list)[0]
-    sorted(src_chainlist, key=lambda chain: chain.start_time)
-    sorted(tgt_chainlist, key=lambda chain: chain.start_time)
+    src_chainlist = sorted(src_chainlist, key=lambda chain: chain.start_time)
+    tgt_chainlist = sorted(tgt_chainlist, key=lambda chain: chain.start_time)
     if not src_chainlist:
         log.Notice(_(u"No old backup sets found."))
         return
@@ -1097,8 +1097,8 @@ def replicate():
 
     src_chainlist = src_stats.get_backup_chains(filename_list=src_list)[0]
     tgt_chainlist = tgt_stats.get_backup_chains(filename_list=tgt_list)[0]
-    sorted(src_chainlist, key=lambda chain: chain.start_time)
-    sorted(tgt_chainlist, key=lambda chain: chain.start_time)
+    src_chainlist = sorted(src_chainlist, key=lambda chain: chain.start_time)
+    tgt_chainlist = sorted(tgt_chainlist, key=lambda chain: chain.start_time)
     for src_chain in src_chainlist:
         try:
             tgt_chain = list([chain for chain in tgt_chainlist if chain.start_time == src_chain.start_time])[0]
