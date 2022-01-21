@@ -12,6 +12,8 @@ The build process can be also be run separately:
 python setup.py build
 ```
 
+If you want to use python 3 replace the `python` command with `python3`
+
 The default prefix is /usr, so files are put in /usr/bin,
 /usr/share/man/, etc.  An alternate prefix can be specified using the
 --prefix=<prefix> option.  For example:
@@ -40,6 +42,17 @@ If you install from the source package, you will also need:
  * Python development files, normally found in module 'python-dev'.
  * librsync development files, normally found in module 'librsync-dev'.
 
+Install python modules by performing the following command in duplicity's root directory:
+
+```
+pip install -r requirements.txt
+```
+or:
+
+```
+pip3 install -r requirements.txt
+```
+if you're using python3
 
 # DEVELOPMENT
 
