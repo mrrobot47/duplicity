@@ -1,8 +1,49 @@
 ## (unreleased)
 
+### New
+
+* Minimize testing/manual/issue98.sh for issue #98. [Kenneth Loafman]
+
+* Add testing/manual/issue98.sh to test issue #98. [Kenneth Loafman]
+
+* Add Getting Versioned Source to README-REPO.md. [Kenneth Loafman]
+
+* Add --use-glacier-ir option for instant retrieval.  Fixes #102. [Kenneth Loafman]
+
+* Add --par2-volumes entry to man page. [Kenneth Loafman]
+
+* Add option --show-changes-in-set <index> to collection-status. [Kenneth Loafman]
+
+  Patches provided by Peter Canning (@pcanning).  Closes #99.
+
 ### Changes
 
 * Add line wrap to changelog process, body and subject. [Kenneth Loafman]
+
+### Fix
+
+* Fix use of sorted() builtin (does not sort in place). [Kenneth Loafman]
+
+* Fix #107 - TypeError in restart\_position\_iterator. [Kenneth Loafman]
+
+* Need to pass kwargs to BaseIdentitu. [Kenneth Loafman]
+
+* Fix \_\_init\_\_ in hubic.py.  Fixes #106. [Kenneth Loafman]
+
+* Somehow missed boto when doing #102.  Now supported. [Kenneth Loafman]
+
+### Other
+
+* Merge branch 'filecoin-backend' into 'master' [Kenneth Loafman]
+
+  Slate Backend
+  See merge request duplicity/duplicity!42
+
+* Slate Backend. [Shr1ftyy]
+
+* Merge branch 'mr-origin-75' [Kenneth Loafman]
+
+* Skip tests for ppc64le also. [Mikel Olasagasti Uranga]
 
 
 ## rel.0.8.21 (2021-11-09)
