@@ -782,6 +782,14 @@ def parse_cmdline_options(arglist):
         replicate = True
         num_expect = 2
 
+    if cmd == u'replicate':
+        log.Warn(u'''
+WARNING: Replicate is only minimally functional at this time
+         See https://gitlab.com/duplicity/duplicity/-/issues/98
+         for further details.  Please consider using rsync,
+         rclone, or other copy utilities to make a replication.
+''')
+
     if len(args) != num_expect:
         command_line_error(u"Expected %d args, got %d" % (num_expect, len(args)))
 
