@@ -20,8 +20,6 @@ parts:
     duplicity:
         plugin: python
         python-version: python3
-        build-snaps:
-            - snapcraft
         build-packages:
             - build-essential
             - ieee-data
