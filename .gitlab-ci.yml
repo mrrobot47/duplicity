@@ -166,7 +166,7 @@ build_snap:
     only: [master]
     script:
         - apt-get update
-        - apt-get upgrade
+        - apt-get upgrade -y
         - snap install snapcraft classic
         - VERSION=`./setup.py --version`
         - echo "make snap of ${VERSION}"
