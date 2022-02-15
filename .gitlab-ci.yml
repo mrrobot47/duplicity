@@ -161,10 +161,13 @@ build_pip:
 
 build_snap:
     stage: deploy
-    image: ubuntu:20.04
     when: manual
+    image: ubuntu:20.04
     only: [master]
     script:
+        - apt-get update
+        - apt-get upgrade -y
+        - apt-get install -y snapd snapcraft
         - snap install snapd classic
         - snap install snapcraft classic
         - VERSION=`./setup.py --version`
