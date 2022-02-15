@@ -165,7 +165,6 @@ build_snap:
     when: manual
     only: [master]
     script:
-        - apt-get install snapd snapcraft -y
         - snap install snapd classic
         - snap install snapcraft classic
         - VERSION=`./setup.py --version`
