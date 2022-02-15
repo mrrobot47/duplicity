@@ -167,6 +167,8 @@ build_snap:
     script:
         - apt-get update
         - apt-get upgrade -y
+        - apt-get install snapd snapcraft
+        - snap install snapd classic
         - snap install snapcraft classic
         - VERSION=`./setup.py --version`
         - echo "make snap of ${VERSION}"
