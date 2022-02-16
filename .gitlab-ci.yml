@@ -162,7 +162,7 @@ build_pip:
 build_snap:
     stage: deploy
     when: manual
-    image: ubuntu:20.04
+    image: ubuntu:18.04
     only: [master]
     script:
         - apt-get update
