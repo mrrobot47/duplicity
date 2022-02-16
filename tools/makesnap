@@ -21,6 +21,11 @@
 
 set -e
 
+if [ "`uname`" != "Linux" ]; then
+    echo "Snapcraft does not run on this OS, yet."
+    exit 2
+fi
+
 if [ "$#" -gt 1 ]; then
     echo "usage: makesnap <comma-sep-list-of-architectures>"
     echo "      - default is amd64 only"
