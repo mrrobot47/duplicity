@@ -22,7 +22,7 @@
 set -e
 
 if [ "`uname`" != "Linux" ]; then
-    echo "Snapcraft does not run on this OS, yet."
+    echo "makesnap does not run on this OS"
     exit 2
 fi
 
@@ -73,9 +73,13 @@ for f in duplicity_*.snap; do
 done
 
 # mv into working source tree
-mv duplicity_*.txt ../..
-mv duplicity_*.snap* ../..
-cd ../..
+if [ -e duplicity_*.snap ];
+    mv duplicity_*.snap ../..
+fi
+if [ -e duplicity_*.txt ];
+    mv duplicity_*.txt ../..
+fi
 
 # clean up
+cd ../..
 rm -rf build
