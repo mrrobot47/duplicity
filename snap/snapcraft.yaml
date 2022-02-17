@@ -28,42 +28,42 @@ parts:
             - python3-dev
         stage-packages:
             - gnupg
-            - lftp                  # lftpbackend.py
+            - lftp
             - libatm1
             - librsync1
-            - ncftp                 # ncftpbackend.py
-            - openssh-client        # ssh_pexpect_backend.py
-            - python3-gi            # giobackend.py
-            - rsync                 # rsyncbackend.py
-            - rclone                # rclonebackend.py
+            - ncftp
+            - openssh-client
+            - python3-gi
+            - rsync
+            - rclone
         python-packages:
-            - azure-storage-blob
-            - b2sdk                 # b2backend.py
-            - boto
-            - boto3
-            - boxsdk[jwt]
-            - dropbox               # dpbxbackend.py
-            - fasteners
-            - future                # everywhere
-            - gdata-python3         # gdocsbackend.py
-            - google-api-python-client  # gdrivebackend.py
-            - google-auth-oauthlib      # gdrivebackend.py
-            - httplib2              # pydrivebackend.py
-            - jottalib              # jottalib backend
-            - keyring               # gdrivebackend.py
-            - mediafire             # mediafirebackend.py
-            - megatools             # megabackend.py
-            - paramiko              # ssh_paramiko_backend.py
-            - pexpect               # ssh_pexpect_backend.py
-            - psutil                # botobackend.py
-            - pydrive               # pydrivebackend.py
-            - pyrax                 # hubicbackend
-            - python-swiftclient    # swiftbackend.py
-            - requests              # adbackend.py
-            - requests-oauthlib     # onedrivebackend
-            - setuptools            # setup.py
-            - setuptools-scm        # scm version
-            - sx                    # sxbackend.py
-            - tahoe-lafs            # tahoebackend.py
-            - urllib3
+            - azure-storage-blob            ; python_version == '3.6'
+            - b2sdk                         ; python_version == '3.6'
+            - boto                          ; python_version == '3.6'
+            - boto3                         ; python_version == '3.6'
+            - boxsdk[jwt]                   ; python_version == '3.6'
+            - dropbox                       ; python_version == '3.6'
+            - fasteners                     ; python_version == '3.6'
+            - future                        ; python_version == '3.6'
+            - gdata-python3                 ; python_version == '3.6'
+            - google-api-python-client      ; python_version == '3.6'
+            - google-auth-oauthlib          ; python_version == '3.6'
+            - httplib2                      ; python_version == '3.6'
+            - jottalib                      ; python_version == '3.6'
+            - keyring                       ; python_version == '3.6'
+            - mediafire                     ; python_version == '3.6'
+            - megatools                     ; python_version == '3.6'
+            - paramiko                      ; python_version == '3.6'
+            - pexpect                       ; python_version == '3.6'
+            - psutil                        ; python_version == '3.6'
+            - pydrive                       ; python_version == '3.6'
+            - pyrax                         ; python_version == '3.6'
+            - python-swiftclient            ; python_version == '3.6'
+            - requests                      ; python_version == '3.6'
+            - requests-oauthlib             ; python_version == '3.6'
+            - setuptools                    ; python_version == '3.6'
+            - setuptools-scm                ; python_version == '3.6'
+            - sx                            ; python_version == '3.6'
+            - tahoe-lafs                    ; python_version == '3.6'
+            - urllib3                       ; python_version == '3.6'
         source: .
