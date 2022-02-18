@@ -10,7 +10,7 @@ description: |
 
 grade: stable
 confinement: classic
-base: core18
+base: core20
 
 apps:
     duplicity:
@@ -30,7 +30,7 @@ parts:
             - gnupg
             - lftp
             - libatm1
-            - librsync1
+            - librsync2
             - ncftp
             - openssh-client
             - python3-gi
