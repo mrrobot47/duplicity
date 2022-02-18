@@ -167,7 +167,7 @@ build_snap:
     script:
         - apt-get update
         - apt-get upgrade -y
-        - sudo snap refresh
+        - snap refresh
         - VERSION=`./setup.py --version`
         - echo "make snap of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
