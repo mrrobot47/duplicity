@@ -27,7 +27,7 @@ services:
   duplicity_test:
     build:
       context: ../..
-      dockerfile: testing/docker/duplicity_test/Dockerfile-20.04
+      dockerfile: testing/docker/duplicity_test/Dockerfile
     image: firstprime/duplicity_test
     ports:
       - "30000-30009:30000-30009"
