@@ -73,10 +73,10 @@ for f in duplicity_*.snap; do
 done
 
 # mv into working source tree
-if [ -e duplicity_*.snap ];
+if [ -e duplicity_*.snap ]; then
     mv duplicity_*.snap ../..
 fi
-if [ -e duplicity_*.txt ];
+if [ -e duplicity_*.txt ]; then
     mv duplicity_*.txt ../..
 fi
 
