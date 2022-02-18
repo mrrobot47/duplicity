@@ -179,7 +179,7 @@ build_snap:
         - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > snaplogin
         - snapcraft login --with snaplogin
         - rm snaplogin
-        - snapcraft snap
+        - snapcraft remote-build --launchpad-accept-public-upload
         - snapcraft push duplicity_*.snap --release edge
 
 pages:
