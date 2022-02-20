@@ -10,7 +10,7 @@ description: |
 
 grade: stable
 confinement: classic
-base: core20
+base: "cibuilds/snapcraft:core20"
 
 apps:
     duplicity:
