@@ -165,9 +165,9 @@ build_snap:
     image: "cibuilds/snapcraft:core20"
     only: [master]
     script:
-        - apt-get update
-        - apt-get upgrade -y
-        - snap refresh
+        - sudo apt-get update
+        - sudo apt-get upgrade -y
+        - sudo snap refresh
         - VERSION=`./setup.py --version`
         - echo "make snap of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
