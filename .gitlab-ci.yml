@@ -162,7 +162,7 @@ build_pip:
 build_snap:
     stage: deploy
     when: manual
-    image: ubuntu:20.04
+    image: "cibuilds/snapcraft:core20"
     only: [master]
     script:
         - apt-get update
