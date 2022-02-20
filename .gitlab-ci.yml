@@ -48,11 +48,11 @@ default:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
         - export LC_ALL=C.UTF-8
-        - apt-get update
-        - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev
+        - sudo apt-get update
+        - sudo apt-get install -y 2to3 build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
-        - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
+        - sudo python3 -m pip install --upgrade pip
+        - sudo python3 -m pip install --requirement requirements.txt
     interruptible: true
 
 code_ub18-04:
