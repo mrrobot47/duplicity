@@ -164,10 +164,16 @@ build_snap:
     when: manual
     image: "cibuilds/snapcraft:core20"
     only: [master]
-    before_script: []
-    script:
+    before_script:
+        # Set locale to prevent UTF-8 errors
+        - export LANG=C.UTF-8
+        - export LC_ALL=C.UTF-8
         - sudo apt-get update
-        - sudo apt-get upgrade -y
+        - sudo apt-get install -y build-essential git intltool lftp librsync-dev
+          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install --requirement requirements.txt
+    script:
         - VERSION=`./setup.py --version`
         - echo "make snap of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
