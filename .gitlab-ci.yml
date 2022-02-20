@@ -164,10 +164,10 @@ build_snap:
     when: manual
     image: "cibuilds/snapcraft:core20"
     only: [master]
+    before_script: []
     script:
         - sudo apt-get update
         - sudo apt-get upgrade -y
-        - sudo snap refresh
         - VERSION=`./setup.py --version`
         - echo "make snap of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
