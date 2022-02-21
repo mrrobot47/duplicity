@@ -18,6 +18,8 @@
 
 ### Changes
 
+* Add warning for replicate command.  See issue #98. [Kenneth Loafman]
+
 * Add line wrap to changelog process, body and subject. [Kenneth Loafman]
 
 ### Fix
@@ -33,6 +35,12 @@
 * Somehow missed boto when doing #102.  Now supported. [Kenneth Loafman]
 
 ### Other
+
+* Merge branch 'master' of gitlab.com:duplicity/duplicity. [Kenneth Loafman]
+
+* Revert "chg:dev:core20 usess py38, not py36." [Kenneth Loafman]
+
+  This reverts commit 05eda5828c7bdde1003357439cfcb4d93124a377.
 
 * Merge branch 'filecoin-backend' into 'master' [Kenneth Loafman]
 
