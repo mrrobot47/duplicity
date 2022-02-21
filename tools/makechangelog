@@ -14,5 +14,5 @@ if [ $CNT -ne 0 ]; then
     exit 1
 fi
 
-git commit -m"Update changelog.\n\n[skip ci]" CHANGELOG.md
+git commit -m"Update changelog." -m"[skip ci]" CHANGELOG.md
 git push
