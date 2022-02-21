@@ -148,47 +148,6 @@ py39_ub20-04:
         reports:
             junit: report.xml
 
-build_pip:
-    stage: deploy
-    when: manual
-    only: [master]
-    script:
-        - pip install twine
-        - VERSION=`./setup.py --version`
-        - echo "make pip of ${VERSION}"
-        - ./setup.py sdist --dist-dir=.
-        - python3 -m twine upload duplicity-${VERSION}.tar.gz
-
-build_snap:
-    stage: deploy
-    when: manual
-    image: "cibuilds/snapcraft:core20"
-    only: [master]
-    before_script:
-        # Set locale to prevent UTF-8 errors
-        - export LANG=C.UTF-8
-        - export LC_ALL=C.UTF-8
-        - sudo apt-get update
-        - sudo apt-get install -y build-essential git intltool lftp librsync-dev
-          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
-        - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
-    script:
-        - VERSION=`./setup.py --version`
-        - echo "make snap of ${VERSION}"
-        - ./setup.py sdist --dist-dir=.
-        - rm -rf build
-        - mkdir -p build
-        - tar xf duplicity-${VERSION}.tar.gz -C build
-        - rm -f duplicity-${VERSION}.tar.gz
-        - cd build/duplicity-${VERSION}
-        - head -2 snap/snapcraft.yaml | tail -1
-        - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > snaplogin
-        - snapcraft login --with snaplogin
-        - rm snaplogin
-        - snapcraft remote-build --launchpad-accept-public-upload
-        - snapcraft push duplicity_*.snap --release edge
-
 pages:
     stage: deploy
     when: manual
