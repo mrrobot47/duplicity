@@ -10,7 +10,7 @@ description: |
 
 grade: stable
 confinement: classic
-base: "cibuilds/snapcraft:core20"
+base: core20
 
 apps:
     duplicity:
@@ -19,7 +19,6 @@ apps:
 parts:
     duplicity:
         plugin: python
-        python-version: python3
         build-packages:
             - build-essential
             - ieee-data
