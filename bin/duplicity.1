@@ -650,6 +650,14 @@ By default duplicity will print statistics about the current session
 after a successful backup.  This switch disables that behavior.
 
 .TP
+.BI --no-files-changed
+By default duplicity will collect file names and change action in
+memory (add, del, chg) during backup.  This can be quite expensive
+in memory use, especially with millions of small files.
+This flag turns off that collection.  This means that the
+--file-changed option for collection-status will return nothing.
+
+.TP
 .BI --null-separator
 Use nulls (\\0) instead of newlines (\\n) as line separators, which
 may help when dealing with filenames containing newlines.  This
@@ -2205,14 +2213,14 @@ for future use.
 
 .SH A NOTE ON SLATE BACKEND
 Three environment variables are used with the slate backend:
-  1. 
-.BR `SLATE_API_KEY` 
+  1.
+.BR `SLATE_API_KEY`
 - Your slate API key
-  2. 
-.BR `SLATE_SSL_VERIFY` 
+  2.
+.BR `SLATE_SSL_VERIFY`
 - either '1'(True) or '0'(False) for ssl verification (optional - True by default)
-  3. 
-.BR `PASSPHRASE` 
+  3.
+.BR `PASSPHRASE`
 - your gpg passhprase for encryption (optional - will be prompted if not set or not used at all if using the `--no-encryption` parameter)
 
 To use the slate backend, use the following scheme:
@@ -2222,7 +2230,7 @@ slate://[slate-id]
 
 e.g. Full backup of current directory to slate:
 .RS
-duplicity full . "slate://6920df43-5c3w-2x7i-69aw-2390567uav75" 
+duplicity full . "slate://6920df43-5c3w-2x7i-69aw-2390567uav75"
 .RE
 
 Here's a demo:

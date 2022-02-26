@@ -372,6 +372,9 @@ show_changes_in_set = None
 # If set, collect only the file status, not the whole root.
 file_changed = None
 
+# If set, skip collecting the files_changed list in statistics, nullifies --file-changed
+no_files_changed = False
+
 # delay (in seconds) before next operation after failure
 backend_retry_delay = 30
 

@@ -27,6 +27,7 @@ duplicity.egg-info
 duplicity.spec
 filters.txt
 htmlcov
+mprofile_*.dat
 po/duplicity.pot-e
 random_seed
 report.xml

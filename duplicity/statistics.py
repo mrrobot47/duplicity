@@ -31,6 +31,7 @@ import re
 import time
 import os
 
+from duplicity import config
 from duplicity import dup_time
 
 
@@ -353,7 +354,7 @@ class StatsDeltaProcess(StatsObj):
         self.EndTime = time.time()
 
     def add_delta_entries_file(self, path, action_type):
-        if path.isreg():
+        if not config.no_files_changed and path.isreg():
             self.files_changed.append((path.get_relative_path(), action_type))
 
     def get_delta_entries_file(self):
