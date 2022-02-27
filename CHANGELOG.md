@@ -24,6 +24,8 @@
 
 ### Fix
 
+* Add --no-files-changed option.  Fixes issue #110. [Kenneth Loafman]
+
 * Fix use of sorted() builtin (does not sort in place). [Kenneth Loafman]
 
 * Fix #107 - TypeError in restart\_position\_iterator. [Kenneth Loafman]
