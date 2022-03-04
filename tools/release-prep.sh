@@ -37,7 +37,7 @@ git tag -f rel.${REL}
 git push --tags -f origin master -o ci.skip
 
 # make changelog and move tag to include it
-dist/makechangelog
+tools/makechangelog
 git tag -f rel.${REL}
 git push --tags -f origin master
 
