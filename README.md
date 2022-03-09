@@ -63,7 +63,7 @@ code repository and developing for duplicity, see README-REPO.
 
 For more information see the duplicity home page at:
 
-  http://www.nongnu.org/duplicity
+  http://duplicity.gitlab.io
 
 or post to the mailing list at
 
