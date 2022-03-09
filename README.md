@@ -61,7 +61,11 @@ code repository and developing for duplicity, see README-REPO.
 
 # HELP
 
-For more information see the duplicity home page at:
+For more information see the duplicity web site at:
+
+  http://duplicity.us
+
+  or
 
   http://duplicity.gitlab.io
 

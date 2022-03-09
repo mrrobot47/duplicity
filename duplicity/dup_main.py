@@ -21,7 +21,11 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #
-# See http://www.nongnu.org/duplicity for more information.
+# For more information see
+#  http://duplicity.us
+#  or
+#  http://duplicity.gitlab.io
+# .
 # Please send mail to me or the mailing list if you find bugs or have
 # any suggestions.
 
