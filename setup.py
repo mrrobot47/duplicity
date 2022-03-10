@@ -268,7 +268,7 @@ setup(name=u"duplicity",
     author_email=u"ben@emrose.org",
     maintainer=u"Kenneth Loafman <kenneth@loafman.com>",
     maintainer_email=u"kenneth@loafman.com",
-    url=u"http://duplicity.nongnu.org/index.html",
+    url=u"http://duplicity.us",
     python_requires=u">2.6, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4",
     platforms=[u"any"],
     packages=[
