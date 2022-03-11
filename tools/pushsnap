@@ -22,41 +22,38 @@
 set -e
 
 if [ "`uname`" != "Linux" ]; then
-    echo "makesnap does not run on this OS"
+    echo "pushsnap does not run on this OS"
     exit 2
 fi
 
-if [ "$#" -gt 1 ]; then
-    echo "usage: makesnap <comma-sep-list-of-architectures>"
-    echo "      - default is amd64 only"
-    echo "      - working arch: arm64, amd64"
+if [ "$#" -ne 0 ]; then
+    echo "usage: pushsnap"
     exit 2
-elif [ "$#" -eq 1 ]; then
-    BUILD="$1"
-else
-    BUILD="amd64"
 fi
 
 VERSION=`./setup.py --version`
-echo "makesnap of ${VERSION} on ${BUILD}"
+echo "pushsnap of ${VERSION}"
 
-# make distribution
-./setup.py sdist --dist-dir=.
+# make sure we're logged in
+snapcraft login --with ~/.snaplogin
 
-# make clean source dir
-rm -rf build
-mkdir -p build
-tar xf duplicity-${VERSION}.tar.gz -C build
-rm -f duplicity-${VERSION}.tar.gz
-cd build/duplicity-${VERSION}
+# push to edge and sign
+cd build/duplicity-${VERSION}/
+for f in duplicity_*.snap; do
+    if [ -e $f ]; then
+        snapcraft upload $f --release edge
+        snapcraft sign-build $f --key-name firstprime
+    fi
+done
 
-# print version in build copy of snapcraft.yaml
-head -2 snap/snapcraft.yaml | tail -1
-
-if [ ${BUILD} == "amd64" ]; then
-    # build snap locally w/o multipass
-    snapcraft snap --destructive-mode
-else
-    # build snap via remote build on LP
-    snapcraft remote-build --build-on=${BUILD} --launchpad-accept-public-upload
+# mv into working source tree
+if [ -e duplicity_*.snap ]; then
+    mv duplicity_*.snap ../..
 fi
+if [ -e duplicity_*.txt ]; then
+    mv duplicity_*.txt ../..
+fi
+
+# clean up
+cd ../..
+rm -rf build

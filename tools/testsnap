@@ -22,41 +22,23 @@
 set -e
 
 if [ "`uname`" != "Linux" ]; then
-    echo "makesnap does not run on this OS"
+    echo "testsnap does not run on this OS"
     exit 2
 fi
 
-if [ "$#" -gt 1 ]; then
-    echo "usage: makesnap <comma-sep-list-of-architectures>"
-    echo "      - default is amd64 only"
-    echo "      - working arch: arm64, amd64"
+if [ "$#" -ne 0 ]; then
+    echo "usage: testsnap"
     exit 2
-elif [ "$#" -eq 1 ]; then
-    BUILD="$1"
-else
-    BUILD="amd64"
 fi
 
 VERSION=`./setup.py --version`
-echo "makesnap of ${VERSION} on ${BUILD}"
+echo "testsnap of ${VERSION}"
 
-# make distribution
-./setup.py sdist --dist-dir=.
+sudo snap remove duplicity
+cd build/duplicity-${VERSION}/
+sudo snap install duplicity_${VERSION}_amd64.snap --classic --dangerous
+cd -
+duplicity --version
 
-# make clean source dir
-rm -rf build
-mkdir -p build
-tar xf duplicity-${VERSION}.tar.gz -C build
-rm -f duplicity-${VERSION}.tar.gz
-cd build/duplicity-${VERSION}
 
-# print version in build copy of snapcraft.yaml
-head -2 snap/snapcraft.yaml | tail -1
 
-if [ ${BUILD} == "amd64" ]; then
-    # build snap locally w/o multipass
-    snapcraft snap --destructive-mode
-else
-    # build snap via remote build on LP
-    snapcraft remote-build --build-on=${BUILD} --launchpad-accept-public-upload
-fi
