@@ -35,10 +35,5 @@ VERSION=`./setup.py --version`
 echo "testsnap of ${VERSION}"
 
 sudo snap remove duplicity
-cd build/duplicity-${VERSION}/
-sudo snap install duplicity_${VERSION}_amd64.snap --classic --dangerous
-cd -
-duplicity --version
-
-
-
+sudo snap install build/duplicity-${VERSION}/duplicity_${VERSION}_amd64.snap --classic --dangerous
+/snap/bin/duplicity --version

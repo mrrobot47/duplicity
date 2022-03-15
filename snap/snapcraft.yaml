@@ -10,16 +10,24 @@ description: |
 
 grade: stable
 confinement: classic
-base: core18
+base: core20
 
 apps:
     duplicity:
         command: bin/duplicity
+        environment:
+            # setup path to find and use packaged python3 in snap
+            PATH: $SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH
+            # fixup pythonpath to find modules, for some reason
+            #  'lib/python3.8/site-packages' is not added by default
+            # add two more host paths for users to install modules in
+            PYTHONPATH: $SNAP/lib/python3.8/site-packages:$HOME/.local/lib/python3.8/site-packages:/lib/python3.8/site-packages
 
 parts:
     duplicity:
         plugin: python
-        python-version: python3
+        build-environment:
+          - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3/dist-packages"
         build-packages:
             - build-essential
             - ieee-data
@@ -30,40 +38,53 @@ parts:
             - gnupg
             - lftp
             - libatm1
-            - librsync1
+            - librsync2
             - ncftp
             - openssh-client
             - python3-gi
             - rsync
             - rclone
+            - libpython3-stdlib
+            - libpython3.8-stdlib
+            - libpython3.8-minimal
+            - python3-minimal
+            - python3.8-minimal
+            - python3-dev
+            - python3-pip
+            - python3-setuptools
+            - python3-distutils
+            - python3-wheel
+            - python3-pkg-resources
+            - python3-venv
         python-packages:
-            - azure-storage-blob            ; python_version == '3.6'
-            - b2sdk                         ; python_version == '3.6'
-            - boto                          ; python_version == '3.6'
-            - boto3                         ; python_version == '3.6'
-            - boxsdk[jwt]                   ; python_version == '3.6'
-            - dropbox                       ; python_version == '3.6'
-            - fasteners                     ; python_version == '3.6'
-            - future                        ; python_version == '3.6'
-            - gdata-python3                 ; python_version == '3.6'
-            - google-api-python-client      ; python_version == '3.6'
-            - google-auth-oauthlib          ; python_version == '3.6'
-            - httplib2                      ; python_version == '3.6'
-            - jottalib                      ; python_version == '3.6'
-            - keyring                       ; python_version == '3.6'
-            - mediafire                     ; python_version == '3.6'
-            - megatools                     ; python_version == '3.6'
-            - paramiko                      ; python_version == '3.6'
-            - pexpect                       ; python_version == '3.6'
-            - psutil                        ; python_version == '3.6'
-            - pydrive                       ; python_version == '3.6'
-            - pyrax                         ; python_version == '3.6'
-            - python-swiftclient            ; python_version == '3.6'
-            - requests                      ; python_version == '3.6'
-            - requests-oauthlib             ; python_version == '3.6'
-            - setuptools                    ; python_version == '3.6'
-            - setuptools-scm                ; python_version == '3.6'
-            - sx                            ; python_version == '3.6'
-            - tahoe-lafs                    ; python_version == '3.6'
-            - urllib3                       ; python_version == '3.6'
+            - azure-storage-blob            ; python_version == '3.8'
+            - b2sdk                         ; python_version == '3.8'
+            - boto                          ; python_version == '3.8'
+            - boto3                         ; python_version == '3.8'
+            - boxsdk[jwt]                   ; python_version == '3.8'
+            - dropbox                       ; python_version == '3.8'
+            - fasteners                     ; python_version == '3.8'
+            - future                        ; python_version == '3.8'
+            - gdata-python3                 ; python_version == '3.8'
+            - google-api-python-client      ; python_version == '3.8'
+            - google-auth-oauthlib          ; python_version == '3.8'
+            - httplib2                      ; python_version == '3.8'
+            - jottalib                      ; python_version == '3.8'
+            - keyring                       ; python_version == '3.8'
+            - mediafire                     ; python_version == '3.8'
+            - megatools                     ; python_version == '3.8'
+            - paramiko                      ; python_version == '3.8'
+            - pexpect                       ; python_version == '3.8'
+            - psutil                        ; python_version == '3.8'
+            - pydrive                       ; python_version == '3.8'
+            - pyrax                         ; python_version == '3.8'
+            - python-swiftclient            ; python_version == '3.8'
+            - requests                      ; python_version == '3.8'
+            - requests-oauthlib             ; python_version == '3.8'
+            - setuptools                    ; python_version == '3.8'
+            - setuptools-scm                ; python_version == '3.8'
+            - sx                            ; python_version == '3.8'
+            - tahoe-lafs                    ; python_version == '3.8'
+            - urllib3                       ; python_version == '3.8'
+            - wheel                         ; python_version == '3.8'
         source: .
