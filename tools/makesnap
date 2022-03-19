@@ -22,7 +22,7 @@
 set -e
 
 if [ "`uname`" != "Linux" ]; then
-    echo "makesnap does not run on this OS"
+    echo "makesnap does not run on `uname`"
     exit 2
 fi
 

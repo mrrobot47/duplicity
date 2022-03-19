@@ -22,7 +22,7 @@
 set -e
 
 if [ "`uname`" != "Linux" ]; then
-    echo "testsnap does not run on this OS"
+    echo "testsnap does not run on `uname`"
     exit 2
 fi
 
