@@ -27,13 +27,14 @@ parts:
     duplicity:
         plugin: python
         build-environment:
-          - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3/dist-packages"
+          - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages"
+          - SNAPCRAFT_PYTHON_INTERPRETER: "python3.8"
         build-packages:
             - build-essential
             - ieee-data
             - intltool
             - librsync-dev
-            - python3-dev
+            - python3.8-dev
         stage-packages:
             - gnupg
             - lftp
@@ -44,11 +45,9 @@ parts:
             - python3-gi
             - rsync
             - rclone
-            - libpython3-stdlib
             - libpython3.8-stdlib
             - libpython3.8-minimal
             - python3-minimal
-            - python3.8-minimal
             - python3-dev
             - python3-pip
             - python3-setuptools
