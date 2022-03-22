@@ -28,7 +28,6 @@ parts:
         plugin: python
         build-environment:
           - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages"
-          - SNAPCRAFT_PYTHON_INTERPRETER: "python3.8"
         build-packages:
             - build-essential
             - ieee-data
