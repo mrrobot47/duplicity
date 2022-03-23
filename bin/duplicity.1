@@ -2557,29 +2557,43 @@ for future use.
 
 .SH A NOTE ON RCLONE BACKEND
 Rclone is a powerful command line program to sync files and directories to and from various cloud storage providers.
-.PP
+
+.SS Usage
 Once you have configured an rclone remote via
-.PP
+
 .RS
 rclone config
-.PP
 .RE
+
 and successfully set up a remote (e.g. gdrive for Google Drive), assuming you can
 list your remote files with
-.PP
+
 .RS
 rclone ls gdrive:mydocuments
-.PP
 .RE
+
 you can start your backup with
-.PP
+
 .RS
 duplicity /mydocuments rclone://gdrive:/mydocuments
-.PP
 .RE
+
 Please note the slash after the second colon. Some storage provider will work with or without slash
 after colon, but some other will not. Since duplicity will complain about malformed URL if a slash
 is not present, always put it after the colon, and the backend will handle it for you.
+
+.SS Options
+Note that all rclone options can be set by env vars as well. This is properly documented here
+
+.RS
+https://rclone.org/docs/
+.RE
+
+but in a nutshell you need to take the long option name, strip the leading --, change - to _, make upper case and prepend RCLONE_. for example
+
+.RS
+the equivalent of '--stats 5s' would be the env var RCLONE_STATS=5s
+.RE
 
 .SH A NOTE ON SLATE BACKEND
 Three environment variables are used with the slate backend:
