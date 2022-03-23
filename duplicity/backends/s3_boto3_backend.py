@@ -90,7 +90,7 @@ class S3Boto3Backend(duplicity.backend.Backend):
 
         self.bucket = None
         self.s3 = boto3.resource(u's3', region_name=config.s3_region_name,
-                                 use_ssl=(not config.s3_unencrypted_connection), 
+                                 use_ssl=(not config.s3_unencrypted_connection),
                                  endpoint_url=config.s3_endpoint_url)
 
         try:
