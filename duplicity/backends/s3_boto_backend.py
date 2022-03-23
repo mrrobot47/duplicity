@@ -31,4 +31,3 @@ else:
 duplicity.backend.register_backend(u"boto+gs", BotoBackend)
 # s3 is also implemented by the newer boto3 backend now
 duplicity.backend.register_backend(u"boto+s3", BotoBackend)
-
