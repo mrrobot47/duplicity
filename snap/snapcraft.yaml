@@ -22,19 +22,34 @@ apps:
             #  'lib/python3.8/site-packages' is not added by default
             # add two more host paths for users to install modules in
             PYTHONPATH: $SNAP/lib/python3.8/site-packages:$HOME/.local/lib/python3.8/site-packages:/lib/python3.8/site-packages
+    rdiffdir:
+        command: bin/rdiffdir
+        environment:
+            # see above
+            PATH: $SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH
+            PYTHONPATH: $SNAP/lib/python3.8/site-packages:$HOME/.local/lib/python3.8/site-packages:/lib/python3.8/site-packages
 
 parts:
     duplicity:
         plugin: python
+        override-build: |
+            snapcraftctl build
+            rm -rfv "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.9"
         build-environment:
-          - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages"
-          - SNAPCRAFT_PYTHON_INTERPRETER: "python3.8"
+            - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages:$SNAPCRAFT_PART_INSTALL/usr/lib/python3/dist-packages:$PYTHONPATH"
         build-packages:
             - build-essential
             - ieee-data
             - intltool
             - librsync-dev
-            - python3.8-dev
+            - python3-dev
+            # dependencies needed to pip build on non amd64 archs
+            - libffi-dev
+            - libxslt1-dev
+            - libxml2-dev
+            - rust-all
+            - libssl-dev
+            - cargo
         stage-packages:
             - gnupg
             - lftp
@@ -45,9 +60,11 @@ parts:
             - python3-gi
             - rsync
             - rclone
+            - libpython3-stdlib
             - libpython3.8-stdlib
             - libpython3.8-minimal
             - python3-minimal
+            - python3.8-minimal
             - python3-dev
             - python3-pip
             - python3-setuptools
@@ -55,6 +72,10 @@ parts:
             - python3-wheel
             - python3-pkg-resources
             - python3-venv
+            # some libraries needed on not amd64 archs
+            - libicu66
+            - libxml2
+            - libxslt1.1
         python-packages:
             - azure-storage-blob            ; python_version == '3.8'
             - b2sdk                         ; python_version == '3.8'
