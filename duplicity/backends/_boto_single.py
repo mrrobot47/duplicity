@@ -133,6 +133,16 @@ class BotoBackend(duplicity.backend.Backend):
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
 
+        # parse endpoint
+        if config.s3_endpoint_url:
+            import urllib.parse
+            pu = urllib.parse.urlparse(config.s3_endpoint_url)
+            if pu.scheme and pu.scheme.lower() == u'http':
+                config.s3_unencrypted_connection = True
+            if pu.hostname:
+                parsed_url.netloc = pu.netloc
+                parsed_url.hostname = pu.hostname
+
         try:
             import boto  # pylint: disable=import-error
             from boto.s3.connection import Location
@@ -153,8 +163,6 @@ class BotoBackend(duplicity.backend.Backend):
             # HC: Caught a socket error, trying to recover
             raise BackendException(u'Boto requires a bucket name.')
 
-        self.scheme = parsed_url.scheme
-
         if self.url_parts:
             self.key_prefix = u'%s/' % u'/'.join(self.url_parts)
         else:
@@ -165,8 +173,10 @@ class BotoBackend(duplicity.backend.Backend):
 
         # duplicity and boto.storage_uri() have different URI formats.
         # boto uses scheme://bucket[/name] and specifies hostname on connect()
-        self.boto_uri_str = u'://'.join((parsed_url.scheme[:2],
+        self.scheme = duplicity.backend.strip_prefix(parsed_url.scheme, u'boto')[:2]
+        self.boto_uri_str = u'://'.join((self.scheme,
                                          parsed_url.path.lstrip(u'/')))
+
         if config.s3_european_buckets:
             self.my_location = Location.EU
         else:
@@ -235,6 +245,8 @@ class BotoBackend(duplicity.backend.Backend):
             storage_class = u'GLACIER'
         elif config.s3_use_glacier_ir and u"manifest" not in remote_filename:
             storage_class = u'GLACIER_IR'
+        elif config.s3_use_deep_archive and u"manifest" not in remote_filename:
+            storage_class = u'DEEP_ARCHIVE'
         else:
             storage_class = u'STANDARD'
         log.Info(u"Uploading %s/%s to %s Storage" % (self.straight_url, remote_filename, storage_class))
