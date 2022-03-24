@@ -17,17 +17,21 @@ apps:
         command: bin/duplicity
         environment:
             # setup path to find and use packaged python3 in snap
-            PATH: $SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH
+            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
             # fixup pythonpath to find modules, for some reason
-            #  'lib/python3.8/site-packages' is not added by default
+            # 'lib/python3.8/site-packages' is not added by default
             # add two more host paths for users to install modules in
-            PYTHONPATH: $SNAP/lib/python3.8/site-packages:$HOME/.local/lib/python3.8/site-packages:/lib/python3.8/site-packages
+            PYTHONPATH: "$SNAP/lib/python3.8/site-packages:\
+                         $HOME/.local/lib/python3.8/site-packages:\
+                         /lib/python3.8/site-packages"
     rdiffdir:
         command: bin/rdiffdir
         environment:
             # see above
-            PATH: $SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH
-            PYTHONPATH: $SNAP/lib/python3.8/site-packages:$HOME/.local/lib/python3.8/site-packages:/lib/python3.8/site-packages
+            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
+            PYTHONPATH: "$SNAP/lib/python3.8/site-packages:\
+                         $HOME/.local/lib/python3.8/site-packages:\
+                         /lib/python3.8/site-packages"
 
 parts:
     duplicity:
@@ -36,7 +40,9 @@ parts:
             snapcraftctl build
             rm -rfv "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.9"
         build-environment:
-            - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages:$SNAPCRAFT_PART_INSTALL/usr/lib/python3/dist-packages:$PYTHONPATH"
+            - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages:\
+                           $SNAPCRAFT_PART_INSTALL/usr/lib/python3/dist-packages:\
+                           $PYTHONPATH"
         build-packages:
             - build-essential
             - ieee-data
@@ -77,6 +83,11 @@ parts:
             - libxml2
             - libxslt1.1
         python-packages:
+            # libs needed to avoid some version dependencies.
+            # use latest version available while still py38.
+            - pbr                           ; python_version == '3.8'
+            - requests                      ; python_version == '3.8'
+            # normally included libs
             - azure-storage-blob            ; python_version == '3.8'
             - b2sdk                         ; python_version == '3.8'
             - boto                          ; python_version == '3.8'
@@ -99,7 +110,6 @@ parts:
             - pydrive                       ; python_version == '3.8'
             - pyrax                         ; python_version == '3.8'
             - python-swiftclient            ; python_version == '3.8'
-            - requests                      ; python_version == '3.8'
             - requests-oauthlib             ; python_version == '3.8'
             - setuptools                    ; python_version == '3.8'
             - setuptools-scm                ; python_version == '3.8'
