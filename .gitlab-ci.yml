@@ -151,7 +151,7 @@ py39_ub20-04:
 build_pip:
     stage: deploy
     when: manual
-#     only: [master]
+    only: [master, duplicity-core20]
     script:
         - pip install twine
         - VERSION=`./setup.py --version`
@@ -163,7 +163,7 @@ build_snap:
     stage: deploy
     when: manual
     image: "cibuilds/snapcraft:core20"
-#     only: [master]
+    only: [master, duplicity-core20]
     before_script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
