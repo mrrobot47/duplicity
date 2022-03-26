@@ -89,7 +89,9 @@ class S3Boto3Backend(duplicity.backend.Backend):
         from botocore.exceptions import ClientError  # pylint: disable=import-error
 
         self.bucket = None
-        self.s3 = boto3.resource(u's3', region_name=config.s3_region_name, endpoint_url=config.s3_endpoint_url)
+        self.s3 = boto3.resource(u's3', region_name=config.s3_region_name,
+                                 use_ssl=(not config.s3_unencrypted_connection),
+                                 endpoint_url=config.s3_endpoint_url)
 
         try:
             self.s3.meta.client.head_bucket(Bucket=self.bucket_name)
@@ -223,4 +225,5 @@ class UploadProgressTracker(object):
 
 
 duplicity.backend.register_backend(u"boto3+s3", S3Boto3Backend)
-# duplicity.backend.uses_netloc.extend([u'boto3+s3'])
+# make boto3 the default s3 backend
+duplicity.backend.register_backend(u"s3", S3Boto3Backend)

@@ -39,6 +39,18 @@ sudo snap remove duplicity
 sudo snap install build/duplicity-${VERSION}/duplicity_${VERSION}_amd64.snap --classic --dangerous
 
 echo -e  "\n*** test that the basic snap starts ***"
+
+echo -e  "\n*** test for the multi-lib snapcraft issue ***"
+echo "See: https://bugs.launchpad.net/duplicity/+bug/1965814"
+RES=`find /snap/duplicity/current/usr/lib/ -type d -name 'python3.*' | wc -l`
+if [ ${RES} -gt 1 ]; then
+    find /snap/duplicity/current/usr/lib/ -type d -name 'python3.*'
+    echo -e "WARNING: Multiple python lib versions exist in snap."
+else
+    echo "All Good.  Only one version of python libs installed."
+fi
+
+echo -e  "\n*** test that the basic snap starts ***"
 /snap/bin/duplicity --version
 
 echo -e  "\n*** test that the basic backup runs ***"
@@ -54,3 +66,7 @@ else
 fi
 
 
+
+echo -e  "\n*** test that the basic backup/verify runs ***"
+/snap/bin/duplicity full --no-enc --no-com --name=testsnap ./duplicity file:///tmp/testdup
+/snap/bin/duplicity verify --no-enc --no-com --name=testsnap file:///tmp/testdup ./duplicity
