@@ -171,6 +171,7 @@ build_snap:
         - sudo apt-get update
         - sudo apt-get install -y build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
+          snapcraft snap snapd
         - python3 -m pip install --upgrade pip
         - python3 -m pip install --requirement requirements.txt
     script:
