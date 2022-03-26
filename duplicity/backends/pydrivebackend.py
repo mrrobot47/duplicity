@@ -83,11 +83,10 @@ Exception: %s""" % str(e))
                                                             account_key,
                                                             scopes=u'https://www.googleapis.com/auth/drive')
             else:
-                # pylint: disable=used-before-assignment
-                signer = crypt.Signer.from_string(account_key)
-                credentials = ServiceAccountCredentials(parsed_url.username + u'@' + parsed_url.hostname, signer,
+                signer = crypt.Signer.from_string(account_key)  # pylint: disable=used-before-assignment
+                credentials = ServiceAccountCredentials(parsed_url.username +  # pylint: disable=used-before-assignment
+                                                        u'@' + parsed_url.hostname, signer,
                                                         scopes=u'https://www.googleapis.com/auth/drive')
-                # pylint: enable=used-before-assignment
             credentials.authorize(httplib2.Http())
             gauth = GoogleAuth(http_timeout=60)
             gauth.credentials = credentials
