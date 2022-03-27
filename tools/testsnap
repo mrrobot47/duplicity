@@ -1,7 +1,8 @@
 #!/bin/bash
 # -*- Mode:Shell; indent-tabs-mode:nil; tab-width -*-
 #
-# Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
+# Copyright 2022 Kenneth Loafman <kenneth@loafman.com>,
+# Edgar Soldin <https://soldin.de>
 #
 # This file is part of duplicity.
 #
@@ -50,5 +51,6 @@ echo -e  "\n*** test 'duplicity --version' ***"
 echo -e  "\n*** test backup ***"
 [ -e /tmp/testdup ] && rm -rfv /tmp/testdup
 PASSPHRASE=test /snap/bin/duplicity full --name=testsnap ./duplicity file:///tmp/testdup
+
 echo -e  "\n*** test verify ***"
 PASSPHRASE=test /snap/bin/duplicity verify --name=testsnap file:///tmp/testdup ./duplicity

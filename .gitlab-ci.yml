@@ -1,9 +1,9 @@
+# This file is part of duplicity.
+#
 # Copyright 2022 Nils Tekampe <nils@tekampe.org>,
 # Kenneth Loafman <kenneth@loafman.com>,
 # Aaron Whitehouse <code@whitehouse.kiwi.nz>,
 # Edgar Soldin <https://soldin.de>
-#
-# This file is part of duplicity.
 #
 # Duplicity is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by the

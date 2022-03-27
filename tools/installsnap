@@ -1,5 +1,29 @@
-#!/bin/sh
+#!/bin/bash
+# -*- Mode:Shell; indent-tabs-mode:nil; tab-width -*-
+#
+# Copyright 2022 Edgar Soldin <https://soldin.de>,
+# Kenneth Loafman <kenneth@loafman.com>
+#
+# This file is part of duplicity.
+#
+# Duplicity is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation; either version 2 of the License, or (at your
+# option) any later version.
+#
+# Duplicity is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with duplicity; if not, write to the Free Software Foundation,
+# Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+
+set -e
+
 VERSION=`./setup.py --version`
+echo "installsnap of ${VERSION} on amd64"
 
 # only run snap install if not in docker
 [ ! -e /.dockerenv ] && {
@@ -10,6 +34,7 @@ VERSION=`./setup.py --version`
 # manually "install" duplicity to gain a basic testable version in docker
 SNAP_BIN=/snap/bin/duplicity
 mkdir -p /snap/duplicity && unsquashfs -d /snap/duplicity/current ./build/duplicity-${VERSION}/duplicity_${VERSION}_amd64.snap
+
 # create a basic snap runner
 cat <<EOF >"$SNAP_BIN"
 #!/bin/sh

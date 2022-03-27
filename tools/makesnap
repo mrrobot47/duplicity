@@ -1,7 +1,7 @@
 #!/bin/bash
 # -*- Mode:Shell; indent-tabs-mode:nil; tab-width -*-
 #
-# Copyright 2007 Kenneth Loafman <kenneth@loafman.com>
+# Copyright 2022 Kenneth Loafman <kenneth@loafman.com>
 #
 # This file is part of duplicity.
 #
@@ -29,7 +29,7 @@ fi
 if [ "$#" -gt 1 ]; then
     echo "usage: makesnap <comma-sep-list-of-architectures>"
     echo "      - default is amd64 only"
-    echo "      - working arch: arm64, amd64"
+    echo "      - working arch: arm64, amd64, armhf, ppc64el"
     exit 2
 elif [ "$#" -eq 1 ]; then
     BUILD="$1"
