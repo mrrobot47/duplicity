@@ -1,0 +1,21 @@
+#!/bin/sh
+VERSION=`./setup.py --version`
+
+# only run snap install if not in docker
+[ ! -e /.dockerenv ] && {
+  sudo snap install build/duplicity-${VERSION}/duplicity_${VERSION}_amd64.snap --classic --dangerous
+  exit $?
+}
+
+# manually "install" duplicity to gain a basic testable version in docker
+SNAP_BIN=/snap/bin/duplicity
+mkdir -p /snap/duplicity && unsquashfs -d /snap/duplicity/current ./build/duplicity-${VERSION}/duplicity_${VERSION}_amd64.snap
+# create a basic snap runner
+cat <<EOF >"$SNAP_BIN"
+#!/bin/sh
+export SNAP=/snap/duplicity/current
+export PYTHONPATH="\$SNAP/lib/python3.8/site-packages:$HOME/.local/lib/python3.8/site-packages:/lib/python3.8/site-packages"
+export PATH="\$SNAP/usr/sbin:\$SNAP/usr/bin:\$SNAP/sbin:\$SNAP/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin"
+exec "\$SNAP/bin/duplicity" "\$@"
+EOF
+chmod +x "$SNAP_BIN"

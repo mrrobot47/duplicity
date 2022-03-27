@@ -1,6 +1,7 @@
-# Copyright 2019 Nils Tekampe <nils@tekampe.org>,
-# Kenneth Loafman <kenneth@loafman.com> and
-# Aaron Whitehouse <code@whitehouse.kiwi.nz>
+# Copyright 2022 Nils Tekampe <nils@tekampe.org>,
+# Kenneth Loafman <kenneth@loafman.com>,
+# Aaron Whitehouse <code@whitehouse.kiwi.nz>,
+# Edgar Soldin <https://soldin.de>
 #
 # This file is part of duplicity.
 #
@@ -25,8 +26,7 @@
     stage: tests
     except:
         variables:
-            - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i
-            - $SKIP_TESTS
+            - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
 
 variables:
     # cache local items
@@ -162,21 +162,27 @@ build_pip:
 build_snap:
     stage: deploy
     when: manual
-    image: "cibuilds/snapcraft:core20"
-    only: [master, duplicity-core20]
-    before_script:
+    image: "ubuntudesktop/gnome-3-38-2004"
+    #only: [master, duplicity-core20]
+    script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
         - export LC_ALL=C.UTF-8
-        - sudo apt-get update
-        - sudo apt-get install -y build-essential git intltool lftp librsync-dev
-          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
         - python3 -m pip install --upgrade pip
         - python3 -m pip install --requirement requirements.txt
-    script:
+        - export SNAP_ARCH=amd64
+        - export SNAPCRAFT_BUILD_INFO=1
+        - apt-get -y update
+        - apt-get install -y git squashfs-tools
         - tools/makesnap
+        - tools/installsnap
         - tools/testsnap
 #        - tools/pushsnap
+    artifacts:
+        when: always
+        paths:
+            - build/duplicity-*/*.snap
+        expire_in: 30 days
 
 pages:
     stage: deploy

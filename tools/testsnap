@@ -34,12 +34,6 @@ fi
 VERSION=`./setup.py --version`
 echo -e  "\ntestsnap of ${VERSION}"
 
-echo -e  "\n*** remove and reinstall snap ***"
-sudo snap remove duplicity
-sudo snap install build/duplicity-${VERSION}/duplicity_${VERSION}_amd64.snap --classic --dangerous
-
-echo -e  "\n*** test that the basic snap starts ***"
-
 echo -e  "\n*** test for the multi-lib snapcraft issue ***"
 echo "See: https://bugs.launchpad.net/duplicity/+bug/1965814"
 RES=`find /snap/duplicity/current/usr/lib/ -type d -name 'python3.*' | wc -l`
@@ -50,23 +44,11 @@ else
     echo "All Good.  Only one version of python libs installed."
 fi
 
-echo -e  "\n*** test that the basic snap starts ***"
+echo -e  "\n*** test 'duplicity --version' ***"
 /snap/bin/duplicity --version
 
-echo -e  "\n*** test that the basic backup runs ***"
-/snap/bin/duplicity --no-enc --no-com --name=testsnap ./duplicity file:///tmp/testdup
-
-echo -e  "\n*** test for the multi-lib issue ***"
-RES=`find /snap/duplicity/current/usr/lib/ -type d -name 'python3.*' | wc -l`
-if [ ${RES} -gt 1 ]; then
-    find /snap/duplicity/current/usr/lib/ -type d -name 'python3.*'
-    echo -e "WARNING: Multiple python lib versions exist in snap!  Consider failing."
-else
-    echo "All Good"
-fi
-
-
-
-echo -e  "\n*** test that the basic backup/verify runs ***"
-/snap/bin/duplicity full --no-enc --no-com --name=testsnap ./duplicity file:///tmp/testdup
-/snap/bin/duplicity verify --no-enc --no-com --name=testsnap file:///tmp/testdup ./duplicity
+echo -e  "\n*** test backup ***"
+[ -e /tmp/testdup ] && rm -rfv /tmp/testdup
+PASSPHRASE=test /snap/bin/duplicity full --name=testsnap ./duplicity file:///tmp/testdup
+echo -e  "\n*** test verify ***"
+PASSPHRASE=test /snap/bin/duplicity verify --name=testsnap file:///tmp/testdup ./duplicity
