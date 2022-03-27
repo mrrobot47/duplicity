@@ -40,7 +40,6 @@ parts:
             snapcraftctl build
             rm -rfv "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.9"
         build-environment:
-          - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages"
             - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages:\
                            $SNAPCRAFT_PART_INSTALL/usr/lib/python3/dist-packages:\
                            $PYTHONPATH"
