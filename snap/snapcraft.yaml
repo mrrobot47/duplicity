@@ -85,6 +85,7 @@ parts:
         python-packages:
             # libs needed to avoid some version dependencies.
             # use latest version available while still py38.
+            - grpcio-tools                  ; python_version == '3.8'
             - pbr                           ; python_version == '3.8'
             - requests                      ; python_version == '3.8'
             # normally included libs
