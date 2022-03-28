@@ -151,7 +151,6 @@ py39_ub20-04:
 build_pip:
     stage: deploy
     when: manual
-    only: [master, duplicity-core20]
     script:
         - pip install twine
         - VERSION=`./setup.py --version`
@@ -163,7 +162,6 @@ build_snap:
     stage: deploy
     when: manual
     image: "ubuntudesktop/gnome-3-38-2004"
-    #only: [master, duplicity-core20]
     script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
@@ -177,11 +175,13 @@ build_snap:
         - tools/makesnap
         - tools/installsnap
         - tools/testsnap
-#        - tools/pushsnap
+        - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > ~/.snaplogin
+        - tools/pushsnap
     artifacts:
         when: always
         paths:
             - build/duplicity-*/*.snap
+            - build/duplicity-*/*.txt
         expire_in: 30 days
 
 pages:

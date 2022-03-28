@@ -42,18 +42,12 @@ cd build/duplicity-${VERSION}/
 for f in duplicity_*.snap; do
     if [ -e $f ]; then
         snapcraft upload $f --release edge
-        snapcraft sign-build $f --key-name firstprime
+#         snapcraft sign-build $f --key-name firstprime
     fi
 done
 
-# mv into working source tree
-if [ -e duplicity_*.snap ]; then
-    mv duplicity_*.snap ../..
+if [ ! -e /.dockerenv ]; then
+    # mv into working source tree
+    [ -e duplicity_*.snap ] && mv duplicity_*.snap ../..
+    [ -e duplicity_*.txt ] &&  mv duplicity_*.txt ../..
 fi
-if [ -e duplicity_*.txt ]; then
-    mv duplicity_*.txt ../..
-fi
-
-# clean up
-cd ../..
-rm -rf build
