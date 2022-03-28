@@ -1,3 +1,53 @@
+## (unreleased)
+
+### New
+
+* Document rclone option setting via env vars. [edeso]
+
+* Fix other archs, expose rdiffdir. [edeso]
+
+  fix remote build of armhf, arm64, ppc64el   arm64 was tested on Debian
+  11 arm64   rdiffdir now avail as /snap/bin/duplicity.rdiffdir   remove
+  obsolete folder /usr/lib/python3.9/ in snap
+
+* Demote boto backend to legacy ... [ede]
+
+  usable via boto+s3:// or boto+gs:// now only   removed s3+http://
+  scheme   added --s3-endpoint-url option as replacement   added
+  --s3-use-deep-archive option   changes are document in man page commit
+  of the same patch set
+
+* Promote boto3 backend to default s3:// backend ... [ede]
+
+  add --s3-unencrypted-connection support
+
+* Man page, major sorting, reformatting, S3/GCS documentation update. [ede]
+
+  some updates, added s3 options, clarifications   updated Notes on S3
+  and Google Cloud Storage usage   sort Options, Url Formats, Notes on
+  alphabetically   consistently use "NOTE:"   indent properly all over
+
+### Other
+
+* Merge remote-tracking branch 'origin/master' into duplicity-core20. [Kenneth Loafman]
+
+* Merge branch 'duplicity-core20' into 'master' [Kenneth Loafman]
+
+  upgrade to base core20
+  See merge request duplicity/duplicity!80
+
+* Upgrade to base core20. [Kenneth Loafman]
+
+* Merge branch 'website\_links' into 'master' [Kenneth Loafman]
+
+  switch website to gitlab.io, promote duplicity.us
+  See merge request duplicity/duplicity!79
+
+* Switch website to gitlab.io, promote duplicity.us. [ede]
+
+* Fix website link. [ede]
+
+
 ## rel.0.8.22 (2022-03-04)
 
 ### New
