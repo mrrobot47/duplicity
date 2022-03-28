@@ -42,7 +42,7 @@ cd build/duplicity-${VERSION}/
 for f in duplicity_*.snap; do
     if [ -e $f ]; then
         snapcraft upload $f --release edge
-#         snapcraft sign-build $f --key-name firstprime
+        [ ! -e /.dockerenv ] && snapcraft sign-build $f --key-name firstprime
     fi
 done
 
