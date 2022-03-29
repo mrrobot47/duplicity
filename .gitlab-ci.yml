@@ -157,6 +157,11 @@ build_pip:
         - echo "make pip of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
         - python3 -m twine upload duplicity-${VERSION}.tar.gz
+    artifacts:
+        when: always
+        paths:
+            - duplicity-*.tar.gz
+        expire_in: 30 days
 
 build_snap:
     stage: deploy
