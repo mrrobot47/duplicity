@@ -29,6 +29,9 @@
 
 ### Other
 
+* Merge branch 'duplicity-core20' of
+git@gitlab.com:duplicity/duplicity.git into duplicity-core20. [Kenneth Loafman]
+
 * Merge remote-tracking branch 'origin/master' into duplicity-core20. [Kenneth Loafman]
 
 * Merge branch 'duplicity-core20' into 'master' [Kenneth Loafman]

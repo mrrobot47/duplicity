@@ -33,9 +33,6 @@ variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
     # Set to non-interactive so no tzdata prompt
     DEBIAN_FRONTEND: "noninteractive"
-    # for upload to pypi.org
-    TWINE_USERNAME: $TWINE_USERNAME
-    TWINE_PASSWORD: $TWINE_PASSWORD
 
 stages:
     - qual
@@ -148,9 +145,46 @@ py39_ub20-04:
         reports:
             junit: report.xml
 
+changelog:
+    stage: deploy
+    image: ubuntu:20.04
+    when: manual
+    variables:
+        GIT_AUTHOR_NAME: $GITLAB_USER_NAME
+        GIT_AUTHOR_EMAIL: $GITLAB_USER_EMAIL
+        SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
+    before_script:
+        - apt-get update
+        - apt-get install -y build-essential git intltool lftp librsync-dev
+          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
+          openssh-client
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install --requirement requirements.txt
+          # Set up the SSH key and the known_hosts file
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
+        - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+        - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+        # Set up config for git commit
+        - git config --global user.email "${GIT_AUTHOR_EMAIL}"
+        - git config --global user.name "${GIT_AUTHOR_NAME}"
+        - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
+        - cd ${CI_COMMIT_BRANCH}
+    script:
+        - python3 -m pip install gitchangelog pystache
+        - VERSION=`./setup.py --version`
+        - echo "make changelog of ${VERSION}"
+        - tools/makechangelog
+
 build_pip:
     stage: deploy
+    needs: [changelog]
     when: manual
+    variables:
+        TWINE_USERNAME: $TWINE_USERNAME
+        TWINE_PASSWORD: $TWINE_PASSWORD
     script:
         - pip install twine
         - VERSION=`./setup.py --version`
@@ -165,6 +199,7 @@ build_pip:
 
 build_snap:
     stage: deploy
+    needs: [changelog]
     when: manual
     image: "ubuntudesktop/gnome-3-38-2004"
     script:
