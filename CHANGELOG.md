@@ -4,6 +4,8 @@
 
 * Document rclone option setting via env vars. [edeso]
 
+* Document rclone option setting via env vars. [edeso]
+
 * Fix other archs, expose rdiffdir. [edeso]
 
   fix remote build of armhf, arm64, ppc64el   arm64 was tested on Debian
@@ -28,6 +30,8 @@
   alphabetically   consistently use "NOTE:"   indent properly all over
 
 ### Other
+
+* Merge remote-tracking branch 'origin/rclone\_options' [Kenneth Loafman]
 
 * Merge branch 'duplicity-core20' of
 git@gitlab.com:duplicity/duplicity.git into duplicity-core20. [Kenneth Loafman]
