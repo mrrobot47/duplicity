@@ -185,8 +185,10 @@ build_pip:
     variables:
         TWINE_USERNAME: $TWINE_USERNAME
         TWINE_PASSWORD: $TWINE_PASSWORD
+        PYPI_ACCESS_TOKEN: $PYPI_ACCESS_TOKEN
     script:
         - pip install twine
+        - cat ${PYPI_ACCESS_TOKEN} > ~/.pypirc
         - VERSION=`./setup.py --version`
         - echo "make pip of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
