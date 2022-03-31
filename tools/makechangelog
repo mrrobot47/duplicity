@@ -27,11 +27,21 @@ if [ "$#" -ne 0 ]; then
 fi
 
 gitchangelog > CHANGELOG.md
+
+# find out if anything has changed
+CNT=`git status --porcelain | tee /dev/stderr | wc -l`
+if [ $CNT -eq 0 ]; then
+    echo "*** NOTHING CHANGED, NO COMMITS ***"
+    exit 0
+fi
+
+# make sure only CHANGELOG.md has changed
 CNT=`git status --porcelain | tee /dev/stderr | grep -v " M CHANGELOG.md" | wc -l`
 if [ $CNT -ne 0 ]; then
     echo "*** REPO DIRTY, REFUSING TO COMMIT ***"
     exit 1
 fi
 
+# finally commit and push
 git commit -m"Update changelog." -m"[skip tests]" CHANGELOG.md
 git push
