@@ -33,6 +33,17 @@
             - bin/rdiffdir
             - duplicity/**/*
 
+.deploy-template: &deploy-template
+    stage: deploy
+    except:
+        variables:
+            - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
+    only:
+        changes:
+            - bin/duplicity
+            - bin/rdiffdir
+            - duplicity/**/*
+
 variables:
     # cache local items
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
@@ -151,9 +162,9 @@ py39_ub20-04:
             junit: report.xml
 
 changelog:
+    <<: *deploy-template
     stage: deploy
     image: ubuntu:20.04
-    when: manual
     variables:
         GIT_AUTHOR_NAME: $GITLAB_USER_NAME
         GIT_AUTHOR_EMAIL: $GITLAB_USER_EMAIL
@@ -184,9 +195,9 @@ changelog:
         - tools/makechangelog
 
 build_pip:
+    <<: *deploy-template
     stage: deploy
     needs: [changelog]
-    when: manual
     variables:
         TWINE_USERNAME: $TWINE_USERNAME
         TWINE_PASSWORD: $TWINE_PASSWORD
@@ -205,9 +216,9 @@ build_pip:
         expire_in: 30 days
 
 build_snap:
+    <<: *deploy-template
     stage: deploy
     needs: [changelog]
-    when: manual
     image: "ubuntudesktop/gnome-3-38-2004"
     script:
         # Set locale to prevent UTF-8 errors
@@ -227,13 +238,15 @@ build_snap:
     artifacts:
         when: always
         paths:
-            - build/duplicity-*/*.snap
-            - build/duplicity-*/*.txt
+            - build/duplicity-*/duplicity_*.snap
+            - build/duplicity-*/duplicity_*.txt
         expire_in: 30 days
 
 pages:
+    only:
+        changes:
+            - docs/**/*
     stage: deploy
-    when: manual
     image: ubuntu:20.04
     script:
         - VERSION=`./setup.py --version`
