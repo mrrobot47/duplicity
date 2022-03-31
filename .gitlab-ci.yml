@@ -27,6 +27,11 @@
     except:
         variables:
             - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
+    only:
+        changes:
+            - bin/duplicity
+            - bin/rdiffdir
+            - duplicity/**/*
 
 variables:
     # cache local items
