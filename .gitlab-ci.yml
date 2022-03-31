@@ -24,30 +24,28 @@
 
 .test-template: &test-template
     stage: tests
-    except:
-        variables:
-            - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
-    only:
-        changes:
+    rules:
+        - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
+          when: never
+        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+          when: always
+        - changes:
             - bin/duplicity
             - bin/rdiffdir
             - duplicity/**/*
-    rules:
-        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
           when: always
 
 .deploy-template: &deploy-template
     stage: deploy
-    except:
-        variables:
-            - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
-    only:
-        changes:
+    rules:
+        - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
+          when: never
+        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+          when: always
+        - changes:
             - bin/duplicity
             - bin/rdiffdir
             - duplicity/**/*
-    rules:
-        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
           when: always
 
 variables:
