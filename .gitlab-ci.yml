@@ -28,11 +28,13 @@
         variables:
             - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
     only:
-        - changes:
+        changes:
             - bin/duplicity
             - bin/rdiffdir
             - duplicity/**/*
-        - merge_requests
+    rules:
+        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+          when: always
 
 .deploy-template: &deploy-template
     stage: deploy
@@ -40,11 +42,13 @@
         variables:
             - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
     only:
-        - changes:
+        changes:
             - bin/duplicity
             - bin/rdiffdir
             - duplicity/**/*
-        - merge_requests
+    rules:
+        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+          when: always
 
 variables:
     # cache local items
