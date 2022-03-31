@@ -28,10 +28,11 @@
         variables:
             - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
     only:
-        changes:
+        - changes:
             - bin/duplicity
             - bin/rdiffdir
             - duplicity/**/*
+        - merge_requests
 
 .deploy-template: &deploy-template
     stage: deploy
@@ -39,10 +40,11 @@
         variables:
             - $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
     only:
-        changes:
+        - changes:
             - bin/duplicity
             - bin/rdiffdir
             - duplicity/**/*
+        - merge_requests
 
 variables:
     # cache local items
