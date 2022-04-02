@@ -27,7 +27,7 @@
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
           when: never
-        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
           when: always
         - changes:
             - bin/duplicity
@@ -40,12 +40,7 @@
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
           when: never
-        - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-          when: never
-        - changes:
-            - bin/duplicity
-            - bin/rdiffdir
-            - duplicity/**/*
+        - if: $CI_PIPELINE_SOURCE == "push" && $CI_BUILD_REF_NAME == "master"
           when: always
 
 variables:
