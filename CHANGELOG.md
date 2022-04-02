@@ -31,6 +31,8 @@
 
 ### Other
 
+* Optimize CI/CD to only run when needed. [Kenneth Loafman]
+
 * Merge remote-tracking branch 'origin/rclone\_options' [Kenneth Loafman]
 
 * Merge branch 'duplicity-core20' of
