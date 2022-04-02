@@ -38,10 +38,13 @@
 .deploy-template: &deploy-template
     stage: deploy
     rules:
+        - if: $CI_COMMIT_MESSAGE =~ "Update changelog"
+          when: never
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
           when: never
         - if: $CI_PIPELINE_SOURCE == "push" && $CI_BUILD_REF_NAME == "master"
           when: always
+        - when: never
 
 variables:
     # cache local items
