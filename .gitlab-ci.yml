@@ -202,8 +202,6 @@ build_pip:
     stage: deploy
     needs: [changelog]
     variables:
-        TWINE_USERNAME: $TWINE_USERNAME
-        TWINE_PASSWORD: $TWINE_PASSWORD
         PYPI_ACCESS_TOKEN: $PYPI_ACCESS_TOKEN
     script:
         - pip install twine
