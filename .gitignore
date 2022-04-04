@@ -1,8 +1,8 @@
-*.swp
 *.egg
 *.log
 *.pyc
 *.so
+*.swp
 .DS_Store
 ._.DS_Store
 .cache
@@ -19,6 +19,7 @@
 __pycache__
 build
 config.py
+dist
 docs/_build
 docs/duplicity.*
 docs/testing.*

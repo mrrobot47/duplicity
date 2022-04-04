@@ -181,7 +181,18 @@ class SdistCommand(sdist):
         os.environ[u'COPYFILE_DISABLE'] = u'true'
 
         # make the new tarfile and remove tardir
-        assert not os.system(u"tar czf %s %s" % (tarfile, tardir))
+        assert not os.system(u"""tar czf %s \
+                                 --exclude debian \
+                                 --exclude docs \
+                                 --exclude testing/docker \
+                                 --exclude testing/manual \
+                                 --exclude tools \
+                                 --exclude '.*' \
+                                 --exclude Makefile \
+                                 --exclude pylintrc \
+                                 --exclude readthedocs.yaml \
+                                  %s
+                              """ % (tarfile, tardir))
         assert not shutil.rmtree(tardir)
 
 
