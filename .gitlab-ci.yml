@@ -205,7 +205,7 @@ build_pip:
         PYPI_ACCESS_TOKEN: $PYPI_ACCESS_TOKEN
     script:
         - pip install twine
-        - echo ${PYPI_ACCESS_TOKEN} > ~/.pypirc
+        - echo ${PYPI_ACCESS_TOKEN} | base64 --decode --ignore-garbage > ~/.pypirc
         - VERSION=`./setup.py --version`
         - echo "make pip of ${VERSION}"
         - ./setup.py sdist --dist-dir=.
