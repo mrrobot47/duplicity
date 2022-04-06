@@ -19,8 +19,8 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-include:
-    - template: Dependency-Scanning.gitlab-ci.yml
+# include:
+#     - template: Dependency-Scanning.gitlab-ci.yml
 
 .test-template: &test-template
     stage: tests
@@ -44,6 +44,11 @@ include:
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
           when: never
         - if: $CI_PIPELINE_SOURCE == "push" && $CI_BUILD_REF_NAME == "master"
+          when: always
+        - changes:
+            - .gitlab-ci.yml
+            - requirements.*
+            - snap/snapcraft.yaml
           when: always
         - when: never
 
