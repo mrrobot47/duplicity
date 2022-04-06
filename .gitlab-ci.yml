@@ -220,7 +220,7 @@ build_snap:
     stage: deploy
     needs: [changelog]
     image: "ubuntudesktop/gnome-3-38-2004"
-    before-script:
+    before_script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
         - export LC_ALL=C.UTF-8
