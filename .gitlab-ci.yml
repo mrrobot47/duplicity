@@ -174,7 +174,7 @@ changelog:
         - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
         - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
         - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-        # Set up config for git commit
+        # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
@@ -196,6 +196,9 @@ build_pip:
         - python3 -m pip install -r requirements.dev
         - python3 -m pip install twine
         - echo ${PYPI_ACCESS_TOKEN} | base64 --decode --ignore-garbage > ~/.pypirc
+        # Set up config for git
+        - git config --global user.email "${GIT_AUTHOR_EMAIL}"
+        - git config --global user.name "${GIT_AUTHOR_NAME}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
     script:
@@ -216,14 +219,17 @@ build_snap:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
         - export LC_ALL=C.UTF-8
+        - export SNAP_ARCH=amd64
+        - export SNAPCRAFT_BUILD_INFO=1
         - apt-get update
         - apt-get install -y git python3-pip git intltool squashfs-tools
         - python3 -m pip install --upgrade pip
         - python3 -m pip install -r requirements.txt
+        # Set up config for git
+        - git config --global user.email "${GIT_AUTHOR_EMAIL}"
+        - git config --global user.name "${GIT_AUTHOR_NAME}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
-        - export SNAP_ARCH=amd64
-        - export SNAPCRAFT_BUILD_INFO=1
     script:
         - tools/makesnap
         - tools/installsnap
