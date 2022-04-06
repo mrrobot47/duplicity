@@ -22,8 +22,18 @@
 
 set -e
 
+if [ "`uname`" != "Linux" ]; then
+    echo "$0 does not run on `uname`"
+    exit 2
+fi
+
+if [ "$#" -ne 0 ]; then
+    echo "usage: $0"
+    exit 2
+fi
+
 VERSION=`./setup.py --version`
-echo "installsnap of ${VERSION} on amd64"
+echo "$0 of ${VERSION} on amd64"
 
 # only run snap install if not in docker
 [ ! -e /.dockerenv ] && {

@@ -22,17 +22,17 @@
 set -e
 
 if [ "`uname`" != "Linux" ]; then
-    echo "pushsnap does not run on `uname`"
+    echo "$0 does not run on `uname`"
     exit 2
 fi
 
 if [ "$#" -ne 0 ]; then
-    echo "usage: pushsnap"
+    echo "usage: $0"
     exit 2
 fi
 
 VERSION=`./setup.py --version`
-echo "pushsnap of ${VERSION}"
+echo "$0 of ${VERSION}"
 
 # make sure we're logged in
 snapcraft login --with ~/.snaplogin

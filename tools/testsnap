@@ -23,17 +23,17 @@
 set -e
 
 if [ "`uname`" != "Linux" ]; then
-    echo "testsnap does not run on `uname`"
+    echo "$0 does not run on `uname`"
     exit 2
 fi
 
 if [ "$#" -ne 0 ]; then
-    echo "usage: testsnap"
+    echo "usage: $0"
     exit 2
 fi
 
 VERSION=`./setup.py --version`
-echo -e  "\ntestsnap of ${VERSION}"
+echo  "$0 of ${VERSION}"
 
 echo -e  "\n*** test for the multi-lib snapcraft issue ***"
 echo "See: https://bugs.launchpad.net/duplicity/+bug/1965814"

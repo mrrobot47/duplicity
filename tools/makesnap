@@ -22,12 +22,12 @@
 set -e
 
 if [ "`uname`" != "Linux" ]; then
-    echo "makesnap does not run on `uname`"
+    echo "$0 does not run on `uname`"
     exit 2
 fi
 
 if [ "$#" -gt 1 ]; then
-    echo "usage: makesnap <comma-sep-list-of-architectures>"
+    echo "usage: $0 <comma-sep-list-of-architectures>"
     echo "      - default is amd64 only"
     echo "      - working arch: arm64, amd64, armhf, ppc64el"
     exit 2
@@ -38,7 +38,7 @@ else
 fi
 
 VERSION=`./setup.py --version`
-echo "makesnap of ${VERSION} on ${BUILD}"
+echo "$0 of ${VERSION} on ${BUILD}"
 
 # make distribution
 ./setup.py sdist --dist-dir=.
