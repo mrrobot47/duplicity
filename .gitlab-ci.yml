@@ -19,8 +19,8 @@
 # along with duplicity; if not, write to the Free Software Foundation,
 # Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
-# include:
-#     - template: Dependency-Scanning.gitlab-ci.yml
+include:
+    - template: Dependency-Scanning.gitlab-ci.yml
 
 .test-template: &test-template
     stage: tests
@@ -68,7 +68,7 @@ default:
         - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
         - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
+        - python3 -m pip install -r requirements.txt -r requirements.dev
     interruptible: true
 
 code_ub18-04:
@@ -105,7 +105,7 @@ py35_ub16-04:
           libffi-dev libssl-dev openssl par2 rdiff tzdata
           python3-pip python3.5 python3.5-dev
         - python3 -m pip install --upgrade pip==20.3.4
-        - python3 -m pip install --requirement requirements.txt
+        - python3 -m pip install -r requirements.txt -r requirements.dev
     script:
         - apt-get install -y python3.5 python3.5-dev
         - tox -e py35
@@ -156,7 +156,7 @@ py39_ub20-04:
         - apt-get install -y build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
         - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
+        - python3 -m pip install -r requirements.txt -r requirements.dev
     script:
         - apt-get install -y python3.9 python3.9-dev
         - tox -e py39
@@ -174,11 +174,9 @@ changelog:
         SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
     before_script:
         - apt-get update
-        - apt-get install -y build-essential git intltool lftp librsync-dev
-          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
-          openssh-client
+        - apt-get install -y git python3-pip
         - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
+        - python3 -m pip install -r requirements.dev
           # Set up the SSH key and the known_hosts file
         - eval $(ssh-agent -s)
         - mkdir -p ~/.ssh
@@ -192,22 +190,23 @@ changelog:
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
     script:
-        - python3 -m pip install gitchangelog pystache
-        - VERSION=`./setup.py --version`
-        - echo "make changelog of ${VERSION}"
         - tools/makechangelog
 
 build_pip:
     <<: *deploy-template
     stage: deploy
     needs: [changelog]
+    image: ubuntu:20.04
     variables:
         PYPI_ACCESS_TOKEN: $PYPI_ACCESS_TOKEN
-    script:
-        - pip install twine
+    before_script:
+        - apt-get update
+        - apt-get install -y git python3-pip
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install -r requirements.dev
+        - python3 -m pip install twine
         - echo ${PYPI_ACCESS_TOKEN} | base64 --decode --ignore-garbage > ~/.pypirc
-        - VERSION=`./setup.py --version`
-        - echo "make pip of ${VERSION}"
+    script:
         - ./setup.py sdist --dist-dir=.
         - python3 -m twine upload duplicity-${VERSION}.tar.gz
     artifacts:
@@ -221,16 +220,17 @@ build_snap:
     stage: deploy
     needs: [changelog]
     image: "ubuntudesktop/gnome-3-38-2004"
-    script:
+    before-script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
         - export LC_ALL=C.UTF-8
         - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
-        - export SNAP_ARCH=amd64
-        - export SNAPCRAFT_BUILD_INFO=1
+        - python3 -m pip install -r requirements.txt
         - apt-get -y update
         - apt-get install -y git squashfs-tools
+        - export SNAP_ARCH=amd64
+        - export SNAPCRAFT_BUILD_INFO=1
+    script:
         - tools/makesnap
         - tools/installsnap
         - tools/testsnap
