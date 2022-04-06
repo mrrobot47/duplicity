@@ -196,6 +196,13 @@ build_pip:
         - python3 -m pip install -r requirements.dev
         - python3 -m pip install twine
         - echo ${PYPI_ACCESS_TOKEN} | base64 --decode --ignore-garbage > ~/.pypirc
+          # Set up the SSH key and the known_hosts file
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
+        - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+        - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
         # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
@@ -225,6 +232,13 @@ build_snap:
         - apt-get install -y git python3-pip git intltool squashfs-tools
         - python3 -m pip install --upgrade pip
         - python3 -m pip install -r requirements.txt
+          # Set up the SSH key and the known_hosts file
+        - eval $(ssh-agent -s)
+        - mkdir -p ~/.ssh
+        - chmod 700 ~/.ssh
+        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
+        - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
+        - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
         # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
