@@ -82,9 +82,6 @@ code_ub18-04:
     script:
         - apt-get install -y python3.8 python3.8-dev
         - tox -e code
-    artifacts:
-        reports:
-            junit: report.xml
 
 py27_ub18-04:
     <<: *test-template
@@ -92,9 +89,6 @@ py27_ub18-04:
     script:
         - apt-get install -y python2.7 python2.7-dev
         - tox -e py27
-    artifacts:
-        reports:
-            junit: report.xml
     allow_failure: true
 
 py35_ub16-04:
@@ -114,9 +108,6 @@ py35_ub16-04:
     script:
         - apt-get install -y python3.5 python3.5-dev
         - tox -e py35
-    artifacts:
-        reports:
-            junit: report.xml
     allow_failure: true
 
 py36_ub18-04:
@@ -125,9 +116,6 @@ py36_ub18-04:
     script:
         - apt-get install -y python3.6 python3.6-dev
         - tox -e py36
-    artifacts:
-        reports:
-            junit: report.xml
 
 py37_ub18-04:
     <<: *test-template
@@ -135,9 +123,6 @@ py37_ub18-04:
     script:
         - apt-get install -y python3.7 python3.7-dev
         - tox -e py37
-    artifacts:
-        reports:
-            junit: report.xml
 
 py38_ub18-04:
     <<: *test-template

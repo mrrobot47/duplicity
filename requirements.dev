@@ -9,6 +9,8 @@ pylint
 pytest
 pytest-cov
 pytest-runner           ; python_version >= '3.6'
+setuptools>=44.1.1
+setuptools-scm>=5.0.2
 tox
 
 
