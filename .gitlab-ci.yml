@@ -179,7 +179,7 @@ changelog:
         SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
     before_script:
         - apt-get update
-        - apt-get install -y git python3-pip
+        - apt-get install -y git python3-pip git intltool
         - python3 -m pip install --upgrade pip
         - python3 -m pip install -r requirements.dev
           # Set up the SSH key and the known_hosts file
