@@ -196,6 +196,8 @@ build_pip:
         - python3 -m pip install -r requirements.dev
         - python3 -m pip install twine
         - echo ${PYPI_ACCESS_TOKEN} | base64 --decode --ignore-garbage > ~/.pypirc
+        - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
+        - cd ${CI_COMMIT_BRANCH}
     script:
         - ./setup.py sdist --dist-dir=.
         - python3 -m twine upload duplicity-${VERSION}.tar.gz
@@ -209,7 +211,7 @@ build_snap:
     <<: *deploy-template
     stage: deploy
     needs: [changelog]
-    image: "ubuntudesktop/gnome-3-38-2004"
+    image: ubuntudesktop/gnome-3-38-2004
     before_script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
@@ -218,6 +220,8 @@ build_snap:
         - apt-get install -y git python3-pip git intltool squashfs-tools
         - python3 -m pip install --upgrade pip
         - python3 -m pip install -r requirements.txt
+        - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
+        - cd ${CI_COMMIT_BRANCH}
         - export SNAP_ARCH=amd64
         - export SNAPCRAFT_BUILD_INFO=1
     script:
