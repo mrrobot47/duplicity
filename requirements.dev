@@ -1,0 +1,21 @@
+##### testing libraries #####
+
+
+coverage
+mock>=3.0.5
+pycodestyle
+pydevd                  ; python_version >= '3.6'
+pylint
+pytest
+pytest-cov
+pytest-runner           ; python_version >= '3.6'
+tox
+
+
+##### documentation libraries #####
+
+gitchangelog            ; python_version >= '3.6'
+myst-parser             ; python_version >= '3.6'
+pystache                ; python_version >= '3.6'
+sphinx                  ; python_version >= '3.6'
+sphinx-rtd-theme        ; python_version >= '3.6'
