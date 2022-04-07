@@ -2,6 +2,7 @@
 
 fasteners
 future
+pydevd                  ; python_version >= '3.6'
 python-gettext
 
 
