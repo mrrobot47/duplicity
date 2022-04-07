@@ -4,7 +4,6 @@
 coverage
 mock>=3.0.5
 pycodestyle
-pydevd                  ; python_version >= '3.6'
 pylint
 pytest
 pytest-cov
