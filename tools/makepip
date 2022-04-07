@@ -38,4 +38,4 @@ echo "$0 of ${VERSION}"
 ./setup.py sdist --dist-dir=.
 
 # upload to pypi
-twine upload duplicity-${VERSION}.tar.gz
+twine upload --verbose --non-interactive duplicity-${VERSION}.tar.gz
