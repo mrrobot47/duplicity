@@ -214,7 +214,7 @@ build_snap:
     <<: *deploy-template
     stage: deploy
     needs: [changelog]
-    image: ubuntu:20.04
+    image: ubuntudesktop/gnome-3-38-2004
     before_script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
