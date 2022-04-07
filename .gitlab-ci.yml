@@ -130,9 +130,6 @@ py38_ub18-04:
     script:
         - apt-get install -y python3.8 python3.8-dev
         - tox -e py38
-    artifacts:
-        reports:
-            junit: report.xml
 
 py39_ub20-04:
     <<: *test-template
@@ -150,9 +147,6 @@ py39_ub20-04:
     script:
         - apt-get install -y python3.9 python3.9-dev
         - tox -e py39
-    artifacts:
-        reports:
-            junit: report.xml
 
 changelog:
     <<: *deploy-template
@@ -167,7 +161,7 @@ changelog:
         - apt-get install -y git python3-pip git intltool
         - python3 -m pip install --upgrade pip
         - python3 -m pip install -r requirements.dev
-          # Set up the SSH key and the known_hosts file
+        # Set up the SSH key and the known_hosts file
         - eval $(ssh-agent -s)
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
@@ -177,6 +171,7 @@ changelog:
         # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
+        - echo "Cloning branch ${CI_COMMIT_BRANCH}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
     script:
@@ -196,7 +191,7 @@ build_pip:
         - python3 -m pip install -r requirements.dev
         - python3 -m pip install twine
         - echo ${PYPI_ACCESS_TOKEN} | base64 --decode --ignore-garbage > ~/.pypirc
-          # Set up the SSH key and the known_hosts file
+        # Set up the SSH key and the known_hosts file
         - eval $(ssh-agent -s)
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
@@ -206,6 +201,7 @@ build_pip:
         # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
+        - echo "Cloning branch ${CI_COMMIT_BRANCH}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
     script:
@@ -231,8 +227,8 @@ build_snap:
         - apt-get update
         - apt-get install -y git python3-pip git intltool squashfs-tools
         - python3 -m pip install --upgrade pip
-        - python3 -m pip install -r requirements.txt
-          # Set up the SSH key and the known_hosts file
+        - python3 -m pip install -r requirements.txt -r requirements.dev
+        # Set up the SSH key and the known_hosts file
         - eval $(ssh-agent -s)
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
@@ -242,6 +238,7 @@ build_snap:
         # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
+        - echo "Cloning branch ${CI_COMMIT_BRANCH}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
     script:
