@@ -171,7 +171,6 @@ changelog:
         # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
-        - echo "Cloning branch ${CI_COMMIT_BRANCH}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
     script:
@@ -201,22 +200,20 @@ build_pip:
         # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
-        - echo "Cloning branch ${CI_COMMIT_BRANCH}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
     script:
         - tools/makepip
     artifacts:
-        when: always
         paths:
-            - duplicity-*.tar.gz
+            - ${CI_COMMIT_BRANCH}/duplicity-*.tar.gz
         expire_in: 30 days
 
 build_snap:
     <<: *deploy-template
     stage: deploy
     needs: [changelog]
-    image: ubuntudesktop/gnome-3-38-2004
+    image: ubuntu:20.04
     before_script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
@@ -237,7 +234,6 @@ build_snap:
         # Set up config for git
         - git config --global user.email "${GIT_AUTHOR_EMAIL}"
         - git config --global user.name "${GIT_AUTHOR_NAME}"
-        - echo "Cloning branch ${CI_COMMIT_BRANCH}"
         - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
         - cd ${CI_COMMIT_BRANCH}
     script:
@@ -247,10 +243,9 @@ build_snap:
         - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > ~/.snaplogin
         - tools/pushsnap
     artifacts:
-        when: always
         paths:
-            - build/duplicity-*/duplicity_*.snap
-            - build/duplicity-*/duplicity_*.txt
+            - ${CI_COMMIT_BRANCH}/build/duplicity-*/duplicity_*.snap
+            - ${CI_COMMIT_BRANCH}/build/duplicity-*/duplicity_*.txt
         expire_in: 30 days
 
 pages:
