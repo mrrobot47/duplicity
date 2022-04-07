@@ -49,6 +49,7 @@
             - .gitlab-ci.yml
             - requirements.*
             - snap/snapcraft.yaml
+            - tools/*
           when: always
         - when: never
 
