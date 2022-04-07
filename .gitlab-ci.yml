@@ -23,7 +23,7 @@
 #     - template: Dependency-Scanning.gitlab-ci.yml
 
 .test-template: &test-template
-    stage: tests
+    stage: test
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
           when: never
