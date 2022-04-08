@@ -36,17 +36,6 @@
           when: always
         - when: never
 
-.deploy-template: &deploy-template
-    stage: deploy
-    rules:
-        - if: $CI_COMMIT_MESSAGE =~ "Update changelog"
-          when: never
-        - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]deploy\]/i || $SKIP_DEPLOY
-          when: never
-        - if: $CI_PIPELINE_SOURCE == "push" && $CI_BUILD_REF_NAME == "master"
-          when: always
-        - when: never
-
 variables:
     # cache local items
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
@@ -87,9 +76,6 @@ py27_ub18-04:
     script:
         - apt-get install -y python2.7 python2.7-dev
         - tox -e py27
-    artifacts:
-        reports:
-            junit: report.xml
     allow_failure: true
 
 py35_ub16-04:
@@ -109,9 +95,6 @@ py35_ub16-04:
     script:
         - apt-get install -y python3.5 python3.5-dev
         - tox -e py35
-    artifacts:
-        reports:
-            junit: report.xml
     allow_failure: true
 
 py36_ub18-04:
@@ -120,9 +103,6 @@ py36_ub18-04:
     script:
         - apt-get install -y python3.6 python3.6-dev
         - tox -e py36
-    artifacts:
-        reports:
-            junit: report.xml
 
 py37_ub18-04:
     <<: *test-template
@@ -130,9 +110,6 @@ py37_ub18-04:
     script:
         - apt-get install -y python3.7 python3.7-dev
         - tox -e py37
-    artifacts:
-        reports:
-            junit: report.xml
 
 py38_ub18-04:
     <<: *test-template
@@ -140,9 +117,6 @@ py38_ub18-04:
     script:
         - apt-get install -y python3.8 python3.8-dev
         - tox -e py38
-    artifacts:
-        reports:
-            junit: report.xml
 
 py39_ub20-04:
     <<: *test-template
@@ -160,88 +134,6 @@ py39_ub20-04:
     script:
         - apt-get install -y python3.9 python3.9-dev
         - tox -e py39
-    artifacts:
-        reports:
-            junit: report.xml
-
-changelog:
-    <<: *deploy-template
-    stage: deploy
-    image: ubuntu:20.04
-    variables:
-        GIT_AUTHOR_NAME: $GITLAB_USER_NAME
-        GIT_AUTHOR_EMAIL: $GITLAB_USER_EMAIL
-        SSH_PRIVATE_KEY: $SSH_PRIVATE_KEY
-    before_script:
-        - apt-get update
-        - apt-get install -y build-essential git intltool lftp librsync-dev
-          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
-          openssh-client
-        - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
-          # Set up the SSH key and the known_hosts file
-        - eval $(ssh-agent -s)
-        - mkdir -p ~/.ssh
-        - chmod 700 ~/.ssh
-        - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >> ~/.ssh/config
-        - echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add -
-        - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-        # Set up config for git commit
-        - git config --global user.email "${GIT_AUTHOR_EMAIL}"
-        - git config --global user.name "${GIT_AUTHOR_NAME}"
-        - git clone --branch=${CI_COMMIT_BRANCH} git@gitlab.com:duplicity/duplicity.git ${CI_COMMIT_BRANCH}
-        - cd ${CI_COMMIT_BRANCH}
-    script:
-        - python3 -m pip install gitchangelog pystache
-        - VERSION=`./setup.py --version`
-        - echo "make changelog of ${VERSION}"
-        - tools/makechangelog
-
-build_pip:
-    <<: *deploy-template
-    stage: deploy
-    needs: [changelog]
-    variables:
-        PYPI_ACCESS_TOKEN: $PYPI_ACCESS_TOKEN
-    script:
-        - pip install twine
-        - echo ${PYPI_ACCESS_TOKEN} | base64 --decode --ignore-garbage > ~/.pypirc
-        - VERSION=`./setup.py --version`
-        - echo "make pip of ${VERSION}"
-        - ./setup.py sdist --dist-dir=.
-        - python3 -m twine upload duplicity-${VERSION}.tar.gz
-    artifacts:
-        when: always
-        paths:
-            - duplicity-*.tar.gz
-        expire_in: 30 days
-
-build_snap:
-    <<: *deploy-template
-    stage: deploy
-    needs: [changelog]
-    image: "ubuntudesktop/gnome-3-38-2004"
-    script:
-        # Set locale to prevent UTF-8 errors
-        - export LANG=C.UTF-8
-        - export LC_ALL=C.UTF-8
-        - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
-        - export SNAP_ARCH=amd64
-        - export SNAPCRAFT_BUILD_INFO=1
-        - apt-get -y update
-        - apt-get install -y git squashfs-tools
-        - tools/makesnap
-        - tools/installsnap
-        - tools/testsnap
-        - echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > ~/.snaplogin
-        - tools/pushsnap
-    artifacts:
-        when: always
-        paths:
-            - build/duplicity-*/duplicity_*.snap
-            - build/duplicity-*/duplicity_*.txt
-        expire_in: 30 days
 
 pages:
     only:
