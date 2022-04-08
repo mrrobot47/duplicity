@@ -152,7 +152,6 @@ py310_ub22-04:
 build_pip:
     stage: deploy
     when: manual
-    needs: [changelog]
     image: ubuntu:20.04
     variables:
         PYPI_ACCESS_TOKEN: $PYPI_ACCESS_TOKEN
@@ -172,7 +171,6 @@ build_pip:
 build_snap:
     stage: deploy
     when: manual
-    needs: [changelog]
     image: ubuntudesktop/gnome-3-38-2004
     before_script:
         # Set locale to prevent UTF-8 errors
