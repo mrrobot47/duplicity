@@ -194,10 +194,8 @@ build_snap:
 
 pages:
     stage: deploy
+    when: manual
     image: ubuntu:20.04
-    only:
-        changes:
-            - docs/**/*
     script:
         - VERSION=`./setup.py --version`
         - echo "make docs of ${VERSION}"
