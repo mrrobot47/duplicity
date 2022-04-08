@@ -21,6 +21,11 @@
 
 set -e
 
+if [ "`uname`" != "Linux" ]; then
+    echo "$0 does not run on `uname`"
+    exit 2
+fi
+
 if [ "$1" != "" ]; then
     REL=$1
 else

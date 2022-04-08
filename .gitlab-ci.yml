@@ -23,7 +23,7 @@
 #     - template: Dependency-Scanning.gitlab-ci.yml
 
 .test-template: &test-template
-    stage: tests
+    stage: test
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
           when: never
@@ -57,7 +57,7 @@ default:
         - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
         - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
+        - python3 -m pip install -r requirements.txt -r requirements.dev
     interruptible: true
 
 code_ub18-04:
@@ -66,9 +66,6 @@ code_ub18-04:
     script:
         - apt-get install -y python3.8 python3.8-dev
         - tox -e code
-    artifacts:
-        reports:
-            junit: report.xml
 
 py27_ub18-04:
     <<: *test-template
@@ -91,7 +88,7 @@ py35_ub16-04:
           libffi-dev libssl-dev openssl par2 rdiff tzdata
           python3-pip python3.5 python3.5-dev
         - python3 -m pip install --upgrade pip==20.3.4
-        - python3 -m pip install --requirement requirements.txt
+        - python3 -m pip install -r requirements.txt -r requirements.dev
     script:
         - apt-get install -y python3.5 python3.5-dev
         - tox -e py35
@@ -130,17 +127,77 @@ py39_ub20-04:
         - apt-get install -y build-essential git intltool lftp librsync-dev
           libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
         - python3 -m pip install --upgrade pip
-        - python3 -m pip install --requirement requirements.txt
+        - python3 -m pip install -r requirements.txt -r requirements.dev
     script:
         - apt-get install -y python3.9 python3.9-dev
         - tox -e py39
 
+py310_ub22-04:
+    <<: *test-template
+    stage: test
+    image: ubuntu:22.04
+    before_script:
+        # Set locale to prevent UTF-8 errors
+        - export LANG=C.UTF-8
+        - export LC_ALL=C.UTF-8
+        - apt-get update
+        - apt-get install -y build-essential git intltool lftp librsync-dev
+          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install -r requirements.txt -r requirements.dev
+    script:
+        - apt-get install -y python3.10 python3.10-dev
+        - tox -e py310
+
+build_pip:
+    stage: deploy
+    when: manual
+    image: ubuntu:20.04
+    variables:
+        PYPI_ACCESS_TOKEN: $PYPI_ACCESS_TOKEN
+    before_script:
+        - apt-get update
+        - apt-get install -y git python3-pip git intltool
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install -r requirements.dev
+        - python3 -m pip install twine
+    script:
+        - ./setup.py sdist --dist-dir=.
+    artifacts:
+        paths:
+            - duplicity-*.tar.gz
+        expire_in: 30 days
+
+build_snap:
+    stage: deploy
+    when: manual
+    image: ubuntudesktop/gnome-3-38-2004
+    before_script:
+        # Set locale to prevent UTF-8 errors
+        - export LANG=C.UTF-8
+        - export LC_ALL=C.UTF-8
+        - export SNAP_ARCH=amd64
+        - export SNAPCRAFT_BUILD_INFO=1
+        - apt-get update
+        - apt-get install -y git python3-pip git intltool squashfs-tools
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install -r requirements.txt -r requirements.dev
+    script:
+        - tools/makesnap
+        - tools/installsnap
+        - tools/testsnap
+    artifacts:
+        paths:
+            - build/duplicity-*/duplicity_*.snap
+            - build/duplicity-*/duplicity_*.txt
+        expire_in: 30 days
+
 pages:
+    stage: deploy
+    image: ubuntu:20.04
     only:
         changes:
             - docs/**/*
-    stage: deploy
-    image: ubuntu:20.04
     script:
         - VERSION=`./setup.py --version`
         - echo "make docs of ${VERSION}"

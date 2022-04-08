@@ -61,9 +61,9 @@ RUN apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Installing requirements w/pip
-COPY requirements.txt /tmp
+COPY requirements.* /tmp
 RUN pip install --upgrade pip
-RUN pip install --requirement /tmp/requirements.txt
+RUN pip install -r /tmp/requirements.txt -r /tmp/requirements.dev
 
 # Delete root's password so we can do 'su -'
 RUN passwd --delete root
