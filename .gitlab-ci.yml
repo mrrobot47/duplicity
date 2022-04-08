@@ -149,6 +149,23 @@ py39_ub20-04:
         - apt-get install -y python3.9 python3.9-dev
         - tox -e py39
 
+py39_ub22-04:
+    <<: *test-template
+    stage: test
+    image: ubuntu:22.04
+    before_script:
+        # Set locale to prevent UTF-8 errors
+        - export LANG=C.UTF-8
+        - export LC_ALL=C.UTF-8
+        - apt-get update
+        - apt-get install -y build-essential git intltool lftp librsync-dev
+          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install -r requirements.txt -r requirements.dev
+    script:
+        - apt-get install -y python3.10 python3.10-dev
+        - tox -e py310
+
 changelog:
     <<: *deploy-template
     stage: deploy
