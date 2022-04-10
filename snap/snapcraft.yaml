@@ -14,7 +14,7 @@ base: core20
 
 apps:
     duplicity:
-        command: bin/duplicity
+        command: bin/duplicity.sh
         environment:
             # setup path to find and use packaged python3 in snap
             PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
@@ -25,7 +25,18 @@ apps:
                          $HOME/.local/lib/python3.8/site-packages:\
                          /lib/python3.8/site-packages"
     rdiffdir:
-        command: bin/rdiffdir
+        command: bin/rdiffdir.sh
+        environment:
+            # see above
+            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
+            PYTHONPATH: "$SNAP/lib/python3.8/site-packages:\
+                         $HOME/.local/lib/python3.8/site-packages:\
+                         /lib/python3.8/site-packages"
+    # printing env in snap for debug purposes, help's pinning snap startup issues (missing libs, _rsync ...) 
+    debug:
+        command: bin/debug.sh
+    debug2:
+        command: bin/debug.sh
         environment:
             # see above
             PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
@@ -39,6 +50,11 @@ parts:
         override-build: |
             snapcraftctl build
             rm -rfv "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.9"
+        override-prime: |
+            snapcraftctl prime
+            cp -v "$SNAPCRAFT_PROJECT_DIR"/snap/local/launcher.sh "$SNAPCRAFT_PRIME"/bin/duplicity.sh
+            cp -v "$SNAPCRAFT_PROJECT_DIR"/snap/local/launcher.sh "$SNAPCRAFT_PRIME"/bin/rdiffdir.sh
+            cp -v "$SNAPCRAFT_PROJECT_DIR"/snap/local/debug.sh "$SNAPCRAFT_PRIME"/bin/
         build-environment:
             - PYTHONPATH: "$SNAPCRAFT_PART_INSTALL/usr/lib/python3.8/dist-packages:\
                            $SNAPCRAFT_PART_INSTALL/usr/lib/python3/dist-packages:\
