@@ -182,15 +182,15 @@ class SdistCommand(sdist):
 
         # make the new tarfile and remove tardir
         assert not os.system(u"""tar czf %s \
+                                 --exclude '.*' \
+                                 --exclude Makefile \
                                  --exclude debian \
                                  --exclude docs \
+                                 --exclude pylintrc \
+                                 --exclude readthedocs.yaml \
                                  --exclude testing/docker \
                                  --exclude testing/manual \
                                  --exclude tools \
-                                 --exclude '.*' \
-                                 --exclude Makefile \
-                                 --exclude pylintrc \
-                                 --exclude readthedocs.yaml \
                                   %s
                               """ % (tarfile, tardir))
         assert not shutil.rmtree(tardir)
