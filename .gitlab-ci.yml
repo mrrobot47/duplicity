@@ -27,8 +27,6 @@
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
           when: never
-        - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-          when: always
         - changes:
             - bin/duplicity
             - bin/rdiffdir
@@ -153,8 +151,6 @@ build_pip:
     stage: deploy
     when: manual
     image: ubuntu:20.04
-    variables:
-        PYPI_ACCESS_TOKEN: $PYPI_ACCESS_TOKEN
     before_script:
         - apt-get update
         - apt-get install -y git python3-pip git intltool
