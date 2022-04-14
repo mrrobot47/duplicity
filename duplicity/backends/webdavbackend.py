@@ -25,6 +25,7 @@ from future import standard_library
 standard_library.install_aliases()
 from builtins import str
 from builtins import range
+
 import base64
 import http.client
 import os
@@ -143,7 +144,19 @@ class WebDAVBackend(duplicity.backend.Backend):
     u"""Connect to remote store using WebDAV Protocol"""
     def __init__(self, parsed_url):
         duplicity.backend.Backend.__init__(self, parsed_url)
+
         self.headers = {u'Connection': u'keep-alive'}
+        if config.webdav_headers:
+            try:
+                self.headers = util.merge_dicts(self.headers,
+                                                util.csv_args_to_dict(config.webdav_headers))
+            except IndexError as e:
+                log.FatalError(u"--webdav-headers value has an odd number of arguments.  Must be paired.")
+            except SyntaxError as e:
+                log.FatalError(u"--webdav-headers value has bad syntax.  Check quoting pairs.")
+            except Exception as e:
+                log.FatalErrof(u"--webdav-headers value caused error: %s" % e)
+
         self.parsed_url = parsed_url
         self.digest_challenge = None
         self.digest_auth_handler = None
@@ -152,7 +165,6 @@ class WebDAVBackend(duplicity.backend.Backend):
         self.password = self.get_password()
         self.directory = self.sanitize_path(parsed_url.path)
 
-        log.Info(_(u"Using WebDAV protocol %s") % (config.webdav_proto,))
         log.Info(_(u"Using WebDAV host %s port %s") % (parsed_url.hostname,
                                                        parsed_url.port))
         log.Info(_(u"Using WebDAV directory %s") % (self.directory,))

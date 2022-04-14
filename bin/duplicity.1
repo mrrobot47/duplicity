@@ -792,9 +792,9 @@ will use only the values
 .I scheme (protocol)
 and
 .I hostname
-from the given 
+from the given
 .IR url .
-Choosing 
+Choosing
 .B 'http://'
 will disable SSL encryption, just as if
 .B --s3-unencrypted-connection
@@ -982,7 +982,7 @@ is not backwards compatible if your bucket name contains upper-case
 characters or other characters that are not valid in a hostname.
 
 .B NOTE:
-This option has no effect when using the 
+This option has no effect when using the
 .B boto3
 backend, which will always use new style subdomain bucket naming.
 
@@ -1244,6 +1244,17 @@ Print duplicity's version and quit.
 Change the volume size to
 .IR number
 MB. Default is 200MB.
+
+.TP
+.BI "--webdav-headers " "csv formatted key,value pairs"
+.RS
+The input format is comma separated list of key,value pairs. Standard
+CSV encoding may be used.
+
+For example to set a Cookie use 'Cookie,name=value', or '"Cookie","name=value"'.
+
+You can set multiple headers, e.g. '"Cookie","name=value","Authorization","xxx"'.
+.RE
 
 .SH ENVIRONMENT VARIABLES
 
@@ -1903,15 +1914,15 @@ to setup the OAuth once again, but can otherwise keep your backups and config.
 
 .SH A NOTE ON AMAZON S3
 When backing up to Amazon S3, two backend implementations are available.
-The older 
+The older
 .B boto
 library, which is deprecated and is no longer maintained.
-And the recent 
+And the recent
 .B boto3
 backend based on the newer boto3 library. The new backend fixes several known
 limitations in the older backend, which developed as Amazon S3 evolved.
 
-The 
+The
 .B boto3
 backend should behave largely the same as the older backend,
 but there are some differences in the supported "--s3-..." options.
@@ -1928,15 +1939,15 @@ not a good practice to give your backup role bucket creation rights.
 In most cases the role used for backups should probably be
 limited to specific buckets.
 
-The 
+The
 .B boto3
 backend only supports newer domain style buckets. Amazon is moving
 to deprecate the older bucket style, so migration is recommended.
-Use the 
+Use the
 .B boto
 backend for compatibility with buckets using older naming conventions.
 
-The 
+The
 .B boto3
 backend does not currently support initiating restores
 from the glacier storage class.  When restoring a backup from
@@ -2184,7 +2195,7 @@ below.
 .PP
 Two backends are available to access S3 namely
 .B boto3
-which is used via 
+which is used via
 .I s3://
 (alias for
 .I boto3+s3://
@@ -2194,27 +2205,27 @@ backend, usable via
 .IR boto+s3:// .
 
 .SS Preparations
-.IP 1. 
+.IP 1.
 login on https://console.cloud.google.com/
-.IP 2. 
-go to 
+.IP 2.
+go to
 .B Cloud Storage->Settings->Interoperability
-.IP 3. 
-create a 
+.IP 3.
+create a
 .BR "Service account" " (if needed)"
-.IP 4. 
-create 
+.IP 4.
+create
 .B Service account HMAC
 access key and secret
 .RB ( "!!instantly copy!!"
 the secret, it can NOT be recovered later)
-.IP 5. 
-go to 
+.IP 5.
+go to
 .B Cloud Storage->Browser
-.IP 6. 
+.IP 6.
 create a bucket
-.IP 7. 
-add permissions for 
+.IP 7.
+add permissions for
 .B Service account
 that was used to set up Interoperability access above
 
@@ -2225,7 +2236,7 @@ Once set up you can use the generated Interoperable Storage Access key and secre
 The following examples show accessing GCS via S3 for a collection-status action.
 The shown env vars, options and url format can be applied for all other actions as well of course.
 
-using 
+using
 .B boto3
 supplying the
 .B --s3-endpoint-url

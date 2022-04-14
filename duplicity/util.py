@@ -31,6 +31,7 @@ from builtins import map
 from builtins import object
 from builtins import str
 
+import csv
 import errno
 import json
 import os
@@ -38,6 +39,11 @@ import string
 import sys
 import traceback
 import atexit
+
+if sys.version_info.major == 2:
+    from cStringIO import StringIO  # pylint: disable=import-error
+else:
+    from io import StringIO  # pylint: disable=import-error
 
 from duplicity import tarfile
 import duplicity.config as config
@@ -313,3 +319,28 @@ def start_debugger(remote=False):
         sys.path.insert(0, base)
 
         os.environ[u'DEBUG_RUNNING'] = u'yes'
+
+
+def merge_dicts(*dict_args):
+    u"""
+    Given any number of dictionaries, shallow copy and merge into a new dict,
+    precedence goes to key-value pairs in latter dictionaries.
+    """
+    result = {}
+    for dictionary in dict_args:
+        result.update(dictionary)
+    return result
+
+
+def csv_args_to_dict(arg):
+    u"""
+    Given the string arg in single line csv format, split into pairs (key, val)
+    and produce a dictionary from those key:val pairs.
+    """
+    mydict = {}
+    with StringIO(arg) as infile:
+        rows = csv.reader(infile)
+        for row in rows:
+            for i in range(0, len(row), 2):
+                mydict[row[i]] = row[i + 1]
+    return mydict

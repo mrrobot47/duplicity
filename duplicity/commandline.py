@@ -634,6 +634,9 @@ def parse_cmdline_options(arglist):
     parser.add_option(u"--ssl-cacert-path", metavar=_(u"path to a folder with certificate authority files"))
     parser.add_option(u"--ssl-no-check-certificate", action=u"store_true")
 
+    # header options for Webdav
+    parser.add_option(u"--webdav-headers", metavar=_(u"extra headers for Webdav, like 'Cookie,name=value'"))
+
     # Working directory for the tempfile module. Defaults to /tmp on most systems.
     parser.add_option(u"--tempdir", dest=u"temproot", type=u"file", metavar=_(u"path"))
 

@@ -190,8 +190,8 @@ timeout = 30
 # FTP data connection type
 ftp_connection = u'passive'
 
-# Protocol for webdav
-webdav_proto = u'http'
+# Header options for Webdav
+webdav_headers = u""
 
 # Asynchronous put/get concurrency limit
 # (default of 0 disables asynchronicity).
