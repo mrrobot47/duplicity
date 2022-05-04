@@ -1302,7 +1302,7 @@ def sync_archive(col_stats):
             def __next__(self):
                 try:
                     res = Block(self.fileobj.read(self.get_read_size()))
-                except Exception:
+                except Exception as e:
                     if hasattr(self.fileobj, u'name'):
                         name = self.fileobj.name
                         # name may be a path
@@ -1310,8 +1310,7 @@ def sync_archive(col_stats):
                             name = name.name
                     else:
                         name = None
-                    log.FatalError(_(u"Failed to read %s: %s") %
-                                   (util.fsdecode(name), sys.exc_info()),
+                    log.FatalError(_(u"Failed to read %s: %s") % (util.fsdecode(fn), util.uexc(e)),
                                    log.ErrorCode.generic)
                 if not res.data:
                     self.fileobj.close()
