@@ -176,7 +176,7 @@ Exception: %s""" % str(e))
             if listing:
                 rv[1].extend(listing)
         if ffilter is not None:
-            return filter(ffilter, rv[1])
+            return list(filter(ffilter, rv[1]))
         return rv[1]
 
     def _list(self):
