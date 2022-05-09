@@ -23,6 +23,7 @@
 #     - template: Dependency-Scanning.gitlab-ci.yml
 
 .test-template: &test-template
+    image: firstprime/duplicity_test:latest
     stage: test
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
@@ -46,105 +47,62 @@ stages:
     - deploy
 
 default:
-    image: ubuntu:18.04
     before_script:
         # Set locale to prevent UTF-8 errors
         - export LANG=C.UTF-8
         - export LC_ALL=C.UTF-8
-        - apt-get update
-        - apt-get install -y 2to3 build-essential git intltool lftp librsync-dev
-          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
-        - python3 -m pip install --upgrade pip
-        - python3 -m pip install -r requirements.txt -r requirements.dev
+        - export PYENV_ROOT="/root/.pyenv"
+        - export TOXWORKDIR="/root/.tox"
     interruptible: true
 
-code_ub18-04:
+code:
     <<: *test-template
     stage: qual
     script:
-        - apt-get install -y python3.8 python3.8-dev
         - tox -e code
 
-py27_ub18-04:
+py27:
     <<: *test-template
     stage: test
     script:
-        - apt-get install -y python2.7 python2.7-dev
         - tox -e py27
     allow_failure: true
 
-py35_ub16-04:
+py35:
     <<: *test-template
     stage: test
-    image: ubuntu:16.04
-    before_script:
-        # Set locale to prevent UTF-8 errors
-        - export LANG=C.UTF-8
-        - export LC_ALL=C.UTF-8
-        - apt-get update
-        - apt-get install -y build-essential git intltool lftp librsync-dev
-          libffi-dev libssl-dev openssl par2 rdiff tzdata
-          python3-pip python3.5 python3.5-dev
-        - python3 -m pip install --upgrade pip==20.3.4
-        - python3 -m pip install -r requirements.txt -r requirements.dev
     script:
-        - apt-get install -y python3.5 python3.5-dev
         - tox -e py35
     allow_failure: true
 
-py36_ub18-04:
+py36:
     <<: *test-template
     stage: test
     script:
-        - apt-get install -y python3.6 python3.6-dev
         - tox -e py36
 
-py37_ub18-04:
+py37:
     <<: *test-template
     stage: test
     script:
-        - apt-get install -y python3.7 python3.7-dev
         - tox -e py37
 
-py38_ub18-04:
+py38:
     <<: *test-template
     stage: test
     script:
-        - apt-get install -y python3.8 python3.8-dev
         - tox -e py38
 
-py39_ub20-04:
+py39:
     <<: *test-template
     stage: test
-    image: ubuntu:20.04
-    before_script:
-        # Set locale to prevent UTF-8 errors
-        - export LANG=C.UTF-8
-        - export LC_ALL=C.UTF-8
-        - apt-get update
-        - apt-get install -y build-essential git intltool lftp librsync-dev
-          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
-        - python3 -m pip install --upgrade pip
-        - python3 -m pip install -r requirements.txt -r requirements.dev
     script:
-        - apt-get install -y python3.9 python3.9-dev
         - tox -e py39
 
-py310_ub22-04:
+py310:
     <<: *test-template
     stage: test
-    image: ubuntu:22.04
-    before_script:
-        # Set locale to prevent UTF-8 errors
-        - export LANG=C.UTF-8
-        - export LC_ALL=C.UTF-8
-        - apt-get update
-        - apt-get install -y build-essential git intltool lftp librsync-dev
-          libffi-dev libssl-dev openssl par2 rdiff tzdata python3-pip
-        - python3 -m pip install --upgrade pip
-        - python3 -m pip install -r requirements.txt -r requirements.dev
     script:
-        - apt-get install -y python3.10 python3.10-dev
         - tox -e py310
 
 build_pip:

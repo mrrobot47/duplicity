@@ -53,7 +53,8 @@ class CodeTest(DuplicityTestCase):
             for line in output.split(u'\n'):
                 print(line, file=sys.stderr)
             output = u""
-        self.assertTrue(process.returncode in returncodes, output)
+        self.assertTrue(process.returncode in returncodes,
+                        f"Test failed: returncode = {process.returncode}")
 
     @skipCodeTest
     def test_2to3(self):

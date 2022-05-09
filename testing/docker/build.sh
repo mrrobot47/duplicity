@@ -24,5 +24,14 @@
 
 cd `dirname $0`
 
-docker-compose up -d
-docker-compose exec duplicity_test /bin/bash
+export DOCKER_BUILDKIT=0
+
+cp ../../requirements.* .
+cp ../../setup.py .
+cp ../../tox.ini .
+
+docker build --compress --tag firstprime/duplicity_test --file duplicity_test/Dockerfile .
+
+rm requirements.*
+rm setup.py
+rm tox.ini

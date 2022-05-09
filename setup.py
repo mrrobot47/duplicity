@@ -302,10 +302,6 @@ setup(name=u"duplicity",
         ],
     data_files=get_data_files(),
     include_package_data=True,
-    setup_requires=[
-        u"setuptools",
-        u"setuptools_scm",
-        ],
     install_requires=[
         u"fasteners",
         u"future",
