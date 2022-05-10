@@ -23,7 +23,7 @@
 #     - template: Dependency-Scanning.gitlab-ci.yml
 
 .test-template: &test-template
-    image: firstprime/duplicity_test:latest
+    image: registry.gitlab.com/duplicity/duplicity/firstprime/duplicity_test
     stage: test
     rules:
         - if: $CI_COMMIT_MESSAGE =~ /\[skip[ _-]tests?\]/i || $SKIP_TESTS
