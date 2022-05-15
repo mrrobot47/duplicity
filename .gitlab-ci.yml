@@ -150,7 +150,13 @@ pages:
     stage: deploy
     when: manual
     image: ubuntu:20.04
+    before_script:
+        # Set locale to prevent UTF-8 errors
+        - export LANG=C.UTF-8
+        - export LC_ALL=C.UTF-8
     script:
+        - python3 -m pip install --upgrade pip
+        - python3 -m pip install -r requirements.dev
         - VERSION=`./setup.py --version`
         - echo "make docs of ${VERSION}"
         - make docs
