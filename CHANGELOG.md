@@ -1,6 +1,8 @@
-## (unreleased)
+## rel.0.8.23 (2022-05-15)
 
 ### New
+
+* Add --webdav-headers to webdavbackend.  Fixes #94. [Kenneth Loafman]
 
 * Document rclone option setting via env vars. [edeso]
 
@@ -29,7 +31,27 @@
   and Google Cloud Storage usage   sort Options, Url Formats, Notes on
   alphabetically   consistently use "NOTE:"   indent properly all over
 
+### Changes
+
+* Use cicd image hosted on GitLab. [Kenneth Loafman]
+
+* Create singular container for testing. [Kenneth Loafman]
+
+### Fix
+
+* Fix LP bug #1970124 - obscure error message. [Kenneth Loafman]
+
+  Fixes handling of error message with real path, not temp path.
+
 ### Other
+
+* Pkg:fix: make extra sure correct python binary is used. [edeso]
+
+  remove unmaintained changelog   add shell wrapper(launcher.sh)   add
+  debug script   use shell wrapper as snap binary ignores PATH for
+  python binary on debian
+
+* Merge remote-tracking branch 'origin/clean-dist' [Kenneth Loafman]
 
 * Optimize CI/CD to only run when needed. [Kenneth Loafman]
 
