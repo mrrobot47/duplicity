@@ -68,8 +68,5 @@ git push alpha master -o ci.skip
 ./setup.py sdist --dist-dir=.
 gpg --use-agent -b duplicity-${REL}.tar.gz
 
-# release tar/sig to Savannah
-scp duplicity-${REL}.* loafman@dl.sv.nongnu.org:/releases/duplicity/
-
 # move releases to duplicity-releases
 mv duplicity-${REL}.* ../duplicity-releases
