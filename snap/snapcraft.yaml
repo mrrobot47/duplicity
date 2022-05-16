@@ -17,7 +17,7 @@ apps:
         command: bin/duplicity.sh
         environment:
             # setup path to find and use packaged python3 in snap
-            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
+            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH:/snap/core20/current/usr/bin"
             # fixup pythonpath to find modules, for some reason
             # 'lib/python3.8/site-packages' is not added by default
             # add two more host paths for users to install modules in
@@ -28,7 +28,7 @@ apps:
         command: bin/rdiffdir.sh
         environment:
             # see above
-            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
+            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH:/snap/core20/current/usr/bin"
             PYTHONPATH: "$SNAP/lib/python3.8/site-packages:\
                          $HOME/.local/lib/python3.8/site-packages:\
                          /lib/python3.8/site-packages"
@@ -39,7 +39,7 @@ apps:
         command: bin/debug.sh
         environment:
             # see above
-            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH"
+            PATH: "$SNAP/usr/sbin:$SNAP/usr/bin:$SNAP/sbin:$SNAP/bin:$PATH:/snap/core20/current/usr/bin"
             PYTHONPATH: "$SNAP/lib/python3.8/site-packages:\
                          $HOME/.local/lib/python3.8/site-packages:\
                          /lib/python3.8/site-packages"
