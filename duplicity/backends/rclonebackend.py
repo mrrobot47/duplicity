@@ -68,7 +68,7 @@ class RcloneBackend(duplicity.backend.Backend):
         if rc != 0:
             if os.path.isfile(local_pathname):
                 os.remove(local_pathname)
-            raise BackendException(e)
+            raise BackendException(u"rclone returned rc = %d: %s" % (rc, e))
 
     def _put(self, source_path, remote_filename):
         source_pathname = util.fsdecode(source_path.name)
@@ -77,7 +77,7 @@ class RcloneBackend(duplicity.backend.Backend):
             self.rclone_cmd, source_pathname, self.remote_path, remote_filename)
         rc, o, e = self._subprocess_safe_popen(commandline)
         if rc != 0:
-            raise BackendException(e)
+            raise BackendException(u"rclone returned rc = %d: %s" % (rc, e))
 
     def _list(self):
         filelist = []
@@ -87,7 +87,7 @@ class RcloneBackend(duplicity.backend.Backend):
         if rc == 3:
             return filelist
         if rc != 0:
-            raise BackendException(e)
+            raise BackendException(u"rclone returned rc = %d: %s" % (rc, e))
         if not o:
             return filelist
         return [util.fsencode(x) for x in o.split(u'\n') if x]
@@ -98,7 +98,7 @@ class RcloneBackend(duplicity.backend.Backend):
             self.rclone_cmd, self.remote_path, remote_filename)
         rc, o, e = self._subprocess_safe_popen(commandline)
         if rc != 0:
-            raise BackendException(e)
+            raise BackendException(u"rclone returned rc = %d: %s" % (rc, e))
 
     def _subprocess_safe_popen(self, commandline):
         import shlex
