@@ -822,28 +822,33 @@ def restore_get_enc_fileobj(backend, filename, volume_info):
     with --ignore-errors set continue on hash mismatch
 
     """
-    parseresults = file_naming.parse(filename)
-    tdp = dup_temp.new_tempduppath(parseresults)
-    backend.get(filename, tdp)
-
-    u""" verify hash of the remote file """
-    verified, hash_pair, calculated_hash = restore_check_hash(volume_info, tdp)
-    if not verified:
-        error_msg = u"%s\n %s\n %s\n %s\n" % (
-            _(u"Invalid data - %s hash mismatch for file:") %
-            hash_pair[0],
-            util.fsdecode(filename),
-            _(u"Calculated hash: %s") % calculated_hash,
-            _(u"Manifest hash: %s") % hash_pair[1]
-        )
+    for n in range(1, config.num_retries + 1):
+        u""" get the remote file """
+        parseresults = file_naming.parse(filename)
+        tdp = dup_temp.new_tempduppath(parseresults)
+        backend.get(filename, tdp)
+    
+        u""" verify hash of the remote file """
+        verified, hash_pair, calculated_hash = restore_check_hash(volume_info, tdp)
+        if verified:
+            break
+        else:
+            error_msg = u"%s\n %s\n %s\n %s\n" % (
+                _(u"Invalid data - %s hash mismatch for file:") %
+                hash_pair[0],
+                util.fsdecode(filename),
+                _(u"Calculated hash: %s") % calculated_hash,
+                _(u"Manifest hash: %s") % hash_pair[1]
+            )
+            log.Error(error_msg, code=log.ErrorCode.mismatched_hash)
+    else:
         if config.ignore_errors:
             exc = duplicity.errors.BadVolumeException(u"Hash mismatch for: %s" % util.fsdecode(filename))
-            log.Log(error_msg, log.ERROR, code=log.ErrorCode.mismatched_hash)
             log.Warn(_(u"IGNORED_ERROR: Warning: ignoring error as requested: %s: %s")
                      % (exc.__class__.__name__, util.uexc(exc)))
-            raise exc
         else:
             log.FatalError(error_msg, code=log.ErrorCode.mismatched_hash)
+        
     fileobj = tdp.filtered_open_with_delete(u"rb")
     if parseresults.encrypted and config.gpg_profile.sign_key:
         restore_add_sig_check(fileobj)
