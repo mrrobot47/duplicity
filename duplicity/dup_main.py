@@ -827,7 +827,7 @@ def restore_get_enc_fileobj(backend, filename, volume_info):
         parseresults = file_naming.parse(filename)
         tdp = dup_temp.new_tempduppath(parseresults)
         backend.get(filename, tdp)
-    
+
         u""" verify hash of the remote file """
         verified, hash_pair, calculated_hash = restore_check_hash(volume_info, tdp)
         if verified:
@@ -848,7 +848,7 @@ def restore_get_enc_fileobj(backend, filename, volume_info):
                      % (exc.__class__.__name__, util.uexc(exc)))
         else:
             log.FatalError(error_msg, code=log.ErrorCode.mismatched_hash)
-        
+
     fileobj = tdp.filtered_open_with_delete(u"rb")
     if parseresults.encrypted and config.gpg_profile.sign_key:
         restore_add_sig_check(fileobj)
