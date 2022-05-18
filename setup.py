@@ -337,6 +337,7 @@ setup(name=u"duplicity",
         u"Programming Language :: Python :: 3.7",
         u"Programming Language :: Python :: 3.8",
         u"Programming Language :: Python :: 3.9",
+        u"Programming Language :: Python :: 3.10",
         u"Topic :: System :: Archiving :: Backup"
         ],
     )
