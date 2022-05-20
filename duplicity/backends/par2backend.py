@@ -91,13 +91,13 @@ class Par2Backend(backend.Backend):
         par2create = u'par2 c -r%d -n%d %s "%s"' % (self.redundancy, self.volumes,
                                                     self.common_options,
                                                     util.fsdecode(source_symlink.get_canonical()))
-        out, returncode = pexpect.run(par2create, None, True)
+        out, returncode = pexpect.run(par2create, None, True, use_poll=True)
 
         if returncode:
             log.Warn(u"Failed to create par2 file with requested options, retrying with -n1")
             par2create = u'par2 c -r%d -n1 %s "%s"' % (self.redundancy, self.common_options,
                                                        util.fsdecode(source_symlink.get_canonical()))
-            out, returncode = pexpect.run(par2create, None, True)
+            out, returncode = pexpect.run(par2create, None, True, use_poll=True)
             if not returncode:
                 log.Warn(u"Successfully created par2 file with -n1")
 
@@ -143,7 +143,7 @@ class Par2Backend(backend.Backend):
             par2verify = u'par2 v %s %s "%s"' % (self.common_options,
                                                  util.fsdecode(par2file.get_canonical()),
                                                  util.fsdecode(local_path_temp.get_canonical()))
-            out, returncode = pexpect.run(par2verify, None, True)
+            out, returncode = pexpect.run(par2verify, None, True, use_poll=True)
 
             if returncode:
                 log.Warn(u"File is corrupt. Try to repair %s" % remote_filename)
@@ -157,7 +157,7 @@ class Par2Backend(backend.Backend):
                 par2repair = u'par2 r %s %s "%s"' % (self.common_options,
                                                      util.fsdecode(par2file.get_canonical()),
                                                      util.fsdecode(local_path_temp.get_canonical()))
-                out, returncode = pexpect.run(par2repair, None, True)
+                out, returncode = pexpect.run(par2repair, None, True, use_poll=True)
 
                 if returncode:
                     log.Error(u"Failed to repair %s" % remote_filename)
