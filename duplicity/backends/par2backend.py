@@ -42,6 +42,14 @@ class Par2Backend(backend.Backend):
         except ImportError:
             raise
 
+        if pexpect.__version__ < u"4.5.0":
+            log.FatalError(u"""
+                The version of pexpect, '%s`, is too old.  We need version 4.5.0 or above to run.
+                See https://gitlab.com/duplicity/duplicity/-/issues/125 for the gory details.
+
+                Use "python3 -m pip install pexpect" to install the latest version.
+                """ % pexexpect.__version__)
+
         self.parsed_url = parsed_url
         try:
             self.redundancy = config.par2_redundancy

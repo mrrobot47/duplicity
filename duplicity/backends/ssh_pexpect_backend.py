@@ -49,9 +49,16 @@ class SSHPExpectBackend(duplicity.backend.Backend):
         try:
             global pexpect
             import pexpect
-
         except ImportError:
             raise
+
+        if pexpect.__version__ < u"4.5.0":
+            log.FatalError(u"""
+                The version of pexpect, '%s`, is too old.  We need version 4.5.0 or above to run.
+                See https://gitlab.com/duplicity/duplicity/-/issues/125 for the gory details.
+
+                Use "python3 -m pip install pexpect" to install the latest version.
+                """ % pexexpect.__version__)
 
         self.retry_delay = 10
 
@@ -94,7 +101,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
     def run_scp_command(self, commandline):
         u""" Run an scp command, responding to password prompts """
         log.Info(u"Running '%s'" % commandline)
-        child = pexpect.spawn(commandline, timeout=None)
+        child = pexpect.spawn(commandline, timeout=None, use_poll=True)
         if config.ssh_askpass:
             state = u"authorizing"
         else:
@@ -170,7 +177,7 @@ class SSHPExpectBackend(duplicity.backend.Backend):
                      u"open(.*): Failure"]
         max_response_len = max([len(p) for p in responses[1:]])
         log.Info(u"Running '%s'" % (commandline))
-        child = pexpect.spawn(commandline, timeout=None, maxread=maxread, encoding=config.fsencoding)
+        child = pexpect.spawn(commandline, timeout=None, maxread=maxread, encoding=config.fsencoding, use_poll=True)
         cmdloc = 0
         passprompt = 0
         while 1:
