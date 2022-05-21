@@ -189,9 +189,7 @@ class LocalBackendTest(BackendInstanceBase):
 
 
 # TODO: Add par2-specific tests here, to confirm that we can recover
-import pexpect
 @unittest.skipIf(not util.which(u'par2'), u"par2 not installed")
-@unittest.skipIf(pexpect.__version__ < u'4.5.0', u"pexpect does not support use_poll")
 class Par2BackendTest(BackendInstanceBase):
     def setUp(self):
         super(Par2BackendTest, self).setUp()

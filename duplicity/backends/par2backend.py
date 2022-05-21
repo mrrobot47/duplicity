@@ -36,20 +36,6 @@ class Par2Backend(backend.Backend):
     def __init__(self, parsed_url):
         backend.Backend.__init__(self, parsed_url)
 
-        global pexpect
-        try:
-            import pexpect
-        except ImportError:
-            raise
-
-        if pexpect.__version__ < u"4.5.0":
-            log.FatalError(u"""
-                The version of pexpect, '%s`, is too old.  We need version 4.5.0 or above to run.
-                See https://gitlab.com/duplicity/duplicity/-/issues/125 for the gory details.
-
-                Use "python3 -m pip install pexpect" to install the latest version.
-                """ % pexexpect.__version__)
-
         self.parsed_url = parsed_url
         try:
             self.redundancy = config.par2_redundancy
@@ -99,13 +85,13 @@ class Par2Backend(backend.Backend):
         par2create = u'par2 c -r%d -n%d %s "%s"' % (self.redundancy, self.volumes,
                                                     self.common_options,
                                                     util.fsdecode(source_symlink.get_canonical()))
-        out, returncode = pexpect.run(par2create, None, True, use_poll=True)
+        returncode, out, err = self.subprocess_popen(par2create)
 
         if returncode:
             log.Warn(u"Failed to create par2 file with requested options, retrying with -n1")
             par2create = u'par2 c -r%d -n1 %s "%s"' % (self.redundancy, self.common_options,
                                                        util.fsdecode(source_symlink.get_canonical()))
-            out, returncode = pexpect.run(par2create, None, True, use_poll=True)
+            returncode, out, err = self.subprocess_popen(par2create)
             if not returncode:
                 log.Warn(u"Successfully created par2 file with -n1")
 
@@ -151,7 +137,7 @@ class Par2Backend(backend.Backend):
             par2verify = u'par2 v %s %s "%s"' % (self.common_options,
                                                  util.fsdecode(par2file.get_canonical()),
                                                  util.fsdecode(local_path_temp.get_canonical()))
-            out, returncode = pexpect.run(par2verify, None, True, use_poll=True)
+            returncode, out, err = self.subprocess_popen(par2verify)
 
             if returncode:
                 log.Warn(u"File is corrupt. Try to repair %s" % remote_filename)
@@ -165,7 +151,7 @@ class Par2Backend(backend.Backend):
                 par2repair = u'par2 r %s %s "%s"' % (self.common_options,
                                                      util.fsdecode(par2file.get_canonical()),
                                                      util.fsdecode(local_path_temp.get_canonical()))
-                out, returncode = pexpect.run(par2repair, None, True, use_poll=True)
+                returncode, out, err = self.subprocess_popen(par2repair)
 
                 if returncode:
                     log.Error(u"Failed to repair %s" % remote_filename)
